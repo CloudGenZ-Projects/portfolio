@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
-import { ChevronDown, Layers, Palette, Grid } from 'lucide-react';
+import { ChevronDown, Layers, Palette, Grid, Search, X, Check } from 'lucide-react';
 import { INDUSTRIES, getIndustryBySlug } from '../data/industries.js';
 import { THEMES_CONFIG } from '../data/themesConfig.js';
 
@@ -21,6 +21,11 @@ export default function Navbar() {
   const location = useLocation();
   const [searchParams] = useSearchParams();
 
+  const [isIndustryOpen, setIsIndustryOpen] = useState(false);
+  const [dropdownSearch, setDropdownSearch] = useState('');
+  const dropdownRef = useRef(null);
+  const searchInputRef = useRef(null);
+
   // Extract industry from query param (?industry=xxx) or URL path (/xxx)
   const queryIndustry = searchParams.get('industry');
   const pathIndustry = location.pathname.replace('/', '').trim();
@@ -34,12 +39,44 @@ export default function Navbar() {
   }
   const currentThemeId = rawTheme ? parseInt(rawTheme, 10) : 1;
 
-  const handleIndustryChange = (e) => {
-    const newSlug = e.target.value;
-    if (newSlug === 'all' || !newSlug) {
+  // Close dropdown on click outside or escape key
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsIndustryOpen(false);
+      }
+    };
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setIsIndustryOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
+  // Auto-focus search input when dropdown opens
+  useEffect(() => {
+    if (isIndustryOpen) {
+      setTimeout(() => {
+        searchInputRef.current?.focus();
+      }, 50);
+    } else {
+      setDropdownSearch('');
+    }
+  }, [isIndustryOpen]);
+
+  const handleSelectIndustry = (slug) => {
+    setIsIndustryOpen(false);
+    setDropdownSearch('');
+    if (slug === 'all' || !slug) {
       navigate('/');
     } else {
-      navigate(`/?industry=${newSlug}&theme=${currentThemeId}`);
+      navigate(`/?industry=${slug}&theme=${currentThemeId}`);
     }
   };
 
@@ -49,11 +86,34 @@ export default function Navbar() {
   };
 
   // Group industries by sector
-  const sectorGroups = Object.keys(SECTOR_LABELS).map((sectorKey) => ({
-    key: sectorKey,
-    label: SECTOR_LABELS[sectorKey],
-    items: INDUSTRIES.filter((ind) => ind.sector === sectorKey),
-  }));
+  const sectorGroups = useMemo(() => {
+    return Object.keys(SECTOR_LABELS).map((sectorKey) => ({
+      key: sectorKey,
+      label: SECTOR_LABELS[sectorKey],
+      items: INDUSTRIES.filter((ind) => ind.sector === sectorKey),
+    }));
+  }, []);
+
+  // Filtered sector groups based on dropdown search
+  const filteredSectorGroups = useMemo(() => {
+    const query = dropdownSearch.trim().toLowerCase();
+    if (!query) return sectorGroups;
+    return sectorGroups
+      .map((group) => ({
+        ...group,
+        items: group.items.filter(
+          (ind) =>
+            ind.name.toLowerCase().includes(query) ||
+            (ind.tagline && ind.tagline.toLowerCase().includes(query)) ||
+            (ind.featuredServices && ind.featuredServices.some((s) => s.toLowerCase().includes(query)))
+        ),
+      }))
+      .filter((group) => group.items.length > 0);
+  }, [sectorGroups, dropdownSearch]);
+
+  const showAllOption =
+    !dropdownSearch ||
+    'all industries'.includes(dropdownSearch.trim().toLowerCase());
 
   return (
     <header className="sticky top-0 z-50 w-full bg-[#DFE5EC] border-b border-[#CBD5E1] px-4 sm:px-8 py-2.5 transition-colors">
@@ -64,24 +124,26 @@ export default function Navbar() {
           <div 
             onClick={() => navigate('/')} 
             className="flex items-center gap-2.5 cursor-pointer select-none group"
-            title="Return to Industry Card Gallery"
+            title="Return to Home"
           >
-            <div className="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-sm tracking-tight group-hover:bg-blue-700 transition-colors shadow-xs">
-              CG
-            </div>
+            <img 
+              src="/logo.png" 
+              alt="CloudGenZ Logo" 
+              className="w-8 h-8 rounded-full object-contain shadow-xs group-hover:scale-105 transition-transform" 
+            />
             <div className="font-bold text-base text-slate-800 tracking-tight flex items-center gap-2">
-              <span>CloudGenZ</span>
+              <span>CloudGenZ Portfolio</span>
             </div>
           </div>
 
-          {/* Quick Back to Cards Button (visible when on a live site) */}
+          {/* Quick Back to All Industries Button (visible when on a live site) */}
           {currentIndustry && (
             <button
               onClick={() => navigate('/')}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-slate-50 border border-[#CBD5E1] text-xs font-medium text-slate-700 hover:text-slate-900 transition-all shadow-2xs"
             >
               <Grid className="w-3.5 h-3.5 text-blue-600" />
-              <span>All Verticals</span>
+              <span>All Industries</span>
             </button>
           )}
         </div>
@@ -89,49 +151,144 @@ export default function Navbar() {
         {/* The Two Core Dropdowns (Industry & Theme) */}
         <div className="flex items-center gap-3 w-full sm:w-auto justify-center sm:justify-end">
           
-          {/* 1. Industry Dropdown */}
-          <div className="relative flex-1 sm:flex-initial">
-            <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
-              <Layers className="w-3.5 h-3.5" />
-            </div>
-            <select
-              value={currentIndustry ? currentIndustry.id : 'all'}
-              onChange={handleIndustryChange}
-              className="w-full sm:w-auto pl-8.5 pr-8 py-2 bg-white hover:bg-slate-50/80 border border-[#CBD5E1] hover:border-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-500/20 rounded-xl text-xs sm:text-sm font-semibold text-slate-800 outline-none cursor-pointer transition-all appearance-none sm:min-w-[220px] shadow-2xs"
+          {/* 1. Searchable Industry Dropdown */}
+          <div className="relative flex-1 sm:flex-initial" ref={dropdownRef}>
+            <button
+              type="button"
+              onClick={() => setIsIndustryOpen((prev) => !prev)}
+              aria-haspopup="listbox"
+              aria-expanded={isIndustryOpen}
+              className="w-full sm:w-auto pl-8.5 pr-8 py-2 bg-white hover:bg-slate-50/90 border border-[#CBD5E1] hover:border-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-500/20 rounded-xl text-xs sm:text-sm font-semibold text-slate-800 outline-none cursor-pointer transition-all flex items-center justify-between sm:min-w-[240px] shadow-2xs text-left"
             >
-              <option value="all">❖ All 50 Verticals (Cards)</option>
-              {sectorGroups.map((group) => (
-                <optgroup key={group.key} label={`── ${group.label} ──`} className="font-bold text-slate-700">
-                  {group.items.map((ind) => (
-                    <option key={ind.id} value={ind.id} className="font-normal text-slate-800">
-                      {ind.name}
-                    </option>
-                  ))}
-                </optgroup>
-              ))}
-            </select>
-            <div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
-              <ChevronDown className="w-3.5 h-3.5" />
-            </div>
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
+                <Layers className="w-3.5 h-3.5" />
+              </div>
+              <span className="truncate pr-2">
+                {currentIndustry ? currentIndustry.name : 'Select Industry'}
+              </span>
+              <div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-150 ${isIndustryOpen ? 'rotate-180 text-blue-600' : ''}`} />
+              </div>
+            </button>
+
+            {/* Floating Dropdown Menu with Integrated Search Bar */}
+            {isIndustryOpen && (
+              <div className="absolute left-0 sm:right-0 sm:left-auto top-full mt-1.5 w-full sm:w-[320px] bg-white rounded-2xl shadow-xl border border-slate-200 z-50 overflow-hidden flex flex-col">
+                
+                {/* Search Input Header */}
+                <div className="p-2.5 border-b border-slate-100 bg-slate-50/80 sticky top-0 z-10">
+                  <div className="relative">
+                    <Search className="w-3.5 h-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                    <input
+                      ref={searchInputRef}
+                      type="text"
+                      value={dropdownSearch}
+                      onChange={(e) => setDropdownSearch(e.target.value)}
+                      placeholder="Search industries (e.g. Plumber, Gym)..."
+                      className="w-full pl-8 pr-7 py-1.5 bg-white border border-slate-200 focus:border-blue-500 rounded-lg text-xs font-medium text-slate-800 placeholder-slate-400 outline-none shadow-2xs transition-all"
+                    />
+                    {dropdownSearch && (
+                      <button
+                        onClick={() => setDropdownSearch('')}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-0.5 rounded"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {/* Scrollable List of Industries */}
+                <div className="max-h-72 overflow-y-auto divide-y divide-slate-100 py-1 text-xs">
+                  {/* Option: Return to All Industries */}
+                  {showAllOption && (
+                    <button
+                      type="button"
+                      onClick={() => handleSelectIndustry('all')}
+                      className={`w-full text-left px-3.5 py-2 flex items-center justify-between transition-colors ${
+                        !currentIndustry
+                          ? 'bg-blue-50 text-blue-700 font-semibold'
+                          : 'text-slate-700 hover:bg-slate-50'
+                      }`}
+                    >
+                      <span className="flex items-center gap-2">
+                        <Grid className="w-3.5 h-3.5 text-slate-400" />
+                        <span>All Industries</span>
+                      </span>
+                      {!currentIndustry && <Check className="w-3.5 h-3.5 text-blue-600 flex-shrink-0" />}
+                    </button>
+                  )}
+
+                  {/* Filtered Sectors and Industries */}
+                  {filteredSectorGroups.length > 0 ? (
+                    filteredSectorGroups.map((group) => (
+                      <div key={group.key} className="py-1">
+                        <div className="px-3.5 py-1 text-[10px] font-bold tracking-wider text-slate-400 uppercase bg-slate-50/60">
+                          {group.label}
+                        </div>
+                        {group.items.map((ind) => {
+                          const isSelected = currentIndustry?.id === ind.id;
+                          return (
+                            <button
+                              key={ind.id}
+                              type="button"
+                              onClick={() => handleSelectIndustry(ind.id)}
+                              className={`w-full text-left px-3.5 py-1.5 flex items-center justify-between transition-colors ${
+                                isSelected
+                                  ? 'bg-blue-50 text-blue-700 font-semibold'
+                                  : 'text-slate-700 hover:bg-slate-50 font-normal'
+                              }`}
+                            >
+                              <span className="truncate pr-2">{ind.name}</span>
+                              {isSelected && <Check className="w-3.5 h-3.5 text-blue-600 flex-shrink-0" />}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    ))
+                  ) : (
+                    !showAllOption && (
+                      <div className="p-5 text-center text-xs text-slate-400">
+                        No industry matching "{dropdownSearch}"
+                      </div>
+                    )
+                  )}
+                </div>
+              </div>
+            )}
           </div>
 
-          {/* 2. Theme Dropdown */}
+          {/* 2. Theme Dropdown (Disabled until an industry is selected) */}
           <div className="relative flex-1 sm:flex-initial">
-            <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-blue-600">
+            <div className={`absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none transition-colors ${
+              currentIndustry ? 'text-blue-600' : 'text-slate-400'
+            }`}>
               <Palette className="w-3.5 h-3.5" />
             </div>
             <select
-              value={currentThemeId}
+              disabled={!currentIndustry}
+              value={currentIndustry ? currentThemeId : ''}
               onChange={(e) => handleThemeChange(e.target.value)}
-              className="w-full sm:w-auto pl-8.5 pr-8 py-2 bg-white hover:bg-slate-50/80 border border-[#CBD5E1] hover:border-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-500/20 rounded-xl text-xs sm:text-sm font-semibold text-slate-800 outline-none cursor-pointer transition-all appearance-none sm:min-w-[210px] shadow-2xs"
+              title={!currentIndustry ? 'Please select an industry first' : 'Select Theme'}
+              className={`w-full sm:w-auto pl-8.5 pr-8 py-2 border rounded-xl text-xs sm:text-sm font-semibold outline-none transition-all appearance-none sm:min-w-[210px] shadow-2xs ${
+                !currentIndustry
+                  ? 'bg-slate-100/90 border-slate-200 text-slate-400 cursor-not-allowed opacity-70'
+                  : 'bg-white hover:bg-slate-50/80 border-[#CBD5E1] hover:border-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-500/20 text-slate-800 cursor-pointer'
+              }`}
             >
-              {THEMES_CONFIG.map((theme) => (
-                <option key={theme.id} value={theme.id}>
-                  Theme {theme.id}: {theme.shortName}
-                </option>
-              ))}
+              {!currentIndustry ? (
+                <option value="">Select Industry First</option>
+              ) : (
+                THEMES_CONFIG.map((theme) => (
+                  <option key={theme.id} value={theme.id}>
+                    Theme {theme.id}: {theme.shortName}
+                  </option>
+                ))
+              )}
             </select>
-            <div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+            <div className={`absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none transition-colors ${
+              currentIndustry ? 'text-slate-400' : 'text-slate-300'
+            }`}>
               <ChevronDown className="w-3.5 h-3.5" />
             </div>
           </div>
