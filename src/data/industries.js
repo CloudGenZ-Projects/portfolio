@@ -638,7 +638,23 @@ export const INDUSTRIES = [
   },
 
   // 7. PROFESSIONAL SERVICES & FINANCE (6)
-  {
+    {
+    id: 'immigration',
+    name: 'Immigration Lawyer',
+    sector: 'professional',
+    tagline: 'Cross-Border Immigration & Visa Legal Solutions',
+    description: 'Specialized Canadian & US immigration attorneys handling corporate intra-company transfers, investor visas, permanent residency, and cross-border mobility.',
+    rating: '5.0',
+    reviewCount: '340+',
+    featuredServices: ['US & Canada Visas', 'Express Entry & CEC', 'Work Permits & CUSMA', 'Family Sponsorship'],
+    themeCount: TOTAL_THEMES_COUNT,
+    images: [
+      'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200&q=85',
+      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=85',
+      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=85'
+    ]
+  },
+{
     id: 'accountant',
     name: 'Accountant / Tax Prep',
     sector: 'professional',
