@@ -10,12 +10,16 @@ function AppContent() {
   const pathIndustry = location.pathname.replace('/', '').trim();
   const isPreviewMode = Boolean(queryIndustry || pathIndustry);
 
+  // Header visibility: hidden ONLY when allowMore=false is explicitly set
+  const allowMoreParam = searchParams.get('allowMore');
+  const showHeader = allowMoreParam !== 'false';
+
   return (
     <div className={`flex flex-col font-sans bg-[#EDF2F7] text-slate-900 ${
       isPreviewMode ? 'h-screen overflow-hidden' : 'min-h-screen'
     }`}>
-      {/* Header */}
-      <Navbar />
+      {/* Header - hidden only when allowMore=false */}
+      {showHeader && <Navbar />}
 
       {/* Main Workspace / Preview Canvas */}
       <main className={`flex-1 w-full ${
