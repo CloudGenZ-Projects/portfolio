@@ -1,16 +1,26 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, useSearchParams } from 'react-router-dom';
 import Navbar from './components/Navbar.jsx';
 import HomePage from './pages/HomePage.jsx';
 
 function AppContent() {
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
+  const queryIndustry = searchParams.get('industry');
+  const pathIndustry = location.pathname.replace('/', '').trim();
+  const isPreviewMode = Boolean(queryIndustry || pathIndustry);
+
   return (
-    <div className="min-h-screen flex flex-col font-sans bg-[#EDF2F7] text-slate-900">
+    <div className={`flex flex-col font-sans bg-[#EDF2F7] text-slate-900 ${
+      isPreviewMode ? 'h-screen overflow-hidden' : 'min-h-screen'
+    }`}>
       {/* Header */}
       <Navbar />
 
       {/* Main Workspace / Preview Canvas */}
-      <main className="flex-1 w-full">
+      <main className={`flex-1 w-full ${
+        isPreviewMode ? 'min-h-0 overflow-hidden flex flex-col' : ''
+      }`}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/:industrySlug" element={<HomePage />} />

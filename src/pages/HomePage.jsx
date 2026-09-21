@@ -69,7 +69,7 @@ export default function HomePage({ viewport = 'desktop' }) {
   // ----------------------------------------------------
   if (currentIndustry) {
     return (
-      <div className="w-full min-h-screen bg-white">
+      <div className="w-full h-full flex-1 min-h-0 overflow-hidden flex flex-col bg-white">
         <ThemeRenderer 
           industry={currentIndustry} 
           themeId={currentThemeId} 

@@ -41,7 +41,7 @@ export default function ThemeRenderer({ themeId, industry }) {
   }, [themePath]);
 
   return (
-    <div className="w-full min-h-[calc(100vh-58px)] bg-slate-100 relative flex flex-col">
+    <div className="w-full h-full flex-1 min-h-0 bg-slate-100 relative flex flex-col overflow-hidden">
       {isLoading ? (
         <div className="flex-1 flex items-center justify-center p-12 text-slate-400">
           <div className="flex items-center gap-3 text-sm font-medium">
@@ -54,7 +54,7 @@ export default function ThemeRenderer({ themeId, industry }) {
         <iframe
           src={themePath}
           title={`${industry?.name || 'Industry'} Theme ${numericId}`}
-          className="w-full flex-1 border-0 min-h-[calc(100vh-58px)] bg-white shadow-inner"
+          className="w-full h-full flex-1 min-h-0 border-0 bg-white block"
         />
       ) : (
         /* Clean placeholder when HTML/CSS/JS is not yet placed in folder */
