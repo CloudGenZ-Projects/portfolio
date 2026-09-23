@@ -654,6 +654,22 @@ export const INDUSTRIES = [
       'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=85'
     ]
   },
+  {
+    id: 'gniimmigration',
+    name: 'GNI Immigration Services',
+    sector: 'professional',
+    tagline: 'Your First Step to Canada Immigration',
+    description: 'Licensed Canadian immigration consultants (RCIC) in Hamilton, Ontario providing guidance for visas, work permits, study permits, express entry, PNP, and permanent residency.',
+    rating: '5.0',
+    reviewCount: '100+',
+    featuredServices: ['Express Entry & CEC', 'Work Permits & LMIA', 'Study Permits', 'Family Sponsorship'],
+    themeCount: 1,
+    images: [
+      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=85',
+      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=85',
+      'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200&q=85'
+    ]
+  },
 {
     id: 'accountant',
     name: 'Accountant / Tax Prep',
