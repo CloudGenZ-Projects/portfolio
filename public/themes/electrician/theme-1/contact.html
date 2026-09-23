@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact & Emergency Service - Electrician Pro</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="container flex-between">
+            <div class="contact-info">
+                <span><i class="fas fa-map-marker-alt text-yellow"></i> 123 Spark Drive, NY, USA</span>
+                <span><i class="fas fa-phone-alt text-yellow"></i> +0 123 456 789</span>
+                <span><i class="fas fa-envelope text-yellow"></i> info@electricianpro.com</span>
+            </div>
+            <div class="top-right flex-center">
+                <a href="contact.html" class="btn-quote">GET A QUOTE</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN NAVBAR -->
+    <header class="header">
+        <div class="container flex-between">
+            <div class="logo">
+                <i class="fas fa-bolt text-yellow"></i> Electrician<span>Pro</span>
+            </div>
+            <nav class="navbar">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-right">
+                <div class="social-icons">
+                    <a href="#"><i class="fas fa-search"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                </div>
+                <a href="#" class="btn-buy">Buy Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION 1: FAST CONTACT CARDS -->
+    <section class="section-padding bg-light" style="padding-bottom: 50px;">
+        <div class="container">
+            <div class="section-title text-center mb-50">
+                <div class="title-icon flex-center"><i class="fas fa-bolt text-yellow"></i> Always Available</div>
+                <h2>How Can We Assist You Today?</h2>
+                <p style="max-width: 650px; margin: 15px auto 0;">Reach out through our direct service channels or request immediate on-site diagnostics from certified master technicians.</p>
+            </div>
+
+            <div class="grid-4">
+                <!-- Card 1 -->
+                <div class="service-card" style="padding: 35px 25px;">
+                    <div class="icon-wrapper" style="width: 70px; height: 70px; font-size: 28px;">
+                        <i class="fas fa-phone-volume"></i>
+                    </div>
+                    <h3 style="font-size: 19px;">24/7 Hotline</h3>
+                    <p class="mb-10" style="font-size: 14px;">Urgent short circuits & emergency power failures.</p>
+                    <a href="tel:+0123456789" class="text-yellow" style="font-weight: 700; font-size: 16px;">+0 123 456 789</a>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="service-card" style="padding: 35px 25px;">
+                    <div class="icon-wrapper" style="width: 70px; height: 70px; font-size: 28px;">
+                        <i class="fas fa-envelope-open-text"></i>
+                    </div>
+                    <h3 style="font-size: 19px;">Email Quotes</h3>
+                    <p class="mb-10" style="font-size: 14px;">Blueprints, bidding & residential proposals.</p>
+                    <a href="mailto:quotes@electricianpro.com" class="text-yellow" style="font-weight: 700; font-size: 15px;">quotes@electricianpro.com</a>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="service-card" style="padding: 35px 25px;">
+                    <div class="icon-wrapper" style="width: 70px; height: 70px; font-size: 28px;">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3 style="font-size: 19px;">Main Station</h3>
+                    <p class="mb-10" style="font-size: 14px;">123 Spark Drive, Suite 400, New York, NY.</p>
+                    <span class="text-yellow" style="font-weight: 700; font-size: 14px;">Open: Mon - Sat</span>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="service-card" style="padding: 35px 25px;">
+                    <div class="icon-wrapper" style="width: 70px; height: 70px; font-size: 28px;">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <h3 style="font-size: 19px;">Careers</h3>
+                    <p class="mb-10" style="font-size: 14px;">Join our team of licensed master journeymen.</p>
+                    <a href="mailto:careers@electricianpro.com" class="text-yellow" style="font-weight: 700; font-size: 15px;">careers@electricianpro.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: 24/7 EMERGENCY CALLOUT BANNER -->
+    <div style="background: var(--secondary-color); color: var(--primary-color); padding: 25px 0;">
+        <div class="container flex-between" style="flex-wrap: wrap; gap: 20px;">
+            <div class="flex align-center" style="gap: 20px;">
+                <i class="fas fa-exclamation-triangle" style="font-size: 42px;"></i>
+                <div>
+                    <h3 style="margin: 0; color: var(--primary-color); font-size: 22px;">Electrical Emergency? Hazardous Sparking or Blackout?</h3>
+                    <p style="margin: 0; font-weight: 600; font-size: 14px;">Average dispatch arrival time is under 45 minutes across all metropolitan zones.</p>
+                </div>
+            </div>
+            <a href="tel:+0123456789" class="btn-primary" style="background: var(--primary-color); color: #fff; border-color: var(--primary-color);">CALL RAPID DISPATCH</a>
+        </div>
+    </div>
+
+    <!-- SECTION 3: FULL CONTACT & ESTIMATE BOOKING FORM -->
+    <section class="contact-form section-padding bg-dark position-relative" style="background-image: url('https://images.unsplash.com/photo-1498084393753-b411b2d26b34?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-attachment: fixed;">
+        <div class="contact-overlay"></div>
+        <div class="container grid-2 position-relative z-index-2 align-center">
+            
+            <!-- Left Info Panel -->
+            <div class="contact-text text-white">
+                <div class="section-title">
+                    <div class="title-icon"><i class="fas fa-industry text-yellow"></i> Book Consultation</div>
+                    <h2 class="text-white">Request An Estimate Or In-Depth Inspection</h2>
+                </div>
+                <p class="text-gray mb-30" style="margin-top: 15px;">Whether you're upgrading an aging industrial breaker, converting warehouse high-voltage systems, or wiring a custom residential residence, our certified master engineers are ready.</p>
+
+                <div class="contact-details">
+                    <div class="detail-item">
+                        <i class="fas fa-certificate text-yellow"></i>
+                        <div>
+                            <h4 class="text-white" style="margin: 0 0 5px;">Licensed, Bonded & Insured</h4>
+                            <p class="text-gray" style="font-size: 14px; margin: 0;">State Electrical Board License #EL-9824301-A.</p>
+                        </div>
+                    </div>
+                    <div class="detail-item mt-30">
+                        <i class="fas fa-shield-alt text-yellow"></i>
+                        <div>
+                            <h4 class="text-white" style="margin: 0 0 5px;">Lifetime Craftsmanship Guarantee</h4>
+                            <p class="text-gray" style="font-size: 14px; margin: 0;">All commercial and residential work backed by our warranty.</p>
+                        </div>
+                    </div>
+                    <div class="detail-item mt-30">
+                        <i class="fas fa-file-invoice-dollar text-yellow"></i>
+                        <div>
+                            <h4 class="text-white" style="margin: 0 0 5px;">Transparent Fixed-Fee Bids</h4>
+                            <p class="text-gray" style="font-size: 14px; margin: 0;">No surprise charges or hidden fees after inspection.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Comprehensive Form -->
+            <div class="form-wrapper bg-white text-dark rounded-shadow p-40">
+                <h3 class="mb-10 form-title">Send Us A Message</h3>
+                <p style="font-size: 14px; color: #777; margin-bottom: 25px;">Fill out this form and an engineer will reply within 2 business hours.</p>
+                
+                <form>
+                    <div class="grid-2 no-gap" style="gap: 15px;">
+                        <input type="text" placeholder="Full Name *" class="form-control mb-20" required>
+                        <input type="tel" placeholder="Phone Number *" class="form-control mb-20" required>
+                    </div>
+                    
+                    <div class="grid-2 no-gap" style="gap: 15px;">
+                        <input type="email" placeholder="Email Address *" class="form-control mb-20" required>
+                        <select class="form-control mb-20" style="color: #555;">
+                            <option value="">Select Service Type</option>
+                            <option value="residential">Residential Wiring & Lighting</option>
+                            <option value="commercial">Commercial Breakers & HVAC</option>
+                            <option value="industrial">Industrial Heavy Voltage</option>
+                            <option value="inspection">Code Violation & Safety Inspection</option>
+                            <option value="ev">EV Charger & Generator Setup</option>
+                        </select>
+                    </div>
+
+                    <input type="text" placeholder="Project Location / Street Address" class="form-control mb-20">
+                    <textarea placeholder="Describe your project, electrical requirements, or symptoms..." class="form-control mb-20" rows="4" required></textarea>
+                    
+                    <div style="margin-bottom: 25px; display: flex; align-items: center; gap: 10px;">
+                        <input type="checkbox" id="urgent" style="width: 18px; height: 18px; accent-color: var(--secondary-color);">
+                        <label for="urgent" style="font-size: 14px; font-weight: 600; color: #444; cursor: pointer;">This is an urgent request requiring immediate telephone dispatch.</label>
+                    </div>
+
+                    <button type="submit" class="btn-primary w-100">SUBMIT PROJECT REQUEST <i class="fas fa-paper-plane ml-10"></i></button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 4: SERVICE AREAS COVERAGE -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="flex-between align-end mb-40 section-header">
+                <div class="section-title">
+                    <div class="title-icon"><i class="fas fa-map-marker-alt text-yellow"></i> Service Regions</div>
+                    <h2>Areas We Frequently Service</h2>
+                </div>
+                <span class="text-yellow font-weight-bold" style="font-family: var(--font-heading);"><i class="fas fa-check-circle"></i> Daily Fleet Route Active</span>
+            </div>
+
+            <div class="grid-3">
+                <div style="background: #fff; padding: 25px; border-radius: 8px; box-shadow: var(--shadow-soft);">
+                    <h4 style="color: var(--primary-color);"><i class="fas fa-city text-yellow mr-10"></i> Greater Metro District</h4>
+                    <p style="font-size: 14px; margin: 10px 0 0;">Downtown, Financial District, Midtown, Brooklyn Navy Yard, Long Island City industrial parks.</p>
+                </div>
+                <div style="background: #fff; padding: 25px; border-radius: 8px; box-shadow: var(--shadow-soft);">
+                    <h4 style="color: var(--primary-color);"><i class="fas fa-warehouse text-yellow mr-10"></i> Industrial & Port Hubs</h4>
+                    <p style="font-size: 14px; margin: 10px 0 0;">Newark Port, Secaucus Logistics Hubs, Freight Terminals, Power Distribution corridors.</p>
+                </div>
+                <div style="background: #fff; padding: 25px; border-radius: 8px; box-shadow: var(--shadow-soft);">
+                    <h4 style="color: var(--primary-color);"><i class="fas fa-home text-yellow mr-10"></i> Suburban Residential</h4>
+                    <p style="font-size: 14px; margin: 10px 0 0;">Westchester County, Bergen County, Staten Island, and southern coastal municipalities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: CONTACT FAQ ACCORDION -->
+    <section class="section-padding" style="background: #fff;">
+        <div class="container" style="max-width: 900px;">
+            <div class="section-title text-center mb-50">
+                <div class="title-icon flex-center"><i class="fas fa-question-circle text-yellow"></i> Common Questions</div>
+                <h2>Before You Call Or Book</h2>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-item active">
+                    <button class="accordion-header">Do you charge for on-site residential or business estimates? <i class="fas fa-minus text-yellow"></i></button>
+                    <div class="accordion-content" style="max-height: 200px;">
+                        <p>Standard architectural blueprint estimates and formal project proposals are 100% free of charge. For emergency diagnostic troubleshooting involving manual multimeter panel teardowns, a nominal dispatch fee applies, which is waived if you approve the service.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">How quickly can an emergency electrician arrive? <i class="fas fa-plus text-yellow"></i></button>
+                    <div class="accordion-content">
+                        <p>Our standby emergency vehicles are stationed across strategic quadrants. Our average response time for active hazards, smoke, or total plant shutdowns is between 30 and 45 minutes.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">Are all your electricians licensed and insured? <i class="fas fa-plus text-yellow"></i></button>
+                    <div class="accordion-content">
+                        <p>Yes. Every single electrician on our team is a state-registered journeyman or master electrician. We carry up to $5,000,000 in comprehensive commercial liability and full workers' compensation coverage.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: FULL-WIDTH INTERACTIVE MAP -->
+    <div style="width: 100%; height: 450px; line-height: 0; position: relative;">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.119763973046!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1689100000000!5m2!1sen!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer bg-darker text-white section-padding border-top-yellow">
+        <div class="container grid-3 mb-50 footer-top">
+            <div class="footer-about">
+                <h2 class="mb-20 logo"><i class="fas fa-bolt text-yellow"></i> Electrician<span class="text-white">Pro</span></h2>
+                <p class="mb-20">Since 1960 ElectricianPro inc has build a reputation for producing high quality precision electrical work for use in a variety of industries...</p>
+                <a href="#" class="text-yellow font-weight-bold">Read More <i class="fas fa-angle-double-right"></i></a>
+            </div>
+            <div class="footer-contact">
+                <h3 class="mb-30 footer-title">Contact Us</h3>
+                <p class="mb-20 text-gray">Te obtinuit ut adepto satis somno. Aliisque institoribus iter deliciae vivet vita.</p>
+                <ul class="contact-list">
+                    <li><i class="fas fa-map-marker-alt text-yellow"></i> Mountain Drive, London, UK</li>
+                    <li><i class="fas fa-phone-alt text-yellow"></i> +0 123 456 789</li>
+                    <li><i class="fas fa-envelope text-yellow"></i> info@electricianpro.com</li>
+                </ul>
+            </div>
+            <div class="footer-posts">
+                <h3 class="mb-30 footer-title">Recent Posts</h3>
+                <div class="flex gap-20 mb-20 align-center post-item">
+                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&w=80&h=80&fit=crop" alt="Blog" class="rounded">
+                    <div>
+                        <span class="text-yellow text-sm">Oct 24, 2024</span>
+                        <a href="#" class="text-white d-block hover-yellow">Latest Blog Title 3</a>
+                    </div>
+                </div>
+                <div class="flex gap-20 align-center post-item">
+                    <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-4.0.3&w=80&h=80&fit=crop" alt="Blog" class="rounded">
+                    <div>
+                        <span class="text-yellow text-sm">Oct 18, 2024</span>
+                        <a href="#" class="text-white d-block hover-yellow">Latest Blog Title 2</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container footer-bottom flex-between border-top-dark pt-30">
+            <p>&copy; 2024 ElectricianPro. All Rights Reserved.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

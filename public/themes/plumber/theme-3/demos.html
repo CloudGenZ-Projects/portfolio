@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HouzFix - Plumber & Handyman Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary-color: #00a2d3; --primary-dark: #0088b3; --dark-bg: #0b1a2a; --light-bg: #f5f8fa; --text-dark: #222222; --text-light: #666666; --white: #ffffff; --border-color: #eaeaea; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; color: var(--text-dark); line-height: 1.6; background-color: var(--white); overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; height: auto; display: block; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .btn { display: inline-block; background-color: var(--primary-color); color: var(--white); padding: 12px 30px; border-radius: 4px; font-weight: 500; transition: 0.3s; text-align: center; border: none; cursor: pointer; }
+        .btn:hover { background-color: var(--primary-dark); }
+        .btn-outline { background-color: transparent; border: 2px solid var(--border-color); color: var(--text-dark); }
+        .btn-outline:hover { border-color: var(--primary-color); color: var(--primary-color); }
+        .section-padding { padding: 100px 0; }
+        .text-center { text-align: center; }
+        .section-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 20px; color: #1a2b4c; }
+        .section-title span { color: var(--primary-color); }
+        .section-subtitle { color: var(--text-light); max-width: 700px; margin: 0 auto 50px auto; }
+
+        /* Header */
+        header { background-color: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; width: 100%; z-index: 1000; }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+        .logo { font-size: 1.8rem; font-weight: 700; display: flex; align-items: center; gap: 10px; color: #0b1a2a; }
+        .logo svg { width: 30px; fill: var(--primary-color); }
+        .logo span { color: var(--primary-color); font-weight: 400; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { font-weight: 500; text-transform: uppercase; font-size: 0.9rem; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--primary-color); }
+
+        /* Hero */
+        .hero { background-color: var(--dark-bg); padding: 120px 0 80px; position: relative; text-align: center; }
+        .hero h1 { color: var(--white); font-size: 3rem; margin-bottom: 20px; font-weight: 600; }
+        .hero h1 span { color: #f39c12; border-bottom: 3px solid #f39c12; }
+        .hero p { color: #aaa; font-size: 1.2rem; max-width: 600px; margin: 0 auto 40px auto; }
+        .hero-images-container { display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 50px; }
+        .hero-images-container img { border-radius: 8px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); width: 320px; height: 220px; object-fit: cover; border: 4px solid rgba(255,255,255,0.1); transition: 0.3s; }
+        .hero-images-container img:hover { transform: translateY(-10px); }
+        .hero-images-container img:nth-child(2) { transform: translateY(30px); z-index: 2; }
+        .hero-images-container img:nth-child(2):hover { transform: translateY(20px); }
+
+        /* Features */
+        .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; padding: 40px 0; border-bottom: 1px solid var(--border-color); }
+        .feature-item { display: flex; align-items: center; justify-content: center; gap: 15px; font-weight: 600; color: #1a2b4c; }
+        .feature-item svg { width: 35px; stroke: #1a2b4c; }
+
+        /* Services Section (NEW) */
+        .services-section { background: var(--light-bg); }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .service-card { background: var(--white); padding: 40px 30px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.3s; text-align: center; border-bottom: 3px solid transparent; }
+        .service-card:hover { transform: translateY(-10px); border-bottom-color: var(--primary-color); }
+        .service-icon { width: 70px; height: 70px; background: rgba(0,162,211,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: var(--primary-color); font-size: 2rem; }
+        .service-card h3 { font-size: 1.4rem; color: #1a2b4c; margin-bottom: 15px; }
+
+        /* Gallery Section (NEW) */
+        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .gallery-item { position: relative; overflow: hidden; border-radius: 10px; height: 300px; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-overlay { position: absolute; inset: 0; background: rgba(11,26,42,0.8); display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; transition: 0.3s; color: white; }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+        /* Demos Preview */
+        .demos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+        .demo-card { text-align: center; }
+        .demo-image-wrap { background: var(--white); padding: 15px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); margin-bottom: 20px; transition: 0.3s; overflow: hidden; }
+        .demo-image-wrap:hover { transform: translateY(-10px); }
+        .demo-image-wrap img { border-radius: 5px; width: 100%; height: 350px; object-fit: cover; object-position: top; }
+        .demo-card h3 { font-size: 1.3rem; color: var(--primary-color); }
+
+        /* Reviews/Testimonials */
+        .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .testi-card { background: var(--white); padding: 40px 30px; border-radius: 10px; border: 1px solid var(--border-color); text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.02); }
+        .testi-text { font-size: 1.1rem; margin-bottom: 25px; color: #444; font-style: italic; }
+        .stars { color: #f39c12; font-size: 1.5rem; margin-bottom: 15px; letter-spacing: 2px; }
+        .client-info img { width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 10px; object-fit: cover; }
+        .client-name { font-weight: 600; color: #1a2b4c; }
+
+        /* Footer */
+        .footer-cta { background-color: var(--light-bg); text-align: center; padding: 80px 0 20px 0; border-top: 1px solid var(--border-color); }
+        .footer-cta h2 { font-size: 2.5rem; color: #1a2b4c; margin-bottom: 30px; }
+        .footer-bottom { border-top: 1px solid var(--border-color); padding: 25px 0 10px; margin-top: 60px; display: flex; justify-content: space-between; align-items: center; color: var(--text-light); }
+
+        @media (max-width: 992px) { .services-grid, .gallery-grid, .demos-grid, .testi-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { .nav-links { display: none; } .services-grid, .gallery-grid, .demos-grid, .testi-grid, .features-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 2rem; } .hero-images-container { display: none; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                Houz<span>Fix</span>
+            </a>
+            <nav class="nav-links">
+                <a href="demos.html">Demos</a>
+                <a href="plugins.html">Plugins</a>
+                <a href="faq.html">FAQ</a>
+                <a href="docs.html">Docs</a>
+            </nav>
+            <a href="#" class="btn">Purchase Now</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1><span>Plumbing & Handyman</span> Solutions</h1>
+            <p>Professional repair, installation, and maintenance services for your home and business. Built for plumbers, electricians, and contractors.</p>
+            <div class="hero-images-container">
+                <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&q=80&w=600" alt="Plumber Fixing Sink">
+                <img src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&q=80&w=600" alt="Plumbing Pipes">
+                <img src="https://images.unsplash.com/photo-1574536294717-b769ea8e7526?auto=format&fit=crop&q=80&w=600" alt="Water Heater Repair">
+            </div>
+        </div>
+    </section>
+
+    <div class="container features-grid">
+        <div class="feature-item"><svg viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>One Click Demo Import</span></div>
+        <div class="feature-item"><svg viewBox="0 0 24 24" fill="none"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg><span>No Code Skills Needed</span></div>
+        <div class="feature-item"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg><span>100% Responsive</span></div>
+        <div class="feature-item"><svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg><span>Extensive Docs</span></div>
+    </div>
+
+    <!-- NEW SERVICES SECTION -->
+    <section class="section-padding services-section">
+        <div class="container">
+            <h2 class="section-title text-center">Our <span>Plumbing Services</span></h2>
+            <p class="section-subtitle text-center">We provide a wide range of residential and commercial plumbing services with certified professionals.</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">💧</div>
+                    <h3>Leak Detection</h3>
+                    <p>Advanced acoustic and thermal leak detection to find hidden pipe bursts without damaging walls.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔧</div>
+                    <h3>Pipe Installation</h3>
+                    <p>Complete repiping services using high-quality copper and PEX piping for long-lasting durability.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🚿</div>
+                    <h3>Drain Cleaning</h3>
+                    <p>Professional hydro-jetting and drain snaking to clear tough clogs and prevent future backups.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔥</div>
+                    <h3>Water Heaters</h3>
+                    <p>Installation and repair of traditional and tankless water heaters for instant hot water.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🚽</div>
+                    <h3>Fixture Repair</h3>
+                    <p>Fast repairs for running toilets, dripping faucets, and broken showerheads to save water.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🛠️</div>
+                    <h3>24/7 Emergency</h3>
+                    <p>Available round-the-clock for severe leaks, flooding, and urgent plumbing disasters.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW GALLERY SECTION -->
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="section-title text-center">Project <span>Gallery</span></h2>
+            <p class="section-subtitle text-center">Take a look at some of our recent plumbing installations and repair works.</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=500" alt="Pipes">
+                    <div class="gallery-overlay"><h3>Copper Repiping</h3></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=500" alt="Bathroom Sink">
+                    <div class="gallery-overlay"><h3>Modern Sink Install</h3></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1574536294717-b769ea8e7526?auto=format&fit=crop&w=500" alt="Water Heater">
+                    <div class="gallery-overlay"><h3>Tankless Heater</h3></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=500" alt="Plumber working">
+                    <div class="gallery-overlay"><h3>Under Sink Repair</h3></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1527262312678-eb285328c89b?auto=format&fit=crop&w=500" alt="Bathtub">
+                    <div class="gallery-overlay"><h3>Tub Installation</h3></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1542013936693-884638332954?auto=format&fit=crop&w=500" alt="Tools">
+                    <div class="gallery-overlay"><h3>Drain Maintenance</h3></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENHANCED REVIEWS SECTION -->
+    <section class="section-padding services-section">
+        <div class="container">
+            <h2 class="section-title text-center">Client <span>Reviews</span></h2>
+            <p class="section-subtitle text-center">See what our satisfied homeowners and commercial clients have to say about our plumbing services.</p>
+            
+            <div class="testi-grid">
+                <div class="testi-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testi-text">"Our water heater broke in the middle of winter. The HouzFix team arrived within an hour and replaced it perfectly. Amazing emergency service!"</p>
+                    <div class="client-info">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100" alt="Client">
+                        <div class="client-name">David Warner</div>
+                        <span style="font-size: 0.85rem; color: #888;">Homeowner</span>
+                    </div>
+                </div>
+                <div class="testi-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testi-text">"We had a massive leak under the concrete slab. They used acoustic sensors to find it without tearing up our entire floor. Highly professional."</p>
+                    <div class="client-info">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100" alt="Client">
+                        <div class="client-name">Sarah Jenkins</div>
+                        <span style="font-size: 0.85rem; color: #888;">Restaurant Manager</span>
+                    </div>
+                </div>
+                <div class="testi-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testi-text">"Re-piped my entire old house. The crew was respectful, clean, and finished ahead of schedule. The water pressure is finally amazing."</p>
+                    <div class="client-info">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100" alt="Client">
+                        <div class="client-name">Michael Chang</div>
+                        <span style="font-size: 0.85rem; color: #888;">Real Estate Investor</span>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center" style="margin-top: 40px;">
+                <a href="#" class="btn btn-outline">Read All 500+ Reviews</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-cta">
+        <div class="container">
+            <h2>Ready to start your plumbing website?</h2>
+            <a href="#" class="btn">Purchase HouzFix Today</a>
+            <div class="footer-bottom">
+                <p>Copyright © 2024 HouzFix All Rights Reserved.</p>
+                <div class="nav-links">
+                    <a href="demos.html">Demos</a>
+                    <a href="plugins.html">Plugins</a>
+                    <a href="faq.html">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

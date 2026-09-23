@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions - HouzFix Plumbing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ==========================================================================
+           1. CSS VARIABLES & RESET
+           ========================================================================== */
+        :root {
+            --primary-color: #00a2d3;
+            --primary-dark: #0088b3;
+            --secondary-color: #f39c12;
+            --dark-bg: #0b1a2a;
+            --light-bg: #f4f7f9;
+            --text-dark: #1a2b4c;
+            --text-body: #556575;
+            --white: #ffffff;
+            --border-color: #e2e8f0;
+            --transition-fast: 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-body);
+            background-color: var(--light-bg);
+            line-height: 1.7;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            background-color: var(--primary-color); color: var(--white);
+            padding: 14px 30px; border-radius: 6px; font-weight: 600;
+            transition: var(--transition-fast); border: none; cursor: pointer;
+        }
+        .btn:hover { background-color: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 162, 211, 0.3); color: var(--white); }
+        .btn-outline { background-color: transparent; border: 2px solid var(--primary-color); color: var(--primary-color); }
+        .btn-outline:hover { background-color: var(--primary-color); color: var(--white); }
+
+        /* ==========================================================================
+           2. HEADER & NAVIGATION
+           ========================================================================== */
+        header { background-color: var(--white); box-shadow: 0 2px 15px rgba(0,0,0,0.05); position: sticky; top: 0; width: 100%; z-index: 1000; }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; height: 90px; }
+        .logo { font-size: 1.8rem; font-weight: 800; display: flex; align-items: center; gap: 10px; color: var(--text-dark); }
+        .logo svg { width: 32px; fill: var(--primary-color); }
+        .logo span { color: var(--primary-color); }
+        
+        .nav-links { display: flex; gap: 35px; }
+        .nav-links a { font-weight: 600; text-transform: uppercase; font-size: 0.95rem; color: var(--text-dark); transition: var(--transition-fast); position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--primary-color); transition: var(--transition-fast); }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary-color); }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+        /* ==========================================================================
+           3. PAGE HERO
+           ========================================================================== */
+        .page-hero {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #162a42 100%);
+            color: var(--white); padding: 100px 0; text-align: center; position: relative;
+        }
+        .page-hero h1 { font-size: 3rem; color: var(--white); margin-bottom: 20px; font-weight: 700; }
+        .page-hero h1 span { color: var(--primary-color); }
+        .page-hero p { font-size: 1.2rem; color: #cbd5e1; max-width: 600px; margin: 0 auto; }
+
+        /* ==========================================================================
+           4. FAQ SECTION LAYOUT
+           ========================================================================== */
+        .faq-section { padding: 80px 0; }
+        .faq-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 50px; align-items: start; }
+        
+        /* Sticky Contact Box (Sidebar) */
+        .faq-contact-box {
+            background: var(--white); padding: 40px 30px; border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid var(--border-color);
+            position: sticky; top: 120px; text-align: center;
+        }
+        .faq-contact-box h3 { font-size: 1.5rem; color: var(--text-dark); margin-bottom: 15px; }
+        .faq-contact-box p { color: var(--text-body); margin-bottom: 25px; font-size: 0.95rem; }
+        .faq-contact-box .icon-wrap {
+            width: 70px; height: 70px; background: rgba(0, 162, 211, 0.1); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;
+        }
+        .faq-contact-box .icon-wrap svg { width: 32px; height: 32px; fill: var(--primary-color); }
+        .faq-contact-box .btn { width: 100%; justify-content: center; margin-bottom: 10px; }
+
+        /* FAQ Categories & Accordions */
+        .faq-category { margin-bottom: 50px; }
+        .faq-category h2 { font-size: 1.8rem; color: var(--text-dark); margin-bottom: 25px; display: flex; align-items: center; gap: 10px; }
+        .faq-category h2 svg { width: 28px; height: 28px; fill: var(--primary-color); }
+
+        details {
+            background: var(--white); margin-bottom: 15px; border-radius: 8px;
+            border: 1px solid var(--border-color); box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: var(--transition-fast); overflow: hidden;
+        }
+        details:hover { border-color: rgba(0, 162, 211, 0.4); box-shadow: 0 8px 15px rgba(0,0,0,0.05); }
+        
+        summary {
+            padding: 22px 25px; font-weight: 600; font-size: 1.1rem; color: var(--text-dark);
+            cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center;
+            background: var(--white); transition: var(--transition-fast);
+        }
+        summary::-webkit-details-marker { display: none; }
+        
+        /* Custom Plus/Minus Icon */
+        summary::after {
+            content: '+'; font-size: 1.8rem; color: var(--primary-color); font-weight: 400;
+            line-height: 1; transition: transform 0.3s ease;
+        }
+        details[open] summary { background: rgba(0, 162, 211, 0.03); color: var(--primary-color); border-bottom: 1px solid var(--border-color); }
+        details[open] summary::after { content: '−'; transform: rotate(180deg); }
+        
+        .faq-content { padding: 25px; color: var(--text-body); line-height: 1.8; background: var(--white); font-size: 1rem; }
+
+        /* ==========================================================================
+           5. FOOTER
+           ========================================================================== */
+        .footer-cta { background-color: var(--dark-bg); text-align: center; padding: 80px 0 30px 0; color: var(--white); margin-top: 50px;}
+        .footer-cta h2 { font-size: 2.5rem; color: var(--white); margin-bottom: 20px; }
+        .footer-cta p { color: #a0aec0; margin-bottom: 40px; font-size: 1.1rem; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding: 30px 0 10px; margin-top: 60px; display: flex; justify-content: space-between; align-items: center; color: #a0aec0; }
+        .footer-bottom .nav-links a { color: #a0aec0; }
+        .footer-bottom .nav-links a:hover { color: var(--primary-color); }
+        .footer-bottom .nav-links a::after { display: none; }
+
+        /* ==========================================================================
+           6. RESPONSIVE DESIGN
+           ========================================================================== */
+        @media (max-width: 992px) {
+            .faq-layout { grid-template-columns: 1fr; }
+            .faq-contact-box { position: static; margin-bottom: 50px; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .header-cta-btn { display: none; }
+            .page-hero h1 { font-size: 2.2rem; }
+            .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <header>
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                Houz<span>Fix</span>
+            </a>
+            <!-- Links point back to the main page sections -->
+            <nav class="nav-links">
+                <a href="index.html#home">Home</a>
+                <a href="index.html#services">Services</a>
+                <a href="index.html#gallery">Projects</a>
+                <a href="index.html#reviews">Reviews</a>
+            </nav>
+            <a href="tel:1800PLUMBER" class="btn header-cta-btn">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                1-800-PLUMBER
+            </a>
+        </div>
+    </header>
+
+    <!-- ================= PAGE HERO ================= -->
+    <div class="page-hero">
+        <div class="container">
+            <h1>Plumbing <span>FAQ</span></h1>
+            <p>Find quick answers to common plumbing questions, pricing details, and our emergency service policies.</p>
+        </div>
+    </div>
+
+    <!-- ================= FAQ SECTION ================= -->
+    <section class="faq-section">
+        <div class="container faq-layout">
+            
+            <!-- Sidebar: Contact Box -->
+            <aside>
+                <div class="faq-contact-box">
+                    <div class="icon-wrap">
+                        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                    </div>
+                    <h3>Still Have Questions?</h3>
+                    <p>If you cannot find the answer to your question in our FAQ, please don't hesitate to reach out to our licensed experts.</p>
+                    <a href="tel:1800PLUMBER" class="btn">Call Us Now</a>
+                    <a href="mailto:support@houzfix.com" class="btn btn-outline">Send an Email</a>
+                </div>
+            </aside>
+
+            <!-- Main Content: Accordions -->
+            <div class="faq-content-area">
+                
+                <!-- Category 1: Emergency & Service -->
+                <div class="faq-category">
+                    <h2>
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        Emergency & Scheduling
+                    </h2>
+                    
+                    <details open>
+                        <summary>Do you offer 24/7 emergency plumbing service?</summary>
+                        <div class="faq-content">
+                            Yes! Plumbing disasters don't wait for business hours, and neither do we. Our dispatch team is available 24 hours a day, 7 days a week, 365 days a year. If you have a burst pipe, severe leak, or overflowing sewer, call us immediately and we will dispatch a technician right away.
+                        </div>
+                    </details>
+                    
+                    <details>
+                        <summary>How quickly can a plumber arrive at my house?</summary>
+                        <div class="faq-content">
+                            For emergency calls, our average response time is between 45 to 60 minutes depending on your exact location and traffic conditions. For non-emergency standard calls, we typically offer same-day or next-day appointments.
+                        </div>
+                    </details>
+                    
+                    <details>
+                        <summary>Are your plumbers licensed and insured?</summary>
+                        <div class="faq-content">
+                            Absolutely. Every technician employed by HouzFix is a fully licensed, bonded, and insured professional. We undergo rigorous background checks and continuous training to ensure we provide the safest and highest quality service possible.
+                        </div>
+                    </details>
+                </div>
+
+                <!-- Category 2: Pricing & Estimates -->
+                <div class="faq-category">
+                    <h2>
+                        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                        Pricing & Estimates
+                    </h2>
+                    
+                    <details>
+                        <summary>Do you charge an hourly rate or a flat fee?</summary>
+                        <div class="faq-content">
+                            We use a transparent, upfront flat-rate pricing system. This means after we inspect the problem, we will give you a total price for the repair *before* any work begins. You will never be surprised by an inflated hourly bill if a job takes longer than expected.
+                        </div>
+                    </details>
+                    
+                    <details>
+                        <summary>Do you offer free estimates?</summary>
+                        <div class="faq-content">
+                            We offer free estimates on large installations (such as whole-house repiping, new sewer lines, or water heater replacements). For standard repairs and troubleshooting, there is a small diagnostic dispatch fee to send a licensed plumber to your home, which is waived if you choose to proceed with the repair.
+                        </div>
+                    </details>
+                    
+                    <details>
+                        <summary>What payment methods do you accept?</summary>
+                        <div class="faq-content">
+                            We accept all major credit cards (Visa, MasterCard, American Express, Discover), debit cards, cash, and personal checks. We also offer flexible financing options for larger plumbing projects.
+                        </div>
+                    </details>
+                </div>
+
+                <!-- Category 3: General Plumbing -->
+                <div class="faq-category">
+                    <h2>
+                        <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                        General Plumbing Issues
+                    </h2>
+                    
+                    <details>
+                        <summary>Why is my water pressure suddenly so low?</summary>
+                        <div class="faq-content">
+                            Sudden low water pressure can be caused by several issues. It could be a closed or partially closed shut-off valve, a failing pressure regulator, mineral buildup in the pipes, or a hidden water leak. If the issue is affecting the whole house, we highly recommend scheduling an inspection to rule out major pipe leaks.
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>What should I NEVER put down my garbage disposal?</summary>
+                        <div class="faq-content">
+                            To avoid serious clogs, never put the following items down your disposal: liquid grease or oil (it solidifies in pipes), coffee grounds, eggshells, fibrous vegetables (like celery or onion skins), pasta, rice, and bones. Always run cold water while operating the disposal.
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>How do I know if I have a hidden water leak?</summary>
+                        <div class="faq-content">
+                            Common signs of a hidden leak include: an unusually high water bill, the sound of running water when all fixtures are turned off, damp or warm spots on your floors, mold or mildew smells, and cracks in your foundation. We offer non-invasive acoustic leak detection to find the exact source.
+                        </div>
+                    </details>
+                </div>
+
+                <!-- Category 4: Water Heaters -->
+                <div class="faq-category">
+                    <h2>
+                        <svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
+                        Water Heaters
+                    </h2>
+                    
+                    <details>
+                        <summary>How long does a standard water heater last?</summary>
+                        <div class="faq-content">
+                            A traditional tank-style water heater typically lasts between 8 to 12 years with proper maintenance. Tankless water heaters have a longer lifespan, often lasting 15 to 20 years. If your heater is over 10 years old and requiring frequent repairs, replacement is usually the most cost-effective option.
+                        </div>
+                    </details>
+                    
+                    <details>
+                        <summary>Why is my water heater making a popping or rumbling noise?</summary>
+                        <div class="faq-content">
+                            Popping or rumbling noises are usually caused by hard water mineral sediment building up at the bottom of the tank. When the burner heats the tank, water trapped under the sediment boils and bursts through, causing the sound. Flushing the tank annually can prevent this.
+                        </div>
+                    </details>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer-cta">
+        <div class="container">
+            <h2>Need an Expert Plumber Today?</h2>
+            <p>Our licensed technicians are standing by 24/7 to solve your plumbing problems.</p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="tel:1800PLUMBER" class="btn" style="background-color: var(--secondary-color); color: white; padding: 15px 40px; font-size: 1.1rem;">
+                    Call Now: 1-800-PLUMBER
+                </a>
+                <a href="index.html#contact" class="btn btn-outline" style="color: white; border-color: white; padding: 15px 40px; font-size: 1.1rem;">
+                    Get a Free Estimate
+                </a>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>Copyright © 2024 HouzFix Plumbing Services. All Rights Reserved.</p>
+                <div class="nav-links">
+                    <a href="index.html#home">Home</a>
+                    <a href="index.html#services">Services</a>
+                    <a href="index.html#gallery">Projects</a>
+                    <a href="index.html#reviews">Reviews</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

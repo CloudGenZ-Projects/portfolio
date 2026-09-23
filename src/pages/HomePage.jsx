@@ -29,16 +29,25 @@ export default function HomePage({ viewport = 'desktop' }) {
   // Extract industry from query param (?industry=xxx) or URL path (/xxx)
   const queryIndustry = searchParams.get('industry');
   const pathIndustry = location.pathname.replace('/', '').trim();
-  const activeIndustrySlug = queryIndustry || pathIndustry;
+  
+  // OVERRIDE: If path is exactly /gniimmigration, map it to industry=immigration
+  const isGniImmigration = pathIndustry.toLowerCase() === 'gniimmigration';
+  const activeIndustrySlug = isGniImmigration ? 'immigration' : (queryIndustry || pathIndustry);
 
   const currentIndustry = activeIndustrySlug ? getIndustryBySlug(activeIndustrySlug) : null;
 
   // Extract theme from query param (?theme=X)
-  let rawTheme = searchParams.get('theme');
-  if (!rawTheme && location.search.includes('>theme=')) {
-    rawTheme = location.search.split('>theme=')[1];
+  let currentThemeId = 1;
+  if (isGniImmigration) {
+    // Force Theme 2 for the /gniimmigration route
+    currentThemeId = 2;
+  } else {
+    let rawTheme = searchParams.get('theme');
+    if (!rawTheme && location.search.includes('>theme=')) {
+      rawTheme = location.search.split('>theme=')[1];
+    }
+    currentThemeId = rawTheme ? parseInt(rawTheme, 10) : 1;
   }
-  const currentThemeId = rawTheme ? parseInt(rawTheme, 10) : 1;
 
   // Filtered industries for card gallery
   const filteredIndustries = useMemo(() => {

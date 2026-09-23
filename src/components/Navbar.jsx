@@ -71,19 +71,31 @@ export default function Navbar() {
   }, [isIndustryOpen]);
 
   const handleSelectIndustry = (slug) => {
+
     setIsIndustryOpen(false);
     setDropdownSearch('');
     if (slug === 'all' || !slug) {
       navigate('/');
     } else {
+
+       console.log(`Navigating to industry: ${slug}`);
+
       navigate(`/?industry=${slug}&theme=${currentThemeId}`);
     }
   };
 
   const handleThemeChange = (newThemeId) => {
     const targetIndustry = currentIndustry ? currentIndustry.id : 'plumber';
+
+      console.log(`Changing theme to: ${newThemeId}`);
+    
+
     navigate(`/?industry=${targetIndustry}&theme=${newThemeId}`);
   };
+
+
+
+
 
   // Group industries by sector
   const sectorGroups = useMemo(() => {

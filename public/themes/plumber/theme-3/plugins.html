@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Services & Integrations - HouzFix Plumber Theme</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ==========================================================================
+           1. CSS VARIABLES & RESET
+           ========================================================================== */
+        :root {
+            --primary-color: #00a2d3;
+            --primary-light: #33b5dc;
+            --primary-dark: #0088b3;
+            --secondary-color: #f39c12;
+            --dark-bg: #0b1a2a;
+            --dark-light: #162a42;
+            --text-dark: #1a2b4c;
+            --text-body: #556575;
+            --white: #ffffff;
+            --bg-light: #f4f7f9;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-lg: 0 20px 40px -5px rgba(11, 26, 42, 0.1);
+            --transition-fast: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-body);
+            background-color: var(--white);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ==========================================================================
+           2. TYPOGRAPHY & BUTTONS
+           ========================================================================== */
+        h1, h2, h3, h4, h5, h6 { color: var(--text-dark); font-weight: 700; line-height: 1.2; }
+        
+        .section-title { font-size: 2.8rem; margin-bottom: 20px; position: relative; display: inline-block; }
+        .section-title span { color: var(--primary-color); }
+        .section-subtitle { font-size: 1.1rem; max-width: 700px; margin: 0 auto 50px; color: var(--text-body); }
+        .text-center { text-align: center; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 14px 36px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: var(--transition-fast);
+            cursor: pointer;
+            border: 2px solid transparent;
+            z-index: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 0%; height: 100%;
+            background: rgba(0,0,0,0.1);
+            transition: var(--transition-fast);
+            z-index: -1;
+        }
+
+        .btn:hover::before { width: 100%; }
+        .btn:hover { background-color: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,162,211,0.3); color: var(--white); }
+
+        .btn-outline { background: transparent; border-color: var(--primary-color); color: var(--primary-color); }
+        .btn-outline:hover { background: var(--primary-color); color: var(--white); }
+        
+        .btn-warning { background-color: var(--secondary-color); color: white; }
+        .btn-warning:hover { background-color: #d68910; box-shadow: 0 10px 20px rgba(243, 156, 18, 0.3); }
+
+        /* ==========================================================================
+           3. KEYFRAME ANIMATIONS
+           ========================================================================== */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(243, 156, 18, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(243, 156, 18, 0); }
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .animate-fade-up { animation: fadeUp 0.8s ease forwards; opacity: 0; }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+
+        /* ==========================================================================
+           4. HEADER & NAVIGATION
+           ========================================================================== */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition-fast);
+        }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; height: 90px; }
+        .logo { font-size: 2rem; font-weight: 800; display: flex; align-items: center; gap: 12px; color: var(--dark-bg); }
+        .logo svg { width: 36px; height: 36px; fill: var(--primary-color); }
+        .logo span { color: var(--primary-color); }
+        .nav-links { display: flex; gap: 35px; }
+        .nav-links a { font-weight: 600; text-transform: uppercase; font-size: 0.95rem; color: var(--text-dark); transition: var(--transition-fast); position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--primary-color); transition: var(--transition-fast); }
+        .nav-links a:hover { color: var(--primary-color); }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a.active { color: var(--primary-color); }
+        
+        .header-cta { display: flex; align-items: center; gap: 20px; }
+        .phone-cta { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--text-dark); font-size: 1.1rem; }
+        .phone-cta svg { width: 20px; height: 20px; fill: var(--primary-color); animation: pulse 2s infinite; border-radius: 50%; }
+
+        /* ==========================================================================
+           5. HERO SECTION
+           ========================================================================== */
+        .page-hero {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-light) 100%);
+            color: var(--white);
+            padding: 140px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-hero::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(0,162,211,0.05) 0%, transparent 60%);
+            animation: spinSlow 60s linear infinite;
+        }
+        .page-hero-content { position: relative; z-index: 10; max-width: 800px; margin: 0 auto; }
+        .page-hero h1 { font-size: 3.5rem; color: var(--white); margin-bottom: 24px; animation: slideInRight 0.8s ease; }
+        .page-hero h1 span { color: var(--primary-color); }
+        .page-hero p { font-size: 1.25rem; color: #a0aec0; margin-bottom: 40px; animation: slideInRight 0.8s ease 0.2s backwards; }
+
+        /* ==========================================================================
+           6. SOFTWARE PLUGINS SECTION (Original Request Enhanced)
+           ========================================================================== */
+        .plugins-section { padding: 100px 0; background: var(--bg-light); border-bottom: 1px solid var(--border-color); }
+        .plugins-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; }
+        .plugin-card {
+            background: var(--white); padding: 40px 20px; border-radius: 12px; text-align: center;
+            transition: var(--transition-slow); border: 1px solid var(--border-color);
+            position: relative; z-index: 1; overflow: hidden;
+        }
+        .plugin-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--primary-color);
+            transform: scaleX(0); transition: var(--transition-fast); origin: left;
+        }
+        .plugin-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
+        .plugin-card:hover::before { transform: scaleX(1); }
+        .plugin-icon {
+            width: 80px; height: 80px; border-radius: 24px; display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 25px; font-weight: 800; font-size: 2rem; color: var(--white);
+            transform: rotate(-5deg); transition: var(--transition-fast);
+        }
+        .plugin-card:hover .plugin-icon { transform: rotate(0deg) scale(1.1); }
+        .plugin-card h3 { font-size: 1.3rem; margin-bottom: 15px; color: var(--text-dark); }
+        .plugin-card p { font-size: 0.95rem; color: var(--text-body); }
+
+        /* Brand Colors for Icons */
+        .bg-elementor { background: linear-gradient(135deg, #92003b, #d90059); }
+        .bg-woo { background: linear-gradient(135deg, #96588a, #c476b5); }
+        .bg-cf7 { background: linear-gradient(135deg, #0073aa, #009be6); }
+        .bg-yoast { background: linear-gradient(135deg, #a4286a, #df3790); }
+
+        /* ==========================================================================
+           7. MASSIVE ANIMATED PLUMBING SERVICES SECTION (The Core Addition)
+           ========================================================================== */
+        .services-section { padding: 120px 0; background: var(--white); position: relative; }
+        
+        /* Floating background elements for aesthetics */
+        .bg-shape-1 { position: absolute; top: 10%; left: -5%; width: 300px; height: 300px; background: rgba(0,162,211,0.03); border-radius: 50%; animation: float 10s infinite alternate; z-index: 0; pointer-events: none; }
+        .bg-shape-2 { position: absolute; bottom: 10%; right: -5%; width: 400px; height: 400px; background: rgba(243,156,18,0.03); border-radius: 50%; animation: float 12s infinite alternate-reverse; z-index: 0; pointer-events: none; }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .svc-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            transition: var(--transition-slow);
+            border: 1px solid var(--border-color);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .svc-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(0,162,211,0.3);
+        }
+
+        .svc-img-wrap {
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .svc-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .svc-card:hover .svc-img-wrap img { transform: scale(1.15); }
+        
+        .svc-img-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(11,26,42,0.8) 0%, transparent 100%);
+            opacity: 0.6;
+            transition: var(--transition-fast);
+        }
+        .svc-card:hover .svc-img-overlay { opacity: 0.8; }
+
+        .svc-icon-badge {
+            position: absolute;
+            bottom: -25px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(0,162,211,0.4);
+            border: 4px solid var(--white);
+            z-index: 20;
+            transition: var(--transition-fast);
+        }
+        .svc-icon-badge svg { width: 32px; height: 32px; fill: var(--white); }
+        .svc-card:hover .svc-icon-badge { background: var(--secondary-color); transform: rotate(15deg) scale(1.1); box-shadow: 0 10px 20px rgba(243,156,18,0.4); }
+
+        .svc-content { padding: 40px 30px 30px; flex-grow: 1; display: flex; flex-direction: column; }
+        .svc-content h3 { font-size: 1.4rem; color: var(--text-dark); margin-bottom: 15px; transition: var(--transition-fast); }
+        .svc-card:hover .svc-content h3 { color: var(--primary-color); }
+        
+        .svc-content p { color: var(--text-body); margin-bottom: 20px; font-size: 0.95rem; flex-grow: 1; }
+        
+        .svc-features { list-style: none; margin-bottom: 25px; padding-top: 15px; border-top: 1px solid var(--border-color); }
+        .svc-features li { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--text-dark); margin-bottom: 8px; font-weight: 500;}
+        .svc-features li svg { width: 16px; height: 16px; fill: var(--primary-color); flex-shrink: 0; }
+
+        .svc-btn {
+            display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: var(--primary-color);
+            text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; transition: var(--transition-fast);
+            margin-top: auto;
+        }
+        .svc-btn svg { width: 18px; height: 18px; fill: currentColor; transition: transform 0.3s; }
+        .svc-card:hover .svc-btn { color: var(--secondary-color); }
+        .svc-card:hover .svc-btn svg { transform: translateX(5px); }
+
+        /* ==========================================================================
+           8. WORK PROCESS TIMELINE
+           ========================================================================== */
+        .process-section { background: var(--dark-bg); color: var(--white); padding: 120px 0; }
+        .process-section .section-title { color: var(--white); }
+        .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 60px; position: relative; }
+        
+        /* Connecting Line */
+        .process-grid::before {
+            content: ''; position: absolute; top: 40px; left: 12%; right: 12%; height: 2px;
+            background: rgba(255,255,255,0.1); border-top: 2px dashed rgba(255,255,255,0.2); z-index: 1;
+        }
+
+        .process-step { text-align: center; position: relative; z-index: 2; }
+        .step-number {
+            width: 80px; height: 80px; border-radius: 50%; background: var(--dark-light);
+            border: 4px solid var(--primary-color); color: var(--white); font-size: 2rem; font-weight: 800;
+            display: flex; align-items: center; justify-content: center; margin: 0 auto 25px;
+            box-shadow: 0 0 0 10px rgba(0,162,211,0.1); transition: var(--transition-fast);
+        }
+        .process-step:hover .step-number { background: var(--primary-color); transform: scale(1.1); box-shadow: 0 0 0 15px rgba(0,162,211,0.2); }
+        .process-step h4 { font-size: 1.3rem; margin-bottom: 15px; color: var(--white); }
+        .process-step p { color: #a0aec0; font-size: 0.95rem; }
+
+        /* ==========================================================================
+           9. PRICING / MAINTENANCE PLANS
+           ========================================================================== */
+        .pricing-section { padding: 120px 0; background: var(--bg-light); }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; align-items: center; }
+        
+        .price-card {
+            background: var(--white); border-radius: 12px; padding: 50px 40px; text-align: center;
+            border: 1px solid var(--border-color); transition: var(--transition-slow); position: relative; overflow: hidden;
+        }
+        .price-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
+        
+        .price-card.featured {
+            background: var(--dark-bg); color: var(--white); border-color: var(--primary-color);
+            transform: scale(1.05); box-shadow: var(--shadow-lg);
+        }
+        .price-card.featured:hover { transform: scale(1.05) translateY(-10px); }
+        
+        .badge-popular {
+            position: absolute; top: 20px; right: -35px; background: var(--secondary-color); color: var(--white);
+            padding: 5px 40px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; transform: rotate(45deg);
+        }
+
+        .plan-name { font-size: 1.5rem; font-weight: 700; margin-bottom: 15px; color: inherit;}
+        .price-card:not(.featured) .plan-name { color: var(--text-dark); }
+        
+        .price { font-size: 4rem; font-weight: 800; color: var(--primary-color); line-height: 1; margin-bottom: 20px; }
+        .price span { font-size: 1.2rem; color: var(--text-body); font-weight: 500; }
+        .price-card.featured .price span { color: #a0aec0; }
+        
+        .price-list { margin: 30px 0 40px; text-align: left; }
+        .price-list li { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; font-size: 1rem; }
+        .price-card:not(.featured) .price-list li { color: var(--text-body); }
+        .price-list li svg { width: 20px; height: 20px; fill: var(--primary-color); }
+        
+        .price-card .btn { width: 100%; }
+
+        /* ==========================================================================
+           10. EMERGENCY CTA STRIP
+           ========================================================================== */
+        .cta-strip {
+            background: linear-gradient(90deg, var(--secondary-color) 0%, #e67e22 100%);
+            padding: 60px 0; color: var(--white); position: relative; overflow: hidden;
+        }
+        .cta-inner { display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
+        .cta-text h2 { font-size: 2.5rem; color: var(--white); margin-bottom: 10px; }
+        .cta-text p { font-size: 1.2rem; opacity: 0.9; }
+        .cta-strip .btn { background: var(--white); color: var(--secondary-color); font-size: 1.1rem; padding: 18px 45px; }
+        .cta-strip .btn:hover { background: var(--dark-bg); color: var(--white); }
+
+        /* ==========================================================================
+           11. FOOTER
+           ========================================================================== */
+        footer { background: var(--dark-bg); color: #a0aec0; padding-top: 80px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 50px; margin-bottom: 60px; }
+        
+        .footer-about .logo { color: var(--white); margin-bottom: 20px; }
+        .footer-about p { margin-bottom: 25px; }
+        .social-links { display: flex; gap: 15px; }
+        .social-links a {
+            width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05);
+            display: flex; align-items: center; justify-content: center; transition: var(--transition-fast);
+        }
+        .social-links a svg { width: 18px; height: 18px; fill: var(--white); }
+        .social-links a:hover { background: var(--primary-color); transform: translateY(-3px); }
+
+        .footer-title { color: var(--white); font-size: 1.3rem; margin-bottom: 25px; font-weight: 600; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { transition: var(--transition-fast); display: flex; align-items: center; gap: 8px; }
+        .footer-links a::before { content: '›'; color: var(--primary-color); font-size: 1.5rem; line-height: 0; }
+        .footer-links a:hover { color: var(--primary-color); transform: translateX(5px); }
+
+        .newsletter-form { display: flex; margin-top: 20px; }
+        .newsletter-form input {
+            width: 100%; padding: 14px 20px; border: none; border-radius: 6px 0 0 6px;
+            background: rgba(255,255,255,0.1); color: var(--white); outline: none;
+        }
+        .newsletter-form button {
+            background: var(--primary-color); color: var(--white); border: none; padding: 0 25px;
+            border-radius: 0 6px 6px 0; cursor: pointer; font-weight: 700; transition: var(--transition-fast);
+        }
+        .newsletter-form button:hover { background: var(--primary-dark); }
+
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding: 25px 0; text-align: center; font-size: 0.9rem; }
+        .footer-bottom span { color: var(--primary-color); }
+
+        /* ==========================================================================
+           12. RESPONSIVE DESIGN (Media Queries)
+           ========================================================================== */
+        @media (max-width: 1200px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .process-grid { grid-template-columns: repeat(2, 1fr); gap: 50px; }
+            .process-grid::before { display: none; }
+        }
+        @media (max-width: 992px) {
+            .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+            .price-card.featured { transform: scale(1); }
+            .price-card.featured:hover { transform: translateY(-10px); }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+            .cta-inner { flex-direction: column; text-align: center; gap: 30px; }
+        }
+        @media (max-width: 768px) {
+            .nav-links, .header-cta { display: none; }
+            .page-hero h1 { font-size: 2.2rem; }
+            .services-grid, .plugins-grid, .pricing-grid, .process-grid, .footer-grid { grid-template-columns: 1fr; }
+            .section-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================
+         HEADER
+         ========================================== -->
+    <header>
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <!-- Inline SVG Logo -->
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                Houz<span>Fix</span>
+            </a>
+            <nav class="nav-links">
+                <a href="demos.html">Demos</a>
+                <a href="plugins.html" class="active">Services & Plugins</a>
+                <a href="faq.html">FAQ</a>
+                <a href="docs.html">Docs</a>
+            </nav>
+            <div class="header-cta">
+                <div class="phone-cta">
+                    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    1-800-PLUMBER
+                </div>
+                <a href="#quote" class="btn">Get Free Quote</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==========================================
+         HERO SECTION
+         ========================================== -->
+    <section class="page-hero">
+        <div class="container page-hero-content">
+            <h1>Comprehensive <span>Plumbing Services</span> & Integrations</h1>
+            <p>From deep WordPress software integrations to physical, hands-on master plumbing services. Explore our full capabilities below.</p>
+            <a href="#services" class="btn">Explore All Services</a>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SOFTWARE PLUGINS (Original Modified)
+         ========================================== -->
+    <section class="plugins-section">
+        <div class="container">
+            <div class="text-center animate-fade-up">
+                <h2 class="section-title">Software <span>Integrations</span></h2>
+                <p class="section-subtitle">Run your plumbing business efficiently online with our pre-configured WordPress plugin compatibility.</p>
+            </div>
+            <div class="plugins-grid animate-fade-up delay-200">
+                <div class="plugin-card">
+                    <div class="plugin-icon bg-elementor">E</div>
+                    <h3>Elementor Pro</h3>
+                    <p>Drag and drop visual builder to customize every service page effortlessly.</p>
+                </div>
+                <div class="plugin-card">
+                    <div class="plugin-icon bg-woo">W</div>
+                    <h3>WooCommerce</h3>
+                    <p>Sell plumbing parts, fixtures, and allow clients to pay invoices online.</p>
+                </div>
+                <div class="plugin-card">
+                    <div class="plugin-icon bg-cf7">C</div>
+                    <h3>Contact Form 7</h3>
+                    <p>Advanced routing forms to capture plumbing emergency requests 24/7.</p>
+                </div>
+                <div class="plugin-card">
+                    <div class="plugin-icon bg-yoast">Y</div>
+                    <h3>Yoast SEO</h3>
+                    <p>Dominate local search results for "plumber near me" automatically.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         MASSIVE PLUMBING SERVICES SECTION (NEW)
+         ========================================== -->
+    <section id="services" class="services-section">
+        <div class="bg-shape-1"></div>
+        <div class="bg-shape-2"></div>
+        
+        <div class="container">
+            <div class="text-center animate-fade-up">
+                <h2 class="section-title">Professional <span>Plumbing Solutions</span></h2>
+                <p class="section-subtitle">Residential and commercial plumbing excellence. Our licensed, bonded, and insured master plumbers are equipped with state-of-the-art tools for any job, big or small.</p>
+            </div>
+
+            <div class="services-grid">
+                
+                <!-- Service Card 1 -->
+                <div class="svc-card animate-fade-up delay-100">
+                    <div class="svc-img-wrap">
+                        <!-- Unsplash high quality plumbing image -->
+                        <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&q=80&w=600" alt="Leak Detection">
+                        <div class="svc-img-overlay"></div>
+                        <div class="svc-icon-badge">
+                            <!-- Water Drop SVG -->
+                            <svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="svc-content">
+                        <h3>Emergency Leak Detection</h3>
+                        <p>We utilize advanced thermal imaging and acoustic sensor technology to pinpoint hidden leaks behind walls and under concrete slabs without destructive searching.</p>
+                        <ul class="svc-features">
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Thermal Imaging Scans</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Acoustic Pipe Locating</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Minimal Intrusive Repair</li>
+                        </ul>
+                        <a href="#" class="svc-btn">Read Service Details <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                    </div>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="svc-card animate-fade-up delay-200">
+                    <div class="svc-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&q=80&w=600" alt="Pipe Repair">
+                        <div class="svc-img-overlay"></div>
+                        <div class="svc-icon-badge">
+                            <!-- Wrench/Pipe SVG -->
+                            <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="svc-content">
+                        <h3>Trenchless Sewer Repair</h3>
+                        <p>Repair or replace deeply buried sewer lines without tearing up your beautiful landscaping or driveway. We use epoxy pipe lining and pipe bursting techniques.</p>
+                        <ul class="svc-features">
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> No Digging Required</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Epoxy CIPP Lining</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> 50-Year Warranty</li>
+                        </ul>
+                        <a href="#" class="svc-btn">Read Service Details <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                    </div>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="svc-card animate-fade-up delay-300">
+                    <div class="svc-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=600" alt="Hydro Jetting">
+                        <div class="svc-img-overlay"></div>
+                        <div class="svc-icon-badge">
+                            <!-- Whirlpool/Drain SVG (Simulated with circles) -->
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                        </div>
+                    </div>
+                    <div class="svc-content">
+                        <h3>Hydro-Jet Drain Cleaning</h3>
+                        <p>Eliminate stubborn clogs, tree roots, and grease buildup with high-pressure hydro-jetting. It scours the inside of your pipes leaving them like brand new.</p>
+                        <ul class="svc-features">
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> High Pressure Scouring</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Removes Tree Roots</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Safe for Old Pipes</li>
+                        </ul>
+                        <a href="#" class="svc-btn">Read Service Details <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                    </div>
+                </div>
+
+                <!-- Service Card 4 -->
+                <div class="svc-card animate-fade-up delay-100">
+                    <div class="svc-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1574536294717-b769ea8e7526?auto=format&fit=crop&q=80&w=600" alt="Water Heater">
+                        <div class="svc-img-overlay"></div>
+                        <div class="svc-icon-badge">
+                            <!-- Flame SVG for heating -->
+                            <svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="svc-content">
+                        <h3>Water Heater Installation</h3>
+                        <p>Upgrade to energy-efficient hot water solutions. We install, repair, and maintain both traditional tank heaters and modern on-demand tankless water heaters.</p>
+                        <ul class="svc-features">
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Tankless Upgrades</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Gas & Electric Models</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Fast Anode Replacement</li>
+                        </ul>
+                        <a href="#" class="svc-btn">Read Service Details <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                    </div>
+                </div>
+
+                <!-- Service Card 5 -->
+                <div class="svc-card animate-fade-up delay-200">
+                    <div class="svc-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=600" alt="Commercial Plumbing">
+                        <div class="svc-img-overlay"></div>
+                        <div class="svc-icon-badge">
+                            <!-- Building SVG -->
+                            <svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="22" x2="9" y2="22"></line><line x1="15" y1="22" x2="15" y2="22"></line><path d="M9 6h.01M15 6h.01M9 10h.01M15 10h.01M9 14h.01M15 14h.01M9 18h.01M15 18h.01"></path></svg>
+                        </div>
+                    </div>
+                    <div class="svc-content">
+                        <h3>Commercial Plumbing</h3>
+                        <p>Large scale plumbing solutions for restaurants, office buildings, and retail spaces. Including grease trap installation, commercial repiping, and code compliance.</p>
+                        <ul class="svc-features">
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Grease Trap Pumping</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Backflow Prevention</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> HOA Contracts</li>
+                        </ul>
+                        <a href="#" class="svc-btn">Read Service Details <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                    </div>
+                </div>
+
+                <!-- Service Card 6 -->
+                <div class="svc-card animate-fade-up delay-300">
+                    <div class="svc-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1542013936693-884638332954?auto=format&fit=crop&q=80&w=600" alt="Gas Lines">
+                        <div class="svc-img-overlay"></div>
+                        <div class="svc-icon-badge">
+                            <!-- Shield SVG -->
+                            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="svc-content">
+                        <h3>Gas Line Services</h3>
+                        <p>Certified, safe installation and repair of natural gas lines for stoves, outdoor grills, fireplaces, and heaters. We conduct rigorous pressure testing for absolute safety.</p>
+                        <ul class="svc-features">
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Leak Detection & Fixing</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> New Line Installation</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Pressure Certification</li>
+                        </ul>
+                        <a href="#" class="svc-btn">Read Service Details <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SERVICE PROCESS TIMELINE
+         ========================================== -->
+    <section class="process-section">
+        <div class="container">
+            <div class="text-center animate-fade-up">
+                <h2 class="section-title">How We <span>Work</span></h2>
+                <p class="section-subtitle">Our streamlined 4-step process ensures transparency, speed, and absolute quality control on every plumbing job.</p>
+            </div>
+            
+            <div class="process-grid animate-fade-up delay-200">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h4>Request & Schedule</h4>
+                    <p>Call our 24/7 hotline or book online. We provide immediate dispatch for emergencies.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h4>Inspection & Quote</h4>
+                    <p>Our master plumbers assess the issue using camera tech and provide a flat-rate quote.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h4>Professional Repair</h4>
+                    <p>We execute the repair or installation cleanly, respecting your home and property.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h4>Testing & Warranty</h4>
+                    <p>Rigorous pressure testing ensures it's fixed right. Backed by our 100% guarantee.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         MAINTENANCE PRICING PLANS
+         ========================================== -->
+    <section class="pricing-section">
+        <div class="container">
+            <div class="text-center animate-fade-up">
+                <h2 class="section-title">Preventative <span>Maintenance Plans</span></h2>
+                <p class="section-subtitle">Save thousands on unexpected plumbing disasters by joining our annual pipe and heater maintenance club.</p>
+            </div>
+
+            <div class="pricing-grid animate-fade-up delay-200">
+                
+                <!-- Basic Plan -->
+                <div class="price-card">
+                    <h3 class="plan-name">Basic Shield</h3>
+                    <div class="price">$15 <span>/month</span></div>
+                    <p>Perfect for essential peace of mind.</p>
+                    <ul class="price-list">
+                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Annual Plumbing Inspection</li>
+                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> 10% Off Repairs</li>
+                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Priority Scheduling</li>
+                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Water Heater Flush</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Choose Basic</a>
+                </div>
+
+                <!-- Featured Plan -->
+                <div class="price-card featured">
+                    <div class="badge-popular">Popular</div>
+                    <h3 class="plan-name">Premium Protection</h3>
+                    <div class="price">$29 <span>/month</span></div>
+                    <p>Comprehensive coverage for homeowners.</p>
+                    <ul class="price-list">
+                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Bi-Annual Camera Inspection</li>
+                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> 20% Off All Repairs</li>
+                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Front-of-line Emergency</li>
+                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Drain Bio-Treatment</li>
+                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Free Fixture Adjustments</li>
+                    </ul>
+                    <a href="#" class="btn btn-warning">Join Premium Club</a>
+                </div>
+
+                <!-- Commercial Plan -->
+                <div class="price-card">
+                    <h3 class="plan-name">Commercial Pro</h3>
+                    <div class="price">$99 <span>/month</span></div>
+                    <p>Tailored for businesses and restaurants.</p>
+                    <ul class="price-list">
+                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Quarterly Inspections</li>
+                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Hydro-jetting 1x / Year</li>
+                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Backflow Certification</li>
+                        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Grease Trap Monitoring</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Contact Sales</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         EMERGENCY CTA
+         ========================================== -->
+    <section class="cta-strip">
+        <div class="container cta-inner">
+            <div class="cta-text">
+                <h2>Facing a Plumbing Emergency?</h2>
+                <p>Don't let water damage destroy your home. Our rapid response team is standing by 24/7/365.</p>
+            </div>
+            <a href="tel:18001234567" class="btn">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                Call 1-800-PLUMBER Now
+            </a>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         FOOTER
+         ========================================== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                
+                <div class="footer-about">
+                    <a href="index.html" class="logo">
+                        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                        Houz<span style="color:var(--primary-color)">Fix</span>
+                    </a>
+                    <p>The ultimate WordPress theme engineered specifically for Plumbers, Electricians, and Handyman contractors. Build an online presence that converts visitors into loyal clients.</p>
+                    <div class="social-links">
+                        <a href="#"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                        <a href="#"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
+                        <a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    </div>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4 class="footer-title">Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Leak Repair</a></li>
+                        <li><a href="#">Drain Cleaning</a></li>
+                        <li><a href="#">Water Heaters</a></li>
+                        <li><a href="#">Gas Lines</a></li>
+                        <li><a href="#">Commercial</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4 class="footer-title">Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Team</a></li>
+                        <li><a href="#">Career</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-newsletter">
+                    <h4 class="footer-title">Newsletter</h4>
+                    <p>Subscribe to get plumbing tips, seasonal maintenance reminders, and exclusive discounts.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email Address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>Copyright © 2024 <span>HouzFix Theme</span>. All Rights Reserved. Designed for Plumbers.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - HouzFix Plumber Theme</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary-color: #00a2d3; --dark-bg: #0b1a2a; --text-dark: #222222; --white: #ffffff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; color: var(--text-dark); }
+        a { text-decoration: none; color: inherit; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .btn { background-color: var(--primary-color); color: var(--white); padding: 12px 30px; border-radius: 4px; font-weight: 500; }
+        header { background-color: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+        .logo { font-size: 1.8rem; font-weight: 700; color: #0b1a2a; }
+        .logo span { color: var(--primary-color); }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { font-weight: 500; text-transform: uppercase; font-size: 0.9rem; }
+        
+        .page-header { background: var(--dark-bg); color: white; padding: 80px 0; text-align: center; }
+        
+        .docs-layout { display: flex; gap: 50px; padding: 80px 0; }
+        .sidebar { width: 300px; background: #f9f9f9; padding: 30px; border-radius: 8px; border: 1px solid #eaeaea; height: fit-content; }
+        .sidebar ul { list-style: none; }
+        .sidebar li { margin-bottom: 15px; }
+        .sidebar a { color: #666; font-weight: 500; transition: 0.3s; }
+        .sidebar a:hover, .sidebar a.active { color: var(--primary-color); }
+        
+        .content { flex: 1; }
+        .content h2 { color: #1a2b4c; margin-bottom: 20px; font-size: 2rem; }
+        .content p { color: #666; margin-bottom: 20px; line-height: 1.8; }
+        .code-block { background: #111; color: #0f0; padding: 20px; border-radius: 5px; font-family: monospace; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-inner">
+            <a href="index.html" class="logo">Houz<span>Fix</span></a>
+            <nav class="nav-links">
+                <a href="demos.html">Demos</a>
+                <a href="plugins.html">Plugins</a>
+                <a href="faq.html">FAQ</a>
+                <a href="docs.html" style="color: var(--primary-color);">Docs</a>
+            </nav>
+            <a href="#" class="btn">Purchase Now</a>
+        </div>
+    </header>
+
+    <div class="page-header">
+        <div class="container">
+            <h1 style="font-size: 3rem; color: var(--primary-color);">Theme Documentation</h1>
+            <p>Step-by-step guide to installing and configuring HouzFix.</p>
+        </div>
+    </div>
+
+    <div class="container docs-layout">
+        <div class="sidebar">
+            <ul>
+                <li><a href="#" class="active">1. Getting Started</a></li>
+                <li><a href="#">2. 1-Click Demo Import</a></li>
+                <li><a href="#">3. Editing Plumbing Services</a></li>
+                <li><a href="#">4. Setting Up WooCommerce</a></li>
+                <li><a href="#">5. Theme Options Panel</a></li>
+                <li><a href="#">6. Customizing Footer</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <h2>1. Getting Started (Installation)</h2>
+            <p>Thank you for purchasing HouzFix! To install the theme on your WordPress site, follow these instructions to ensure your plumbing website gets off to a perfect start.</p>
+            
+            <h3 style="margin: 30px 0 15px;">Uploading via WordPress Admin</h3>
+            <p>1. Navigate to <strong>Appearance > Themes</strong>.<br>
+               2. Click <strong>Add New</strong> and hit the <strong>Upload Theme</strong> button.<br>
+               3. Choose the <code>houzfix.zip</code> file you downloaded from ThemeForest.<br>
+               4. Click <strong>Install Now</strong> and wait for the success message, then click <strong>Activate</strong>.</p>
+            
+            <h3 style="margin: 30px 0 15px;">Installing Required Plugins</h3>
+            <p>Once activated, you will see a prompt to install required plugins (like Elementor and our Plumbing Core features plugin). Click <strong>Begin installing plugins</strong> and activate them.</p>
+
+            <div class="code-block">
+                // Minimum Server Requirements for 1-Click Import
+                PHP Version: 7.4 or higher
+                max_execution_time: 300
+                memory_limit: 256M
+                upload_max_filesize: 64M
+            </div>
+            
+            <a href="#" class="btn" style="margin-top: 20px;">Next: 1-Click Demo Import &rarr;</a>
+        </div>
+    </div>
+</body>
+</html>
