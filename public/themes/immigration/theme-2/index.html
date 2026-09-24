@@ -87,7 +87,7 @@ html.lenis {
 .transparent .navbar12_component:not(.nav--is-scrolled) .navbar12_logo{
 	filter: brightness(0) invert(1);
 }
-@media only screen and (min-width: 891px){
+@media only screen and (min-width: 992px){
   .transparent .navbar12_component:not(.nav--is-scrolled)  .navbar12_link,
   .transparent .navbar12_component:not(.nav--is-scrolled)  .navbar12_dropdown-toggle,
   .transparent .navbar12_component:not(.nav--is-scrolled) .nva-link-color,
@@ -116,11 +116,6 @@ html.lenis {
 
 <!-- Mobile Fixes for Responsiveness -->
 <style>
-  /* Mobile Navbar Adjustments */
-  .mobile-nav-btn {
-    display: none !important;
-  }
-  
   /* Ensure Tower Image is permanently visible on ALL devices (Laptop & Mobile) */
   .ultra-gradient-wrapper .images {
     display: block !important;
@@ -149,6 +144,17 @@ html.lenis {
     z-index: 2 !important;
   }
 
+  /* Desktop View (>= 992px) - Show right side buttons, hide mobile menu buttons */
+  @media screen and (min-width: 992px) {
+    .mobile-nav-btn {
+      display: none !important;
+    }
+    .desktop-nav-btn {
+      display: flex !important;
+    }
+  }
+
+  /* Tablet & Mobile View (<= 991px) - Hamburger Only with Mobile buttons */
   @media screen and (max-width: 991px) {
     .desktop-nav-btn {
       display: none !important;
@@ -157,13 +163,15 @@ html.lenis {
       display: inline-flex !important;
       margin: 1.5rem 1.5rem 2rem 1.5rem;
       width: max-content;
+      gap: 15px;
+      align-items: center;
     }
     /* Mobile specific adjustments for the tower image */
     .ultra-gradient-wrapper .images {
       width: 85% !important;
       max-width: 350px !important;
       right: -5% !important;
-      opacity: 0.4 !important; /* Slightly transparent on mobile so hero text remains easily readable */
+      opacity: 0.4 !important;
     }
   }
 </style>
@@ -236,6 +244,7 @@ a, .w-input, .w-select, .w-tab-link, .w-nav-link, .w-slider-arrow-left, .w-slide
 </div>
 
 <div class="global_nav transparent">
+  <!-- data-collapse="medium" ensures the menu turns into a hamburger ONLY on tablet/mobile (<= 991px) -->
   <div data-animation="default" class="navbar12_component w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="medium" data-w-id="f4f99ca9-5028-75c7-5f1e-79bbe6f665eb" role="banner" data-duration="400">
     <div class="navbar12_container">
       <a href="#" aria-current="page" class="navbar12_logo-link w-nav-brand w--current">
@@ -312,14 +321,19 @@ a, .w-input, .w-select, .w-tab-link, .w-nav-link, .w-slider-arrow-left, .w-slide
           <a href="#contact" class="navbar12_link w-nav-link">Contact</a>
         </div>
         
-        <!-- Mobile Dropdown Get Started Button inside hamburger -->
-        <a href="#contact" class="button is-small is-icon mobile-nav-btn w-inline-block">
-          <div class="icon-embed-xsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--bx" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path d="M3.414 13.778L2 15.192l4.949 2.121l2.122 4.95l1.414-1.414l-.707-3.536L13.091 14l3.61 7.704l1.339-1.339l-1.19-10.123l2.828-2.829a2 2 0 1 0-2.828-2.828l-2.903 2.903L3.824 6.297L2.559 7.563l7.644 3.67l-3.253 3.253l-3.536-.708z" fill="currentColor"></path></svg></div>
-          <div>Get Started</div>
-        </a>
+        <!-- Mobile Dropdown Buttons inside hamburger (Visible only on Tablet/Mobile) -->
+        <div class="mobile-nav-btn">
+          <a href="#contact" class="button is-small is-icon w-inline-block">
+            <div class="icon-embed-xsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--bx" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path d="M3.414 13.778L2 15.192l4.949 2.121l2.122 4.95l1.414-1.414l-.707-3.536L13.091 14l3.61 7.704l1.339-1.339l-1.19-10.123l2.828-2.829a2 2 0 1 0-2.828-2.828l-2.903 2.903L3.824 6.297L2.559 7.563l7.644 3.67l-3.253 3.253l-3.536-.708z" fill="currentColor"></path></svg></div>
+            <div>Get Started</div>
+          </a>
+          <a aria-label="Log In" href="#" class="button is-link is-icon-only is-nav w-inline-block" style="color: inherit; background: transparent; box-shadow: none; border: none; align-self: center;">
+            <div class="icon-embed-xsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ic" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8z"></path></svg></div>
+          </a>
+        </div>
 
       </nav>
-      <!-- Desktop right-side nav buttons -->
+      <!-- Desktop right-side nav buttons (Visible only on Desktop >=992px) -->
       <div class="navbar12_menu-buttons desktop-nav-btn">
         <a href="#contact" class="button is-small is-icon w-inline-block">
           <div class="icon-embed-xsmall w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--bx" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path d="M3.414 13.778L2 15.192l4.949 2.121l2.122 4.95l1.414-1.414l-.707-3.536L13.091 14l3.61 7.704l1.339-1.339l-1.19-10.123l2.828-2.829a2 2 0 1 0-2.828-2.828l-2.903 2.903L3.824 6.297L2.559 7.563l7.644 3.67l-3.253 3.253l-3.536-.708z" fill="currentColor"></path></svg></div>
