@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TITANSHIELD | Military-Grade Architectural Roofing & Storm Fortification</title>
+    
+    <!-- Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Vector Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="loading-state">
+
+    <!-- 24 & 25. INITIAL SKELETON SCREEN & RADIAL SHIELD LOADER -->
+    <div id="pageLoader" class="page-loader">
+        <div class="loader-content">
+            <div class="shield-pulse-wrapper">
+                <svg class="shield-svg-loader" viewBox="0 0 100 120">
+                    <polygon points="50,5 95,25 95,75 50,115 5,75 5,25" class="shield-track" />
+                    <polygon points="50,5 95,25 95,75 50,115 5,25" class="shield-fill" />
+                </svg>
+                <div class="pulse-sparkle"></div>
+            </div>
+            <div class="loader-text-group">
+                <span class="loader-title">CALIBRATING STORM DEFENSE SYSTEM</span>
+                <div class="skeleton-bar-wrapper">
+                    <div class="skeleton-shimmer-bar" id="loadBar"></div>
+                </div>
+                <div class="load-status"><span id="loadPct">0</span>% COMPLETE</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 22. PAGE TRANSITION WIPER -->
+    <div class="page-transition-curtain" id="pageCurtain">
+        <div class="curtain-blade b1"></div>
+        <div class="curtain-blade b2"></div>
+        <div class="curtain-blade b3"></div>
+    </div>
+
+    <!-- 12. CUSTOM MAGNETIC MICROINTERACTION CURSOR -->
+    <div class="custom-cursor" id="customCursor"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- TOP EMERGENCY ANNOUNCEMENT (MARQUEE) -->
+    <aside class="top-announcement">
+        <div class="marquee-track">
+            <span class="marquee-item"><i data-lucide="alert-triangle"></i> SEVERE WEATHER RAPID RESPONSE DISPATCH ACTIVE</span>
+            <span class="marquee-item"><i data-lucide="shield-check"></i> MIAMI-DADE COUNTY 150+ MPH HIGH-VELOCITY WIND CERTIFICATION</span>
+            <span class="marquee-item"><i data-lucide="badge-percent"></i> ZERO DEDUCTIBLE ASSISTANCE FOR QUALIFIED HAIL CLAIMS</span>
+            <span class="marquee-item"><i data-lucide="check-circle-2"></i> CERTAINTEED 5-STAR & GAF MASTER-ELITE ACCREDITED</span>
+            <span class="marquee-item"><i data-lucide="wind"></i> CAT 5 HURRICANE INTERLOCK CODE COMPLIANT</span>
+        </div>
+    </aside>
+
+    <!-- NAVIGATION BAR -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-flex">
+            <a href="#" class="brand-identity">
+                <div class="brand-symbol">
+                    <svg viewBox="0 0 40 46" fill="none">
+                        <polygon points="20,2 38,12 38,34 20,44 2,34 2,12" stroke="url(#nav_paint)" stroke-width="3" fill="rgba(14, 165, 233, 0.08)" />
+                        <path d="M12 23L18 29L28 17" stroke="#38bdf8" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs>
+                            <linearGradient id="nav_paint" x1="2" y1="2" x2="38" y2="44" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#38bdf8"/>
+                                <stop offset="1" stop-color="#f97316"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-name">TITAN<span class="highlight">SHIELD</span></span>
+                    <span class="brand-sub">ARCHITECTURAL SYSTEMS</span>
+                </div>
+            </a>
+
+            <div class="nav-cluster" id="navCluster">
+                <ul class="nav-links">
+                    <li><a href="#hero" class="magnetic-target">Defense</a></li>
+                    <li><a href="#threat" class="magnetic-target">Storm Threat</a></li>
+                    <li><a href="#anatomy" class="magnetic-target">5 Layers</a></li>
+                    <li><a href="#bento" class="magnetic-target">Tech Grid</a></li>
+                    <li><a href="#colorways" class="magnetic-target">Colorways</a></li>
+                    <li><a href="#horizontalWorkflow" class="magnetic-target">Protocol</a></li>
+                    <li><a href="#commercialBento" class="magnetic-target">Commercial</a></li>
+                    <li><a href="#comparison" class="magnetic-target">Field Proof</a></li>
+                    <li><a href="#calculator" class="magnetic-target">Estimator</a></li>
+                    <li><a href="#faq" class="magnetic-target">Intel</a></li>
+                </ul>
+                <div class="nav-cta-wrap">
+                    <a href="#contact" class="btn btn-primary magnetic-target">
+                        <span class="btn-shine"></span>
+                        <i data-lucide="shield-alert"></i> Dispatch Audit
+                    </a>
+                </div>
+            </div>
+
+            <button class="menu-toggler" id="menuToggle" aria-label="Toggle Navigation">
+                <span class="bar top"></span>
+                <span class="bar mid"></span>
+                <span class="bar bot"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 17 & 20 & 23. HERO SECTION WITH LIQUID CANVAS & HIGH-CONVERTING CAROUSEL -->
+    <header class="hero-container" id="hero">
+        <canvas id="liquidCanvas" class="liquid-bg-canvas"></canvas>
+        <div class="hero-mesh-gradient"></div>
+
+        <!-- 21. Doodle SVGs Floating in Background -->
+        <svg class="doodle-asset doodle-1" viewBox="0 0 100 100">
+            <path d="M10,50 Q25,20 50,50 T90,50" fill="none" stroke="rgba(56,189,248,0.25)" stroke-width="3" stroke-dasharray="4,4"/>
+        </svg>
+        <svg class="doodle-asset doodle-2" viewBox="0 0 80 80">
+            <circle cx="40" cy="40" r="30" fill="none" stroke="rgba(249,115,22,0.25)" stroke-width="2" stroke-dasharray="6,6"/>
+        </svg>
+
+        <div class="hero-viewport" id="heroViewport">
+            <!-- SLIDE 01: Wind Uplift Defense -->
+            <div class="hero-slide active-slide" data-slide="0">
+                <div class="container hero-slide-grid">
+                    <div class="slide-intel-col">
+                        <div class="status-chip">
+                            <span class="ping-circle"></span>
+                            <span>MIL-SPEC 150 MPH WIND DEFENSE</span>
+                        </div>
+                        <h1 class="hero-main-title">
+                            Engineered To Outlast The Storm When <span class="text-gradient-cyan">Ordinary Roofs Shear.</span>
+                        </h1>
+                        <p class="hero-lead">
+                            Constructed with heavy-weight fiberglass SBS rubberized shingles and dual-perimeter locking nails. Guaranteed against shingle tear-off, torrential capillary leaks, and hurricane-force uplift.
+                        </p>
+                        <div class="hero-action-shelf">
+                            <a href="#calculator" class="btn btn-primary btn-xl magnetic-target">
+                                <span class="btn-shine"></span>
+                                <i data-lucide="calculator"></i> Calculate Investment
+                            </a>
+                            <a href="#anatomy" class="btn btn-glass btn-xl magnetic-target">
+                                <i data-lucide="layers"></i> Dissect The 5 Layers
+                            </a>
+                        </div>
+                        <div class="hero-metric-bar">
+                            <div class="m-card">
+                                <strong>150+ <small>MPH</small></strong>
+                                <span>Zero Lift Guarantee</span>
+                            </div>
+                            <div class="m-separator"></div>
+                            <div class="m-card">
+                                <strong>CLASS 4</strong>
+                                <span>Hail Impact Resistance</span>
+                            </div>
+                            <div class="m-separator"></div>
+                            <div class="m-card">
+                                <strong>50 YEARS</strong>
+                                <span>Non-Prorated System</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 14. Faux-3D Hero Visual Plate -->
+                    <div class="slide-visual-col">
+                        <div class="faux-3d-card" id="hero3DCard1">
+                            <div class="card-glass-glow"></div>
+                            <img src="https://images.unsplash.com/photo-1605814515286-90f7ce74ba6d?q=80&w=1200&auto=format&fit=crop" alt="High Grade Architectural Shingle Construction" class="parallax-layer layer-deep">
+                            <div class="h-card-badge">
+                                <i data-lucide="check-check"></i>
+                                <div>
+                                    <strong>Miami-Dade Approved</strong>
+                                    <span>High Velocity Hurricane Zone (NOA 21-0412)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 02: Hail Impact Resilience -->
+            <div class="hero-slide" data-slide="1">
+                <div class="container hero-slide-grid">
+                    <div class="slide-intel-col">
+                        <div class="status-chip amber-chip">
+                            <span class="ping-circle amber"></span>
+                            <span>BALLISTIC CLASS-4 HAIL DEFENSE</span>
+                        </div>
+                        <h1 class="hero-main-title">
+                            Absorb 2-Inch Ice Projectiles Without <span class="text-gradient-amber">Structural Micro-Fracture.</span>
+                        </h1>
+                        <p class="hero-lead">
+                            Ordinary asphalt granules fracture instantly when struck by spring hail. Our SBS polymer-blend cushion bounces back, preventing subsurface water intrusion and insurance loss.
+                        </p>
+                        <div class="hero-action-shelf">
+                            <a href="#comparison" class="btn btn-amber btn-xl magnetic-target">
+                                <span class="btn-shine"></span>
+                                <i data-lucide="eye"></i> Witness Hail Test
+                            </a>
+                            <a href="#contact" class="btn btn-glass btn-xl magnetic-target">
+                                <i data-lucide="camera"></i> Free Drone Damage Audit
+                            </a>
+                        </div>
+                        <div class="hero-metric-bar">
+                            <div class="m-card">
+                                <strong>2.0 INCH</strong>
+                                <span>Steel Ball Drop Proof</span>
+                            </div>
+                            <div class="m-separator"></div>
+                            <div class="m-card">
+                                <strong>-28%</strong>
+                                <span>Home Insurance Discount</span>
+                            </div>
+                            <div class="m-separator"></div>
+                            <div class="m-card">
+                                <strong>0% SPLIT</strong>
+                                <span>Flexible Polymer Core</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slide-visual-col">
+                        <div class="faux-3d-card" id="hero3DCard2">
+                            <div class="card-glass-glow"></div>
+                            <img src="https://images.unsplash.com/photo-1518388168265-27a3a8d1f2e1?q=80&w=1200&auto=format&fit=crop" alt="Impact Resistant Roof Decking" class="parallax-layer layer-deep">
+                            <div class="h-card-badge">
+                                <i data-lucide="shield-alert"></i>
+                                <div>
+                                    <strong>UL 2218 Certified</strong>
+                                    <span>Class 4 Impact Proof Standards</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 03: Algae & Solar UV Shield -->
+            <div class="hero-slide" data-slide="2">
+                <div class="container hero-slide-grid">
+                    <div class="slide-intel-col">
+                        <div class="status-chip emerald-chip">
+                            <span class="ping-circle emerald"></span>
+                            <span>THERMAL REFLECTIVE ALGAE ARMOR</span>
+                        </div>
+                        <h1 class="hero-main-title">
+                            Banish Dark Cyanobacteria & <span class="text-gradient-emerald">Slash Attic Blistering.</span>
+                        </h1>
+                        <p class="hero-lead">
+                            Continuous copper-ion release granules halt Gloeocapsa magma black algae streaks forever, while radiant heat barrier technologies reflect up to 88% of solar UV radiation.
+                        </p>
+                        <div class="hero-action-shelf">
+                            <a href="#contact" class="btn btn-emerald btn-xl magnetic-target">
+                                <span class="btn-shine"></span>
+                                <i data-lucide="check"></i> Book Installation
+                            </a>
+                            <a href="#bento" class="btn btn-glass btn-xl magnetic-target">
+                                <i data-lucide="sparkles"></i> Copper Matrix Tech
+                            </a>
+                        </div>
+                        <div class="hero-metric-bar">
+                            <div class="m-card">
+                                <strong>25+ YRS</strong>
+                                <span>Algae-Free Guarantee</span>
+                            </div>
+                            <div class="m-separator"></div>
+                            <div class="m-card">
+                                <strong>-18°F</strong>
+                                <span>Attic Temp Reduction</span>
+                            </div>
+                            <div class="m-separator"></div>
+                            <div class="m-card">
+                                <strong>100%</strong>
+                                <span>Pure Copper Infusion</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slide-visual-col">
+                        <div class="faux-3d-card" id="hero3DCard3">
+                            <div class="card-glass-glow"></div>
+                            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1200&auto=format&fit=crop" alt="Premium Modern Roof Finish" class="parallax-layer layer-deep">
+                            <div class="h-card-badge">
+                                <i data-lucide="sun"></i>
+                                <div>
+                                    <strong>Cool Roof Rating</strong>
+                                    <span>Title 24 & CRRC Compliant</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HERO SLIDER CONTROLS -->
+        <div class="hero-slider-dock container">
+            <div class="dock-left-controls">
+                <button class="dock-nav-btn prev-btn" id="heroPrevBtn" aria-label="Previous Slide">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <div class="dock-bullets" id="heroBullets">
+                    <button class="dock-bullet active" data-target="0"><span class="bullet-progress"></span></button>
+                    <button class="dock-bullet" data-target="1"><span class="bullet-progress"></span></button>
+                    <button class="dock-bullet" data-target="2"><span class="bullet-progress"></span></button>
+                </div>
+                <button class="dock-nav-btn next-btn" id="heroNextBtn" aria-label="Next Slide">
+                    <i data-lucide="chevron-right"></i>
+                </button>
+            </div>
+            <div class="dock-auto-indicator">
+                <i data-lucide="activity"></i> AUTO-CYCLE ACTIVE (6.5s)
+            </div>
+        </div>
+    </header>
+
+    <!-- 13. INTERACTIVE MASCOT ASSISTANT -->
+    <div class="character-assistant" id="charAssistant">
+        <div class="char-bubble" id="charBubble">
+            <span class="typing-text">Click the 5-Layer tabs below to see how we prevent wind shear!</span>
+            <button class="close-bubble" id="closeBubble">×</button>
+        </div>
+        <div class="char-avatar-box magnetic-target" id="charAvatar">
+            <svg class="char-svg" viewBox="0 0 100 100">
+                <defs>
+                    <linearGradient id="charGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#38bdf8"/>
+                        <stop offset="1%" stop-color="#0284c7"/>
+                    </linearGradient>
+                </defs>
+                <circle cx="50" cy="50" r="42" stroke="rgba(56,189,248,0.4)" stroke-width="2" fill="none" stroke-dasharray="8,4" class="char-spin"/>
+                <rect x="25" y="25" width="50" height="42" rx="16" fill="url(#charGrad)" stroke="#f8fafc" stroke-width="2.5" />
+                <rect x="32" y="33" width="36" height="24" rx="8" fill="#0f172a" />
+                <ellipse cx="42" cy="45" rx="4" ry="5" fill="#38bdf8" class="char-eye left"/>
+                <ellipse cx="58" cy="45" rx="4" ry="5" fill="#38bdf8" class="char-eye right"/>
+                <path d="M22 28 C22 15, 78 15, 78 28 Z" fill="#f59e0b" stroke="#f8fafc" stroke-width="2"/>
+                <rect x="47" y="10" width="6" height="6" rx="2" fill="#ef4444" class="char-beacon"/>
+                <line x1="15" y1="18" x2="35" y2="18" stroke="#f8fafc" stroke-width="3" stroke-linecap="round"/>
+                <line x1="65" y1="18" x2="85" y2="18" stroke="#f8fafc" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- CODE COMPLIANCE CREDENTIAL STRIP -->
+    <section class="compliance-strip">
+        <div class="container compliance-flex">
+            <div class="comp-item">
+                <i data-lucide="shield-check"></i>
+                <div>
+                    <strong>Miami-Dade NOA #21-0412</strong>
+                    <span>High-Velocity Hurricane Zone Rated</span>
+                </div>
+            </div>
+            <div class="comp-sep"></div>
+            <div class="comp-item">
+                <i data-lucide="award"></i>
+                <div>
+                    <strong>UL 2218 Class 4</strong>
+                    <span>Maximum Impact Ballistic Standard</span>
+                </div>
+            </div>
+            <div class="comp-sep"></div>
+            <div class="comp-item">
+                <i data-lucide="flame"></i>
+                <div>
+                    <strong>ASTM E108 Class A</strong>
+                    <span>Highest Fire Retardant Standard</span>
+                </div>
+            </div>
+            <div class="comp-sep"></div>
+            <div class="comp-item">
+                <i data-lucide="wind"></i>
+                <div>
+                    <strong>ASTM D3161 Class F</strong>
+                    <span>110–150 MPH Continuous Fan Certified</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STORM SCALE THREAT MATRIX -->
+    <section class="section threat-section" id="threat">
+        <div class="container">
+            <div class="section-heading text-center">
+                <div class="pill-badge amber-chip"><i data-lucide="wind"></i> THE ANATOMY OF FAILURE</div>
+                <h2>When Weather Turns Extreme: Standard vs. TitanShield</h2>
+                <p>Most roofs do not fail catastrophically all at once; they unravel layer by layer as barometric uplift spikes and shear stress accelerates.</p>
+            </div>
+
+            <div class="threat-grid">
+                <!-- Threat 1: 45 MPH -->
+                <div class="threat-card">
+                    <div class="threat-header">
+                        <span class="threat-speed">45 MPH</span>
+                        <span class="threat-label advisory">Advisory Gale</span>
+                    </div>
+                    <div class="threat-body">
+                        <div class="threat-row failed">
+                            <strong>Standard 3-Tab:</strong>
+                            <p>Edge seal tabs break adhesion; perimeter shingle flutter begins micro-tearing around nail shanks.</p>
+                        </div>
+                        <div class="threat-row fortified">
+                            <strong>TitanShield Defense:</strong>
+                            <p>Dura-Weld continuous heat-activated adhesive bonds hold firm. Zero shingle flutter; 100% seal integrity.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Threat 2: 75 MPH -->
+                <div class="threat-card">
+                    <div class="threat-header">
+                        <span class="threat-speed">75 MPH</span>
+                        <span class="threat-label cat1">Cat 1 Hurricane</span>
+                    </div>
+                    <div class="threat-body">
+                        <div class="threat-row failed">
+                            <strong>Standard 3-Tab:</strong>
+                            <p>Fastener tear-out occurs on rakes and ridges. 15lb felt paper tears away, exposing bare plywood to driving rain.</p>
+                        </div>
+                        <div class="threat-row fortified">
+                            <strong>TitanShield Defense:</strong>
+                            <p>Six ring-shank nail geometry and high-tensile synthetic underlayment withstand 35 lbs/sq.ft uplift pressure without distortion.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Threat 3: 110 MPH -->
+                <div class="threat-card">
+                    <div class="threat-header">
+                        <span class="threat-speed">110 MPH</span>
+                        <span class="threat-label cat2">Cat 2 / 3 Storm</span>
+                    </div>
+                    <div class="threat-body">
+                        <div class="threat-row failed">
+                            <strong>Standard 3-Tab:</strong>
+                            <p>Widespread delamination. Valleys buckle, chimney flashings pull loose, catastrophic interior water penetration begins.</p>
+                        </div>
+                        <div class="threat-row fortified">
+                            <strong>TitanShield Defense:</strong>
+                            <p>Elastomeric vulcanized ice & water barrier remains fused to the structural wood. Self-heals around mechanical stress points.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Threat 4: 150+ MPH -->
+                <div class="threat-card highlight-card">
+                    <div class="threat-header">
+                        <span class="threat-speed">150+ MPH</span>
+                        <span class="threat-label extreme">Cat 4 / 5 Extreme</span>
+                    </div>
+                    <div class="threat-body">
+                        <div class="threat-row failed">
+                            <strong>Standard 3-Tab:</strong>
+                            <p>Total roof assembly loss. Sheathing pulls loose from rafters; structural home failure imminent.</p>
+                        </div>
+                        <div class="threat-row fortified">
+                            <strong>TitanShield Defense:</strong>
+                            <p>H-clip braced 5/8" CDX decking + heavy SBS interlocking matrix survives extreme vortex microburst conditions intact.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 14 & 19. THE 5 LAYERS OF TOTAL PROTECTION -->
+    <section class="section anatomy-section" id="anatomy">
+        <div class="container">
+            <div class="section-heading text-center">
+                <div class="pill-badge"><i data-lucide="shield"></i> MULTI-LAYER INTERLOCK</div>
+                <h2>The 5 Layers of Total Protection</h2>
+                <p>A storm-proof roof is not just a bundle of shingles. It is a sealed industrial composite system. Click each layer to reveal exploded structural specs.</p>
+            </div>
+
+            <div class="anatomy-station-grid">
+                <!-- Tab Selector Stack -->
+                <div class="layer-control-deck">
+                    <button class="layer-trigger active" data-layer-idx="0">
+                        <span class="l-num">01</span>
+                        <div class="l-info">
+                            <strong>Architectural SBS Shingles</strong>
+                            <span>Dual-mat core & continuous polymer seal</span>
+                        </div>
+                        <i data-lucide="chevron-right" class="arrow-indicator"></i>
+                    </button>
+
+                    <button class="layer-trigger" data-layer-idx="1">
+                        <span class="l-num">02</span>
+                        <div class="l-info">
+                            <strong>Synthetic Micro-Weave Underlayment</strong>
+                            <span>High-tensile barrier replacing 15lb felt paper</span>
+                        </div>
+                        <i data-lucide="chevron-right" class="arrow-indicator"></i>
+                    </button>
+
+                    <button class="layer-trigger" data-layer-idx="2">
+                        <span class="l-num">03</span>
+                        <div class="l-info">
+                            <strong>Vulcanized Ice & Water Shield</strong>
+                            <span>Self-healing membrane in critical leak channels</span>
+                        </div>
+                        <i data-lucide="chevron-right" class="arrow-indicator"></i>
+                    </button>
+
+                    <button class="layer-trigger" data-layer-idx="3">
+                        <span class="l-num">04</span>
+                        <div class="l-info">
+                            <strong>Balanced Kinetic Ridge Ventilation</strong>
+                            <span>Thermal heat extraction baffle preventing rot</span>
+                        </div>
+                        <i data-lucide="chevron-right" class="arrow-indicator"></i>
+                    </button>
+
+                    <button class="layer-trigger" data-layer-idx="4">
+                        <span class="l-num">05</span>
+                        <div class="l-info">
+                            <strong>Structural CDX Solid Re-Decking</strong>
+                            <span>5/8-inch high-span deck reinforced with H-clips</span>
+                        </div>
+                        <i data-lucide="chevron-right" class="arrow-indicator"></i>
+                    </button>
+                </div>
+
+                <!-- 19. Isometric 3D Exploded Viewer Stage -->
+                <div class="anatomy-stage-box">
+                    <div class="iso-visual-card" id="isoCard">
+                        <div class="iso-badge-tag" id="isoBadge">LAYER 01: EXTERIOR DEFENSE</div>
+                        <h3 id="isoTitle">ArmorShield SBS Dual Architectural Shingles</h3>
+                        <p id="isoDesc">
+                            Bonded with high-ductility SBS rubberized asphalt that does not become brittle in freezing temperatures or slide down the roof in blazing 110°F summer heat. Sealed with an airtight six-nail fastener ring.
+                        </p>
+                        
+                        <div class="iso-dynamic-specs" id="isoSpecs">
+                            <span class="spec-bubble"><i data-lucide="wind"></i> 150 MPH Lift Resistance</span>
+                            <span class="spec-bubble"><i data-lucide="flame"></i> Class A Fire Rating</span>
+                            <span class="spec-bubble"><i data-lucide="award"></i> Lifetime Warranty</span>
+                        </div>
+
+                        <!-- Exploded 3D Stage Graphic -->
+                        <div class="iso-exploded-view">
+                            <div class="iso-plate-wrap">
+                                <div class="iso-plate plate-5" id="plate5"><span>05. Plywood Deck</span></div>
+                                <div class="iso-plate plate-4" id="plate4"><span>04. Ridge Vent</span></div>
+                                <div class="iso-plate plate-3" id="plate3"><span>03. Ice/Water</span></div>
+                                <div class="iso-plate plate-2" id="plate2"><span>02. Synthetic Mat</span></div>
+                                <div class="iso-plate plate-1 active-plate" id="plate1"><span>01. Shingle Matrix</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 18. TECH BENTO GRID A (FORENSICS & DEFENSE ENGINE) -->
+    <section class="section bento-section" id="bento">
+        <div class="container">
+            <div class="section-heading text-center">
+                <div class="pill-badge"><i data-lucide="cpu"></i> FORENSIC ACCURACY</div>
+                <h2>Next-Gen Roofing Engineering Bento Grid</h2>
+                <p>Explore why structural engineering firms, municipal code inspectors, and discerning homeowners specify TitanShield over commodity roofers.</p>
+            </div>
+
+            <div class="bento-container">
+                <!-- Bento Cell 1 (Large - Doppler Radar Tracking) -->
+                <div class="bento-box bento-span-2 gradient-border-card">
+                    <div class="bento-inner">
+                        <div class="bento-icon-ring"><i data-lucide="radar"></i></div>
+                        <span class="sub-label">PRECISION METEOROLOGY</span>
+                        <h3>Historical Radar Hail & Wind Forensics</h3>
+                        <p>We feed your exact GPS coordinates through NOAA Doppler archival data over the past 36 months. We generate incontrovertible date-stamped weather proof required for total insurance replacement approvals.</p>
+                        
+                        <div class="radar-visual-simulator">
+                            <div class="radar-sweep"></div>
+                            <div class="radar-blip blip-1"></div>
+                            <div class="radar-blip blip-2"></div>
+                            <span class="radar-hud">DOPPLER SWEEP: CONFIRMED 1.75" HAIL CORRIDOR @ 64 MPH</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bento Cell 2 (Rapid Tarp Dispatch) -->
+                <div class="bento-box gradient-border-card">
+                    <div class="bento-inner">
+                        <div class="bento-icon-ring"><i data-lucide="zap"></i></div>
+                        <span class="sub-label">FAST-TRACK RESPONSE</span>
+                        <h3>2-Hour Storm Tarp Deployment</h3>
+                        <p>Active tree breach or structural puncture? Our rapid response crews arrive with heavy industrial vinyl sheets and timber anchors to stop interior water destruction before permanent rebuild.</p>
+                        <div class="bento-pill-stat">
+                            <strong>&lt; 120 MINS</strong>
+                            <span>Average Emergency Dispatch Window</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bento Cell 3 (Algae Copper Matrix) -->
+                <div class="bento-box gradient-border-card">
+                    <div class="bento-inner">
+                        <div class="bento-icon-ring"><i data-lucide="sparkles"></i></div>
+                        <span class="sub-label">ALGAE DEFENSE</span>
+                        <h3>Copper-Ion Granule Matrix</h3>
+                        <p>Eliminate dark streaking without caustic pressure washing. Our ceramic-coated mineral blend continuously neutralizes airborne cyanobacteria (*Gloeocapsa magma*) for 25+ years.</p>
+                        <div class="algae-gauge">
+                            <div class="algae-fill"></div>
+                            <span>100% Surface Algae Resistance</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bento Cell 4 (Large - Direct Insurance Desk) -->
+                <div class="bento-box bento-span-2 gradient-border-card">
+                    <div class="bento-inner flex-bento-row">
+                        <div class="f-col-text">
+                            <div class="bento-icon-ring"><i data-lucide="scale"></i></div>
+                            <span class="sub-label">ZERO DEDUCTIBLE EXPOSURE</span>
+                            <h3>Direct Insurance Settlement Integration</h3>
+                            <p>We write line-item estimates in <strong>Xactimate®</strong>, the exact forensic estimating software used by insurance carriers. Our HAAG-certified inspectors eliminate underpaid adjustor estimates.</p>
+                            <div class="bento-check-tags">
+                                <span><i data-lucide="check"></i> 100% Code-Upgrade Coverage (Ordinance & Law)</span>
+                                <span><i data-lucide="check"></i> Zero Out-Of-Pocket Surprises on Payout</span>
+                                <span><i data-lucide="check"></i> On-Site Representation During Adjuster Walk</span>
+                            </div>
+                        </div>
+                        <div class="f-col-stamp">
+                            <div class="ins-stamp">
+                                <strong>XACTIMATE</strong>
+                                <span>COMPLIANT ESTIMATE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bento Cell 5 (Ballistic Hail Comparator) -->
+                <div class="bento-box gradient-border-card">
+                    <div class="bento-inner">
+                        <div class="bento-icon-ring"><i data-lucide="target"></i></div>
+                        <span class="sub-label">BALLISTICS LAB</span>
+                        <h3>UL 2218 Steel Sphere Impact</h3>
+                        <p>A 2.0-inch steel ball dropped from 20 feet strikes at 73 MPH with 32 foot-pounds of kinetic energy. Standard shingles rupture; our SBS cushion disperses the wave cleanly.</p>
+                        <div class="bento-pill-stat">
+                            <strong>32 FT-LBS</strong>
+                            <span>Kinetic Energy Absorbed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bento Cell 6 (Thermal Deck Ventilation Delta) -->
+                <div class="bento-box gradient-border-card">
+                    <div class="bento-inner">
+                        <div class="bento-icon-ring"><i data-lucide="thermometer-snowflake"></i></div>
+                        <span class="sub-label">THERMAL EFFICIENCY</span>
+                        <h3>Attic Micro-Climate Control</h3>
+                        <p>Continuous intake and ridge exhaust creates a thermodynamic siphon, driving blistering 145°F attic air out while protecting the asphalt shingle bond from premature thermal degradation.</p>
+                        <div class="bento-pill-stat">
+                            <strong>-18°F TO -24°F</strong>
+                            <span>Attic Heat Dissipation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ARCHITECTURAL COLORWAY CONFIGURATOR -->
+    <section class="section color-config-section" id="colorways">
+        <div class="container">
+            <div class="section-heading text-center">
+                <div class="pill-badge emerald-chip"><i data-lucide="palette"></i> CURB APPEAL & LUXURY</div>
+                <h2>Interactive Colorway Configurator</h2>
+                <p>Engineered defense doesn’t mean an industrial look. Preview our four flagship architectural color palettes built with deep shadow bands and multidimensional depth.</p>
+            </div>
+
+            <div class="configurator-chassis">
+                <div class="config-visual-panel" id="configPanel">
+                    <img id="configImg" src="https://images.unsplash.com/photo-1623696515433-a38f32230623?q=80&w=1200" alt="Roof Color Preview" class="config-image">
+                    <div class="config-floating-specs">
+                        <div class="c-spec-chip"><strong>150 MPH</strong> Wind Rating</div>
+                        <div class="c-spec-chip"><strong>Class 4</strong> Impact</div>
+                        <div class="c-spec-chip"><strong>Class A</strong> Fire Core</div>
+                    </div>
+                </div>
+
+                <div class="config-controls-panel">
+                    <span class="sub-label">SELECT PALETTE PROFILE</span>
+                    <h3 id="colorName">Onyx Charcoal Shadow</h3>
+                    <p id="colorDescription" class="config-desc">
+                        A rich, deep obsidian with multidimensional charcoal flecks. Delivers bold architectural contrast for white, gray, stone, and modern brick exteriors.
+                    </p>
+
+                    <div class="color-swatches-grid">
+                        <button class="swatch-btn active" data-color="onyx" data-name="Onyx Charcoal Shadow" data-img="https://images.unsplash.com/photo-1623696515433-a38f32230623?q=80&w=1200" data-desc="A rich, deep obsidian with multidimensional charcoal flecks. Delivers bold architectural contrast for white, gray, stone, and modern brick exteriors.">
+                            <span class="swatch-circle" style="background: #1c1d21;"></span>
+                            <div class="swatch-labels">
+                                <strong>Onyx Charcoal</strong>
+                                <small>Deep Dramatic Obsidian</small>
+                            </div>
+                        </button>
+
+                        <button class="swatch-btn" data-color="wood" data-name="Weathered Driftwood" data-img="https://images.unsplash.com/photo-1632759145355-66774a383b48?q=80&w=1200" data-desc="A warm, earthy blend of cedar brown, umber, and slate grays that replicates hand-split cedar shakes with none of the wood-rot liability.">
+                            <span class="swatch-circle" style="background: #5b4d3e;"></span>
+                            <div class="swatch-labels">
+                                <strong>Weathered Driftwood</strong>
+                                <small>Hand-Split Shake Tone</small>
+                            </div>
+                        </button>
+
+                        <button class="swatch-btn" data-color="slate" data-name="Estate Pewter Slate" data-img="https://images.unsplash.com/photo-1574360699268-07e868c22752?q=80&w=1200" data-desc="A stately cool-toned blue-gray reminiscent of historic quarried slate. Imparts majestic presence to European stone and traditional stucco homes.">
+                            <span class="swatch-circle" style="background: #414a54;"></span>
+                            <div class="swatch-labels">
+                                <strong>Estate Pewter</strong>
+                                <small>Historic Quarried Slate</small>
+                            </div>
+                        </button>
+
+                        <button class="swatch-btn" data-color="moss" data-name="Highland Moss Bark" data-img="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1200" data-desc="Subtle forest green undertones married to warm autumn copper hues. Blends seamlessly with wooded properties, lakeside estates, and craftsman builds.">
+                            <span class="swatch-circle" style="background: #39423b;"></span>
+                            <div class="swatch-labels">
+                                <strong>Highland Moss</strong>
+                                <small>Natural Forest & Copper</small>
+                            </div>
+                        </button>
+                    </div>
+
+                    <a href="#calculator" class="btn btn-primary btn-block magnetic-target" style="margin-top: 2rem;">
+                        <span class="btn-shine"></span>
+                        <i data-lucide="calculator"></i> Estimate This Colorway
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 15. HORIZONTAL PROTOCOL WORKFLOW SCROLL -->
+    <section class="section workflow-section" id="horizontalWorkflow">
+        <div class="container">
+            <div class="section-heading">
+                <div class="pill-badge amber-chip"><i data-lucide="clipboard-check"></i> ZERO MARGIN FOR ERROR</div>
+                <h2>The 4-Step Fortification Protocol</h2>
+                <p>Scroll horizontally through our systematic engineering procedure designed to complete whole-roof conversions in under 36 hours.</p>
+            </div>
+        </div>
+
+        <div class="horizontal-scroll-container" id="horizontalContainer">
+            <div class="horizontal-track" id="horizontalTrack">
+                <!-- STEP 1 -->
+                <div class="protocol-card">
+                    <div class="p-card-number">STEP 01</div>
+                    <div class="p-card-icon"><i data-lucide="scan"></i></div>
+                    <h3>Forensic Thermal & Drone Scan</h3>
+                    <p>High-resolution FLIR cameras detect hidden moisture pockets under the decking before a single nail is pulled.</p>
+                    <ul class="p-list">
+                        <li>Subsurface Moisture Mapping</li>
+                        <li>Structural Sag Analysis</li>
+                        <li>Automated Insurance Damage Export</li>
+                    </ul>
+                </div>
+
+                <!-- STEP 2 -->
+                <div class="protocol-card">
+                    <div class="p-card-number">STEP 02</div>
+                    <div class="p-card-icon"><i data-lucide="trash-2"></i></div>
+                    <h3>Full Raze & Substrate Restoration</h3>
+                    <p>We strip the old roof directly down to bare rafters. Weak or rotten wood is cut out and replaced with structural CDX plywood.</p>
+                    <ul class="p-list">
+                        <li>100% Tear-Off (Never Double-Layer)</li>
+                        <li>H-Clip Structural Truss Spacers</li>
+                        <li>Magnetic Debris Catchment Perimeter</li>
+                    </ul>
+                </div>
+
+                <!-- STEP 3 -->
+                <div class="protocol-card">
+                    <div class="p-card-number">STEP 03</div>
+                    <div class="p-card-icon"><i data-lucide="shield-check"></i></div>
+                    <h3>Vulcanized Barrier Fusion</h3>
+                    <p>Ice and Water rubberized membranes are torched and bonded directly around all valleys, soil pipes, chimneys, and drip edges.</p>
+                    <ul class="p-list">
+                        <li>36-Inch Eave Intrusion Guard</li>
+                        <li>Self-Sealing Fastener Coating</li>
+                        <li>Heavy Guage Metal Valley Troughs</li>
+                    </ul>
+                </div>
+
+                <!-- STEP 4 -->
+                <div class="protocol-card">
+                    <div class="p-card-number">STEP 04</div>
+                    <div class="p-card-icon"><i data-lucide="check-circle"></i></div>
+                    <h3>6-Nail Architectural Armor Lay</h3>
+                    <p>Shingles are mechanically bonded with six ring-shank galvanized fasteners driven precisely into the Dura-Weld nailing zone.</p>
+                    <ul class="p-list">
+                        <li>150 MPH Wind Warranty Lock</li>
+                        <li>Continuous Ridge Baffle Install</li>
+                        <li>Magnetic Sweep Cleanliness Guarantee</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENTO GRID B (COMMERCIAL & SPECIALTY SYSTEMS) -->
+    <section class="section commercial-bento-section" id="commercialBento">
+        <div class="container">
+            <div class="section-heading text-center">
+                <div class="pill-badge"><i data-lucide="layers"></i> SPECIALIZED SUB-SYSTEMS</div>
+                <h2>Beyond Shingles: Commercial & Engineered Metallurgy</h2>
+                <p>For custom architecture, low-slope roofs, and commercial facilities requiring lifetime durability without compromise.</p>
+            </div>
+
+            <div class="bento-container">
+                <!-- Commercial Bento 1: Standing Seam Metal -->
+                <div class="bento-box bento-span-2 gradient-border-card">
+                    <div class="bento-inner flex-bento-row">
+                        <div class="f-col-text">
+                            <div class="bento-icon-ring"><i data-lucide="shield"></i></div>
+                            <span class="sub-label">ARCHITECTURAL METALLURGY</span>
+                            <h3>24-Gauge Concealed-Fastener Standing Seam</h3>
+                            <p>Engineered with double-lock mechanical seams that roll through 360 degrees. With zero exposed screws to back out or leak, this system withstands Category 5 winds (165+ MPH) and carries a 70-year operational life.</p>
+                            <div class="bento-check-tags">
+                                <span><i data-lucide="check"></i> Kynar 500® Fluoropolymer Paint (No Chalking)</span>
+                                <span><i data-lucide="check"></i> 100% Non-Combustible Class A Fire Armor</span>
+                            </div>
+                        </div>
+                        <div class="f-col-stamp">
+                            <div class="ins-stamp">
+                                <strong>KYNAR 500</strong>
+                                <span>70-YEAR LIFESPAN</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Commercial Bento 2: Low-Slope TPO -->
+                <div class="bento-box gradient-border-card">
+                    <div class="bento-inner">
+                        <div class="bento-icon-ring"><i data-lucide="maximize"></i></div>
+                        <span class="sub-label">LOW-SLOPE & FLAT ROOFS</span>
+                        <h3>Hot-Air Welded 60-Mil TPO Membrane</h3>
+                        <p>Robotic heat-welded seams are physically 4x stronger than the sheet itself. Creates a monolithic bathtub membrane over porches, additions, and commercial facilities.</p>
+                        <div class="bento-pill-stat">
+                            <strong>1,000°F</strong>
+                            <span>Molecular Hot-Air Seam Weld</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Commercial Bento 3: Synthetic Slate -->
+                <div class="bento-box gradient-border-card">
+                    <div class="bento-inner">
+                        <div class="bento-icon-ring"><i data-lucide="gem"></i></div>
+                        <span class="sub-label">HISTORIC REPRODUCTION</span>
+                        <h3>Engineered Composite Slate Tiles</h3>
+                        <p>Molded from authentic virgin slate tiles using pure engineered polymers. Delivers genuine 19th-century luxury at 1/4th the weight, requiring no roof truss reinforcement.</p>
+                        <div class="bento-pill-stat">
+                            <strong>1/4 WEIGHT</strong>
+                            <span>No Rafter Reinforcement Needed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Commercial Bento 4: Custom Copper Fabrication -->
+                <div class="bento-box bento-span-2 gradient-border-card">
+                    <div class="bento-inner">
+                        <div class="bento-icon-ring"><i data-lucide="hammer"></i></div>
+                        <span class="sub-label">CUSTOM METALSMITHING</span>
+                        <h3>Hand-Soldered 16oz Cold-Rolled Copper Flashings</h3>
+                        <p>Tar and caulk dry out in 3–5 years. We hand-solder custom copper dormer aprons, internal valley troughs, and box gutters on-site with lead-coated copper for an impermeable 100-year seal that never needs recaulking.</p>
+                        <div class="bento-pill-stat">
+                            <strong>100 YEARS</strong>
+                            <span>Never Needs Caulk or Tar Recoating</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEE THE DIFFERENCE: BEFORE / AFTER DUAL SLIDER -->
+    <section class="section comparison-section" id="comparison">
+        <div class="container">
+            <div class="section-heading text-center">
+                <div class="pill-badge emerald-chip"><i data-lucide="eye"></i> FIELD CASE STUDY</div>
+                <h2>See The Difference Engineering Makes</h2>
+                <p>Drag the interactive central divider to witness the transformation of a 16-year-old failing roof transformed into a Class-4 architectural fortress.</p>
+            </div>
+
+            <div class="comparison-stage-wrap">
+                <div class="ba-split-frame" id="baSplitFrame">
+                    <!-- Before Image -->
+                    <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?q=80&w=1600&auto=format&fit=crop" class="ba-photo photo-before" alt="Failing worn roof">
+                    
+                    <!-- After Image with dynamic clip-path -->
+                    <div class="ba-photo-clip-after" id="baClipAfter">
+                        <img src="https://images.unsplash.com/photo-1605814515286-90f7ce74ba6d?q=80&w=1600&auto=format&fit=crop" class="ba-photo photo-after" alt="New armored architectural roof">
+                    </div>
+
+                    <!-- Labels -->
+                    <div class="ba-ribbon ribbon-before">BEFORE: 3-Tab Granule Loss & Curl</div>
+                    <div class="ba-ribbon ribbon-after">AFTER: TitanShield Architectural Defense</div>
+
+                    <!-- Drag Handle Bar -->
+                    <div class="ba-separator-line" id="baDivider">
+                        <div class="ba-knob-handle">
+                            <i data-lucide="chevrons-left-right"></i>
+                        </div>
+                    </div>
+
+                    <!-- Native Accessible Range Input Overlaid -->
+                    <input type="range" min="0" max="100" value="50" class="ba-range-sensor" id="baSensor" aria-label="Compare Before and After Installation">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE ESTIMATOR CALCULATOR -->
+    <section class="section calc-section" id="calculator">
+        <div class="container">
+            <div class="calc-chassis">
+                <div class="calc-header-block">
+                    <div class="pill-badge"><i data-lucide="badge-dollar-sign"></i> INSTANT TRANSPARENT PRICING</div>
+                    <h2>Engineered Investment Estimator</h2>
+                    <p>Adjust home dimensions, incline pitch, and protection grade to preview real-time materials and certified labor investment.</p>
+                </div>
+
+                <div class="calc-interface-grid">
+                    <!-- Controls Column -->
+                    <div class="calc-inputs-pane">
+                        <div class="calc-input-block">
+                            <div class="c-label-row">
+                                <label for="rangeSqft">Calculated Roof Footprint</label>
+                                <span class="c-val-pill" id="valSqft">2,600 SQ.FT</span>
+                            </div>
+                            <input type="range" id="rangeSqft" min="1000" max="6000" step="100" value="2600" class="styled-slider">
+                        </div>
+
+                        <div class="calc-input-block">
+                            <label>Roof Pitch / Incline Difficulty</label>
+                            <div class="segmented-picker">
+                                <button type="button" class="seg-btn active" data-pitch="1.0">
+                                    <strong>Gentle (4/12)</strong>
+                                    <small>Standard Walkable</small>
+                                </button>
+                                <button type="button" class="seg-btn" data-pitch="1.2">
+                                    <strong>Architectural (8/12)</strong>
+                                    <small>Steep Pitch Rig</small>
+                                </button>
+                                <button type="button" class="seg-btn" data-pitch="1.45">
+                                    <strong>Severe (12/12)</strong>
+                                    <small>Multi-Gable Harness</small>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="calc-input-block">
+                            <label>Defense Armor Specification</label>
+                            <div class="segmented-picker">
+                                <button type="button" class="seg-btn active" data-rate="4.9">
+                                    <strong>Titan Architectural</strong>
+                                    <small>130 MPH Wind Rated</small>
+                                </button>
+                                <button type="button" class="seg-btn" data-rate="6.7">
+                                    <strong>SBS Ballistic Class 4</strong>
+                                    <small>150 MPH Hail Impact</small>
+                                </button>
+                                <button type="button" class="seg-btn" data-rate="9.4">
+                                    <strong>Standing Seam Steel</strong>
+                                    <small>Commercial Grade 24-Ga</small>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Output Summary Column -->
+                    <div class="calc-totals-pane">
+                        <div class="total-display-card">
+                            <span class="total-headline">TOTAL SYSTEM INVESTMENT</span>
+                            <div class="price-figure">
+                                <span class="currency">$</span>
+                                <span class="digit-counter" id="calcFinal">12,740</span>
+                            </div>
+                            <div class="total-inclusions">
+                                <div class="inc-line"><i data-lucide="check"></i> 100% Deck Tear-Off & Disposal</div>
+                                <div class="inc-line"><i data-lucide="check"></i> Synthetic Polymer Underlayment</div>
+                                <div class="inc-line"><i data-lucide="check"></i> Ice & Water Shield in Valleys</div>
+                                <div class="inc-line"><i data-lucide="check"></i> 50-Year Non-Prorated Warranty</div>
+                            </div>
+                            <a href="#contact" class="btn btn-primary btn-block btn-lg magnetic-target">
+                                <span class="btn-shine"></span>
+                                Lock In Written Proposal
+                            </a>
+                            <small class="disclaimer-note">*Official binding proposals generated following physical or thermal drone confirmation.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTEL & FAQ ACCORDION -->
+    <section class="section faq-section" id="faq">
+        <div class="container faq-layout">
+            <div class="faq-summary-col">
+                <div class="pill-badge"><i data-lucide="help-circle"></i> TRANSPARENCY FIRST</div>
+                <h2>Roofing Intelligence & FAQs</h2>
+                <p>Replacing a roof is one of the highest-leverage investments you can make in home equity and defense. Find clear answers to the most common homeowner queries.</p>
+                
+                <div class="expert-box">
+                    <div class="expert-avatar"><i data-lucide="headset"></i></div>
+                    <div>
+                        <strong>Speak To A Master Roofer</strong>
+                        <span>Available Mon-Sat for immediate consultations.</span>
+                    </div>
+                    <a href="tel:18005557663" class="btn btn-glass btn-block"><i data-lucide="phone"></i> (800) 555-ROOF</a>
+                </div>
+            </div>
+
+            <div class="faq-accordion-col">
+                <!-- FAQ 1 -->
+                <div class="accordion-item open">
+                    <button class="accordion-header">
+                        <span>Why does TitanShield insist on complete tear-offs rather than overlaying?</span>
+                        <i data-lucide="chevron-down" class="acc-chevron"></i>
+                    </button>
+                    <div class="accordion-body">
+                        <p>Nailing a new roof over old shingles (a "re-roof") traps moisture, conceals rotten decking, doubles attic thermal load, and voids the manufacturer’s 50-year non-prorated warranty. We always strip down to bare wood to ensure your deck is solid, clean, and structurally sound.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>How does a Class-4 impact rating lower my homeowner insurance policy?</span>
+                        <i data-lucide="chevron-down" class="acc-chevron"></i>
+                    </button>
+                    <div class="accordion-body">
+                        <p>Insurance carriers lose millions each year to hail damage. Because UL 2218 Class-4 rated SBS shingles resist fracturing from 2-inch ice spheres at terminal velocity, major carriers (State Farm, Allstate, USAA, Travelers) offer annual premium discounts of up to 28% upon filing an inspection certificate.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>What is your cleanup process for stray roofing nails?</span>
+                        <i data-lucide="chevron-down" class="acc-chevron"></i>
+                    </button>
+                    <div class="accordion-body">
+                        <p>We deploy industrial neodymium magnetic sweepers across your entire lawn, driveway, shrubbery, and gutters in three continuous sweeps: mid-day, post-tear-off, and final twilight sweep. We guarantee zero flat tires or injured pets.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>How long does an installation crew remain at my residence?</span>
+                        <i data-lucide="chevron-down" class="acc-chevron"></i>
+                    </button>
+                    <div class="accordion-body">
+                        <p>92% of residential roof replacements (under 3,500 sq.ft) are completed in exactly ONE DAY. We dispatch an elite 6-to-8-man specialized crew starting at 7:00 AM, finishing shingles by 4:30 PM, followed by systematic magnetic cleanup by 6:00 PM.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>What happens if an unexpected storm hits while my roof is torn off?</span>
+                        <i data-lucide="chevron-down" class="acc-chevron"></i>
+                    </button>
+                    <div class="accordion-body">
+                        <p>We work in targeted sections and monitor live micro-Doppler radar on-site. The moment moisture is detected within 15 miles, our entire crew can dry-in the entire deck with heavy synthetic underlayment and mechanically fastened storm tarps within 12 minutes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCHEDULE INSPECTION / CONTACT FORM -->
+    <section class="section contact-section" id="contact">
+        <div class="container">
+            <div class="contact-chassis">
+                <div class="c-info-side">
+                    <div class="pill-badge amber-chip"><i data-lucide="calendar"></i> LIMITED CALENDAR SLOTS</div>
+                    <h2>Schedule Your Free 21-Point Drone & Attic Audit</h2>
+                    <p>Receive an unbiased, high-resolution forensic damage assessment of your roof decking, flashing seams, and ventilation balance.</p>
+                    
+                    <div class="perks-checklist">
+                        <div class="perk-row"><i data-lucide="check-circle-2"></i> 4K Drone Aerial Roof Scan Included</div>
+                        <div class="perk-row"><i data-lucide="check-circle-2"></i> FLIR Attic Thermal Moisture Inspection</div>
+                        <div class="perk-row"><i data-lucide="check-circle-2"></i> Xactimate Insurance-Grade Itemized Proposal</div>
+                        <div class="perk-row"><i data-lucide="check-circle-2"></i> Free Ice & Water Barrier Upgrade on All Valleys</div>
+                    </div>
+                </div>
+
+                <div class="c-form-side">
+                    <form class="booking-form" id="auditForm">
+                        <div class="form-grid-2">
+                            <div class="input-field">
+                                <label for="cName">Full Name</label>
+                                <input type="text" id="cName" placeholder="David Vance" required>
+                            </div>
+                            <div class="input-field">
+                                <label for="cPhone">Mobile Phone</label>
+                                <input type="tel" id="cPhone" placeholder="(555) 438-9210" required>
+                            </div>
+                        </div>
+
+                        <div class="input-field">
+                            <label for="cAddress">Property Address</label>
+                            <input type="text" id="cAddress" placeholder="8421 Crestview Terrace" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label for="cService">Primary Concern</label>
+                            <select id="cService">
+                                <option>Suspected Hail / High-Wind Damage</option>
+                                <option>Aging Roof Replacement (15+ Years)</option>
+                                <option>Emergency Active Leak Tarping</option>
+                                <option>Commercial Facility Evaluation</option>
+                                <option>Standing Seam Metal Conversion</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block btn-lg magnetic-target">
+                            <span class="btn-shine"></span>
+                            <i data-lucide="send"></i> Request Forensic Audit
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="f-brand">
+                <div class="brand-text">
+                    <span class="brand-name">TITAN<span class="highlight">SHIELD</span></span>
+                    <span class="brand-sub">ARCHITECTURAL ROOFING SYSTEMS</span>
+                </div>
+                <p>Industrial grade storm fortification, commercial membrane applications, and lifetime architectural residential installations across coastal and tornado corridors.</p>
+                <div class="f-socials">
+                    <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+                    <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                    <a href="#" aria-label="Linkedin"><i data-lucide="linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="f-links">
+                <h4>Engineered Systems</h4>
+                <ul>
+                    <li><a href="#">SBS Ballistic Shingles</a></li>
+                    <li><a href="#">Standing Seam Metal</a></li>
+                    <li><a href="#">Synthetic Composite Slate</a></li>
+                    <li><a href="#">Flat Commercial TPO / PVC</a></li>
+                </ul>
+            </div>
+
+            <div class="f-links">
+                <h4>Forensic Protocols</h4>
+                <ul>
+                    <li><a href="#">FLIR Thermal Imaging</a></li>
+                    <li><a href="#">Insurance Claim Escort</a></li>
+                    <li><a href="#">Emergency Tarp Service</a></li>
+                    <li><a href="#">Ventilation Balancing</a></li>
+                </ul>
+            </div>
+
+            <div class="f-links">
+                <h4>Dispatch Operations</h4>
+                <p class="f-contact-item"><i data-lucide="map-pin"></i> 100 Industrial Pkwy, Bldg 4</p>
+                <p class="f-contact-item"><i data-lucide="phone"></i> 1-800-555-ROOF (7663)</p>
+                <p class="f-contact-item"><i data-lucide="mail"></i> dispatch@titanshieldroofs.com</p>
+            </div>
+        </div>
+
+        <div class="container f-sub">
+            <span>&copy; 2026 TitanShield Roofing Corp. All Rights Reserved. State General Contractor Lic #CCC1331890.</span>
+            <div class="f-legals">
+                <a href="#">Privacy Framework</a>
+                <a href="#">Warranty Terms</a>
+                <a href="#">Insurance Compliance</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Core Runtime Execution -->
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

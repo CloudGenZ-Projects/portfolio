@@ -1,0 +1,3143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0" />
+  <title>AURA | Your Space. Freshly Reset.</title>
+  <meta name="description" content="Professional home and commercial cleaning that gives you your time back. Sustainable, meticulous, bonded, and backed by clinical eco-standards." />
+
+  <!-- Preconnect & Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       01. DESIGN TOKENS, FLUID TYPOGRAPHY & BULLETPROOF RESET
+       ========================================================================== */
+    :root {
+      /* Brand Color Palette */
+      --primary-forest: #12352B;
+      --forest-light: #1b4b3e;
+      --forest-ultra-light: #245e4f;
+      --forest-dark: #0a1f19;
+      --forest-deep: #05130f;
+      --accent-lime: #C8F36A;
+      --accent-lime-hover: #b5e450;
+      --accent-lime-dim: rgba(200, 243, 106, 0.18);
+      --bg-warm-white: #F8F7F2;
+      --bg-soft-mint: #EAF4EC;
+      --text-primary: #17231E;
+      --text-secondary: #586760;
+      --text-muted: #839189;
+      --pure-white: #FFFFFF;
+      --border-subtle: rgba(18, 53, 43, 0.08);
+      --border-strong: rgba(18, 53, 43, 0.16);
+
+      /* Typography Tokens */
+      --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+      /* Spacing Scale */
+      --space-2: 2px;
+      --space-4: 4px;
+      --space-8: 8px;
+      --space-12: 12px;
+      --space-16: 16px;
+      --space-20: 20px;
+      --space-24: 24px;
+      --space-32: 32px;
+      --space-40: 40px;
+      --space-48: 48px;
+      --space-64: 64px;
+      --space-80: 80px;
+      --space-96: 96px;
+      --space-120: 120px;
+      --space-160: 160px;
+
+      /* Corner Radii */
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 36px;
+      --radius-pill: 9999px;
+
+      /* Shadows */
+      --shadow-subtle: 0 4px 20px rgba(18, 53, 43, 0.05);
+      --shadow-float: 0 12px 36px rgba(18, 53, 43, 0.09);
+      --shadow-card: 0 20px 48px -12px rgba(18, 53, 43, 0.13);
+      --shadow-glow: 0 0 35px rgba(200, 243, 106, 0.35);
+
+      /* Bezier Curves & Timing */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --transition-fast: 180ms var(--ease-out);
+      --transition-base: 320ms var(--ease-out);
+      --transition-smooth: 550ms var(--ease-out);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background-color: var(--bg-warm-white);
+      color: var(--text-primary);
+      text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: var(--font-family);
+      line-height: 1.6;
+      background-color: var(--bg-warm-white);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      width: 100%;
+      position: relative;
+    }
+
+    img, svg, picture, video {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--transition-fast);
+      touch-action: manipulation;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      font-size: 1rem;
+      border: none;
+      outline: none;
+      background: none;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+    }
+
+    /* Container Utility */
+    .container {
+      width: 100%;
+      max-width: 1320px;
+      margin-inline: auto;
+      padding-inline: clamp(16px, 4vw, 48px);
+    }
+
+    /* Section Foundation */
+    section {
+      padding-block: clamp(64px, 10vw, 130px);
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .section-header {
+      max-width: 760px;
+      margin-bottom: clamp(36px, 6vw, 64px);
+    }
+
+    .section-header.center {
+      text-align: center;
+      margin-inline: auto;
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-8);
+      padding: 6px 16px;
+      background-color: var(--bg-soft-mint);
+      color: var(--primary-forest);
+      font-size: 0.8125rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-radius: var(--radius-pill);
+      margin-bottom: var(--space-16);
+      border: 1px solid rgba(18, 53, 43, 0.08);
+      width: fit-content;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      color: var(--primary-forest);
+      margin-bottom: var(--space-16);
+    }
+
+    .section-subtitle {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      color: var(--text-secondary);
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    /* Button System */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-8);
+      padding: 16px 32px;
+      font-weight: 700;
+      font-size: 0.9375rem;
+      border-radius: var(--radius-pill);
+      transition: transform var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+      white-space: nowrap;
+      position: relative;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background-color: var(--accent-lime);
+      color: var(--primary-forest);
+      box-shadow: 0 4px 18px rgba(200, 243, 106, 0.45);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-lime-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 26px rgba(200, 243, 106, 0.6);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--primary-forest);
+      border: 1.5px solid var(--border-strong);
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(18, 53, 43, 0.05);
+      border-color: var(--primary-forest);
+      transform: translateY(-2px);
+    }
+
+    .btn-dark {
+      background-color: var(--primary-forest);
+      color: var(--pure-white);
+    }
+
+    .btn-dark:hover {
+      background-color: var(--forest-light);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-float);
+    }
+
+    .btn svg {
+      transition: transform var(--transition-fast);
+      flex-shrink: 0;
+    }
+
+    .btn:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* Scroll Reveals */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+      will-change: opacity, transform;
+    }
+
+    .reveal-on-scroll.is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal-on-scroll {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+
+    /* ==========================================================================
+       02. RESPONSIVE NAVIGATION & DYNAMIC BAR
+       ========================================================================== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1100;
+      transition: padding var(--transition-base), background-color var(--transition-base), backdrop-filter var(--transition-base), border-color var(--transition-base);
+      padding: var(--space-24) 0;
+      background-color: transparent;
+    }
+
+    .navbar.scrolled {
+      padding: var(--space-12) 0;
+      background: rgba(248, 247, 242, 0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border-subtle);
+      box-shadow: 0 4px 24px rgba(18, 53, 43, 0.06);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-16);
+    }
+
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-8);
+      font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--primary-forest);
+      z-index: 1101;
+    }
+
+    .nav-logo-spark {
+      color: var(--primary-forest);
+      width: 24px;
+      height: 24px;
+    }
+
+    .nav-menu {
+      display: none;
+      align-items: center;
+      gap: clamp(18px, 2.2vw, 34px);
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      position: relative;
+      padding-block: 4px;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary-forest);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background-color: var(--accent-lime);
+      transition: width var(--transition-fast);
+    }
+
+    .nav-link:hover::after, .nav-link.active::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-16);
+      z-index: 1101;
+    }
+
+    .mobile-menu-toggle {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 32px;
+      height: 26px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .mobile-menu-toggle span {
+      width: 100%;
+      height: 2.5px;
+      background-color: var(--primary-forest);
+      border-radius: 2px;
+      transition: all var(--transition-base);
+    }
+
+    .mobile-menu-toggle.open span:nth-child(1) {
+      transform: translateY(8.5px) rotate(45deg);
+    }
+    .mobile-menu-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .mobile-menu-toggle.open span:nth-child(3) {
+      transform: translateY(-8.5px) rotate(-45deg);
+    }
+
+    .mobile-nav-drawer {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: var(--bg-warm-white);
+      z-index: 1050;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(32px, 8vw, 64px);
+      transform: translateY(-100%);
+      transition: transform var(--transition-smooth);
+      visibility: hidden;
+    }
+
+    .mobile-nav-drawer.open {
+      transform: translateY(0);
+      visibility: visible;
+    }
+
+    .mobile-nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-24);
+      margin-bottom: var(--space-40);
+    }
+
+    .mobile-nav-link {
+      font-size: clamp(1.5rem, 5vw, 2.25rem);
+      font-weight: 800;
+      color: var(--primary-forest);
+      letter-spacing: -0.02em;
+    }
+
+    @media (min-width: 1080px) {
+      .nav-menu {
+        display: flex;
+      }
+      .mobile-menu-toggle {
+        display: none;
+      }
+      .mobile-nav-drawer {
+        display: none !important;
+      }
+    }
+
+    /* ==========================================================================
+       03. HERO SECTION
+       ========================================================================== */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: calc(var(--space-120) + 10px);
+      padding-bottom: var(--space-80);
+      background: radial-gradient(circle at 85% 15%, rgba(200, 243, 106, 0.22) 0%, rgba(248, 247, 242, 0) 55%);
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(40px, 6vw, 72px);
+      align-items: center;
+    }
+
+    @media (min-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1.15fr 0.85fr;
+      }
+    }
+
+    .hero-content {
+      max-width: 680px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-8);
+      padding: 8px 18px;
+      border-radius: var(--radius-pill);
+      background: var(--pure-white);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-subtle);
+      font-size: 0.8125rem;
+      font-weight: 800;
+      color: var(--primary-forest);
+      margin-bottom: var(--space-24);
+    }
+
+    .hero-headline {
+      font-size: clamp(2.6rem, 5.8vw, 5.25rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      color: var(--primary-forest);
+      margin-bottom: var(--space-24);
+    }
+
+    .hero-headline .highlight-accent {
+      color: var(--primary-forest);
+      position: relative;
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    .hero-headline .highlight-accent::after {
+      content: '';
+      position: absolute;
+      bottom: 8%;
+      left: -2%;
+      width: 104%;
+      height: 30%;
+      background: var(--accent-lime);
+      z-index: -1;
+      border-radius: 4px;
+      transform: rotate(-1.5deg);
+    }
+
+    .hero-desc {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      color: var(--text-secondary);
+      margin-bottom: var(--space-40);
+      max-width: 560px;
+      font-weight: 400;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-16);
+      margin-bottom: var(--space-48);
+    }
+
+    .hero-trust-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: clamp(16px, 3vw, 32px);
+      align-items: center;
+      padding-top: var(--space-24);
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .hero-trust-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .hero-stage {
+      position: relative;
+      width: 100%;
+    }
+
+    .hero-image-wrap {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 4 / 3.8;
+      box-shadow: var(--shadow-card);
+      background-color: #E2ECE5;
+    }
+
+    .hero-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .clean-sweep-beam {
+      position: absolute;
+      top: 0;
+      left: -150%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(200, 243, 106, 0.45) 45%,
+        rgba(255, 255, 255, 0.95) 50%,
+        rgba(200, 243, 106, 0.45) 55%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: skewX(-25deg);
+      pointer-events: none;
+      animation: cleanSweepCycle 7s infinite ease-in-out;
+    }
+
+    @keyframes cleanSweepCycle {
+      0%, 15% { left: -150%; }
+      50%, 65% { left: 200%; }
+      100% { left: 200%; }
+    }
+
+    .floating-card {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 12px 20px;
+      border-radius: var(--radius-pill);
+      box-shadow: var(--shadow-float);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+      font-size: 0.8125rem;
+      font-weight: 800;
+      color: var(--primary-forest);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .floating-card-1 {
+      top: 6%;
+      left: -4%;
+      animation: floatA 5s ease-in-out infinite alternate;
+    }
+
+    .floating-card-2 {
+      bottom: 8%;
+      right: -4%;
+      animation: floatB 6.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatA {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-14px) rotate(-1.5deg); }
+    }
+    @keyframes floatB {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-16px) rotate(2deg); }
+    }
+
+    .floating-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-lime);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-lime);
+    }
+
+    #heroCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* ==========================================================================
+       04. TRUST STATS STRIP
+       ========================================================================== */
+    .trust-strip {
+      background-color: var(--primary-forest);
+      color: var(--pure-white);
+      padding: clamp(36px, 6vw, 56px) 0;
+      position: relative;
+      z-index: 5;
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-32);
+    }
+
+    .trust-item {
+      text-align: left;
+      border-left: 2.5px solid rgba(200, 243, 106, 0.4);
+      padding-left: var(--space-20);
+    }
+
+    .trust-number {
+      font-size: clamp(2.25rem, 4vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      color: var(--accent-lime);
+      letter-spacing: -0.03em;
+      margin-bottom: var(--space-4);
+    }
+
+    .trust-label {
+      font-size: 0.9375rem;
+      color: rgba(255, 255, 255, 0.78);
+      font-weight: 500;
+    }
+
+    /* ==========================================================================
+       NEW SECTION 1: MOTION GRAPHICS & INTERACTIVE STORYTELLING
+       ========================================================================== */
+    .story-motion-section {
+      background-color: var(--primary-forest);
+      color: var(--pure-white);
+      position: relative;
+      overflow: hidden;
+      padding-block: clamp(80px, 12vw, 150px);
+    }
+
+    .story-ambient-bg {
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(200, 243, 106, 0.15) 0%, rgba(18, 53, 43, 0) 70%);
+      pointer-events: none;
+      border-radius: 50%;
+    }
+
+    .story-motion-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(40px, 6vw, 80px);
+      align-items: center;
+    }
+
+    @media (min-width: 1024px) {
+      .story-motion-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .story-motion-stage {
+      position: relative;
+      width: 100%;
+      max-width: 580px;
+      margin-inline: auto;
+      aspect-ratio: 1 / 1;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .motion-svg-canvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    .story-content-col {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-32);
+    }
+
+    .story-chapter {
+      padding: var(--space-24);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all var(--transition-base);
+      cursor: pointer;
+    }
+
+    .story-chapter:hover, .story-chapter.active {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--accent-lime);
+      transform: translateX(8px);
+    }
+
+    .chapter-num {
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent-lime);
+      margin-bottom: var(--space-8);
+      display: block;
+    }
+
+    .chapter-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: var(--space-8);
+      color: var(--pure-white);
+    }
+
+    .chapter-desc {
+      font-size: 0.9375rem;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.6;
+    }
+
+    /* Motion Graphics SVG Animations */
+    .pulse-ring {
+      transform-origin: center;
+      animation: svgRingPulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes svgRingPulse {
+      0% { transform: scale(0.85); opacity: 0.2; }
+      50% { transform: scale(1.1); opacity: 0.7; }
+      100% { transform: scale(0.85); opacity: 0.2; }
+    }
+
+    .orbit-particle {
+      transform-origin: 200px 200px;
+      animation: svgOrbit 14s linear infinite;
+    }
+    @keyframes svgOrbit {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .sparkle-node {
+      animation: svgNodeBlink 3s ease-in-out infinite alternate;
+    }
+    @keyframes svgNodeBlink {
+      0% { opacity: 0.3; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* ==========================================================================
+       NEW SECTION 2: INTERACTIVE SHOWCASE GALLERY & LIGHTBOX
+       ========================================================================== */
+    .gallery-section {
+      background-color: var(--bg-warm-white);
+    }
+
+    .gallery-filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-8);
+      justify-content: center;
+      margin-bottom: var(--space-48);
+    }
+
+    .gallery-tab-btn {
+      padding: 10px 22px;
+      border-radius: var(--radius-pill);
+      background: var(--pure-white);
+      border: 1px solid var(--border-subtle);
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      transition: all var(--transition-fast);
+    }
+
+    .gallery-tab-btn:hover {
+      color: var(--primary-forest);
+      border-color: var(--border-strong);
+    }
+
+    .gallery-tab-btn.active {
+      background-color: var(--primary-forest);
+      color: var(--pure-white);
+      border-color: var(--primary-forest);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: clamp(16px, 2.5vw, 32px);
+    }
+
+    @media (min-width: 1024px) {
+      .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      cursor: pointer;
+      box-shadow: var(--shadow-subtle);
+      border: 1px solid var(--border-subtle);
+      background-color: #e6eee9;
+      transform: translateZ(0);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s var(--ease-out), filter 0.6s var(--ease-out);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(18, 53, 43, 0) 30%, rgba(18, 53, 43, 0.85) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: var(--space-24);
+      opacity: 0;
+      transition: opacity var(--transition-base);
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+
+    .gallery-tag-pill {
+      font-size: 0.6875rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-lime);
+      margin-bottom: var(--space-4);
+    }
+
+    .gallery-item-title {
+      font-size: 1.125rem;
+      font-weight: 800;
+      color: var(--pure-white);
+    }
+
+    /* Gallery Modal (Lightbox) */
+    .gallery-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 31, 25, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 1200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-24);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-base);
+    }
+
+    .gallery-modal.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-content-wrap {
+      max-width: 900px;
+      width: 100%;
+      position: relative;
+      background: var(--pure-white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+    }
+
+    .modal-img {
+      width: 100%;
+      max-height: 70vh;
+      object-fit: cover;
+    }
+
+    .modal-caption {
+      padding: var(--space-24) var(--space-32);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-16);
+      background: var(--pure-white);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: background var(--transition-fast);
+    }
+
+    .modal-close-btn:hover {
+      background: rgba(0, 0, 0, 0.9);
+    }
+
+    /* ==========================================================================
+       05. SERVICES SECTION & FILTERING
+       ========================================================================== */
+    .services-section {
+      background-color: var(--bg-soft-mint);
+    }
+
+    .services-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-8);
+      margin-bottom: var(--space-48);
+    }
+
+    .filter-btn {
+      padding: 10px 22px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid var(--border-subtle);
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      transition: all var(--transition-fast);
+    }
+
+    .filter-btn:hover {
+      background: var(--pure-white);
+      color: var(--primary-forest);
+    }
+
+    .filter-btn.active {
+      background: var(--primary-forest);
+      color: var(--pure-white);
+      border-color: var(--primary-forest);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: clamp(20px, 3vw, 32px);
+    }
+
+    .service-card {
+      background: var(--pure-white);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-card);
+      border-color: rgba(18, 53, 43, 0.2);
+    }
+
+    .service-card-img-wrap {
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+      background-color: #E2ECE5;
+    }
+
+    .service-card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s var(--ease-out);
+    }
+
+    .service-card:hover .service-card-img-wrap img {
+      transform: scale(1.06);
+    }
+
+    .service-card-body {
+      padding: clamp(20px, 3vw, 32px);
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .service-card-category {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: var(--space-8);
+    }
+
+    .service-card-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--primary-forest);
+      margin-bottom: var(--space-12);
+    }
+
+    .service-card-text {
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: var(--space-24);
+      flex-grow: 1;
+    }
+
+    .service-card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-8);
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--primary-forest);
+      transition: gap var(--transition-fast);
+    }
+
+    .service-card:hover .service-card-cta {
+      gap: var(--space-12);
+    }
+
+    /* ==========================================================================
+       06. BEFORE / AFTER COMPARISON
+       ========================================================================== */
+    .before-after-section {
+      background-color: var(--bg-warm-white);
+    }
+
+    .comparison-container {
+      max-width: 1040px;
+      margin: 0 auto;
+      position: relative;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .comparison-stage {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      touch-action: pan-y;
+      background-color: #E2ECE5;
+    }
+
+    .comparison-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .comparison-before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+      will-change: clip-path;
+    }
+
+    .comparison-label {
+      position: absolute;
+      bottom: var(--space-20);
+      padding: 8px 16px;
+      background: rgba(18, 53, 43, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--pure-white);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      border-radius: var(--radius-pill);
+      z-index: 5;
+    }
+
+    .comparison-label.label-before {
+      left: var(--space-20);
+    }
+
+    .comparison-label.label-after {
+      right: var(--space-20);
+      background: rgba(200, 243, 106, 0.95);
+      color: var(--primary-forest);
+    }
+
+    .comparison-handle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 4px;
+      background-color: var(--pure-white);
+      cursor: ew-resize;
+      z-index: 10;
+      transform: translateX(-50%);
+      box-shadow: 0 0 12px rgba(0,0,0,0.3);
+    }
+
+    .handle-circle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 44px;
+      height: 44px;
+      background-color: var(--pure-white);
+      border: 3px solid var(--primary-forest);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    }
+
+    .handle-circle svg {
+      width: 18px;
+      height: 18px;
+      color: var(--primary-forest);
+    }
+
+    /* ==========================================================================
+       07. HOW IT WORKS
+       ========================================================================== */
+    .how-it-works-section {
+      background-color: var(--bg-soft-mint);
+    }
+
+    .timeline-container {
+      position: relative;
+      margin-top: var(--space-48);
+    }
+
+    .timeline-line-bg {
+      display: none;
+      position: absolute;
+      top: 40px;
+      left: 10%;
+      width: 80%;
+      height: 3px;
+      background-color: rgba(18, 53, 43, 0.1);
+      z-index: 1;
+    }
+
+    .timeline-line-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background-color: var(--accent-lime);
+      transition: width 0.8s var(--ease-out);
+    }
+
+    @media (min-width: 1024px) {
+      .timeline-line-bg {
+        display: block;
+      }
+    }
+
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-40);
+      position: relative;
+      z-index: 2;
+    }
+
+    @media (min-width: 1024px) {
+      .timeline-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-32);
+      }
+    }
+
+    .timeline-step {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .step-number-bubble {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background-color: var(--pure-white);
+      border: 3px solid var(--border-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary-forest);
+      margin-bottom: var(--space-24);
+      transition: all var(--transition-base);
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .timeline-step.active .step-number-bubble {
+      background-color: var(--accent-lime);
+      border-color: var(--primary-forest);
+      transform: scale(1.06);
+    }
+
+    .step-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--primary-forest);
+      margin-bottom: var(--space-12);
+    }
+
+    .step-desc {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       08. PRICING SECTION
+       ========================================================================== */
+    .pricing-section {
+      background-color: var(--bg-warm-white);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-32);
+      max-width: 1140px;
+      margin-inline: auto;
+    }
+
+    @media (min-width: 768px) {
+      .pricing-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .pricing-card {
+      background: var(--pure-white);
+      border-radius: var(--radius-lg);
+      padding: clamp(32px, 4vw, 48px) var(--space-32);
+      border: 1.5px solid var(--border-subtle);
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .pricing-card.featured {
+      border-color: var(--primary-forest);
+      box-shadow: var(--shadow-card);
+      background: linear-gradient(180deg, #FFFFFF 0%, #FAFCF9 100%);
+    }
+
+    .pricing-card-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent-lime);
+      color: var(--primary-forest);
+      padding: 4px 18px;
+      border-radius: var(--radius-pill);
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      box-shadow: 0 4px 12px rgba(200, 243, 106, 0.4);
+    }
+
+    .pricing-plan-name {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--primary-forest);
+      margin-bottom: var(--space-8);
+    }
+
+    .pricing-plan-desc {
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-24);
+      min-height: 44px;
+    }
+
+    .pricing-plan-price {
+      font-size: clamp(2.4rem, 4vw, 3rem);
+      font-weight: 800;
+      color: var(--primary-forest);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: var(--space-8);
+    }
+
+    .pricing-plan-price span {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .pricing-features-list {
+      list-style: none;
+      margin: var(--space-32) 0;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-12);
+    }
+
+    .pricing-feature-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-12);
+      font-size: 0.9375rem;
+      color: var(--text-primary);
+    }
+
+    .pricing-feature-item svg {
+      color: var(--primary-forest);
+      flex-shrink: 0;
+    }
+
+    /* ==========================================================================
+       09. TESTIMONIALS SLIDER
+       ========================================================================== */
+    .testimonials-section {
+      background-color: var(--bg-soft-mint);
+    }
+
+    .testimonials-slider {
+      position: relative;
+      max-width: 900px;
+      margin-inline: auto;
+    }
+
+    .testimonial-track {
+      display: flex;
+      transition: transform 0.5s var(--ease-out);
+    }
+
+    .testimonial-slide {
+      min-width: 100%;
+      padding-inline: var(--space-12);
+    }
+
+    .testimonial-quote-card {
+      background: var(--pure-white);
+      border-radius: var(--radius-lg);
+      padding: clamp(36px, 6vw, 64px) clamp(24px, 5vw, 48px);
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border-subtle);
+      text-align: center;
+    }
+
+    .quote-stars {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      color: #F59E0B;
+      margin-bottom: var(--space-20);
+    }
+
+    .quote-text {
+      font-size: clamp(1.15rem, 2.5vw, 1.65rem);
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--primary-forest);
+      letter-spacing: -0.02em;
+      margin-bottom: var(--space-32);
+    }
+
+    .quote-author {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--primary-forest);
+    }
+
+    .quote-role {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .slider-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: var(--space-20);
+      margin-top: var(--space-32);
+    }
+
+    .slider-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--pure-white);
+      border: 1px solid var(--border-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--primary-forest);
+      transition: all var(--transition-fast);
+    }
+
+    .slider-btn:hover {
+      background: var(--primary-forest);
+      color: var(--pure-white);
+      border-color: var(--primary-forest);
+    }
+
+    /* ==========================================================================
+       10. ACCORDION FAQ
+       ========================================================================== */
+    .faq-section {
+      background-color: var(--bg-warm-white);
+    }
+
+    .faq-wrapper {
+      max-width: 840px;
+      margin-inline: auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-16);
+    }
+
+    .faq-item {
+      background: var(--pure-white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      overflow: hidden;
+      transition: border-color var(--transition-fast);
+    }
+
+    .faq-item.active {
+      border-color: var(--border-strong);
+    }
+
+    .faq-question-btn {
+      width: 100%;
+      text-align: left;
+      padding: clamp(20px, 3vw, 28px) var(--space-32);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-16);
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      font-weight: 700;
+      color: var(--primary-forest);
+      cursor: pointer;
+    }
+
+    .faq-icon-arrow {
+      width: 22px;
+      height: 22px;
+      color: var(--primary-forest);
+      transition: transform var(--transition-base);
+      flex-shrink: 0;
+    }
+
+    .faq-item.active .faq-icon-arrow {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer-pane {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows var(--transition-base);
+    }
+
+    .faq-item.active .faq-answer-pane {
+      grid-template-rows: 1fr;
+    }
+
+    .faq-answer-inner {
+      overflow: hidden;
+    }
+
+    .faq-answer-content {
+      padding: 0 var(--space-32) var(--space-24) var(--space-32);
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       11. COMPREHENSIVE RESPONSIVE BOOKING ESTIMATOR & FORM
+       ========================================================================== */
+    .booking-section {
+      background-color: var(--bg-soft-mint);
+    }
+
+    .booking-card {
+      max-width: 900px;
+      margin-inline: auto;
+      background: var(--pure-white);
+      border-radius: var(--radius-lg);
+      padding: clamp(28px, 6vw, 64px);
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .booking-header {
+      text-align: center;
+      margin-bottom: var(--space-40);
+    }
+
+    .booking-form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-32);
+    }
+
+    .form-step-title {
+      font-size: 1.125rem;
+      font-weight: 800;
+      color: var(--primary-forest);
+      margin-bottom: var(--space-16);
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+    }
+
+    .form-step-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--accent-lime);
+      color: var(--primary-forest);
+      font-size: 0.75rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .form-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-20);
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--space-20);
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+    }
+
+    .form-label {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--primary-forest);
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border-strong);
+      background-color: var(--bg-warm-white);
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      transition: border-color var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--primary-forest);
+      background-color: var(--pure-white);
+      box-shadow: 0 0 0 3px rgba(200, 243, 106, 0.4);
+    }
+
+    .estimate-bar {
+      background-color: var(--bg-soft-mint);
+      border-radius: var(--radius-md);
+      padding: var(--space-24);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-16);
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid rgba(18, 53, 43, 0.1);
+    }
+
+    @media (min-width: 680px) {
+      .estimate-bar {
+        flex-direction: row;
+      }
+    }
+
+    .estimate-info {
+      text-align: left;
+    }
+
+    .estimate-label {
+      font-size: 0.8125rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+    }
+
+    .estimate-amount {
+      font-size: clamp(2rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      color: var(--primary-forest);
+      letter-spacing: -0.03em;
+    }
+
+    .form-success-banner {
+      display: none;
+      background: var(--bg-soft-mint);
+      border: 2px solid var(--accent-lime);
+      padding: var(--space-24);
+      border-radius: var(--radius-md);
+      text-align: center;
+      margin-top: var(--space-24);
+    }
+
+    .form-success-banner.show {
+      display: block;
+      animation: fadeIn 0.4s var(--ease-out) forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================================
+       12. CALL TO ACTION & FOOTER
+       ========================================================================== */
+    .final-cta-section {
+      background-color: var(--primary-forest);
+      color: var(--pure-white);
+      text-align: center;
+      padding-block: clamp(80px, 12vw, 140px);
+      position: relative;
+    }
+
+    .final-cta-content {
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+      margin-inline: auto;
+    }
+
+    .final-cta-title {
+      font-size: clamp(2.2rem, 5vw, 4.25rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--pure-white);
+      margin-bottom: var(--space-24);
+    }
+
+    .final-cta-desc {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      color: rgba(255, 255, 255, 0.82);
+      margin-bottom: var(--space-40);
+    }
+
+    .final-cta-btns {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-16);
+    }
+
+    .site-footer {
+      background-color: var(--forest-dark);
+      color: var(--pure-white);
+      padding: clamp(48px, 8vw, 80px) 0 var(--space-40);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-48);
+      margin-bottom: var(--space-64);
+    }
+
+    .footer-brand p {
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 0.9375rem;
+      margin-top: var(--space-16);
+      line-height: 1.6;
+    }
+
+    .footer-heading {
+      font-size: 0.875rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-lime);
+      margin-bottom: var(--space-20);
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-12);
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.9375rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--pure-white);
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-16);
+      align-items: center;
+      justify-content: space-between;
+      padding-top: var(--space-32);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .footer-legal-links {
+      display: flex;
+      gap: var(--space-24);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER & RESPONSIVE NAVIGATION
+       ========================================================================== -->
+  <header class="navbar" id="navbar" role="banner">
+    <div class="container nav-container">
+      <a href="#home" class="nav-logo" aria-label="AURA Reset Home">
+        <svg class="nav-logo-spark" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
+        </svg>
+        <span>AURA</span>
+      </a>
+
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-menu">
+          <li><a href="#story" class="nav-link">Our Story</a></li>
+          <li><a href="#gallery" class="nav-link">Showcase</a></li>
+          <li><a href="#services" class="nav-link">Services</a></li>
+          <li><a href="#before-after" class="nav-link">Results</a></li>
+          <li><a href="#how-it-works" class="nav-link">Process</a></li>
+          <li><a href="#pricing" class="nav-link">Pricing</a></li>
+          <li><a href="#faq" class="nav-link">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#booking" class="btn btn-primary" style="padding: 10px 22px; font-size: 0.875rem;">
+          Instant Book
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+
+        <button class="mobile-menu-toggle" id="mobileToggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer" id="mobileDrawer" role="dialog" aria-modal="true">
+    <ul class="mobile-nav-links">
+      <li><a href="#story" class="mobile-nav-link">Our Story</a></li>
+      <li><a href="#gallery" class="mobile-nav-link">Showcase Gallery</a></li>
+      <li><a href="#services" class="mobile-nav-link">Services</a></li>
+      <li><a href="#before-after" class="mobile-nav-link">Before & After</a></li>
+      <li><a href="#how-it-works" class="mobile-nav-link">How It Works</a></li>
+      <li><a href="#pricing" class="mobile-nav-link">Transparent Pricing</a></li>
+      <li><a href="#faq" class="mobile-nav-link">FAQ</a></li>
+    </ul>
+    <a href="#booking" class="btn btn-primary" style="width: 100%; justify-content: center;">Schedule Your Reset</a>
+  </div>
+
+  <main>
+    <!-- ==========================================================================
+         HERO SECTION
+         ========================================================================== -->
+    <section class="hero-section" id="home">
+      <div class="container">
+        <div class="hero-grid">
+          
+          <div class="hero-content">
+            <div class="hero-badge reveal-on-scroll">
+              <span style="color:#F59E0B;">★</span>
+              <span>Sanctuary Standard 2026</span>
+            </div>
+
+            <h1 class="hero-headline reveal-on-scroll">
+              Your space. <br />
+              <span class="highlight-accent">Freshly reset.</span>
+            </h1>
+
+            <p class="hero-desc reveal-on-scroll">
+              Meticulous home and workplace sanitization engineered around zero toxicity, hotel-grade precision, and your uncompromised peace of mind.
+            </p>
+
+            <div class="hero-actions reveal-on-scroll">
+              <a href="#booking" class="btn btn-primary">
+                Book a Cleaning
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </a>
+              <a href="#gallery" class="btn btn-secondary">Explore Showcase</a>
+            </div>
+
+            <div class="hero-trust-bar reveal-on-scroll">
+              <div class="hero-trust-item">
+                <span style="color:#F59E0B;">★★★★★</span>
+                <span><strong>4.9/5</strong> Rating</span>
+              </div>
+              <div class="hero-trust-item">
+                <span><strong>10,000+</strong> Spaces Reset</span>
+              </div>
+              <div class="hero-trust-item">
+                <span><strong>100%</strong> Bonded Specialists</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-stage reveal-on-scroll">
+            <div class="hero-image-wrap">
+              <img 
+                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80" 
+                alt="Sunlit minimalist living room with polished natural flooring"
+                loading="eager"
+              />
+              <div class="clean-sweep-beam" aria-hidden="true"></div>
+              <canvas id="heroCanvas" aria-hidden="true"></canvas>
+            </div>
+
+            <div class="floating-card floating-card-1">
+              <span class="floating-dot"></span>
+              <span>Hospital Grade Eco-Reset</span>
+            </div>
+
+            <div class="floating-card floating-card-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#12352B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Plant-Derived Sanitization</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         TRUST STATS STRIP
+         ========================================================================== -->
+    <section class="trust-strip" aria-label="Platform Benchmarks">
+      <div class="container">
+        <div class="trust-grid">
+          <div class="trust-item reveal-on-scroll">
+            <div class="trust-number" data-count="10000" data-suffix="+">0</div>
+            <div class="trust-label">Sanctuaries Reset</div>
+          </div>
+          <div class="trust-item reveal-on-scroll">
+            <div class="trust-number" data-count="4.95" data-decimal="2" data-suffix="/5">0</div>
+            <div class="trust-label">Verified Client Score</div>
+          </div>
+          <div class="trust-item reveal-on-scroll">
+            <div class="trust-number" data-count="98.4" data-decimal="1" data-suffix="%">0</div>
+            <div class="trust-label">Recurring Client Rate</div>
+          </div>
+          <div class="trust-item reveal-on-scroll">
+            <div class="trust-number" data-count="100" data-suffix="%">0</div>
+            <div class="trust-label">Non-Toxic Botanicals</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         NEW SECTION 1: MOTION GRAPHICS & STORYTELLING
+         ========================================================================== -->
+    <section class="story-motion-section" id="story">
+      <div class="story-ambient-bg" aria-hidden="true"></div>
+      <div class="container">
+        <div class="section-header reveal-on-scroll">
+          <span class="section-tag" style="background: rgba(200,243,106,0.15); color: var(--accent-lime);">The Philosophy</span>
+          <h2 class="section-title" style="color: var(--pure-white);">Why we built a different kind of reset.</h2>
+          <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.8);">Clutter and residue aren't just physical. They drain cognitive vitality. Follow our three-phase restoration story.</p>
+        </div>
+
+        <div class="story-motion-grid">
+          
+          <!-- Interactive Story Chapters -->
+          <div class="story-content-col">
+            <div class="story-chapter active reveal-on-scroll" data-stage="1">
+              <span class="chapter-num">Phase 01 // The Deconstruction of Chaos</span>
+              <h3 class="chapter-title">Airborne Micro-Particulate Neutralization</h3>
+              <p class="chapter-desc">Modern indoor spaces accumulate volatile organic compounds and deep allergens. We deploy active HEPA filtration and ionic botanical capture to clean the invisible air first.</p>
+            </div>
+
+            <div class="story-chapter reveal-on-scroll" data-stage="2">
+              <span class="chapter-num">Phase 02 // Botanical Restoration</span>
+              <h3 class="chapter-title">Microbiome-Safe Surface Healing</h3>
+              <p class="chapter-desc">Corrosive bleach degrades stones, woods, and lungs. Our enzyme solutions eliminate 99.9% of pathogen bio-films while enriching the natural surfaces of your home.</p>
+            </div>
+
+            <div class="story-chapter reveal-on-scroll" data-stage="3">
+              <span class="chapter-num">Phase 03 // Cognitive Calm</span>
+              <h3 class="chapter-title">The Sanctuary Threshold</h3>
+              <p class="chapter-desc">You step across the doorway to crisp linens, balanced light, and a faint aroma of wild citrus. Your weekend is restored, uninterrupted by domestic obligation.</p>
+            </div>
+          </div>
+
+          <!-- Motion Graphics SVG Visualizer -->
+          <div class="story-motion-stage reveal-on-scroll">
+            <svg class="motion-svg-canvas" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Orbit lines -->
+              <circle cx="200" cy="200" r="160" stroke="rgba(200, 243, 106, 0.15)" stroke-width="1.5" stroke-dasharray="6 6"/>
+              <circle cx="200" cy="200" r="115" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1.5"/>
+              <circle cx="200" cy="200" r="70" stroke="rgba(200, 243, 106, 0.3)" stroke-width="2"/>
+
+              <!-- Central Core Pulse -->
+              <circle class="pulse-ring" cx="200" cy="200" r="50" fill="rgba(200, 243, 106, 0.12)"/>
+              <circle cx="200" cy="200" r="28" fill="var(--accent-lime)"/>
+              <path d="M200 186L203 197L214 200L203 203L200 214L197 203L186 200L197 197L200 186Z" fill="var(--primary-forest)"/>
+
+              <!-- Rotating Orbital Ring -->
+              <g class="orbit-particle">
+                <circle cx="200" cy="40" r="9" fill="var(--accent-lime)" filter="drop-shadow(0 0 8px #C8F36A)"/>
+                <circle cx="360" cy="200" r="6" fill="#FFFFFF"/>
+                <circle cx="85" cy="200" r="7" fill="var(--accent-lime)"/>
+                <circle cx="200" cy="315" r="5" fill="#FFFFFF" opacity="0.6"/>
+              </g>
+
+              <!-- Dynamic Sparkle Nodes -->
+              <g class="sparkle-node">
+                <circle cx="120" cy="110" r="3" fill="#C8F36A"/>
+                <line x1="120" y1="102" x2="120" y2="118" stroke="#C8F36A" stroke-width="1.5"/>
+                <line x1="112" y1="110" x2="128" y2="110" stroke="#C8F36A" stroke-width="1.5"/>
+              </g>
+              <g class="sparkle-node" style="animation-delay: 1.5s;">
+                <circle cx="280" cy="290" r="3" fill="#ffffff"/>
+                <line x1="280" y1="282" x2="280" y2="298" stroke="#ffffff" stroke-width="1.5"/>
+                <line x1="272" y1="290" x2="288" y2="290" stroke="#ffffff" stroke-width="1.5"/>
+              </g>
+            </svg>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         NEW SECTION 2: SHOWCASE GALLERY WITH LIGHTBOX MODAL
+         ========================================================================== -->
+    <section class="gallery-section" id="gallery">
+      <div class="container">
+        <div class="section-header center reveal-on-scroll">
+          <span class="section-tag">Visual Verification</span>
+          <h2 class="section-title">The Sanctuary Showcase.</h2>
+          <p class="section-subtitle">Browse recent transformations across residential estates, designer lofts, and commercial creative studios.</p>
+        </div>
+
+        <div class="gallery-filter-tabs reveal-on-scroll">
+          <button class="gallery-tab-btn active" data-gallery-filter="all">All Sanctuaries</button>
+          <button class="gallery-tab-btn" data-gallery-filter="kitchen">Kitchens & Dining</button>
+          <button class="gallery-tab-btn" data-gallery-filter="living">Living Spaces</button>
+          <button class="gallery-tab-btn" data-gallery-filter="bath">Spa Bathrooms</button>
+          <button class="gallery-tab-btn" data-gallery-filter="commercial">Work Studios</button>
+        </div>
+
+        <div class="gallery-grid" id="galleryGrid">
+          <!-- Populated via Dynamic Structured JS Array -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Lightbox Modal -->
+    <div class="gallery-modal" id="galleryModal" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="modal-content-wrap">
+        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close Preview">&times;</button>
+        <img src="" alt="Enlarged space preview" class="modal-img" id="modalImg" />
+        <div class="modal-caption">
+          <div>
+            <h4 id="modalTitle" style="font-size: 1.25rem; font-weight:800; color:var(--primary-forest);"></h4>
+            <p id="modalCategory" style="font-size: 0.875rem; color:var(--text-secondary);"></p>
+          </div>
+          <a href="#booking" class="btn btn-primary" id="modalBookBtn" style="padding: 10px 20px; font-size: 0.8125rem;">Book Similar Reset</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         SERVICES MATRIX
+         ========================================================================== -->
+    <section class="services-section" id="services">
+      <div class="container">
+        <div class="section-header reveal-on-scroll">
+          <span class="section-tag">Targeted Solutions</span>
+          <h2 class="section-title">Cleaning calibrated to your space.</h2>
+          <p class="section-subtitle">Tailored treatments carried out with zero-residue protocols and medical-grade HEPA extraction systems.</p>
+        </div>
+
+        <div class="services-filters reveal-on-scroll">
+          <button class="filter-btn active" data-filter="all">All Tiers</button>
+          <button class="filter-btn" data-filter="residential">Residential Care</button>
+          <button class="filter-btn" data-filter="deep">Deep Clinical</button>
+          <button class="filter-btn" data-filter="commercial">Workplace</button>
+          <button class="filter-btn" data-filter="moving">Move In/Out</button>
+        </div>
+
+        <div class="services-grid" id="servicesGrid">
+          <!-- Dynamically populated via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         BEFORE / AFTER COMPARISON SLIDER
+         ========================================================================== -->
+    <section class="before-after-section" id="before-after">
+      <div class="container">
+        <div class="section-header center reveal-on-scroll">
+          <span class="section-tag">Zero Compromise</span>
+          <h2 class="section-title">The anatomy of an AURA reset.</h2>
+          <p class="section-subtitle">Drag the precision slider to reveal the removal of stubborn grease, micro-film, and environmental haze.</p>
+        </div>
+
+        <div class="comparison-container reveal-on-scroll">
+          <div class="comparison-stage" id="comparisonStage">
+            <img 
+              class="comparison-img" 
+              src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1400&q=80" 
+              alt="Polished immaculate modern kitchen island after reset" 
+            />
+            <span class="comparison-label label-after">AFTER: AURA SANCTUARY</span>
+
+            <div class="comparison-before" id="comparisonBefore">
+              <img 
+                class="comparison-img" 
+                style="filter: saturate(0.65) contrast(1.15) brightness(0.82);" 
+                src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1400&q=80" 
+                alt="Cluttered, neglected kitchen counter space before cleaning" 
+              />
+              <span class="comparison-label label-before">BEFORE RESET</span>
+            </div>
+
+            <div class="comparison-handle" id="comparisonHandle" role="slider" aria-label="Before and after split slider" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" tabindex="0">
+              <div class="handle-circle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left:-8px;">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         HOW IT WORKS
+         ========================================================================== -->
+    <section class="how-it-works-section" id="how-it-works">
+      <div class="container">
+        <div class="section-header center reveal-on-scroll">
+          <span class="section-tag">Zero Friction</span>
+          <h2 class="section-title">Three steps to your fresh start.</h2>
+          <p class="section-subtitle">No estimation friction, no surprise line items. Pure predictability from booking to completion.</p>
+        </div>
+
+        <div class="timeline-container">
+          <div class="timeline-line-bg">
+            <div class="timeline-line-progress" id="timelineProgress"></div>
+          </div>
+
+          <div class="timeline-grid">
+            <div class="timeline-step active reveal-on-scroll" data-step="1">
+              <div class="step-number-bubble">01</div>
+              <h3 class="step-title">Specify in 60s</h3>
+              <p class="step-desc">Pick your desired date, square footage, and custom details through our transparent pricing engine.</p>
+            </div>
+
+            <div class="timeline-step reveal-on-scroll" data-step="2">
+              <div class="step-number-bubble">02</div>
+              <h3 class="step-title">The Clean Protocol</h3>
+              <p class="step-desc">Our bonded in-house technicians arrive on schedule with bio-enzyme formulas and HEPA gear.</p>
+            </div>
+
+            <div class="timeline-step reveal-on-scroll" data-step="3">
+              <div class="step-number-bubble">03</div>
+              <h3 class="step-title">Return & Unwind</h3>
+              <p class="step-desc">Cross your threshold into renewed serenity, sterile surfaces, and your weekend back in hand.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         TRANSPARENT PRICING
+         ========================================================================== -->
+    <section class="pricing-section" id="pricing">
+      <div class="container">
+        <div class="section-header center reveal-on-scroll">
+          <span class="section-tag">Honest Investment</span>
+          <h2 class="section-title">Transparent packages. No surprises.</h2>
+          <p class="section-subtitle">All plans include comprehensive liability insurance, non-toxic botanicals, and our 100% Happiness Rule.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <div class="pricing-card reveal-on-scroll">
+            <h3 class="pricing-plan-name">Routine Reset</h3>
+            <p class="pricing-plan-desc">For sustained maintenance and recurring serenity every week or fortnight.</p>
+            <div class="pricing-plan-price">$129<span> / visit</span></div>
+            <ul class="pricing-features-list">
+              <li class="pricing-feature-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Full surface dust & botanical polish</span>
+              </li>
+              <li class="pricing-feature-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Kitchen counter & appliance exterior sanitize</span>
+              </li>
+              <li class="pricing-feature-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Tile, shower & tub deep descaling</span>
+              </li>
+              <li class="pricing-feature-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Dual-stage microfiber hardwood care</span>
+              </li>
+            </ul>
+            <a href="#booking" class="btn btn-secondary" style="width:100%;">Select Tier</a>
+          </div>
+
+          <div class="pricing-card featured reveal-on-scroll">
+            <div class="pricing-card-badge">Most Popular</div>
+            <h3 class="pricing-plan-name">Deep Sanctuary</h3>
+            <p class="pricing-plan-desc">A deep overhaul addressing persistent buildup and overlooked crevices.</p>
+            <div class="pricing-plan-price">$239<span> / reset</span></div>
+            <ul class="pricing-features-list">
+              <li class="pricing-feature-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Everything in Routine Care tier</span>
+              </li>
+              <li class="pricing-feature-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Baseboard & door molding restoration</span>
+              </li>
+              <li class="pricing-feature-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Oven interior & range degreasing</span>
+              </li>
+              <li class="pricing-feature-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Interior refrigerator steam sterilize</span>
+              </li>
+              <li class="pricing-feature-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Air vents & register vacuuming</span>
+              </li>
+            </ul>
+            <a href="#booking" class="btn btn-primary" style="width:100%;">Select Tier</a>
+          </div>
+
+          <div class="pricing-card reveal-on-scroll">
+            <h3 class="pricing-plan-name">Relocation Reset</h3>
+            <p class="pricing-plan-desc">A 360-degree sterile handover clean for departing or newly arriving residents.</p>
+            <div class="pricing-plan-price">$319<span> / visit</span></div>
+            <ul class="pricing-features-list">
+              <li class="pricing-feature-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Complete Deep Sanctuary checklist</span>
+              </li>
+              <li class="pricing-feature-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Interior drawers, closets & shelving</span>
+              </li>
+              <li class="pricing-feature-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Interior window glazing & slide tracks</span>
+              </li>
+              <li class="pricing-feature-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Wall scuff mark remediation</span>
+              </li>
+            </ul>
+            <a href="#booking" class="btn btn-secondary" style="width:100%;">Select Tier</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         TESTIMONIALS SLIDER
+         ========================================================================== -->
+    <section class="testimonials-section" id="reviews">
+      <div class="container">
+        <div class="section-header center reveal-on-scroll">
+          <span class="section-tag">Client Voices</span>
+          <h2 class="section-title">Trusted by homeowners and founders.</h2>
+          <p class="section-subtitle">Real experiences from clients who handed their space over to our care.</p>
+        </div>
+
+        <div class="testimonials-slider reveal-on-scroll" id="testimonialSlider">
+          <div class="testimonial-track" id="testimonialTrack">
+            <!-- Dynamically populated via JS -->
+          </div>
+
+          <div class="slider-controls">
+            <button class="slider-btn" id="prevReview" aria-label="Previous Testimonial">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button class="slider-btn" id="nextReview" aria-label="Next Testimonial">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         ACCORDION FAQ
+         ========================================================================== -->
+    <section class="faq-section" id="faq">
+      <div class="container">
+        <div class="section-header center reveal-on-scroll">
+          <span class="section-tag">Clear Answers</span>
+          <h2 class="section-title">Frequently asked questions.</h2>
+          <p class="section-subtitle">Everything you need to know about our standards, liability coverage, and keys.</p>
+        </div>
+
+        <div class="faq-wrapper" id="faqWrapper">
+          <!-- Dynamically populated via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         END-TO-END RESPONSIVE BOOKING ESTIMATOR & FORM
+         ========================================================================== -->
+    <section class="booking-section" id="booking">
+      <div class="container">
+        <div class="booking-card reveal-on-scroll">
+          <div class="booking-header">
+            <span class="section-tag">Instant Booking Engine</span>
+            <h2 class="section-title">Configure your space reset.</h2>
+            <p class="section-subtitle">Real-time quote calculation. No credit card required to request reservation.</p>
+          </div>
+
+          <form class="booking-form" id="bookingForm" novalidate>
+            <!-- Step 1 -->
+            <div>
+              <div class="form-step-title">
+                <span class="form-step-num">1</span>
+                <span>Select Package & Dimensions</span>
+              </div>
+              <div class="form-grid-3">
+                <div class="form-field">
+                  <label class="form-label" for="serviceSelect">Service Tier</label>
+                  <select class="form-select" id="serviceSelect" required>
+                    <option value="routine" data-base="129">Routine Reset</option>
+                    <option value="deep" data-base="239" selected>Deep Sanctuary</option>
+                    <option value="move" data-base="319">Relocation Handover</option>
+                    <option value="commercial" data-base="209">Creative Office & Studio</option>
+                  </select>
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="bedroomSelect">Bedrooms / Main Areas</label>
+                  <select class="form-select" id="bedroomSelect">
+                    <option value="1">1 Bedroom / Open Studio</option>
+                    <option value="2" selected>2 Bedrooms / Zones</option>
+                    <option value="3">3 Bedrooms / Zones</option>
+                    <option value="4">4+ Bedrooms / Large Zone</option>
+                  </select>
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="bathroomSelect">Full Bathrooms</label>
+                  <select class="form-select" id="bathroomSelect">
+                    <option value="1">1 Bathroom</option>
+                    <option value="2" selected>2 Bathrooms</option>
+                    <option value="3">3 Bathrooms</option>
+                    <option value="4">4+ Bathrooms</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div>
+              <div class="form-step-title">
+                <span class="form-step-num">2</span>
+                <span>Choose Preferred Window</span>
+              </div>
+              <div class="form-grid-2">
+                <div class="form-field">
+                  <label class="form-label" for="bookingDate">Preferred Date</label>
+                  <input type="date" class="form-input" id="bookingDate" required />
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="bookingTime">Arrival Window</label>
+                  <select class="form-select" id="bookingTime">
+                    <option value="morning">Morning (8:00 AM – 11:00 AM)</option>
+                    <option value="midday" selected>Midday (11:00 AM – 2:00 PM)</option>
+                    <option value="afternoon">Afternoon (2:00 PM – 5:00 PM)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div>
+              <div class="form-step-title">
+                <span class="form-step-num">3</span>
+                <span>Contact Details & Entry Notes</span>
+              </div>
+              <div class="form-grid-2">
+                <div class="form-field">
+                  <label class="form-label" for="clientName">Full Name</label>
+                  <input type="text" class="form-input" id="clientName" placeholder="e.g. Julian Hayes" required />
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="clientEmail">Email Address</label>
+                  <input type="email" class="form-input" id="clientEmail" placeholder="julian@domain.com" required />
+                </div>
+              </div>
+              <div class="form-field" style="margin-top: 16px;">
+                <label class="form-label" for="clientNotes">Access or Pet Instructions (Optional)</label>
+                <input type="text" class="form-input" id="clientNotes" placeholder="Door lock code, indoor pets, special stone counters..." />
+              </div>
+            </div>
+
+            <!-- Live Estimate & Submit -->
+            <div class="estimate-bar">
+              <div class="estimate-info">
+                <div class="estimate-label">Calculated Total (Pay After Completion)</div>
+                <div class="estimate-amount" id="estimatePriceDisplay">$279</div>
+              </div>
+              <button type="submit" class="btn btn-primary" id="submitBookingBtn">
+                Confirm Reservation
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+
+            <div class="form-success-banner" id="formSuccess">
+              <h4 style="font-size:1.25rem; font-weight:800; color:var(--primary-forest); margin-bottom:8px;">Sanctuary Scheduled!</h4>
+              <p style="color:var(--text-secondary);">Your reset request is registered. A dispatched technician schedule along with access notes has been delivered to your email.</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CALL TO ACTION
+         ========================================================================== -->
+    <section class="final-cta-section">
+      <div class="container">
+        <div class="final-cta-content reveal-on-scroll">
+          <h2 class="final-cta-title">Reclaim your weekend hours.</h2>
+          <p class="final-cta-desc">Join thousands of homeowners and executives who stepped off the chore treadmill and stepped into an AURA sanctuary.</p>
+          <div class="final-cta-btns">
+            <a href="#booking" class="btn btn-primary">
+              Book Your Cleaning
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+            <a href="#services" class="btn btn-secondary" style="color: #fff; border-color: rgba(255,255,255,0.4);">Explore All Services</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#home" class="nav-logo" style="color: #fff; margin-bottom: 8px;">
+            <svg class="nav-logo-spark" viewBox="0 0 24 24" fill="var(--accent-lime)">
+              <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
+            </svg>
+            <span>AURA</span>
+          </a>
+          <p>Meticulous space restoration and recurring environmental sanitization for quality-first modern residences and forward studios.</p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Services</h4>
+          <ul class="footer-links">
+            <li><a href="#services">Routine Reset</a></li>
+            <li><a href="#services">Deep Sanctuary Clean</a></li>
+            <li><a href="#services">Relocation Clean</a></li>
+            <li><a href="#services">Office & Studio Sanitizing</a></li>
+            <li><a href="#gallery">Showcase Portfolio</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Company</h4>
+          <ul class="footer-links">
+            <li><a href="#story">Our Motion Story</a></li>
+            <li><a href="#how-it-works">Our Protocol</a></li>
+            <li><a href="#reviews">Testimonials</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#pricing">Price Matrix</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Direct Concierge</h4>
+          <ul class="footer-links">
+            <li><a href="tel:18005550199">(800) 555-0199</a></li>
+            <li><a href="mailto:concierge@auraclean.example">concierge@auraclean.example</a></li>
+            <li><span>Mon–Sat: 7:00 AM – 8:00 PM</span></li>
+            <li style="margin-top: 10px; color: var(--accent-lime); font-weight:800;">$2M Bonded & Insured</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 AURA Cleaning Systems Inc. All rights reserved.</div>
+        <div class="footer-legal-links">
+          <a href="#home">Privacy Policy</a>
+          <a href="#home">Terms of Service</a>
+          <a href="#home">Non-Toxic Guarantee</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       VANILLA JS ENGINE
+       ========================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      /* ------------------------------------------------------------------------
+         DATA REPOSITORIES
+         ------------------------------------------------------------------------ */
+      const galleryData = [
+        {
+          id: 'g1',
+          category: 'kitchen',
+          title: 'Monochrome Marble Island',
+          subtitle: 'Deep degreasing & sealant polish',
+          image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80'
+        },
+        {
+          id: 'g2',
+          category: 'living',
+          title: 'Scandinavian Sunlit Loft',
+          subtitle: 'Air particulate reset & upholstery HEPA steam',
+          image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80'
+        },
+        {
+          id: 'g3',
+          category: 'bath',
+          title: 'Zen Travertine Spa Bath',
+          subtitle: 'Grout descaling and brass detail restoration',
+          image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80'
+        },
+        {
+          id: 'g4',
+          category: 'commercial',
+          title: 'Industrial Architecture Studio',
+          subtitle: 'End-of-week full workstation reset',
+          image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80'
+        },
+        {
+          id: 'g5',
+          category: 'kitchen',
+          title: 'Minimalist Walnut Galley',
+          subtitle: 'Interior oven scrub & zero-streak glass treatment',
+          image: 'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1200&q=80'
+        },
+        {
+          id: 'g6',
+          category: 'living',
+          title: 'Mid-Century Highland Residence',
+          subtitle: 'Hardwood organic oil wash & dust purge',
+          image: 'https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?auto=format&fit=crop&w=1200&q=80'
+        }
+      ];
+
+      const servicesData = [
+        {
+          id: 's1',
+          category: 'residential',
+          title: 'Routine Sanctuary Reset',
+          description: 'A recurring rhythm that keeps high-traffic kitchens, pristine baths, and airy bedrooms in effortless balance.',
+          image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=700&q=80'
+        },
+        {
+          id: 's2',
+          category: 'deep',
+          title: 'Deep Clinical Sanitization',
+          description: 'Deep tile descaling, baseboard detailing, oven and refrigeration interiors, and microbial biofilm mitigation.',
+          image: 'https://images.unsplash.com/photo-1528740561666-dc2479dc08ab?auto=format&fit=crop&w=700&q=80'
+        },
+        {
+          id: 's3',
+          category: 'moving',
+          title: 'Relocation Handover',
+          description: 'A complete top-to-bottom scrub ensuring guaranteed deposit returns or a sterile foundation for move-ins.',
+          image: 'https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?auto=format&fit=crop&w=700&q=80'
+        },
+        {
+          id: 's4',
+          category: 'commercial',
+          title: 'Office & Creative Agency',
+          description: 'Discreet commercial sanitization boosting cognitive focus, safeguarding air quality, and greeting clients flawlessly.',
+          image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=700&q=80'
+        },
+        {
+          id: 's5',
+          category: 'residential',
+          title: 'Host Property Turnaround',
+          description: 'High-standard changeovers for boutique stays with fresh linen styling and amenity reset checklists.',
+          image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=700&q=80'
+        },
+        {
+          id: 's6',
+          category: 'deep',
+          title: 'Post-Renovation Detail',
+          description: 'Micro drywall dust extraction, protective tape glue removal, and complete mechanical scrubbing.',
+          image: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=700&q=80'
+        }
+      ];
+
+      const testimonialsData = [
+        {
+          name: 'Sarah Montgomery',
+          role: 'Architect & Homeowner',
+          text: '“Walking into my loft after AURA’s reset brought genuine emotional relief. The marble gleamed without caustic fumes, and I gained eight hours of my weekend back.”',
+          stars: 5
+        },
+        {
+          name: 'Marcus Vance',
+          role: 'Principal, Studio 9 Architecture',
+          text: '“We contracted AURA for our design office. Unobtrusive, razor sharp with details, and consistently reliable across sixteen months of weekly visits.”',
+          stars: 5
+        },
+        {
+          name: 'Elena Rostova',
+          role: 'Luxury Villa Host',
+          text: '“Our cleanliness ratings hit a flawless 5.0 after swapping to AURA. Their attention to bathroom tile descaling and baseboards is simply unparalleled.”',
+          stars: 5
+        }
+      ];
+
+      const faqsData = [
+        {
+          q: 'Do I need to supply any cleaning equipment or products?',
+          a: 'No. Our technicians arrive fully outfitted with medical-grade HEPA extraction units, color-coded microfiber tools to prevent cross-contamination, and certified plant-based non-toxic cleaners.'
+        },
+        {
+          q: 'Are your technicians bonded, insured, and vetted?',
+          a: 'Yes, 100%. Every specialist is an in-house employee (never gig subcontractors) backed by comprehensive background investigations, thorough security screenings, and $2,000,000 in liability bonding.'
+        },
+        {
+          q: 'How do you handle key access when I am away?',
+          a: 'The majority of our clients provide a smart key code or leave a concierge key. Our automated notification system alerts you the minute technicians arrive and as soon as your sanctuary is secured.'
+        },
+        {
+          q: 'What is your cancellation and reschedule window?',
+          a: 'Flexibility is paramount. You can reschedule or adjust any reservation directly via your digital link without fees up to 24 hours before your assigned arrival window.'
+        },
+        {
+          q: 'What is the AURA 100% Happiness Rule?',
+          a: 'If any corner or surface falls short of your expectations, contact our concierge within 24 hours. A supervisor will return to re-clean the targeted zone free of charge.'
+        }
+      ];
+
+      /* ------------------------------------------------------------------------
+         1. NAVBAR DYNAMICS & MOBILE DRAWER
+         ------------------------------------------------------------------------ */
+      const navbar = document.getElementById('navbar');
+      const mobileToggle = document.getElementById('mobileToggle');
+      const mobileDrawer = document.getElementById('mobileDrawer');
+      const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 40) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      }, { passive: true });
+
+      const toggleDrawer = () => {
+        const isOpen = mobileDrawer.classList.toggle('open');
+        mobileToggle.classList.toggle('open', isOpen);
+        mobileToggle.setAttribute('aria-expanded', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      };
+
+      mobileToggle.addEventListener('click', toggleDrawer);
+      mobileNavLinks.forEach(link => link.addEventListener('click', () => {
+        if (mobileDrawer.classList.contains('open')) toggleDrawer();
+      }));
+
+      /* ------------------------------------------------------------------------
+         2. HERO CANVAS PARTICLES
+         ------------------------------------------------------------------------ */
+      const canvas = document.getElementById('heroCanvas');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = canvas.parentElement.offsetWidth;
+        let height = canvas.height = canvas.parentElement.offsetHeight;
+
+        window.addEventListener('resize', () => {
+          width = canvas.width = canvas.parentElement.offsetWidth;
+          height = canvas.height = canvas.parentElement.offsetHeight;
+        });
+
+        const particles = Array.from({ length: 22 }, () => ({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: Math.random() * 2 + 1,
+          vx: (Math.random() - 0.5) * 0.35,
+          vy: -Math.random() * 0.45 - 0.2,
+          isSpark: Math.random() > 0.45
+        }));
+
+        const drawParticles = () => {
+          ctx.clearRect(0, 0, width, height);
+          particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+
+            if (p.y < 0) {
+              p.y = height;
+              p.x = Math.random() * width;
+            }
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            if (p.isSpark) {
+              ctx.fillStyle = 'rgba(200, 243, 106, 0.75)';
+              ctx.shadowColor = 'rgba(200, 243, 106, 0.8)';
+              ctx.shadowBlur = 6;
+            } else {
+              ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+              ctx.shadowBlur = 0;
+            }
+            ctx.fill();
+          });
+          requestAnimationFrame(drawParticles);
+        };
+
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          drawParticles();
+        }
+      }
+
+      /* ------------------------------------------------------------------------
+         3. TRUST NUMBER ANIMATION
+         ------------------------------------------------------------------------ */
+      const counters = document.querySelectorAll('.trust-number');
+      let countersAnimated = false;
+
+      const runCounters = () => {
+        counters.forEach(counter => {
+          const target = parseFloat(counter.getAttribute('data-count'));
+          const suffix = counter.getAttribute('data-suffix') || '';
+          const decimals = parseInt(counter.getAttribute('data-decimal')) || 0;
+          const duration = 1800;
+          const start = performance.now();
+
+          const update = (now) => {
+            const progress = Math.min((now - start) / duration, 1);
+            const ease = 1 - Math.pow(1 - progress, 3);
+            const val = target * ease;
+
+            counter.textContent = (decimals > 0 ? val.toFixed(decimals) : Math.floor(val).toLocaleString()) + suffix;
+
+            if (progress < 1) {
+              requestAnimationFrame(update);
+            } else {
+              counter.textContent = (decimals > 0 ? target.toFixed(decimals) : target.toLocaleString()) + suffix;
+            }
+          };
+          requestAnimationFrame(update);
+        });
+      };
+
+      const trustStrip = document.querySelector('.trust-strip');
+      if (trustStrip) {
+        new IntersectionObserver((entries, obs) => {
+          if (entries[0].isIntersecting && !countersAnimated) {
+            countersAnimated = true;
+            runCounters();
+            obs.unobserve(entries[0].target);
+          }
+        }, { threshold: 0.25 }).observe(trustStrip);
+      }
+
+      /* ------------------------------------------------------------------------
+         4. STORY MOTION CHAPTERS INTERACTION
+         ------------------------------------------------------------------------ */
+      const chapters = document.querySelectorAll('.story-chapter');
+      chapters.forEach(chap => {
+        chap.addEventListener('mouseenter', () => {
+          chapters.forEach(c => c.classList.remove('active'));
+          chap.classList.add('active');
+        });
+      });
+
+      /* ------------------------------------------------------------------------
+         5. SHOWCASE GALLERY POPULATION, FILTERING & LIGHTBOX
+         ------------------------------------------------------------------------ */
+      const galleryGrid = document.getElementById('galleryGrid');
+      const galleryTabs = document.querySelectorAll('.gallery-tab-btn');
+      const galleryModal = document.getElementById('galleryModal');
+      const modalImg = document.getElementById('modalImg');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalCategory = document.getElementById('modalCategory');
+      const modalCloseBtn = document.getElementById('modalCloseBtn');
+
+      const renderGallery = (filter = 'all') => {
+        galleryGrid.innerHTML = '';
+        const items = filter === 'all' ? galleryData : galleryData.filter(g => g.category === filter);
+
+        items.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'gallery-item reveal-on-scroll is-revealed';
+          card.innerHTML = `
+            <img src="${item.image}" alt="${item.title}" loading="lazy" />
+            <div class="gallery-overlay">
+              <span class="gallery-tag-pill">${item.category}</span>
+              <h3 class="gallery-item-title">${item.title}</h3>
+            </div>
+          `;
+          card.addEventListener('click', () => {
+            modalImg.src = item.image;
+            modalTitle.textContent = item.title;
+            modalCategory.textContent = `${item.subtitle} • Category: ${item.category.toUpperCase()}`;
+            galleryModal.classList.add('show');
+            galleryModal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+          });
+          galleryGrid.appendChild(card);
+        });
+      };
+
+      renderGallery('all');
+
+      galleryTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          galleryTabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          renderGallery(tab.getAttribute('data-gallery-filter'));
+        });
+      });
+
+      const closeModal = () => {
+        galleryModal.classList.remove('show');
+        galleryModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      };
+
+      modalCloseBtn.addEventListener('click', closeModal);
+      galleryModal.addEventListener('click', (e) => {
+        if (e.target === galleryModal) closeModal();
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && galleryModal.classList.contains('show')) closeModal();
+      });
+
+      /* ------------------------------------------------------------------------
+         6. SERVICES MATRIX POPULATION & FILTERING
+         ------------------------------------------------------------------------ */
+      const servicesGrid = document.getElementById('servicesGrid');
+      const serviceFilterBtns = document.querySelectorAll('.filter-btn');
+
+      const renderServices = (filter = 'all') => {
+        servicesGrid.innerHTML = '';
+        const filtered = filter === 'all' ? servicesData : servicesData.filter(s => s.category === filter);
+
+        filtered.forEach(service => {
+          const card = document.createElement('article');
+          card.className = 'service-card reveal-on-scroll is-revealed';
+          card.innerHTML = `
+            <div class="service-card-img-wrap">
+              <img src="${service.image}" alt="${service.title}" loading="lazy" />
+            </div>
+            <div class="service-card-body">
+              <span class="service-card-category">${service.category}</span>
+              <h3 class="service-card-title">${service.title}</h3>
+              <p class="service-card-text">${service.description}</p>
+              <a href="#booking" class="service-card-cta">
+                <span>Book This Tier</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </a>
+            </div>
+          `;
+          servicesGrid.appendChild(card);
+        });
+      };
+
+      renderServices('all');
+
+      serviceFilterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          serviceFilterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          renderServices(btn.getAttribute('data-filter'));
+        });
+      });
+
+      /* ------------------------------------------------------------------------
+         7. BEFORE / AFTER DUAL INTERACTIVE SLIDER
+         ------------------------------------------------------------------------ */
+      const comparisonStage = document.getElementById('comparisonStage');
+      const comparisonBefore = document.getElementById('comparisonBefore');
+      const comparisonHandle = document.getElementById('comparisonHandle');
+
+      if (comparisonStage && comparisonBefore && comparisonHandle) {
+        let isSliding = false;
+
+        const updatePos = (clientX) => {
+          const rect = comparisonStage.getBoundingClientRect();
+          let pos = ((clientX - rect.left) / rect.width) * 100;
+          pos = Math.max(2, Math.min(pos, 98));
+          comparisonBefore.style.clipPath = `polygon(0 0, ${pos}% 0, ${pos}% 100%, 0 100%)`;
+          comparisonHandle.style.left = `${pos}%`;
+          comparisonHandle.setAttribute('aria-valuenow', Math.round(pos));
+        };
+
+        const start = () => { isSliding = true; };
+        const end = () => { isSliding = false; };
+        const move = (e) => {
+          if (!isSliding) return;
+          const x = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+          updatePos(x);
+        };
+
+        comparisonHandle.addEventListener('mousedown', start);
+        window.addEventListener('mouseup', end);
+        window.addEventListener('mousemove', move);
+
+        comparisonHandle.addEventListener('touchstart', start, { passive: true });
+        window.addEventListener('touchend', end);
+        window.addEventListener('touchmove', move, { passive: true });
+
+        comparisonStage.addEventListener('click', (e) => updatePos(e.clientX));
+
+        comparisonHandle.addEventListener('keydown', (e) => {
+          let curr = parseFloat(comparisonHandle.getAttribute('aria-valuenow')) || 50;
+          if (e.key === 'ArrowLeft') curr = Math.max(curr - 5, 2);
+          if (e.key === 'ArrowRight') curr = Math.min(curr + 5, 98);
+          comparisonBefore.style.clipPath = `polygon(0 0, ${curr}% 0, ${curr}% 100%, 0 100%)`;
+          comparisonHandle.style.left = `${curr}%`;
+          comparisonHandle.setAttribute('aria-valuenow', curr);
+        });
+      }
+
+      /* ------------------------------------------------------------------------
+         8. HOW IT WORKS PROGRESS SCROLLER
+         ------------------------------------------------------------------------ */
+      const howSection = document.getElementById('how-it-works');
+      const timelineProgress = document.getElementById('timelineProgress');
+      const timelineSteps = document.querySelectorAll('.timeline-step');
+
+      window.addEventListener('scroll', () => {
+        if (!howSection || !timelineProgress) return;
+        const rect = howSection.getBoundingClientRect();
+        const winH = window.innerHeight;
+
+        if (rect.top <= winH * 0.65 && rect.bottom >= 0) {
+          const p = Math.min(Math.max((winH * 0.65 - rect.top) / (rect.height * 0.7), 0), 1);
+          timelineProgress.style.width = `${p * 100}%`;
+          timelineSteps.forEach((st, i) => {
+            if (p >= i * 0.35) st.classList.add('active');
+            else if (i > 0) st.classList.remove('active');
+          });
+        }
+      }, { passive: true });
+
+      /* ------------------------------------------------------------------------
+         9. TESTIMONIALS SLIDER
+         ------------------------------------------------------------------------ */
+      const testimonialTrack = document.getElementById('testimonialTrack');
+      const prevReview = document.getElementById('prevReview');
+      const nextReview = document.getElementById('nextReview');
+
+      testimonialsData.forEach(t => {
+        const slide = document.createElement('div');
+        slide.className = 'testimonial-slide';
+        slide.innerHTML = `
+          <div class="testimonial-quote-card">
+            <div class="quote-stars">${'★'.repeat(t.stars)}</div>
+            <p class="quote-text">${t.text}</p>
+            <div class="quote-author">${t.name}</div>
+            <div class="quote-role">${t.role}</div>
+          </div>
+        `;
+        testimonialTrack.appendChild(slide);
+      });
+
+      let currentSlide = 0;
+      const updateSlider = () => {
+        testimonialTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+      };
+
+      if (prevReview && nextReview) {
+        prevReview.addEventListener('click', () => {
+          currentSlide = (currentSlide - 1 + testimonialsData.length) % testimonialsData.length;
+          updateSlider();
+        });
+        nextReview.addEventListener('click', () => {
+          currentSlide = (currentSlide + 1) % testimonialsData.length;
+          updateSlider();
+        });
+      }
+
+      /* ------------------------------------------------------------------------
+         10. FAQ ACCORDION
+         ------------------------------------------------------------------------ */
+      const faqWrapper = document.getElementById('faqWrapper');
+      faqsData.forEach((item, index) => {
+        const row = document.createElement('div');
+        row.className = `faq-item ${index === 0 ? 'active' : ''}`;
+        row.innerHTML = `
+          <button class="faq-question-btn" aria-expanded="${index === 0}">
+            <span>${item.q}</span>
+            <svg class="faq-icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-answer-pane">
+            <div class="faq-answer-inner">
+              <div class="faq-answer-content">${item.a}</div>
+            </div>
+          </div>
+        `;
+        faqWrapper.appendChild(row);
+      });
+
+      faqWrapper.addEventListener('click', (e) => {
+        const btn = e.target.closest('.faq-question-btn');
+        if (!btn) return;
+        const item = btn.parentElement;
+        const wasActive = item.classList.contains('active');
+
+        document.querySelectorAll('.faq-item').forEach(el => {
+          el.classList.remove('active');
+          el.querySelector('.faq-question-btn').setAttribute('aria-expanded', 'false');
+        });
+
+        if (!wasActive) {
+          item.classList.add('active');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+
+      /* ------------------------------------------------------------------------
+         11. RESPONSIVE ESTIMATOR & INSTANT BOOKING ENGINE
+         ------------------------------------------------------------------------ */
+      const serviceSelect = document.getElementById('serviceSelect');
+      const bedroomSelect = document.getElementById('bedroomSelect');
+      const bathroomSelect = document.getElementById('bathroomSelect');
+      const estimatePriceDisplay = document.getElementById('estimatePriceDisplay');
+      const bookingForm = document.getElementById('bookingForm');
+      const formSuccess = document.getElementById('formSuccess');
+      const bookingDate = document.getElementById('bookingDate');
+
+      if (bookingDate) {
+        const today = new Date().toISOString().split('T')[0];
+        bookingDate.min = today;
+        bookingDate.value = today;
+      }
+
+      const calculateTotal = () => {
+        const base = parseFloat(serviceSelect.options[serviceSelect.selectedIndex].getAttribute('data-base')) || 129;
+        const beds = parseInt(bedroomSelect.value, 10) || 1;
+        const baths = parseInt(bathroomSelect.value, 10) || 1;
+        const total = base + ((beds - 1) * 35) + ((baths - 1) * 25);
+        estimatePriceDisplay.textContent = `$${total}`;
+      };
+
+      [serviceSelect, bedroomSelect, bathroomSelect].forEach(elem => elem.addEventListener('change', calculateTotal));
+      calculateTotal();
+
+      bookingForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!bookingForm.checkValidity()) {
+          bookingForm.reportValidity();
+          return;
+        }
+
+        const submitBtn = document.getElementById('submitBookingBtn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Transmitting Reservation...';
+
+        setTimeout(() => {
+          submitBtn.style.display = 'none';
+          formSuccess.classList.add('show');
+          bookingForm.reset();
+          calculateTotal();
+        }, 700);
+      });
+
+      /* ------------------------------------------------------------------------
+         12. SCROLL REVEAL OBSERVER
+         ------------------------------------------------------------------------ */
+      const revealObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.reveal-on-scroll').forEach(el => revealObserver.observe(el));
+
+    });
+  </script>
+</body>
+</html>
+```

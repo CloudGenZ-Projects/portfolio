@@ -1,0 +1,1419 @@
+html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Obsidian & Ink Atelier — Premier fine line, realism, and bespoke custom tattoo studio in Bengaluru. Medical-grade sterilization with contemporary master artists." />
+  <title>OBSIDIAN & INK — Haute Tattoo Atelier</title>
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 6.5.0 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Custom Cursor Elements -->
+  <div class="custom-cursor" id="cursor"></div>
+  <div class="custom-cursor-follower" id="cursorFollower"></div>
+
+  <!-- Real-time Studio Status Ticker -->
+  <div class="ticker-bar">
+    <div class="container ticker-flex">
+      <div class="ticker-status">
+        <span class="ticker-pulse"></span>
+        <strong>Studio Status:</strong> Walk-ins & Consultations open today until 9:00 PM • 4 Resident Masters on duty
+      </div>
+      <div class="ticker-contacts">
+        <span><i class="fa-solid fa-phone"></i> +91 98765 43210</span>
+        <span><i class="fa-solid fa-location-dot"></i> Indiranagar, Bengaluru</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Glassmorphic Header -->
+  <header class="site-header" id="navbar">
+    <div class="container header-inner">
+      <a href="#home" class="brand-logo">
+        <span class="logo-main">OBSIDIAN <span>&</span> INK</span>
+        <span class="logo-sub">Haute Tattoo Atelier • Est. 2016</span>
+      </a>
+
+      <nav class="main-nav" id="navLinks">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#styles" class="nav-link">Styles</a>
+        <a href="#portfolio" class="nav-link">Portfolio</a>
+        <a href="#artists" class="nav-link">Artists</a>
+        <a href="#custom" class="nav-link">Custom Ink</a>
+        <a href="#pricing" class="nav-link">Pricing</a>
+        <a href="#about" class="nav-link">Atelier</a>
+        <a href="#hygiene" class="nav-link">Hygiene</a>
+        <a href="#aftercare" class="nav-link">Aftercare</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#booking" class="btn btn-gold btn-sm"><i class="fa-regular fa-calendar-check"></i> Book Session</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         1. HERO SECTION
+         ========================================================================== -->
+    <section class="hero" id="home">
+      <div class="hero-bg-overlay"></div>
+      <div class="hero-media-wrapper">
+        <img src="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&w=1600&q=80" alt="Tattoo artist executing fine line piece" />
+      </div>
+      <div class="container">
+        <div class="hero-content reveal-on-scroll">
+          <div class="hero-pretitle">
+            <i class="fa-solid fa-gem"></i> Bespoke Fine Artistry On Skin
+          </div>
+          <h1 class="hero-title">
+            Your Narrative, Immortalized In <em>Obsidian</em>.
+          </h1>
+          <p class="hero-description">
+            Welcome to Bengaluru's premier fine-line, realism, and bespoke custom tattoo atelier. Where medical-grade clinical sterilization harmonizes with world-class contemporary fine arts.
+          </p>
+          <div class="hero-cta-group">
+            <a href="#booking" class="btn btn-gold"><i class="fa-solid fa-pen-nib"></i> Book Appointment</a>
+            <a href="#portfolio" class="btn btn-outline"><i class="fa-regular fa-images"></i> Explore Portfolio</a>
+            <a href="#custom" class="btn btn-outline"><i class="fa-solid fa-sliders"></i> Price Estimator</a>
+          </div>
+
+          <div class="hero-stats-row">
+            <div class="stat-item">
+              <h3>8,500+</h3>
+              <p>Custom Tattoos Crafted</p>
+            </div>
+            <div class="stat-item">
+              <h3>4.98★</h3>
+              <p>Over 1,200 Verified Reviews</p>
+            </div>
+            <div class="stat-item">
+              <h3>100%</h3>
+              <p>Medical-Grade Sterilization</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         2. TATTOO ARTISTS (PROFILES, SPECS & WORKING DAYS)
+         ========================================================================== -->
+    <section class="section-spacing" id="artists">
+      <div class="container">
+        <div class="section-header reveal-on-scroll">
+          <div class="section-badge">Master Craftsmen</div>
+          <h2 class="section-title">Meet Our <span>Resident Artists</span></h2>
+          <p class="section-subtitle">Every resident master brings years of classical fine art pedigree, distinct signature aesthetics, and a gentle precision touch.</p>
+        </div>
+
+        <div class="artists-grid">
+          <!-- Artist 1: Rahul -->
+          <article class="artist-card reveal-on-scroll">
+            <div class="artist-img-holder">
+              <img src="https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=800&q=80" alt="Rahul Sharma - Lead Realism Artist" />
+              <div class="artist-exp-badge">9+ Years Experience</div>
+              <div class="artist-social-overlay">
+                <a href="https://instagram.com" target="_blank" class="artist-social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#contact" class="artist-social-btn" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+              </div>
+            </div>
+            <div class="artist-details">
+              <div>
+                <div class="artist-header-info">
+                  <h3 class="artist-name">Rahul Sharma</h3>
+                  <div class="artist-role">Lead Realism & Portrait Specialist</div>
+                </div>
+                <p class="artist-bio">
+                  Trained under classical Italian oil portrait painters, Rahul translates high-definition portraits and micro-realism with surgical contrast and decades-long retention.
+                </p>
+                <div class="artist-styles-tags">
+                  <span class="tag">Black & Grey</span>
+                  <span class="tag">Realism</span>
+                  <span class="tag">Micro Portrait</span>
+                  <span class="tag">Surrealism</span>
+                </div>
+              </div>
+              <div class="artist-footer-meta">
+                <div class="artist-availability">
+                  <i class="fa-solid fa-circle-check"></i> Tue – Sat
+                </div>
+                <button class="btn btn-outline btn-sm book-artist-trigger" data-artist="Rahul Sharma">Book With Rahul</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artist 2: Elena -->
+          <article class="artist-card reveal-on-scroll">
+            <div class="artist-img-holder">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="Elena Rostova - Fine Line Specialist" />
+              <div class="artist-exp-badge">7+ Years Experience</div>
+              <div class="artist-social-overlay">
+                <a href="https://instagram.com" target="_blank" class="artist-social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#contact" class="artist-social-btn" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+              </div>
+            </div>
+            <div class="artist-details">
+              <div>
+                <div class="artist-header-info">
+                  <h3 class="artist-name">Elena Rostova</h3>
+                  <div class="artist-role">Fine Line & Botanical Virtuoso</div>
+                </div>
+                <p class="artist-bio">
+                  Renowned for single-needle botanical illustrations, delicate script lettering, and micro architectural geometry that age cleanly without pigment feathering.
+                </p>
+                <div class="artist-styles-tags">
+                  <span class="tag">Fine Line</span>
+                  <span class="tag">Minimalist</span>
+                  <span class="tag">Botanical</span>
+                  <span class="tag">Single Needle</span>
+                </div>
+              </div>
+              <div class="artist-footer-meta">
+                <div class="artist-availability">
+                  <i class="fa-solid fa-circle-check"></i> Mon, Wed – Sun
+                </div>
+                <button class="btn btn-outline btn-sm book-artist-trigger" data-artist="Elena Rostova">Book With Elena</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artist 3: Marcus -->
+          <article class="artist-card reveal-on-scroll">
+            <div class="artist-img-holder">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80" alt="Marcus Vance - Neo Traditional Artist" />
+              <div class="artist-exp-badge">11+ Years Experience</div>
+              <div class="artist-social-overlay">
+                <a href="https://instagram.com" target="_blank" class="artist-social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#contact" class="artist-social-btn" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+              </div>
+            </div>
+            <div class="artist-details">
+              <div>
+                <div class="artist-header-info">
+                  <h3 class="artist-name">Marcus Vance</h3>
+                  <div class="artist-role">Japanese Irezumi & Neo-Traditional</div>
+                </div>
+                <p class="artist-bio">
+                  Marcus studied traditional Tebori dynamics in Osaka. He specializes in full-scale back pieces, dragons, koi sleeves, and bold chromatic motifs built for impact.
+                </p>
+                <div class="artist-styles-tags">
+                  <span class="tag">Japanese Irezumi</span>
+                  <span class="tag">Neo-Traditional</span>
+                  <span class="tag">Full Sleeve</span>
+                  <span class="tag">Color Theory</span>
+                </div>
+              </div>
+              <div class="artist-footer-meta">
+                <div class="artist-availability">
+                  <i class="fa-solid fa-circle-check"></i> Thu – Mon
+                </div>
+                <button class="btn btn-outline btn-sm book-artist-trigger" data-artist="Marcus Vance">Book With Marcus</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artist 4: Priya -->
+          <article class="artist-card reveal-on-scroll">
+            <div class="artist-img-holder">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Priya Nair - Sacred Geometry & Dotwork" />
+              <div class="artist-exp-badge">6+ Years Experience</div>
+              <div class="artist-social-overlay">
+                <a href="https://instagram.com" target="_blank" class="artist-social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#contact" class="artist-social-btn" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+              </div>
+            </div>
+            <div class="artist-details">
+              <div>
+                <div class="artist-header-info">
+                  <h3 class="artist-name">Priya Nair</h3>
+                  <div class="artist-role">Sacred Geometry, Dotwork & Mandala</div>
+                </div>
+                <p class="artist-bio">
+                  Blends ancient Vedic iconography with algorithmic geometry. Every stipple dot is hand-rendered with calculated equilibrium and optical harmony.
+                </p>
+                <div class="artist-styles-tags">
+                  <span class="tag">Sacred Geometry</span>
+                  <span class="tag">Dotwork</span>
+                  <span class="tag">Mandala</span>
+                  <span class="tag">Ornamental</span>
+                </div>
+              </div>
+              <div class="artist-footer-meta">
+                <div class="artist-availability">
+                  <i class="fa-solid fa-circle-check"></i> Wed – Sun
+                </div>
+                <button class="btn btn-outline btn-sm book-artist-trigger" data-artist="Priya Nair">Book With Priya</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         3. TATTOO STYLES (12 CATEGORIES)
+         ========================================================================== -->
+    <section class="section-spacing bg-surface" id="styles">
+      <div class="container">
+        <div class="section-header reveal-on-scroll">
+          <div class="section-badge">Artistic Repertoire</div>
+          <h2 class="section-title">Explore <span>12 Tattoo Styles</span></h2>
+          <p class="section-subtitle">From microscopic fine-line florals to heavy blackwork armor, our atelier masters the entire canon of ink design.</p>
+        </div>
+
+        <div class="styles-grid">
+          <!-- 1. Minimalist -->
+          <div class="style-card reveal-on-scroll" onclick="openStyleGallery('Minimalist')">
+            <img src="https://images.unsplash.com/photo-1590246814883-57c631481b7a?auto=format&fit=crop&w=600&q=80" alt="Minimalist Tattoo Style" />
+            <div class="style-card-overlay">
+              <h3 class="style-title">Minimalist <i class="fa-solid fa-arrow-right"></i></h3>
+              <p class="style-desc">Clean, subtle motifs distilled down to raw geometric essence.</p>
+            </div>
+          </div>
+
+          <!-- 2. Fine Line -->
+          <div class="style-card reveal-on-scroll" onclick="openStyleGallery('Fine Line')">
+            <img src="https://images.unsplash.com/photo-1562962230-16e4623d36e6?auto=format&fit=crop&w=600&q=80" alt="Fine Line Tattoo Style" />
+            <div class="style-card-overlay">
+              <h3 class="style-title">Fine Line <i class="fa-solid fa-arrow-right"></i></h3>
+              <p class="style-desc">Crisp single-needle contours with feather-light tonal shading.</p>
+            </div>
+          </div>
+
+          <!-- 3. Realism -->
+          <div class="style-card reveal-on-scroll" onclick="openStyleGallery('Realism')">
+            <img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?auto=format&fit=crop&w=600&q=80" alt="Realism Tattoo Style" />
+            <div class="style-card-overlay">
+              <h3 class="style-title">Realism <i class="fa-solid fa-arrow-right"></i></h3>
+              <p class="style-desc">Photographic rendering with hyper-accurate depth and texture.</p>
+            </div>
+          </div>
+
+          <!-- 4. Black & Grey -->
+          <div class="style-card reveal-on-scroll" onclick="openStyleGallery('Black & Grey')">
+            <img src="https://images.unsplash.com/photo-1560707303-4e980ce876ad?auto=format&fit=crop&w=600&q=80" alt="Black and Grey Tattoo Style" />
+            <div class="style-card-overlay">
+              <h3 class="style-title">Black & Grey <i class="fa-solid fa-arrow-right"></i></h3>
+              <p class="style-desc">Classic gradient washes from stark carbon black to soft graphite.</p>
+            </div>
+          </div>
+
+          <!-- 5. Traditional -->
+          <div class="style-card reveal-on-scroll" onclick="openStyleGallery('Traditional')">
+            <img src="https://images.unsplash.com/photo-1542382257-80dedb725088?auto=format&fit=crop&w=600&q=80" alt="Traditional Tattoo Style" />
+            <div class="style-card-overlay">
+              <h3 class="style-title">Traditional <i class="fa-solid fa-arrow-right"></i></h3>
+              <p class="style-desc">Iconic heavy black outlines with a bold, timeless primary color palette.</p>
+            </div>
+          </div>
+
+          <!-- 6. Neo-Traditional -->
+          <div class="style-card reveal-on-scroll" onclick="openStyleGallery('Neo-Traditional')">
+            <img src="https://images.unsplash.com/photo-1568515045052-f9a854d70bfd?auto=format&fit=crop&w=600&q=80" alt="Neo Traditional Tattoo Style" />
+            <div class="style-card-overlay">
+              <h3 class="style-title">Neo-Traditional <i class="fa-solid fa-arrow-right"></i></h3>
+              <p class="style-desc">Ornate Art Nouveau styling with vivid gradients and dimensional depth.</p>
+            </div>
+          </div>
+
+          <!-- 7. Japanese (Irezumi) -->
+          <div class="style-card reveal-on-scroll" onclick="openStyleGallery('Japanese')">
+            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=600&q=80" alt="Japanese Irezumi Tattoo Style" />
+            <div class="style-card-overlay">
+              <h3 class="style-title">Japanese (Irezumi) <i class="fa-solid fa-arrow-right"></i></h3>
+              <p class="style-desc">Dragons, waves, and mythological beasts rendered with heritage flow.</p>
+            </div>
+          </div>
+
+          <!-- 8. Geometric & Sacred -->
+          <div class="style-card reveal-on-scroll" onclick="openStyleGallery('Geometric')">
+            <img src="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&w=600&q=80" alt="Geometric Tattoo Style" />
+            <div class="style-card-overlay">
+              <h3 class="style-title">Geometric <i class="fa-solid fa-arrow-right"></i></h3>
+              <p class="style-desc">Fibonacci spirals, mandalas, and polyhedral line matrices.</p>
+            </div>
+          </div>
+
+          <!-- 9. Tribal & Polynesian -->
+          <div class="style-card reveal-on-scroll" onclick="openStyleGallery('Tribal')">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80" alt="Tribal Tattoo Style" />
+            <div class="style-card-overlay">
+              <h3 class="style-title">Tribal & Blackwork <i class="fa-solid fa-arrow-right"></i></h3>
+              <p class="style-desc">Solid blackout geometries sculpted to flow with natural musculature.</p>
+            </div>
+          </div>
+
+          <!-- 10. Watercolor -->
+          <div class="style-card reveal-on-scroll" onclick="openStyleGallery('Watercolor')">
+            <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80" alt="Watercolor Tattoo Style" />
+            <div class="style-card-overlay">
+              <h3 class="style-title">Watercolor <i class="fa-solid fa-arrow-right"></i></h3>
+              <p class="style-desc">Fluid splatters, pigment bleeds, and organic painterly strokes.</p>
+            </div>
+          </div>
+
+          <!-- 11. Lettering & Calligraphy -->
+          <div class="style-card reveal-on-scroll" onclick="openStyleGallery('Lettering')">
+            <img src="https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=600&q=80" alt="Custom Lettering Tattoo Style" />
+            <div class="style-card-overlay">
+              <h3 class="style-title">Lettering <i class="fa-solid fa-arrow-right"></i></h3>
+              <p class="style-desc">Bespoke Gothic, Chicano script, and fluid cursive hand lettering.</p>
+            </div>
+          </div>
+
+          <!-- 12. Portrait -->
+          <div class="style-card reveal-on-scroll" onclick="openStyleGallery('Portrait')">
+            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80" alt="Portrait Tattoo Style" />
+            <div class="style-card-overlay">
+              <h3 class="style-title">Portraiture <i class="fa-solid fa-arrow-right"></i></h3>
+              <p class="style-desc">Human likenesses and cinematic icons captured with photographic fidelity.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         4. PORTFOLIO / GALLERY WITH ACTIVE FILTERS + LIGHTBOX
+         ========================================================================== -->
+    <section class="section-spacing" id="portfolio">
+      <div class="container">
+        <div class="section-header reveal-on-scroll">
+          <div class="section-badge">Atelier Archive</div>
+          <h2 class="section-title">Our Masterwork <span>Gallery</span></h2>
+          <p class="section-subtitle">Filter through our catalog of healed and fresh pieces executed at Obsidian & Ink.</p>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="portfolio-filters reveal-on-scroll" id="galleryFilters">
+          <button class="filter-btn active" data-filter="all">All Masterpieces</button>
+          <button class="filter-btn" data-filter="black-grey">Black & Grey</button>
+          <button class="filter-btn" data-filter="realism">Realism</button>
+          <button class="filter-btn" data-filter="minimal">Minimal & Fine Line</button>
+          <button class="filter-btn" data-filter="color">Color / Neo-Trad</button>
+          <button class="filter-btn" data-filter="sleeve">Full Sleeve</button>
+          <button class="filter-btn" data-filter="small">Small Tattoos</button>
+          <button class="filter-btn" data-filter="custom">Custom Geometry</button>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="gallery-masonry" id="galleryGrid">
+          <!-- Item 1 -->
+          <div class="gallery-item reveal-on-scroll" data-category="realism black-grey" 
+               data-title="Marcus Aurelius Micro-Portrait" 
+               data-artist="Rahul Sharma" 
+               data-placement="Forearm Outer" 
+               data-size="6 x 4 inches" 
+               data-img="https://images.unsplash.com/photo-1560707303-4e980ce876ad?auto=format&fit=crop&w=1000&q=80">
+            <img src="https://images.unsplash.com/photo-1560707303-4e980ce876ad?auto=format&fit=crop&w=800&q=80" alt="Marcus Aurelius Bust Tattoo" />
+            <div class="gallery-item-meta">
+              <span class="gallery-tag">Black & Grey Realism</span>
+              <h4 class="gallery-item-title">Marcus Aurelius Bust</h4>
+              <div class="gallery-specs">
+                <span><i class="fa-solid fa-user-pen"></i> Rahul Sharma</span>
+                <span><i class="fa-solid fa-ruler-combined"></i> 6 x 4"</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="gallery-item reveal-on-scroll" data-category="minimal small" 
+               data-title="Single Needle Botanical Fern" 
+               data-artist="Elena Rostova" 
+               data-placement="Inner Wrist" 
+               data-size="3 x 2 inches" 
+               data-img="https://images.unsplash.com/photo-1562962230-16e4623d36e6?auto=format&fit=crop&w=1000&q=80">
+            <img src="https://images.unsplash.com/photo-1562962230-16e4623d36e6?auto=format&fit=crop&w=800&q=80" alt="Botanical Fern Tattoo" />
+            <div class="gallery-item-meta">
+              <span class="gallery-tag">Fine Line Minimal</span>
+              <h4 class="gallery-item-title">Single-Needle Botanical Fern</h4>
+              <div class="gallery-specs">
+                <span><i class="fa-solid fa-user-pen"></i> Elena Rostova</span>
+                <span><i class="fa-solid fa-ruler-combined"></i> 3 x 2"</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="gallery-item reveal-on-scroll" data-category="color sleeve" 
+               data-title="Japanese Ryujin Dragon Sleeve" 
+               data-artist="Marcus Vance" 
+               data-placement="Full Left Arm" 
+               data-size="Full Sleeve" 
+               data-img="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80">
+            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80" alt="Ryujin Dragon Sleeve" />
+            <div class="gallery-item-meta">
+              <span class="gallery-tag">Japanese Irezumi</span>
+              <h4 class="gallery-item-title">Ryujin Dragon Full Sleeve</h4>
+              <div class="gallery-specs">
+                <span><i class="fa-solid fa-user-pen"></i> Marcus Vance</span>
+                <span><i class="fa-solid fa-ruler-combined"></i> Full Arm</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="gallery-item reveal-on-scroll" data-category="custom black-grey" 
+               data-title="Metatron's Cube Sacred Mandala" 
+               data-artist="Priya Nair" 
+               data-placement="Upper Spine / Shoulder" 
+               data-size="7 x 7 inches" 
+               data-img="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&w=1000&q=80">
+            <img src="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&w=800&q=80" alt="Mandala Dotwork Tattoo" />
+            <div class="gallery-item-meta">
+              <span class="gallery-tag">Sacred Geometry</span>
+              <h4 class="gallery-item-title">Metatron's Cube Mandala</h4>
+              <div class="gallery-specs">
+                <span><i class="fa-solid fa-user-pen"></i> Priya Nair</span>
+                <span><i class="fa-solid fa-ruler-combined"></i> 7 x 7"</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="gallery-item reveal-on-scroll" data-category="realism black-grey" 
+               data-title="Chiaroscuro Tiger Eye" 
+               data-artist="Rahul Sharma" 
+               data-placement="Bicep Inner" 
+               data-size="5 x 4 inches" 
+               data-img="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?auto=format&fit=crop&w=1000&q=80">
+            <img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?auto=format&fit=crop&w=800&q=80" alt="Tiger Eye Tattoo" />
+            <div class="gallery-item-meta">
+              <span class="gallery-tag">Micro Realism</span>
+              <h4 class="gallery-item-title">Tiger Eye In Shadows</h4>
+              <div class="gallery-specs">
+                <span><i class="fa-solid fa-user-pen"></i> Rahul Sharma</span>
+                <span><i class="fa-solid fa-ruler-combined"></i> 5 x 4"</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="gallery-item reveal-on-scroll" data-category="color" 
+               data-title="Neo-Traditional Phoenix" 
+               data-artist="Marcus Vance" 
+               data-placement="Thigh Side" 
+               data-size="9 x 6 inches" 
+               data-img="https://images.unsplash.com/photo-1568515045052-f9a854d70bfd?auto=format&fit=crop&w=1000&q=80">
+            <img src="https://images.unsplash.com/photo-1568515045052-f9a854d70bfd?auto=format&fit=crop&w=800&q=80" alt="Phoenix Neo-Traditional Tattoo" />
+            <div class="gallery-item-meta">
+              <span class="gallery-tag">Neo-Traditional</span>
+              <h4 class="gallery-item-title">Chromatic Phoenix</h4>
+              <div class="gallery-specs">
+                <span><i class="fa-solid fa-user-pen"></i> Marcus Vance</span>
+                <span><i class="fa-solid fa-ruler-combined"></i> 9 x 6"</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIGHTBOX MODAL DIALOG -->
+    <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-hidden="true">
+      <div class="lightbox-content">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close Preview">&times;</button>
+        <div class="lightbox-img-box">
+          <img src="" id="lightboxImg" alt="Enlarged Tattoo Preview" />
+        </div>
+        <div class="lightbox-info-box">
+          <div>
+            <span class="section-badge" id="modalTag">Realism</span>
+            <h3 class="section-title modal-piece-title" id="modalTitle">Artwork Title</h3>
+            <div class="modal-meta-list">
+              <p><strong>Artist:</strong> <span id="modalArtist">Rahul Sharma</span></p>
+              <p><strong>Placement:</strong> <span id="modalPlacement">Forearm</span></p>
+              <p><strong>Dimensions:</strong> <span id="modalSize">6 x 4 in</span></p>
+              <p><strong>Condition:</strong> 10 Months Healed</p>
+            </div>
+          </div>
+          <a href="#booking" class="btn btn-gold btn-sm" onclick="closeLightbox()"><i class="fa-solid fa-pen-nib"></i> Book Similar Design</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         5. CUSTOM TATTOO WORKFLOW & LIVE ESTIMATOR
+         ========================================================================== -->
+    <section class="section-spacing bg-surface" id="custom">
+      <div class="container">
+        <div class="section-header reveal-on-scroll">
+          <div class="section-badge">Co-Creation Process</div>
+          <h2 class="section-title">How Custom Ink <span>Comes To Life</span></h2>
+          <p class="section-subtitle">We never copy another studio's artwork. Here is our 5-step journey to crafting a one-of-one heirloom on your skin.</p>
+        </div>
+
+        <div class="custom-workflow-grid">
+          <div class="workflow-step-card reveal-on-scroll">
+            <div class="step-number">01</div>
+            <h3 class="step-title">The Spark</h3>
+            <p class="step-desc">Share your reference moodboard, symbolic motifs, personal backstory, and placement ideas via our custom form.</p>
+          </div>
+          <div class="workflow-step-card reveal-on-scroll">
+            <div class="step-number">02</div>
+            <h3 class="step-title">Consultation</h3>
+            <p class="step-desc">Meet one-on-one with your selected artist to calibrate anatomical flow, aging mechanics, and pigment palette.</p>
+          </div>
+          <div class="workflow-step-card reveal-on-scroll">
+            <div class="step-number">03</div>
+            <h3 class="step-title">Digital Stencil</h3>
+            <p class="step-desc">Receive a 3D anatomical mockup of your design scaled to your precise bodily measurements for feedback.</p>
+          </div>
+          <div class="workflow-step-card reveal-on-scroll">
+            <div class="step-number">04</div>
+            <h3 class="step-title">The Atelier Inking</h3>
+            <p class="step-desc">Relax in our sterile, private operatory equipped with ergonomic motorized beds and ambient sound design.</p>
+          </div>
+          <div class="workflow-step-card reveal-on-scroll">
+            <div class="step-number">05</div>
+            <h3 class="step-title">Dermal Healing</h3>
+            <p class="step-desc">Wrapped in breathable second-skin dermal shield with personalized 30-day medical aftercare check-ins.</p>
+          </div>
+        </div>
+
+        <!-- Interactive Custom Estimator & Moodboard Submitter -->
+        <div class="idea-box-container reveal-on-scroll">
+          <div class="estimator-layout">
+            <div>
+              <h3 class="estimator-heading">Have An Idea? Calculate & Submit</h3>
+              <p class="estimator-subheading">Adjust the controls below to generate an immediate ballpark estimate and attach your reference moodboard.</p>
+
+              <div class="form-group">
+                <label class="form-label">Approximate Size (Inches)</label>
+                <input type="range" min="2" max="14" value="5" id="sizeRangeInput" class="range-slider" />
+                <div class="slider-labels">
+                  <span>Small (2")</span>
+                  <span id="sizeDisplayLabel" class="active-slider-val">5 x 5 Inches</span>
+                  <span>Full Sleeve (14"+)</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Tattoo Complexity</label>
+                <select class="form-control" id="complexitySelect">
+                  <option value="minimal">Minimal / Single Needle Fine Line</option>
+                  <option value="medium" selected>Moderate Shading & Texture</option>
+                  <option value="complex">Hyper-Realism / Intricate Geometric</option>
+                  <option value="master">Full Color Neo-Traditional / Sleeve Piece</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Body Placement</label>
+                <div class="placement-chips" id="placementChipContainer">
+                  <span class="chip selected" data-placement="Forearm">Forearm</span>
+                  <span class="chip" data-placement="Wrist">Wrist</span>
+                  <span class="chip" data-placement="Bicep">Bicep</span>
+                  <span class="chip" data-placement="Shoulder">Shoulder</span>
+                  <span class="chip" data-placement="Ribs">Ribs (High Sensitivity)</span>
+                  <span class="chip" data-placement="Calf/Leg">Calf / Leg</span>
+                  <span class="chip" data-placement="Back">Full Back</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Upload Reference Image (Optional)</label>
+                <div class="file-dropzone" id="dropzoneBox" onclick="document.getElementById('fileInputDummy').click();">
+                  <i class="fa-solid fa-cloud-arrow-up"></i>
+                  <p class="dropzone-text">Click to attach references or drop moodboard here</p>
+                  <p class="dropzone-sub">Supports PNG, JPG, WEBP up to 25MB</p>
+                  <input type="file" id="fileInputDummy" style="display: none;" accept="image/*" />
+                  <div id="fileUploadFeedback" class="upload-feedback"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Real-time Cost Estimation Card -->
+            <div class="estimate-result-card">
+              <div>
+                <div class="estimate-price-header">
+                  <span class="section-badge">Real-Time Estimation</span>
+                  <div class="estimate-amount" id="dynamicPriceLabel">₹6,500 – ₹8,000</div>
+                  <p class="estimate-disclaimer">Final quote confirmed in-studio upon exact stencil sizing & artist choice.</p>
+                </div>
+
+                <ul class="estimate-breakdown-list">
+                  <li>
+                    <span>Estimated Studio Time:</span>
+                    <strong id="timeEstimateLabel">2.5 – 3.5 Hours</strong>
+                  </li>
+                  <li>
+                    <span>Placement Surcharge:</span>
+                    <strong id="placementSurchargeLabel">Standard Anatomical</strong>
+                  </li>
+                  <li>
+                    <span>Included Aftercare:</span>
+                    <strong class="text-green">Complimentary Dermal Shield Kit</strong>
+                  </li>
+                  <li>
+                    <span>Sterilization & Materials:</span>
+                    <strong class="text-green">Included in base quote</strong>
+                  </li>
+                </ul>
+              </div>
+
+              <a href="#booking" class="btn btn-gold btn-block"><i class="fa-regular fa-paper-plane"></i> Lock In This Estimate & Book</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         6. BOOKING / APPOINTMENT (COMPLETE FORM WITH VALIDATION)
+         ========================================================================== -->
+    <section class="section-spacing" id="booking">
+      <div class="container">
+        <div class="booking-card-wrapper reveal-on-scroll">
+          <div class="booking-grid-layout">
+            <div class="booking-sidebar-info">
+              <div class="section-badge">Official Atelier Booking</div>
+              <h2 class="section-title booking-heading">Reserve Your <span>Immortalization</span></h2>
+              <p class="booking-desc">
+                Our resident artists accept a strictly limited number of commissions per week to guarantee relentless attention to detail and unhurried session care.
+              </p>
+
+              <div class="booking-perk-item">
+                <i class="fa-solid fa-shield-virus booking-perk-icon"></i>
+                <div>
+                  <h4>Sterile Medical Suite</h4>
+                  <p>100% disposable cartridge needles, hospital-grade barriers, and HEPA air filtration.</p>
+                </div>
+              </div>
+
+              <div class="booking-perk-item">
+                <i class="fa-solid fa-palette booking-perk-icon"></i>
+                <div>
+                  <h4>1-of-1 Bespoke Drafting</h4>
+                  <p>Zero flash replicates. Every stencil is drafted natively for your body contour.</p>
+                </div>
+              </div>
+
+              <div class="booking-perk-item">
+                <i class="fa-solid fa-bandage booking-perk-icon"></i>
+                <div>
+                  <h4>Complimentary Healed Touchup</h4>
+                  <p>Free touch-up session within 6 months to guarantee deep pigment density.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Booking Form -->
+            <div>
+              <form id="appointmentBookingForm">
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label class="form-label">Full Name *</label>
+                    <input type="text" class="form-control" id="clientFullName" placeholder="e.g. Aryan Malhotra" required />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Phone / WhatsApp *</label>
+                    <input type="tel" class="form-control" id="clientPhone" placeholder="+91 98765 00000" required />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Email Address *</label>
+                  <input type="email" class="form-control" id="clientEmail" placeholder="aryan@example.com" required />
+                </div>
+
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label class="form-label">Preferred Artist *</label>
+                    <select class="form-control" id="selectedArtistDropdown" required>
+                      <option value="">Any Available Resident Master</option>
+                      <option value="Rahul Sharma">Rahul Sharma (Realism / Portraits)</option>
+                      <option value="Elena Rostova">Elena Rostova (Fine Line / Floral)</option>
+                      <option value="Marcus Vance">Marcus Vance (Japanese / Neo-Trad)</option>
+                      <option value="Priya Nair">Priya Nair (Mandala / Sacred Geometry)</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Ink Palette *</label>
+                    <select class="form-control" id="clientInkType">
+                      <option value="Black & Grey">Black & Grey Carbon</option>
+                      <option value="Color">Full Chromatic Color</option>
+                      <option value="Single Needle Micro">Micro Fine Single-Needle</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label class="form-label">Body Placement *</label>
+                    <input type="text" class="form-control" id="clientPlacement" placeholder="e.g. Left Inner Forearm" required />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Approx Size *</label>
+                    <input type="text" class="form-control" id="clientDimensions" placeholder="e.g. 4 x 3 inches" required />
+                  </div>
+                </div>
+
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label class="form-label">Preferred Date *</label>
+                    <input type="date" class="form-control" id="bookingDate" required />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Preferred Time Slot *</label>
+                    <select class="form-control" id="bookingSlot" required>
+                      <option value="11:00 AM">Morning Slot (11:00 AM)</option>
+                      <option value="2:30 PM">Afternoon Slot (2:30 PM)</option>
+                      <option value="6:00 PM">Evening Slot (6:00 PM)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Tattoo Vision & Story</label>
+                  <textarea class="form-control" id="clientDescription" placeholder="Describe the idea, symbols you want included, or if this is a cover-up..." rows="3"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-gold btn-block btn-lg">
+                  <i class="fa-solid fa-calendar-check"></i> Submit Booking Request
+                </button>
+                <p class="booking-terms-note">
+                  * A standard advance consultation deposit of ₹1,000 applies upon date confirmation, adjustable against final tattoo bill.
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         7. PRICING TIERS
+         ========================================================================== -->
+    <section class="section-spacing" id="pricing">
+      <div class="container">
+        <div class="section-header reveal-on-scroll">
+          <div class="section-badge">Honest & Transparent</div>
+          <h2 class="section-title">Investment <span>& Pricing</span></h2>
+          <p class="section-subtitle">No hidden studio fees. Final pricing is dictated purely by scale, detail intricacy, anatomical placement, and duration.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <!-- Small Tattoos -->
+          <div class="pricing-card reveal-on-scroll">
+            <h3 class="pricing-tier-name">Small / Minimalist</h3>
+            <div class="pricing-price">₹1,500 <span>starting</span></div>
+            <p class="pricing-desc">For single-needle scripts, symbols, and fine-line micro icons under 2.5 inches.</p>
+            <ul class="pricing-features">
+              <li><i class="fa-solid fa-check"></i> Single-needle precision setup</li>
+              <li><i class="fa-solid fa-check"></i> High-definition crisp lines</li>
+              <li><i class="fa-solid fa-check"></i> 30–45 Minute session duration</li>
+              <li><i class="fa-solid fa-check"></i> Dermal patch aftercare packet</li>
+            </ul>
+            <a href="#booking" class="btn btn-outline btn-sm btn-block">Reserve Small Piece</a>
+          </div>
+
+          <!-- Custom Mid-Size Tattoos (Featured) -->
+          <div class="pricing-card featured reveal-on-scroll">
+            <div class="pricing-badge">Most Popular Choice</div>
+            <h3 class="pricing-tier-name">Custom Studio Piece</h3>
+            <div class="pricing-price">₹3,000 <span>starting</span></div>
+            <p class="pricing-desc">Original bespoke creations between 3 to 7 inches with deep tonal gradients and shading.</p>
+            <ul class="pricing-features">
+              <li><i class="fa-solid fa-check"></i> 1-on-1 Artist consultation</li>
+              <li><i class="fa-solid fa-check"></i> 100% Custom hand-drawn artwork</li>
+              <li><i class="fa-solid fa-check"></i> Smooth black & grey or color shading</li>
+              <li><i class="fa-solid fa-check"></i> 2–4 Hours detailed studio session</li>
+              <li><i class="fa-solid fa-check"></i> 6-Month free touchup warranty</li>
+            </ul>
+            <a href="#booking" class="btn btn-gold btn-sm btn-block">Reserve Custom Design</a>
+          </div>
+
+          <!-- Large Projects / Full Sleeves -->
+          <div class="pricing-card reveal-on-scroll">
+            <h3 class="pricing-tier-name">Full Sleeve / Back</h3>
+            <div class="pricing-price">Consultation <span>required</span></div>
+            <p class="pricing-desc">Multi-session large projects (sleeves, backplates, chest suites). Flat day rates available.</p>
+            <ul class="pricing-features">
+              <li><i class="fa-solid fa-check"></i> Comprehensive full-anatomy 3D mockups</li>
+              <li><i class="fa-solid fa-check"></i> Dedicated full-day studio locks</li>
+              <li><i class="fa-solid fa-check"></i> Hourly or fixed multi-session day pass</li>
+              <li><i class="fa-solid fa-check"></i> Priority scheduling & re-wraps</li>
+            </ul>
+            <a href="#booking" class="btn btn-outline btn-sm btn-block">Request Sleeve Consult</a>
+          </div>
+        </div>
+
+        <div class="pricing-callout reveal-on-scroll">
+          <p>
+            <i class="fa-solid fa-circle-info"></i>
+            <strong>Pricing note:</strong> Final price depends on size, complexity, body placement, and resident artist tenure. Walk-in flash starts at ₹1,500.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         8. ABOUT STUDIO & HERITAGE
+         ========================================================================== -->
+    <section class="section-spacing bg-surface" id="about">
+      <div class="container">
+        <div class="about-atelier-grid">
+          <div class="reveal-on-scroll">
+            <div class="section-badge">Atelier Heritage</div>
+            <h2 class="section-title">A Sanctuary For <span>Eternal Fine Art</span></h2>
+            <p class="about-story-text">
+              Founded in 2016 in the cultural heart of Bengaluru, Obsidian & Ink was born from a singular refusal: the refusal to treat tattoos as assembly-line commercial products.
+            </p>
+            <p class="about-story-text">
+              We conceptualized an atelier that merges the sterile rigor of a surgical clinic with the intimate elegance of an avant-garde art gallery. Our space is calm, quiet, and deliberate. You will not find loud music or rush here—only intentional craftsmanship, single-origin vegan pigments, and artists dedicated to technical immortality.
+            </p>
+
+            <div class="heritage-badges">
+              <div class="h-badge">
+                <h4 class="h-badge-title"><i class="fa-solid fa-award"></i> Est. 2016</h4>
+                <p class="h-badge-desc">Over eight consecutive years of zero-infection clinical history.</p>
+              </div>
+              <div class="h-badge">
+                <h4 class="h-badge-title"><i class="fa-solid fa-leaf"></i> 100% Vegan Inks</h4>
+                <p class="h-badge-desc">Cruelty-free, heavy-metal-free medical pigments.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Studio Collage Photo Showcase -->
+          <div class="studio-photo-collage reveal-on-scroll">
+            <div class="collage-img-1">
+              <img src="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&w=800&q=80" alt="Studio Precision Inking" />
+            </div>
+            <div>
+              <div class="collage-img-2">
+                <img src="https://images.unsplash.com/photo-1542382257-80dedb725088?auto=format&fit=crop&w=600&q=80" alt="Studio Sterile Suite" />
+              </div>
+              <div class="collage-img-3">
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80" alt="Artist Stencil Drawing" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         9. HYGIENE & SAFETY PROTOCOLS
+         ========================================================================== -->
+    <section class="section-spacing" id="hygiene">
+      <div class="container">
+        <div class="section-header reveal-on-scroll">
+          <div class="section-badge">Uncompromising Standards</div>
+          <h2 class="section-title">Clinical <span>Hygiene & Safety</span></h2>
+          <p class="section-subtitle">Your physical safety is our primary ethical duty. We maintain protocols rivaling minor surgical operatories.</p>
+        </div>
+
+        <div class="hygiene-cards-grid">
+          <div class="hygiene-card reveal-on-scroll">
+            <div class="hygiene-icon-circle"><i class="fa-solid fa-syringe"></i></div>
+            <h3 class="hygiene-card-title">100% Single-Use Needles</h3>
+            <p class="hygiene-card-desc">Every cartridge needle is sterile blister-packed and unsealed exclusively in front of your eyes before disposal into medical bio-hazard sharps bins.</p>
+          </div>
+
+          <div class="hygiene-card reveal-on-scroll">
+            <div class="hygiene-icon-circle"><i class="fa-solid fa-pump-soap"></i></div>
+            <h3 class="hygiene-card-title">Hospital-Grade Sterilization</h3>
+            <p class="hygiene-card-desc">Non-disposable steel furniture is processed via Class-B Autoclaves under high steam pressure and vacuum dried with quarterly spore validation.</p>
+          </div>
+
+          <div class="hygiene-card reveal-on-scroll">
+            <div class="hygiene-icon-circle"><i class="fa-solid fa-hand-dots"></i></div>
+            <h3 class="hygiene-card-title">Medical Nitrile PPE</h3>
+            <p class="hygiene-card-desc">Zero powdered latex. Our artists employ hypoallergenic medical nitrile gloves, barrier clip sleeves, and machine baggies replaced for every phase.</p>
+          </div>
+
+          <div class="hygiene-card reveal-on-scroll">
+            <div class="hygiene-icon-circle"><i class="fa-solid fa-vial-circle-check"></i></div>
+            <h3 class="hygiene-card-title">EU Certified Safe Inks</h3>
+            <p class="hygiene-card-desc">We exclusively dispense REACH-compliant, gamma-sterilized vegan pigments from world standard labs (Dynamic, Eternal, Silverback).</p>
+          </div>
+
+          <div class="hygiene-card reveal-on-scroll">
+            <div class="hygiene-icon-circle"><i class="fa-solid fa-wind"></i></div>
+            <h3 class="hygiene-card-title">HEPA H13 Air Filtration</h3>
+            <p class="hygiene-card-desc">Continuous medical air purifiers scrub airborne aerosols, maintaining an ultra-low particulate count within all tattooing rooms.</p>
+          </div>
+
+          <div class="hygiene-card reveal-on-scroll">
+            <div class="hygiene-icon-circle"><i class="fa-solid fa-shield-halved"></i></div>
+            <h3 class="hygiene-card-title">Cross-Contamination Shields</h3>
+            <p class="hygiene-card-desc">All contact surfaces, lamp switches, and power supplies are double-wrapped with medical film and disinfected with hospital virucides.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         10. INTERACTIVE AFTERCARE PROTOCOL
+         ========================================================================== -->
+    <section class="section-spacing bg-surface" id="aftercare">
+      <div class="container">
+        <div class="section-header reveal-on-scroll">
+          <div class="section-badge">Healing Roadmap</div>
+          <h2 class="section-title">The Healing <span>Phases</span></h2>
+          <p class="section-subtitle">A stunning tattoo is 50% artist execution and 50% post-session discipline. Follow this phase-by-phase protocol.</p>
+        </div>
+
+        <!-- Aftercare Phase Tabs -->
+        <div class="aftercare-tabs reveal-on-scroll">
+          <button class="aftercare-tab-btn active" onclick="switchAftercareTab(0)">Phase 1: First 24 Hours</button>
+          <button class="aftercare-tab-btn" onclick="switchAftercareTab(1)">Phase 2: Days 2 – 7</button>
+          <button class="aftercare-tab-btn" onclick="switchAftercareTab(2)">Phase 3: Weeks 2 – 4</button>
+        </div>
+
+        <!-- Phase 1 Content -->
+        <div class="aftercare-stage-pane active" id="aftercareStage0">
+          <div class="aftercare-pane-header">
+            <h3>Phase 1: First 24 Hours (Dermal Shield & Rest)</h3>
+            <p>Your tattoo is an open abrasion weeping plasma. The medical film applied by our artists acts as an artificial epidermis protecting against bacteria.</p>
+          </div>
+
+          <div class="do-dont-grid">
+            <div class="protocol-box do-box">
+              <h4><i class="fa-solid fa-circle-check"></i> Critical Protocols (DO)</h4>
+              <ul>
+                <li><i class="fa-solid fa-check"></i> Leave the protective second-skin bandage intact for 24 hours minimum.</li>
+                <li><i class="fa-solid fa-check"></i> If blood/plasma pools under the film, this is completely normal and accelerates cellular healing.</li>
+                <li><i class="fa-solid fa-check"></i> Rest the tattooed limb, hydrate with water, and avoid strenuous workouts.</li>
+                <li><i class="fa-solid fa-check"></i> Sleep in clean, loose, breathable dark cotton clothing.</li>
+              </ul>
+            </div>
+            <div class="protocol-box dont-box">
+              <h4><i class="fa-solid fa-circle-xmark"></i> Strictly Forbidden (AVOID)</h4>
+              <ul>
+                <li><i class="fa-solid fa-xmark"></i> DO NOT remove the bandage prematurely with unwashed hands.</li>
+                <li><i class="fa-solid fa-xmark"></i> DO NOT submerge in hot baths, saunas, swimming pools, or ocean water.</li>
+                <li><i class="fa-solid fa-xmark"></i> DO NOT consume excessive alcohol which thins blood and increases weeping.</li>
+                <li><i class="fa-solid fa-xmark"></i> DO NOT allow pets to lick or sleep directly beside the fresh ink.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 2 Content -->
+        <div class="aftercare-stage-pane" id="aftercareStage1">
+          <div class="aftercare-pane-header">
+            <h3>Phase 2: Days 2 – 7 (Washing & Hydration)</h3>
+            <p>Peel the dermal bandage slowly under lukewarm running water. The skin will begin mild flaking and peeling resembling a sunburn.</p>
+          </div>
+
+          <div class="do-dont-grid">
+            <div class="protocol-box do-box">
+              <h4><i class="fa-solid fa-circle-check"></i> Critical Protocols (DO)</h4>
+              <ul>
+                <li><i class="fa-solid fa-check"></i> Wash 2x daily using mild fragrance-free antibacterial liquid soap.</li>
+                <li><i class="fa-solid fa-check"></i> Pat dry gently with clean disposable paper towels (never abrasive bath towels).</li>
+                <li><i class="fa-solid fa-check"></i> Apply an ultra-thin layer of unscented ointment (Aquaphor or studio aftercare balm).</li>
+                <li><i class="fa-solid fa-check"></i> Let the skin breathe—less ointment is better than smothering the pores.</li>
+              </ul>
+            </div>
+            <div class="protocol-box dont-box">
+              <h4><i class="fa-solid fa-circle-xmark"></i> Strictly Forbidden (AVOID)</h4>
+              <ul>
+                <li><i class="fa-solid fa-xmark"></i> NEVER pick, scratch, or peel flaking scabs; you will pull pigment out.</li>
+                <li><i class="fa-solid fa-xmark"></i> Avoid tight athletic gym clothes that create friction over the tattoo.</li>
+                <li><i class="fa-solid fa-xmark"></i> Avoid direct, harsh sunlight exposure completely.</li>
+                <li><i class="fa-solid fa-xmark"></i> Do not apply thick Petroleum Jelly (Vaseline) which blocks oxygenation.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 3 Content -->
+        <div class="aftercare-stage-pane" id="aftercareStage2">
+          <div class="aftercare-pane-header">
+            <h3>Phase 3: Weeks 2 – 4 (Long-Term Preservation)</h3>
+            <p>Surface peeling is finished, but the deep dermis is actively locking the pigments down for the coming decades.</p>
+          </div>
+
+          <div class="do-dont-grid">
+            <div class="protocol-box do-box">
+              <h4><i class="fa-solid fa-circle-check"></i> Critical Protocols (DO)</h4>
+              <ul>
+                <li><i class="fa-solid fa-check"></i> Switch to gentle unscented daily body lotion to prevent dry epidermis.</li>
+                <li><i class="fa-solid fa-check"></i> Apply broad spectrum SPF 50+ sunscreen anytime the tattoo is outdoors.</li>
+                <li><i class="fa-solid fa-check"></i> Schedule your complimentary 6-week healed photo check-in at our studio.</li>
+              </ul>
+            </div>
+            <div class="protocol-box dont-box">
+              <h4><i class="fa-solid fa-circle-xmark"></i> Strictly Forbidden (AVOID)</h4>
+              <ul>
+                <li><i class="fa-solid fa-xmark"></i> Do not expose unprotected healed ink to UV tanning beds.</li>
+                <li><i class="fa-solid fa-xmark"></i> Avoid harsh chemical exfoliants, scrubs, or retinol directly over the tattoo.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         11. CLIENT REVIEWS & VERIFIED TESTIMONIALS
+         ========================================================================== -->
+    <section class="section-spacing" id="reviews">
+      <div class="container">
+        <div class="section-header reveal-on-scroll">
+          <div class="section-badge">Client Testimonials</div>
+          <h2 class="section-title">Healed Stories & <span>Endorsements</span></h2>
+          <p class="section-subtitle">Real experiences from clients who entrusted us with their permanent bodily canvas.</p>
+        </div>
+
+        <div class="reviews-grid">
+          <!-- Review 1 -->
+          <div class="review-card reveal-on-scroll">
+            <div>
+              <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="review-text">
+                "Rahul's realism is nothing short of otherworldly. I got a portrait of my grandfather done; the tonal transition in the eyes feels alive. 6 months healed and not a single micro-line has blurred."
+              </p>
+            </div>
+            <div class="review-author-row">
+              <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80" alt="Client Vikram" />
+              <div>
+                <div class="review-client-name">Vikramaditya Sengupta</div>
+                <div class="review-tagline">Portrait Tattoo • Healed 6 Months</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 2 -->
+          <div class="review-card reveal-on-scroll">
+            <div>
+              <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="review-text">
+                "Elena did a fine-line botanical branch wrapping up my collarbone. I have very low pain tolerance, but her hand was so light I almost fell asleep during the 2-hour session. The studio smells like sandalwood and medical serenity."
+              </p>
+            </div>
+            <div class="review-author-row">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Client Ananya" />
+              <div>
+                <div class="review-client-name">Ananya Deshmukh</div>
+                <div class="review-tagline">Fine Line Floral • Healed 1 Year</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 3 -->
+          <div class="review-card reveal-on-scroll">
+            <div>
+              <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="review-text">
+                "Priya covered an old 10-year-old college tribal disaster with an algorithmic dotwork mandala. You cannot see even a trace of the old dark scar tissue. True master-level technical mastery."
+              </p>
+            </div>
+            <div class="review-author-row">
+              <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=150&q=80" alt="Client Karan" />
+              <div>
+                <div class="review-client-name">Karan Mehra</div>
+                <div class="review-tagline">Cover-Up Mandala • Healed 3 Months</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         12. FAQ ACCORDION (WITH LIVE KEYWORD SEARCH)
+         ========================================================================== -->
+    <section class="section-spacing bg-surface" id="faq">
+      <div class="container">
+        <div class="section-header reveal-on-scroll">
+          <div class="section-badge">Clarity & Answers</div>
+          <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+          <p class="section-subtitle">Everything you need to know about pain, deposits, healing time, cover-ups, and studio etiquette.</p>
+        </div>
+
+        <div class="faq-wrapper reveal-on-scroll">
+          <!-- Real-time FAQ Search Bar -->
+          <div class="faq-search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="faqSearchInput" placeholder="Type keywords like 'pain', 'cover-up', 'price', 'age', 'alcohol'..." />
+          </div>
+
+          <div class="faq-accordion" id="faqAccordionList">
+            <!-- FAQ 1 -->
+            <div class="faq-item">
+              <button class="faq-question-btn">
+                <span>Tattoo kitna painful hota hai? (How painful is it?)</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+              <div class="faq-answer-panel">
+                <div class="faq-answer-inner">
+                  Tattoo pain varies significantly depending on placement. Fleshy areas like outer biceps, forearms, calves, and outer thighs feel like a constant scratching vibration (pain rating 2 to 4 out of 10). Bony or nerve-dense areas like ribs, spine, sternum, wrists, and feet are notably more sensitive (pain rating 7 to 8 out of 10). Our artists use specialized gentle tapering techniques and take breaks whenever required.
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div class="faq-item">
+              <button class="faq-question-btn">
+                <span>Minimum age limit kya hai? (What is the legal age?)</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+              <div class="faq-answer-panel">
+                <div class="faq-answer-inner">
+                  You must be strictly <strong>18 years or older</strong>. We verify official government-issued photo ID (Aadhaar, Passport, Driver's License) before any consultation or needle unsealing. No exceptions are made even with parental consent.
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 3 -->
+            <div class="faq-item">
+              <button class="faq-question-btn">
+                <span>Tattoo banne mein kitna time lagta hai? (Session Duration)</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+              <div class="faq-answer-panel">
+                <div class="faq-answer-inner">
+                  Minimalist and small fine-line tattoos typically take 30 to 60 minutes. Custom palm-sized pieces take 2.5 to 4 hours. Full-day projects (such as large forearm pieces or half-sleeves) require 6 to 8 hours. Full sleeves and back-pieces are scheduled over 4 to 8 separate day sessions spaced 3 weeks apart for proper skin healing.
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 4 -->
+            <div class="faq-item">
+              <button class="faq-question-btn">
+                <span>Price kaise calculate hota hai? (Pricing calculation)</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+              <div class="faq-answer-panel">
+                <div class="faq-answer-inner">
+                  Price is calculated based on four objective elements: (1) Total square surface area (dimensions in inches), (2) Stencil detail complexity (single-line vs hyper-realism), (3) Body placement (ribs and neck take longer due to skin elasticity), and (4) Artist tenure. Small tattoos start at ₹1,500; bespoke pieces average ₹3,000 to ₹12,000+.
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 5 -->
+            <div class="faq-item">
+              <button class="faq-question-btn">
+                <span>Advance payment / Deposit zaroori hai? (Deposits)</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+              <div class="faq-answer-panel">
+                <div class="faq-answer-inner">
+                  Yes. A modest deposit of ₹1,000 (for smaller tattoos) or ₹3,000 (for large full-day sessions) is required to lock your appointment slot on the artist's calendar. This deposit is non-refundable but 100% deductible from your final session bill. You can reschedule once with at least 48 hours notice.
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 6 -->
+            <div class="faq-item">
+              <button class="faq-question-btn">
+                <span>Walk-ins available hain ya appointment lena hoga? (Walk-ins)</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+              <div class="faq-answer-panel">
+                <div class="faq-answer-inner">
+                  We welcome walk-ins every day based on resident artist availability between 12:00 PM and 7:00 PM for flash and smaller designs. However, for custom realism, portraits, and large sleeves, pre-booking with an advance consultation is mandatory to allow our artists sufficient drafting time.
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 7 -->
+            <div class="faq-item">
+              <button class="faq-question-btn">
+                <span>Old tattoo remove ya cover-up ho sakta hai? (Cover-ups)</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+              <div class="faq-answer-panel">
+                <div class="faq-answer-inner">
+                  Yes, 100%. Our artists are certified cover-up specialists. We assess the age, pigment saturation, and scarring of your existing ink. Depending on darkness, we either design an intentional organic dark-flow motif (Japanese Irezumi or dark floral geometry) or recommend 1-2 light sessions of laser fading prior to covering.
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 8 -->
+            <div class="faq-item">
+              <button class="faq-question-btn">
+                <span>Complete healing mein kitna time lagta hai? (Healing duration)</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+              <div class="faq-answer-panel">
+                <div class="faq-answer-inner">
+                  Surface epidermis healing takes approximately <strong>10 to 14 days</strong>, during which peeling and light flaking complete. However, deeper dermal healing—where your white blood cells fully encapsulate the pigment particles—takes approximately <strong>4 to 6 weeks</strong>. Following our aftercare guidelines guarantees vibrant longevity.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         13. CONTACT & LOCATION (MAP + OPERATING HOURS)
+         ========================================================================== -->
+    <section class="section-spacing" id="contact">
+      <div class="container">
+        <div class="section-header reveal-on-scroll">
+          <div class="section-badge">Atelier Coordinates</div>
+          <h2 class="section-title">Visit The <span>Sanctuary</span></h2>
+          <p class="section-subtitle">Located in Bengaluru's leafy design district. Complimentary valet parking and artisan pour-overs available.</p>
+        </div>
+
+        <div class="contact-layout">
+          <div class="contact-info-panel reveal-on-scroll">
+            <h3 class="contact-panel-title">Obsidian & Ink Atelier</h3>
+
+            <div class="contact-block">
+              <div class="contact-block-icon"><i class="fa-solid fa-location-dot"></i></div>
+              <div>
+                <h4>Studio Address</h4>
+                <p>Level 3, The Onyx Pavillion, 100 Feet Road, Indiranagar, Bengaluru, Karnataka 560038</p>
+              </div>
+            </div>
+
+            <div class="contact-block">
+              <div class="contact-block-icon"><i class="fa-solid fa-phone"></i></div>
+              <div>
+                <h4>Direct Telephone</h4>
+                <p>+91 98765 43210 / +91 (080) 4123 9988</p>
+              </div>
+            </div>
+
+            <div class="contact-block">
+              <div class="contact-block-icon"><i class="fa-solid fa-square-parking"></i></div>
+              <div>
+                <h4>Valet & Parking</h4>
+                <p>Dedicated underground guest parking with EV fast-charging bays available.</p>
+              </div>
+            </div>
+
+            <h4 class="hours-title">Atelier Operating Hours</h4>
+            <table class="hours-table">
+              <tr>
+                <td>Monday – Friday</td>
+                <td>11:00 AM – 9:00 PM</td>
+              </tr>
+              <tr>
+                <td>Saturday & Sunday</td>
+                <td>10:30 AM – 9:30 PM</td>
+              </tr>
+              <tr>
+                <td>Walk-In Consultations</td>
+                <td>Daily from 12:00 PM – 7:00 PM</td>
+              </tr>
+            </table>
+
+            <div class="contact-btns-wrap">
+              <a href="https://wa.me/919876543210" target="_blank" class="btn btn-gold btn-sm">
+                <i class="fa-brands fa-whatsapp"></i> Instant WhatsApp
+              </a>
+              <a href="https://instagram.com" target="_blank" class="btn btn-outline btn-sm">
+                <i class="fa-brands fa-instagram"></i> Follow @ObsidianInk
+              </a>
+            </div>
+          </div>
+
+          <!-- Stylized Dark Map Embed -->
+          <div class="interactive-map-frame reveal-on-scroll">
+            <iframe 
+              title="Studio Google Map Location"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.9739504746356!2d77.63756287593259!3d12.973541114841961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae16a77d54b8df%3A0xe543fa92e6205cf!2s100%20Feet%20Rd%2C%20Indiranagar%2C%20Bengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Floating Direct WhatsApp Trigger -->
+  <a href="https://wa.me/919876543210" target="_blank" class="floating-whatsapp" aria-label="Chat on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="brand-logo footer-logo">
+            <span class="logo-main">OBSIDIAN <span>&</span> INK</span>
+            <span class="logo-sub">Haute Tattoo Atelier • Bengaluru</span>
+          </div>
+          <p class="footer-summary">
+            A sanctuary where medical sterilization meets contemporary fine art. Every piece is drafted 1-of-1 with zero reproductions.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Exploration</h4>
+          <ul class="footer-links">
+            <li><a href="#styles">12 Signature Styles</a></li>
+            <li><a href="#portfolio">Archive Gallery</a></li>
+            <li><a href="#artists">Resident Artists</a></li>
+            <li><a href="#custom">Custom Estimator</a></li>
+            <li><a href="#pricing">Price Guide</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Safety & Ethics</h4>
+          <ul class="footer-links">
+            <li><a href="#hygiene">Hospital Sterilization</a></li>
+            <li><a href="#aftercare">30-Day Aftercare Protocol</a></li>
+            <li><a href="#faq">Client FAQ</a></li>
+            <li><a href="#hygiene">REACH Certified Vegan Inks</a></li>
+            <li><a href="#about">Studio Creed</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Studio Journal</h4>
+          <p class="journal-sub">Receive exclusive cancellations, guest artist alerts, and flash drops.</p>
+          <form onsubmit="handleNewsletter(event)" class="newsletter-form">
+            <input type="email" placeholder="Your email address" required />
+            <button type="submit" class="btn btn-gold btn-sm"><i class="fa-solid fa-arrow-right"></i></button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2016–2025 OBSIDIAN & INK ATELIER PVT. LTD. ALL RIGHTS RESERVED.
+        </div>
+        <div class="legal-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Inking</a>
+          <a href="#">Health Disclosures</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>

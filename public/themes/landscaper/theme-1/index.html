@@ -1,0 +1,2629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GREENSCAPE — Landscape & Lawn Care | Modern Natural Luxury</title>
+  
+  <!-- Google Fonts: Editorial Serif + Clean Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Motion One (Framer Motion's official pure JS/HTML core engine) -->
+  <script src="https://cdn.jsdelivr.net/npm/motion@10.16.4/dist/motion.umd.min.js"></script>
+
+  <style>
+    /* ==========================================================================
+       1. CSS DESIGN TOKENS & LIQUID SYSTEM
+       ========================================================================== */
+    :root {
+      --color-primary: #173F2A;        /* Forest Green */
+      --color-primary-light: #235c3e;
+      --color-primary-dark: #0f2b1d;
+      --color-secondary: #8FAF91;      /* Sage */
+      --color-secondary-subtle: #d7e4d8;
+      --color-bg-ivory: #F7F5EF;       /* Warm Ivory */
+      --color-bg-sage: #E9F0E7;        /* Soft Sage */
+      --color-accent-earth: #9A7450;   /* Earth */
+      --color-text-charcoal: #18201B;  /* Deep Charcoal */
+      --color-text-muted: #526056;
+      --color-white: #FFFFFF;
+      --color-border: rgba(23, 63, 42, 0.12);
+      
+      /* Typography */
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      
+      /* Fluid Typography */
+      --fluid-hero-h1: clamp(2.5rem, 5.5vw + 1rem, 5rem);     /* 40px to 80px */
+      --fluid-h2: clamp(2rem, 3.5vw + 0.5rem, 3.5rem);          /* 32px to 56px */
+      --fluid-h3: clamp(1.4rem, 2vw + 0.2rem, 2rem);             /* 22px to 32px */
+      --fluid-body: clamp(1rem, 0.5vw + 0.9rem, 1.125rem);      /* 16px to 18px */
+      
+      /* Border Radii */
+      --radius-sm: 8px;
+      --radius-card: 16px;
+      --radius-large: 24px;
+      --radius-hero: 32px;
+      
+      /* Liquid Width */
+      --liquid-width: 90%;
+      --liquid-max-width: 1680px;
+      --transition-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Reset & Global */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--color-bg-ivory);
+      color: var(--color-text-charcoal);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+
+    body {
+      line-height: 1.6;
+      background-color: var(--color-bg-ivory);
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+
+    button, input, textarea, select {
+      font-family: inherit;
+      color: inherit;
+    }
+
+    /* Liquid Container System */
+    .liquid-container {
+      width: var(--liquid-width);
+      max-width: var(--liquid-max-width);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Section Utilities */
+    .section-spacing {
+      padding: clamp(4.5rem, 8vw, 8.5rem) 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: 1rem;
+    }
+    .eyebrow::before {
+      content: "";
+      display: inline-block;
+      width: 18px;
+      height: 2px;
+      background: var(--color-secondary);
+    }
+
+    .heading-serif {
+      font-family: var(--font-serif);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+
+    .section-title {
+      font-size: var(--fluid-h2);
+      color: var(--color-primary);
+      margin-bottom: 1.25rem;
+    }
+
+    .section-description {
+      font-size: var(--fluid-body);
+      color: var(--color-text-muted);
+      max-width: 680px;
+      line-height: 1.7;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 0.95rem 2rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: all 0.35s var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+    }
+    .btn-primary:hover {
+      background-color: var(--color-primary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px -8px rgba(23, 63, 42, 0.35);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+    .btn-outline:hover {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      transform: translateY(-2px);
+    }
+
+    .btn-white {
+      background-color: var(--color-white);
+      color: var(--color-primary);
+    }
+    .btn-white:hover {
+      background-color: var(--color-bg-sage);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+
+    .btn-outline-white {
+      background-color: transparent;
+      border-color: var(--color-white);
+      color: var(--color-white);
+    }
+    .btn-outline-white:hover {
+      background-color: var(--color-white);
+      color: var(--color-primary);
+    }
+
+    /* ==========================================================================
+       2. NAVIGATION
+       ========================================================================== */
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 1.25rem 0;
+      transition: background-color 0.4s ease, padding 0.3s ease, box-shadow 0.4s ease;
+    }
+
+    .site-nav.scrolled {
+      background-color: rgba(247, 245, 239, 0.96);
+      backdrop-filter: blur(12px);
+      padding: 0.85rem 0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      display: flex;
+      flex-direction: column;
+    }
+    .nav-brand-title {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--color-primary);
+      line-height: 1;
+    }
+    .nav-brand-sub {
+      font-size: 0.6875rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-top: 3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--color-text-charcoal);
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 1.5px;
+      background-color: var(--color-primary);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-primary);
+      padding: 0.25rem;
+    }
+
+    /* Mobile Drawer */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: var(--color-bg-ivory);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      transform: translateY(-100%);
+      transition: transform 0.5s var(--transition-smooth);
+    }
+    .mobile-menu.active {
+      transform: translateY(0);
+    }
+    .mobile-menu a {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       3. HERO SECTION
+       ========================================================================== */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 6.5rem;
+      position: relative;
+      overflow: hidden;
+      background-color: var(--color-bg-ivory);
+    }
+
+    .hero-liquid-wrap {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      width: 100%;
+      padding-bottom: 4rem;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin-top: 2rem;
+    }
+
+    .hero-title {
+      font-size: var(--fluid-hero-h1);
+      color: var(--color-primary);
+      margin: 0.8rem 0 1.5rem 0;
+      line-height: 1.05;
+    }
+
+    .hero-lead {
+      font-size: clamp(1.125rem, 1vw + 0.85rem, 1.35rem);
+      color: var(--color-text-muted);
+      line-height: 1.6;
+      max-width: 720px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .hero-trust-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--color-border);
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+    .trust-item svg {
+      color: var(--color-secondary);
+    }
+
+    .hero-canvas-frame {
+      width: 100%;
+      height: clamp(380px, 60vh, 700px);
+      border-radius: var(--radius-hero);
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 24px 60px -15px rgba(23, 63, 42, 0.2);
+    }
+    .hero-canvas-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.04);
+      transition: transform 1.2s ease;
+    }
+
+    /* ==========================================================================
+       4. INTRODUCTION SECTION (LIQUID SPLIT)
+       ========================================================================== */
+    .intro-section {
+      background-color: var(--color-bg-ivory);
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 45% 55%;
+      gap: clamp(2rem, 5vw, 6rem);
+      align-items: center;
+    }
+
+    .intro-content p {
+      font-size: var(--fluid-body);
+      color: var(--color-text-muted);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .intro-image-wrap {
+      position: relative;
+    }
+    .organic-image {
+      width: 100%;
+      height: clamp(350px, 45vw, 550px);
+      object-fit: cover;
+      border-radius: var(--radius-large);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+
+    /* ==========================================================================
+       5. SERVICES SECTION (LIQUID EXPANDING CARDS)
+       ========================================================================== */
+    .services-section {
+      background-color: var(--color-bg-sage);
+    }
+
+    .services-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .services-liquid-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+    }
+
+    .service-card {
+      background-color: var(--color-white);
+      border-radius: var(--radius-card);
+      padding: clamp(1.75rem, 2.5vw, 2.5rem);
+      transition: transform 0.4s var(--transition-smooth), box-shadow 0.4s var(--transition-smooth);
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(23, 63, 42, 0.05);
+      position: relative;
+    }
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px -10px rgba(23, 63, 42, 0.12);
+    }
+
+    .service-num {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      color: var(--color-secondary);
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+    }
+    .service-title {
+      font-family: var(--font-serif);
+      font-size: var(--fluid-h3);
+      color: var(--color-primary);
+      margin-bottom: 0.85rem;
+      font-weight: 600;
+    }
+    .service-desc {
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      margin-bottom: 1.75rem;
+      flex-grow: 1;
+    }
+    .service-tags {
+      font-size: 0.8125rem;
+      color: var(--color-accent-earth);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      padding-top: 1rem;
+      border-top: 1px dashed rgba(23, 63, 42, 0.15);
+    }
+
+    /* ==========================================================================
+       6. FEATURED PROJECT (HERO SHOWCASE)
+       ========================================================================== */
+    .featured-section {
+      background-color: var(--color-bg-ivory);
+    }
+
+    .featured-card {
+      border-radius: var(--radius-hero);
+      background-color: var(--color-white);
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      display: grid;
+      grid-template-columns: 58% 42%;
+      box-shadow: 0 25px 50px -12px rgba(23, 63, 42, 0.08);
+    }
+
+    .featured-media {
+      position: relative;
+      min-height: 480px;
+    }
+    .featured-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .featured-info {
+      padding: clamp(2rem, 4vw, 4.5rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .featured-info h3 {
+      font-size: clamp(1.8rem, 2.5vw, 2.75rem);
+      color: var(--color-primary);
+      margin-bottom: 1rem;
+    }
+    .featured-info p {
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .project-specs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+      padding: 1.25rem 0;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .spec-item span {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-muted);
+      margin-bottom: 0.25rem;
+    }
+    .spec-item strong {
+      font-size: 0.95rem;
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       7. BEFORE / AFTER (INTERACTIVE SLIDER)
+       ========================================================================== */
+    .transformation-section {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      position: relative;
+    }
+    .transformation-section .eyebrow {
+      color: var(--color-secondary);
+    }
+    .transformation-section .eyebrow::before {
+      background-color: var(--color-secondary);
+    }
+    .transformation-section .section-title {
+      color: var(--color-white);
+    }
+
+    .comparison-container {
+      position: relative;
+      width: 100%;
+      height: clamp(340px, 55vw, 620px);
+      border-radius: var(--radius-large);
+      overflow: hidden;
+      margin: 3rem 0;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+      user-select: none;
+    }
+
+    .comparison-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .comparison-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .comparison-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      overflow: hidden;
+      border-right: 3px solid var(--color-white);
+      box-shadow: 4px 0 20px rgba(0,0,0,0.35);
+    }
+    .comparison-overlay img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      max-width: none;
+    }
+
+    .comparison-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 48px;
+      height: 48px;
+      background-color: var(--color-white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+      cursor: ew-resize;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .comp-badge {
+      position: absolute;
+      bottom: 24px;
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      text-transform: uppercase;
+      z-index: 5;
+    }
+    .comp-badge.after {
+      right: 24px;
+      background-color: rgba(23, 63, 42, 0.85);
+      color: var(--color-white);
+    }
+    .comp-badge.before {
+      left: 24px;
+      background-color: rgba(0,0,0,0.75);
+      color: var(--color-white);
+    }
+
+    /* ==========================================================================
+       8. EDITORIAL PORTFOLIO (LIQUID ASYMMETRIC GRID)
+       ========================================================================== */
+    .portfolio-section {
+      background-color: var(--color-bg-ivory);
+    }
+
+    .portfolio-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin: 2rem 0 3rem 0;
+    }
+    .filter-btn {
+      background: none;
+      border: 1px solid var(--color-border);
+      padding: 0.6rem 1.4rem;
+      border-radius: 40px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-text-charcoal);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      border-color: var(--color-primary);
+    }
+
+    .portfolio-liquid-gallery {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1.5rem;
+    }
+
+    .portfolio-card {
+      border-radius: var(--radius-large);
+      overflow: hidden;
+      position: relative;
+      background-color: var(--color-white);
+      group: relative;
+      cursor: pointer;
+      height: 420px;
+      transition: transform 0.4s ease;
+    }
+    .portfolio-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .portfolio-card.col-7 { grid-column: span 7; }
+    .portfolio-card.col-5 { grid-column: span 5; }
+    .portfolio-card.col-4 { grid-column: span 4; }
+    .portfolio-card.col-8 { grid-column: span 8; }
+
+    .portfolio-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+    .portfolio-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .portfolio-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(15, 43, 29, 0.9) 0%, rgba(15, 43, 29, 0.2) 60%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+      color: var(--color-white);
+      opacity: 0.95;
+      transition: opacity 0.3s ease;
+    }
+    .portfolio-cat {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-secondary);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    .portfolio-name {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+    }
+
+    /* ==========================================================================
+       9. WHY CHOOSE US
+       ========================================================================== */
+    .why-us-section {
+      background-color: var(--color-bg-sage);
+    }
+
+    .why-us-grid {
+      display: grid;
+      grid-template-columns: 45% 55%;
+      gap: clamp(2rem, 5vw, 5rem);
+      align-items: center;
+    }
+
+    .why-image-card {
+      border-radius: var(--radius-large);
+      overflow: hidden;
+      height: 100%;
+      min-height: 520px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+    .why-image-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .why-blocks {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+    .why-item {
+      display: flex;
+      gap: 1.5rem;
+      padding-bottom: 1.75rem;
+      border-bottom: 1px solid rgba(23, 63, 42, 0.15);
+    }
+    .why-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .why-index {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--color-secondary);
+      font-weight: 700;
+      min-width: 32px;
+    }
+    .why-title {
+      font-size: 1.25rem;
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+    .why-desc {
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* ==========================================================================
+       10. PROCESS (HORIZONTAL TIMELINE)
+       ========================================================================== */
+    .process-section {
+      background-color: var(--color-bg-ivory);
+    }
+
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 4rem;
+      position: relative;
+    }
+    .timeline-grid::before {
+      content: "";
+      position: absolute;
+      top: 36px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: var(--color-secondary-subtle);
+      z-index: 0;
+    }
+
+    .timeline-step {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .step-circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background-color: var(--color-white);
+      border: 2px solid var(--color-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 1.5rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    .timeline-step:hover .step-circle {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      transform: scale(1.1);
+    }
+    .step-title {
+      font-size: 1.15rem;
+      color: var(--color-primary);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    .step-desc {
+      font-size: 0.925rem;
+      color: var(--color-text-muted);
+    }
+
+    /* ==========================================================================
+       11. ABOUT
+       ========================================================================== */
+    .about-section {
+      background-color: var(--color-white);
+    }
+
+    .about-split {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      gap: clamp(2.5rem, 6vw, 6rem);
+      align-items: center;
+    }
+    .about-img {
+      border-radius: var(--radius-large);
+      overflow: hidden;
+      box-shadow: 0 24px 50px rgba(0,0,0,0.08);
+      height: 520px;
+    }
+    .about-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ==========================================================================
+       12. NUMBERS / TRUST SECTION
+       ========================================================================== */
+    .numbers-section {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      padding: clamp(4rem, 6vw, 6.5rem) 0;
+    }
+
+    .stats-liquid-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+    .stat-number {
+      font-family: var(--font-serif);
+      font-size: clamp(2.75rem, 4.5vw, 4.25rem);
+      font-weight: 700;
+      color: var(--color-secondary);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .stat-label {
+      font-size: 1rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.02em;
+    }
+
+    /* ==========================================================================
+       13. TESTIMONIALS
+       ========================================================================== */
+    .testimonials-section {
+      background-color: var(--color-bg-ivory);
+    }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 2.5rem;
+      align-items: stretch;
+      margin-top: 3.5rem;
+    }
+
+    .hero-quote-card {
+      background-color: var(--color-white);
+      padding: clamp(2.5rem, 4vw, 4rem);
+      border-radius: var(--radius-large);
+      border: 1px solid var(--color-border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+    }
+    .hero-quote-text {
+      font-family: var(--font-serif);
+      font-size: clamp(1.4rem, 2vw, 1.85rem);
+      line-height: 1.45;
+      color: var(--color-primary);
+      font-style: italic;
+    }
+    .author-info {
+      margin-top: 2rem;
+    }
+    .author-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--color-primary);
+    }
+    .author-role {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    .sub-reviews-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .sub-review-card {
+      background-color: var(--color-white);
+      padding: 2rem;
+      border-radius: var(--radius-card);
+      border: 1px solid var(--color-border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .sub-review-card p {
+      font-size: 0.95rem;
+      color: var(--color-text-charcoal);
+      margin-bottom: 1.25rem;
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       14. FAQ ACCORDION
+       ========================================================================== */
+    .faq-section {
+      background-color: var(--color-bg-sage);
+    }
+
+    .faq-container {
+      max-width: 900px;
+      margin: 3.5rem auto 0 auto;
+    }
+    .faq-item {
+      background: var(--color-white);
+      border-radius: var(--radius-sm);
+      margin-bottom: 1rem;
+      border: 1px solid var(--color-border);
+      overflow: hidden;
+      transition: box-shadow 0.3s ease;
+    }
+    .faq-header {
+      padding: 1.5rem 1.75rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      user-select: none;
+    }
+    .faq-header h4 {
+      font-size: 1.125rem;
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+    .faq-icon {
+      transition: transform 0.3s ease;
+      color: var(--color-primary);
+    }
+    .faq-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s var(--transition-smooth), padding 0.3s ease;
+      padding: 0 1.75rem;
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .faq-item.active .faq-body {
+      max-height: 250px;
+      padding-bottom: 1.5rem;
+    }
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    /* ==========================================================================
+       15. FINAL CALL TO ACTION
+       ========================================================================== */
+    .final-cta-section {
+      position: relative;
+      background: url('https://images.unsplash.com/photo-1558904541-efa8c4a08931?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
+      padding: clamp(6rem, 10vw, 10rem) 0;
+      text-align: center;
+      color: var(--color-white);
+    }
+    .final-cta-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 43, 29, 0.88);
+      backdrop-filter: blur(2px);
+    }
+    .final-cta-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .final-cta-content h2 {
+      font-size: var(--fluid-h2);
+      margin-bottom: 1.25rem;
+    }
+    .final-cta-content p {
+      font-size: 1.125rem;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ==========================================================================
+       16. FOOTER
+       ========================================================================== */
+    .site-footer {
+      background-color: var(--color-primary-dark);
+      color: rgba(255,255,255,0.7);
+      padding: 5rem 0 2.5rem 0;
+      font-size: 0.9375rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 3rem;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-brand h3 {
+      font-family: var(--font-serif);
+      color: var(--color-white);
+      font-size: 1.85rem;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    .footer-col-title {
+      color: var(--color-white);
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 0.8125rem;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .footer-links a:hover {
+      color: var(--color-white);
+    }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      font-size: 0.8125rem;
+    }
+
+    /* ==========================================================================
+       17. STICKY ACTION & FLOATING BUTTON
+       ========================================================================== */
+    .sticky-floating-cta {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 900;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+
+    .mobile-bottom-bar {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: var(--color-white);
+      padding: 0.75rem 1rem;
+      z-index: 950;
+      box-shadow: 0 -4px 15px rgba(0,0,0,0.08);
+    }
+
+    /* ==========================================================================
+       18. PROGRESSIVE 8-STEP ENQUIRY MODAL SYSTEM
+       ========================================================================== */
+    .enquiry-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 43, 29, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .enquiry-modal-backdrop.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .enquiry-modal-window {
+      background: var(--color-white);
+      width: 100%;
+      max-width: 720px;
+      border-radius: var(--radius-large);
+      padding: clamp(2rem, 4vw, 3.5rem);
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 35px 70px rgba(0,0,0,0.3);
+      position: relative;
+      transform: translateY(20px) scale(0.98);
+      transition: transform 0.4s var(--transition-smooth);
+    }
+    .enquiry-modal-backdrop.open .enquiry-modal-window {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-text-muted);
+      padding: 0.5rem;
+      border-radius: 50%;
+      transition: background-color 0.2s ease;
+    }
+    .modal-close-btn:hover {
+      background-color: var(--color-bg-sage);
+      color: var(--color-primary);
+    }
+
+    .wizard-progress {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+    .wizard-step-label {
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-secondary);
+    }
+    .progress-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--color-secondary-subtle);
+      transition: all 0.3s ease;
+    }
+    .dot.active {
+      background: var(--color-primary);
+      transform: scale(1.2);
+    }
+
+    .wizard-step {
+      display: none;
+    }
+    .wizard-step.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-question-heading {
+      font-family: var(--font-serif);
+      font-size: 1.85rem;
+      color: var(--color-primary);
+      margin-bottom: 0.5rem;
+    }
+    .step-question-sub {
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--color-primary);
+    }
+    .form-input, .form-textarea, .form-select {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      background-color: var(--color-bg-ivory);
+      font-size: 0.95rem;
+      transition: border-color 0.2s ease;
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      background-color: var(--color-white);
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .option-card {
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: all 0.2s ease;
+      font-size: 0.925rem;
+      font-weight: 500;
+    }
+    .option-card:hover {
+      border-color: var(--color-secondary);
+      background-color: var(--color-bg-ivory);
+    }
+    .option-card.selected {
+      border-color: var(--color-primary);
+      background-color: var(--color-bg-sage);
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+
+    .wizard-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .file-upload-box {
+      border: 2px dashed var(--color-secondary);
+      border-radius: var(--radius-card);
+      padding: 2.5rem;
+      text-align: center;
+      cursor: pointer;
+      background: var(--color-bg-ivory);
+      transition: background-color 0.3s ease;
+    }
+    .file-upload-box:hover {
+      background-color: var(--color-bg-sage);
+    }
+
+    /* Modal Success State */
+    .success-pane {
+      display: none;
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    .success-icon-wrap {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--color-bg-sage);
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem auto;
+    }
+
+    /* ==========================================================================
+       19. RESPONSIVE BREAKPOINTS (LIQUID PHILOSOPHY)
+       ========================================================================== */
+    @media (max-width: 1024px) {
+      .services-liquid-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .featured-card {
+        grid-template-columns: 1fr;
+      }
+      .portfolio-liquid-gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .portfolio-card.col-7,
+      .portfolio-card.col-5,
+      .portfolio-card.col-4,
+      .portfolio-card.col-8 {
+        grid-column: span 1;
+      }
+      .why-us-grid,
+      .intro-grid,
+      .about-split {
+        grid-template-columns: 1fr;
+      }
+      .timeline-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .timeline-grid::before {
+        display: none;
+      }
+      .stats-liquid-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .testi-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-actions .btn {
+        display: none;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .services-liquid-grid {
+        grid-template-columns: 1fr;
+      }
+      .timeline-grid {
+        grid-template-columns: 1fr;
+      }
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .stats-liquid-grid {
+        grid-template-columns: 1fr;
+      }
+      .sticky-floating-cta {
+        display: none;
+      }
+      .mobile-bottom-bar {
+        display: block;
+      }
+      .mobile-bottom-bar .btn {
+        width: 100%;
+      }
+      body {
+        padding-bottom: 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       NAVIGATION
+       ========================================================================== -->
+  <header class="site-nav" id="navbar">
+    <div class="liquid-container nav-inner">
+      <a href="#" class="nav-brand">
+        <span class="nav-brand-title">GREENSCAPE</span>
+        <span class="nav-brand-sub">Landscape & Lawn Care</span>
+      </a>
+      
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#projects">Our Work</a></li>
+          <li><a href="#transformation">Transformation</a></li>
+          <li><a href="#process">How It Works</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn btn-primary" onclick="openEnquiryModal()">
+          Get a Free Estimate <i data-lucide="arrow-right" style="width:16px;"></i>
+        </button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-menu" id="mobileDrawer">
+    <a href="#services" class="mobile-nav-link">Services</a>
+    <a href="#projects" class="mobile-nav-link">Our Work</a>
+    <a href="#transformation" class="mobile-nav-link">Transformation</a>
+    <a href="#process" class="mobile-nav-link">Process</a>
+    <a href="#about" class="mobile-nav-link">About</a>
+    <a href="#faq" class="mobile-nav-link">FAQ</a>
+    <button class="btn btn-primary" onclick="openEnquiryModal(); toggleMobileMenu();">
+      Get a Free Estimate
+    </button>
+  </div>
+
+  <main>
+    <!-- ==========================================================================
+         HERO SECTION (LIQUID FULL-BLEED)
+         ========================================================================== -->
+    <section class="hero-section">
+      <div class="liquid-container hero-liquid-wrap">
+        <div class="hero-content">
+          <div class="eyebrow">Landscape • Lawn • Outdoor Living</div>
+          <h1 class="heading-serif hero-title">
+            Beautiful Outdoor Spaces, Thoughtfully Designed.
+          </h1>
+          <p class="hero-lead">
+            We design, build and maintain landscapes that make your outdoor space feel as natural, inviting and refined as your home.
+          </p>
+          <div class="hero-buttons">
+            <button class="btn btn-primary" onclick="openEnquiryModal()">
+              Get a Free Estimate <i data-lucide="arrow-up-right" style="width:18px;"></i>
+            </button>
+            <a href="#projects" class="btn btn-outline">
+              Explore Our Work
+            </a>
+          </div>
+          <div class="hero-trust-bar">
+            <div class="trust-item"><i data-lucide="check"></i> Reliable Service</div>
+            <div class="trust-item"><i data-lucide="check"></i> Quality Workmanship</div>
+            <div class="trust-item"><i data-lucide="check"></i> Free Estimates</div>
+          </div>
+        </div>
+
+        <div class="hero-canvas-frame">
+          <img src="https://images.unsplash.com/photo-1592417817098-8f3d6ef23edf?auto=format&fit=crop&w=1800&q=80" alt="Lush landscaped private backyard with modern stone pavers and rich foliage" id="heroImage">
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         INTRODUCTION SECTION
+         ========================================================================== -->
+    <section class="intro-section section-spacing">
+      <div class="liquid-container">
+        <div class="intro-grid">
+          <div class="intro-content">
+            <div class="eyebrow">Our Approach</div>
+            <h2 class="heading-serif section-title">Your Landscape Should Feel Like Home.</h2>
+            <p>
+              From a crisp, healthy lawn to an architecturally transformed backyard retreat, we craft natural spaces that balance living beauty, functionality and effortless longevity.
+            </p>
+            <p>
+              Every soil texture, sun angle and stone placement is evaluated so your outdoor living area effortlessly harmonizes with your lifestyle.
+            </p>
+            <div style="margin-top: 2rem;">
+              <a href="#about" class="btn btn-outline" style="border: none; padding-left: 0;">
+                Learn More About Us <i data-lucide="arrow-right" style="width: 16px;"></i>
+              </a>
+            </div>
+          </div>
+          <div class="intro-image-wrap">
+            <img class="organic-image" src="https://images.unsplash.com/photo-1584467735871-8e85353a8413?auto=format&fit=crop&w=1200&q=80" alt="Lush pathway through manicured garden architecture">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SERVICES SECTION
+         ========================================================================== -->
+    <section class="services-section section-spacing" id="services">
+      <div class="liquid-container">
+        <div class="services-header">
+          <div>
+            <div class="eyebrow">What We Do</div>
+            <h2 class="heading-serif section-title">Complete Care for Your Outdoor Space.</h2>
+          </div>
+          <p class="section-description">
+            Thoughtful ongoing maintenance and comprehensive transformations handled with precision.
+          </p>
+        </div>
+
+        <div class="services-liquid-grid">
+          <!-- 01 -->
+          <div class="service-card">
+            <div class="service-num">01</div>
+            <h3 class="service-title">Lawn Care</h3>
+            <p class="service-desc">Keep your lawn deeply rooted, clean and vibrant throughout the seasons with consistent, meticulous maintenance.</p>
+            <div class="service-tags">Mowing · Edging · Trimming · Aeration</div>
+          </div>
+
+          <!-- 02 -->
+          <div class="service-card">
+            <div class="service-num">02</div>
+            <h3 class="service-title">Landscape Design</h3>
+            <p class="service-desc">Tailored outdoor architectural concepts that balance modern aesthetics, indigenous flora, and everyday practical utility.</p>
+            <div class="service-tags">Design · Planting · Hardscape · Spatial Planning</div>
+          </div>
+
+          <!-- 03 -->
+          <div class="service-card">
+            <div class="service-num">03</div>
+            <h3 class="service-title">Garden & Plant Care</h3>
+            <p class="service-desc">From seasonal perennials to enriched soil composition, we sustain vibrant blooms and resilient greenery throughout the year.</p>
+            <div class="service-tags">Planting · Pruning · Soil Health · Weed Control</div>
+          </div>
+
+          <!-- 04 -->
+          <div class="service-card">
+            <div class="service-num">04</div>
+            <h3 class="service-title">Irrigation</h3>
+            <p class="service-desc">Smart, water-conserving irrigation systems that deliver optimal hydration directly where your plants and turf need it most.</p>
+            <div class="service-tags">Drip Systems · Smart Controllers · Audits</div>
+          </div>
+
+          <!-- 05 -->
+          <div class="service-card">
+            <div class="service-num">05</div>
+            <h3 class="service-title">Tree & Shrub Care</h3>
+            <p class="service-desc">Artistic shaping, canopy thinning, and deep health inspections for the mature trees that anchor your property’s skyline.</p>
+            <div class="service-tags">Pruning · Shaping · Root Nutrition</div>
+          </div>
+
+          <!-- 06 -->
+          <div class="service-card">
+            <div class="service-num">06</div>
+            <h3 class="service-title">Landscape Transformation</h3>
+            <p class="service-desc">Full outdoor overhauls converting underutilized yards into serene, value-adding architectural sanctuaries.</p>
+            <div class="service-tags">Turnkey · Construction · Hardscaping</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         FEATURED PROJECT
+         ========================================================================== -->
+    <section class="featured-section section-spacing">
+      <div class="liquid-container">
+        <div class="featured-card">
+          <div class="featured-media">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80" alt="Modern backyard architectural retreat">
+          </div>
+          <div class="featured-info">
+            <div class="eyebrow">Featured Project</div>
+            <h3 class="heading-serif">Modern Backyard Retreat</h3>
+            <p>
+              A complete landscape overhaul designed to turn a sloping, fragmented lawn into an open-air sanctuary featuring custom stone masonry, indigenous drought-tolerant plantings, and warm evening lighting.
+            </p>
+            <div class="project-specs">
+              <div class="spec-item">
+                <span>Location</span>
+                <strong>Highland Park</strong>
+              </div>
+              <div class="spec-item">
+                <span>Service</span>
+                <strong>Design &amp; Build</strong>
+              </div>
+              <div class="spec-item">
+                <span>Style</span>
+                <strong>Natural Luxury</strong>
+              </div>
+            </div>
+            <div>
+              <button class="btn btn-primary" onclick="openEnquiryModal()">
+                Request Similar Project <i data-lucide="arrow-right" style="width: 16px;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         BEFORE / AFTER TRANSFORMATION (DRAGGABLE SLIDER)
+         ========================================================================== -->
+    <section class="transformation-section section-spacing" id="transformation">
+      <div class="liquid-container">
+        <div style="text-align: center; max-width: 720px; margin: 0 auto;">
+          <div class="eyebrow">The Transformation</div>
+          <h2 class="heading-serif section-title">From Ordinary to Extraordinary.</h2>
+          <p style="color: rgba(255,255,255,0.8); font-size: var(--fluid-body);">
+            Drag the handle below to see how purposeful landscaping elevates unrefined ground into an architectural haven.
+          </p>
+        </div>
+
+        <div class="comparison-container" id="compContainer">
+          <!-- After (Full background image) -->
+          <div class="comparison-image">
+            <img src="https://images.unsplash.com/photo-1558904541-efa8c4a08931?auto=format&fit=crop&w=1600&q=80" alt="After Transformation - Lush green lawn with stone patio">
+            <span class="comp-badge after">After</span>
+          </div>
+
+          <!-- Before (Clipped Image) -->
+          <div class="comparison-overlay" id="compOverlay">
+            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80" alt="Before Transformation - Overgrown dry yard" id="compBeforeImg">
+            <span class="comp-badge before">Before</span>
+          </div>
+
+          <!-- Handle -->
+          <div class="comparison-handle" id="compHandle">
+            <i data-lucide="chevrons-left-right" style="width: 22px;"></i>
+          </div>
+        </div>
+
+        <div style="text-align: center;">
+          <p style="color: rgba(255,255,255,0.75); margin-bottom: 2rem;">
+            Every plot of land possesses latent character. We reveal it through enduring natural elements.
+          </p>
+          <button class="btn btn-white" onclick="openEnquiryModal()">
+            Start Your Transformation
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         EDITORIAL PORTFOLIO
+         ========================================================================== -->
+    <section class="portfolio-section section-spacing" id="projects">
+      <div class="liquid-container">
+        <div class="eyebrow">Our Work</div>
+        <h2 class="heading-serif section-title">Spaces We've Transformed.</h2>
+
+        <!-- Filters -->
+        <div class="portfolio-filters">
+          <button class="filter-btn active" data-filter="all">All Projects</button>
+          <button class="filter-btn" data-filter="residential">Residential</button>
+          <button class="filter-btn" data-filter="lawn">Lawn &amp; Turf</button>
+          <button class="filter-btn" data-filter="gardens">Gardens</button>
+        </div>
+
+        <!-- Asymmetric Liquid Grid -->
+        <div class="portfolio-liquid-gallery" id="portfolioGallery">
+          <div class="portfolio-card col-7" data-category="residential">
+            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80" alt="Modern villa lawn landscape">
+            <div class="portfolio-overlay">
+              <span class="portfolio-cat">Residential</span>
+              <h4 class="portfolio-name">The Glass Pavilion Meadow</h4>
+            </div>
+          </div>
+
+          <div class="portfolio-card col-5" data-category="gardens">
+            <img src="https://images.unsplash.com/photo-1598902108854-10e335adac99?auto=format&fit=crop&w=1000&q=80" alt="Botanical flower beds and pathway">
+            <div class="portfolio-overlay">
+              <span class="portfolio-cat">Gardens</span>
+              <h4 class="portfolio-name">Cotswold Perennial Border</h4>
+            </div>
+          </div>
+
+          <div class="portfolio-card col-4" data-category="lawn">
+            <img src="https://images.unsplash.com/photo-1590682680695-43b964a3ae17?auto=format&fit=crop&w=1000&q=80" alt="Striped pristine green lawn">
+            <div class="portfolio-overlay">
+              <span class="portfolio-cat">Lawn &amp; Turf</span>
+              <h4 class="portfolio-name">Estate Turf Restoration</h4>
+            </div>
+          </div>
+
+          <div class="portfolio-card col-8" data-category="residential">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80" alt="Luxury outdoor living terrace with stonework">
+            <div class="portfolio-overlay">
+              <span class="portfolio-cat">Residential</span>
+              <h4 class="portfolio-name">Cascading Limestone Terrace</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         WHY CHOOSE US
+         ========================================================================== -->
+    <section class="why-us-section section-spacing">
+      <div class="liquid-container">
+        <div class="why-us-grid">
+          <div class="why-image-card">
+            <img src="https://images.unsplash.com/photo-1599427303058-f04cbcf4756f?auto=format&fit=crop&w=1000&q=80" alt="Landscaper attending carefully to soil and plants">
+          </div>
+
+          <div class="why-content">
+            <div class="eyebrow">Why Choose Us</div>
+            <h2 class="heading-serif section-title">Thoughtful Work. Beautiful Results.</h2>
+            
+            <div class="why-blocks">
+              <div class="why-item">
+                <span class="why-index">01</span>
+                <div>
+                  <h4 class="why-title">Local Ecological Expertise</h4>
+                  <p class="why-desc">We comprehend your microclimate, native soil structure, seasonal sun patterns, and ideal flora combinations.</p>
+                </div>
+              </div>
+
+              <div class="why-item">
+                <span class="why-index">02</span>
+                <div>
+                  <h4 class="why-title">Dependable Communication</h4>
+                  <p class="why-desc">No missed dates or ambiguous quotes. You receive punctuality, continuous updates, and white-glove respect.</p>
+                </div>
+              </div>
+
+              <div class="why-item">
+                <span class="why-index">03</span>
+                <div>
+                  <h4 class="why-title">Rigorous Attention to Detail</h4>
+                  <p class="why-desc">From clean border edging to hidden irrigation conduits, we prioritize the craftsmanship standard others skip.</p>
+                </div>
+              </div>
+
+              <div class="why-item">
+                <span class="why-index">04</span>
+                <div>
+                  <h4 class="why-title">Built Around Your Living Rhythm</h4>
+                  <p class="why-desc">Every space is custom balanced around how your children play, where you dine outside, and your visual enjoyment from indoors.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PROCESS (HOW IT WORKS)
+         ========================================================================== -->
+    <section class="process-section section-spacing" id="process">
+      <div class="liquid-container">
+        <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+          <div class="eyebrow">How It Works</div>
+          <h2 class="heading-serif section-title">From Idea to Outdoor Space.</h2>
+          <p class="section-description" style="margin: 0 auto;">
+            A seamless, stress-free four-stage progression that ensures quality from consultation through completion.
+          </p>
+        </div>
+
+        <div class="timeline-grid">
+          <div class="timeline-step">
+            <div class="step-circle">01</div>
+            <h4 class="step-title">Tell Us About Your Space</h4>
+            <p class="step-desc">Share your initial goals, preferences, and aesthetic vision through our simple enquiry form.</p>
+          </div>
+
+          <div class="timeline-step">
+            <div class="step-circle">02</div>
+            <h4 class="step-title">We Assess</h4>
+            <p class="step-desc">We conduct an on-site property walkthrough to analyze light exposure, drainage, grading, and soil.</p>
+          </div>
+
+          <div class="timeline-step">
+            <div class="step-circle">03</div>
+            <h4 class="step-title">Plan &amp; Scope</h4>
+            <p class="step-desc">We create a tailored design concept paired with a clear, itemized proposal and plant specifications.</p>
+          </div>
+
+          <div class="timeline-step">
+            <div class="step-circle">04</div>
+            <h4 class="step-title">Transform</h4>
+            <p class="step-desc">Our master landscaping artisans install your project cleanly, efficiently, and on schedule.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         ABOUT US
+         ========================================================================== -->
+    <section class="about-section section-spacing" id="about">
+      <div class="liquid-container">
+        <div class="about-split">
+          <div class="about-img">
+            <img src="https://images.unsplash.com/photo-1595855759920-86582396756a?auto=format&fit=crop&w=1200&q=80" alt="Founders standing in front of landscaped property">
+          </div>
+          <div class="about-text">
+            <div class="eyebrow">About Greenscape</div>
+            <h2 class="heading-serif section-title">We Care About the Spaces You Live In.</h2>
+            <p style="font-size: var(--fluid-body); color: var(--color-text-muted); margin-bottom: 1.5rem; line-height: 1.8;">
+              Greenscape began with a straightforward conviction: outdoor environments deserve the same refined architectural intentionality as your interior rooms.
+            </p>
+            <p style="font-size: var(--fluid-body); color: var(--color-text-muted); margin-bottom: 2rem; line-height: 1.8;">
+              Over the last decade, we have nurtured a dedicated team of horticulturists, stonemasons, and lawn specialists. We are not just yard mowers—we are caretakers of natural beauty.
+            </p>
+            <button class="btn btn-outline" onclick="openEnquiryModal()">
+              Schedule a Consultation <i data-lucide="calendar" style="width: 16px;"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         TRUST NUMBERS / STATS (ANIMATED ON SCROLL)
+         ========================================================================== -->
+    <section class="numbers-section" id="statsSection">
+      <div class="liquid-container">
+        <div class="stats-liquid-grid">
+          <div class="stat-card">
+            <div class="stat-number" data-target="12">0</div>
+            <div class="stat-label">Years of Experience</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" data-target="580">0</div>
+            <div class="stat-label">Projects Completed</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" data-target="98">0</div>
+            <div class="stat-label">% Client Satisfaction</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" data-target="100">0</div>
+            <div class="stat-label">% Workmanship Guarantee</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         TESTIMONIALS
+         ========================================================================== -->
+    <section class="testimonials-section section-spacing">
+      <div class="liquid-container">
+        <div class="eyebrow">Client Stories</div>
+        <h2 class="heading-serif section-title">Loved by Homeowners.</h2>
+
+        <div class="testi-grid">
+          <!-- Main Review -->
+          <div class="hero-quote-card">
+            <div>
+              <div style="color: var(--color-accent-earth); margin-bottom: 1rem; display: flex; gap: 4px;">
+                <i data-lucide="star" style="width: 18px; fill: currentColor;"></i>
+                <i data-lucide="star" style="width: 18px; fill: currentColor;"></i>
+                <i data-lucide="star" style="width: 18px; fill: currentColor;"></i>
+                <i data-lucide="star" style="width: 18px; fill: currentColor;"></i>
+                <i data-lucide="star" style="width: 18px; fill: currentColor;"></i>
+              </div>
+              <p class="hero-quote-text">
+                “From our first consultation to the final stone laid in the courtyard, Greenscape exceeded every expectation. Our backyard now feels like a five-star private resort.”
+              </p>
+            </div>
+            <div class="author-info">
+              <div class="author-name">Sarah M.</div>
+              <div class="author-role">Residential Client • Complete Overhaul</div>
+            </div>
+          </div>
+
+          <!-- Secondary Reviews -->
+          <div class="sub-reviews-col">
+            <div class="sub-review-card">
+              <p>“Their scheduled lawn care team is quiet, respectful, and razor-sharp. Our grass has never looked this dense and vibrantly green in 8 years.”</p>
+              <div>
+                <strong>David K.</strong>
+                <span style="font-size: 0.8rem; color: var(--color-text-muted); display: block;">Lawn Maintenance Member</span>
+              </div>
+            </div>
+
+            <div class="sub-review-card">
+              <p>“The custom drip irrigation and perennial garden they created saved our plants through intense summer heat waves while lowering our water bills.”</p>
+              <div>
+                <strong>Elena &amp; Marc R.</strong>
+                <span style="font-size: 0.8rem; color: var(--color-text-muted); display: block;">Garden &amp; Irrigation Clients</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         FAQ ACCORDION
+         ========================================================================== -->
+    <section class="faq-section section-spacing" id="faq">
+      <div class="liquid-container">
+        <div style="text-align: center; max-width: 650px; margin: 0 auto;">
+          <div class="eyebrow">Got Questions?</div>
+          <h2 class="heading-serif section-title">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="faq-container">
+          <div class="faq-item">
+            <div class="faq-header">
+              <h4>How much does a landscaping project cost?</h4>
+              <i data-lucide="plus" class="faq-icon"></i>
+            </div>
+            <div class="faq-body">
+              Every property has distinct grade, scale, and soil requirements. We deliver comprehensive transparent estimates tailored precisely to your property parameters without hidden fees.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-header">
+              <h4>Do you provide regular recurring lawn maintenance?</h4>
+              <i data-lucide="plus" class="faq-icon"></i>
+            </div>
+            <div class="faq-body">
+              Yes. We offer bi-weekly and weekly maintenance contracts including precision mowing, edging, seasonal aeration, fertilization, and bed weed eradication.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-header">
+              <h4>Are consultations and initial estimates free?</h4>
+              <i data-lucide="plus" class="faq-icon"></i>
+            </div>
+            <div class="faq-body">
+              Yes, our initial phone evaluation and preliminary project estimates are complimentary. Detailed architectural 3D layout renderings are included for full redesign engagements.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-header">
+              <h4>Do you work with residential properties?</h4>
+              <i data-lucide="plus" class="faq-icon"></i>
+            </div>
+            <div class="faq-body">
+              Yes. The majority of our portfolio consists of private residences, from suburban lawn revitalizations to comprehensive estate garden architecture.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-header">
+              <h4>Can you design a complete backyard from scratch?</h4>
+              <i data-lucide="plus" class="faq-icon"></i>
+            </div>
+            <div class="faq-body">
+              Absolutely. We orchestrate the entire design-build journey: earthwork, stone masonry, patios, irrigation systems, outdoor illumination, and mature flora planting.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         FINAL CTA
+         ========================================================================== -->
+    <section class="final-cta-section">
+      <div class="final-cta-overlay"></div>
+      <div class="liquid-container final-cta-content">
+        <h2 class="heading-serif">Your Dream Outdoor Space Starts Here.</h2>
+        <p>Let’s collaborate to build something enduring, relaxing, and naturally luxurious.</p>
+        <button class="btn btn-white" onclick="openEnquiryModal()" style="font-size: 1.05rem; padding: 1.1rem 2.5rem;">
+          Get a Free Estimate <i data-lucide="arrow-right" style="width: 18px;"></i>
+        </button>
+        <div style="font-size: 0.875rem; color: rgba(255,255,255,0.7); margin-top: 1.25rem;">
+          No obligation. Simply an open conversation regarding your space.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="liquid-container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>GREENSCAPE</h3>
+          <p style="margin-bottom: 1.5rem; line-height: 1.6;">
+            Landscape architecture &amp; lawn preservation dedicated to organic beauty and lasting craftsmanship.
+          </p>
+          <div style="display: flex; gap: 1rem; color: var(--color-white);">
+            <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+            <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Navigation</div>
+          <ul class="footer-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#projects">Our Work</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Services</div>
+          <ul class="footer-links">
+            <li><a href="#services">Lawn Care</a></li>
+            <li><a href="#services">Landscape Design</a></li>
+            <li><a href="#services">Garden Care</a></li>
+            <li><a href="#services">Irrigation</a></li>
+            <li><a href="#services">Tree Pruning</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Direct Inquiries</div>
+          <p style="margin-bottom: 0.5rem;"><i data-lucide="phone" style="width:14px; vertical-align:middle; margin-right:6px;"></i> (555) 349-2810</p>
+          <p style="margin-bottom: 0.5rem;"><i data-lucide="mail" style="width:14px; vertical-align:middle; margin-right:6px;"></i> hello@greenscape-design.com</p>
+          <p style="margin-bottom: 0.5rem;"><i data-lucide="map-pin" style="width:14px; vertical-align:middle; margin-right:6px;"></i> 4820 Evergreen Lane, Suite 100</p>
+          <p><i data-lucide="clock" style="width:14px; vertical-align:middle; margin-right:6px;"></i> Mon – Sat: 7:30 AM – 6:00 PM</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 Greenscape. All Rights Reserved.</div>
+        <div>
+          <a href="#" style="margin-right: 1.5rem;">Privacy Policy</a>
+          <a href="#">Terms &amp; Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       FLOATING ACTIONS
+       ========================================================================== -->
+  <div class="sticky-floating-cta">
+    <button class="btn btn-primary" onclick="openEnquiryModal()" style="box-shadow: 0 10px 25px rgba(23, 63, 42, 0.35);">
+      🌿 Get Free Estimate
+    </button>
+  </div>
+
+  <div class="mobile-bottom-bar">
+    <button class="btn btn-primary" onclick="openEnquiryModal()">
+      Get Your Free Estimate →
+    </button>
+  </div>
+
+  <!-- ==========================================================================
+       PROGRESSIVE 8-STEP ENQUIRY MODAL
+       ========================================================================== -->
+  <div class="enquiry-modal-backdrop" id="enquiryModal">
+    <div class="enquiry-modal-window">
+      <button class="modal-close-btn" onclick="closeEnquiryModal()" aria-label="Close dialog">
+        <i data-lucide="x"></i>
+      </button>
+
+      <!-- Wizard Flow Container -->
+      <div id="wizardFlow">
+        <div class="wizard-progress">
+          <span class="wizard-step-label" id="stepCounterDisplay">Step 1 of 8</span>
+          <div class="progress-dots" id="dotsContainer">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+        </div>
+
+        <form id="enquiryForm" onsubmit="event.preventDefault();">
+          <!-- STEP 1: CONTACT -->
+          <div class="wizard-step active" data-step="1">
+            <h3 class="step-question-heading">Let's talk about your space.</h3>
+            <p class="step-question-sub">How can our landscape architects reach you?</p>
+            <div class="form-group">
+              <label class="form-label">Full Name *</label>
+              <input type="text" class="form-input" id="clientName" placeholder="e.g. Eleanor Vance" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone Number *</label>
+              <input type="tel" class="form-input" id="clientPhone" placeholder="e.g. (555) 123-4567" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address *</label>
+              <input type="email" class="form-input" id="clientEmail" placeholder="e.g. eleanor@example.com" required>
+            </div>
+          </div>
+
+          <!-- STEP 2: PROPERTY INFO -->
+          <div class="wizard-step" data-step="2">
+            <h3 class="step-question-heading">Tell us about the property.</h3>
+            <p class="step-question-sub">What type of space are we enhancing?</p>
+            <label class="form-label">Property Type</label>
+            <div class="options-grid" style="margin-bottom: 1.5rem;">
+              <div class="option-card selected" onclick="selectSingle(this, 'propertyType')">
+                <input type="radio" name="propertyType" value="Residential" checked hidden>
+                <i data-lucide="home"></i> Residential
+              </div>
+              <div class="option-card" onclick="selectSingle(this, 'propertyType')">
+                <input type="radio" name="propertyType" value="Commercial" hidden>
+                <i data-lucide="building"></i> Commercial
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Property Address / Zip Code *</label>
+              <input type="text" class="form-input" id="propertyAddress" placeholder="Street and City" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Approximate Lot / Garden Size</label>
+              <select class="form-select" id="lotSize">
+                <option value="Small">Small (Townhouse / Under 3,000 sq ft)</option>
+                <option value="Medium" selected>Medium (3,000 - 10,000 sq ft)</option>
+                <option value="Large">Large (1/4 Acre to 1 Acre)</option>
+                <option value="Estate">Estate (Over 1 Acre)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- STEP 3: SERVICES NEEDED -->
+          <div class="wizard-step" data-step="3">
+            <h3 class="step-question-heading">What services do you need?</h3>
+            <p class="step-question-sub">Select all services of interest.</p>
+            <div class="options-grid">
+              <div class="option-card selected" onclick="toggleMulti(this)">
+                <i data-lucide="check-circle-2"></i> Lawn Care
+              </div>
+              <div class="option-card" onclick="toggleMulti(this)">
+                <i data-lucide="check-circle-2"></i> Landscape Design
+              </div>
+              <div class="option-card" onclick="toggleMulti(this)">
+                <i data-lucide="check-circle-2"></i> Irrigation Systems
+              </div>
+              <div class="option-card" onclick="toggleMulti(this)">
+                <i data-lucide="check-circle-2"></i> Garden Maintenance
+              </div>
+              <div class="option-card" onclick="toggleMulti(this)">
+                <i data-lucide="check-circle-2"></i> Tree &amp; Shrub Care
+              </div>
+              <div class="option-card" onclick="toggleMulti(this)">
+                <i data-lucide="check-circle-2"></i> Full Transformation
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 4: PROJECT DETAILS -->
+          <div class="wizard-step" data-step="4">
+            <h3 class="step-question-heading">Tell us about your project vision.</h3>
+            <p class="step-question-sub">What do you envision for this outdoor transformation?</p>
+            <div class="form-group">
+              <label class="form-label">Project Details &amp; Ideas</label>
+              <textarea class="form-textarea" id="projectDetails" rows="4" placeholder="Mention any specific features: stone patios, sod revival, native plants, children's lawn areas, lighting..."></textarea>
+            </div>
+          </div>
+
+          <!-- STEP 5: BUDGET RANGE -->
+          <div class="wizard-step" data-step="5">
+            <h3 class="step-question-heading">Do you have an allocated budget?</h3>
+            <p class="step-question-sub">This helps us match materials, plants, and scale accurately.</p>
+            <div class="options-grid">
+              <div class="option-card" onclick="selectSingle(this, 'budget')">
+                <input type="radio" name="budget" value="Under $1,000" hidden> Under $1,000
+              </div>
+              <div class="option-card" onclick="selectSingle(this, 'budget')">
+                <input type="radio" name="budget" value="$1,000 – $2,500" hidden> $1,000 – $2,500
+              </div>
+              <div class="option-card selected" onclick="selectSingle(this, 'budget')">
+                <input type="radio" name="budget" value="$2,500 – $5,000" checked hidden> $2,500 – $5,000
+              </div>
+              <div class="option-card" onclick="selectSingle(this, 'budget')">
+                <input type="radio" name="budget" value="$5,000 – $10,000" hidden> $5,000 – $10,000
+              </div>
+              <div class="option-card" onclick="selectSingle(this, 'budget')">
+                <input type="radio" name="budget" value="$10,000+" hidden> $10,000+
+              </div>
+              <div class="option-card" onclick="selectSingle(this, 'budget')">
+                <input type="radio" name="budget" value="Exploring" hidden> Just exploring options
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 6: TIMELINE -->
+          <div class="wizard-step" data-step="6">
+            <h3 class="step-question-heading">When would you like to start?</h3>
+            <p class="step-question-sub">Project availability is tailored around your target window.</p>
+            <div class="options-grid">
+              <div class="option-card selected" onclick="selectSingle(this, 'timeline')">
+                <input type="radio" name="timeline" value="ASAP" checked hidden> As soon as possible
+              </div>
+              <div class="option-card" onclick="selectSingle(this, 'timeline')">
+                <input type="radio" name="timeline" value="1month" hidden> Within 1 Month
+              </div>
+              <div class="option-card" onclick="selectSingle(this, 'timeline')">
+                <input type="radio" name="timeline" value="1-3months" hidden> 1–3 Months
+              </div>
+              <div class="option-card" onclick="selectSingle(this, 'timeline')">
+                <input type="radio" name="timeline" value="Flexible" hidden> Completely flexible
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 7: PHOTO UPLOAD -->
+          <div class="wizard-step" data-step="7">
+            <h3 class="step-question-heading">Show us your space.</h3>
+            <p class="step-question-sub">Uploading a quick photo of your yard assists our preliminary estimate.</p>
+            <div class="file-upload-box" onclick="document.getElementById('fileInput').click()">
+              <i data-lucide="image-plus" style="width: 42px; height: 42px; color: var(--color-primary); margin-bottom: 0.5rem;"></i>
+              <p style="font-weight: 600; color: var(--color-primary);">Click to upload property pictures</p>
+              <span style="font-size: 0.8125rem; color: var(--color-text-muted);">Supports JPG, PNG, WebP (Optional)</span>
+              <input type="file" id="fileInput" multiple style="display: none;" onchange="handleFileSelected(this)">
+            </div>
+            <div id="fileUploadStatus" style="margin-top: 1rem; font-size: 0.875rem; color: var(--color-primary); font-weight: 500;"></div>
+          </div>
+
+          <!-- STEP 8: APPOINTMENT PREFERENCE & SUBMIT -->
+          <div class="wizard-step" data-step="8">
+            <h3 class="step-question-heading">Consultation preference.</h3>
+            <p class="step-question-sub">Select your preferred window for our team walk-through.</p>
+            <div class="form-group">
+              <label class="form-label">Preferred Consultation Time</label>
+              <select class="form-select" id="prefTime">
+                <option value="Morning">Morning (8:00 AM – 11:30 AM)</option>
+                <option value="Afternoon" selected>Afternoon (12:00 PM – 4:00 PM)</option>
+                <option value="Evening">Evening (4:00 PM – 6:30 PM)</option>
+              </select>
+            </div>
+            <div style="margin-top: 1.5rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+              <input type="checkbox" id="consentCheck" checked style="margin-top: 4px; accent-color: var(--color-primary);">
+              <label for="consentCheck" style="font-size: 0.8125rem; color: var(--color-text-muted);">
+                I agree to be contacted via phone or email regarding my estimate inquiry. Your personal information is strictly protected and never shared.
+              </label>
+            </div>
+          </div>
+
+          <!-- Navigation Buttons -->
+          <div class="wizard-actions">
+            <button type="button" class="btn btn-outline" id="prevBtn" onclick="navigateStep(-1)" style="visibility: hidden;">
+              ← Back
+            </button>
+            <button type="button" class="btn btn-primary" id="nextBtn" onclick="navigateStep(1)">
+              Continue →
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- SUCCESS STATE -->
+      <div class="success-pane" id="successState">
+        <div class="success-icon-wrap">
+          <i data-lucide="check" style="width: 36px; height: 36px;"></i>
+        </div>
+        <h3 class="heading-serif" style="font-size: 2.25rem; color: var(--color-primary); margin-bottom: 0.5rem;" id="successHeading">
+          Thank you!
+        </h3>
+        <p style="color: var(--color-text-muted); font-size: 1.05rem; margin-bottom: 2rem;">
+          We have received your outdoor space information. One of our dedicated landscape specialists will review your requirements and reach out within 24 hours.
+        </p>
+        <button class="btn btn-primary" onclick="closeEnquiryModal(); resetWizard();">
+          Return to Overview
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       JAVASCRIPT: LOGIC & MOTION INTEGRATION
+       ========================================================================== -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    /* --------------------------------------------------------------------------
+       1. NAVBAR SCROLL EFFECT & MOBILE MENU
+       -------------------------------------------------------------------------- */
+    const navbar = document.getElementById('navbar');
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    function toggleMobileMenu() {
+      mobileDrawer.classList.toggle('active');
+    }
+    menuToggle.addEventListener('click', toggleMobileMenu);
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileDrawer.classList.remove('active');
+      });
+    });
+
+    /* --------------------------------------------------------------------------
+       2. NATURAL MOTION: SCROLL REVEALS
+       -------------------------------------------------------------------------- */
+    const { animate, inView } = Motion;
+
+    // Hero entrance animations
+    animate(".hero-content > *", 
+      { opacity: [0, 1], y: [30, 0] }, 
+      { duration: 0.85, delay: (i) => i * 0.12, easing: [0.16, 1, 0.3, 1] }
+    );
+    animate("#heroImage", 
+      { opacity: [0, 1], scale: [1.08, 1] }, 
+      { duration: 1.4, easing: [0.16, 1, 0.3, 1] }
+    );
+
+    // Dynamic scroll reveals for cards and headlines
+    inView(".services-liquid-grid", () => {
+      animate(".service-card", 
+        { opacity: [0, 1], y: [40, 0] }, 
+        { duration: 0.7, delay: (i) => i * 0.09, easing: [0.16, 1, 0.3, 1] }
+      );
+    });
+
+    inView(".portfolio-liquid-gallery", () => {
+      animate(".portfolio-card", 
+        { opacity: [0, 1], y: [35, 0] }, 
+        { duration: 0.8, delay: (i) => i * 0.1, easing: [0.16, 1, 0.3, 1] }
+      );
+    });
+
+    inView(".timeline-grid", () => {
+      animate(".timeline-step", 
+        { opacity: [0, 1], y: [25, 0] }, 
+        { duration: 0.65, delay: (i) => i * 0.12, easing: [0.16, 1, 0.3, 1] }
+      );
+    });
+
+    /* --------------------------------------------------------------------------
+       3. INTERACTIVE BEFORE / AFTER SLIDER
+       -------------------------------------------------------------------------- */
+    const compContainer = document.getElementById('compContainer');
+    const compOverlay = document.getElementById('compOverlay');
+    const compHandle = document.getElementById('compHandle');
+    const compBeforeImg = document.getElementById('compBeforeImg');
+
+    function syncBeforeImageSize() {
+      if (compContainer && compBeforeImg) {
+        compBeforeImg.style.width = `${compContainer.offsetWidth}px`;
+      }
+    }
+    window.addEventListener('resize', syncBeforeImageSize);
+    syncBeforeImageSize();
+
+    let isSliding = false;
+
+    function moveDivider(x) {
+      const rect = compContainer.getBoundingClientRect();
+      let offsetX = x - rect.left;
+      if (offsetX < 0) offsetX = 0;
+      if (offsetX > rect.width) offsetX = rect.width;
+      
+      const percentage = (offsetX / rect.width) * 100;
+      compOverlay.style.width = `${percentage}%`;
+      compHandle.style.left = `${percentage}%`;
+    }
+
+    compContainer.addEventListener('mousedown', () => isSliding = true);
+    window.addEventListener('mouseup', () => isSliding = false);
+    window.addEventListener('mousemove', (e) => {
+      if (!isSliding) return;
+      moveDivider(e.clientX);
+    });
+
+    // Touch support for tablets & mobiles
+    compContainer.addEventListener('touchstart', () => isSliding = true);
+    window.addEventListener('touchend', () => isSliding = false);
+    window.addEventListener('touchmove', (e) => {
+      if (!isSliding) return;
+      moveDivider(e.touches[0].clientX);
+    });
+
+    /* --------------------------------------------------------------------------
+       4. PORTFOLIO FILTER SYSTEM
+       -------------------------------------------------------------------------- */
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const portfolioCards = document.querySelectorAll('.portfolio-card');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.getAttribute('data-filter');
+        portfolioCards.forEach(card => {
+          const category = card.getAttribute('data-category');
+          if (filter === 'all' || category === filter) {
+            card.style.display = 'block';
+            animate(card, { opacity: [0, 1], scale: [0.95, 1] }, { duration: 0.45 });
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    /* --------------------------------------------------------------------------
+       5. ANIMATED STATISTICS COUNTER
+       -------------------------------------------------------------------------- */
+    let counterStarted = false;
+    inView("#statsSection", () => {
+      if (counterStarted) return;
+      counterStarted = true;
+      const statNumbers = document.querySelectorAll('.stat-number');
+      
+      statNumbers.forEach(elem => {
+        const target = parseInt(elem.getAttribute('data-target'), 10);
+        let current = 0;
+        const stepTime = 1800 / target;
+        const timer = setInterval(() => {
+          current += Math.ceil(target / 45);
+          if (current >= target) {
+            elem.innerText = target + "+";
+            clearInterval(timer);
+          } else {
+            elem.innerText = current;
+          }
+        }, stepTime);
+      });
+    });
+
+    /* --------------------------------------------------------------------------
+       6. FAQ ACCORDION INTERACTION
+       -------------------------------------------------------------------------- */
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const header = item.querySelector('.faq-header');
+      header.addEventListener('click', () => {
+        const isOpen = item.classList.contains('active');
+        faqItems.forEach(other => other.classList.remove('active'));
+        if (!isOpen) item.classList.add('active');
+      });
+    });
+
+    /* --------------------------------------------------------------------------
+       7. PROGRESSIVE 8-STEP ENQUIRY MODAL LOGIC
+       -------------------------------------------------------------------------- */
+    const enquiryModal = document.getElementById('enquiryModal');
+    let currentStep = 1;
+    const totalSteps = 8;
+
+    function openEnquiryModal() {
+      enquiryModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeEnquiryModal() {
+      enquiryModal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    enquiryModal.addEventListener('click', (e) => {
+      if (e.target === enquiryModal) closeEnquiryModal();
+    });
+
+    function updateStepUI() {
+      // Toggle steps
+      document.querySelectorAll('.wizard-step').forEach(step => {
+        step.classList.remove('active');
+        if (parseInt(step.getAttribute('data-step')) === currentStep) {
+          step.classList.add('active');
+        }
+      });
+
+      // Update dots
+      const dots = document.querySelectorAll('.dot');
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentStep - 1);
+      });
+
+      // Update label
+      document.getElementById('stepCounterDisplay').innerText = `Step ${currentStep} of ${totalSteps}`;
+
+      // Toggle back button visibility
+      const prevBtn = document.getElementById('prevBtn');
+      prevBtn.style.visibility = (currentStep === 1) ? 'hidden' : 'visible';
+
+      // Update Next button label
+      const nextBtn = document.getElementById('nextBtn');
+      nextBtn.innerText = (currentStep === totalSteps) ? 'Request My Free Estimate →' : 'Continue →';
+    }
+
+    function validateCurrentStep() {
+      if (currentStep === 1) {
+        const name = document.getElementById('clientName').value.trim();
+        const phone = document.getElementById('clientPhone').value.trim();
+        const email = document.getElementById('clientEmail').value.trim();
+        if (!name || !phone || !email) {
+          alert('Please fill out all required contact fields.');
+          return false;
+        }
+      }
+      if (currentStep === 2) {
+        const address = document.getElementById('propertyAddress').value.trim();
+        if (!address) {
+          alert('Please enter your property address or zip code.');
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function navigateStep(direction) {
+      if (direction === 1 && !validateCurrentStep()) return;
+
+      if (currentStep === totalSteps && direction === 1) {
+        submitFinalForm();
+        return;
+      }
+
+      currentStep += direction;
+      if (currentStep < 1) currentStep = 1;
+      if (currentStep > totalSteps) currentStep = totalSteps;
+      updateStepUI();
+    }
+
+    function selectSingle(cardElement, groupName) {
+      const parent = cardElement.parentElement;
+      parent.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+      cardElement.classList.add('selected');
+      const radio = cardElement.querySelector(`input[name="${groupName}"]`);
+      if (radio) radio.checked = true;
+    }
+
+    function toggleMulti(cardElement) {
+      cardElement.classList.toggle('selected');
+    }
+
+    function handleFileSelected(input) {
+      const status = document.getElementById('fileUploadStatus');
+      if (input.files.length > 0) {
+        status.innerText = `✓ ${input.files.length} photo(s) selected`;
+      }
+    }
+
+    function submitFinalForm() {
+      const clientName = document.getElementById('clientName').value.trim();
+      document.getElementById('wizardFlow').style.display = 'none';
+      const successPane = document.getElementById('successState');
+      successPane.style.display = 'block';
+      document.getElementById('successHeading').innerText = `Thank you, ${clientName}!`;
+      lucide.createIcons();
+    }
+
+    function resetWizard() {
+      document.getElementById('wizardFlow').style.display = 'block';
+      document.getElementById('successState').style.display = 'none';
+      document.getElementById('enquiryForm').reset();
+      currentStep = 1;
+      updateStepUI();
+    }
+  </script>
+</body>
+</html>
