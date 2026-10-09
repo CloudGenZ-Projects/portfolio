@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORM / SPINE + MOVEMENT</title>
+    <!-- Google Fonts: Cormorant Garamond (Editorial Serif) & DM Sans (Modern Sans-Serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           1. DESIGN TOKENS & VARIABLES
+           ========================================================================== */
+        :root {
+            /* Color System */
+            --forest-charcoal: #202923;
+            --warm-ivory: #F5F2EA;
+            --sage: #C7D2C2;
+            --mist-green: #B9D4CA;
+            --clay: #D8A47F;
+            --pure-white: #FFFFFF;
+            
+            /* Typography */
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'DM Sans', sans-serif;
+            
+            /* Layout & Spacing */
+            --max-width: 1280px;
+            --gutter: 88px;
+            --section-spacing: 144px;
+            --radius-card: 16px;
+            --radius-img: 24px;
+            
+            /* Motion */
+            --transition-fast: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 700ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @media (max-width: 1024px) {
+            :root {
+                --gutter: 48px;
+                --section-spacing: 96px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --gutter: 24px;
+                --section-spacing: 72px;
+            }
+        }
+
+        /* ==========================================================================
+           2. RESET & BASE STYLES
+           ========================================================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--warm-ivory);
+            color: var(--forest-charcoal);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img { max-width: 100%; height: auto; display: block; object-fit: cover; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        button { border: none; background: none; font-family: inherit; cursor: pointer; }
+
+        /* Typography Classes */
+        .h-display { font-family: var(--font-serif); font-size: clamp(42px, 6vw, 84px); line-height: 1.1; font-weight: 500; letter-spacing: -0.02em; }
+        .h-section { font-family: var(--font-serif); font-size: clamp(34px, 4vw, 56px); line-height: 1.1; font-weight: 500; }
+        .h-card { font-family: var(--font-serif); font-size: clamp(22px, 2.5vw, 28px); line-height: 1.2; font-weight: 500; }
+        .t-body { font-size: clamp(16px, 1.2vw, 18px); color: rgba(32, 41, 35, 0.8); }
+        .t-eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; color: var(--clay); display: block; margin-bottom: 1rem; }
+        
+        /* Layout Utilities */
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--gutter); }
+        .section { padding: var(--section-spacing) 0; }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            height: 52px; padding: 0 32px; border-radius: 100px;
+            font-size: 15px; font-weight: 500; transition: var(--transition-fast);
+            gap: 8px;
+        }
+        .btn-primary { background-color: var(--forest-charcoal); color: var(--pure-white); }
+        .btn-primary:hover { background-color: #111512; transform: translateY(-2px); }
+        .btn-secondary { background-color: transparent; border: 1px solid rgba(32, 41, 35, 0.2); color: var(--forest-charcoal); }
+        .btn-secondary:hover { border-color: var(--forest-charcoal); background-color: rgba(32, 41, 35, 0.05); }
+
+        /* Motion/Reveal Classes */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity var(--transition-slow), transform var(--transition-slow); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 100ms; }
+        .reveal-delay-2 { transition-delay: 200ms; }
+
+        /* ==========================================================================
+           3. SECTION-SPECIFIC STYLES
+           ========================================================================== */
+        
+        /* Nav & Announcement Bar */
+        .announcement-bar { background-color: var(--sage); color: var(--forest-charcoal); text-align: center; padding: 8px 24px; font-size: 13px; font-weight: 500; }
+        header { position: sticky; top: 0; z-index: 100; background: rgba(245, 242, 234, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.05); transition: var(--transition-fast); }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+        .logo { font-family: var(--font-serif); font-size: 20px; font-weight: 600; letter-spacing: 0.05em; }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a { font-size: 15px; font-weight: 500; opacity: 0.8; transition: var(--transition-fast); }
+        .nav-links a:hover { opacity: 1; }
+        .menu-btn { display: none; font-size: 24px; }
+
+        /* Hero */
+        .hero-section { overflow: hidden; position: relative; padding-top: 80px; }
+        .hero-grid { display: flex; gap: 64px; align-items: center; }
+        .hero-content { width: 55%; }
+        .hero-content p { margin: 24px 0 40px; max-width: 500px; }
+        .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+        .hero-image-wrap { width: 45%; position: relative; }
+        .hero-image { border-radius: var(--radius-img); height: 700px; object-fit: cover; }
+        .hero-floating-card {
+            position: absolute; bottom: -32px; left: -32px; background: var(--pure-white);
+            padding: 24px 32px; border-radius: var(--radius-card);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05); width: 280px;
+        }
+        .hero-floating-card h4 { font-size: 18px; margin-bottom: 8px; }
+        .hero-label { position: absolute; right: -40px; top: 50%; transform: translateY(-50%) rotate(90deg); font-size: 12px; letter-spacing: 0.1em; color: var(--clay); font-weight: 600; }
+
+        /* Trust Strip */
+        .trust-strip { border-top: 1px solid rgba(0,0,0,0.1); border-bottom: 1px solid rgba(0,0,0,0.1); padding: 32px 0; }
+        .trust-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
+        .trust-item { display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 500; }
+        .trust-item svg { width: 20px; height: 20px; stroke: var(--clay); }
+
+        /* The Problem */
+        .problem-top { display: flex; gap: 64px; margin-bottom: 80px; }
+        .problem-content { width: 45%; }
+        .problem-images { width: 55%; position: relative; }
+        .problem-img-main { border-radius: var(--radius-img); height: 500px; width: 100%; }
+        .problem-img-sec { position: absolute; bottom: -40px; left: -40px; width: 250px; height: 300px; border-radius: var(--radius-card); border: 8px solid var(--warm-ivory); }
+        .concern-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+        .concern-card { background: var(--pure-white); padding: 32px; border-radius: var(--radius-card); transition: var(--transition-fast); border: 1px solid rgba(0,0,0,0.03); }
+        .concern-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-color: var(--sage); }
+        .concern-card h4 { margin-bottom: 12px; font-size: 20px; }
+        .concern-card a { color: var(--clay); font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 4px; margin-top: 24px; }
+
+        /* Philosophy */
+        .philosophy-grid { display: flex; gap: 80px; align-items: flex-start; }
+        .philosophy-title { width: 40%; position: sticky; top: 120px; }
+        .philosophy-list { width: 60%; display: flex; flex-direction: column; gap: 40px; }
+        .phil-item { border-top: 1px solid rgba(0,0,0,0.1); padding-top: 32px; display: flex; gap: 24px; }
+        .phil-num { font-family: var(--font-serif); font-size: 24px; color: var(--clay); }
+        .phil-text h4 { font-size: 22px; margin-bottom: 12px; }
+
+        /* Targeted Care (Dark) */
+        .dark-section { background-color: var(--forest-charcoal); color: var(--pure-white); }
+        .dark-section .t-body { color: rgba(255,255,255,0.7); }
+        .dark-section .t-eyebrow { color: var(--mist-green); }
+        .targeted-grid { display: flex; gap: 64px; align-items: center; }
+        .targeted-img { width: 50%; border-radius: 0 var(--radius-img) var(--radius-img) 0; height: 600px; margin-left: calc(-1 * var(--gutter)); }
+        .targeted-content { width: 50%; }
+        .targeted-blocks { margin: 40px 0; display: grid; gap: 24px; }
+        .t-block { background: rgba(255,255,255,0.05); padding: 24px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
+        .t-block h5 { font-size: 16px; margin-bottom: 8px; color: var(--pure-white); }
+
+        /* Bento Grid Services */
+        .bento-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 64px; }
+        .bento-card {
+            background: var(--pure-white); border-radius: var(--radius-img); padding: 48px;
+            display: flex; flex-direction: column; justify-content: space-between;
+            min-height: 380px; position: relative; overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05); transition: var(--transition-fast);
+        }
+        .bento-card:hover { transform: translateY(-4px); border-color: var(--sage); }
+        .bento-header { display: flex; justify-content: space-between; align-items: flex-start; }
+        .bento-num { font-size: 13px; font-weight: 600; color: var(--clay); }
+        .bento-arrow { width: 40px; height: 40px; border-radius: 50%; background: var(--warm-ivory); display: flex; align-items: center; justify-content: center; transition: var(--transition-fast); }
+        .bento-card:hover .bento-arrow { background: var(--mist-green); color: var(--forest-charcoal); transform: rotate(45deg); }
+        
+        /* Patient Journey Timeline */
+        .timeline { display: flex; gap: 24px; margin-top: 64px; position: relative; }
+        .timeline::before { content: ''; position: absolute; top: 24px; left: 0; right: 0; height: 1px; background: rgba(0,0,0,0.1); z-index: 1; }
+        .timeline-step { flex: 1; position: relative; z-index: 2; }
+        .timeline-num { width: 48px; height: 48px; background: var(--warm-ivory); border: 1px solid var(--sage); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 20px; margin-bottom: 24px; transition: var(--transition-fast); }
+        .timeline-step:hover .timeline-num { background: var(--forest-charcoal); color: var(--pure-white); border-color: var(--forest-charcoal); }
+
+        /* Gallery */
+        .gallery-container { margin-top: 48px; display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 24px; scrollbar-width: none; }
+        .gallery-container::-webkit-scrollbar { display: none; }
+        .gallery-item { min-width: 400px; scroll-snap-align: start; }
+        .gallery-item img { border-radius: var(--radius-card); height: 500px; width: 100%; object-fit: cover; margin-bottom: 16px; }
+
+        /* Chiropractor */
+        .chiro-grid { display: flex; gap: 64px; align-items: center; background: var(--pure-white); padding: 64px; border-radius: var(--radius-img); }
+        .chiro-img { width: 40%; border-radius: var(--radius-card); height: 600px; }
+        .chiro-info { width: 60%; }
+        .creds { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 40px; padding-top: 40px; border-top: 1px solid rgba(0,0,0,0.1); }
+
+        /* Reviews Carousel */
+        .reviews-wrapper { background: var(--sage); padding: 96px 0; text-align: center; border-radius: var(--radius-img); }
+        .review-card { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+        .review-quote { font-family: var(--font-serif); font-size: clamp(24px, 3vw, 36px); line-height: 1.4; font-style: italic; margin-bottom: 32px; }
+        .review-author { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
+
+        /* Journal */
+        .journal-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 64px; }
+        .article-card img { border-radius: var(--radius-card); height: 240px; width: 100%; margin-bottom: 24px; transition: var(--transition-fast); }
+        .article-card:hover img { transform: scale(1.02); }
+        .article-meta { font-size: 12px; font-weight: 600; color: var(--clay); text-transform: uppercase; margin-bottom: 12px; display: block; }
+        .article-card h4 { font-size: 20px; margin-bottom: 12px; }
+
+        /* FAQ */
+        .faq-list { max-width: 800px; margin: 64px auto 0; }
+        .faq-item { border-bottom: 1px solid rgba(0,0,0,0.1); }
+        .faq-question { width: 100%; text-align: left; padding: 24px 0; font-size: 20px; font-family: var(--font-serif); font-weight: 500; display: flex; justify-content: space-between; align-items: center; }
+        .faq-icon { transition: transform var(--transition-fast); }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height var(--transition-fast); }
+        .faq-answer p { padding-bottom: 24px; color: rgba(32, 41, 35, 0.8); }
+
+        /* Booking Form */
+        .booking-section { background: var(--pure-white); }
+        .form-container { max-width: 800px; margin: 0 auto; background: var(--warm-ivory); padding: 48px; border-radius: var(--radius-img); border: 1px solid var(--sage); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-group.full { grid-column: span 2; }
+        .form-label { font-size: 14px; font-weight: 600; }
+        .form-control { height: 52px; padding: 0 16px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-family: inherit; font-size: 16px; background: var(--pure-white); transition: border var(--transition-fast); }
+        .form-control:focus { outline: none; border-color: var(--forest-charcoal); }
+        .form-checkbox { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; margin: 24px 0; }
+        .form-checkbox input { margin-top: 4px; }
+
+        /* Footer */
+        footer { background: var(--forest-charcoal); color: var(--pure-white); padding: 96px 0 48px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 64px; margin-bottom: 64px; }
+        .footer-brand h3 { font-family: var(--font-serif); font-size: 24px; margin-bottom: 16px; }
+        .footer-col h4 { font-size: 14px; color: var(--mist-green); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px; }
+        .footer-col ul { display: flex; flex-direction: column; gap: 12px; }
+        .footer-col a { color: rgba(255,255,255,0.7); transition: var(--transition-fast); }
+        .footer-col a:hover { color: var(--pure-white); }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 32px; font-size: 13px; color: rgba(255,255,255,0.5); display: flex; justify-content: space-between; }
+
+        /* ==========================================================================
+           4. RESPONSIVE QUERIES
+           ========================================================================== */
+        @media (max-width: 1024px) {
+            .hero-grid, .problem-top, .philosophy-grid, .targeted-grid, .chiro-grid { flex-direction: column; }
+            .hero-content, .hero-image-wrap, .problem-content, .problem-images, .philosophy-title, .philosophy-list, .targeted-img, .targeted-content, .chiro-img, .chiro-info { width: 100%; }
+            .targeted-img { margin-left: 0; border-radius: var(--radius-img); height: 400px; margin-bottom: 32px; }
+            .concern-grid, .bento-grid, .journal-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero-label { display: none; }
+            .timeline { flex-direction: column; gap: 32px; }
+            .timeline::before { left: 24px; top: 0; bottom: 0; width: 1px; height: auto; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .menu-btn { display: block; }
+            .concern-grid, .bento-grid, .journal-grid, .form-row { grid-template-columns: 1fr; }
+            .problem-img-sec { display: none; }
+            .chiro-grid { padding: 32px; }
+            .gallery-item { min-width: 280px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .footer-bottom { flex-direction: column; gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Navigation & Announcement -->
+    <div class="announcement-bar">
+        A more thoughtful approach to movement, mobility and recovery. Discover our care philosophy.
+    </div>
+    <header id="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">FORM / SPINE + MOVEMENT</a>
+            <nav class="nav-links">
+                <a href="#approach">Our Approach</a>
+                <a href="#treatments">Treatments</a>
+                <a href="#recovery">Athletic Recovery</a>
+                <a href="#about">About</a>
+                <a href="#journal">Journal</a>
+            </nav>
+            <a href="#booking" class="btn btn-primary" style="display: none; @media(min-width: 769px){display: inline-flex;}">Book an Assessment ↗</a>
+            <button class="menu-btn">☰</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- 2. Asymmetrical Hero -->
+        <section class="section hero-section container">
+            <div class="hero-grid">
+                <div class="hero-content reveal">
+                    <span class="t-eyebrow">Chiropractic Care · Spinal Decompression · Athletic Recovery</span>
+                    <h1 class="h-display">Move beyond discomfort. Rediscover your movement.</h1>
+                    <p class="t-body">Personalized chiropractic care and recovery-focused treatment plans designed around your body, your goals and the activities that matter to you.</p>
+                    <div class="hero-actions">
+                        <a href="#booking" class="btn btn-primary">Book an Assessment ↗</a>
+                        <a href="#approach" class="btn btn-secondary">Explore Our Approach</a>
+                    </div>
+                </div>
+                <div class="hero-image-wrap reveal reveal-delay-1">
+                    <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80&w=1200" alt="Athlete stretching" class="hero-image">
+                    <div class="hero-floating-card">
+                        <h4>Built around your movement</h4>
+                        <p class="t-body" style="font-size: 14px;">Individual assessment, clear explanations and care tailored to your needs.</p>
+                    </div>
+                    <div class="hero-label">01 / MOVEMENT</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Trust Strip -->
+        <div class="trust-strip container reveal">
+            <div class="trust-grid">
+                <div class="trust-item"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Individualized care plans</div>
+                <div class="trust-item"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Movement-focused assessments</div>
+                <div class="trust-item"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Clear explanations at every step</div>
+                <div class="trust-item"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Progress reviewed together</div>
+            </div>
+        </div>
+
+        <!-- 4. The Problem -->
+        <section class="section container" id="approach">
+            <div class="problem-top">
+                <div class="problem-content reveal">
+                    <span class="t-eyebrow">02 / WHEN MOVEMENT CHANGES</span>
+                    <h2 class="h-section">When discomfort starts deciding what you can do.</h2>
+                    <br>
+                    <p class="t-body">Your body is part of everything you do. Your morning routine, your workday, your training sessions and the activities you look forward to.</p><br>
+                    <p class="t-body">When discomfort or restricted movement enters the picture, even familiar tasks can become frustrating.</p><br>
+                    <p class="t-body">You deserve to be heard, to understand your options and to receive care that considers the bigger picture.</p>
+                </div>
+                <div class="problem-images reveal reveal-delay-1">
+                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=1000" alt="Person experiencing shoulder tension" class="problem-img-main">
+                    <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=600" alt="Active movement" class="problem-img-sec">
+                </div>
+            </div>
+            
+            <div class="concern-grid reveal">
+                <div class="concern-card">
+                    <h4>Everyday discomfort</h4>
+                    <p class="t-body">Sitting, bending, lifting and daily routines.</p>
+                    <a href="#">Explore care ↗</a>
+                </div>
+                <div class="concern-card">
+                    <h4>Training limitations</h4>
+                    <p class="t-body">Mobility, recovery and confidence in movement.</p>
+                    <a href="#">Explore recovery ↗</a>
+                </div>
+                <div class="concern-card">
+                    <h4>Neck and shoulder tension</h4>
+                    <p class="t-body">A closer look at comfort and everyday movement.</p>
+                    <a href="#">Explore care ↗</a>
+                </div>
+                <div class="concern-card">
+                    <h4>Staying active</h4>
+                    <p class="t-body">Support for maintaining an active lifestyle.</p>
+                    <a href="#">Explore care ↗</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Philosophy -->
+        <section class="section container">
+            <div class="philosophy-grid">
+                <div class="philosophy-title reveal">
+                    <span class="t-eyebrow">03 / A MORE PERSONAL APPROACH</span>
+                    <h2 class="h-section">You are more than a symptom.</h2>
+                    <br>
+                    <p class="t-body">We begin by listening. What feels difficult? What activities are you missing? What have you tried? What would meaningful progress look like for you?</p><br>
+                    <p class="t-body">Your assessment helps us understand your history, movement, goals and whether chiropractic care or another type of clinical evaluation is appropriate.</p>
+                </div>
+                <div class="philosophy-list reveal reveal-delay-1">
+                    <div class="phil-item">
+                        <div class="phil-num">1</div>
+                        <div class="phil-text">
+                            <h4>Understand first.</h4>
+                            <p class="t-body">Your history and goals inform the assessment.</p>
+                        </div>
+                    </div>
+                    <div class="phil-item">
+                        <div class="phil-num">2</div>
+                        <div class="phil-text">
+                            <h4>Explain every step.</h4>
+                            <p class="t-body">You should understand the options, limitations and expected costs before proceeding.</p>
+                        </div>
+                    </div>
+                    <div class="phil-item">
+                        <div class="phil-num">3</div>
+                        <div class="phil-text">
+                            <h4>Adapt as you progress.</h4>
+                            <p class="t-body">Your care plan should be reviewed in light of your response and changing needs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Targeted Care (Dark) -->
+        <section class="section dark-section" id="treatments">
+            <div class="container targeted-grid">
+                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=1000" alt="Spinal care treatment" class="targeted-img reveal">
+                <div class="targeted-content reveal reveal-delay-1">
+                    <span class="t-eyebrow">04 / TARGETED CARE</span>
+                    <h2 class="h-section">A more considered approach to spinal care.</h2>
+                    <br>
+                    <p class="t-body">Spinal decompression uses controlled forces intended to reduce loading on selected spinal structures. Whether a particular technique is appropriate depends on your symptoms, examination findings and clinical circumstances.</p>
+                    
+                    <div class="targeted-blocks">
+                        <div class="t-block">
+                            <h5>Assessment before treatment</h5>
+                            <p class="t-body" style="font-size: 14px;">Review your history, symptoms, relevant examination findings and suitability.</p>
+                        </div>
+                        <div class="t-block">
+                            <h5>An individualized approach</h5>
+                            <p class="t-body" style="font-size: 14px;">Discuss the proposed technique, potential risks, alternatives and expected costs.</p>
+                        </div>
+                        <div class="t-block">
+                            <h5>Progress reviewed regularly</h5>
+                            <p class="t-body" style="font-size: 14px;">Reassess symptoms and function rather than relying on a fixed promise of results.</p>
+                        </div>
+                    </div>
+                    
+                    <a href="#booking" class="btn btn-primary" style="background: var(--pure-white); color: var(--forest-charcoal);">Discuss Your Options ↗</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Services Bento -->
+        <section class="section container">
+            <div class="reveal" style="text-align: center; max-width: 600px; margin: 0 auto;">
+                <span class="t-eyebrow">05 / CARE THAT FITS YOUR GOALS</span>
+                <h2 class="h-section">Different needs. One thoughtful approach.</h2>
+                <br>
+                <p class="t-body">Every patient arrives with a different history and a different idea of what better movement means. Explore the services we offer and discuss which options may be appropriate for you.</p>
+            </div>
+            
+            <div class="bento-grid reveal reveal-delay-1">
+                <div class="bento-card">
+                    <div class="bento-header">
+                        <span class="bento-num">01 / SPINAL CARE</span>
+                        <div class="bento-arrow">↗</div>
+                    </div>
+                    <div>
+                        <h3 class="h-card">Spinal Decompression</h3>
+                        <p class="t-body" style="margin-top: 16px;">Assessment-led consideration of decompression techniques where clinically appropriate.</p>
+                    </div>
+                </div>
+                <div class="bento-card">
+                    <div class="bento-header">
+                        <span class="bento-num">02 / MOBILITY</span>
+                        <div class="bento-arrow">↗</div>
+                    </div>
+                    <div>
+                        <h3 class="h-card">Chiropractic Care</h3>
+                        <p class="t-body" style="margin-top: 16px;">A personalized assessment and discussion of appropriate manual or movement-based options.</p>
+                    </div>
+                </div>
+                <div class="bento-card" id="recovery">
+                    <div class="bento-header">
+                        <span class="bento-num">03 / PERFORMANCE</span>
+                        <div class="bento-arrow">↗</div>
+                    </div>
+                    <div>
+                        <h3 class="h-card">Athletic Recovery</h3>
+                        <p class="t-body" style="margin-top: 16px;">Movement, training-load and recovery considerations tailored to your sport and goals.</p>
+                    </div>
+                </div>
+                <div class="bento-card">
+                    <div class="bento-header">
+                        <span class="bento-num">04 / MOVEMENT</span>
+                        <div class="bento-arrow">↗</div>
+                    </div>
+                    <div>
+                        <h3 class="h-card">Movement & Mobility</h3>
+                        <p class="t-body" style="margin-top: 16px;">Appropriate mobility and exercise strategies that support functional goals.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Patient Journey -->
+        <section class="section container">
+            <div class="reveal">
+                <span class="t-eyebrow">06 / WHAT TO EXPECT</span>
+                <h2 class="h-section">Know what happens next.</h2>
+            </div>
+            
+            <div class="timeline reveal reveal-delay-1">
+                <div class="timeline-step">
+                    <div class="timeline-num">01</div>
+                    <h4>Start with a conversation</h4>
+                    <p class="t-body" style="margin-top: 12px; font-size: 15px;">Tell us what you have been experiencing, what affects your day and what you hope to change.</p>
+                </div>
+                <div class="timeline-step">
+                    <div class="timeline-num">02</div>
+                    <h4>Understand your movement</h4>
+                    <p class="t-body" style="margin-top: 12px; font-size: 15px;">Your clinician reviews your history and performs an appropriate examination, including referral when needed.</p>
+                </div>
+                <div class="timeline-step">
+                    <div class="timeline-num">03</div>
+                    <h4>Discuss your options</h4>
+                    <p class="t-body" style="margin-top: 12px; font-size: 15px;">Review suitable approaches, expected benefits and limitations, alternatives, costs and a proposed plan.</p>
+                </div>
+                <div class="timeline-step">
+                    <div class="timeline-num">04</div>
+                    <h4>Review and adapt</h4>
+                    <p class="t-body" style="margin-top: 12px; font-size: 15px;">Monitor your response, reassess progress and adjust the plan according to your needs.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. Gallery -->
+        <section class="section" style="padding-left: var(--gutter);">
+            <div class="reveal pr-gutter" style="padding-right: var(--gutter);">
+                <span class="t-eyebrow">07 / INSIDE THE STUDIO</span>
+                <h2 class="h-section">A space designed around movement.</h2>
+                <p class="t-body" style="margin-top: 16px; max-width: 600px;">The environment should feel calm and professional, with the equipment, people and details that make the clinic welcoming.</p>
+            </div>
+            
+            <div class="gallery-container reveal reveal-delay-1">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=800" alt="Clinic interior">
+                    <h4>The treatment space</h4>
+                    <p class="t-body" style="font-size: 14px;">A calm environment for focused clinical care.</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=800" alt="Consultation">
+                    <h4>Personal consultations</h4>
+                    <p class="t-body" style="font-size: 14px;">Time to ask questions and understand your options.</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1588286840104-a212ebcebde2?auto=format&fit=crop&q=80&w=800" alt="Treatment equipment">
+                    <h4>Treatment technology</h4>
+                    <p class="t-body" style="font-size: 14px;">Equipment used where indicated and appropriate.</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&q=80&w=800" alt="Movement exercise">
+                    <h4>Movement in practice</h4>
+                    <p class="t-body" style="font-size: 14px;">Practical movement work tailored to individual goals.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. Meet the Chiropractor -->
+        <section class="section container" id="about">
+            <div class="chiro-grid reveal">
+                <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=800" alt="Dr. Practitioner Portrait" class="chiro-img">
+                <div class="chiro-info">
+                    <span class="t-eyebrow">08 / THE PERSON BEHIND YOUR CARE</span>
+                    <h2 class="h-section">Good care begins with listening.</h2>
+                    <br>
+                    <p class="t-body">The best starting point is a conversation. We take time to understand your concerns, explain our findings in plain language and help you make informed decisions about your care.</p><br>
+                    <p class="t-body">Our approach brings clinical assessment, realistic expectations and your individual goals into the same conversation.</p>
+                    
+                    <div class="creds">
+                        <div>
+                            <h5 style="font-size: 15px; margin-bottom: 8px;">Professional qualifications</h5>
+                            <p class="t-body" style="font-size: 14px;">Doctor of Chiropractic (D.C.)<br>BSc Kinesiology</p>
+                        </div>
+                        <div>
+                            <h5 style="font-size: 15px; margin-bottom: 8px;">Registration and credentials</h5>
+                            <p class="t-body" style="font-size: 14px;">Registered with the National Chiropractic Board. License #123456.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. Reviews -->
+        <section class="section container">
+            <div class="reveal" style="text-align: center; margin-bottom: 48px;">
+                <span class="t-eyebrow">09 / EXPERIENCES IN THEIR OWN WORDS</span>
+                <h2 class="h-section">Every recovery journey is personal.</h2>
+                <p class="t-body" style="margin-top: 16px;">Choosing a clinician is personal, too. Hear from people who have shared their experiences.</p>
+            </div>
+            
+            <div class="reviews-wrapper reveal reveal-delay-1">
+                <div class="review-card">
+                    <div class="t-eyebrow" style="margin-bottom: 24px; color: var(--forest-charcoal);">VERIFIED PATIENT REVIEW</div>
+                    <p class="review-quote">"The team actually listened to my goals. I understand my treatment plan, and we regularly adapt it based on my progress. I finally feel confident moving again."</p>
+                    <p class="review-author">Sarah M.</p>
+                    <p class="t-body" style="font-size: 12px; margin-top: 8px;">Published with consent · Source: Google Reviews</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. Journal -->
+        <section class="section container" id="journal">
+            <div class="reveal">
+                <span class="t-eyebrow">10 / THE MOVEMENT JOURNAL</span>
+                <h2 class="h-section">Understand your body.<br>Make informed choices.</h2>
+            </div>
+            
+            <div class="journal-grid reveal reveal-delay-1">
+                <a href="#" class="article-card">
+                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=600" alt="Spinal health">
+                    <span class="article-meta">Spinal Health · 6 Min Read</span>
+                    <h4>What is spinal decompression, and who might it be suitable for?</h4>
+                    <p class="t-body" style="font-size: 14px; margin-bottom: 16px;">Understand the technique, what assessment involves and what to ask your clinician.</p>
+                    <span style="color: var(--clay); font-weight: 600; font-size: 14px;">Read article ↗</span>
+                </a>
+                <a href="#" class="article-card">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=600" alt="Athletic Recovery">
+                    <span class="article-meta">Athletic Recovery · 5 Min Read</span>
+                    <h4>Recovery is more than what happens after training.</h4>
+                    <p class="t-body" style="font-size: 14px; margin-bottom: 16px;">Explore training load, sleep, appropriate exercise and recovery habits.</p>
+                    <span style="color: var(--clay); font-weight: 600; font-size: 14px;">Read article ↗</span>
+                </a>
+                <a href="#" class="article-card">
+                    <img src="https://images.unsplash.com/photo-1552674605-15c214d3b6a9?auto=format&fit=crop&q=80&w=600" alt="Daily Movement">
+                    <span class="article-meta">Daily Movement · 4 Min Read</span>
+                    <h4>Small ways to bring more movement into your workday.</h4>
+                    <p class="t-body" style="font-size: 14px; margin-bottom: 16px;">Practical ideas for varying positions and building movement breaks into your routine.</p>
+                    <span style="color: var(--clay); font-weight: 600; font-size: 14px;">Read article ↗</span>
+                </a>
+                <a href="#" class="article-card">
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=600" alt="First Visit">
+                    <span class="article-meta">Your First Visit · 3 Min Read</span>
+                    <h4>What to expect at your first chiropractic appointment.</h4>
+                    <p class="t-body" style="font-size: 14px; margin-bottom: 16px;">Learn about your history, assessment, questions and treatment choices.</p>
+                    <span style="color: var(--clay); font-weight: 600; font-size: 14px;">Read article ↗</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- 13. FAQ -->
+        <section class="section container">
+            <div class="reveal" style="text-align: center;">
+                <h2 class="h-section">Frequently asked questions</h2>
+            </div>
+            
+            <div class="faq-list reveal reveal-delay-1">
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        What happens at my first appointment?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Your clinician will discuss your history, symptoms and goals, conduct an appropriate assessment and explain the options that may be suitable. Further investigation or referral may be recommended when necessary.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        Is spinal decompression suitable for everyone?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>No. Suitability depends entirely on your specific symptoms, clinical history, and assessment findings. We will discuss whether this technique is appropriate for you during your consultation.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        Do I need a referral?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>In most cases, you do not need a referral to book an initial assessment. However, if you are seeking care under specific insurance or worker's compensation schemes, a referral may be required.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 14. Booking Form -->
+        <section class="section booking-section" id="booking">
+            <div class="container">
+                <div class="reveal" style="text-align: center; margin-bottom: 48px;">
+                    <span class="t-eyebrow">11 / YOUR NEXT STEP</span>
+                    <h2 class="h-section">Let's start with a conversation.</h2>
+                    <p class="t-body" style="margin-top: 16px; max-width: 600px; margin-left: auto; margin-right: auto;">Tell us a little about what you need. Our team will help you understand the next step and arrange an appropriate consultation.</p>
+                </div>
+                
+                <div class="form-container reveal reveal-delay-1">
+                    <form onsubmit="event.preventDefault(); alert('Appointment request submitted successfully!');">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Full name *</label>
+                                <input type="text" class="form-control" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email address *</label>
+                                <input type="email" class="form-control" placeholder="you@example.com" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Phone number</label>
+                                <input type="tel" class="form-control" placeholder="Optional">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">What would you like help with? *</label>
+                                <select class="form-control" required>
+                                    <option value="">Choose a general area</option>
+                                    <option value="spinal">Spinal Decompression Assessment</option>
+                                    <option value="chiro">Chiropractic Care</option>
+                                    <option value="recovery">Athletic Recovery</option>
+                                    <option value="other">Other / Not Sure</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row" style="margin-top: 32px;">
+                            <div class="form-group">
+                                <label class="form-label" style="margin-bottom: 12px;">Preferred visit</label>
+                                <label style="display: flex; gap: 8px; font-size: 15px;"><input type="radio" name="visit" checked> In-person appointment</label>
+                                <label style="display: flex; gap: 8px; font-size: 15px;"><input type="radio" name="visit"> Phone call first</label>
+                                <label style="display: flex; gap: 8px; font-size: 15px;"><input type="radio" name="visit"> Either works for me</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" style="margin-bottom: 12px;">Preferred contact method</label>
+                                <label style="display: flex; gap: 8px; font-size: 15px;"><input type="radio" name="contact" checked> Email</label>
+                                <label style="display: flex; gap: 8px; font-size: 15px;"><input type="radio" name="contact"> Phone</label>
+                            </div>
+                        </div>
+                        
+                        <label class="form-checkbox">
+                            <input type="checkbox" required>
+                            <span>I agree to be contacted about this appointment request and acknowledge the clinic's privacy notice.</span>
+                        </label>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Request an Appointment ↗</button>
+                        
+                        <p style="font-size: 13px; color: rgba(0,0,0,0.5); margin-top: 24px; text-align: center;">Please do not include detailed medical histories or sensitive clinical information in this form. It is an appointment request, not a confirmed booking or a substitute for medical evaluation.</p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="section container" style="text-align: center;">
+            <div class="reveal">
+                <span class="t-eyebrow">12 / MOVE FORWARD</span>
+                <h2 class="h-section">Your next step starts with understanding.</h2>
+                <p class="t-body" style="margin: 24px auto 40px; max-width: 600px;">Ask questions, understand your options and decide what feels right for you. We're here to help you take that first step.</p>
+                <a href="#booking" class="btn btn-primary">Book an Assessment ↗</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- 15. Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>FORM / SPINE + MOVEMENT</h3>
+                    <p style="color: rgba(255,255,255,0.7); font-size: 15px; max-width: 300px;">Chiropractic care. Thoughtful recovery. Movement that matters.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="#approach">Our Approach</a></li>
+                        <li><a href="#treatments">Treatments</a></li>
+                        <li><a href="#recovery">Athletic Recovery</a></li>
+                        <li><a href="#about">Meet the Team</a></li>
+                        <li><a href="#journal">Movement Journal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Visit</h4>
+                    <ul style="color: rgba(255,255,255,0.7); font-size: 15px;">
+                        <li>123 Wellness Ave,<br>Suite 100,<br>City, State 12345</li>
+                        <li style="margin-top: 16px;">(555) 123-4567</li>
+                        <li>Mon-Fri: 8am - 6pm</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Information</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2026 FORM / SPINE + MOVEMENT. All rights reserved.</p>
+                <p>Individual results vary. Website information is educational and does not replace professional medical advice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Interactions -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Scroll Reveals (Intersection Observer)
+            const revealOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Optional: Stop observing once revealed
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, revealOptions);
+
+            document.querySelectorAll('.reveal').forEach(el => {
+                revealObserver.observe(el);
+            });
+
+            // 2. FAQ Accordion Logic
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const button = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                
+                button.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all other accordions (Optional, standard behavior)
+                    faqItems.forEach(otherItem => {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                        otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                    });
+                    
+                    if (!isActive) {
+                        item.classList.add('active');
+                        answer.style.maxHeight = answer.scrollHeight + "px";
+                        button.setAttribute('aria-expanded', 'true');
+                    }
+                });
+            });
+
+            // 3. Header Scroll Effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.05)';
+                    header.style.padding = '0'; // Can adjust height via padding if desired
+                } else {
+                    header.style.boxShadow = 'none';
+                }
+            });
+
+            // 4. Mobile Menu Toggle (Basic implementation)
+            const menuBtn = document.querySelector('.menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            
+            menuBtn.addEventListener('click', () => {
+                const isExpanded = navLinks.style.display === 'flex';
+                if(isExpanded) {
+                    navLinks.style.display = 'none';
+                    menuBtn.innerHTML = '☰';
+                } else {
+                    navLinks.style.display = 'flex';
+                    navLinks.style.flexDirection = 'column';
+                    navLinks.style.position = 'absolute';
+                    navLinks.style.top = '80px';
+                    navLinks.style.left = '0';
+                    navLinks.style.width = '100%';
+                    navLinks.style.background = 'var(--warm-ivory)';
+                    navLinks.style.padding = '24px';
+                    navLinks.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+                    menuBtn.innerHTML = '✕';
+                }
+            });
+
+            // Close mobile menu when a link is clicked
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        navLinks.style.display = 'none';
+                        menuBtn.innerHTML = '☰';
+                    }
+                });
+            });
+
+            // Handle resize events to reset mobile menu styles
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    navLinks.style.display = 'flex';
+                    navLinks.style.flexDirection = 'row';
+                    navLinks.style.position = 'static';
+                    navLinks.style.background = 'none';
+                    navLinks.style.padding = '0';
+                    navLinks.style.boxShadow = 'none';
+                    menuBtn.style.display = 'none';
+                } else {
+                    navLinks.style.display = 'none';
+                    menuBtn.style.display = 'block';
+                    menuBtn.innerHTML = '☰';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

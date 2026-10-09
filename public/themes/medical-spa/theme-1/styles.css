@@ -1,0 +1,236 @@
+/* ==========================================================================
+   AURA DESIGN SYSTEM (Variables & Theming)
+   ========================================================================== */
+   :root {
+    /* Nature Palette */
+    --c-sand: #F7F5F0;
+    --c-sage: #8DA399;
+    --c-sage-dark: #5C7066;
+    --c-terra: #D38B70;
+    --c-forest: #2A3B32;
+    --c-birch: #EBEBE6;
+    
+    /* Glassmorphism Variables */
+    --glass-bg: rgba(255, 255, 255, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --glass-blur: 16px;
+    
+    /* Soft UI Radii */
+    --r-bento: 32px;
+    --r-btn: 50px;
+    --r-organic: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    
+    /* Typography */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Manrope', sans-serif;
+    
+    /* Depth & Shadows */
+    --shadow-soft: 0 24px 48px rgba(42, 59, 50, 0.06);
+    --shadow-float: 0 32px 64px rgba(42, 59, 50, 0.12);
+    
+    /* Transitions */
+    --t-smooth: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ==========================================================================
+   RESET & BASE
+   ========================================================================== */
+* { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body {
+    background-color: var(--c-sand);
+    color: var(--c-forest);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 500; }
+.organic-text { color: var(--c-sage-dark); font-style: italic; }
+
+/* ==========================================================================
+   CUSTOM CURSOR
+   ========================================================================== */
+.cursor-dot, .cursor-outline {
+    position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+    border-radius: 50%; z-index: 9999; pointer-events: none;
+}
+.cursor-dot { width: 6px; height: 6px; background-color: var(--c-terra); }
+.cursor-outline {
+    width: 40px; height: 40px; border: 1px solid var(--c-sage);
+    transition: width 0.3s, height 0.3s, background-color 0.3s;
+}
+.cursor-outline.hovering {
+    width: 70px; height: 70px; background-color: rgba(141, 163, 153, 0.15); border-color: transparent;
+}
+
+/* ==========================================================================
+   3D ORGANIC BACKGROUND (Immersive Spatial Design)
+   ========================================================================== */
+.organic-bg {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: -2; overflow: hidden; filter: blur(90px);
+}
+.blob {
+    position: absolute; border-radius: var(--r-organic);
+    animation: morph 20s ease-in-out infinite both alternate;
+}
+.blob-1 {
+    width: 55vw; height: 55vw; background: var(--c-sage); opacity: 0.3;
+    top: -10%; left: -10%;
+}
+.blob-2 {
+    width: 45vw; height: 45vw; background: var(--c-terra); opacity: 0.15;
+    bottom: 10%; right: -5%; animation-delay: -5s;
+}
+.blob-3 {
+    width: 40vw; height: 40vw; background: #fff; opacity: 0.4;
+    top: 40%; left: 30%; animation-delay: -10s;
+}
+
+@keyframes morph {
+    0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; transform: rotate(0deg) scale(1); }
+    50% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: rotate(45deg) scale(1.1); }
+    100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; transform: rotate(90deg) scale(1); }
+}
+
+#particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+.particle { position: absolute; background: var(--c-sage); border-radius: 50%; opacity: 0.5; animation: floatUp linear infinite; }
+@keyframes floatUp { 0% { transform: translateY(100vh) scale(0); opacity: 0; } 20% { opacity: 0.6; } 80% { opacity: 0.6; } 100% { transform: translateY(-10vh) scale(1); opacity: 0; } }
+
+/* ==========================================================================
+   GLASSMORPHIC SAAS COMPONENTS
+   ========================================================================== */
+.bento-glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-soft);
+}
+
+.saas-header {
+    position: fixed; top: 1.5rem; left: 50%; transform: translateX(-50%);
+    width: 90%; max-width: 1200px; border-radius: var(--r-btn);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.75rem 1.5rem; z-index: 100;
+}
+.logo { font-family: var(--font-heading); font-size: 1.5rem; letter-spacing: 1px; }
+.logo span { color: var(--c-terra); }
+.desktop-nav a { text-decoration: none; color: var(--c-forest); margin: 0 1.5rem; font-weight: 500; font-size: 0.95rem; transition: var(--t-smooth); }
+.desktop-nav a:hover { color: var(--c-terra); }
+
+.cta-btn {
+    padding: 0.8rem 2rem; border-radius: var(--r-btn); border: none; font-family: var(--font-body); font-weight: 600; transition: var(--t-smooth); position: relative; overflow: hidden;
+}
+.cta-btn.primary { background: var(--c-forest); color: var(--c-sand); }
+.cta-btn.primary:hover { background: var(--c-sage-dark); transform: translateY(-3px); box-shadow: var(--shadow-float); }
+.cta-btn.secondary { background: transparent; border: 1px solid var(--c-forest); color: var(--c-forest); }
+.cta-btn.secondary:hover { background: var(--c-forest); color: var(--c-sand); }
+
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+.hero { display: flex; align-items: center; min-height: 100vh; padding: 0 5%; max-width: 1400px; margin: 0 auto; perspective: 1000px; }
+.hero-content { flex: 1; max-width: 600px; z-index: 2; padding-top: 100px; }
+.badge { display: inline-block; padding: 0.4rem 1.2rem; background: rgba(141,163,153,0.2); border: 1px solid var(--c-sage); border-radius: var(--r-btn); font-size: 0.8rem; font-weight: 600; color: var(--c-sage-dark); margin-bottom: 1.5rem; }
+.hero-title { font-size: clamp(3.5rem, 6vw, 6rem); line-height: 1.05; margin-bottom: 1rem; }
+.hero-desc { font-size: 1.1rem; opacity: 0.8; margin-bottom: 2.5rem; }
+.hero-actions { display: flex; gap: 1rem; }
+
+.hero-3d-visual { flex: 1; position: relative; height: 600px; display: flex; justify-content: center; align-items: center; transform-style: preserve-3d; }
+.soft-img { width: 85%; height: 85%; object-fit: cover; border-radius: var(--r-organic); transform: translateZ(50px); box-shadow: var(--shadow-float); }
+.glass-orb { position: absolute; width: 350px; height: 350px; border-radius: 50%; background: linear-gradient(135deg, rgba(255,255,255,0.6), rgba(255,255,255,0.1)); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.8); transform: translateZ(150px) translateX(-120px) translateY(80px); }
+.floating-badge { position: absolute; background: var(--glass-bg); backdrop-filter: blur(12px); padding: 1rem 1.5rem; border-radius: var(--r-btn); border: 1px solid var(--glass-border); font-weight: 600; transform: translateZ(100px); box-shadow: var(--shadow-soft); }
+.floating-badge.top-right { top: 20%; right: 0; }
+.floating-badge span { color: var(--c-terra); font-size: 1.5rem; font-family: var(--font-heading); }
+
+/* ==========================================================================
+   BENTO SYSTEM (Treatments)
+   ========================================================================== */
+.bento-section, .gallery-section { padding: 6rem 5%; max-width: 1400px; margin: 0 auto; }
+.section-title { font-size: clamp(2.5rem, 4vw, 4rem); text-align: center; margin-bottom: 0.5rem; }
+.section-subtitle { text-align: center; font-size: 1.1rem; opacity: 0.7; margin-bottom: 4rem; }
+
+.bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; auto-rows: 350px; }
+.bento-card { border-radius: var(--r-bento); padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; transform-style: preserve-3d; transition: box-shadow 0.4s ease; }
+.bento-card h3 { font-size: 2rem; margin-bottom: 1rem; transform: translateZ(30px); }
+.bento-card p { opacity: 0.8; transform: translateZ(20px); }
+.text-link { margin-top: auto; font-weight: 600; color: var(--c-terra); text-decoration: none; transform: translateZ(25px); display: inline-block; }
+.text-link.light { color: var(--c-sand); }
+.span-2 { grid-column: span 2; flex-direction: row; align-items: center; }
+.bento-dark { background: var(--c-forest); color: var(--c-sand); border: none; }
+.card-visual { flex: 1; height: 100%; padding-left: 2rem; transform: translateZ(40px); }
+.card-visual img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--r-bento); }
+.stat-card { align-items: center; justify-content: center; text-align: center; }
+.stat-number { font-size: 4.5rem; color: var(--c-sage-dark); line-height: 1; margin-bottom: 0.5rem; transform: translateZ(40px); }
+
+/* ==========================================================================
+   IN-DEPTH GALLERY & CASE STUDIES (Interactive Before/After)
+   ========================================================================== */
+.case-study-container { display: flex; flex-direction: column; gap: 4rem; }
+.case-study-bento { display: flex; gap: 3rem; padding: 3rem; border-radius: var(--r-bento); align-items: center; transform-style: preserve-3d; }
+.case-study-bento.reverse-layout { flex-direction: row-reverse; }
+.case-info { flex: 1; transform: translateZ(30px); }
+.case-info h3 { font-size: 2.5rem; margin: 1rem 0; }
+.patient-bio { font-size: 0.9rem; background: rgba(255,255,255,0.5); padding: 1rem; border-radius: 12px; margin-bottom: 1rem; }
+.case-desc { margin-bottom: 2rem; }
+.metrics-grid { display: flex; gap: 1rem; }
+.metric { background: #fff; padding: 1rem; border-radius: 16px; flex: 1; text-align: center; font-size: 0.85rem; font-weight: 600; box-shadow: var(--shadow-soft); }
+.metric span { display: block; font-size: 2rem; font-family: var(--font-heading); color: var(--c-terra); }
+
+/* Before/After Image Slider Core CSS */
+.before-after-slider { flex: 1.2; position: relative; width: 100%; aspect-ratio: 4/3; border-radius: var(--r-bento); overflow: hidden; transform: translateZ(40px); box-shadow: var(--shadow-float); }
+.image-before, .image-after { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+.image-after { z-index: 1; }
+/* The JS controls the width/clip-path of this before image */
+.image-before { z-index: 2; width: 50%; border-right: 2px solid #fff; }
+.before-after-slider img { width: 100%; height: 100%; object-fit: cover; /* Important: image must not scale down, so we use a trick in JS or width: max-content. Using absolute width: sliderWidth */ pointer-events: none;}
+.image-before img { width: 200%; max-width: none; } /* Compensate for wrapper crop */
+
+/* Slider Labels */
+.label { position: absolute; top: 20px; padding: 0.3rem 1rem; background: rgba(0,0,0,0.5); color: #fff; border-radius: 20px; font-size: 0.8rem; backdrop-filter: blur(4px); z-index: 3; }
+.label-before { left: 20px; }
+.label-after { right: 20px; }
+
+/* The Native Input Hack */
+.slider-input { position: absolute; top: 0; left: 0; width: 100%; height: 100%; outline: none; background: transparent; -webkit-appearance: none; z-index: 4; cursor: ew-resize !important; }
+.slider-input::-webkit-slider-thumb { -webkit-appearance: none; width: 4px; height: 100%; background: transparent; cursor: ew-resize !important; }
+
+/* Custom Slider Line & Button (Visual) */
+.slider-line { position: absolute; top: 0; left: 50%; width: 2px; height: 100%; background: #fff; z-index: 3; pointer-events: none; transform: translateX(-50%); box-shadow: 0 0 10px rgba(0,0,0,0.3); }
+.slider-button { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; background: #fff; border-radius: 50%; display: flex; justify-content: space-between; align-items: center; padding: 0 5px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); color: var(--c-forest); }
+.slider-button svg { width: 16px; height: 16px; }
+
+/* Standard Gallery Grid Layout */
+.case-image-grid { flex: 1.2; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; transform: translateZ(40px); }
+.case-image-grid img { width: 100%; height: 100%; object-fit: cover; border-radius: 24px; aspect-ratio: 3/4; }
+
+/* ==========================================================================
+   ANIMATIONS & RESPONSIVE
+   ========================================================================== */
+.observer-section { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.22, 1, 0.36, 1); }
+.observer-section.is-visible { opacity: 1; transform: translateY(0); }
+
+.bottom-cta { padding: 6rem 5%; display: flex; justify-content: center; }
+.cta-box { background: linear-gradient(135deg, var(--c-sage-dark), var(--c-forest)); color: #fff; width: 100%; max-width: 900px; padding: 4rem; border-radius: var(--r-bento); text-align: center; transform-style: preserve-3d; }
+.cta-box h2 { font-size: 3rem; margin-bottom: 1rem; transform: translateZ(40px); }
+.cta-box p { font-size: 1.1rem; margin-bottom: 2rem; transform: translateZ(30px); }
+.input-group { display: flex; justify-content: center; gap: 1rem; transform: translateZ(50px); }
+.input-group input { padding: 1rem 2rem; border-radius: var(--r-btn); border: none; width: 300px; font-family: var(--font-body); }
+
+@media (max-width: 1024px) {
+    .bento-grid { grid-template-columns: 1fr 1fr; }
+    .hero { flex-direction: column; text-align: center; }
+    .hero-content { padding-top: 150px; display: flex; flex-direction: column; align-items: center; }
+    .case-study-bento { flex-direction: column !important; }
+    .before-after-slider, .case-image-grid { width: 100%; }
+}
+@media (max-width: 768px) {
+    .desktop-nav { display: none; }
+    .bento-grid { grid-template-columns: 1fr; }
+    .span-2 { grid-column: span 1; flex-direction: column; }
+    .card-visual { padding-left: 0; padding-top: 2rem; }
+    .input-group { flex-direction: column; align-items: center; }
+    .input-group input { width: 100%; }
+}

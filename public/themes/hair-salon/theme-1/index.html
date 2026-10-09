@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Art of Becoming | Luxury Hair Salon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           1. DESIGN TOKENS & FOUNDATIONS
+           ========================================================================== */
+        :root {
+            /* Colors */
+            --ivory: #F7F2EB;
+            --oat-milk: #E8DDD0;
+            --espresso: #332720;
+            --mocha: #8C6B55;
+            --rose-taupe: #B99B91;
+            --ink: #211F1D;
+
+            /* Typography */
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Manrope', sans-serif;
+
+            /* Fluid Type Scale */
+            --text-hero: clamp(3.5rem, 8vw, 7.5rem);
+            --text-h1: clamp(2.5rem, 5vw, 4.5rem);
+            --text-h2: clamp(2rem, 4vw, 3.5rem);
+            --text-h3: clamp(1.5rem, 3vw, 2.5rem);
+            --text-body: clamp(1rem, 1.2vw, 1.125rem);
+            --text-micro: 0.75rem;
+
+            /* Spacing */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 2rem;
+            --space-lg: 4rem;
+            --space-xl: 8rem;
+
+            /* Animation */
+            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+            --transition-slow: 1.2s var(--ease-out);
+            --transition-med: 0.6s var(--ease-out);
+            --transition-fast: 0.3s ease;
+        }
+
+        /* ==========================================================================
+           2. BASE STYLES
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--ivory);
+            color: var(--ink);
+            font-family: var(--font-sans);
+            font-size: var(--text-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Utility Classes */
+        .container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .grid-12 {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            background: var(--ink);
+            color: var(--ivory);
+            font-family: var(--font-sans);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid var(--ink);
+            border-radius: 2px;
+            transition: all var(--transition-fast);
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--ink);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--ink);
+        }
+
+        .btn-outline:hover {
+            background: var(--ink);
+            color: var(--ivory);
+        }
+
+        .micro-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-micro);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--mocha);
+        }
+
+        .section-padding { padding: var(--space-xl) 0; }
+        .bg-espresso { background-color: var(--espresso); color: var(--ivory); }
+        .bg-oat { background-color: var(--oat-milk); }
+
+        /* ==========================================================================
+           3. ANIMATION SYSTEM (SCROLL REVEALS)
+           ========================================================================== */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s var(--ease-out), transform 1s var(--ease-out);
+        }
+
+        .reveal-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-mask {
+            clip-path: inset(100% 0 0 0);
+            transition: clip-path 1.5s var(--ease-out);
+        }
+
+        .reveal-mask.is-visible {
+            clip-path: inset(0 0 0 0);
+        }
+
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s var(--ease-out);
+        }
+
+        .stagger-container.is-visible .stagger-item {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Dynamic delays for stagger */
+        .stagger-item:nth-child(1) { transition-delay: 0.1s; }
+        .stagger-item:nth-child(2) { transition-delay: 0.2s; }
+        .stagger-item:nth-child(3) { transition-delay: 0.3s; }
+        .stagger-item:nth-child(4) { transition-delay: 0.4s; }
+
+        /* ==========================================================================
+           4. NAVIGATION
+           ========================================================================== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            mix-blend-mode: difference;
+            color: #fff;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* ==========================================================================
+           5. SECTION 01: CINEMATIC HERO
+           ========================================================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 5rem;
+        }
+
+        .hero-layout {
+            align-items: center;
+        }
+
+        .hero-content {
+            grid-column: 1 / 8;
+            padding-right: 2rem;
+        }
+
+        .hero-title {
+            font-size: var(--text-hero);
+            margin-bottom: 1.5rem;
+            line-height: 0.95;
+        }
+
+        .hero-desc {
+            font-size: 1.25rem;
+            max-width: 500px;
+            margin-bottom: 3rem;
+            color: var(--espresso);
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .hero-image-wrapper {
+            grid-column: 8 / 13;
+            height: 85vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image-wrapper img {
+            height: 100%;
+            transform: scale(1.05);
+            transition: transform 10s linear; /* Ambient movement */
+        }
+
+        .hero-image-wrapper:hover img {
+            transform: scale(1.1);
+        }
+
+        .floating-label {
+            position: absolute;
+            bottom: 2rem;
+            left: -2rem;
+            background: var(--ivory);
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            color: var(--ink);
+        }
+
+        /* ==========================================================================
+           6. SECTION 02: SIGNATURE BENTO GRID
+           ========================================================================== */
+        .bento-header {
+            margin-bottom: 4rem;
+            max-width: 600px;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: minmax(300px, auto);
+            gap: 1.5rem;
+        }
+
+        .bento-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .bento-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to top, rgba(33,31,29,0.8) 0%, rgba(33,31,29,0) 60%);
+            z-index: 1;
+        }
+
+        .bento-card-content {
+            position: relative;
+            z-index: 2;
+            color: var(--ivory);
+        }
+
+        .bento-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Grid Spans */
+        .card-feature { grid-column: 1 / 8; grid-row: span 2; background-image: url('https://images.unsplash.com/photo-1595476108010-b4d1f10d5e43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'); }
+        .card-cut { grid-column: 8 / 13; grid-row: span 1; background-image: url('https://images.unsplash.com/photo-1605980776566-0486c3ac7617?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'); }
+        .card-length { grid-column: 8 / 13; grid-row: span 1; background-image: url('https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'); }
+        
+        .card-text-only {
+            grid-column: 1 / 13;
+            background: var(--oat-milk);
+            color: var(--ink);
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-text-only::before { display: none; }
+        .card-text-only .bento-card-content { color: var(--ink); display: flex; width: 100%; justify-content: space-between; align-items: center;}
+        
+        .bento-card:hover img, .bento-card:hover {
+            transform: scale(1.02);
+            transition: transform 0.6s var(--ease-out);
+        }
+
+        /* ==========================================================================
+           7. SECTION 03: TRANSFORMATION STUDIO (BEFORE/AFTER)
+           ========================================================================== */
+        .transformation-layout {
+            align-items: center;
+        }
+
+        .transformation-text { grid-column: 1 / 6; }
+        
+        .ba-slider-container {
+            grid-column: 7 / 13;
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4/5;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .ba-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .ba-image-after {
+            z-index: 1;
+        }
+
+        .ba-image-before {
+            z-index: 2;
+            clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); /* Start at 50% */
+        }
+
+        .ba-slider {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: var(--ivory);
+            z-index: 3;
+            cursor: ew-resize;
+            transform: translateX(-50%);
+        }
+
+        .ba-slider-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: var(--ivory);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .ba-slider-button::before, .ba-slider-button::after {
+            content: '';
+            border: solid var(--ink);
+            border-width: 0 2px 2px 0;
+            display: inline-block;
+            padding: 3px;
+        }
+        .ba-slider-button::before { transform: rotate(135deg); margin-right: 5px; }
+        .ba-slider-button::after { transform: rotate(-45deg); margin-left: 5px; }
+
+        /* ==========================================================================
+           8. SECTION 04/05: EDITORIAL SCROLL (BALAYAGE & CUT)
+           ========================================================================== */
+        .edit-layout {
+            align-items: start;
+        }
+
+        .edit-image-col {
+            grid-column: 1 / 7;
+            position: sticky;
+            top: 10vh;
+            height: 80vh;
+        }
+
+        .edit-image-col img {
+            height: 100%;
+        }
+
+        .edit-text-col {
+            grid-column: 8 / 13;
+            padding: 5rem 0;
+        }
+
+        .step-list {
+            margin-top: 3rem;
+            border-left: 1px solid var(--rose-taupe);
+            padding-left: 2rem;
+        }
+
+        .step-item {
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .step-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.5rem;
+            width: 8px;
+            height: 8px;
+            background: var(--espresso);
+            border-radius: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Reverse layout for Cut section */
+        .layout-reverse .edit-image-col { grid-column: 7 / 13; }
+        .layout-reverse .edit-text-col { grid-column: 1 / 6; grid-row: 1; }
+
+        /* ==========================================================================
+           9. SECTION 07: EDITORIAL GALLERY
+           ========================================================================== */
+        .gallery-header { text-align: center; margin-bottom: 3rem; }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            cursor: pointer;
+        }
+
+        .gallery-item:nth-child(2) { transform: translateY(40px); }
+        .gallery-item:nth-child(3) { transform: translateY(-20px); }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            transition: transform var(--transition-med);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: var(--ivory);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all var(--transition-fast);
+        }
+
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==========================================================================
+           10. SECTION 08: MEET THE ARTISTS
+           ========================================================================== */
+        .artists-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .artist-card {
+            text-align: center;
+        }
+
+        .artist-image-wrapper {
+            position: relative;
+            aspect-ratio: 4/5;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .artist-image-wrapper img {
+            position: absolute;
+            top: 0; left: 0;
+            transition: opacity var(--transition-med);
+        }
+
+        .artist-img-hover { opacity: 0; }
+        .artist-card:hover .artist-img-hover { opacity: 1; }
+        .artist-card:hover .artist-img-main { opacity: 0; }
+
+        /* ==========================================================================
+           11. SECTION 11: CONSULTATION QUIZ
+           ========================================================================== */
+        .quiz-section {
+            background: var(--oat-milk);
+            text-align: center;
+        }
+
+        .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--ivory);
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        }
+
+        .quiz-step {
+            display: none;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        .quiz-step.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .quiz-option {
+            padding: 1rem;
+            border: 1px solid var(--rose-taupe);
+            background: transparent;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-align: left;
+        }
+
+        .quiz-option:hover, .quiz-option.selected {
+            background: var(--espresso);
+            color: var(--ivory);
+            border-color: var(--espresso);
+        }
+
+        /* ==========================================================================
+           12. FOOTER
+           ========================================================================== */
+        footer {
+            background: var(--ink);
+            color: var(--ivory);
+            padding: 5rem 5% 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 4rem;
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links h4 {
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+            color: var(--rose-taupe);
+        }
+
+        .footer-links ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            transition: opacity var(--transition-fast);
+        }
+        .footer-links a:hover { opacity: 0.7; }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--rose-taupe);
+        }
+
+        /* ==========================================================================
+           13. RESPONSIVE DESIGN (MOBILE)
+           ========================================================================== */
+        @media (max-width: 900px) {
+            .grid-12 { display: flex; flex-direction: column; gap: 2rem; }
+            .hero-layout, .transformation-layout, .edit-layout { flex-direction: column; }
+            .hero-content, .hero-image-wrapper { width: 100%; }
+            .hero-image-wrapper { height: 60vh; }
+            
+            .bento-card { min-height: 350px; }
+            
+            .edit-image-col { position: relative; top: 0; height: 50vh; margin-bottom: 2rem; }
+            .layout-reverse .edit-image-col, .layout-reverse .edit-text-col { width: 100%; }
+            
+            .gallery-grid, .artists-grid { grid-template-columns: 1fr; }
+            .gallery-item:nth-child(n) { transform: none; aspect-ratio: 1/1;}
+            
+            .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+            
+            .nav-links { display: none; } /* Simplified for demo */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">The Art of Becoming</div>
+        <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#journal">Journal</a>
+            <a href="#artists">Artists</a>
+        </div>
+        <a href="#book" class="btn btn-outline" style="color: white; border-color: white;">Book Visit</a>
+    </nav>
+
+    <!-- 01. Cinematic Hero -->
+    <section class="hero section-padding">
+        <div class="container grid-12 hero-layout">
+            <div class="hero-content reveal-up">
+                <p class="micro-label">Your hair, reimagined.</p>
+                <h1 class="hero-title">The art of <br>becoming.</h1>
+                <p class="hero-desc">Colour that catches the light. Cuts that move with you. Extensions that feel entirely your own. We create personalised hair transformations that celebrate your natural beauty.</p>
+                <div class="hero-actions">
+                    <a href="#services" class="btn">Discover Your Look</a>
+                    <a href="#book" class="btn btn-outline">Book Consultation</a>
+                </div>
+            </div>
+            <div class="hero-image-wrapper reveal-mask">
+                <img src="https://images.unsplash.com/photo-1615813967515-e1838c1c534c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80" alt="Editorial portrait of model with flowing hair">
+                <div class="floating-label">
+                    <span class="micro-label">Colour, cut & transformation</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 02. The Signature Services Bento Grid -->
+    <section id="services" class="section-padding bg-oat stagger-container">
+        <div class="container">
+            <div class="bento-header reveal-up">
+                <h2 class="serif">More than a service.<br>A signature.</h2>
+                <p>Your hair should feel like you—only more confident. Whether you're looking for sun-kissed dimension or a beautifully structured cut, our artists bring technical precision.</p>
+            </div>
+            
+            <div class="bento-grid">
+                <!-- Large Feature -->
+                <div class="bento-card card-feature stagger-item">
+                    <div class="bento-card-content">
+                        <span class="micro-label" style="color: var(--oat-milk)">01 / Colour</span>
+                        <h3>Balayage, beautifully blended.</h3>
+                        <p>Soft transitions. Multidimensional colour.</p>
+                    </div>
+                </div>
+                
+                <!-- Smaller Cards -->
+                <div class="bento-card card-cut stagger-item">
+                    <div class="bento-card-content">
+                        <span class="micro-label" style="color: var(--oat-milk)">02 / Cut</span>
+                        <h3>The perfect cut.</h3>
+                        <p>Shape, movement and effortless styling.</p>
+                    </div>
+                </div>
+                
+                <div class="bento-card card-length stagger-item">
+                    <div class="bento-card-content">
+                        <span class="micro-label" style="color: var(--oat-milk)">03 / Length</span>
+                        <h3>Length without limits.</h3>
+                        <p>Seamless extensions. Natural volume.</p>
+                    </div>
+                </div>
+
+                <!-- Text Only CTA Bar -->
+                <div class="bento-card card-text-only stagger-item">
+                    <div class="bento-card-content">
+                        <div>
+                            <span class="micro-label">04 / Your Journey</span>
+                            <h3 class="serif" style="margin:0;">Let's find your look.</h3>
+                        </div>
+                        <a href="#book" class="btn">Explore All Services</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 03. The Transformation Studio -->
+    <section class="section-padding">
+        <div class="container grid-12 transformation-layout">
+            <div class="transformation-text reveal-up">
+                <span class="micro-label">Transformation Spotlight</span>
+                <h2 class="serif" style="margin: 1rem 0;">Every transformation begins with a vision.</h2>
+                <p style="margin-bottom: 2rem;">Sometimes it's a softer shade. Sometimes it's a completely new silhouette. We listen first, plan thoughtfully, and create a look that works with your hair—not against it.</p>
+                <div style="padding: 1.5rem; background: var(--ivory); border-left: 2px solid var(--mocha);">
+                    <strong>Service:</strong> Dimensional Balayage<br>
+                    <strong>Goal:</strong> Lived-in blonde with seamless grow-out.<br>
+                    <strong>Artist:</strong> Elena, Colour Specialist
+                </div>
+                <br>
+                <a href="#book" class="btn btn-outline">Create a look like this</a>
+            </div>
+            
+            <!-- Before/After Slider Component -->
+            <div class="ba-slider-container reveal-mask" id="ba-container">
+                <!-- After Image (Bottom Layer) -->
+                <img src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" class="ba-image ba-image-after" alt="Hair After Transformation">
+                
+                <!-- Before Image (Top Layer, Masked) -->
+                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" class="ba-image ba-image-before" id="ba-before" alt="Hair Before Transformation" style="filter: brightness(0.8) contrast(0.9);">
+                
+                <!-- Slider Handle -->
+                <div class="ba-slider" id="ba-slider">
+                    <div class="ba-slider-button"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 04. Balayage Artistry (Editorial Scroll) -->
+    <section class="section-padding bg-espresso">
+        <div class="container grid-12 edit-layout">
+            <div class="edit-image-col reveal-mask">
+                <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Balayage detail shot">
+            </div>
+            <div class="edit-text-col reveal-up">
+                <span class="micro-label" style="color: var(--rose-taupe)">The Colour Edit / 01</span>
+                <h2 class="serif" style="margin: 1rem 0;">Dimension that feels like it belongs to you.</h2>
+                <p>Balayage is more than a lighter shade. It's the placement, the softness, the contrast, and the way colour catches the light as you move. We consider your natural base and maintenance routine before designing a personalised plan.</p>
+                
+                <div class="step-list">
+                    <div class="step-item">
+                        <h4 class="serif">01 — Discover your inspiration</h4>
+                        <p style="font-size: 0.9rem; color: #ccc;">Share the tones, references, and mood you're drawn to.</p>
+                    </div>
+                    <div class="step-item">
+                        <h4 class="serif">02 — Design your colour</h4>
+                        <p style="font-size: 0.9rem; color: #ccc;">Your stylist assesses your starting colour and history.</p>
+                    </div>
+                    <div class="step-item">
+                        <h4 class="serif">03 — Create the blend</h4>
+                        <p style="font-size: 0.9rem; color: #ccc;">Thoughtful placement builds dimension and softness.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 05. The Precision Cut Studio (Reverse Split) -->
+    <section class="section-padding">
+        <div class="container grid-12 edit-layout layout-reverse">
+            <div class="edit-image-col reveal-mask">
+                <img src="https://images.unsplash.com/photo-1620331311520-246422fd82f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Precision haircut">
+            </div>
+            <div class="edit-text-col reveal-up">
+                <span class="micro-label">The Shape Edit / 02</span>
+                <h2 class="serif" style="margin: 1rem 0;">A great cut changes the way everything falls.</h2>
+                <p>The best haircut doesn't just look beautiful in the salon. It works with your natural texture, moves with your lifestyle, and feels right long after you've left the chair. From soft layers to structured bobs, every cut begins with understanding how you want your hair to feel.</p>
+                <br>
+                <ul style="line-height: 2.2; border-top: 1px solid var(--oat-milk); padding-top: 2rem;">
+                    <li>✓ Face-framing and overall silhouette</li>
+                    <li>✓ Natural texture and density</li>
+                    <li>✓ Everyday styling habits</li>
+                </ul>
+                <br><br>
+                <a href="#book" class="btn btn-outline">Find Your Cut</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 07. Modern Editorial Gallery -->
+    <section id="journal" class="section-padding bg-oat stagger-container">
+        <div class="container">
+            <div class="gallery-header reveal-up">
+                <h2 class="serif">A little inspiration.<br>A whole new perspective.</h2>
+                <p>Explore the colours, cuts, and transformations that inspire our work.</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item stagger-item">
+                    <img src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Brunette Balayage">
+                    <div class="gallery-caption">
+                        <span class="micro-label">01 / Dimension</span>
+                        <h4 class="serif">The Brunette Edit</h4>
+                    </div>
+                </div>
+                <div class="gallery-item stagger-item">
+                    <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Blonde Styling">
+                    <div class="gallery-caption">
+                        <span class="micro-label">02 / Light</span>
+                        <h4 class="serif">The Blonde Edit</h4>
+                    </div>
+                </div>
+                <div class="gallery-item stagger-item">
+                    <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Copper Hair">
+                    <div class="gallery-caption">
+                        <span class="micro-label">03 / Colour</span>
+                        <h4 class="serif">The Copper Edit</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 08. Meet the Artists -->
+    <section id="artists" class="section-padding stagger-container">
+        <div class="container">
+            <div style="text-align: center; max-width: 700px; margin: 0 auto; margin-bottom: 4rem;" class="reveal-up">
+                <h2 class="serif">Good hair starts with good listening.</h2>
+                <p>Our stylists bring together technical knowledge, creative instinct, and thoughtful consultation to help you find a look that fits your life.</p>
+            </div>
+
+            <div class="artists-grid">
+                <div class="artist-card stagger-item">
+                    <div class="artist-image-wrapper">
+                        <!-- Main portrait -->
+                        <img src="https://images.unsplash.com/photo-1580618864180-f6d7d39b8b20?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="artist-img-main" alt="Stylist Portrait">
+                        <!-- Hover candid shot -->
+                        <img src="https://images.unsplash.com/photo-1521590832167-7bfcfaa6362f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="artist-img-hover" alt="Stylist Working">
+                    </div>
+                    <h3 class="serif">Sarah Jenkins</h3>
+                    <span class="micro-label">The Colour Specialist</span>
+                </div>
+                
+                <div class="artist-card stagger-item">
+                    <div class="artist-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1595959183082-7b570b7e08e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="artist-img-main" alt="Stylist Portrait">
+                        <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="artist-img-hover" alt="Stylist Working">
+                    </div>
+                    <h3 class="serif">Marcus Thorne</h3>
+                    <span class="micro-label">The Precision Stylist</span>
+                </div>
+
+                <div class="artist-card stagger-item">
+                    <div class="artist-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="artist-img-main" alt="Stylist Portrait">
+                        <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="artist-img-hover" alt="Stylist Working">
+                    </div>
+                    <h3 class="serif">Elena Rostova</h3>
+                    <span class="micro-label">The Extension Artist</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. Consultation Quiz -->
+    <section id="book" class="section-padding quiz-section">
+        <div class="container reveal-up">
+            <span class="micro-label">Your Hair Journey / 01</span>
+            <h2 class="serif" style="margin-bottom: 2rem;">Let's find your signature look.</h2>
+            
+            <div class="quiz-container">
+                <!-- Step 1 -->
+                <div class="quiz-step active" id="step1">
+                    <h3 class="serif">What would you love to explore?</h3>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="nextStep(2)">Dimensional colour or balayage</button>
+                        <button class="quiz-option" onclick="nextStep(2)">A new cut or shape</button>
+                        <button class="quiz-option" onclick="nextStep(2)">More length or fullness</button>
+                        <button class="quiz-option" onclick="nextStep(2)">A complete hair refresh</button>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="quiz-step" id="step2">
+                    <h3 class="serif">What is your hair-length goal?</h3>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="nextStep(3)">Keep my length</button>
+                        <button class="quiz-option" onclick="nextStep(3)">Add length</button>
+                        <button class="quiz-option" onclick="nextStep(3)">Go shorter or reshape</button>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="quiz-step" id="step3">
+                    <h3 class="serif">What maintenance routine suits you?</h3>
+                    <div class="quiz-options">
+                        <button class="quiz-option" onclick="finishQuiz()">Low maintenance (1-2 times a year)</button>
+                        <button class="quiz-option" onclick="finishQuiz()">Every few months</button>
+                        <button class="quiz-option" onclick="finishQuiz()">Regular salon visits (every 6-8 weeks)</button>
+                    </div>
+                </div>
+
+                <!-- Final Screen -->
+                <div class="quiz-step" id="stepFinal">
+                    <h3 class="serif" style="margin-bottom: 1rem;">Perfect. We're ready for you.</h3>
+                    <p style="margin-bottom: 2rem;">Based on your answers, we recommend booking a personalized consultation with one of our specialists to finalize your vision.</p>
+                    <button class="btn">Proceed to Booking Calendar</button>
+                    <br><br>
+                    <a href="#" onclick="resetQuiz(); return false;" style="font-size: 0.8rem; text-decoration: underline;">Restart Quiz</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h2 class="serif footer-logo">The art of <br>becoming.</h2>
+                    <p style="max-width: 300px; color: var(--rose-taupe); font-size: 0.9rem;">Thoughtful colour, precision cuts and personalised extensions—created with care, artistry and intention.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#artists">Our Artists</a></li>
+                        <li><a href="#journal">Hair Journal</a></li>
+                        <li><a href="#book">Book a Visit</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Visit Us</h4>
+                    <ul>
+                        <li style="color: var(--oat-milk)">123 Editorial Ave, Style District</li>
+                        <li style="color: var(--oat-milk)">Tue-Sat: 10am - 7pm</li>
+                        <li><a href="mailto:hello@artofbecoming.com">hello@artofbecoming.com</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <span>&copy; 2023 The Art of Becoming. All rights reserved.</span>
+                <span style="display: flex; gap: 2rem;">
+                    <a href="#">Privacy</a>
+                    <a href="#">Accessibility</a>
+                    <a href="#">Booking Policy</a>
+                </span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================================================
+         JAVASCRIPT LOGIC
+         ========================================================================== -->
+    <script>
+        // 1. Intersection Observer for Scroll Reveals
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Run once
+                    }
+                });
+            }, observerOptions);
+
+            // Select all animated elements
+            const revealElements = document.querySelectorAll('.reveal-up, .reveal-mask, .stagger-container');
+            revealElements.forEach(el => observer.observe(el));
+        });
+
+        // 2. Before / After Slider Logic
+        const baContainer = document.getElementById('ba-container');
+        const baSlider = document.getElementById('ba-slider');
+        const baBeforeImg = document.getElementById('ba-before');
+        let isDragging = false;
+
+        if (baContainer && baSlider && baBeforeImg) {
+            // Mouse Events
+            baSlider.addEventListener('mousedown', () => isDragging = true);
+            window.addEventListener('mouseup', () => isDragging = false);
+            window.addEventListener('mousemove', handleDrag);
+
+            // Touch Events (Mobile)
+            baSlider.addEventListener('touchstart', () => isDragging = true);
+            window.addEventListener('touchend', () => isDragging = false);
+            window.addEventListener('touchmove', handleDrag);
+        }
+
+        function handleDrag(e) {
+            if (!isDragging) return;
+
+            // Get x position relative to container
+            let clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+            let rect = baContainer.getBoundingClientRect();
+            let xPos = clientX - rect.left;
+
+            // Constrain bounds
+            if (xPos < 0) xPos = 0;
+            if (xPos > rect.width) xPos = rect.width;
+
+            // Calculate percentage
+            let percent = (xPos / rect.width) * 100;
+
+            // Update DOM
+            baSlider.style.left = `${percent}%`;
+            // Update the mask via clip-path polygon
+            baBeforeImg.style.clipPath = `polygon(0 0, ${percent}% 0, ${percent}% 100%, 0 100%)`;
+        }
+
+        // 3. Consultation Quiz Logic
+        function nextStep(stepNum) {
+            // Hide all steps
+            document.querySelectorAll('.quiz-step').forEach(step => {
+                step.classList.remove('active');
+            });
+            // Show requested step
+            document.getElementById(`step${stepNum}`).classList.add('active');
+        }
+
+        function finishQuiz() {
+            document.querySelectorAll('.quiz-step').forEach(step => {
+                step.classList.remove('active');
+            });
+            document.getElementById('stepFinal').classList.add('active');
+        }
+
+        function resetQuiz() {
+            document.querySelectorAll('.quiz-step').forEach(step => {
+                step.classList.remove('active');
+            });
+            document.getElementById('step1').classList.add('active');
+        }
+
+        // 4. Sticky Header Background transition on scroll
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.style.mixBlendMode = 'normal';
+                nav.style.background = 'var(--ivory)';
+                nav.style.color = 'var(--ink)';
+                nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.05)';
+                nav.querySelector('.btn').style.color = 'var(--ink)';
+                nav.querySelector('.btn').style.borderColor = 'var(--ink)';
+            } else {
+                nav.style.mixBlendMode = 'difference';
+                nav.style.background = 'transparent';
+                nav.style.color = '#fff';
+                nav.style.boxShadow = 'none';
+                nav.querySelector('.btn').style.color = 'white';
+                nav.querySelector('.btn').style.borderColor = 'white';
+            }
+        });
+    </script>
+</body>
+</html>

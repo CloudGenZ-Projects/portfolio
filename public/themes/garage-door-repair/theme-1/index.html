@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Garage Doors | Modern Repair & Installation Solutions</title>
+    <meta name="description" content="Fast, Professional & Affordable Garage Door Services You Can Trust.">
+    
+    <!-- Fonts: Space Grotesk (Headings), Inter (Body), IBM Plex Mono (Labels) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           1. DESIGN TOKENS & VARIABLES
+           ========================================================================== */
+        :root {
+            /* Colors */
+            --bg-primary: #F7F7F5;
+            --text-main: #17191C;
+            --brand-orange: #F05A28;
+            --brand-orange-hover: #D4481C;
+            --bg-secondary: #EAECEB;
+            --bg-dark: #202326;
+            --text-secondary: #686D72;
+            --border-color: #D9DCDA;
+            --color-white: #FFFFFF;
+            --star-color: #F5A623;
+            
+            /* Typography */
+            --font-head: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+            
+            /* Easing & Motion */
+            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+            --transition-fast: 200ms var(--ease-out);
+            --transition-std: 300ms var(--ease-out);
+            --transition-reveal: 800ms var(--ease-out);
+            
+            /* Grid Structure */
+            --grid-gap: 24px;
+            --max-width: 1440px;
+            --outer-margin: clamp(20px, 5vw, 80px);
+            --section-spacing: clamp(64px, 10vw, 160px);
+        }
+
+        /* ==========================================================================
+           2. RESET & BASE
+           ========================================================================== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 { font-family: var(--font-head); line-height: 1.1; letter-spacing: -0.02em; }
+        
+        h1 { font-size: clamp(48px, 6vw, 96px); font-weight: 700; margin-bottom: 24px; }
+        h2 { font-size: clamp(36px, 4vw, 60px); margin-bottom: 24px; }
+        h3 { font-size: clamp(22px, 2vw, 28px); margin-bottom: 16px; }
+        
+        p { font-size: clamp(16px, 1.2vw, 18px); color: var(--text-secondary); margin-bottom: 24px; max-width: 65ch;}
+        
+        .eyebrow {
+            font-family: var(--font-mono);
+            font-size: clamp(11px, 1vw, 13px);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--brand-orange);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        /* ==========================================================================
+           3. LAYOUT & GRID
+           ========================================================================== */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--outer-margin);
+        }
+
+        .grid-12 {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--grid-gap);
+        }
+
+        .section-padding { padding: var(--section-spacing) 0; }
+
+        /* ==========================================================================
+           4. COMPONENTS
+           ========================================================================== */
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 56px;
+            padding: 0 30px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all var(--transition-std);
+            border: 1px solid transparent;
+        }
+
+        .btn svg { margin-left: 12px; transition: transform var(--transition-fast); }
+        .btn:hover svg { transform: translateX(4px); }
+
+        .btn-primary { background-color: var(--brand-orange); color: var(--color-white); }
+        .btn-primary:hover { background-color: var(--brand-orange-hover); }
+
+        .btn-secondary { background-color: transparent; color: var(--text-main); border-color: var(--text-main); }
+        .btn-secondary:hover { background-color: var(--text-main); color: var(--color-white); }
+
+        .btn-group { display: flex; gap: 16px; flex-wrap: wrap; }
+
+        /* Glassmorphism */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        }
+
+        /* Neumorphism Inputs */
+        .neu-input {
+            width: 100%; height: 52px; padding: 0 16px; background: var(--bg-primary); border: none;
+            border-radius: 6px; font-family: var(--font-body); font-size: 15px; margin-bottom: 16px;
+            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.05), inset -2px -2px 5px rgba(255,255,255,0.8);
+            transition: box-shadow var(--transition-fast);
+        }
+        .neu-input:focus { outline: none; box-shadow: inset 4px 4px 8px rgba(0,0,0,0.08), inset -4px -4px 8px rgba(255,255,255,1); }
+
+        /* ==========================================================================
+           5. HEADER & NAVIGATION
+           ========================================================================== */
+        header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 24px 0; transition: all var(--transition-std); border-bottom: 1px solid transparent;
+        }
+
+        header.scrolled {
+            padding: 16px 0; background: rgba(247, 247, 245, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-head); font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-links a { font-size: 15px; font-weight: 500; transition: color var(--transition-fast); }
+        .nav-links a:hover { color: var(--brand-orange); }
+
+        .nav-cta { display: flex; gap: 24px; align-items: center; }
+        .phone-link { font-family: var(--font-mono); font-weight: 600; font-size: 14px; }
+        .mobile-toggle { display: none; background: none; border: none; cursor: pointer; }
+
+        /* ==========================================================================
+           6. SLIDER CORE STYLES (Used in Hero & Repair Section)
+           ========================================================================== */
+        .slider-wrapper { position: relative; width: 100%; height: 100%; border-radius: 8px; overflow: hidden; background-color: var(--bg-dark); }
+        .slider-wrapper .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transition: opacity 0.8s var(--ease-out); }
+        .slider-wrapper .slide.active { opacity: 1; z-index: 2; }
+        
+        .slider-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; background: rgba(23, 25, 28, 0.4); backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; z-index: 10; transition: all var(--transition-fast); }
+        .slider-nav:hover { background: var(--brand-orange); border-color: var(--brand-orange); transform: translateY(-50%) scale(1.1); }
+        .slider-nav.prev { left: 16px; }
+        .slider-nav.next { right: 16px; }
+        
+        .slider-dots { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
+        .slider-dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.4); background: transparent; cursor: pointer; transition: all var(--transition-fast); }
+        .slider-dot.active { background: white; border-color: white; transform: scale(1.2); }
+
+        /* ==========================================================================
+           7. HERO SECTION
+           ========================================================================== */
+        .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 120px; }
+        .hero .grid-12 { align-items: center; }
+        .hero-content { grid-column: span 6; padding-right: 40px; }
+        .hero-image-wrap { grid-column: 7 / 13; position: relative; height: 75vh; min-height: 600px;}
+        
+        /* Move Hero Dots to accommodate form */
+        .hero-slider-wrap .slider-dots { bottom: auto; top: 24px; right: 24px; left: auto; transform: none; }
+
+        .trust-indicators { display: flex; gap: 24px; margin-top: 48px; border-top: 1px solid var(--border-color); padding-top: 24px; }
+        .trust-item { font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary); display: flex; align-items: center; gap: 8px; }
+        .trust-item::before { content: ''; width: 6px; height: 6px; background: var(--brand-orange); border-radius: 50%; }
+
+        .hero-glass-form { position: absolute; bottom: -40px; left: -80px; width: 380px; z-index: 20; }
+
+        /* ==========================================================================
+           8. SERVICES SECTION
+           ========================================================================== */
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+        .service-card { background: var(--bg-primary); border: 1px solid var(--border-color); padding: 40px 32px; border-radius: 4px; transition: all var(--transition-std); position: relative; }
+        .service-card:hover { border-color: var(--brand-orange); box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        .service-number { font-family: var(--font-mono); color: var(--border-color); font-size: 40px; font-weight: 500; position: absolute; top: 24px; right: 32px; line-height: 1; transition: color var(--transition-std); }
+        .service-card:hover .service-number { color: var(--brand-orange); opacity: 0.2; }
+        .service-card h3 { margin-top: 24px; font-size: 22px;}
+        .service-link { font-weight: 600; font-size: 14px; color: var(--text-main); display: inline-flex; align-items: center; margin-top: 16px; }
+        .service-link svg { margin-left: 8px; transition: transform var(--transition-fast); }
+        .service-card:hover .service-link svg { transform: translateX(6px); color: var(--brand-orange); }
+
+        /* ==========================================================================
+           9. MODERN GALLERY SECTION (Horizontal Scroll Snap)
+           ========================================================================== */
+        .gallery-track {
+            display: flex;
+            gap: 24px;
+            margin-top: 48px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 32px; /* for scrollbar */
+            scrollbar-width: thin;
+            scrollbar-color: var(--brand-orange) var(--border-color);
+        }
+        .gallery-track::-webkit-scrollbar { height: 6px; }
+        .gallery-track::-webkit-scrollbar-track { background: var(--border-color); border-radius: 10px; }
+        .gallery-track::-webkit-scrollbar-thumb { background-color: var(--brand-orange); border-radius: 10px; }
+
+        .gallery-item {
+            flex: 0 0 calc(33.333% - 16px);
+            scroll-snap-align: start;
+            position: relative;
+            height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--border-color);
+            cursor: grab;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s var(--ease-out);
+        }
+        .gallery-item:hover img { transform: scale(1.05); }
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 32px 24px;
+            background: linear-gradient(to top, rgba(23, 25, 28, 0.9) 0%, rgba(23, 25, 28, 0) 100%);
+            color: var(--color-white);
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all var(--transition-std);
+        }
+        .gallery-item:hover .gallery-overlay { opacity: 1; transform: translateY(0); }
+        .gallery-overlay h4 { margin: 0; font-size: 20px; color: var(--color-white); }
+        .gallery-overlay p { margin: 6px 0 0; font-size: 13px; font-family: var(--font-mono); color: var(--brand-orange); }
+
+        /* ==========================================================================
+           10. TRUST / PROOF SECTION
+           ========================================================================== */
+        .trust-section { background-color: var(--bg-dark); color: var(--color-white); }
+        .trust-section p { color: #A0A5AA; }
+        .trust-section .eyebrow { color: var(--color-white); opacity: 0.7; }
+        .proof-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 64px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 48px; }
+        .proof-item h4 { font-size: 48px; color: var(--brand-orange); margin-bottom: 8px; }
+        .proof-item p { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; margin: 0; color: #FFFFFF; opacity: 0.8;}
+
+        /* ==========================================================================
+           11. HOW IT WORKS (Timeline)
+           ========================================================================== */
+        .timeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 64px; }
+        .timeline-item { position: relative; }
+        .timeline-num { font-family: var(--font-mono); font-size: 14px; font-weight: 600; color: var(--brand-orange); margin-bottom: 16px; display: block;}
+        .timeline-item::before { content: ''; position: absolute; top: 10px; left: 30px; width: calc(100% - 10px); height: 1px; background: var(--border-color); z-index: -1; }
+        .timeline-item:last-child::before { display: none; }
+
+        /* ==========================================================================
+           12. FEATURED EDITORIAL SPLIT (WITH NEW REPAIR SLIDER)
+           ========================================================================== */
+        .split-feature { background: var(--bg-secondary); }
+        .split-feature .grid-12 { align-items: center; }
+        
+        .repair-slider-wrap {
+            grid-column: 1 / 7; 
+            height: 600px; 
+            width: 100%; 
+            border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        .split-content { grid-column: 8 / 13; }
+        .warning-list { margin: 32px 0; }
+        .warning-list li { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; font-weight: 500;}
+        .warning-list li svg { color: var(--brand-orange); }
+
+        /* ==========================================================================
+           13. REVIEWS & TESTIMONIALS (NEW)
+           ========================================================================== */
+        .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+        .review-card {
+            background: var(--color-white);
+            border: 1px solid var(--border-color);
+            padding: 40px 32px;
+            border-radius: 8px;
+            transition: transform var(--transition-std), box-shadow var(--transition-std);
+        }
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.04);
+            border-color: var(--brand-orange);
+        }
+        .stars { display: flex; gap: 4px; color: var(--star-color); margin-bottom: 24px; }
+        .review-text { font-size: 16px; color: var(--text-main); font-style: italic; margin-bottom: 24px; }
+        .reviewer { font-family: var(--font-head); font-weight: 700; font-size: 18px; color: var(--text-main); }
+        .reviewer-meta { font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary); text-transform: uppercase; margin-top: 4px; }
+
+        /* ==========================================================================
+           14. FAQ ACCORDION
+           ========================================================================== */
+        .faq-container { max-width: 800px; margin: 64px auto 0; }
+        .accordion-item { border-bottom: 1px solid var(--border-color); }
+        .accordion-header {
+            width: 100%; text-align: left; background: none; border: none; padding: 24px 0; font-family: var(--font-head); font-size: 20px; font-weight: 600; color: var(--text-main); cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .accordion-icon { width: 24px; height: 24px; position: relative; transition: transform var(--transition-std); }
+        .accordion-icon::before, .accordion-icon::after {
+            content: ''; position: absolute; background: var(--text-main); top: 50%; left: 50%; transform: translate(-50%, -50%); transition: all var(--transition-std);
+        }
+        .accordion-icon::before { width: 16px; height: 2px; }
+        .accordion-icon::after { width: 2px; height: 16px; }
+        .accordion-header.active .accordion-icon::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height var(--transition-std); }
+        .accordion-inner { padding-bottom: 24px; color: var(--text-secondary); }
+
+        /* ==========================================================================
+           15. CONVERSION & FOOTER
+           ========================================================================== */
+        .conversion { background: var(--brand-orange); color: var(--color-white); text-align: center; }
+        .conversion h2 { color: var(--color-white); }
+        .conversion p { color: rgba(255,255,255,0.9); margin: 0 auto 40px; }
+        .conversion .btn-secondary { border-color: var(--color-white); color: var(--color-white); }
+        .conversion .btn-secondary:hover { background: var(--color-white); color: var(--brand-orange); }
+        .conversion .btn-primary { background: var(--bg-dark); color: white;}
+        .conversion .btn-primary:hover { background: black; }
+
+        footer { background: var(--bg-dark); color: var(--color-white); padding: 80px 0 32px; font-size: 14px; }
+        footer p, footer a { color: #A0A5AA; }
+        footer a:hover { color: var(--brand-orange); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 64px; }
+        .footer-logo { font-family: var(--font-head); font-size: 24px; font-weight: 700; color: var(--color-white); margin-bottom: 24px; display: block; }
+        .footer-col h5 { font-family: var(--font-mono); color: var(--color-white); text-transform: uppercase; margin-bottom: 24px; font-size: 13px; letter-spacing: 0.05em; }
+        .footer-col ul { display: flex; flex-direction: column; gap: 12px; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 32px; display: flex; justify-content: space-between; color: #A0A5AA; font-family: var(--font-mono); font-size: 12px;}
+
+        /* ==========================================================================
+           16. MOTION & ANIMATION SYSTEM
+           ========================================================================== */
+        .reveal-up { opacity: 0; transform: translateY(40px); transition: all var(--transition-reveal); }
+        .reveal-up.active { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 100ms; }
+        .reveal-delay-2 { transition-delay: 200ms; }
+        .reveal-delay-3 { transition-delay: 300ms; }
+        .mask-reveal { clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%); transition: clip-path 1s var(--ease-out); }
+        .mask-reveal.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+
+        /* ==========================================================================
+           17. RESPONSIVE DESIGN (Tablet & Mobile)
+           ========================================================================== */
+        @media (max-width: 1024px) {
+            .hero { padding-top: 100px; min-height: auto; }
+            .hero .grid-12 { display: flex; flex-direction: column; gap: 64px; }
+            .hero-content { padding-right: 0; }
+            .hero-image-wrap { width: 100%; height: 500px; }
+            .hero-glass-form { position: relative; bottom: 0; left: 0; width: 100%; margin-top: -60px; }
+            
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            
+            .gallery-item { flex: 0 0 calc(50% - 12px); } /* 2 columns on tablet */
+            
+            .proof-grid { grid-template-columns: repeat(2, 1fr); }
+            .timeline { grid-template-columns: 1fr; gap: 32px; }
+            .timeline-item::before { display: none; }
+            
+            .split-feature .grid-12 { display: flex; flex-direction: column-reverse; }
+            .repair-slider-wrap { width: 100%; height: 400px; }
+            
+            .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, .phone-link { display: none; }
+            .mobile-toggle { display: block; }
+            
+            h1 { font-size: 40px; }
+            h2 { font-size: 32px; }
+            
+            .services-grid { grid-template-columns: 1fr; }
+            
+            .gallery-item { flex: 0 0 calc(100% - 24px); } /* 1 column on mobile */
+            
+            .proof-grid { grid-template-columns: 1fr; text-align: center; }
+            
+            .reviews-grid { grid-template-columns: 1fr; }
+            
+            .btn-group { flex-direction: column; width: 100%; }
+            .btn { width: 100%; }
+            
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *, ::before, ::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .reveal-up, .mask-reveal { opacity: 1; transform: none; clip-path: none; }
+            .slider-wrapper .slide, .gallery-item img { transition: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header id="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="#" class="logo">Apex Doors.</a>
+                <nav class="nav-links">
+                    <a href="#">Home</a>
+                    <a href="#services">Services</a>
+                    <a href="#gallery">Gallery</a>
+                    <a href="#about">About</a>
+                    <a href="#reviews">Reviews</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+                <div class="nav-cta">
+                    <a href="tel:18005550199" class="phone-link">Call (800) 555-0199</a>
+                    <a href="#contact" class="btn btn-primary" style="height: 44px; padding: 0 20px;">
+                        Request Service
+                    </a>
+                    <button class="mobile-toggle" aria-label="Open menu">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="container grid-12">
+                <div class="hero-content">
+                    <span class="eyebrow reveal-up">Garage Door Repair & Installation</span>
+                    <h1 class="mask-reveal">Your Garage Door.<br>Fixed Right.</h1>
+                    <p class="reveal-up reveal-delay-1">Fast, professional garage door repairs, opener service, and installation designed to keep your home secure and your day moving.</p>
+                    
+                    <div class="btn-group reveal-up reveal-delay-2">
+                        <a href="#contact" class="btn btn-primary">
+                            Request Service
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                        <a href="tel:18005550199" class="btn btn-secondary">
+                            Call (800) 555-0199
+                        </a>
+                    </div>
+                    
+                    <div class="trust-indicators reveal-up reveal-delay-3">
+                        <span class="trust-item">Residential & Commercial</span>
+                        <span class="trust-item">Professional Technicians</span>
+                        <span class="trust-item">Upfront Estimates</span>
+                    </div>
+                </div>
+                
+                <div class="hero-image-wrap mask-reveal hero-slider-wrap">
+                    
+                    <!-- Modern Interactive Hero Slider -->
+                    <div class="slider-wrapper" id="heroSlider">
+                        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80');"></div>
+                        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80');"></div>
+                        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1595844730298-b960af98fee8?auto=format&fit=crop&w=1200&q=80');"></div>
+                        
+                        <!-- Slider UI -->
+                        <button class="slider-nav prev" aria-label="Previous Slide">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+                        </button>
+                        <button class="slider-nav next" aria-label="Next Slide">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                        </button>
+                        
+                        <div class="slider-dots">
+                            <button class="slider-dot active" data-index="0" aria-label="Slide 1"></button>
+                            <button class="slider-dot" data-index="1" aria-label="Slide 2"></button>
+                            <button class="slider-dot" data-index="2" aria-label="Slide 3"></button>
+                        </div>
+                    </div>
+                    
+                    <!-- Glassmorphism Panel -->
+                    <div class="glass-panel hero-glass-form reveal-up reveal-delay-3">
+                        <h3 style="font-size: 20px; margin-bottom: 8px;">Need Garage Door Help?</h3>
+                        <p style="font-size: 14px; margin-bottom: 24px;">Tell us what's happening and request a service appointment.</p>
+                        <form action="#" method="POST">
+                            <input type="text" class="neu-input" placeholder="Your Name" required>
+                            <input type="tel" class="neu-input" placeholder="Phone Number" required>
+                            <select class="neu-input" required>
+                                <option value="" disabled selected>Service Required</option>
+                                <option value="repair">General Repair</option>
+                                <option value="spring">Spring Replacement</option>
+                                <option value="opener">Opener Issue</option>
+                                <option value="install">New Installation</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">Request a Callback</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES SECTION -->
+        <section id="services" class="section-padding">
+            <div class="container">
+                <span class="eyebrow reveal-up">What We Do</span>
+                <h2 class="reveal-up">Complete Garage Door Solutions.</h2>
+                <p class="reveal-up">From unexpected breakdowns to planned upgrades, get professional service for the components that keep your garage door operating safely.</p>
+                
+                <div class="services-grid">
+                    <div class="service-card reveal-up">
+                        <span class="service-number">01</span>
+                        <h3>Garage Door Repair</h3>
+                        <p style="font-size: 15px;">Get your garage door working smoothly again with professional diagnosis and reliable repairs.</p>
+                        <a href="#" class="service-link">Explore Service <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                    </div>
+                    <div class="service-card reveal-up reveal-delay-1">
+                        <span class="service-number">02</span>
+                        <h3>Broken Spring Replacement</h3>
+                        <p style="font-size: 15px;">Safe replacement of damaged tension springs to restore proper door balance and operation.</p>
+                        <a href="#" class="service-link">Explore Service <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                    </div>
+                    <div class="service-card reveal-up reveal-delay-2">
+                        <span class="service-number">03</span>
+                        <h3>Garage Door Opener Repair</h3>
+                        <p style="font-size: 15px;">Diagnosis and repair of motor issues, remote-control faults, and sensor malfunctions.</p>
+                        <a href="#" class="service-link">Explore Service <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                    </div>
+                    <div class="service-card reveal-up">
+                        <span class="service-number">04</span>
+                        <h3>Cable & Track Repair</h3>
+                        <p style="font-size: 15px;">Fixing bent tracks, worn rollers, and frayed cables to stop grinding noises and jerky movement.</p>
+                        <a href="#" class="service-link">Explore Service <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                    </div>
+                    <div class="service-card reveal-up reveal-delay-1">
+                        <span class="service-number">05</span>
+                        <h3>New Door Installation</h3>
+                        <p style="font-size: 15px;">Upgrade your property with a new garage door designed for security and curb appeal.</p>
+                        <a href="#" class="service-link">Explore Service <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                    </div>
+                    <div class="service-card reveal-up reveal-delay-2">
+                        <span class="service-number">06</span>
+                        <h3>Preventive Maintenance</h3>
+                        <p style="font-size: 15px;">Routine hardware inspections and balance checks to identify wear before unexpected breakdowns.</p>
+                        <a href="#" class="service-link">Explore Service <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODERN GALLERY SECTION (Scroll Snap Carousel) -->
+        <section id="gallery" class="section-padding" style="background: var(--bg-secondary);">
+            <div class="container">
+                <span class="eyebrow reveal-up">Our Portfolio</span>
+                <h2 class="reveal-up">Quality Craftsmanship on Display.</h2>
+                <p class="reveal-up">Swipe through our recent residential and commercial garage door installations and repair projects.</p>
+                
+                <div class="gallery-track reveal-up reveal-delay-1">
+                    <!-- Gallery Item 1 -->
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" alt="Modern white garage door installation">
+                        <div class="gallery-overlay">
+                            <h4>Modern Estate Install</h4>
+                            <p>New Installation</p>
+                        </div>
+                    </div>
+                    <!-- Gallery Item 2 -->
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1605276374104-162f15cebcd1?auto=format&fit=crop&w=800&q=80" alt="Clean suburban garage">
+                        <div class="gallery-overlay">
+                            <h4>Classic Paneled Replacement</h4>
+                            <p>Door Replacement</p>
+                        </div>
+                    </div>
+                    <!-- Gallery Item 3 -->
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80" alt="Architectural home garage">
+                        <div class="gallery-overlay">
+                            <h4>Custom Architectural Finish</h4>
+                            <p>Premium Upgrade</p>
+                        </div>
+                    </div>
+                    <!-- Gallery Item 4 -->
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1628624747186-a941c476b7ef?auto=format&fit=crop&w=800&q=80" alt="Modern dark industrial garage door">
+                        <div class="gallery-overlay">
+                            <h4>Industrial Black Aluminum</h4>
+                            <p>Contemporary Design</p>
+                        </div>
+                    </div>
+                    <!-- Gallery Item 5 -->
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1558904541-efa843a96f0f?auto=format&fit=crop&w=800&q=80" alt="Garage mechanism and tools">
+                        <div class="gallery-overlay">
+                            <h4>Spring & Cable Overhaul</h4>
+                            <p>System Repair</p>
+                        </div>
+                    </div>
+                    <!-- Gallery Item 6 -->
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1613553507747-5f8d62ad5904?auto=format&fit=crop&w=800&q=80" alt="Home exterior night garage">
+                        <div class="gallery-overlay">
+                            <h4>Smart Opener Integration</h4>
+                            <p>Technology Setup</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRUST SECTION -->
+        <section class="trust-section section-padding">
+            <div class="container">
+                <span class="eyebrow reveal-up">Why Choose Us</span>
+                <h2 class="reveal-up">Reliable Service. Clear Answers.</h2>
+                <p class="reveal-up">A malfunctioning garage door can affect your daily routine and compromise security. Let our team identify the problem accurately and recommend the right solution.</p>
+                
+                <div class="proof-grid">
+                    <div class="proof-item reveal-up">
+                        <h4>Expert</h4>
+                        <p>Experienced Technicians</p>
+                    </div>
+                    <div class="proof-item reveal-up reveal-delay-1">
+                        <h4>Clear</h4>
+                        <p>Upfront Estimates</p>
+                    </div>
+                    <div class="proof-item reveal-up reveal-delay-2">
+                        <h4>Quality</h4>
+                        <p>Replacement Parts</p>
+                    </div>
+                    <div class="proof-item reveal-up reveal-delay-3">
+                        <h4>Focused</h4>
+                        <p>Customer Service</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS -->
+        <section class="section-padding">
+            <div class="container">
+                <span class="eyebrow reveal-up">Our Process</span>
+                <h2 class="reveal-up">From Problem to Solution.</h2>
+                
+                <div class="timeline reveal-up">
+                    <div class="timeline-item">
+                        <span class="timeline-num">01 — Tell Us What's Wrong</span>
+                        <p>Contact our team and describe your garage door issue to arrange a service visit.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-num">02 — Get a Clear Estimate</span>
+                        <p>Our technician inspects the problem, identifies the cause, and explains the recommended repair and pricing.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-num">03 — Get Back to Normal</span>
+                        <p>Once approved, the agreed work is completed and the door is tested for proper operation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURED EDITORIAL SPLIT (WITH REPAIR SLIDER) -->
+        <section id="about" class="split-feature section-padding">
+            <div class="container grid-12">
+                
+                <!-- Inner Slider Component -->
+                <div class="repair-slider-wrap mask-reveal">
+                    <div class="slider-wrapper" id="repairSlider">
+                        <!-- Tech inspecting hardware -->
+                        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1622473590773-f588134b6ce7?auto=format&fit=crop&w=1000&q=80');"></div>
+                        <!-- Tools and mechanisms -->
+                        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1000&q=80');"></div>
+                        <!-- Detail of installation -->
+                        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1000&q=80');"></div>
+                        
+                        <!-- Navigation UI -->
+                        <button class="slider-nav prev" aria-label="Previous Slide">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+                        </button>
+                        <button class="slider-nav next" aria-label="Next Slide">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                        </button>
+                        <div class="slider-dots">
+                            <button class="slider-dot active" data-index="0"></button>
+                            <button class="slider-dot" data-index="1"></button>
+                            <button class="slider-dot" data-index="2"></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="split-content">
+                    <span class="eyebrow reveal-up">Professional Repair</span>
+                    <h2 class="reveal-up">Small Problems.<br>Serious Consequences.</h2>
+                    <p class="reveal-up">Ignoring minor issues can lead to unexpected breakdowns at the worst possible time. Recognize the early warning signs before a simple fix turns into a major replacement.</p>
+                    
+                    <ul class="warning-list reveal-up">
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Unusual grinding or squeaking.</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Uneven or jerky movement.</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Door refusing to open or close.</li>
+                    </ul>
+
+                    <a href="#services" class="btn btn-secondary reveal-up">Explore Repair Services</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- REVIEWS & TESTIMONIALS SECTION (NEW) -->
+        <section id="reviews" class="section-padding">
+            <div class="container">
+                <div style="text-align: center;">
+                    <span class="eyebrow reveal-up">Testimonials</span>
+                    <h2 class="reveal-up">What Our Customers Say</h2>
+                </div>
+                
+                <div class="reviews-grid">
+                    <div class="review-card reveal-up">
+                        <div class="stars">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <p class="review-text">"Fast, professional, and affordable. My garage door spring snapped on a Sunday, and they had a technician out the next morning. Highly recommend their service!"</p>
+                        <h4 class="reviewer">Sarah Jenkins</h4>
+                        <p class="reviewer-meta">Residential Customer</p>
+                    </div>
+                    
+                    <div class="review-card reveal-up reveal-delay-1">
+                        <div class="stars">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <p class="review-text">"The technician was incredibly polite and explained everything clearly before starting the repair. No hidden fees, just honest and solid workmanship."</p>
+                        <h4 class="reviewer">Mark T.</h4>
+                        <p class="reviewer-meta">New Installation</p>
+                    </div>
+
+                    <div class="review-card reveal-up reveal-delay-2">
+                        <div class="stars">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <p class="review-text">"Apex upgraded our old noisy opener to a modern smart unit. It is whisper quiet now, and the pricing was much better than the other quotes we received."</p>
+                        <h4 class="reviewer">Emily Davis</h4>
+                        <p class="reviewer-meta">Opener Upgrade</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ SECTION -->
+        <section class="section-padding">
+            <div class="container">
+                <div style="text-align: center;">
+                    <span class="eyebrow reveal-up">FAQ</span>
+                    <h2 class="reveal-up">Frequently Asked Questions</h2>
+                </div>
+                
+                <div class="faq-container reveal-up">
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            How do I know if my garage door needs repair?
+                            <span class="accordion-icon"></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                Common warning signs include unusual noises, slow movement, uneven opening, a door that comes off its tracks, or a garage door that will not open or close.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            Can you repair garage door openers?
+                            <span class="accordion-icon"></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                Yes. We can assess common opener problems, including motor issues, remote-control faults, sensor problems, and inconsistent operation.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            Do you offer emergency garage door repair?
+                            <span class="accordion-icon"></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                Contact us to check current technician availability and emergency service options. If you have a visibly broken spring or cable, keep people away from the area.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            How much does garage door repair cost?
+                            <span class="accordion-icon"></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                Pricing depends on the issue, replacement parts, door type, and labor required. We provide a clear estimate after assessing the problem onsite before work begins.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            Should I repair or replace my garage door?
+                            <span class="accordion-icon"></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                The right choice depends on the door's condition, the extent of the damage, repair costs, and your long-term needs. Our team can help you evaluate your options honestly.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL CONVERSION -->
+        <section id="contact" class="conversion section-padding">
+            <div class="container">
+                <h2 class="reveal-up">Let's Get Your Garage Door Working Again.</h2>
+                <p class="reveal-up">Tell us about the problem. Our team will help you determine the next steps and arrange service based on availability.</p>
+                <div class="btn-group reveal-up" style="justify-content: center;">
+                    <a href="#" class="btn btn-primary">
+                        Request Service
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="tel:18005550199" class="btn btn-secondary">Call (800) 555-0199</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="areas">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="footer-logo">Apex Doors.</a>
+                    <p>Your trusted source for professional garage door repair, installation, and maintenance in the Greater Metro Area.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Garage Door Repair</a></li>
+                        <li><a href="#services">Spring Replacement</a></li>
+                        <li><a href="#gallery">Project Gallery</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h5>Contact</h5>
+                    <ul>
+                        <li>Phone: (800) 555-0199</li>
+                        <li>Email: service@apexgaragedoors.com</li>
+                        <li>Location: 123 Industrial Pkwy, Springfield, ST 12345</li>
+                        <li>Hours: Mon-Fri: 7am - 7pm | Sat: 8am - 4pm</li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Service Area</h5>
+                    <ul>
+                        <li>North Springfield</li>
+                        <li>Westwood Area</li>
+                        <li>Downtown District</li>
+                        <li>Southside</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <span>&copy; 2026 Apex Garage Doors. All rights reserved.</span>
+                <div style="display: flex; gap: 24px;">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTION & MOTION SCRIPTS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Sticky Header with Glassmorphism
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // 2. Generic Slider Initialization Function (For Hero & Repair Sliders)
+            function initSlider(containerId) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+
+                const slides = container.querySelectorAll('.slide');
+                const prevBtn = container.querySelector('.prev');
+                const nextBtn = container.querySelector('.next');
+                const dots = container.querySelectorAll('.slider-dot');
+                let currentSlide = 0;
+                let sliderInterval;
+
+                function showSlide(index) {
+                    slides.forEach(slide => slide.classList.remove('active'));
+                    dots.forEach(dot => dot.classList.remove('active'));
+                    
+                    // Loop around properly
+                    currentSlide = (index + slides.length) % slides.length;
+                    
+                    slides[currentSlide].classList.add('active');
+                    if(dots[currentSlide]) dots[currentSlide].classList.add('active');
+                }
+
+                function nextSlide() { showSlide(currentSlide + 1); }
+                function prevSlide() { showSlide(currentSlide - 1); }
+
+                function startAutoPlay() {
+                    sliderInterval = setInterval(nextSlide, 5000); // 5 sec auto play
+                }
+
+                function resetAutoPlay() {
+                    clearInterval(sliderInterval);
+                    startAutoPlay();
+                }
+
+                // Attach Events
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', () => { prevSlide(); resetAutoPlay(); });
+                }
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', () => { nextSlide(); resetAutoPlay(); });
+                }
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => { showSlide(index); resetAutoPlay(); });
+                });
+
+                startAutoPlay(); // start automatically
+            }
+
+            // Initialize both sliders
+            initSlider('heroSlider');
+            initSlider('repairSlider');
+
+            // 3. Scroll Reveal Animations (Intersection Observer)
+            const revealElements = document.querySelectorAll('.reveal-up, .mask-reveal');
+            
+            const revealOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, revealOptions);
+
+            revealElements.forEach(el => {
+                revealOnScroll.observe(el);
+            });
+
+            // 4. FAQ Accordion Logic
+            const accordions = document.querySelectorAll('.accordion-header');
+            
+            accordions.forEach(acc => {
+                acc.addEventListener('click', function() {
+                    // Close others
+                    accordions.forEach(otherAcc => {
+                        if (otherAcc !== this) {
+                            otherAcc.classList.remove('active');
+                            otherAcc.nextElementSibling.style.maxHeight = null;
+                        }
+                    });
+
+                    // Toggle Current
+                    this.classList.toggle('active');
+                    const content = this.nextElementSibling;
+                    
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    }
+                });
+            });
+
+            // 5. Mobile Menu Toggle
+            const mobileToggle = document.querySelector('.mobile-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if(mobileToggle) {
+                mobileToggle.addEventListener('click', () => {
+                    if (navLinks.style.display === 'flex') {
+                        navLinks.style.display = 'none';
+                    } else {
+                        navLinks.style.display = 'flex';
+                        navLinks.style.flexDirection = 'column';
+                        navLinks.style.position = 'absolute';
+                        navLinks.style.top = '100%';
+                        navLinks.style.left = '0';
+                        navLinks.style.width = '100%';
+                        navLinks.style.background = 'rgba(247, 247, 245, 0.98)';
+                        navLinks.style.padding = '24px';
+                        navLinks.style.borderBottom = '1px solid var(--border-color)';
+                        navLinks.style.boxShadow = '0 10px 30px rgba(0,0,0,0.05)';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

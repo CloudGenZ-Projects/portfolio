@@ -1,0 +1,2478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APEX TIRE & ALIGNMENT — Precision in Every Mile</title>
+  <meta name="description" content="High-performance tires, dynamic balancing, and laser-guided wheel alignments. Engineered precision for road and track.">
+  
+  <!-- Typography: Space Grotesk (Display) & Inter (UI/Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Three.js for 3D Visualizer -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <style>
+    /* ==========================================================================
+       01. DESIGN TOKENS & CSS FOUNDATION
+       ========================================================================== */
+    :root {
+      --track-black: #101214;
+      --graphite: #1C2024;
+      --graphite-elevated: #252A2F;
+      --graphite-hover: #2D3339;
+      --warm-white: #F4F3EF;
+      --racing-orange: #FF642D;
+      --racing-orange-glow: rgba(255, 100, 45, 0.28);
+      --technical-sage: #B7C7BD;
+      --sage-muted: rgba(183, 199, 189, 0.15);
+      --steel-gray: #71777E;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-medium: rgba(255, 255, 255, 0.16);
+      
+      --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-card: 24px;
+      --radius-pill: 9999px;
+
+      --transition-base: 240ms cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-smooth: 500ms cubic-bezier(0.2, 0.8, 0.2, 1);
+      --shadow-ambient: 0 24px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--track-black);
+      color: var(--warm-white);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      overflow-x: hidden;
+      min-height: 100vh;
+      background: radial-gradient(circle at 50% 0%, #1a1e23 0%, var(--track-black) 70%);
+    }
+
+    img, svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      color: inherit;
+      border: none;
+      background: none;
+      outline: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* TYPOGRAPHY */
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--racing-orange);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--racing-orange);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--racing-orange);
+    }
+
+    /* CONTAINERS & SYSTEM LAYOUT */
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 4vw, 64px);
+    }
+
+    section {
+      padding: clamp(60px, 8vw, 120px) 0;
+      position: relative;
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all var(--transition-base);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background-color: var(--racing-orange);
+      color: #fff;
+      box-shadow: 0 6px 20px var(--racing-orange-glow);
+    }
+
+    .btn-primary:hover {
+      background-color: #ff7847;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(255, 100, 45, 0.4);
+    }
+
+    .btn-secondary {
+      background-color: var(--graphite-elevated);
+      color: var(--warm-white);
+      border: 1px solid var(--border-medium);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--graphite-hover);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      color: var(--warm-white);
+      border: 1px solid transparent;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--border-subtle);
+    }
+
+    /* CARDS & BENTO ARCHITECTURE */
+    .bento-card {
+      background-color: var(--graphite);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      position: relative;
+      transition: border-color var(--transition-base), transform var(--transition-base);
+    }
+
+    .bento-card:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .performance-glow {
+      position: relative;
+    }
+
+    .performance-glow::after {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -20%;
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(circle, var(--racing-orange-glow) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+      transition: opacity var(--transition-base);
+    }
+
+    .performance-glow:hover::after {
+      opacity: 0.9;
+    }
+
+    /* ==========================================================================
+       02. NAVIGATION BAR
+       ========================================================================== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background-color: rgba(16, 18, 20, 0.82);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.35rem;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      background: linear-gradient(135deg, var(--racing-orange) 0%, #cc4210 100%);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 800;
+      box-shadow: 0 4px 14px var(--racing-orange-glow);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: #A0A5AA;
+      transition: color var(--transition-base);
+    }
+
+    .nav-links a:hover {
+      color: var(--warm-white);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .tel-link {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--technical-sage);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* ==========================================================================
+       03. HERO SECTION (Asymmetric with 3D Canvas)
+       ========================================================================== */
+    .hero-section {
+      padding-top: clamp(40px, 6vw, 80px);
+      padding-bottom: clamp(60px, 8vw, 100px);
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 32px;
+      align-items: stretch;
+    }
+
+    .hero-content {
+      background: linear-gradient(145deg, rgba(28, 32, 36, 0.8), rgba(20, 23, 26, 0.95));
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      padding: clamp(32px, 5vw, 64px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .hero-carousel-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 4px;
+      border-radius: var(--radius-pill);
+      width: fit-content;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .hero-tab-btn {
+      padding: 6px 16px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--steel-gray);
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+
+    .hero-tab-btn.active {
+      background-color: var(--racing-orange);
+      color: #fff;
+    }
+
+    .hero-heading {
+      font-size: clamp(2.4rem, 4.6vw, 4.2rem);
+      line-height: 1.05;
+      margin: 16px 0 20px;
+      text-transform: uppercase;
+    }
+
+    .hero-heading span.gradient-text {
+      background: linear-gradient(90deg, #FFFFFF 0%, #A2A9B0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-body {
+      color: #9EA4AB;
+      font-size: clamp(1rem, 1.2vw, 1.15rem);
+      max-width: 540px;
+      margin-bottom: 36px;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+
+    /* 3D Tire Canvas Interactive Stage */
+    .hero-canvas-card {
+      background: radial-gradient(circle at 50% 50%, #252b31 0%, #131518 80%);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      min-height: 480px;
+    }
+
+    #tire-canvas-container {
+      position: absolute;
+      inset: 0;
+      cursor: grab;
+    }
+
+    #tire-canvas-container:active {
+      cursor: grabbing;
+    }
+
+    .canvas-hud {
+      position: relative;
+      z-index: 10;
+      background: rgba(16, 18, 20, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: none;
+    }
+
+    .canvas-hud-metric {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .canvas-hud-metric .label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--steel-gray);
+    }
+
+    .canvas-hud-metric .value {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--technical-sage);
+    }
+
+    .interaction-hint {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      z-index: 10;
+      font-size: 0.75rem;
+      color: var(--steel-gray);
+      background: rgba(0, 0, 0, 0.5);
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-subtle);
+      pointer-events: none;
+    }
+
+    /* ==========================================================================
+       04. TRUST & ENGINEERING PROOF STRIP
+       ========================================================================== */
+    .trust-strip {
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(28, 32, 36, 0.35);
+      padding: 32px 0;
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .trust-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(255, 100, 45, 0.1);
+      border: 1px solid rgba(255, 100, 45, 0.25);
+      color: var(--racing-orange);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .trust-item h4 {
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .trust-item p {
+      font-size: 0.85rem;
+      color: var(--steel-gray);
+      line-height: 1.4;
+    }
+
+    /* ==========================================================================
+       05. SERVICE BENTO GRID
+       ========================================================================== */
+    .services-bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .bento-hero-service {
+      grid-column: span 7;
+      padding: clamp(32px, 4vw, 48px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 420px;
+      background: linear-gradient(135deg, #1f2429 0%, #15181b 100%);
+    }
+
+    .bento-secondary-service {
+      grid-column: span 5;
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .bento-sub-1 { grid-column: span 4; padding: 32px; }
+    .bento-sub-2 { grid-column: span 4; padding: 32px; }
+    .bento-sub-3 { grid-column: span 4; padding: 32px; }
+
+    .service-badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--technical-sage);
+      background: var(--sage-muted);
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      display: inline-block;
+      margin-bottom: 16px;
+      width: fit-content;
+    }
+
+    .service-card-title {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+
+    .service-card-desc {
+      color: #9299A0;
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+      max-width: 480px;
+    }
+
+    .technical-specs-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 20px 0 28px;
+      font-size: 0.85rem;
+      color: #ACB3B9;
+    }
+
+    .technical-specs-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .technical-specs-list li::before {
+      content: '✓';
+      color: var(--racing-orange);
+      font-weight: 700;
+    }
+
+    /* ==========================================================================
+       06. INTERACTIVE TIRE FINDER (SaaS Style)
+       ========================================================================== */
+    .finder-section {
+      background: linear-gradient(180deg, var(--track-black) 0%, #15181b 100%);
+    }
+
+    .finder-container {
+      background: var(--graphite);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-card);
+      padding: clamp(24px, 4vw, 48px);
+      box-shadow: var(--shadow-ambient);
+    }
+
+    .finder-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .finder-tabs {
+      display: flex;
+      background: var(--track-black);
+      padding: 6px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .finder-tab-btn {
+      padding: 10px 24px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      color: var(--steel-gray);
+      transition: all var(--transition-base);
+    }
+
+    .finder-tab-btn.active {
+      background: var(--racing-orange);
+      color: #fff;
+    }
+
+    .finder-inputs-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr) auto;
+      gap: 16px;
+      align-items: end;
+      margin-bottom: 36px;
+    }
+
+    .finder-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .finder-field label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9FA5AB;
+    }
+
+    .finder-select {
+      background: var(--track-black);
+      border: 1px solid var(--border-medium);
+      border-radius: 12px;
+      padding: 14px 16px;
+      color: var(--warm-white);
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: border-color var(--transition-base);
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2371777E' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: calc(100% - 16px) center;
+    }
+
+    .finder-select:focus {
+      border-color: var(--racing-orange);
+    }
+
+    .tire-catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .tire-card {
+      background: var(--track-black);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all var(--transition-base);
+    }
+
+    .tire-card:hover {
+      border-color: rgba(255, 100, 45, 0.4);
+      transform: translateY(-4px);
+    }
+
+    .tire-card-brand {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--racing-orange);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .tire-card-name {
+      font-size: 1.25rem;
+      margin: 4px 0 12px;
+    }
+
+    .tire-specs-badge {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .badge-pill {
+      font-size: 0.75rem;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 4px 10px;
+      border-radius: 6px;
+      color: #A5ABB2;
+    }
+
+    .tire-card-price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .tire-price {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--warm-white);
+    }
+
+    .tire-price span {
+      font-size: 0.8rem;
+      color: var(--steel-gray);
+      font-weight: 400;
+    }
+
+    /* ==========================================================================
+       07. INTERACTIVE ALIGNMENT LAB & PROCESS
+       ========================================================================== */
+    .alignment-lab-section {
+      background: #F4F3EF;
+      color: #101214;
+    }
+
+    .alignment-lab-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .alignment-lab-section .eyebrow {
+      color: #cc4210;
+    }
+
+    .alignment-lab-section .eyebrow::before {
+      background: #cc4210;
+      box-shadow: 0 0 10px rgba(204, 66, 16, 0.6);
+    }
+
+    .alignment-lab-section h2 {
+      color: #101214;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      margin: 12px 0 20px;
+    }
+
+    .alignment-lab-desc {
+      color: #4A5056;
+      margin-bottom: 32px;
+      font-size: 1.05rem;
+    }
+
+    .alignment-steps {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .align-step-card {
+      background: #E8E7E2;
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .align-step-num {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #cc4210;
+      margin-bottom: 6px;
+    }
+
+    .align-step-card h4 {
+      font-size: 1rem;
+      margin-bottom: 6px;
+      color: #101214;
+    }
+
+    .align-step-card p {
+      font-size: 0.85rem;
+      color: #5D636A;
+      line-height: 1.4;
+    }
+
+    /* Alignment Visual Simulator Console */
+    .alignment-visual-console {
+      background: #14171A;
+      border-radius: var(--radius-card);
+      padding: 32px;
+      color: #fff;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.25);
+      position: relative;
+    }
+
+    .console-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .console-title {
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--technical-sage);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .console-title::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: #25D366;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #25D366;
+    }
+
+    .alignment-simulator-stage {
+      height: 240px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      background: #0B0C0E;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    /* Laser beam visuals */
+    .laser-line-horiz {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--racing-orange);
+      box-shadow: 0 0 8px var(--racing-orange);
+      top: 50%;
+    }
+
+    .laser-line-vert {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--racing-orange);
+      box-shadow: 0 0 8px var(--racing-orange);
+      left: 50%;
+    }
+
+    .sim-wheel {
+      width: 64px;
+      height: 140px;
+      background: #2D3238;
+      border: 2px solid #5C626A;
+      border-radius: 12px;
+      position: absolute;
+      transition: transform 600ms cubic-bezier(0.2, 0.8, 0.2, 1);
+      box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    }
+
+    .sim-wheel.left {
+      left: 25%;
+      transform: rotate(-3.5deg);
+    }
+
+    .sim-wheel.right {
+      right: 25%;
+      transform: rotate(2.8deg);
+    }
+
+    .sim-wheel.calibrated {
+      transform: rotate(0deg) !important;
+      border-color: var(--technical-sage);
+      box-shadow: 0 0 20px rgba(183, 199, 189, 0.25);
+    }
+
+    .console-telemetry-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .telemetry-cell {
+      background: #1C2024;
+      border-radius: 10px;
+      padding: 12px 14px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .telemetry-cell .t-label {
+      font-size: 0.7rem;
+      color: var(--steel-gray);
+      text-transform: uppercase;
+    }
+
+    .telemetry-cell .t-value {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #FF5555;
+      transition: color var(--transition-base);
+    }
+
+    .telemetry-cell .t-value.in-spec {
+      color: #25D366;
+    }
+
+    /* ==========================================================================
+       08. INTERACTIVE PRICING CALCULATOR
+       ========================================================================== */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .pricing-card {
+      background: var(--graphite);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: all var(--transition-base);
+    }
+
+    .pricing-card.featured {
+      background: linear-gradient(145deg, #24292f 0%, #17191d 100%);
+      border-color: var(--racing-orange);
+      box-shadow: 0 20px 50px rgba(255, 100, 45, 0.12);
+    }
+
+    .pricing-tier-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--racing-orange);
+      margin-bottom: 12px;
+    }
+
+    .pricing-value {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin: 12px 0 20px;
+    }
+
+    .pricing-value span {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--steel-gray);
+    }
+
+    .pricing-card-features {
+      list-style: none;
+      margin: 24px 0 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      font-size: 0.95rem;
+      color: #ACB3B9;
+    }
+
+    .pricing-card-features li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .pricing-card-features li svg {
+      flex-shrink: 0;
+      color: var(--technical-sage);
+    }
+
+    /* ==========================================================================
+       09. REVIEWS & EDITORIAL STORIES
+       ========================================================================== */
+    .reviews-bento-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .featured-review-card {
+      background: var(--graphite);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      padding: clamp(32px, 4vw, 48px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .quote-mark {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      line-height: 1;
+      color: var(--racing-orange);
+      opacity: 0.6;
+    }
+
+    .featured-review-quote {
+      font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+      line-height: 1.4;
+      font-weight: 500;
+      margin: 16px 0 32px;
+    }
+
+    .author-lockup {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .author-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #2c333a;
+      border: 2px solid var(--border-medium);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      color: var(--technical-sage);
+    }
+
+    .author-details h5 {
+      font-size: 1rem;
+      margin-bottom: 2px;
+    }
+
+    .author-details span {
+      font-size: 0.8rem;
+      color: var(--steel-gray);
+    }
+
+    .side-reviews-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .compact-review-card {
+      background: var(--graphite);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .rating-stars {
+      color: #FFB800;
+      display: flex;
+      gap: 4px;
+      margin-bottom: 12px;
+    }
+
+    /* ==========================================================================
+       10. PROGRESSIVE BOOKING MODAL
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 12, 14, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 2000;
+      display: none;
+      place-items: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity var(--transition-base);
+    }
+
+    .modal-overlay.active {
+      display: grid;
+      opacity: 1;
+    }
+
+    .booking-modal-card {
+      background: var(--graphite);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-card);
+      width: 100%;
+      max-width: 680px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: clamp(28px, 4vw, 44px);
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7);
+      position: relative;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: background var(--transition-base);
+    }
+
+    .modal-close-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .stepper-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .step-pill {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--technical-sage);
+      background: var(--sage-muted);
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+    }
+
+    .form-step {
+      display: none;
+    }
+
+    .form-step.active {
+      display: block;
+      animation: stepFade 300ms ease-out forwards;
+    }
+
+    @keyframes stepFade {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .radio-grid-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin: 16px 0 24px;
+    }
+
+    .option-card-radio {
+      border: 1px solid var(--border-medium);
+      border-radius: 14px;
+      padding: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--track-black);
+      transition: all var(--transition-base);
+    }
+
+    .option-card-radio.selected {
+      border-color: var(--racing-orange);
+      background: rgba(255, 100, 45, 0.08);
+    }
+
+    .input-field-group {
+      margin-bottom: 16px;
+    }
+
+    .input-field-group label {
+      display: block;
+      font-size: 0.8rem;
+      margin-bottom: 6px;
+      color: #9AA0A6;
+    }
+
+    .text-input {
+      width: 100%;
+      background: var(--track-black);
+      border: 1px solid var(--border-medium);
+      border-radius: 10px;
+      padding: 14px 16px;
+      color: #fff;
+      font-size: 0.95rem;
+      transition: border-color var(--transition-base);
+    }
+
+    .text-input:focus {
+      border-color: var(--racing-orange);
+    }
+
+    /* ==========================================================================
+       11. FOOTER & LOCAL SEO
+       ========================================================================== */
+    .site-footer {
+      background: #0B0D0F;
+      border-top: 1px solid var(--border-subtle);
+      padding: 80px 0 40px;
+      margin-top: 80px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(3, 1fr);
+      gap: 48px;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand p {
+      color: var(--steel-gray);
+      margin: 16px 0 24px;
+      max-width: 320px;
+      font-size: 0.9rem;
+    }
+
+    .footer-col h4 {
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+      color: var(--warm-white);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-col ul a {
+      color: var(--steel-gray);
+      font-size: 0.9rem;
+      transition: color var(--transition-base);
+    }
+
+    .footer-col ul a:hover {
+      color: var(--racing-orange);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #555A60;
+      font-size: 0.85rem;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    /* ==========================================================================
+       12. RESPONSIVE MEDIA QUERIES
+       ========================================================================== */
+    @media (max-width: 1080px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-canvas-card { min-height: 380px; }
+      .bento-hero-service, .bento-secondary-service { grid-column: span 12; }
+      .bento-sub-1, .bento-sub-2, .bento-sub-3 { grid-column: span 4; }
+      .alignment-lab-grid { grid-template-columns: 1fr; }
+      .reviews-bento-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 860px) {
+      .trust-grid { grid-template-columns: repeat(2, 1fr); }
+      .finder-inputs-grid { grid-template-columns: repeat(2, 1fr); }
+      .tire-catalog-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .bento-sub-1, .bento-sub-2, .bento-sub-3 { grid-column: span 12; }
+      .nav-links, .nav-actions .tel-link { display: none; }
+      .mobile-menu-btn { display: block; }
+    }
+
+    @media (max-width: 580px) {
+      .trust-grid { grid-template-columns: 1fr; }
+      .finder-inputs-grid { grid-template-columns: 1fr; }
+      .alignment-steps { grid-template-columns: 1fr; }
+      .radio-grid-options { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ACCESSIBILITY: REDUCED MOTION */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo" aria-label="Apex Tire and Alignment Home">
+        <span class="brand-mark">A</span>
+        <span>APEX <span style="font-weight: 400; color: #8F959C;">TIRE</span></span>
+      </a>
+
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-links">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#tire-finder">Shop Tires</a></li>
+          <li><a href="#alignment">Laser Alignment</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="tel:8005552739" class="tel-link">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z"/></svg>
+          (800) 555-APEX
+        </a>
+        <button class="btn btn-primary" onclick="openBookingModal()">Book Appointment</button>
+        <button class="mobile-menu-btn" aria-label="Toggle Navigation Menu" onclick="toggleMobileMenu()">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         HERO SECTION (Asymmetric Bento with 3D Canvas Tire Model)
+         ========================================================================== -->
+    <section class="hero-section">
+      <div class="container hero-grid">
+        <!-- Left: Editorial & CTA -->
+        <div class="hero-content performance-glow">
+          <div>
+            <div class="hero-carousel-tabs" role="tablist">
+              <button class="hero-tab-btn active" onclick="switchHeroSlide(0)">01 • Pure Grip</button>
+              <button class="hero-tab-btn" onclick="switchHeroSlide(1)">02 • Zero Vibration</button>
+              <button class="hero-tab-btn" onclick="switchHeroSlide(2)">03 • Laser Geometry</button>
+            </div>
+
+            <div class="eyebrow" id="hero-eyebrow">HIGH-PERFORMANCE WORKSHOP</div>
+
+            <h1 class="hero-heading" id="hero-title">
+              Precision Starts Where <br><span class="gradient-text">Rubber Meets Road</span>
+            </h1>
+
+            <p class="hero-body" id="hero-desc">
+              Premium tires, dynamic road-force balancing, and laser-guided wheel alignments calibrated to manufacturer race and street tolerances.
+            </p>
+          </div>
+
+          <div class="hero-cta-group">
+            <button class="btn btn-primary" onclick="openBookingModal()">Schedule Fitment</button>
+            <a href="#tire-finder" class="btn btn-secondary">Find By Vehicle Size ↗</a>
+          </div>
+        </div>
+
+        <!-- Right: Real-time 3D Interactive Tire -->
+        <div class="hero-canvas-card">
+          <div class="interaction-hint">Drag to Rotate • 3D Render</div>
+          <div id="tire-canvas-container" title="Interactive 3D Tire Model"></div>
+
+          <div class="canvas-hud">
+            <div class="canvas-hud-metric">
+              <span class="label">Compound</span>
+              <span class="value" id="hud-compound">Apex UHP-R</span>
+            </div>
+            <div class="canvas-hud-metric">
+              <span class="label">Lateral Grip</span>
+              <span class="value">1.18 G</span>
+            </div>
+            <div class="canvas-hud-metric">
+              <span class="label">Laser Status</span>
+              <span class="value" style="color: #25D366;">Active (0.00°)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         TRUST & TECHNICAL PROOF STRIP
+         ========================================================================== -->
+    <section class="trust-strip">
+      <div class="container trust-grid">
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <div>
+            <h4>Master Certified</h4>
+            <p>ASE Master Technicians with chassis dyno training.</p>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div>
+            <h4>Hawkeye Elite Optics</h4>
+            <p>Laser measurements down to 0.01° accuracy.</p>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div>
+            <h4>Touchless Wheel Mounting</h4>
+            <p>Zero rim contact clamp technology up to 24".</p>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <div>
+            <h4>Transparent Specs</h4>
+            <p>Every reading documented with before & after prints.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SERVICES BENTO GRID
+         ========================================================================== -->
+    <section id="services">
+      <div class="container">
+        <div class="eyebrow">PRECISION WORKSHOP</div>
+        <h2 style="font-size: clamp(2rem, 3.5vw, 3rem); margin-top: 12px;">Engineered Vehicle Services</h2>
+
+        <div class="services-bento-grid">
+          <!-- Primary Bento Card -->
+          <div class="bento-card bento-hero-service performance-glow">
+            <div>
+              <span class="service-badge">Flagship Capability</span>
+              <h3 class="service-card-title">Performance Tire Fitting & Siping</h3>
+              <p class="service-card-desc">
+                From high-speed Autobahn track setups to daily grand touring. We balance rubber compound, load rating, and aspect ratio specifically to your drivetrain.
+              </p>
+              <ul class="technical-specs-list">
+                <li>Corghi Master Touchless Mounting</li>
+                <li>Nitrogen Purity Inflation (99.2%)</li>
+                <li>Bead Seating Pressure Verification</li>
+                <li>Manufacturer TPMS Sensor Coding</li>
+              </ul>
+            </div>
+            <button class="btn btn-primary" onclick="openBookingModal('Tire Fitting')">Select Tires & Book →</button>
+          </div>
+
+          <!-- Secondary Bento Card -->
+          <div class="bento-card bento-secondary-service">
+            <div>
+              <span class="service-badge">Dynamic Vibration</span>
+              <h3 class="service-card-title">Road Force Balancing</h3>
+              <p class="service-card-desc">
+                Applying up to 1,250 lbs of simulated road pressure to isolate radial runout and structural tire imperfections that regular balancers miss completely.
+              </p>
+            </div>
+            <button class="btn btn-secondary" onclick="openBookingModal('Road Force Balancing')">Explore Balancing ↗</button>
+          </div>
+
+          <!-- Tertiary Bento Cards -->
+          <div class="bento-card bento-sub-1">
+            <span class="service-badge">Kinematics</span>
+            <h4 style="font-size: 1.25rem; margin-bottom: 8px;">Laser 4-Wheel Alignment</h4>
+            <p style="font-size: 0.88rem; color: #8C939A; margin-bottom: 16px;">
+              Individual toe, camber, and caster dial-in for precise corner turn-in and zero irregular wear.
+            </p>
+            <a href="#alignment" style="color: var(--racing-orange); font-size: 0.85rem; font-weight: 600;">Learn the Science ↗</a>
+          </div>
+
+          <div class="bento-card bento-sub-2">
+            <span class="service-badge">Lifespan</span>
+            <h4 style="font-size: 1.25rem; margin-bottom: 8px;">Tread Rotation & Diagnostic</h4>
+            <p style="font-size: 0.88rem; color: #8C939A; margin-bottom: 16px;">
+              Directional, asymmetrical, and staggered axle patterns designed to maximize tire tread life.
+            </p>
+            <a href="#pricing" style="color: var(--racing-orange); font-size: 0.85rem; font-weight: 600;">View Pricing ↗</a>
+          </div>
+
+          <div class="bento-card bento-sub-3">
+            <span class="service-badge">Safety</span>
+            <h4 style="font-size: 1.25rem; margin-bottom: 8px;">Digital Tread Profiling</h4>
+            <p style="font-size: 0.88rem; color: #8C939A; margin-bottom: 16px;">
+              3D optical scan of tread depths across all contact ribs to detect unseen suspension play.
+            </p>
+            <a href="#alignment" style="color: var(--racing-orange); font-size: 0.85rem; font-weight: 600;">View Report Sample ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         INTERACTIVE TIRE FINDER (SaaS Module)
+         ========================================================================== -->
+    <section id="tire-finder" class="finder-section">
+      <div class="container">
+        <div class="finder-container">
+          <div class="finder-header">
+            <div>
+              <div class="eyebrow">FITMENT ENGINE</div>
+              <h2 style="font-size: clamp(1.8rem, 3vw, 2.4rem); margin-top: 8px;">Find Certified Tires</h2>
+            </div>
+            
+            <div class="finder-tabs">
+              <button class="finder-tab-btn active" id="tab-vehicle" onclick="switchFinderMode('vehicle')">By Vehicle</button>
+              <button class="finder-tab-btn" id="tab-size" onclick="switchFinderMode('size')">By Tire Size</button>
+            </div>
+          </div>
+
+          <!-- Finder Controls -->
+          <div class="finder-inputs-grid" id="finder-controls">
+            <div class="finder-field">
+              <label for="f-year">Year</label>
+              <select id="f-year" class="finder-select" onchange="updateFinderOptions()">
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="2022" selected>2022</option>
+                <option value="2021">2021</option>
+              </select>
+            </div>
+
+            <div class="finder-field">
+              <label for="f-make">Make</label>
+              <select id="f-make" class="finder-select" onchange="updateFinderOptions()">
+                <option value="porsche" selected>Porsche</option>
+                <option value="bmw">BMW</option>
+                <option value="audi">Audi</option>
+                <option value="tesla">Tesla</option>
+              </select>
+            </div>
+
+            <div class="finder-field">
+              <label for="f-model">Model</label>
+              <select id="f-model" class="finder-select">
+                <option value="911">911 Carrera S</option>
+                <option value="taycan">Taycan Turbo</option>
+                <option value="gt3">911 GT3</option>
+              </select>
+            </div>
+
+            <div class="finder-field">
+              <label for="f-season">Condition</label>
+              <select id="f-season" class="finder-select" onchange="filterCatalog()">
+                <option value="all">All Compounds</option>
+                <option value="summer">Ultra-High Summer</option>
+                <option value="allseason">Performance All-Season</option>
+              </select>
+            </div>
+
+            <button class="btn btn-primary" onclick="filterCatalog()">Match Tires</button>
+          </div>
+
+          <!-- Dynamic Tire Catalog Results -->
+          <div class="tire-catalog-grid" id="catalog-results">
+            <!-- Rendered by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         INTERACTIVE LASER ALIGNMENT LAB
+         ========================================================================== -->
+    <section id="alignment" class="alignment-lab-section">
+      <div class="container alignment-lab-grid">
+        <div>
+          <div class="eyebrow">THE SCIENCE OF CONTACT PATCH</div>
+          <h2>Your Wheels Have Angles. We Perfect Them.</h2>
+          <p class="alignment-lab-desc">
+            Even a variance of 0.12° in toe can drag a tire sideways 28 feet for every mile driven. Our computer-guided optical reflectors restore original factory geometry.
+          </p>
+
+          <div class="alignment-steps">
+            <div class="align-step-card">
+              <div class="align-step-num">01</div>
+              <h4>Kinematic Inspection</h4>
+              <p>Check control arm bushings, tie rod ends, and wheel bearings for deflection.</p>
+            </div>
+            <div class="align-step-card">
+              <div class="align-step-num">02</div>
+              <h4>Laser Target Capture</h4>
+              <p>High-resolution optical cameras read target pods mounted on all four rims.</p>
+            </div>
+            <div class="align-step-card">
+              <div class="align-step-num">03</div>
+              <h4>Eccentric Bolt Dial-in</h4>
+              <p>Micrometer torque adjustments for Camber, Caster, and Toe angles simultaneously.</p>
+            </div>
+            <div class="align-step-card">
+              <div class="align-step-num">04</div>
+              <h4>Steering Angle Reset</h4>
+              <p>Recalibrate the electronic steering angle sensor (SAS) back to exact zero center.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Laser Console Visualizer -->
+        <div class="alignment-visual-console">
+          <div class="console-header">
+            <div class="console-title">Live Hawkeye Optical Array</div>
+            <span style="font-size: 0.75rem; color: #8F959C;">V-Spec 4.2</span>
+          </div>
+
+          <div class="alignment-simulator-stage">
+            <div class="laser-line-horiz"></div>
+            <div class="laser-line-vert"></div>
+            <!-- Interactive Simulated Tires -->
+            <div class="sim-wheel left" id="sim-wheel-left"></div>
+            <div class="sim-wheel right" id="sim-wheel-right"></div>
+          </div>
+
+          <div class="console-telemetry-grid">
+            <div class="telemetry-cell">
+              <div class="t-label">Left Camber</div>
+              <div class="t-value" id="val-camber-l">-1.85°</div>
+            </div>
+            <div class="telemetry-cell">
+              <div class="t-label">Right Camber</div>
+              <div class="t-value" id="val-camber-r">-0.90°</div>
+            </div>
+            <div class="telemetry-cell">
+              <div class="t-label">Total Toe</div>
+              <div class="t-value" id="val-toe">+0.38°</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px;">
+            <button class="btn btn-primary" style="flex: 1; padding: 12px;" onclick="calibrateLaserSim()">Apply Factory Calibration</button>
+            <button class="btn btn-secondary" style="padding: 12px;" onclick="resetLaserSim()">Reset Drift</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         TRANSPARENT PRICING CARDS
+         ========================================================================== -->
+    <section id="pricing">
+      <div class="container">
+        <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+          <div class="eyebrow">PREDICTABLE WORKSHOP PRICING</div>
+          <h2 style="font-size: clamp(2rem, 3.5vw, 3rem); margin-top: 10px;">Clear Precision Tiers</h2>
+          <p style="color: var(--steel-gray); margin-top: 12px;">No hidden shop fees, extra tire disposal charges, or unapproved work.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <!-- Tier 1 -->
+          <div class="pricing-card">
+            <div>
+              <span class="pricing-tier-tag">Precision Balance</span>
+              <h3 style="font-size: 1.4rem;">Road-Force Balancing</h3>
+              <div class="pricing-value">$95 <span>/ axle pair</span></div>
+              <p style="font-size: 0.88rem; color: #8F959C;">Ideal for steering wheel vibration above 55 mph.</p>
+              
+              <ul class="pricing-card-features">
+                <li><svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Hunter Road Force Roller Test</li>
+                <li><svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Hidden adhesive low-profile weights</li>
+                <li><svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Rim radial runout diagnostics</li>
+              </ul>
+            </div>
+            <button class="btn btn-secondary" onclick="openBookingModal('Road-Force Balance')">Select Service</button>
+          </div>
+
+          <!-- Tier 2 (Featured) -->
+          <div class="pricing-card featured performance-glow">
+            <div>
+              <span class="pricing-tier-tag">Complete Geometry</span>
+              <h3 style="font-size: 1.4rem;">Laser 4-Wheel Alignment</h3>
+              <div class="pricing-value">$189 <span>/ full vehicle</span></div>
+              <p style="font-size: 0.88rem; color: #8F959C;">Full geometric camber, caster & toe alignment.</p>
+              
+              <ul class="pricing-card-features">
+                <li><svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 4-Wheel optical Hawkeye verification</li>
+                <li><svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Steering Angle Sensor (SAS) reset</li>
+                <li><svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Full before/after engineering printout</li>
+                <li><svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 12-Month or 12k Mile Guarantee</li>
+              </ul>
+            </div>
+            <button class="btn btn-primary" onclick="openBookingModal('Laser Alignment')">Select Service</button>
+          </div>
+
+          <!-- Tier 3 -->
+          <div class="pricing-card">
+            <div>
+              <span class="pricing-tier-tag">Complete Apex Suite</span>
+              <h3 style="font-size: 1.4rem;">Performance Package</h3>
+              <div class="pricing-value">$260 <span>/ complete bundle</span></div>
+              <p style="font-size: 0.88rem; color: #8F959C;">Combines alignment, road-force balance & nitrogen.</p>
+              
+              <ul class="pricing-card-features">
+                <li><svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Includes all 4-wheel alignment steps</li>
+                <li><svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Complete 4-wheel road force balancing</li>
+                <li><svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Pure medical-grade nitrogen conversion</li>
+              </ul>
+            </div>
+            <button class="btn btn-secondary" onclick="openBookingModal('Performance Package')">Select Service</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+       AUTHENTIC REVIEWS & PROOF
+       ========================================================================== -->
+    <section id="reviews">
+      <div class="container">
+        <div class="eyebrow">VERIFIED ROAD TESTS</div>
+        <h2 style="font-size: clamp(2rem, 3.5vw, 3rem); margin-top: 10px;">Driver Experiences</h2>
+
+        <div class="reviews-bento-grid">
+          <div class="featured-review-card">
+            <div>
+              <div class="quote-mark">“</div>
+              <p class="featured-review-quote">
+                Took my Cayman GT4 here after two other shops couldn’t eliminate highway shimmy at 75 mph. Apex put it on their road-force roller, found a bead seat mismatch in minutes, and dialed the front camber to exact factory spec. Drive is completely razor sharp now.
+              </p>
+            </div>
+            <div class="author-lockup">
+              <div class="author-avatar">MR</div>
+              <div class="author-details">
+                <h5>Marcus Rosenthal</h5>
+                <span>Porsche 718 Cayman GT4 Owner • Verified Track Driver</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="side-reviews-stack">
+            <div class="compact-review-card">
+              <div class="rating-stars">★★★★★</div>
+              <p style="font-size: 0.95rem; color: #D5D9DC; margin-bottom: 16px;">
+                "Completely transparent pricing. They showed me the digital Hawkeye printout before touching a single bolt. Steering wheel is dead straight for the first time in two years."
+              </p>
+              <div style="font-size: 0.85rem; color: var(--steel-gray);">
+                <strong>Elena Vance</strong> • BMW M3 Competition
+              </div>
+            </div>
+
+            <div class="compact-review-card">
+              <div class="rating-stars">★★★★★</div>
+              <p style="font-size: 0.95rem; color: #D5D9DC; margin-bottom: 16px;">
+                "Touchless mounting is legit. My custom HRE satin bronze wheels didn't have a single microscopic mark. Highly recommended for enthusiasts who care about their rims."
+              </p>
+              <div style="font-size: 0.85rem; color: var(--steel-gray);">
+                <strong>David K.</strong> • Audi RS6 Avant
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       PROGRESSIVE BOOKING MODAL
+       ========================================================================== -->
+  <div class="modal-overlay" id="booking-modal" role="dialog" aria-modal="true" aria-labelledby="modal-step-title">
+    <div class="booking-modal-card">
+      <button class="modal-close-btn" onclick="closeBookingModal()" aria-label="Close dialog">✕</button>
+
+      <div class="stepper-header">
+        <div>
+          <h3 id="modal-step-title" style="font-size: 1.35rem;">Reserve Workshop Bay</h3>
+          <span style="font-size: 0.85rem; color: var(--steel-gray);" id="modal-step-desc">Step 1 of 3: Select Service</span>
+        </div>
+        <span class="step-pill" id="step-counter-pill">STEP 1 / 3</span>
+      </div>
+
+      <!-- Step 1: Select Service & Vehicle Class -->
+      <div class="form-step active" id="booking-step-1">
+        <label style="font-size: 0.85rem; font-weight: 600; color: #9AA0A6;">SELECT DESIRED WORK</label>
+        <div class="radio-grid-options">
+          <div class="option-card-radio selected" onclick="selectRadio(this, 'Laser Alignment')">
+            <span>🎯</span>
+            <div>
+              <strong style="font-size: 0.9rem; display: block;">Laser Alignment</strong>
+              <small style="color: var(--steel-gray);">Hawkeye 4-wheel calibration</small>
+            </div>
+          </div>
+          <div class="option-card-radio" onclick="selectRadio(this, 'Road Force Balance')">
+            <span>⚡</span>
+            <div>
+              <strong style="font-size: 0.9rem; display: block;">Road Force Balance</strong>
+              <small style="color: var(--steel-gray);">Dynamic runout match</small>
+            </div>
+          </div>
+          <div class="option-card-radio" onclick="selectRadio(this, 'New Tires & Fitting')">
+            <span>🏁</span>
+            <div>
+              <strong style="font-size: 0.9rem; display: block;">Tires & Fitting</strong>
+              <small style="color: var(--steel-gray);">Touchless rim mounting</small>
+            </div>
+          </div>
+          <div class="option-card-radio" onclick="selectRadio(this, 'Complete Package')">
+            <span>👑</span>
+            <div>
+              <strong style="font-size: 0.9rem; display: block;">Complete Package</strong>
+              <small style="color: var(--steel-gray);">Tires, alignment & balance</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-field-group">
+          <label for="b-vehicle">Vehicle Make / Model / Year</label>
+          <input type="text" id="b-vehicle" class="text-input" placeholder="e.g. 2022 Porsche 911 Carrera S" required>
+        </div>
+
+        <button class="btn btn-primary" style="width: 100%; margin-top: 12px;" onclick="goToStep(2)">Continue to Date & Time →</button>
+      </div>
+
+      <!-- Step 2: Date & Slot -->
+      <div class="form-step" id="booking-step-2">
+        <div class="input-field-group">
+          <label for="b-date">Preferred Date</label>
+          <input type="date" id="b-date" class="text-input" required>
+        </div>
+
+        <div class="input-field-group">
+          <label for="b-time">Bay Arrival Window</label>
+          <select id="b-time" class="finder-select" style="width: 100%;">
+            <option>08:30 AM — Morning First Run</option>
+            <option>10:45 AM — Midday Bay</option>
+            <option>01:30 PM — Afternoon</option>
+            <option>03:45 PM — Late Session</option>
+          </select>
+        </div>
+
+        <div style="display: flex; gap: 12px; margin-top: 24px;">
+          <button class="btn btn-secondary" onclick="goToStep(1)">Back</button>
+          <button class="btn btn-primary" style="flex: 1;" onclick="goToStep(3)">Contact Details →</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Contact Details & Submit -->
+      <div class="form-step" id="booking-step-3">
+        <div class="input-field-group">
+          <label for="b-name">Full Name</label>
+          <input type="text" id="b-name" class="text-input" placeholder="Marcus Sterling" required>
+        </div>
+
+        <div class="input-field-group">
+          <label for="b-phone">Phone (for SMS Bay Alerts)</label>
+          <input type="tel" id="b-phone" class="text-input" placeholder="(555) 019-2834" required>
+        </div>
+
+        <div class="input-field-group">
+          <label for="b-notes">Specific Notes or Symptoms (Optional)</label>
+          <input type="text" id="b-notes" class="text-input" placeholder="e.g. slight right pulling above 60mph">
+        </div>
+
+        <div style="display: flex; gap: 12px; margin-top: 24px;">
+          <button class="btn btn-secondary" onclick="goToStep(2)">Back</button>
+          <button class="btn btn-primary" style="flex: 1;" onclick="confirmBooking()">Confirm Reservation</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Confirmation Ticket -->
+      <div class="form-step" id="booking-step-4">
+        <div style="text-align: center; padding: 24px 0;">
+          <div style="width: 60px; height: 60px; background: rgba(37, 211, 102, 0.15); border: 2px solid #25D366; border-radius: 50%; color: #25D366; display: grid; place-items: center; margin: 0 auto 20px; font-size: 1.8rem;">✓</div>
+          <h3 style="font-size: 1.6rem; margin-bottom: 8px;">Appointment Confirmed</h3>
+          <p style="color: var(--steel-gray); font-size: 0.95rem; margin-bottom: 24px;" id="confirmation-summary-text">
+            Your bay reservation has been registered in the workshop management system.
+          </p>
+          <div style="background: var(--track-black); border: 1px dashed var(--border-medium); border-radius: 12px; padding: 16px; margin-bottom: 24px; font-family: monospace; font-size: 1rem; color: var(--technical-sage);" id="ticket-id-tag">
+            APX-9482-CONFIRMED
+          </div>
+          <button class="btn btn-secondary" style="width: 100%;" onclick="closeBookingModal()">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER & LOCAL SEO FOUNDATION
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="brand-logo">
+          <span class="brand-mark">A</span>
+          <span>APEX <span style="font-weight: 400; color: #8F959C;">TIRE</span></span>
+        </a>
+        <p>
+          Engineering-grade automotive chassis & tire workshop. Calibrated equipment, certified ASE technicians, and zero-compromise wheel fitment.
+        </p>
+        <div style="font-size: 0.85rem; color: var(--technical-sage); display: flex; align-items: center; gap: 8px;">
+          <span style="width: 8px; height: 8px; background: #25D366; border-radius: 50%;"></span>
+          Bays currently operational & accepting bookings
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Touchless Tire Mounting</a></li>
+          <li><a href="#services">Road Force Balancing</a></li>
+          <li><a href="#alignment">Hawkeye Laser Alignment</a></li>
+          <li><a href="#services">Track Day Geometry Setup</a></li>
+          <li><a href="#services">TPMS Diagnosis & Coding</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Workshop</h4>
+        <ul>
+          <li><a href="#trust">About our Technicians</a></li>
+          <li><a href="#alignment">The Science of Angles</a></li>
+          <li><a href="#pricing">Transparent Rates</a></li>
+          <li><a href="#reviews">Verified Client Proof</a></li>
+          <li><a href="tel:8005552739">Direct Bay Hotline</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Visit Workshop</h4>
+        <address style="font-style: normal; color: var(--steel-gray); font-size: 0.9rem; line-height: 1.6;">
+          <strong>APEX Performance Center</strong><br>
+          1420 Motor Speedway Blvd, Suite 100<br>
+          Mon – Fri: 7:30 AM – 6:30 PM<br>
+          Sat: 8:00 AM – 4:00 PM<br>
+          <a href="tel:8005552739" style="color: var(--racing-orange); font-weight: 600;">(800) 555-APEX</a>
+        </address>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div>© <span id="cur-year"></span> APEX Tire & Alignment Corp. All rights reserved.</div>
+      <div style="display: flex; gap: 24px;">
+        <a href="#" style="color: inherit;">Privacy Architecture</a>
+        <a href="#" style="color: inherit;">Warranty Terms</a>
+        <a href="#" style="color: inherit;">Safety Disclosures</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       JAVASCRIPT: 3D THREE.JS TIRE, INTERACTIVE FINDER, ALIGNMENT LAB & MODAL
+       ========================================================================== -->
+  <script>
+    // Set current year in footer
+    document.getElementById('cur-year').textContent = new Date().getFullYear();
+
+    /* --------------------------------------------------------------------------
+       01. THREE.JS 3D INTERACTIVE TIRE VISUALIZATION
+       -------------------------------------------------------------------------- */
+    let scene, camera, renderer, wheelGroup;
+    let isDragging = false, prevMouseX = 0;
+    const canvasContainer = document.getElementById('tire-canvas-container');
+
+    function initThreeTire() {
+      if (!canvasContainer) return;
+
+      const width = canvasContainer.clientWidth;
+      const height = canvasContainer.clientHeight;
+
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
+      camera.position.set(0, 0, 5.2);
+
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.shadowMap.enabled = true;
+      canvasContainer.appendChild(renderer.domElement);
+
+      // Lights: Precision Rim Highlight setup
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+      scene.add(ambientLight);
+
+      const dirLight1 = new THREE.DirectionalLight(0xff642d, 2.5); // Orange rim highlight
+      dirLight1.position.set(5, 5, 4);
+      scene.add(dirLight1);
+
+      const dirLight2 = new THREE.DirectionalLight(0xb7c7bd, 1.8); // Technical Sage soft key
+      dirLight2.position.set(-5, -3, 3);
+      scene.add(dirLight2);
+
+      // Create Wheel & Tire Group
+      wheelGroup = new THREE.Group();
+
+      // A. Outer Rubber Tire (Torus Geometry)
+      const tireGeo = new THREE.TorusGeometry(1.4, 0.45, 32, 64);
+      const tireMat = new THREE.MeshStandardMaterial({
+        color: 0x16181B,
+        roughness: 0.85,
+        metalness: 0.1
+      });
+      const tireMesh = new THREE.Mesh(tireGeo, tireMat);
+      wheelGroup.add(tireMesh);
+
+      // B. Rim Barrel (Cylinder)
+      const rimBarrelGeo = new THREE.CylinderGeometry(1.05, 1.05, 0.7, 32, 1, true);
+      const rimMat = new THREE.MeshStandardMaterial({
+        color: 0x2C3036,
+        roughness: 0.25,
+        metalness: 0.85
+      });
+      const rimBarrel = new THREE.Mesh(rimBarrelGeo, rimMat);
+      rimBarrel.rotation.x = Math.PI / 2;
+      wheelGroup.add(rimBarrel);
+
+      // C. Center Hub
+      const hubGeo = new THREE.CylinderGeometry(0.32, 0.32, 0.72, 24);
+      const hubMesh = new THREE.Mesh(hubGeo, rimMat);
+      hubMesh.rotation.x = Math.PI / 2;
+      wheelGroup.add(hubMesh);
+
+      // D. Multi-Spoke Assembly (5 Twin-Spokes = 10 Spokes)
+      for (let i = 0; i < 10; i++) {
+        const spokeGeo = new THREE.BoxGeometry(0.1, 0.88, 0.08);
+        const spoke = new THREE.Mesh(spokeGeo, rimMat);
+        const angle = (i * Math.PI * 2) / 10;
+        spoke.position.x = Math.cos(angle) * 0.58;
+        spoke.position.y = Math.sin(angle) * 0.58;
+        spoke.rotation.z = angle + Math.PI / 2;
+        wheelGroup.add(spoke);
+      }
+
+      // E. Drilled High-Performance Brake Rotor
+      const rotorGeo = new THREE.CylinderGeometry(0.85, 0.85, 0.05, 32);
+      const rotorMat = new THREE.MeshStandardMaterial({
+        color: 0x90969D,
+        metalness: 0.9,
+        roughness: 0.2
+      });
+      const rotor = new THREE.Mesh(rotorGeo, rotorMat);
+      rotor.rotation.x = Math.PI / 2;
+      rotor.position.z = -0.15;
+      wheelGroup.add(rotor);
+
+      // F. APEX Racing Orange Brake Caliper
+      const caliperGeo = new THREE.BoxGeometry(0.32, 0.65, 0.3);
+      const caliperMat = new THREE.MeshStandardMaterial({
+        color: 0xFF642D,
+        roughness: 0.3,
+        metalness: 0.4
+      });
+      const caliper = new THREE.Mesh(caliperGeo, caliperMat);
+      caliper.position.set(-0.82, 0.2, -0.05);
+      caliper.rotation.z = -0.3;
+      wheelGroup.add(caliper);
+
+      // Initial angle presentation
+      wheelGroup.rotation.y = 0.5;
+      wheelGroup.rotation.x = 0.15;
+      scene.add(wheelGroup);
+
+      // Drag to rotate handlers
+      canvasContainer.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        prevMouseX = e.clientX;
+      });
+
+      window.addEventListener('mouseup', () => isDragging = false);
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const delta = e.clientX - prevMouseX;
+        wheelGroup.rotation.y += delta * 0.01;
+        prevMouseX = e.clientX;
+      });
+
+      // Touch handlers for mobile
+      canvasContainer.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          isDragging = true;
+          prevMouseX = e.touches[0].clientX;
+        }
+      });
+
+      window.addEventListener('touchend', () => isDragging = false);
+
+      window.addEventListener('touchmove', (e) => {
+        if (!isDragging || e.touches.length !== 1) return;
+        const delta = e.touches[0].clientX - prevMouseX;
+        wheelGroup.rotation.y += delta * 0.01;
+        prevMouseX = e.touches[0].clientX;
+      });
+
+      // Responsive resize
+      window.addEventListener('resize', onWindowResize);
+
+      animateTire();
+    }
+
+    function onWindowResize() {
+      if (!canvasContainer || !renderer || !camera) return;
+      const w = canvasContainer.clientWidth;
+      const h = canvasContainer.clientHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    }
+
+    function animateTire() {
+      requestAnimationFrame(animateTire);
+      if (!isDragging && wheelGroup) {
+        wheelGroup.rotation.y += 0.0035; // Gentle continuous auto-spin
+      }
+      renderer.render(scene, camera);
+    }
+
+    // Initialize after DOM loads
+    window.addEventListener('DOMContentLoaded', initThreeTire);
+
+    /* --------------------------------------------------------------------------
+       02. HERO CAROUSEL DATA SWITCHER
+       -------------------------------------------------------------------------- */
+    const heroSlides = [
+      {
+        eyebrow: "HIGH-PERFORMANCE WORKSHOP",
+        title: "Precision Starts Where <br><span class='gradient-text'>Rubber Meets Road</span>",
+        desc: "Premium tires, dynamic road-force balancing, and laser-guided wheel alignments calibrated to manufacturer race and street tolerances.",
+        compound: "Apex UHP-R Track Spec"
+      },
+      {
+        eyebrow: "HUNTER ROAD-FORCE TECHNOLOGY",
+        title: "Zero Vibration at Any <br><span class='gradient-text'>Rotational Velocity</span>",
+        desc: "Eliminate steering wheel resonance at 70+ mph through 1,250 lbs of loaded roller diagnostic force. We match low points of tires to high points of wheels.",
+        compound: "Grand Touring Low-Noise"
+      },
+      {
+        eyebrow: "HAWKEYE ELITE OPTICAL GEOMETRY",
+        title: "Every Angle Calibrated to <br><span class='gradient-text'>0.01° Accuracy</span>",
+        desc: "Precision camber, caster, and toe geometry alignment protects costly low-profile performance tires and sharpens directional steering turn-in.",
+        compound: "Factory Verified Spec"
+      }
+    ];
+
+    function switchHeroSlide(idx) {
+      document.querySelectorAll('.hero-tab-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === idx);
+      });
+      const data = heroSlides[idx];
+      document.getElementById('hero-eyebrow').textContent = data.eyebrow;
+      document.getElementById('hero-title').innerHTML = data.title;
+      document.getElementById('hero-desc').textContent = data.desc;
+      document.getElementById('hud-compound').textContent = data.compound;
+    }
+
+    /* --------------------------------------------------------------------------
+       03. INTERACTIVE TIRE FINDER DATABASE & LOGIC
+       -------------------------------------------------------------------------- */
+    const tireDatabase = [
+      {
+        brand: "Michelin",
+        name: "Pilot Sport 4S",
+        category: "summer",
+        size: "245/35ZR20 (95Y) XL",
+        rating: "Speed 186+ mph • Treadwear 300",
+        price: 342,
+        bestFor: "Max Grip / Wet Braking"
+      },
+      {
+        brand: "Pirelli",
+        name: "P Zero Corsa (PZC4)",
+        category: "summer",
+        size: "305/30ZR20 (103Y) XL",
+        rating: "Ultra High Track • Treadwear 80",
+        price: 468,
+        bestFor: "Track Attack / Corner Turn-in"
+      },
+      {
+        brand: "Continental",
+        name: "ExtremeContact DWS06 Plus",
+        category: "allseason",
+        size: "245/35R20 95Y XL",
+        rating: "All-Season UHP • Treadwear 560",
+        price: 268,
+        bestFor: "Year-Round Longevity & Rain"
+      }
+    ];
+
+    function switchFinderMode(mode) {
+      const isVehicle = mode === 'vehicle';
+      document.getElementById('tab-vehicle').classList.toggle('active', isVehicle);
+      document.getElementById('tab-size').classList.toggle('active', !isVehicle);
+
+      const controls = document.getElementById('finder-controls');
+      if (!isVehicle) {
+        controls.innerHTML = `
+          <div class="finder-field">
+            <label>Width</label>
+            <select class="finder-select" id="f-w">
+              <option>225</option><option selected>245</option><option>275</option><option>305</option>
+            </select>
+          </div>
+          <div class="finder-field">
+            <label>Aspect Ratio</label>
+            <select class="finder-select" id="f-ar">
+              <option>30</option><option selected>35</option><option>40</option><option>45</option>
+            </select>
+          </div>
+          <div class="finder-field">
+            <label>Diameter</label>
+            <select class="finder-select" id="f-dia">
+              <option>18"</option><option>19"</option><option selected>20"</option><option>21"</option>
+            </select>
+          </div>
+          <div class="finder-field">
+            <label>Compound</label>
+            <select class="finder-select" id="f-season-sub" onchange="filterCatalog()">
+              <option value="all">All Compounds</option>
+              <option value="summer">Summer</option>
+              <option value="allseason">All-Season</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" onclick="filterCatalog()">Search Sizes</button>
+        `;
+      } else {
+        controls.innerHTML = `
+          <div class="finder-field">
+            <label for="f-year">Year</label>
+            <select id="f-year" class="finder-select" onchange="updateFinderOptions()">
+              <option value="2024">2024</option><option value="2023">2023</option><option value="2022" selected>2022</option><option value="2021">2021</option>
+            </select>
+          </div>
+          <div class="finder-field">
+            <label for="f-make">Make</label>
+            <select id="f-make" class="finder-select" onchange="updateFinderOptions()">
+              <option value="porsche" selected>Porsche</option><option value="bmw">BMW</option><option value="audi">Audi</option><option value="tesla">Tesla</option>
+            </select>
+          </div>
+          <div class="finder-field">
+            <label for="f-model">Model</label>
+            <select id="f-model" class="finder-select">
+              <option value="911">911 Carrera S</option><option value="taycan">Taycan Turbo</option><option value="gt3">911 GT3</option>
+            </select>
+          </div>
+          <div class="finder-field">
+            <label for="f-season">Condition</label>
+            <select id="f-season" class="finder-select" onchange="filterCatalog()">
+              <option value="all">All Compounds</option><option value="summer">Ultra-High Summer</option><option value="allseason">Performance All-Season</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" onclick="filterCatalog()">Match Tires</button>
+        `;
+      }
+      filterCatalog();
+    }
+
+    function updateFinderOptions() {
+      const makeEl = document.getElementById('f-make');
+      const modelEl = document.getElementById('f-model');
+      if (!makeEl || !modelEl) return;
+      const make = makeEl.value;
+
+      if (make === 'porsche') {
+        modelEl.innerHTML = '<option>911 Carrera S</option><option>Taycan Turbo</option><option>718 Cayman GT4</option>';
+      } else if (make === 'bmw') {
+        modelEl.innerHTML = '<option>M3 Competition (G80)</option><option>M5 CS</option><option>M2 Coupe</option>';
+      } else if (make === 'audi') {
+        modelEl.innerHTML = '<option>RS6 Avant</option><option>R8 V10 Performance</option><option>RS3 Sedan</option>';
+      } else {
+        modelEl.innerHTML = '<option>Model S Plaid</option><option>Model 3 Performance</option>';
+      }
+      filterCatalog();
+    }
+
+    function filterCatalog() {
+      const container = document.getElementById('catalog-results');
+      if (!container) return;
+      const seasonFilter = (document.getElementById('f-season') || document.getElementById('f-season-sub'))?.value || 'all';
+
+      const filtered = tireDatabase.filter(tire => {
+        return seasonFilter === 'all' || tire.category === seasonFilter;
+      });
+
+      container.innerHTML = filtered.map(t => `
+        <div class="tire-card">
+          <div>
+            <div class="tire-card-brand">${t.brand}</div>
+            <h4 class="tire-card-name">${t.name}</h4>
+            <div class="tire-specs-badge">
+              <span class="badge-pill">${t.size}</span>
+              <span class="badge-pill">${t.bestFor}</span>
+            </div>
+            <div style="font-size: 0.82rem; color: #7F858D; margin-bottom: 12px;">${t.rating}</div>
+          </div>
+          <div class="tire-card-price-row">
+            <div>
+              <div class="tire-price">$${t.price} <span>/ tire</span></div>
+              <small style="font-size: 0.72rem; color: #25D366;">In Stock (Apex Bay)</small>
+            </div>
+            <button class="btn btn-primary" style="padding: 10px 18px; font-size: 0.85rem;" onclick="openBookingModal('Fitment: ${t.brand} ${t.name}')">Select & Fit</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    window.addEventListener('DOMContentLoaded', filterCatalog);
+
+    /* --------------------------------------------------------------------------
+       04. INTERACTIVE LASER ALIGNMENT LAB
+       -------------------------------------------------------------------------- */
+    function calibrateLaserSim() {
+      const leftW = document.getElementById('sim-wheel-left');
+      const rightW = document.getElementById('sim-wheel-right');
+      const camberL = document.getElementById('val-camber-l');
+      const camberR = document.getElementById('val-camber-r');
+      const toe = document.getElementById('val-toe');
+
+      if (leftW && rightW) {
+        leftW.classList.add('calibrated');
+        rightW.classList.add('calibrated');
+      }
+
+      if (camberL && camberR && toe) {
+        camberL.textContent = "-1.20°";
+        camberL.classList.add('in-spec');
+        camberR.textContent = "-1.20°";
+        camberR.classList.add('in-spec');
+        toe.textContent = "0.00°";
+        toe.classList.add('in-spec');
+      }
+    }
+
+    function resetLaserSim() {
+      const leftW = document.getElementById('sim-wheel-left');
+      const rightW = document.getElementById('sim-wheel-right');
+      const camberL = document.getElementById('val-camber-l');
+      const camberR = document.getElementById('val-camber-r');
+      const toe = document.getElementById('val-toe');
+
+      if (leftW && rightW) {
+        leftW.classList.remove('calibrated');
+        rightW.classList.remove('calibrated');
+      }
+
+      if (camberL && camberR && toe) {
+        camberL.textContent = "-1.85°";
+        camberL.classList.remove('in-spec');
+        camberR.textContent = "-0.90°";
+        camberR.classList.remove('in-spec');
+        toe.textContent = "+0.38°";
+        toe.classList.remove('in-spec');
+      }
+    }
+
+    /* --------------------------------------------------------------------------
+       05. PROGRESSIVE MULTI-STEP BOOKING MODAL
+       -------------------------------------------------------------------------- */
+    let currentStep = 1;
+    let selectedServiceName = "Laser Alignment";
+
+    function openBookingModal(servicePref = "Laser Alignment") {
+      selectedServiceName = servicePref;
+      const modal = document.getElementById('booking-modal');
+      modal.classList.add('active');
+      goToStep(1);
+
+      // Pre-select radio if matching text
+      document.querySelectorAll('.option-card-radio').forEach(card => {
+        if (card.textContent.includes(servicePref)) {
+          selectRadio(card, servicePref);
+        }
+      });
+
+      // Default date to tomorrow
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      const dateInput = document.getElementById('b-date');
+      if (dateInput) dateInput.value = tomorrow.toISOString().split('T')[0];
+    }
+
+    function closeBookingModal() {
+      document.getElementById('booking-modal').classList.remove('active');
+    }
+
+    function selectRadio(element, name) {
+      document.querySelectorAll('.option-card-radio').forEach(c => c.classList.remove('selected'));
+      element.classList.add('selected');
+      selectedServiceName = name;
+    }
+
+    function goToStep(stepNumber) {
+      currentStep = stepNumber;
+      for (let i = 1; i <= 4; i++) {
+        const el = document.getElementById(`booking-step-${i}`);
+        if (el) el.classList.toggle('active', i === stepNumber);
+      }
+
+      const pill = document.getElementById('step-counter-pill');
+      const desc = document.getElementById('modal-step-desc');
+      if (pill && desc) {
+        if (stepNumber === 1) {
+          pill.textContent = "STEP 1 / 3";
+          desc.textContent = "Step 1: Select Service & Vehicle";
+        } else if (stepNumber === 2) {
+          pill.textContent = "STEP 2 / 3";
+          desc.textContent = "Step 2: Choose Workshop Schedule";
+        } else if (stepNumber === 3) {
+          pill.textContent = "STEP 3 / 3";
+          desc.textContent = "Step 3: Driver Details";
+        } else if (stepNumber === 4) {
+          pill.textContent = "CONFIRMED";
+          desc.textContent = "Bay Work Order Generated";
+        }
+      }
+    }
+
+    function confirmBooking() {
+      const name = document.getElementById('b-name').value || "Driver";
+      const vehicle = document.getElementById('b-vehicle').value || "Vehicle";
+      const randId = Math.floor(1000 + Math.random() * 9000);
+
+      document.getElementById('ticket-id-tag').textContent = `APX-${randId}-CONFIRMED`;
+      document.getElementById('confirmation-summary-text').textContent = 
+        `Thank you, ${name}. Your bay allocation for ${vehicle} (${selectedServiceName}) is logged in the workshop queue.`;
+
+      goToStep(4);
+    }
+
+    function toggleMobileMenu() {
+      const nav = document.querySelector('.nav-links');
+      if (!nav) return;
+      if (nav.style.display === 'flex') {
+        nav.style.display = 'none';
+      } else {
+        nav.style.display = 'flex';
+        nav.style.flexDirection = 'column';
+        nav.style.position = 'absolute';
+        nav.style.top = '80px';
+        nav.style.left = '0';
+        nav.style.right = '0';
+        nav.style.background = '#101214';
+        nav.style.padding = '24px';
+        nav.style.borderBottom = '1px solid rgba(255,255,255,0.1)';
+      }
+    }
+
+    // Close modal on escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeBookingModal();
+    });
+  </script>
+</body>
+</html>

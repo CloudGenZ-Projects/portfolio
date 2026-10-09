@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harmonia | Compassionate Pet Medicine & Urgent Care</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       DESIGN TOKENS & BASE
+       ========================================================================== */
+    :root {
+      --clr-forest: #174C3C;
+      --clr-sage: #D8E7D5;
+      --clr-ivory: #F8F5ED;
+      --clr-terra: #E8A77C;
+      --clr-charcoal: #27332E;
+      --clr-red: #B93232;
+      --clr-white: #FFFFFF;
+
+      --font-display: 'DM Serif Display', serif;
+      --font-ui: 'Plus Jakarta Sans', sans-serif;
+
+      --radius-sm: 16px;
+      --radius-md: 24px;
+      --radius-lg: 36px;
+      
+      --transition-fast: 200ms ease;
+      --transition-slow: 650ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-ui);
+      background-color: var(--clr-ivory);
+      color: var(--clr-charcoal);
+      line-height: 1.6;
+      font-size: 17px;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 400; line-height: 1.1; }
+    h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
+    h2 { font-size: clamp(2rem, 4vw, 3.5rem); }
+    h3 { font-size: clamp(1.5rem, 3vw, 2.5rem); }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; height: auto; display: block; }
+    
+    .container {
+      width: 100%;
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section { padding: 6rem 0; }
+    @media (max-width: 768px) { section { padding: 4rem 0; } }
+
+    /* ==========================================================================
+       BUTTONS & CTAS
+       ========================================================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all var(--transition-fast);
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary { background: var(--clr-forest); color: var(--clr-white); }
+    .btn-primary:hover { background: var(--clr-charcoal); transform: translateY(-2px); }
+    .btn-secondary { background: transparent; border: 1px solid var(--clr-charcoal); color: var(--clr-charcoal); }
+    .btn-secondary:hover { background: var(--clr-charcoal); color: var(--clr-white); }
+    .btn-urgent { background: var(--clr-red); color: var(--clr-white); }
+    .btn-urgent:hover { background: #962828; }
+
+    /* ==========================================================================
+       HEADER & EMERGENCY STRIP
+       ========================================================================== */
+    .emergency-strip {
+      background: var(--clr-red);
+      color: var(--clr-white);
+      text-align: center;
+      padding: 0.75rem 1rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .emergency-strip a { text-decoration: underline; font-weight: 700; }
+
+    header {
+      padding: 1.5rem 0;
+      position: sticky;
+      top: 0;
+      background: rgba(248, 245, 237, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      border-top: 3px solid var(--clr-forest); /* 0-300ms line draw effect basis */
+      animation: drawLine 0.5s ease-out forwards;
+    }
+    @keyframes drawLine { from { width: 0; } to { width: 100%; } }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo { font-family: var(--font-display); font-size: 1.75rem; color: var(--clr-forest); }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a { font-weight: 600; font-size: 0.95rem; transition: color var(--transition-fast); }
+    .nav-links a:hover { color: var(--clr-forest); }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; } /* Simplified for demo: mobile menu hidden */
+    }
+
+    /* ==========================================================================
+       01. HERO (Cinematic Sequence)
+       ========================================================================== */
+    .hero {
+      padding: 4rem 0 6rem;
+      overflow: hidden;
+    }
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto 3rem;
+      text-align: center;
+    }
+    .hero-sub {
+      font-weight: 700;
+      color: var(--clr-forest);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: maskUp 0.5s 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    .hero h1 {
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: maskUp 0.7s 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    .hero p {
+      font-size: 1.15rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-inline: auto;
+      opacity: 0;
+      animation: maskUp 0.6s 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      opacity: 0;
+      animation: maskUp 0.6s 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    .hero-image-wrapper {
+      width: 100%;
+      height: 60vh;
+      min-height: 400px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      opacity: 0;
+      animation: imageReveal 0.8s 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    .hero-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.04);
+      animation: imageScale 1.5s 0.35s ease-out forwards;
+    }
+
+    @keyframes maskUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes imageReveal {
+      from { opacity: 0; clip-path: inset(10% 10% 10% 10% round var(--radius-lg)); }
+      to { opacity: 1; clip-path: inset(0% 0% 0% 0% round var(--radius-lg)); }
+    }
+    @keyframes imageScale {
+      to { transform: scale(1); }
+    }
+
+    /* ==========================================================================
+       02. SERVICES BENTO GRID
+       ========================================================================== */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .bento-card {
+      background: var(--clr-white);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      cursor: pointer;
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: all var(--transition-fast);
+    }
+    .bento-card:hover {
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      transform: translateY(-5px);
+    }
+    .bento-img { height: 220px; overflow: hidden; }
+    .bento-img img { 
+      width: 100%; height: 100%; object-fit: cover; 
+      transition: transform var(--transition-slow); 
+    }
+    .bento-card:hover .bento-img img { transform: scale(1.03); }
+    .bento-content { padding: 2rem; display: flex; flex-direction: column; flex-grow: 1; }
+    .bento-content h3 { font-size: 1.75rem; margin-bottom: 0.75rem; }
+    .bento-content p { color: #555; margin-bottom: 1.5rem; flex-grow: 1; }
+    .bento-link { font-weight: 700; display: inline-flex; align-items: center; gap: 0.5rem; transition: gap var(--transition-fast); }
+    .bento-card:hover .bento-link { gap: 0.75rem; }
+    
+    .bento-urgent {
+      grid-column: span 2;
+      background: var(--clr-sage);
+      flex-direction: row;
+    }
+    .bento-urgent .bento-img { width: 40%; height: auto; }
+    .bento-urgent .bento-content { width: 60%; justify-content: center; }
+
+    @media (max-width: 900px) {
+      .bento-grid { grid-template-columns: 1fr; }
+      .bento-urgent { grid-column: span 1; flex-direction: column; }
+      .bento-urgent .bento-img { width: 100%; height: 200px; }
+      .bento-urgent .bento-content { width: 100%; }
+    }
+
+    /* ==========================================================================
+       03. NGO IMPACT STORYTELLING (Scroll Centerpiece)
+       ========================================================================== */
+    .story-section {
+      background: var(--clr-charcoal);
+      color: var(--clr-ivory);
+      padding: 8rem 0;
+    }
+    .story-layout {
+      display: flex;
+      gap: 4rem;
+      position: relative;
+    }
+    .story-visual {
+      flex: 1;
+      position: sticky;
+      top: 10vh;
+      height: 80vh;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .story-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity var(--transition-slow);
+    }
+    .story-content { flex: 1; padding: 4rem 0 20vh; }
+    .story-chapter {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0.3;
+      transition: opacity var(--transition-slow);
+    }
+    .story-chapter.is-active { opacity: 1; }
+    .chapter-tag { font-family: var(--font-ui); font-weight: 700; color: var(--clr-terra); margin-bottom: 1rem; }
+    .story-chapter h3 { font-size: 2.5rem; margin-bottom: 1.5rem; }
+    .story-chapter p { font-size: 1.25rem; line-height: 1.8; opacity: 0.9; }
+
+    @media (max-width: 900px) {
+      .story-layout { flex-direction: column; }
+      .story-visual { position: relative; top: 0; height: 50vh; margin-bottom: 2rem; }
+      .story-content { padding: 0; }
+      .story-chapter { min-height: auto; margin-bottom: 4rem; opacity: 1; }
+    }
+
+    /* ==========================================================================
+       04. CARE JOURNEY (Signature Interaction)
+       ========================================================================== */
+    .journey { padding: 6rem 0; background: var(--clr-white); }
+    .journey-title { text-align: center; margin-bottom: 4rem; }
+    .journey-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      position: relative;
+    }
+    .journey-grid::before {
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: var(--clr-sage);
+      z-index: 0;
+    }
+    .journey-step { text-align: center; position: relative; z-index: 1; }
+    .step-icon {
+      width: 80px; height: 80px;
+      margin: 0 auto 1.5rem;
+      background: var(--clr-ivory);
+      border-radius: 50%;
+      border: 2px solid var(--clr-forest);
+      display: flex; justify-content: center; align-items: center;
+      font-size: 1.5rem; font-weight: 700; color: var(--clr-forest);
+      transition: all var(--transition-slow);
+    }
+    .journey-step:hover .step-icon { background: var(--clr-forest); color: var(--clr-ivory); transform: scale(1.1); box-shadow: 0 0 0 8px var(--clr-sage); }
+    
+    @media (max-width: 768px) {
+      .journey-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .journey-grid::before {
+        top: 0; bottom: 0; left: 50%; right: auto;
+        width: 2px; height: 100%; transform: translateX(-50%);
+      }
+    }
+
+    /* ==========================================================================
+       05. EMERGENCY EXPERIENCE & TEAM
+       ========================================================================== */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .team-card {
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: var(--clr-white);
+      position: relative;
+    }
+    .team-img { height: 350px; }
+    .team-img img { width: 100%; height: 100%; object-fit: cover; }
+    .team-info { padding: 1.5rem; }
+    .team-role { color: var(--clr-forest); font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .team-philosophy {
+      position: absolute;
+      inset: 0;
+      background: rgba(23, 76, 60, 0.95);
+      color: var(--clr-white);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all var(--transition-fast);
+    }
+    .team-card:hover .team-philosophy { opacity: 1; transform: translateY(0); }
+
+    /* ==========================================================================
+       06. IMPACT DASHBOARD & BOOKING
+       ========================================================================== */
+    .impact { background: var(--clr-sage); padding: 6rem 0; border-radius: var(--radius-lg); margin: 4rem 2rem; }
+    .impact-stats {
+      display: flex; gap: 4rem; justify-content: center; margin-top: 3rem; text-align: center;
+      flex-wrap: wrap;
+    }
+    .stat-number { font-family: var(--font-display); font-size: 4rem; color: var(--clr-forest); line-height: 1; }
+    
+    .booking-section { padding: 6rem 0; }
+    .booking-form {
+      max-width: 700px; margin: 0 auto;
+      background: var(--clr-white); padding: 3rem;
+      border-radius: var(--radius-md); box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    }
+    .form-group { margin-bottom: 2rem; }
+    .form-group label { display: block; font-weight: 600; margin-bottom: 1rem; }
+    .radio-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .radio-label {
+      padding: 0.75rem 1.5rem;
+      border: 1px solid #ddd; border-radius: 50px;
+      cursor: pointer; transition: all var(--transition-fast);
+    }
+    .radio-label:has(input:checked) { background: var(--clr-forest); color: var(--clr-white); border-color: var(--clr-forest); }
+    .radio-label input { display: none; }
+    .booking-form textarea { width: 100%; padding: 1rem; border: 1px solid #ddd; border-radius: var(--radius-sm); font-family: inherit; }
+    .urgent-safeguard { background: #fdf2f2; border-left: 4px solid var(--clr-red); padding: 1rem; margin-bottom: 2rem; color: var(--clr-red); font-weight: 600; }
+
+    /* ==========================================================================
+       07. FOOTER
+       ========================================================================== */
+    footer { background: var(--clr-charcoal); color: var(--clr-ivory); padding: 6rem 0 2rem; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+    .footer-title { font-family: var(--font-display); font-size: 2.5rem; margin-bottom: 1rem; color: var(--clr-terra); }
+    .footer-links h4 { font-family: var(--font-ui); font-size: 1.1rem; margin-bottom: 1.5rem; color: var(--clr-sage); }
+    .footer-links ul { list-style: none; }
+    .footer-links li { margin-bottom: 0.75rem; }
+    .footer-links a:hover { color: var(--clr-terra); }
+    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+    /* Utilities */
+    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+      .fade-up, .hero-sub, .hero h1, .hero p, .hero-ctas, .hero-image-wrapper { opacity: 1; transform: none; clip-path: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Emergency Strip -->
+  <div class="emergency-strip">
+    <span>Is your pet experiencing an emergency? Call our veterinary team now.</span>
+    <a href="tel:5550198">555-0198 (Available 24/7)</a>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav-container">
+      <div class="logo">Harmonia.</div>
+      <nav class="nav-links">
+        <a href="#services">Veterinary Services</a>
+        <a href="#team">Meet the Team</a>
+        <a href="#impact">Animal Welfare</a>
+      </nav>
+      <a href="#booking" class="btn btn-secondary">Book Appointment</a>
+    </div>
+  </header>
+
+  <!-- 01. Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-sub">Compassionate Pet Medicine</div>
+        <h1>Because they're family.<br>Every single one.</h1>
+        <p>Thoughtful veterinary care for the ordinary days, the unexpected moments, and the times when your best friend needs us most.</p>
+        <div class="hero-ctas">
+          <a href="#services" class="btn btn-primary">Explore Veterinary Care</a>
+          <a href="#impact" class="btn btn-secondary">Read Their Stories</a>
+        </div>
+      </div>
+      <div class="hero-image-wrapper">
+        <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&q=80&w=1200" alt="Veterinarian affectionately holding a dog">
+      </div>
+    </div>
+  </section>
+
+  <!-- 02. Bento Grid Services -->
+  <section id="services" class="container">
+    <div class="fade-up">
+      <h2 style="margin-bottom: 1rem;">Serious About Medicine.<br>Gentle With Every Patient.</h2>
+      <p style="max-width: 600px; color: #555;">Good veterinary care combines careful examination, appropriate diagnostics, informed decisions, and a treatment plan that considers the animal and the people who care for them.</p>
+    </div>
+
+    <div class="bento-grid fade-up">
+      <!-- Urgent Care (Prominent) -->
+      <a href="#urgent" class="bento-card bento-urgent">
+        <div class="bento-content">
+          <div class="chapter-tag" style="color: var(--clr-forest)">01 / URGENT CARE</div>
+          <h3>When every minute matters.</h3>
+          <p>Prompt assessment, stabilization, diagnostics, and coordinated treatment when a pet suddenly becomes seriously unwell.</p>
+          <span class="bento-link">Understand Emergency Care →</span>
+        </div>
+        <div class="bento-img">
+          <img src="https://images.unsplash.com/photo-1628009368231-7bb7cbcb8122?auto=format&fit=crop&q=80&w=800" alt="Veterinary emergency setup">
+        </div>
+      </a>
+
+      <!-- Surgical Care -->
+      <a href="#surgery" class="bento-card">
+        <div class="bento-img">
+          <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=600" alt="Veterinary surgical room">
+        </div>
+        <div class="bento-content">
+          <h3>Surgical Care</h3>
+          <p>Thoughtful preparation, appropriate anesthesia, and pain management.</p>
+          <span class="bento-link">Explore Surgery →</span>
+        </div>
+      </a>
+
+      <!-- Preventive -->
+      <a href="#preventive" class="bento-card">
+        <div class="bento-img">
+          <img src="https://images.unsplash.com/photo-1599443015574-be5fe8a05783?auto=format&fit=crop&q=80&w=600" alt="Happy dog receiving checkup">
+        </div>
+        <div class="bento-content">
+          <h3>Preventive Medicine</h3>
+          <p>Wellness exams, vaccinations, and age-appropriate screening.</p>
+          <span class="bento-link">Plan Their Care →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- 03. The Care Journey -->
+  <section class="journey">
+    <div class="container">
+      <div class="journey-title fade-up">
+        <h2>Every step, a little more supported.</h2>
+        <p>An approach that puts clinical clarity and emotional comfort first.</p>
+      </div>
+      <div class="journey-grid fade-up">
+        <div class="journey-step">
+          <div class="step-icon">1</div>
+          <h4 style="font-family: var(--font-ui); font-size: 1.2rem; margin-bottom: 0.5rem;">We listen</h4>
+          <p style="font-size: 0.95rem; color: #555;">Understand the concern and gather relevant history.</p>
+        </div>
+        <div class="journey-step">
+          <div class="step-icon">2</div>
+          <h4 style="font-family: var(--font-ui); font-size: 1.2rem; margin-bottom: 0.5rem;">We assess</h4>
+          <p style="font-size: 0.95rem; color: #555;">Examine the animal and determine next steps.</p>
+        </div>
+        <div class="journey-step">
+          <div class="step-icon">3</div>
+          <h4 style="font-family: var(--font-ui); font-size: 1.2rem; margin-bottom: 0.5rem;">We explain</h4>
+          <p style="font-size: 0.95rem; color: #555;">Discuss the care plan, options, and expectations.</p>
+        </div>
+        <div class="journey-step">
+          <div class="step-icon">4</div>
+          <h4 style="font-family: var(--font-ui); font-size: 1.2rem; margin-bottom: 0.5rem;">We support</h4>
+          <p style="font-size: 0.95rem; color: #555;">Provide treatment and ongoing discharge guidance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04. Storytelling Centerpiece (NGO Impact) -->
+  <section class="story-section" id="impact">
+    <div class="container">
+      <div class="fade-up" style="margin-bottom: 4rem;">
+        <h2 style="color: var(--clr-ivory)">One small life.<br>A whole community of care.</h2>
+      </div>
+      
+      <div class="story-layout">
+        <!-- Sticky Visual -->
+        <div class="story-visual">
+          <img id="story-img" src="https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?auto=format&fit=crop&q=80&w=800" alt="Nervous rescue dog arriving">
+        </div>
+        
+        <!-- Scrolling Content -->
+        <div class="story-content">
+          <div class="story-chapter is-active" data-img="https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?auto=format&fit=crop&q=80&w=800">
+            <div class="chapter-tag">Chapter 01 — A difficult beginning</div>
+            <h3>The first encounter</h3>
+            <p>“When a frightened animal arrives without a familiar face beside them, the first thing they need is patience. A calm voice, a safe space, and a careful assessment can make the first moments less overwhelming.”</p>
+          </div>
+          
+          <div class="story-chapter" data-img="https://images.unsplash.com/photo-1629853906660-ce2ea5d04cc6?auto=format&fit=crop&q=80&w=800">
+            <div class="chapter-tag">Chapter 02 — A plan for healing</div>
+            <h3>Clinical assessment</h3>
+            <p>“Every patient deserves to be assessed as an individual. Our team works to understand what the animal needs, explains the available options, and develops a care plan based on clinical findings.”</p>
+          </div>
+          
+          <div class="story-chapter" data-img="https://images.unsplash.com/photo-1596492784531-6e6eb5ea9993?auto=format&fit=crop&q=80&w=800">
+            <div class="chapter-tag">Chapter 03 — Small signs of progress</div>
+            <h3>Recovery and aftercare</h3>
+            <p>“Healing is rarely one dramatic moment. It can be a more comfortable night, a better appetite, or the first curious look around a room. Recovery takes time, monitoring, and consistent care.”</p>
+          </div>
+          
+          <div class="story-chapter" data-img="https://images.unsplash.com/photo-1520560321666-4b36560ef7dd?auto=format&fit=crop&q=80&w=800">
+            <div class="chapter-tag">Chapter 04 — A future with possibilities</div>
+            <h3>Ongoing support</h3>
+            <p>“With appropriate care and support, some animals are able to return to a familiar family, enter foster care, or begin the journey toward adoption. Every patient deserves thoughtful care.”</p>
+            <br>
+            <a href="#" class="btn btn-primary" style="border: 1px solid var(--clr-ivory)">Read the Full Recovery Story</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05. Meet the Healers -->
+  <section id="team" class="container">
+    <div class="fade-up">
+      <h2>Skilled Hands. Curious Minds.<br>Kind Hearts.</h2>
+      <p style="max-width: 600px; color: #555;">Our team combines clinical knowledge with careful observation, thoughtful communication, and respect for the bond between pets and their families.</p>
+    </div>
+
+    <div class="team-grid fade-up">
+      <div class="team-card">
+        <div class="team-img"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=600" alt="Dr. Sarah Jenkins"></div>
+        <div class="team-info">
+          <div class="team-role">Veterinary Surgeon</div>
+          <h3 style="font-family: var(--font-ui); font-size: 1.25rem;">Dr. Sarah Jenkins</h3>
+        </div>
+        <div class="team-philosophy">
+          <p style="font-style: italic; margin-bottom: 1rem;">"Every patient deserves to be treated as an individual, and every family deserves to understand the decisions we make together."</p>
+          <a href="#" style="text-decoration: underline; font-weight: 600;">Book a Consultation</a>
+        </div>
+      </div>
+      
+      <div class="team-card">
+        <div class="team-img"><img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=600" alt="Dr. Marcus Thorne"></div>
+        <div class="team-info">
+          <div class="team-role">Preventive Medicine Lead</div>
+          <h3 style="font-family: var(--font-ui); font-size: 1.25rem;">Dr. Marcus Thorne</h3>
+        </div>
+        <div class="team-philosophy">
+          <p style="font-style: italic; margin-bottom: 1rem;">"The best care starts long before an animal gets sick. I focus on lifelong wellness and gentle handling."</p>
+          <a href="#" style="text-decoration: underline; font-weight: 600;">Book a Consultation</a>
+        </div>
+      </div>
+      
+      <div class="team-card">
+        <div class="team-img"><img src="https://images.unsplash.com/photo-1594824432258-f909e73507d4?auto=format&fit=crop&q=80&w=600" alt="Elena Rodriguez"></div>
+        <div class="team-info">
+          <div class="team-role">Emergency Triage Nurse</div>
+          <h3 style="font-family: var(--font-ui); font-size: 1.25rem;">Elena Rodriguez, RVT</h3>
+        </div>
+        <div class="team-philosophy">
+          <p style="font-style: italic; margin-bottom: 1rem;">"In urgent moments, my job is to bring calm to chaos and provide immediate comfort to animals in distress."</p>
+          <a href="#" style="text-decoration: underline; font-weight: 600;">Meet Elena</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06. Impact Dashboard -->
+  <section class="impact fade-up">
+    <div class="container">
+      <div class="journey-title">
+        <h2>Care that reaches beyond the clinic.</h2>
+        <p>A community is strongest when it knows where help is needed.</p>
+      </div>
+      <div class="impact-stats">
+        <div>
+          <div class="stat-number">1,248</div>
+          <div style="font-weight: 600; margin-top: 0.5rem;">Animals Supported (2025)</div>
+        </div>
+        <div>
+          <div class="stat-number">342</div>
+          <div style="font-weight: 600; margin-top: 0.5rem;">Community Medical Interventions</div>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 4rem;">
+        <a href="#" class="btn btn-primary">Discover Ways to Help →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07. Booking System -->
+  <section id="booking" class="booking-section container">
+    <div class="fade-up" style="text-align: center; margin-bottom: 3rem;">
+      <h2>Let's find the right care for your companion.</h2>
+    </div>
+    
+    <div class="booking-form fade-up">
+      <div class="urgent-safeguard">
+        If your pet is struggling to breathe, collapsing, bleeding heavily, or experiencing a life-threatening problem, DO NOT use this form. Call our emergency line immediately at 555-0198.
+      </div>
+      
+      <form onsubmit="event.preventDefault(); alert('Form logic would execute here.');">
+        <div class="form-group">
+          <label>What kind of companion do you have?</label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="pet_type" value="dog" checked> Dog</label>
+            <label class="radio-label"><input type="radio" name="pet_type" value="cat"> Cat</label>
+            <label class="radio-label"><input type="radio" name="pet_type" value="other"> Other</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>What would you like help with?</label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="service" value="routine" checked> Routine check-up</label>
+            <label class="radio-label"><input type="radio" name="service" value="medical"> Medical consultation</label>
+            <label class="radio-label"><input type="radio" name="service" value="surgery"> Surgical consultation</label>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Anything else you'd like us to know? (Optional)</label>
+          <textarea rows="4" placeholder="Briefly describe any symptoms or specific requests..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Prepare Appointment Inquiry</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-title">Care for every chapter.</div>
+          <p style="opacity: 0.8; max-width: 400px;">From the everyday check-up to the moments no family plans for, we're here to help you make informed decisions for the animals you love.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Veterinary Care</h4>
+          <ul>
+            <li><a href="#">Preventive medicine</a></li>
+            <li><a href="#">Urgent care</a></li>
+            <li><a href="#">Surgical services</a></li>
+            <li><a href="#">Recovery guidance</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Our Community</h4>
+          <ul>
+            <li><a href="#">Meet our team</a></li>
+            <li><a href="#">Patient stories</a></li>
+            <li><a href="#">Animal welfare</a></li>
+            <li><a href="#">Contact and location</a></li>
+          </ul>
+        </div>
+      </div>
+      <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; opacity: 0.7; font-size: 0.9rem;">
+        <p>Harmonia Veterinary Hospital — Compassionate Medicine</p>
+        <p>Verified Emergency: 555-0198 | 123 Care Ave, Medical District</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript for Interactions -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      
+      // 1. Intersection Observer for fade-up animations
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15
+      };
+
+      const fadeObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target); // Run once
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.fade-up').forEach(el => {
+        fadeObserver.observe(el);
+      });
+
+      // 2. NGO Storytelling Chapter Image Switcher
+      const chapters = document.querySelectorAll('.story-chapter');
+      const storyImage = document.getElementById('story-img');
+
+      const chapterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // Add active class
+            chapters.forEach(c => c.classList.remove('is-active'));
+            entry.target.classList.add('is-active');
+
+            // Swap Image with soft fade
+            const newSrc = entry.target.getAttribute('data-img');
+            if (storyImage.src !== newSrc) {
+              storyImage.style.opacity = '0.4';
+              setTimeout(() => {
+                storyImage.src = newSrc;
+                storyImage.style.opacity = '1';
+              }, 300);
+            }
+          }
+        });
+      }, {
+        rootMargin: '-40% 0px -40% 0px', // Triggers when chapter is near middle of screen
+        threshold: 0
+      });
+
+      chapters.forEach(chapter => {
+        chapterObserver.observe(chapter);
+      });
+
+    });
+  </script>
+</body>
+</html>

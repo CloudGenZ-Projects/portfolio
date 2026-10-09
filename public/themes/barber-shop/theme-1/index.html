@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Gentleman's Room | Modern Barbering</title>
+    
+    <!-- Fonts: Oswald for Display, DM Sans for Body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           1. DESIGN TOKENS & RESET
+           ========================================================================== */
+        :root {
+            /* Colors */
+            --c-obsidian: #171715;
+            --c-espresso: #30251F;
+            --c-bone: #F3EFE7;
+            --c-brass: #C6A477;
+            --c-stone: #A7A096;
+            --c-ink: #242321;
+
+            /* Typography */
+            --font-display: 'Oswald', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+
+            /* Motion System */
+            --motion-fast: 160ms;
+            --motion-base: 280ms;
+            --motion-reveal: 650ms;
+            --motion-cinematic: 1000ms;
+            --ease-standard: cubic-bezier(.2, .7, .2, 1);
+            --ease-emphasis: cubic-bezier(.16, 1, .3, 1);
+
+            /* Layout */
+            --container-max: 1360px;
+            --section-pad-y: clamp(80px, 10vw, 144px);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: var(--font-body);
+            background-color: var(--c-bone);
+            color: var(--c-ink);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        img { max-width: 100%; display: block; object-fit: cover; }
+        a { color: inherit; text-decoration: none; }
+        ul { list-style: none; }
+
+        h1, h2, h3, h4, .display-text {
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            line-height: 1.1;
+            font-weight: 500;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .theme-dark {
+            background-color: var(--c-obsidian);
+            color: var(--c-bone);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--c-obsidian);
+            color: var(--c-bone);
+            padding: 16px 32px;
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            transition: all var(--motion-base) var(--ease-standard);
+            cursor: pointer;
+            border: none;
+            font-size: 1.1rem;
+        }
+        .theme-dark .btn { background: var(--c-bone); color: var(--c-obsidian); }
+        .btn:hover { background: var(--c-brass); color: var(--c-obsidian); transform: translateY(-2px); }
+        .btn svg { transition: transform var(--motion-fast) ease; }
+        .btn:hover svg { transform: translateX(4px); }
+
+        /* Typography Utilities */
+        .eyebrow {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--c-brass);
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: block;
+        }
+        
+        .section-header { margin-bottom: 64px; }
+        .section-header h2 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 16px; }
+        .section-header p { font-size: 1.125rem; max-width: 500px; color: var(--c-stone); }
+
+        /* ==========================================================================
+           2. NAVIGATION
+           ========================================================================== */
+        header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            padding: 24px 0;
+            z-index: 100;
+            mix-blend-mode: difference;
+            color: var(--c-bone);
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 1px; }
+        .nav-links { display: flex; gap: 32px; font-weight: 500; font-size: 0.9rem; text-transform: uppercase; }
+        .nav-book { border: 1px solid var(--c-bone); padding: 8px 16px; border-radius: 2px; transition: background 0.3s; }
+        .nav-book:hover { background: var(--c-bone); color: var(--c-obsidian); }
+
+        /* ==========================================================================
+           3. HERO SECTION (Cinematic)
+           ========================================================================== */
+        .hero {
+            height: 100vh;
+            position: relative;
+            background-color: var(--c-obsidian);
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: 10vh;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(to top, rgba(23,23,21,0.9) 0%, rgba(23,23,21,0.2) 100%), url('https://images.unsplash.com/photo-1622286342621-4bd786c2447c?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            /* Cinematic scale animation */
+            animation: heroScale 10s ease-out forwards;
+        }
+        @keyframes heroScale {
+            0% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            color: var(--c-bone);
+            max-width: 800px;
+        }
+        
+        /* Mask Reveal Animation CSS */
+        .mask-line { overflow: hidden; display: block; }
+        .mask-inner {
+            display: block;
+            transform: translateY(100%);
+            animation: maskReveal var(--motion-cinematic) var(--ease-emphasis) forwards;
+        }
+        .delay-1 { animation-delay: 200ms; }
+        .delay-2 { animation-delay: 350ms; }
+        .delay-3 { animation-delay: 500ms; }
+
+        @keyframes maskReveal {
+            to { transform: translateY(0); }
+        }
+
+        .hero h1 { font-size: clamp(3.5rem, 8vw, 7rem); margin-bottom: 24px; }
+        .hero p { font-size: 1.25rem; color: var(--c-stone); margin-bottom: 40px; max-width: 450px; opacity: 0; animation: fadeUp 1s ease forwards 800ms; }
+        .hero .btn { opacity: 0; animation: fadeUp 1s ease forwards 1000ms; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ==========================================================================
+           4. SIGNATURE SERVICES (Editorial Cards)
+           ========================================================================== */
+        .services { padding: var(--section-pad-y) 0; }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .service-card {
+            display: block;
+            background: var(--c-bone);
+            transition: transform var(--motion-base) var(--ease-standard);
+            group: service;
+        }
+        .sc-img-wrap {
+            position: relative;
+            aspect-ratio: 4/5;
+            overflow: hidden;
+            border-radius: 4px;
+            margin-bottom: 24px;
+        }
+        .sc-img-wrap img {
+            width: 100%; height: 100%;
+            transition: transform var(--motion-reveal) var(--ease-standard);
+        }
+        .sc-img-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(23,23,21,0.4), transparent);
+            opacity: 0;
+            transition: opacity var(--motion-base) ease;
+        }
+        .service-card:hover { transform: translateY(-6px); }
+        .service-card:hover .sc-img-wrap img { transform: scale(1.045); }
+        .service-card:hover .sc-img-overlay { opacity: 1; }
+        
+        .sc-content { padding: 0 8px; }
+        .sc-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 12px;}
+        .sc-title { font-size: 1.5rem; font-family: var(--font-display); }
+        .sc-price { font-weight: 500; font-size: 1.1rem; display: flex; align-items: center; gap: 4px;}
+        .sc-price span { transition: transform var(--motion-fast) ease; display: inline-block;}
+        .service-card:hover .sc-price span { transform: translateX(4px) rotate(45deg); color: var(--c-brass); }
+        .sc-desc { color: var(--c-ink); font-size: 0.95rem; opacity: 0.8; }
+
+        /* ==========================================================================
+           5. CRAFT PHILOSOPHY (Bento Grid)
+           ========================================================================== */
+        .bento { padding: var(--section-pad-y) 0; }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+            grid-auto-rows: minmax(300px, auto);
+        }
+        .bento-item {
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            background: var(--c-espresso);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        .bento-item img { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+        .bento-item::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(23,23,21,0.9), rgba(23,23,21,0.1));
+            z-index: 2;
+        }
+        .bento-content { position: relative; z-index: 3; }
+        .bento-content h3 { font-size: 2rem; margin-bottom: 12px; }
+        .bento-content p { color: var(--c-stone); }
+
+        /* Desktop Spans */
+        @media (min-width: 992px) {
+            .bento-1 { grid-column: span 8; grid-row: span 2; padding: 64px; }
+            .bento-1 h3 { font-size: 3.5rem; }
+            .bento-2 { grid-column: span 4; background: var(--c-obsidian); }
+            .bento-2::after { display: none; } /* Text only card */
+            .bento-3 { grid-column: span 4; background: var(--c-brass); color: var(--c-obsidian); }
+            .bento-3::after { display: none; }
+            .bento-3 p { color: var(--c-obsidian); opacity: 0.8; }
+            .bento-4 { grid-column: span 4; }
+            .bento-5 { grid-column: span 8; }
+        }
+        /* Mobile fallback */
+        @media (max-width: 991px) {
+            .bento-grid { display: flex; flex-direction: column; }
+            .bento-item { min-height: 400px; }
+            .bento-2, .bento-3 { min-height: auto; }
+        }
+
+        /* ==========================================================================
+           6. SCROLL STORYTELLING (Sticky Sequence)
+           ========================================================================== */
+        .story-section {
+            position: relative;
+            background: var(--c-obsidian);
+            color: var(--c-bone);
+        }
+        
+        /* The container that defines the total scroll length */
+        .story-scroll-container { height: 400vh; position: relative; }
+        
+        /* The sticky viewport */
+        .story-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .story-scene {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10vw;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 800ms ease, visibility 800ms;
+        }
+        
+        .story-scene.active { opacity: 1; visibility: visible; }
+        
+        .story-text { flex: 1; max-width: 400px; transform: translateY(30px); transition: transform 800ms ease; }
+        .story-scene.active .story-text { transform: translateY(0); }
+        .story-text h2 { font-size: clamp(3rem, 6vw, 5rem); margin-bottom: 24px; color: var(--c-bone); }
+        .story-text p { font-size: 1.25rem; color: var(--c-stone); }
+
+        .story-img { flex: 1; height: 70vh; position: relative; overflow: hidden; border-radius: 4px; transform: scale(1.05); transition: transform 1.5s ease; }
+        .story-scene.active .story-img { transform: scale(1); }
+        .story-img img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Progress indicator */
+        .story-progress {
+            position: absolute; bottom: 40px; left: 10vw;
+            display: flex; gap: 8px; z-index: 10;
+        }
+        .progress-dot {
+            width: 40px; height: 2px; background: rgba(255,255,255,0.2);
+            transition: background 0.3s;
+        }
+        .progress-dot.active { background: var(--c-brass); }
+
+        @media (max-width: 768px) {
+            .story-scene { flex-direction: column; justify-content: center; padding: 24px; text-align: center; }
+            .story-img { height: 40vh; width: 100%; margin-bottom: 32px; order: -1; }
+            .story-text { max-width: 100%; }
+        }
+
+        /* Invisible trigger areas mapping to scenes */
+        .trigger { position: absolute; width: 100%; height: 100vh; pointer-events: none; }
+        #trigger-1 { top: 0; }
+        #trigger-2 { top: 100vh; }
+        #trigger-3 { top: 200vh; }
+        #trigger-4 { top: 300vh; }
+
+        /* ==========================================================================
+           7. PORTFOLIO & TEAM
+           ========================================================================== */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+        }
+        .port-item {
+            position: relative;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .port-item img { transition: transform 0.6s ease; }
+        .port-overlay {
+            position: absolute; inset: 0;
+            background: rgba(23,23,21,0.7);
+            color: white;
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 32px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .port-item:hover img { transform: scale(1.05); }
+        .port-item:hover .port-overlay { opacity: 1; }
+        .port-overlay h4 { font-size: 1.5rem; margin-bottom: 8px; transform: translateY(10px); transition: transform 0.4s ease; }
+        .port-overlay p { color: var(--c-brass); font-size: 0.9rem; transform: translateY(10px); transition: transform 0.4s ease 0.1s; }
+        .port-item:hover .port-overlay h4, .port-item:hover .port-overlay p { transform: translateY(0); }
+
+        /* Team */
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 48px; }
+        .barber-card img { width: 100%; aspect-ratio: 4/5; border-radius: 4px; margin-bottom: 24px; filter: grayscale(20%); }
+        .barber-card h3 { font-size: 2rem; margin-bottom: 8px; }
+        .barber-spec { color: var(--c-brass); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; display: block; }
+        .barber-bio { color: var(--c-stone); margin-bottom: 24px; font-style: italic; }
+        .barber-link { font-weight: 500; text-transform: uppercase; border-bottom: 1px solid var(--c-ink); padding-bottom: 4px; display: inline-block; }
+        .barber-link:hover { color: var(--c-brass); border-color: var(--c-brass); }
+
+        /* ==========================================================================
+           8. REVIEWS & BOOKING
+           ========================================================================== */
+        .reviews { text-align: center; max-width: 800px; margin: 0 auto; }
+        .review-quote { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); line-height: 1.2; margin-bottom: 32px; }
+        .review-author { color: var(--c-brass); letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem; }
+
+        .booking-section { background: var(--c-bone); border-top: 1px solid rgba(0,0,0,0.1); }
+        .booking-form { background: white; padding: 48px; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
+        .form-group { margin-bottom: 24px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 0.9rem; text-transform: uppercase; }
+        .form-control { width: 100%; padding: 16px; border: 1px solid var(--c-stone); border-radius: 4px; font-family: inherit; font-size: 1rem; background: transparent; }
+        .form-control:focus { outline: none; border-color: var(--c-obsidian); }
+
+        /* ==========================================================================
+           9. FOOTER & FAQ
+           ========================================================================== */
+        .faq-location { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+        @media(max-width: 768px) { .faq-location { grid-template-columns: 1fr; } }
+        
+        details { border-bottom: 1px solid rgba(255,255,255,0.2); padding: 24px 0; }
+        summary { font-family: var(--font-display); font-size: 1.5rem; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: '+'; font-size: 2rem; color: var(--c-brass); transition: transform 0.3s; }
+        details[open] summary::after { transform: rotate(45deg); }
+        details p { padding-top: 16px; color: var(--c-stone); }
+
+        .location-card { background: var(--c-espresso); padding: 48px; border-radius: 8px; }
+        .location-card h3 { font-size: 2rem; margin-bottom: 24px; }
+        .location-card p { color: var(--c-stone); margin-bottom: 16px; }
+
+        footer { background: var(--c-obsidian); color: var(--c-stone); padding: 64px 0 32px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; }
+        .footer-logo { font-family: var(--font-display); font-size: 3rem; color: var(--c-bone); margin-bottom: 24px; }
+
+        /* ==========================================================================
+           10. UTILITY ANIMATIONS (Intersection Observer Targets)
+           ========================================================================== */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity var(--motion-reveal) var(--ease-standard), transform var(--motion-reveal) var(--ease-standard);
+        }
+        .reveal-up.is-visible { opacity: 1; transform: translateY(0); }
+        
+        /* Staggered children */
+        .stagger-container.is-visible > *:nth-child(1) { transition-delay: 0ms; }
+        .stagger-container.is-visible > *:nth-child(2) { transition-delay: 100ms; }
+        .stagger-container.is-visible > *:nth-child(3) { transition-delay: 200ms; }
+        .stagger-container.is-visible > *:nth-child(4) { transition-delay: 300ms; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .reveal-up { opacity: 1; transform: none; }
+            .story-scroll-container { height: auto; }
+            .story-sticky { position: static; height: auto; display: block; padding: 10vh 0; }
+            .story-scene { position: static; opacity: 1; visibility: visible; margin-bottom: 64px; }
+            .trigger { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">THE GENTLEMAN'S ROOM</div>
+            <nav class="nav-links">
+                <a href="#services" class="hidden-mobile">Services</a>
+                <a href="#story" class="hidden-mobile">The Craft</a>
+                <a href="#booking" class="nav-book">Book a Chair</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- 01. Cinematic Hero -->
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="container hero-content">
+                <span class="eyebrow">Est. 2024 · London</span>
+                <h1>
+                    <span class="mask-line"><span class="mask-inner delay-1">Good Hair.</span></span>
+                    <span class="mask-line"><span class="mask-inner delay-2">No Shortcuts.</span></span>
+                </h1>
+                <p>Skin fades, precision cuts and traditional hot towel shaves. Every detail, considered.</p>
+                <a href="#booking" class="btn">
+                    Book Your Chair
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- 02. Signature Services -->
+        <section id="services" class="services container">
+            <div class="section-header reveal-up">
+                <span class="eyebrow">01 / The Experience</span>
+                <h2>Crafted with Precision</h2>
+                <p>Choose from our core services. No gimmicks, just proper barbering.</p>
+            </div>
+
+            <div class="services-grid stagger-container reveal-up">
+                <a href="#booking" class="service-card">
+                    <div class="sc-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?q=80&w=800&auto=format&fit=crop" alt="Signature Cut" loading="lazy">
+                        <div class="sc-img-overlay"></div>
+                    </div>
+                    <div class="sc-content">
+                        <div class="sc-header">
+                            <h3 class="sc-title">The Signature Cut</h3>
+                            <div class="sc-price">£45 <span>↗</span></div>
+                        </div>
+                        <p class="sc-desc">Tailored to your face shape and personal style. Finished with precise detailing.</p>
+                    </div>
+                </a>
+
+                <a href="#booking" class="service-card">
+                    <div class="sc-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=800&auto=format&fit=crop" alt="Skin Fade" loading="lazy">
+                        <div class="sc-img-overlay"></div>
+                    </div>
+                    <div class="sc-content">
+                        <div class="sc-header">
+                            <h3 class="sc-title">Skin Fade</h3>
+                            <div class="sc-price">£40 <span>↗</span></div>
+                        </div>
+                        <p class="sc-desc">Seamless blending, sharp transitions and a finish tailored to your preference.</p>
+                    </div>
+                </a>
+
+                <a href="#booking" class="service-card">
+                    <div class="sc-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=800&auto=format&fit=crop" alt="Hot Towel Shave" loading="lazy">
+                        <div class="sc-img-overlay"></div>
+                    </div>
+                    <div class="sc-content">
+                        <div class="sc-header">
+                            <h3 class="sc-title">Hot Towel Shave</h3>
+                            <div class="sc-price">£35 <span>↗</span></div>
+                        </div>
+                        <p class="sc-desc">Warm towels, careful skin preparation and a close, refined straight-razor shave.</p>
+                    </div>
+                </a>
+
+                <a href="#booking" class="service-card">
+                    <div class="sc-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1534723328310-e82dad3ee43f?q=80&w=800&auto=format&fit=crop" alt="Beard Sculpting" loading="lazy">
+                        <div class="sc-img-overlay"></div>
+                    </div>
+                    <div class="sc-content">
+                        <div class="sc-header">
+                            <h3 class="sc-title">Beard Sculpting</h3>
+                            <div class="sc-price">£25 <span>↗</span></div>
+                        </div>
+                        <p class="sc-desc">Defined contours, balanced proportions and a shape that suits your jawline.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 03. Craft Philosophy (Bento) -->
+        <section class="bento container">
+            <div class="section-header reveal-up">
+                <span class="eyebrow">02 / The Standard</span>
+                <h2>No Rushed Cuts</h2>
+            </div>
+            
+            <div class="bento-grid stagger-container reveal-up">
+                <!-- Spans 8 cols -->
+                <div class="bento-item bento-1">
+                    <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=1200&auto=format&fit=crop" alt="Barber cutting hair" loading="lazy">
+                    <div class="bento-content text-white">
+                        <span class="eyebrow">Philosophy</span>
+                        <h3>Precision is a practice.</h3>
+                        <p>We take the time to understand your hair, refine the shape and get every detail right.</p>
+                    </div>
+                </div>
+                
+                <!-- Spans 4 cols -->
+                <div class="bento-item bento-2">
+                    <div class="bento-content text-white">
+                        <h3>Your Cut. Your Features.</h3>
+                        <p>A consultation built around face shape, hair growth patterns and your daily routine.</p>
+                    </div>
+                </div>
+
+                <!-- Spans 4 cols (Brass accent) -->
+                <div class="bento-item bento-3">
+                    <div class="bento-content">
+                        <h3>Details Make the Difference.</h3>
+                        <p>Neckline, edges and styling checked and double-checked before you leave the chair.</p>
+                    </div>
+                </div>
+
+                <!-- Spans 4 cols -->
+                <div class="bento-item bento-4">
+                    <img src="https://images.unsplash.com/photo-1635273051839-8664b4c2b97c?q=80&w=600&auto=format&fit=crop" alt="Barber Tools" loading="lazy">
+                    <div class="bento-content text-white">
+                        <h3>Clean Tools</h3>
+                        <p>A strict hygiene routine for every single client.</p>
+                    </div>
+                </div>
+
+                <!-- Spans 8 cols -->
+                <div class="bento-item bento-5">
+                    <img src="https://images.unsplash.com/photo-1593702275687-f8b402bf1fb5?q=80&w=1200&auto=format&fit=crop" alt="Shop Interior" loading="lazy">
+                    <div class="bento-content text-white">
+                        <h3>Your Space to Reset</h3>
+                        <p>Leave the rush outside. Slow down and enjoy the ritual.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04. Scroll Storytelling (Sticky) -->
+        <section id="story" class="story-section theme-dark">
+            <div class="story-scroll-container">
+                <!-- Invisible triggers for JS Observer -->
+                <div class="trigger" id="trigger-1" data-scene="1"></div>
+                <div class="trigger" id="trigger-2" data-scene="2"></div>
+                <div class="trigger" id="trigger-3" data-scene="3"></div>
+                <div class="trigger" id="trigger-4" data-scene="4"></div>
+
+                <div class="story-sticky">
+                    <!-- Progress UI -->
+                    <div class="story-progress">
+                        <div class="progress-dot" id="dot-1"></div>
+                        <div class="progress-dot" id="dot-2"></div>
+                        <div class="progress-dot" id="dot-3"></div>
+                        <div class="progress-dot" id="dot-4"></div>
+                    </div>
+
+                    <!-- Scenes -->
+                    <div class="story-scene" id="scene-1">
+                        <div class="story-text">
+                            <span class="eyebrow">Chapter 01</span>
+                            <h2>The Consultation</h2>
+                            <p>Every great cut starts with listening. We assess your hair texture, growth patterns, and the look you want to achieve.</p>
+                        </div>
+                        <div class="story-img">
+                            <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?q=80&w=1000&auto=format&fit=crop" alt="Consultation">
+                        </div>
+                    </div>
+
+                    <div class="story-scene" id="scene-2">
+                        <div class="story-text">
+                            <span class="eyebrow">Chapter 02</span>
+                            <h2>The Precision</h2>
+                            <p>Shape. Blend. Refine. We use a combination of scissor work and clipper fading to build a structure that lasts.</p>
+                        </div>
+                        <div class="story-img">
+                            <img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?q=80&w=1000&auto=format&fit=crop" alt="Cutting">
+                        </div>
+                    </div>
+
+                    <div class="story-scene" id="scene-3">
+                        <div class="story-text">
+                            <span class="eyebrow">Chapter 03</span>
+                            <h2>The Ritual</h2>
+                            <p>Take a breath. Enjoy the process. Hot towels, straight razors, and premium products to treat the skin and finish the look.</p>
+                        </div>
+                        <div class="story-img">
+                            <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=1000&auto=format&fit=crop" alt="Ritual">
+                        </div>
+                    </div>
+
+                    <div class="story-scene" id="scene-4">
+                        <div class="story-text">
+                            <span class="eyebrow">Chapter 04</span>
+                            <h2>The Result</h2>
+                            <p>Walk out feeling sharper. A refined look that is still entirely you, designed to grow out naturally.</p>
+                        </div>
+                        <div class="story-img">
+                            <img src="https://images.unsplash.com/photo-1618014529321-7299a98cb9b6?q=80&w=1000&auto=format&fit=crop" alt="Result">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05. Portfolio -->
+        <section class="container" style="padding: var(--section-pad-y) 0;">
+            <div class="section-header reveal-up">
+                <span class="eyebrow">03 / The Work</span>
+                <h2>Different Styles.<br>One Standard.</h2>
+            </div>
+            
+            <div class="portfolio-grid stagger-container reveal-up">
+                <div class="port-item">
+                    <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?q=80&w=600&auto=format&fit=crop" alt="Textured Crop">
+                    <div class="port-overlay">
+                        <h4>The Textured Crop</h4>
+                        <p>Skin fade · Texture</p>
+                    </div>
+                </div>
+                <div class="port-item">
+                    <img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?q=80&w=600&auto=format&fit=crop" alt="Classic Taper">
+                    <div class="port-overlay">
+                        <h4>The Classic Taper</h4>
+                        <p>Scissor work · Natural finish</p>
+                    </div>
+                </div>
+                <div class="port-item">
+                    <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?q=80&w=600&auto=format&fit=crop" alt="Sculpted Beard">
+                    <div class="port-overlay">
+                        <h4>The Sculpted Beard</h4>
+                        <p>Shape · Definition</p>
+                    </div>
+                </div>
+                <div class="port-item">
+                    <img src="https://images.unsplash.com/photo-1618014529321-7299a98cb9b6?q=80&w=600&auto=format&fit=crop" alt="Modern Pompadour">
+                    <div class="port-overlay">
+                        <h4>Modern Pompadour</h4>
+                        <p>Volume · Precision taper</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06. Barbers -->
+        <section class="container theme-dark" style="padding: var(--section-pad-y) 48px; border-radius: 8px;">
+            <div class="section-header reveal-up text-center">
+                <span class="eyebrow">04 / The Team</span>
+                <h2>Meet Your Barber</h2>
+            </div>
+            
+            <div class="team-grid stagger-container reveal-up">
+                <div class="barber-card">
+                    <img src="https://images.unsplash.com/photo-1531891570158-e71b35a485bc?q=80&w=600&auto=format&fit=crop" alt="James">
+                    <h3>James Arthur</h3>
+                    <span class="barber-spec">Master Barber · 12 Yrs Exp</span>
+                    <p class="barber-bio">"I believe a great haircut should work with your hair, your features and your everyday life."</p>
+                    <a href="#booking" class="barber-link">Book with James</a>
+                </div>
+                <div class="barber-card">
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=600&auto=format&fit=crop" alt="Marcus">
+                    <h3>Marcus Thorne</h3>
+                    <span class="barber-spec">Senior Barber · 8 Yrs Exp</span>
+                    <p class="barber-bio">"Specializing in skin fades and precise beard detailing. The finish is everything."</p>
+                    <a href="#booking" class="barber-link">Book with Marcus</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 07. Reviews -->
+        <section class="container" style="padding: var(--section-pad-y) 0;">
+            <div class="reviews reveal-up">
+                <span class="eyebrow">Word on the Street</span>
+                <p class="review-quote">"Finally, a fade that looks as good three days later as it did when I left the chair. Attention to detail is unmatched."</p>
+                <div class="review-author">— Thomas H. · Verified Client</div>
+            </div>
+        </section>
+
+        <!-- 08 & 09. Booking & Location Combined -->
+        <section id="booking" class="booking-section theme-dark" style="padding: var(--section-pad-y) 0;">
+            <div class="container faq-location">
+                
+                <!-- Booking Form -->
+                <div class="reveal-up">
+                    <div class="section-header">
+                        <h2>Your Next Appointment</h2>
+                        <p style="color: var(--c-stone);">Choose your service, select a barber and find a time that works.</p>
+                    </div>
+
+                    <form class="booking-form" style="background: var(--c-obsidian); border: 1px solid rgba(255,255,255,0.1);">
+                        <div class="form-group">
+                            <label for="service">Choose a Service</label>
+                            <select id="service" class="form-control" style="color: white;">
+                                <option>Signature Cut — £45</option>
+                                <option>Skin Fade — £40</option>
+                                <option>Hot Towel Shave — £35</option>
+                                <option>Beard Sculpting — £25</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="barber">Preferred Barber</label>
+                            <select id="barber" class="form-control" style="color: white;">
+                                <option>First Available</option>
+                                <option>James Arthur</option>
+                                <option>Marcus Thorne</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="display: flex; gap: 16px;">
+                            <div style="flex: 1;">
+                                <label for="date">Date</label>
+                                <input type="date" id="date" class="form-control" style="color: white;">
+                            </div>
+                            <div style="flex: 1;">
+                                <label for="time">Time</label>
+                                <select id="time" class="form-control" style="color: white;">
+                                    <option>Morning</option>
+                                    <option>Afternoon</option>
+                                    <option>Evening</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="button" class="btn" style="width: 100%; justify-content: center; margin-top: 16px;">Continue to Booking</button>
+                    </form>
+                </div>
+
+                <!-- FAQ & Location -->
+                <div class="reveal-up">
+                    <div class="location-card text-white">
+                        <h3>Find the Shop</h3>
+                        <p>124 Shoreditch High Street<br>London, E1 6JE</p>
+                        <p style="margin-bottom: 32px; color: var(--c-brass);">Mon - Sat: 9am — 7pm<br>Sunday: Closed</p>
+                        
+                        <details>
+                            <summary>Do I need an appointment?</summary>
+                            <p>Appointments are highly recommended to secure your preferred time. Walk-ins are accommodated only if there is a cancellation.</p>
+                        </details>
+                        <details>
+                            <summary>Which haircut should I choose?</summary>
+                            <p>If you're unsure, select the Signature Cut. We'll start with a consultation to determine the best style for your hair type and routine.</p>
+                        </details>
+                        <details>
+                            <summary>Cancellation policy?</summary>
+                            <p>We require 24 hours notice for cancellations. Late cancellations may incur a 50% fee.</p>
+                        </details>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 10. Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">THE GENTLEMAN'S ROOM</div>
+            <p style="margin-bottom: 32px;">Barbering · Grooming · Ritual</p>
+            <div style="display: flex; justify-content: center; gap: 24px; margin-bottom: 48px;">
+                <a href="#">Instagram</a>
+                <a href="#">Booking terms</a>
+                <a href="#">Privacy policy</a>
+            </div>
+            <p style="font-size: 0.8rem; opacity: 0.5;">&copy; 2024 The Gentleman's Room. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Intersection Observer for Scroll Reveals (Fade Up / Stagger)
+            const revealElements = document.querySelectorAll('.reveal-up, .stagger-container');
+            
+            const revealOptions = {
+                root: null,
+                rootMargin: '0px 0px -10% 0px',
+                threshold: 0.1
+            };
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Run once
+                    }
+                });
+            }, revealOptions);
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+
+            // 2. Sticky Scroll Storytelling Logic using Intersection Observer
+            const storyTriggers = document.querySelectorAll('.trigger');
+            const storyScenes = document.querySelectorAll('.story-scene');
+            const progressDots = document.querySelectorAll('.progress-dot');
+
+            // Set scene 1 as active initially if viewport is at top
+            if(storyScenes.length > 0) {
+                 storyScenes[0].classList.add('active');
+                 progressDots[0].classList.add('active');
+            }
+
+            const storyOptions = {
+                root: null,
+                // Trigger when the element crosses the middle of the screen
+                rootMargin: '-50% 0px -50% 0px',
+                threshold: 0
+            };
+
+            const storyObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const sceneIndex = entry.target.getAttribute('data-scene') - 1;
+                        
+                        // Remove active class from all scenes and dots
+                        storyScenes.forEach(scene => scene.classList.remove('active'));
+                        progressDots.forEach(dot => dot.classList.remove('active'));
+                        
+                        // Add active class to current scene and dot
+                        if(storyScenes[sceneIndex]) {
+                            storyScenes[sceneIndex].classList.add('active');
+                            progressDots[sceneIndex].classList.add('active');
+                        }
+                    }
+                });
+            }, storyOptions);
+
+            // Only initialize story observer if user hasn't requested reduced motion
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            
+            if (!prefersReducedMotion) {
+                storyTriggers.forEach(trigger => storyObserver.observe(trigger));
+            }
+
+            // 3. Header Background on Scroll
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.style.backgroundColor = 'var(--c-obsidian)';
+                    header.style.mixBlendMode = 'normal';
+                    header.style.padding = '16px 0';
+                    header.style.transition = 'all 0.3s ease';
+                } else {
+                    header.style.backgroundColor = 'transparent';
+                    header.style.mixBlendMode = 'difference';
+                    header.style.padding = '24px 0';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

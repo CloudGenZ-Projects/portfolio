@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stoneform | Architectural Concrete & Precision Flatwork</title>
+    
+    <!-- Google Fonts: Manrope (Display) & Inter (Editorial) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           1. DESIGN TOKENS & CSS VARIABLES
+           ========================================================================== */
+        :root {
+            /* Colors */
+            --carbon: #171918;
+            --limestone: #F3F1EC;
+            --aggregate: #77776F;
+            --sandstone: #B7A58A;
+            --burnt-clay: #D96B43;
+            --mist: #E4E5E1;
+
+            /* Typography */
+            --font-display: 'Manrope', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            
+            /* Type Scale (Fluid via clamp) */
+            --text-display-xl: clamp(44px, 6vw, 88px);
+            --text-display-l: clamp(36px, 5vw, 64px);
+            --text-h1: clamp(32px, 4vw, 48px);
+            --text-h2: clamp(26px, 3vw, 36px);
+            --text-h3: clamp(20px, 2vw, 26px);
+            --text-body-lg: clamp(17px, 1.5vw, 20px);
+            --text-body: clamp(16px, 1vw, 18px);
+            --text-caption: 14px;
+
+            /* Spacing & Layout */
+            --gutter: clamp(20px, 5vw, 88px);
+            --max-width: 1440px;
+            --section-pad: clamp(64px, 10vw, 144px);
+            
+            /* Animation Easings */
+            --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+            --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+        }
+
+        /* ==========================================================================
+           2. BASE STYLES & RESET
+           ========================================================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-body);
+            color: var(--carbon);
+            background-color: var(--limestone);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, .display {
+            font-family: var(--font-display);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--carbon);
+        }
+
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; height: auto; display: block; }
+        ul { list-style: none; }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--gutter);
+        }
+
+        /* ==========================================================================
+           3. COMPONENTS (Buttons, Labels)
+           ========================================================================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 32px;
+            font-size: var(--text-body);
+            font-weight: 500;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.25s var(--ease-smooth);
+            border: none;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: var(--burnt-clay);
+            color: var(--carbon); /* High contrast dark text on clay as requested */
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(217, 107, 67, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--limestone);
+            border: 1px solid rgba(243, 241, 236, 0.3);
+        }
+        
+        .btn-outline:hover {
+            background: var(--limestone);
+            color: var(--carbon);
+        }
+
+        .label {
+            font-size: var(--text-caption);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            color: var(--aggregate);
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        /* ==========================================================================
+           4. NAVIGATION (Sticky Morph)
+           ========================================================================== */
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 24px var(--gutter);
+            transition: all 0.4s var(--ease-smooth);
+        }
+
+        header.scrolled {
+            background-color: var(--carbon);
+            padding: 16px var(--gutter);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            color: var(--limestone);
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 48px;
+        }
+
+        .nav-links a {
+            font-size: 15px;
+            font-weight: 500;
+            position: relative;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+        }
+
+        .nav-links a:hover { opacity: 1; }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 0%; height: 1px;
+            background: var(--burnt-clay);
+            transition: width 0.3s var(--ease-smooth);
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+
+        @media (max-width: 900px) {
+            .nav-links, .nav-cta { display: none; }
+        }
+
+        /* ==========================================================================
+           5. HERO SECTION (Cinematic Reveal)
+           ========================================================================== */
+        .hero {
+            position: relative;
+            height: 95vh;
+            min-height: 700px;
+            background-color: var(--carbon);
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: 80px;
+            overflow: hidden;
+        }
+
+        .hero-img {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+            transform: scale(1.08); /* Initial scale for reveal */
+            animation: cinematicReveal 1.4s var(--ease-smooth) forwards;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            color: var(--limestone);
+        }
+
+        .hero h1 {
+            color: var(--limestone);
+            font-size: var(--text-display-xl);
+            margin-bottom: 24px;
+        }
+
+        .hero p {
+            font-size: var(--text-body-lg);
+            max-width: 600px;
+            margin-bottom: 40px;
+            color: var(--mist);
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* ==========================================================================
+           6. PROOF STRIP
+           ========================================================================== */
+        .proof-strip {
+            background-color: var(--carbon);
+            color: var(--mist);
+            padding: 32px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .proof-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+        }
+
+        .proof-item h4 {
+            color: var(--limestone);
+            font-family: var(--font-display);
+            font-size: var(--text-body);
+            margin-bottom: 4px;
+        }
+        .proof-item p { font-size: var(--text-caption); opacity: 0.8; }
+
+        /* ==========================================================================
+           7. SERVICES GRID (Material Hover Effects)
+           ========================================================================== */
+        .services {
+            padding: var(--section-pad) 0;
+            background-color: var(--limestone);
+        }
+
+        .services-header {
+            max-width: 700px;
+            margin-bottom: 80px;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 32px;
+        }
+
+        .service-card {
+            grid-column: span 4;
+            group;
+            text-decoration: none;
+            display: block;
+        }
+
+        @media (max-width: 1024px) { .service-card { grid-column: span 6; } }
+        @media (max-width: 600px) { .service-card { grid-column: span 12; } }
+
+        .service-img-wrap {
+            overflow: hidden;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            background: var(--mist);
+            aspect-ratio: 4/3;
+        }
+
+        .service-img-wrap img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s var(--ease-smooth);
+        }
+
+        .service-card:hover .service-img-wrap img {
+            transform: scale(1.04);
+        }
+
+        .service-card h3 { margin-bottom: 8px; font-size: var(--text-h3); }
+        .service-card p { color: var(--aggregate); margin-bottom: 16px; }
+        
+        .service-link {
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--carbon);
+        }
+        
+        .service-link span {
+            transition: transform 0.3s var(--ease-smooth);
+        }
+        .service-card:hover .service-link span {
+            transform: translateX(4px);
+            color: var(--burnt-clay);
+        }
+
+        /* ==========================================================================
+           8. ANIMATED PROCESS LIST
+           ========================================================================== */
+        .process-section {
+            background-color: var(--mist);
+            padding: var(--section-pad) 0;
+        }
+
+        .process-list {
+            margin-top: 64px;
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+            position: relative;
+        }
+
+        /* The SVG Line drawing effect simulated with CSS border */
+        .process-list::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--aggregate);
+            opacity: 0.3;
+        }
+
+        .process-item {
+            position: relative;
+            padding-left: 80px;
+        }
+
+        .process-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 48px; height: 48px;
+            background: var(--carbon);
+            color: var(--limestone);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 18px;
+            z-index: 2;
+        }
+
+        /* ==========================================================================
+           9. CONVERSION ESTIMATE FORM
+           ========================================================================== */
+        .estimate-section {
+            background-color: var(--carbon);
+            color: var(--limestone);
+            padding: var(--section-pad) 0;
+        }
+
+        .estimate-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 88px;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .estimate-grid { grid-template-columns: 1fr; gap: 48px; }
+        }
+
+        .estimate-content h2 { color: var(--limestone); margin-bottom: 24px; }
+        .estimate-content p { color: var(--mist); margin-bottom: 32px; font-size: var(--text-body-lg); }
+
+        /* Modern Form Styling */
+        .custom-form {
+            background: var(--carbon);
+            border: 1px solid rgba(243, 241, 236, 0.15);
+            padding: 48px;
+            border-radius: 16px;
+        }
+
+        @media (max-width: 600px) { .custom-form { padding: 24px; } }
+
+        .form-group {
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--mist);
+        }
+
+        .form-control, .form-select {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(243, 241, 236, 0.3);
+            color: var(--limestone);
+            padding: 12px 0;
+            font-size: 16px;
+            font-family: var(--font-body);
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            outline: none;
+            border-bottom-color: var(--burnt-clay);
+        }
+
+        /* Select styling trick for custom arrow */
+        .form-select {
+            appearance: none;
+            cursor: pointer;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F3F1EC' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0 center;
+            background-size: 16px;
+        }
+        .form-select option { background: var(--carbon); color: var(--limestone); }
+
+        /* ==========================================================================
+           10. FOOTER
+           ========================================================================== */
+        footer {
+            background-color: var(--carbon);
+            color: var(--mist);
+            padding: 80px 0 40px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; }
+        
+        @media (max-width: 768px) {
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+
+        .footer-brand { font-family: var(--font-display); font-size: 24px; color: var(--limestone); margin-bottom: 16px;}
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a:hover { color: var(--burnt-clay); }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 64px; padding-top: 24px; font-size: var(--text-caption); display: flex; justify-content: space-between;}
+
+
+        /* ==========================================================================
+           11. MODERN ANIMATION SYSTEM (Scroll Reveals)
+           ========================================================================== */
+        
+        /* 01. Cinematic Image Reveal */
+        @keyframes cinematicReveal {
+            0% { clip-path: inset(10% 10% 10% 10%); transform: scale(1.08); opacity: 0; }
+            100% { clip-path: inset(0 0 0 0); transform: scale(1); opacity: 0.6; }
+        }
+
+        /* 02. Scroll Reveal Up */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s var(--ease-smooth), transform 0.6s var(--ease-smooth);
+        }
+        .reveal-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 03. Staggered Children */
+        .stagger-children > * {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s var(--ease-smooth), transform 0.5s var(--ease-smooth);
+        }
+        .stagger-children.is-visible > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger-children.is-visible > *:nth-child(1) { transition-delay: 0.1s; }
+        .stagger-children.is-visible > *:nth-child(2) { transition-delay: 0.2s; }
+        .stagger-children.is-visible > *:nth-child(3) { transition-delay: 0.3s; }
+        .stagger-children.is-visible > *:nth-child(4) { transition-delay: 0.4s; }
+
+        /* 04. Mask Reveal */
+        .reveal-mask {
+            clip-path: inset(0 100% 0 0);
+            transition: clip-path 0.8s var(--ease-smooth);
+        }
+        .reveal-mask.is-visible { clip-path: inset(0 0 0 0); }
+    </style>
+</head>
+<body>
+
+    <!-- SECTION 01: PREMIUM NAVIGATION -->
+    <header id="site-header">
+        <div class="nav-container">
+            <a href="#" class="logo">STONEFORM</a>
+            <nav class="nav-links">
+                <a href="#services">Services</a>
+                <a href="#work">Our Work</a>
+                <a href="#process">Process</a>
+            </nav>
+            <a href="#estimate" class="btn btn-primary nav-cta">Request Estimate ↗</a>
+        </div>
+    </header>
+
+    <!-- SECTION 02: HERO (The Visual Signature) -->
+    <section class="hero">
+        <img src="https://images.unsplash.com/photo-1541888092876-0ceeb638e411?auto=format&fit=crop&w=1920&q=80" alt="Premium decorative concrete patio finish" class="hero-img">
+        <div class="container">
+            <div class="hero-content stagger-children is-visible">
+                <span class="label">Decorative Concrete / Precision Flatwork</span>
+                <h1>BUILT ON SOLID GROUND.</h1>
+                <p>Designed with intention. Finished with precision. From custom stamped patios and architectural driveways to commercial slabs and industrial flatwork, we create concrete surfaces built around your property's needs.</p>
+                <div class="hero-actions">
+                    <a href="#estimate" class="btn btn-primary">Request an Estimate ↗</a>
+                    <a href="#work" class="btn btn-outline">Explore Our Work ↓</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 03: PROOF STRIP -->
+    <section class="proof-strip">
+        <div class="container">
+            <div class="proof-grid stagger-children">
+                <div class="proof-item">
+                    <h4>Licensed & Insured</h4>
+                    <p>Verified commercial & residential credentials</p>
+                </div>
+                <div class="proof-item">
+                    <h4>Defined Project Scope</h4>
+                    <p>Clear deliverables and expectations</p>
+                </div>
+                <div class="proof-item">
+                    <h4>Precision Execution</h4>
+                    <p>Rigorous preparation and finishing</p>
+                </div>
+                <div class="proof-item">
+                    <h4>Clear Communication</h4>
+                    <p>Transparent timelines and next steps</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 04: SERVICES OVERVIEW -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="services-header reveal-up">
+                <span class="label">What We Do / 01—04</span>
+                <h2>SURFACES THAT MAKE AN IMPRESSION.</h2>
+            </div>
+            
+            <div class="service-grid stagger-children">
+                <!-- Service 1 -->
+                <a href="#" class="service-card">
+                    <div class="service-img-wrap reveal-mask">
+                        <img src="https://images.unsplash.com/photo-1602028682046-6085a6ba433c?auto=format&fit=crop&w=800&q=80" alt="Stamped Concrete Patio">
+                    </div>
+                    <h3>Stamped Concrete</h3>
+                    <p>Stone-inspired textures, pattern options and decorative finishes for outdoor spaces.</p>
+                    <div class="service-link">Explore stamped <span>↗</span></div>
+                </a>
+                
+                <!-- Service 2 -->
+                <a href="#" class="service-card">
+                    <div class="service-img-wrap reveal-mask" style="transition-delay: 0.1s;">
+                        <img src="https://images.unsplash.com/photo-1590495392686-2775791c53b2?auto=format&fit=crop&w=800&q=80" alt="Concrete Driveway">
+                    </div>
+                    <h3>Concrete Driveways</h3>
+                    <p>New installations and replacements designed around site conditions and everyday use.</p>
+                    <div class="service-link">Explore driveways <span>↗</span></div>
+                </a>
+
+                <!-- Service 3 -->
+                <a href="#" class="service-card">
+                    <div class="service-img-wrap reveal-mask" style="transition-delay: 0.2s;">
+                        <img src="https://images.unsplash.com/photo-1582218659102-140b938fccdb?auto=format&fit=crop&w=800&q=80" alt="Industrial Flatwork">
+                    </div>
+                    <h3>Industrial Flatwork</h3>
+                    <p>Large-area concrete floors and slabs planned for stringent operational requirements.</p>
+                    <div class="service-link">Explore industrial <span>↗</span></div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 08: PROJECT PROCESS (Animated List) -->
+    <section id="process" class="process-section">
+        <div class="container" style="max-width: 800px; margin: 0 auto;">
+            <div class="reveal-up text-center">
+                <span class="label">Our Approach</span>
+                <h2>FROM FIRST CONVERSATION TO FINISHED CONCRETE.</h2>
+                <p>A clear process makes a complex, site-dependent project easier to understand.</p>
+            </div>
+
+            <!-- CSS Animated Process List -->
+            <ul class="process-list stagger-children">
+                <li class="process-item">
+                    <div class="process-number">01</div>
+                    <h3>Site Review & Scope</h3>
+                    <p>Assess site conditions, access, drainage considerations, measurements and finish options based on architectural requirements.</p>
+                </li>
+                <li class="process-item">
+                    <div class="process-number">02</div>
+                    <h3>Groundwork & Preparation</h3>
+                    <p>Site assessment, subgrade preparation, formwork, and base work appropriate to the structural conditions.</p>
+                </li>
+                <li class="process-item">
+                    <div class="process-number">03</div>
+                    <h3>Finishing & Detailing</h3>
+                    <p>Precise finish execution, stamping layout, jointing, and surface details selected for the intended application.</p>
+                </li>
+                <li class="process-item">
+                    <div class="process-number">04</div>
+                    <h3>Curing & Handover</h3>
+                    <p>Appropriate curing protocols, protection details, and care instructions based on the concrete system used.</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- SECTION 11 & 7: CONVERSION ESTIMATE FORM -->
+    <section id="estimate" class="estimate-section">
+        <div class="container estimate-grid">
+            
+            <div class="estimate-content reveal-up">
+                <span class="label">Project Inquiry / Step 01</span>
+                <h2>LET'S PUT YOUR PLANS ON SOLID GROUND.</h2>
+                <p>Tell us what you're building. We'll review your project details, evaluate the site requirements, and explain the next step toward a comprehensive estimate.</p>
+                
+                <div style="margin-top: 48px;">
+                    <span class="label">Prefer to call?</span>
+                    <h3>(555) 123-4567</h3>
+                </div>
+            </div>
+
+            <div class="estimate-form-wrapper reveal-up" style="transition-delay: 0.2s;">
+                <!-- Animated Form UI Built Inside -->
+                <form class="custom-form" onsubmit="event.preventDefault(); alert('This is a prototype form. In production, this submits securely.');">
+                    <div class="form-group">
+                        <label class="form-label">Project Type</label>
+                        <select class="form-select" required>
+                            <option value="">Select a service...</option>
+                            <option value="stamped">Stamped / Decorative Concrete</option>
+                            <option value="driveway">Residential Driveway</option>
+                            <option value="commercial">Commercial Flatwork</option>
+                            <option value="industrial">Industrial Concrete Slab</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Approximate Size</label>
+                        <select class="form-select" required>
+                            <option value="">Select estimated area...</option>
+                            <option value="small">Under 500 sq ft</option>
+                            <option value="medium">500–1,500 sq ft</option>
+                            <option value="large">1,500–5,000 sq ft</option>
+                            <option value="xl">Over 5,000 sq ft</option>
+                            <option value="unsure">Not sure yet</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">City or ZIP Code</label>
+                        <input type="text" class="form-control" placeholder="Where is the project located?" required>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 40px;">
+                        <label class="form-label">Project Details (Optional)</label>
+                        <input type="text" class="form-control" placeholder="Briefly describe what you're building...">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Preview Next Step ↗</button>
+                </form>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- SECTION 12: FOOTER -->
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <div class="footer-brand">STONEFORM</div>
+                <p style="max-width: 300px; margin-bottom: 24px;">Architectural finishes. Precision flatwork. Lasting results.</p>
+                <a href="#estimate" class="btn btn-primary">Request an Estimate ↗</a>
+            </div>
+            
+            <div>
+                <span class="label" style="color: var(--limestone);">Explore</span>
+                <ul class="footer-links">
+                    <li><a href="#">Stamped Concrete</a></li>
+                    <li><a href="#">Driveways & Patios</a></li>
+                    <li><a href="#">Commercial Flatwork</a></li>
+                    <li><a href="#">Industrial Slabs</a></li>
+                    <li><a href="#">Project Gallery</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <span class="label" style="color: var(--limestone);">Contact</span>
+                <ul class="footer-links">
+                    <li>(555) 123-4567</li>
+                    <li>build@stoneform.com</li>
+                    <li>Serving Greater Metro Area</li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <span>© 2026 Stoneform Concrete. All rights reserved.</span>
+            <span>Privacy Policy · Accessibility</span>
+        </div>
+    </footer>
+
+    <!-- INTERACTION SCRIPTS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Sticky Header Morph
+            const header = document.getElementById('site-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // 2. Intersection Observer for Scroll Animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -10% 0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Optional: observer.unobserve(entry.target) if you only want it to animate once
+                    }
+                });
+            }, observerOptions);
+
+            // Select elements to animate
+            const animatedElements = document.querySelectorAll('.reveal-up, .stagger-children, .reveal-mask');
+            
+            // Only observe elements outside of the hero so hero runs on load
+            animatedElements.forEach(el => {
+                if (!el.closest('.hero')) {
+                    observer.observe(el);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

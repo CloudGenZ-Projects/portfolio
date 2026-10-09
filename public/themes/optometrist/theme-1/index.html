@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FRAME THEORY | See the world. Your way.</title>
+  
+  <!-- Fonts: Space Grotesk (Display) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       01. DESIGN TOKENS & RESET
+       ========================================================================== */
+    :root {
+      /* Colors */
+      --color-butter: #F7D94C;
+      --color-cobalt: #244BE8;
+      --color-cream: #FFF9EF;
+      --color-charcoal: #252525;
+      --color-lilac: #E8E4FF;
+      --color-pistachio: #DCECCF;
+      --color-white: #FFFFFF;
+
+      /* Typography */
+      --font-display: "Space Grotesk", sans-serif;
+      --font-body: "Inter", sans-serif;
+      
+      --text-hero: clamp(46px, 8vw, 112px);
+      --text-h2: clamp(34px, 5vw, 64px);
+      --text-h3: clamp(24px, 3vw, 32px);
+      --text-body: clamp(16px, 1.5vw, 18px);
+      --text-label: clamp(11px, 1vw, 13px);
+
+      /* Layout & Spacing */
+      --radius-control: 12px;
+      --radius-card: 20px;
+      --radius-feature: 32px;
+      --radius-pill: 9999px;
+
+      --space-section: clamp(52px, 8vw, 144px);
+      --space-card: clamp(18px, 3vw, 36px);
+      --gutter: clamp(16px, 2vw, 24px);
+      --margin-outer: clamp(20px, 5vw, 72px);
+
+      /* Motion */
+      --motion-fast: 200ms ease-out;
+      --motion-normal: 350ms ease-in-out;
+      --motion-slow: 700ms ease-in-out;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      background-color: var(--color-cream);
+      color: var(--color-charcoal);
+      font-family: var(--font-body);
+      font-size: var(--text-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.1; font-weight: 600; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; border-radius: var(--radius-card); object-fit: cover; }
+    ul { list-style: none; }
+
+    /* Utilities */
+    .container { max-width: 1440px; margin: 0 auto; padding: 0 var(--margin-outer); }
+    .section-pad { padding: var(--space-section) 0; }
+    .eyebrow { font-size: var(--text-label); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-bottom: 12px; display: block; }
+    .text-center { text-align: center; }
+    
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      transition: all var(--motion-fast);
+      border: none;
+      gap: 8px;
+    }
+    .btn-primary { background: var(--color-cobalt); color: var(--color-cream); }
+    .btn-primary:hover { background: var(--color-charcoal); transform: translateY(-2px); }
+    .btn-secondary { background: var(--color-charcoal); color: var(--color-cream); }
+    .btn-secondary:hover { background: var(--color-cobalt); transform: translateY(-2px); }
+    .btn-outline { background: transparent; border: 2px solid var(--color-charcoal); color: var(--color-charcoal); }
+    .btn-outline:hover { background: var(--color-charcoal); color: var(--color-cream); }
+
+    /* ==========================================================================
+       02. HEADER & NAVIGATION
+       ========================================================================== */
+    .announcement {
+      background: var(--color-butter);
+      color: var(--color-charcoal);
+      text-align: center;
+      padding: 8px;
+      font-size: var(--text-label);
+      font-weight: 500;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 249, 239, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(37,37,37,0.1);
+      transition: background var(--motion-normal);
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+    .logo { font-family: var(--font-display); font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
+    .desktop-nav { display: flex; gap: 32px; align-items: center; }
+    .desktop-nav a { font-weight: 500; transition: color var(--motion-fast); }
+    .desktop-nav a:hover { color: var(--color-cobalt); }
+    .mobile-menu-btn { display: none; background: none; border: none; font-size: 24px; cursor: pointer; }
+    
+    @media (max-width: 992px) {
+      .desktop-nav, .header-cta { display: none; }
+      .mobile-menu-btn { display: block; }
+    }
+
+    /* ==========================================================================
+       03. HERO SECTION
+       ========================================================================== */
+    .hero {
+      padding: calc(var(--space-section) * 0.8) 0 var(--space-section);
+      display: grid;
+      grid-template-columns: 55% 40%;
+      gap: 5%;
+      align-items: center;
+    }
+    .hero-content h1 { font-size: var(--text-hero); margin-bottom: 24px; letter-spacing: -0.03em; }
+    .hero-content p { font-size: clamp(18px, 2vw, 22px); margin-bottom: 40px; max-width: 90%; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    
+    .hero-image-wrapper {
+      position: relative;
+      background: var(--color-butter);
+      border-radius: var(--radius-feature);
+      aspect-ratio: 4/5;
+      padding: 24px;
+      display: flex;
+      align-items: flex-end;
+    }
+    .hero-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: var(--radius-card);
+      clip-path: inset(100% 0 0 0); /* For animation */
+    }
+    .floating-sticker {
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      background: var(--color-cobalt);
+      color: var(--color-cream);
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: 14px;
+      transform: rotate(15deg);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @media (max-width: 992px) {
+      .hero { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+      .hero-content p { max-width: 100%; margin: 0 auto 32px; }
+      .hero-actions { justify-content: center; }
+      .hero-image-wrapper { width: 100%; max-width: 500px; margin: 0 auto; }
+    }
+
+    /* ==========================================================================
+       04. MARQUEE STRIP
+       ========================================================================== */
+    .marquee {
+      background: var(--color-cobalt);
+      color: var(--color-cream);
+      padding: 20px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      display: flex;
+      font-family: var(--font-display);
+      font-size: 24px;
+      text-transform: uppercase;
+    }
+    .marquee-track {
+      display: flex;
+      gap: 32px;
+      animation: scroll 30s linear infinite;
+    }
+    .marquee-track span { display: inline-block; }
+    
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track { animation: none; }
+      .floating-sticker { animation: none; }
+    }
+
+    /* ==========================================================================
+       05. BENTO GRID (FRAME SHAPES)
+       ========================================================================== */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--gutter);
+      margin-top: 40px;
+    }
+    .bento-card {
+      background: var(--color-white);
+      border-radius: var(--radius-card);
+      padding: var(--space-card);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: box-shadow var(--motion-fast);
+      position: relative;
+      overflow: hidden;
+    }
+    .bento-card:hover {
+      box-shadow: 0 20px 40px rgba(37,37,37,0.08);
+    }
+    .bento-card img {
+      width: 80%;
+      margin: 20px auto;
+      transition: transform var(--motion-normal);
+    }
+    .bento-card:hover img { transform: scale(1.04); }
+    .bento-card h3 { font-size: var(--text-h3); margin-bottom: 8px; }
+    .bento-link { font-weight: 600; display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; color: var(--color-cobalt); }
+    .bento-card:hover .bento-link svg { transform: translateX(4px); transition: var(--motion-fast); }
+
+    .bento-card:nth-child(1) { grid-column: span 7; background: var(--color-lilac); }
+    .bento-card:nth-child(2) { grid-column: span 5; }
+    .bento-card:nth-child(3) { grid-column: span 5; }
+    .bento-card:nth-child(4) { grid-column: span 7; background: var(--color-butter); }
+
+    @media (max-width: 768px) {
+      .bento-card { grid-column: span 12 !important; }
+    }
+
+    /* ==========================================================================
+       06. CAROUSELS (PRODUCTS / SOCIAL PROOF)
+       ========================================================================== */
+    .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
+    .carousel {
+      display: flex;
+      gap: var(--gutter);
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none; /* Firefox */
+      padding-bottom: 24px;
+    }
+    .carousel::-webkit-scrollbar { display: none; }
+    .product-card {
+      min-width: 300px;
+      flex: 0 0 calc(25% - (var(--gutter) * 3 / 4));
+      scroll-snap-align: start;
+    }
+    .product-image {
+      background: #F3F3F3;
+      border-radius: var(--radius-card);
+      aspect-ratio: 1/1;
+      padding: 24px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .product-image img { mix-blend-mode: multiply; }
+    .product-tag {
+      position: absolute;
+      top: 16px; left: 16px;
+      background: var(--color-white);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+    .product-info h4 { font-size: 20px; margin-bottom: 4px; }
+    .product-info p { color: #666; font-size: 14px; margin-bottom: 8px; }
+    
+    @media (max-width: 1024px) { .product-card { flex: 0 0 calc(33.333% - var(--gutter)); } }
+    @media (max-width: 768px) { .product-card { flex: 0 0 calc(75% - var(--gutter)); } }
+
+    /* ==========================================================================
+       07. INTERACTIVE STYLE FINDER
+       ========================================================================== */
+    .style-finder { background: var(--color-charcoal); color: var(--color-cream); border-radius: var(--radius-feature); padding: var(--space-section); text-align: center; }
+    .finder-step { display: none; }
+    .finder-step.active { display: block; animation: fadeIn var(--motion-normal); }
+    .options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 40px 0; }
+    .option-btn {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: var(--color-cream); padding: 24px; border-radius: var(--radius-card);
+      cursor: pointer; transition: var(--motion-fast); font-family: var(--font-display); font-size: 18px;
+    }
+    .option-btn:hover { background: var(--color-cobalt); border-color: var(--color-cobalt); }
+
+    /* ==========================================================================
+       08. CLINICAL SECTIONS (Retinal & Services)
+       ========================================================================== */
+    .clinical-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .clinical-img {
+      border-radius: var(--radius-feature);
+      aspect-ratio: 4/3;
+      object-fit: cover;
+    }
+    .clinical-card {
+      background: var(--color-pistachio);
+      padding: var(--space-card);
+      border-radius: var(--radius-card);
+      margin-bottom: 16px;
+    }
+    .clinical-card h4 { font-size: 20px; margin-bottom: 8px; }
+
+    /* ==========================================================================
+       09. TESTIMONIALS
+       ========================================================================== */
+    .testimonial-card {
+      background: var(--color-white);
+      padding: var(--space-card);
+      border-radius: var(--radius-card);
+      min-width: 350px;
+      flex: 0 0 calc(33.333% - var(--gutter));
+      scroll-snap-align: start;
+    }
+    .testimonial-card p { font-size: 18px; font-style: italic; margin-bottom: 24px; }
+    .testimonial-author { font-size: 14px; font-weight: 600; color: var(--color-cobalt); }
+
+    /* ==========================================================================
+       10. FORMS & FAQ
+       ========================================================================== */
+    .booking-section { background: var(--color-lilac); border-radius: var(--radius-feature); padding: var(--space-section); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group.full { grid-column: span 2; }
+    input, select, textarea {
+      width: 100%; padding: 16px; border-radius: var(--radius-control);
+      border: 1px solid rgba(0,0,0,0.1); font-family: var(--font-body); font-size: 16px;
+      background: var(--color-white);
+    }
+    input:focus, select:focus { outline: 2px solid var(--color-cobalt); }
+    
+    details { background: var(--color-white); border-radius: var(--radius-card); margin-bottom: 16px; padding: 24px; cursor: pointer; }
+    summary { font-family: var(--font-display); font-size: 20px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; }
+    summary::-webkit-details-marker { display: none; }
+    details p { margin-top: 16px; color: #555; }
+
+    /* ==========================================================================
+       11. FOOTER
+       ========================================================================== */
+    footer { background: var(--color-charcoal); color: var(--color-cream); padding: var(--space-section) 0 40px; margin-top: var(--space-section); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 64px; }
+    .footer-col h4 { margin-bottom: 24px; font-size: 18px; color: var(--color-butter); }
+    .footer-col ul { display: flex; flex-direction: column; gap: 12px; }
+    .footer-col a { color: #CCC; transition: color var(--motion-fast); }
+    .footer-col a:hover { color: var(--color-cream); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; justify-content: space-between; font-size: 14px; color: #999; }
+
+    @media (max-width: 768px) {
+      .clinical-split, .form-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    }
+
+    /* ==========================================================================
+       12. ANIMATIONS & REVEALS
+       ========================================================================== */
+    @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    @keyframes float { 0%, 100% { transform: rotate(15deg) translateY(0); } 50% { transform: rotate(15deg) translateY(-10px); } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .reveal { opacity: 0; transform: translateY(30px); transition: all var(--motion-slow); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
+  </style>
+</head>
+<body>
+
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="announcement">
+    Good things are in sight. Discover your next favourite frames.
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container nav-container">
+      <div class="logo">FRAME THEORY</div>
+      <nav class="desktop-nav">
+        <a href="#eyewear">Eyeglasses</a>
+        <a href="#sunglasses">Sunglasses</a>
+        <a href="#eye-exams">Eye Exams</a>
+        <a href="#story">Our Story</a>
+      </nav>
+      <div class="header-cta">
+        <a href="#book" class="btn btn-primary">Book an eye exam <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></a>
+      </div>
+      <button class="mobile-menu-btn">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- 06. HERO SECTION -->
+    <section class="container hero">
+      <div class="hero-content">
+        <span class="eyebrow">Good vision. Great personality.</span>
+        <h1 class="hero-title">See the world.<br>Your way.</h1>
+        <p>Your everyday frames should feel like you. Your eye care should help you see beyond the everyday. Discover distinctive eyewear, personalised fitting and professional eye examinations—all in one welcoming space.</p>
+        <div class="hero-actions">
+          <a href="#eyewear" class="btn btn-primary">Explore eyewear</a>
+          <a href="#book" class="btn btn-outline">Book an eye exam</a>
+        </div>
+      </div>
+      <div class="hero-image-wrapper">
+        <div class="floating-sticker">A little<br>more you</div>
+        <!-- Placeholder for Fashion Portrait -->
+        <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Person wearing stylish glasses" id="hero-img">
+      </div>
+    </section>
+
+    <!-- 07. MARQUEE STRIP -->
+    <div class="marquee">
+      <div class="marquee-track">
+        <span>GOOD VISION ✳ GOOD STYLE ✳ GREAT FRAMES ✳ A FIT THAT FEELS RIGHT ✳ REPEAT ✳ </span>
+        <span>GOOD VISION ✳ GOOD STYLE ✳ GREAT FRAMES ✳ A FIT THAT FEELS RIGHT ✳ REPEAT ✳ </span>
+        <span>GOOD VISION ✳ GOOD STYLE ✳ GREAT FRAMES ✳ A FIT THAT FEELS RIGHT ✳ REPEAT ✳ </span>
+      </div>
+    </div>
+
+    <!-- 08. SHOP BY FRAME SHAPE -->
+    <section id="eyewear" class="container section-pad reveal">
+      <div class="text-center">
+        <span class="eyebrow">The Shape Of Your Style</span>
+        <h2>Find your kind of frame.</h2>
+        <p style="max-width: 600px; margin: 16px auto 0; color: #555;">Not sure where to start? Explore the shapes, silhouettes and colors that catch your eye.</p>
+      </div>
+      
+      <div class="bento-grid">
+        <div class="bento-card">
+          <div>
+            <h3>Round</h3>
+            <p>Soft curves. A creative classic.</p>
+          </div>
+          <!-- Placeholder product PNG -->
+          <img src="https://images.unsplash.com/photo-1577803645773-f96470509666?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Round glasses" style="mix-blend-mode: multiply; border-radius: 0;">
+          <a href="#" class="bento-link">Explore round frames <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+        <div class="bento-card">
+          <div>
+            <h3>Square</h3>
+            <p>Defined lines. Confident energy.</p>
+          </div>
+          <img src="https://images.unsplash.com/photo-1591076482161-42ce6da69f67?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Square glasses" style="mix-blend-mode: multiply; border-radius: 0;">
+          <a href="#" class="bento-link">Explore square frames <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+        <div class="bento-card" style="background: var(--color-cream);">
+          <div>
+            <h3>Oval</h3>
+            <p>Understated, versatile and easygoing.</p>
+          </div>
+          <img src="https://images.unsplash.com/photo-1509695507497-903c140c43b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Oval glasses" style="mix-blend-mode: multiply; border-radius: 0;">
+          <a href="#" class="bento-link">Explore oval frames <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+        <div class="bento-card">
+          <div>
+            <h3>Cat-eye</h3>
+            <p>Expressive angles. Vintage attitude.</p>
+          </div>
+          <img src="https://images.unsplash.com/photo-1614715838608-dd527c46231d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cat-eye glasses" style="mix-blend-mode: multiply; border-radius: 0;">
+          <a href="#" class="bento-link">Explore cat-eye frames <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09. NEW ARRIVALS CAROUSEL -->
+    <section class="container section-pad reveal">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">Just Landed</span>
+          <h2>New frames. Fresh perspective.</h2>
+        </div>
+        <a href="#" class="btn btn-outline">Shop all</a>
+      </div>
+      
+      <div class="carousel">
+        <div class="product-card">
+          <div class="product-image">
+            <span class="product-tag">NEW IN</span>
+            <img src="https://images.unsplash.com/photo-1572402230267-f3e267c1e5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="The Everyday Clear">
+          </div>
+          <div class="product-info">
+            <h4>The Everyday Clear</h4>
+            <p>Crystal acetate · Rectangle</p>
+            <span>$145</span>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <span class="product-tag">COLOR STORY</span>
+            <img src="https://images.unsplash.com/photo-1582142407894-ec85a1260a46?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="The Blue Note">
+          </div>
+          <div class="product-info">
+            <h4>The Blue Note</h4>
+            <p>Cobalt acetate · Statement</p>
+            <span>$165</span>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <span class="product-tag">EVERYDAY</span>
+            <img src="https://images.unsplash.com/photo-1591076482161-42ce6da69f67?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="The Weekend Round">
+          </div>
+          <div class="product-info">
+            <h4>The Weekend Round</h4>
+            <p>Tortoiseshell · Round</p>
+            <span>$145</span>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <span class="product-tag">LIGHTWEIGHT</span>
+            <img src="https://images.unsplash.com/photo-1509695507497-903c140c43b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="The Fine Line">
+          </div>
+          <div class="product-info">
+            <h4>The Fine Line</h4>
+            <p>Brushed metal · Oval</p>
+            <span>$185</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. INTERACTIVE STYLE FINDER -->
+    <section class="container section-pad reveal">
+      <div class="style-finder">
+        <span class="eyebrow" style="color: var(--color-butter)">The Frame Finder</span>
+        <h2>Let's find your frame.</h2>
+        <p style="margin-bottom: 24px;">Answer a few quick questions to narrow the styles you might like.</p>
+        
+        <div id="quiz-step-1" class="finder-step active">
+          <h3>1. Which shapes catch your eye?</h3>
+          <div class="options-grid">
+            <button class="option-btn" onclick="nextQuizStep(2)">Round and soft</button>
+            <button class="option-btn" onclick="nextQuizStep(2)">Square and structured</button>
+            <button class="option-btn" onclick="nextQuizStep(2)">Oval and understated</button>
+            <button class="option-btn" onclick="nextQuizStep(2)">Cat-eye and expressive</button>
+          </div>
+        </div>
+
+        <div id="quiz-step-2" class="finder-step">
+          <h3>2. What is your style?</h3>
+          <div class="options-grid">
+            <button class="option-btn" onclick="nextQuizStep(3)">Minimal and timeless</button>
+            <button class="option-btn" onclick="nextQuizStep(3)">Bold and expressive</button>
+            <button class="option-btn" onclick="nextQuizStep(3)">Classic and versatile</button>
+          </div>
+        </div>
+        
+        <div id="quiz-step-3" class="finder-step">
+          <h3>Finding your matches...</h3>
+          <p style="margin: 32px 0;">We've gathered styles based on your preferences.</p>
+          <button class="btn btn-primary" onclick="resetQuiz()">View Recommendations <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. DIGITAL RETINAL DIAGNOSTICS (CLINICAL CREDIBILITY) -->
+    <section id="eye-exams" class="container section-pad reveal">
+      <div class="clinical-split">
+        <div>
+          <span class="eyebrow">Beyond The Frame</span>
+          <h2 style="margin-bottom: 16px;">A closer look at your eye health.</h2>
+          <p style="margin-bottom: 32px; color: #555;">Our digital retinal examination service uses specialist imaging equipment to help assess the back of the eye. Understand your options, ask questions and get guidance from your eye-care professional.</p>
+          
+          <div class="clinical-card">
+            <h4>Digital retinal imaging</h4>
+            <p>Images of retinal structures when clinically appropriate.</p>
+          </div>
+          <div class="clinical-card" style="background: var(--color-lilac);">
+            <h4>Professional interpretation</h4>
+            <p>Findings reviewed by a qualified professional as part of the applicable examination.</p>
+          </div>
+          
+          <a href="#book" class="btn btn-primary" style="margin-top: 16px;">Ask about retinal imaging</a>
+        </div>
+        <div>
+          <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Modern optometry equipment" class="clinical-img">
+        </div>
+      </div>
+    </section>
+
+    <!-- 18. TESTIMONIALS -->
+    <section class="container section-pad reveal">
+      <div class="text-center" style="margin-bottom: 40px;">
+        <span class="eyebrow">Kind Words, Clear Vision</span>
+        <h2>Don't just take our word for it.</h2>
+      </div>
+      <div class="carousel">
+        <div class="testimonial-card">
+          <p>“The most thorough eye exam I've ever had. The optometrist explained every scan clearly and helped me find frames that actually fit my bridge.”</p>
+          <span class="testimonial-author">Sarah M. · Google Reviews</span>
+        </div>
+        <div class="testimonial-card">
+          <p>“I usually dread picking out glasses, but the team here made it feel like styling session. I love my new cobalt frames!”</p>
+          <span class="testimonial-author">James T. · Verified Patient</span>
+        </div>
+        <div class="testimonial-card">
+          <p>“Professional, welcoming space with an incredible selection of independent designers. Highly recommend the retinal imaging option.”</p>
+          <span class="testimonial-author">Elena R. · Google Reviews</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 21. APPOINTMENT BOOKING FORM -->
+    <section id="book" class="container section-pad reveal">
+      <div class="booking-section">
+        <div class="text-center">
+          <span class="eyebrow">Let's get you booked</span>
+          <h2>Your next visit starts here.</h2>
+          <p style="color: #444;">Share a few details and our team will follow up to confirm availability.</p>
+        </div>
+        
+        <form class="form-grid" onsubmit="event.preventDefault(); alert('Booking request sent! This is a demo.');">
+          <div class="form-group full">
+            <label>What would you like help with?</label>
+            <select required>
+              <option value="">Select a service...</option>
+              <option>Comprehensive eye examination</option>
+              <option>Digital retinal imaging enquiry</option>
+              <option>Eyewear consultation</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Full name</label>
+            <input type="text" required placeholder="Jane Doe">
+          </div>
+          <div class="form-group">
+            <label>Email address</label>
+            <input type="email" required placeholder="jane@example.com">
+          </div>
+          <div class="form-group">
+            <label>Phone number</label>
+            <input type="tel" required placeholder="(555) 000-0000">
+          </div>
+          <div class="form-group">
+            <label>Preferred time</label>
+            <select required>
+              <option value="">Select time...</option>
+              <option>Morning</option>
+              <option>Afternoon</option>
+              <option>Evening</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <p style="font-size: 13px; color: #666; margin-bottom: 8px;">Please don't include sensitive medical information in this initial enquiry. Your preferred date and time are requests, not confirmed appointments.</p>
+            <button type="submit" class="btn btn-primary" style="width: fit-content;">Review appointment request <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- 22. FAQS -->
+    <section class="container section-pad reveal">
+      <div class="text-center" style="margin-bottom: 40px;">
+        <h2>Good questions deserve clear answers.</h2>
+      </div>
+      <div style="max-width: 800px; margin: 0 auto;">
+        <details>
+          <summary>What happens during a comprehensive eye examination? <span>+</span></summary>
+          <p>The examination depends on your individual needs and may include discussing your visual history, assessing vision and checking relevant aspects of eye health. Your optometrist will explain which tests are appropriate.</p>
+        </details>
+        <details>
+          <summary>What is digital retinal imaging? <span>+</span></summary>
+          <p>It is a non-invasive scan that takes high-resolution images of the back of your eye. This helps our optometrists detect and monitor conditions that might not be visible during a standard exam.</p>
+        </details>
+        <details>
+          <summary>Can I buy glasses without an eye examination? <span>+</span></summary>
+          <p>Yes, if you have a valid, in-date prescription from another qualified professional, you can absolutely bring it in and our styling team will help you find the perfect frames.</p>
+        </details>
+        <details>
+          <summary>Do you offer prescription sunglasses? <span>+</span></summary>
+          <p>Yes! The majority of our optical frames and dedicated sunglasses collection can be fitted with prescription sun lenses, complete with UV protection.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <!-- 24. FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="logo" style="margin-bottom: 16px;">FRAME THEORY®</div>
+          <p style="color: #CCC; max-width: 250px;">Designer eyewear and professional eye care, thoughtfully brought together.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="#">Eyeglasses</a></li>
+            <li><a href="#">Sunglasses</a></li>
+            <li><a href="#">New arrivals</a></li>
+            <li><a href="#">Frame guide</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Eye Care</h4>
+          <ul>
+            <li><a href="#">Eye examinations</a></li>
+            <li><a href="#">Retinal imaging</a></li>
+            <li><a href="#">Our optometrist</a></li>
+            <li><a href="#">Book a visit</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Help</h4>
+          <ul>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Returns and warranty</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>
+          <a href="#" style="margin-right: 16px;">Privacy</a>
+          <a href="#" style="margin-right: 16px;">Terms</a>
+          <a href="#">Accessibility</a>
+        </div>
+        <div>© 2026 Frame Theory Clinic. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 25. JAVASCRIPT: ANIMATIONS & INTERACTIONS -->
+  <script>
+    // Initial Hero Animation Setup
+    window.addEventListener('DOMContentLoaded', () => {
+      const heroTitle = document.querySelector('.hero-title');
+      const heroImg = document.querySelector('.hero-image-wrapper img');
+      
+      // Basic entrance animations triggered on load
+      setTimeout(() => {
+        heroTitle.style.opacity = '0';
+        heroTitle.style.transform = 'translateY(20px)';
+        heroTitle.style.transition = 'all 800ms ease-out';
+        
+        requestAnimationFrame(() => {
+          heroTitle.style.opacity = '1';
+          heroTitle.style.transform = 'translateY(0)';
+        });
+      }, 150);
+
+      setTimeout(() => {
+        heroImg.style.transition = 'clip-path 900ms ease-out';
+        heroImg.style.clipPath = 'inset(0 0 0 0)';
+      }, 350);
+    });
+
+    // Intersection Observer for Scroll Reveals
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    };
+
+    const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('active');
+        observer.unobserve(entry.target);
+      });
+    }, revealOptions);
+
+    revealElements.forEach(el => revealOnScroll.observe(el));
+
+    // Interactive Style Finder Logic
+    function nextQuizStep(stepNumber) {
+      document.querySelectorAll('.finder-step').forEach(step => step.classList.remove('active'));
+      document.getElementById(`quiz-step-${stepNumber}`).classList.add('active');
+    }
+    
+    function resetQuiz() {
+      document.querySelectorAll('.finder-step').forEach(step => step.classList.remove('active'));
+      document.getElementById('quiz-step-1').classList.add('active');
+      alert('In a real environment, this would navigate to a pre-filtered product catalog!');
+    }
+
+    // FAQ Accordion logic (change + to -)
+    const details = document.querySelectorAll('details');
+    details.forEach(detail => {
+      detail.addEventListener('toggle', (e) => {
+        const span = detail.querySelector('summary span');
+        if(detail.open) {
+          span.textContent = '−';
+          // Close others
+          details.forEach(other => {
+            if(other !== detail && other.open) other.removeAttribute('open');
+          });
+        } else {
+          span.textContent = '+';
+        }
+      });
+    });
+
+    // Mobile menu toggle (simple alert for demo, typically adds a class to show a full-screen div)
+    document.querySelector('.mobile-menu-btn').addEventListener('click', () => {
+      alert('Mobile menu drawer would slide in here!');
+    });
+  </script>
+</body>
+</html>

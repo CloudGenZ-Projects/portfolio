@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Collision Repair + Auto Detailing</title>
+  
+  <!-- Fonts: Space Grotesk, Inter, IBM Plex Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================
+       1. DESIGN TOKENS & VARIABLES
+       ========================================= */
+    :root {
+      /* Colors */
+      --graphite: #101214;
+      --graphite-light: #15181a;
+      --graphite-panel: #1a1d21;
+      --volt: #d9ff43;
+      --volt-glow: rgb(217 255 67 / 15%);
+      --white: #f4f3ef;
+      --steel: #6c8491;
+      --steel-bg: #111416;
+      --border-subtle: rgb(255 255 255 / 9%);
+
+      /* Motion */
+      --motion-fast: 160ms;
+      --motion-base: 280ms;
+      --motion-reveal: 700ms;
+      --motion-cinematic: 1100ms;
+      --ease-out: cubic-bezier(.22, 1, .36, 1);
+      --ease-standard: cubic-bezier(.2, .7, .2, 1);
+    }
+
+    /* =========================================
+       2. RESET & BASE STYLES
+       ========================================= */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--graphite);
+      color: var(--white);
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: "Space Grotesk", sans-serif;
+      margin: 0;
+      color: var(--white);
+    }
+
+    p { margin: 0 0 1.5rem 0; line-height: 1.6; color: rgba(244, 243, 239, 0.8); }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; object-fit: cover; }
+    ul { margin: 0; padding: 0; list-style: none; }
+
+    /* =========================================
+       3. TYPOGRAPHY & UTILITIES
+       ========================================= */
+    .tech-label {
+      font-family: "IBM Plex Mono", monospace;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--volt);
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .heading-accent {
+      color: var(--volt);
+      background: linear-gradient(110deg, var(--white) 0%, var(--volt) 48%, #a7c82a 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-heading {
+      max-width: 850px;
+      font-size: clamp(2.5rem, 6vw, 5.5rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.5rem;
+    }
+
+    .container {
+      width: min(100% - 40px, 1320px);
+      margin-inline: auto;
+    }
+
+    .section {
+      padding-block: clamp(80px, 10vw, 160px);
+      position: relative;
+    }
+
+    .editorial-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: clamp(16px, 2vw, 28px);
+    }
+
+    /* =========================================
+       4. UI COMPONENTS
+       ========================================= */
+    /* Primary Button */
+    .button-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2rem;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--graphite);
+      background: var(--volt);
+      border: 1px solid var(--volt);
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 0 rgb(217 255 67 / 0%);
+      transition: transform 220ms ease, box-shadow 220ms ease, background-color 220ms ease;
+    }
+    
+    .button-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--volt-glow), 0 0 42px rgb(217 255 67 / 8%);
+    }
+
+    .button-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2rem;
+      font-weight: 600;
+      color: var(--white);
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all var(--motion-base) ease;
+    }
+    .button-secondary:hover {
+      border-color: var(--white);
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* 3D Service Card */
+    .service-card {
+      background: var(--graphite-light);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transform: perspective(1000px) translateZ(0);
+      transform-style: preserve-3d;
+      transition: transform 350ms ease, border-color 350ms ease;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .service-card:hover {
+        transform: perspective(1000px) translateY(-5px) rotateX(2deg);
+        border-color: rgba(217, 255, 67, 0.3);
+      }
+      .service-card:hover .service-card-img img {
+        transform: scale(1.05);
+      }
+      .service-card:hover .service-link {
+        color: var(--volt);
+      }
+    }
+
+    /* =========================================
+       5. HEADER / NAVIGATION
+       ========================================= */
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 100;
+      padding: 1.25rem 0;
+      background: rgb(15 18 20 / 0%);
+      border-bottom: 1px solid transparent;
+      transition: background-color 250ms ease, border-color 250ms ease, backdrop-filter 250ms ease;
+    }
+
+    .site-header.is-scrolled {
+      background: rgb(15 18 20 / 78%);
+      border-bottom-color: rgb(255 255 255 / 10%);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .logo span { color: var(--volt); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: rgba(244,243,239,0.7);
+      transition: color var(--motion-base);
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    /* =========================================
+       6. HERO SECTION
+       ========================================= */
+    .hero {
+      position: relative;
+      isolation: isolate;
+      overflow: clip;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+      background:
+        radial-gradient(ellipse at 78% 28%, rgb(217 255 67 / 8%), transparent 34%),
+        radial-gradient(ellipse at 12% 88%, rgb(108 132 145 / 13%), transparent 36%),
+        linear-gradient(135deg, #171b1e, #0c0e10 68%);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background: linear-gradient(90deg, #0c0e10 0%, rgb(12 14 16 / 88%) 45%, transparent 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 55% 45%;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .hero-content {
+      z-index: 2;
+      padding-right: 2rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .hero-trust {
+      display: flex;
+      gap: 2rem;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 2rem;
+    }
+    .trust-item h4 { font-size: 0.85rem; margin-bottom: 0.25rem; }
+    .trust-item p { font-size: 0.8rem; color: var(--steel); margin: 0; }
+
+    .hero-visual {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      z-index: -2;
+      mask-image: linear-gradient(to right, transparent, black 15%);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 15%);
+    }
+    .hero-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.7;
+    }
+
+    /* =========================================
+       7. TWO PATHS (Section 2)
+       ========================================= */
+    .two-paths-header {
+      max-width: 700px;
+      margin-bottom: 4rem;
+    }
+    
+    .split-cards {
+      align-items: stretch;
+    }
+    
+    .card-restore { grid-column: span 7; }
+    .card-refine { grid-column: span 5; }
+
+    .service-card-img {
+      height: 350px;
+      overflow: hidden;
+      position: relative;
+    }
+    .service-card-img img {
+      width: 100%;
+      height: 100%;
+      transition: transform 700ms var(--ease-out);
+    }
+    
+    .card-number {
+      position: absolute;
+      top: -20px;
+      right: -10px;
+      font-size: 8rem;
+      font-weight: 700;
+      font-family: "Space Grotesk";
+      color: rgba(255,255,255,0.03);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .service-card-content {
+      padding: 2.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .service-card-content h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    
+    .service-link {
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--white);
+      transition: color var(--motion-base);
+    }
+
+    /* =========================================
+       8. COLLISION (Section 3) - Technical
+       ========================================= */
+    .technical-surface {
+      background-color: var(--steel-bg);
+      background-image:
+        linear-gradient(rgb(255 255 255 / 3%) 1px, transparent 1px),
+        linear-gradient(90deg, rgb(255 255 255 / 3%) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    .technical-surface::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse at center, transparent 15%, var(--steel-bg) 88%);
+    }
+
+    .engineering-grid {
+      position: relative;
+      z-index: 2;
+    }
+
+    .engineering-text {
+      grid-column: span 5;
+    }
+
+    .engineering-list {
+      grid-column: 7 / -1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .tech-item {
+      background: rgba(26, 29, 33, 0.6);
+      border: 1px solid var(--border-subtle);
+      padding: 2rem;
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+    }
+    .tech-item h4 {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .tech-item h4::before {
+      content: "0" counter(tech-counter);
+      counter-increment: tech-counter;
+      font-family: "IBM Plex Mono";
+      color: var(--volt);
+      font-size: 0.9rem;
+    }
+    .engineering-list {
+      counter-reset: tech-counter;
+    }
+
+    /* =========================================
+       9. DETAILING (Section 4)
+       ========================================= */
+    .stages-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 4rem;
+    }
+    .stage-card {
+      padding: 2rem;
+      background: var(--graphite-light);
+      border-top: 2px solid var(--volt);
+      border-radius: 0 0 12px 12px;
+    }
+    .stage-card .tech-label { margin-bottom: 0.5rem; color: var(--steel); }
+    .stage-card h4 { margin-bottom: 1rem; font-size: 1.2rem; }
+    .stage-card p { font-size: 0.9rem; margin: 0; }
+
+    /* =========================================
+       10. BEFORE / AFTER (Section 5)
+       ========================================= */
+    .ba-container {
+      margin-top: 4rem;
+      position: relative;
+      width: 100%;
+      height: 60vh;
+      min-height: 500px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .ba-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* Top image (Before) uses clip-path controlled by CSS variable */
+    .ba-image-before {
+      z-index: 2;
+      clip-path: inset(0 calc(100% - var(--expose, 50%)) 0 0);
+    }
+    
+    /* Range Slider */
+    .ba-slider {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      z-index: 4;
+      cursor: ew-resize;
+    }
+
+    /* Visual Divider */
+    .ba-divider {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: var(--expose, 50%);
+      width: 2px;
+      background: var(--volt);
+      z-index: 3;
+      transform: translateX(-50%);
+      pointer-events: none;
+      box-shadow: 0 0 15px rgba(217, 255, 67, 0.5);
+    }
+    .ba-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 40px;
+      height: 40px;
+      background: var(--volt);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--graphite);
+    }
+    .ba-handle::before, .ba-handle::after {
+      content: "";
+      width: 0; height: 0;
+      border-style: solid;
+      position: absolute;
+    }
+    .ba-handle::before {
+      border-width: 5px 6px 5px 0;
+      border-color: transparent var(--graphite) transparent transparent;
+      left: 10px;
+    }
+    .ba-handle::after {
+      border-width: 5px 0 5px 6px;
+      border-color: transparent transparent transparent var(--graphite);
+      right: 10px;
+    }
+    
+    .ba-labels {
+      position: absolute;
+      top: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 3;
+      pointer-events: none;
+    }
+    .ba-label {
+      background: rgba(16, 18, 20, 0.8);
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-family: "IBM Plex Mono";
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      backdrop-filter: blur(4px);
+    }
+
+    /* =========================================
+       11. INTAKE FORM (Section 9)
+       ========================================= */
+    .form-section {
+      background: linear-gradient(to bottom, var(--graphite), var(--steel-bg));
+    }
+    .intake-form {
+      background: var(--graphite-panel);
+      padding: 3rem;
+      border-radius: 16px;
+      border: 1px solid var(--border-subtle);
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+      color: rgba(244,243,239,0.9);
+    }
+    .form-control {
+      width: 100%;
+      padding: 1rem;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      color: var(--white);
+      font-family: "Inter", sans-serif;
+      transition: border-color var(--motion-fast), box-shadow var(--motion-fast);
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--volt);
+      box-shadow: 0 0 0 1px var(--volt);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    /* =========================================
+       12. FOOTER
+       ========================================= */
+    .site-footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 4rem 0 2rem;
+      background: #0c0e10;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+    .footer-col h5 {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+    .footer-links li { margin-bottom: 0.75rem; }
+    .footer-links a { color: var(--steel); font-size: 0.9rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      color: var(--steel);
+      font-size: 0.85rem;
+    }
+
+    /* =========================================
+       13. ANIMATIONS & REVEALS
+       ========================================= */
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity var(--motion-reveal) var(--ease-out), transform var(--motion-reveal) var(--ease-out);
+    }
+    .reveal-up.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .reveal-image {
+      overflow: hidden;
+      clip-path: inset(0 0 100% 0);
+      transition: clip-path 900ms var(--ease-out);
+    }
+    .reveal-image.is-visible {
+      clip-path: inset(0 0 0 0);
+    }
+
+    /* Staggered delays */
+    .delay-1 { transition-delay: 100ms; }
+    .delay-2 { transition-delay: 200ms; }
+    .delay-3 { transition-delay: 300ms; }
+
+    /* =========================================
+       14. RESPONSIVE DESIGN
+       ========================================= */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: left; }
+      .hero-visual { position: relative; width: 100%; height: 50vh; mask-image: none; -webkit-mask-image: none; border-radius: 16px; overflow: hidden; margin-top: 2rem; }
+      .hero::after { background: linear-gradient(180deg, #0c0e10 0%, transparent 100%); }
+      
+      .card-restore, .card-refine { grid-column: span 12; }
+      .engineering-text, .engineering-list { grid-column: span 12; }
+      .stages-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 767px) {
+      .nav-links { display: none; }
+      .hero-actions { flex-direction: column; }
+      .hero-trust { flex-direction: column; gap: 1rem; }
+      .stages-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <header class="site-header" id="header">
+    <div class="container nav-container">
+      <div class="logo">Auto<span>Studio</span></div>
+      <nav class="nav-links">
+        <a href="#collision">Collision Repair</a>
+        <a href="#detailing">Auto Detailing</a>
+        <a href="#work">Our Work</a>
+      </nav>
+      <a href="#estimate" class="button-primary" style="padding: 0.6rem 1.2rem; font-size: 0.9rem;">Get an estimate ↗</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 01 HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <span class="tech-label reveal-up">Est. Your Brand Story</span>
+          <h1 class="section-heading reveal-up delay-1">
+            Damage happens. <br>
+            <span class="heading-accent">Precision brings it back.</span>
+          </h1>
+          <p class="reveal-up delay-2" style="max-width: 500px; font-size: 1.1rem;">
+            From structural collision repair to mirror-like paint correction, every vehicle receives a process built around precision, transparency and finish quality.
+          </p>
+          <div class="hero-actions reveal-up delay-3">
+            <a href="#estimate" class="button-primary">Request a repair estimate ↗</a>
+            <a href="#detailing" class="button-secondary">Explore detailing</a>
+          </div>
+          <div class="hero-trust reveal-up delay-3">
+            <div class="trust-item">
+              <h4>01 / STRUCTURE</h4>
+              <p>Measure. Align. Verify.</p>
+            </div>
+            <div class="trust-item">
+              <h4>02 / SURFACE</h4>
+              <p>Correct. Refine. Match.</p>
+            </div>
+            <div class="trust-item">
+              <h4>03 / PROTECTION</h4>
+              <p>Coat. Maintain. Preserve.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual reveal-image">
+        <!-- High quality placeholder from Unsplash -->
+        <img src="https://images.unsplash.com/photo-1619551734325-81aaf323686c?q=80&w=2000&auto=format&fit=crop" alt="Sports car details">
+      </div>
+    </section>
+
+    <!-- 02 TWO PATHS -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="two-paths-header reveal-up">
+          <span class="tech-label">Two Different Problems. One Standard of Care.</span>
+          <h2 class="section-heading" style="font-size: clamp(2rem, 4vw, 3.5rem);">Your car deserves more than a quick fix.</h2>
+          <p>A collision can leave you wondering what is happening beneath the bodywork. Everyday driving can gradually dull the finish, hide the depth of the paint and leave fine scratches visible in direct sunlight. Both deserve an informed process, honest recommendations and workmanship that can be inspected.</p>
+        </div>
+
+        <div class="editorial-grid split-cards">
+          <!-- Card 1 -->
+          <div class="service-card card-restore reveal-up delay-1">
+            <div class="service-card-img">
+              <img src="https://images.unsplash.com/photo-1632731558231-155e8f465c36?q=80&w=800&auto=format&fit=crop" alt="Collision Repair">
+              <span class="card-number">01</span>
+            </div>
+            <div class="service-card-content">
+              <h3>Restore</h3>
+              <p>When the unexpected happens. Damage assessment, structural measurements where applicable, panel repair, refinishing and a clear repair plan.</p>
+              <a href="#collision" class="service-link">Explore collision repair ↗</a>
+            </div>
+          </div>
+          
+          <!-- Card 2 -->
+          <div class="service-card card-refine reveal-up delay-2">
+            <div class="service-card-img">
+              <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?q=80&w=800&auto=format&fit=crop" alt="Auto Detailing">
+              <span class="card-number">02</span>
+            </div>
+            <div class="service-card-content">
+              <h3>Refine</h3>
+              <p>When the finish loses its depth. Paint assessment, multi-stage correction, gloss enhancement and ceramic coating options.</p>
+              <a href="#detailing" class="service-link">Explore auto detailing ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 COLLISION ENGINEERING -->
+    <section class="section technical-surface" id="collision">
+      <div class="container editorial-grid engineering-grid">
+        <div class="engineering-text reveal-up">
+          <span class="tech-label">Division 01 / Collision & Body Engineering</span>
+          <h2 class="section-heading" style="font-size: clamp(2rem, 4vw, 3.5rem);">The real repair begins beneath the surface.</h2>
+          <p>A vehicle can look straight while concealed damage remains. After a collision, the repair process needs to consider the vehicle's structure, manufacturer repair procedures, safety systems and the condition of the panels and finish.</p>
+          <p>Our process begins with a thorough assessment, followed by appropriate structural measurements and a repair plan tailored to the vehicle and the damage.</p>
+        </div>
+        
+        <div class="engineering-list">
+          <div class="tech-item reveal-up delay-1">
+            <h4>OEM-Informed Frame Measurement</h4>
+            <p>Assess structural reference points using suitable measurement equipment and vehicle-specific specifications.</p>
+          </div>
+          <div class="tech-item reveal-up delay-2">
+            <h4>Panel Repair and Fitment</h4>
+            <p>Evaluate whether a panel can be repaired or requires replacement. Check panel gaps, contours, mounting points and fitment before refinishing.</p>
+          </div>
+          <div class="tech-item reveal-up delay-3">
+            <h4>Color Matching and Refinishing</h4>
+            <p>Identify the paint system and color code, evaluate the existing finish, prepare the surface and use appropriate mixing and blending procedures.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 DETAILING -->
+    <section class="section" id="detailing">
+      <div class="container">
+        <div class="reveal-up text-center" style="max-width: 700px; margin: 0 auto; text-align: center;">
+          <span class="tech-label">Division 02 / Paint Correction & Protection</span>
+          <h2 class="section-heading" style="font-size: clamp(2rem, 4vw, 3.5rem); margin-inline: auto;">Bring the depth back to the paint.</h2>
+          <p>Sunlight reveals what ordinary lighting can hide. Paint correction is not simply adding shine. It starts with evaluating the paint, testing a suitable polishing approach and refining the surface as safely as the paint condition permits.</p>
+        </div>
+
+        <div class="stages-grid">
+          <div class="stage-card reveal-up delay-1">
+            <div class="tech-label">Stage 01</div>
+            <h4>Decontaminate</h4>
+            <p>Remove surface contamination using suitable wash, chemical and mechanical decontamination methods.</p>
+          </div>
+          <div class="stage-card reveal-up delay-2">
+            <div class="tech-label">Stage 02</div>
+            <h4>Inspect & Test</h4>
+            <p>Assess defects and paint condition. Test a small area before choosing the correction method.</p>
+          </div>
+          <div class="stage-card reveal-up delay-3">
+            <div class="tech-label">Stage 03</div>
+            <h4>Correct & Refine</h4>
+            <p>Use an appropriate combination of compounds and polishes to improve clarity while managing paint removal.</p>
+          </div>
+          <div class="stage-card reveal-up delay-4">
+            <div class="tech-label">Stage 04</div>
+            <h4>Protect</h4>
+            <p>Prepare the surface and apply the selected sealant or ceramic coating according to curing requirements.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 BEFORE & AFTER -->
+    <section class="section" id="work" style="background: var(--graphite-light);">
+      <div class="container">
+        <div class="reveal-up" style="max-width: 600px;">
+          <span class="tech-label">Real Work / Visible Difference</span>
+          <h2 class="section-heading" style="font-size: clamp(2rem, 4vw, 3.5rem);">See the work.<br>Not just the promise.</h2>
+          <p>Every vehicle starts with a different set of challenges. Explore documented repairs and paint correction projects to understand the work performed and the result achieved.</p>
+        </div>
+
+        <div class="ba-container reveal-image delay-2">
+          <!-- Before Image -->
+          <img src="https://images.unsplash.com/photo-1587842323868-b7890a2c5b73?q=80&w=1200&auto=format&fit=crop" class="ba-image ba-image-before" alt="Car Before Polish">
+          
+          <!-- After Image -->
+          <img src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?q=80&w=1200&auto=format&fit=crop" class="ba-image" alt="Car After Polish">
+          
+          <!-- Labels -->
+          <div class="ba-labels">
+            <span class="ba-label">Before Correction</span>
+            <span class="ba-label">After Correction</span>
+          </div>
+
+          <!-- Divider & Handle -->
+          <div class="ba-divider">
+            <div class="ba-handle"></div>
+          </div>
+          
+          <!-- Input Range covering the element -->
+          <input type="range" min="0" max="100" value="50" class="ba-slider" aria-label="Percentage of before/after slider">
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 INTAKE FORM -->
+    <section class="section form-section" id="estimate">
+      <div class="container editorial-grid">
+        <div class="reveal-up" style="grid-column: span 5;">
+          <span class="tech-label">Start your vehicle's next chapter</span>
+          <h2 class="section-heading" style="font-size: clamp(2rem, 4vw, 3.5rem);">Tell us what happened.</h2>
+          <p>Share a few details and, if possible, photographs. We'll use them to understand your requirements before discussing the next step.</p>
+          <div style="margin-top: 3rem;">
+            <p><strong>Or reach us directly:</strong></p>
+            <a href="#" class="service-link" style="color: var(--volt);">Phone call ↗</a><br><br>
+            <a href="#" class="service-link" style="color: var(--volt);">WhatsApp ↗</a>
+          </div>
+        </div>
+
+        <div class="reveal-up delay-2" style="grid-column: 7 / -1;">
+          <form class="intake-form" id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>First Name</label>
+                <input type="text" class="form-control" required placeholder="John">
+              </div>
+              <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" class="form-control" required placeholder="Doe">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" class="form-control" required placeholder="john@example.com">
+              </div>
+              <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" class="form-control" required placeholder="(555) 000-0000">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Service Type</label>
+              <select class="form-control">
+                <option>Collision Repair</option>
+                <option>Paint Correction</option>
+                <option>Ceramic Coating</option>
+                <option>Consultation</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Vehicle Details & Condition</label>
+              <textarea class="form-control" rows="4" placeholder="Briefly describe the vehicle and current condition..."></textarea>
+            </div>
+            <button type="submit" class="button-primary" style="width: 100%;">Prepare Enquiry ↗</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="logo" style="margin-bottom: 1rem;">Auto<span>Studio</span></div>
+          <p style="font-size: 0.9rem; color: var(--steel);">Precision Restored.<br>Perfection Refined.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Services</h5>
+          <ul class="footer-links">
+            <li><a href="#collision">Collision & Body Engineering</a></li>
+            <li><a href="#detailing">Paint Correction</a></li>
+            <li><a href="#detailing">Ceramic Protection</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Workshop</h5>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Our Process</a></li>
+            <li><a href="#work">Case Studies</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <ul class="footer-links">
+            <li><a href="#">(555) 123-4567</a></li>
+            <li><a href="#">hello@autostudio.local</a></li>
+            <li><a href="#">123 Precision Way, Auto City</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 AutoStudio. All rights reserved.</span>
+        <div style="display: flex; gap: 1rem;">
+          <a href="#" style="color: var(--steel);">Privacy Policy</a>
+          <a href="#" style="color: var(--steel);">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      
+      // 1. Header Scroll Effect
+      const header = document.getElementById("header");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          header.classList.add("is-scrolled");
+        } else {
+          header.classList.remove("is-scrolled");
+        }
+      }, { passive: true });
+
+      // 2. Scroll Reveal Animations (Intersection Observer)
+      const revealElements = document.querySelectorAll('.reveal-up, .reveal-image');
+      
+      // Respect reduced motion preference
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      
+      if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              // Optional: Stop observing once revealed
+              // observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          root: null,
+          threshold: 0.1,
+          rootMargin: "0px 0px -50px 0px"
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+      } else {
+        // Fallback for no-js or reduced motion
+        revealElements.forEach(el => el.classList.add('is-visible'));
+      }
+
+      // 3. Before/After Slider Logic
+      const baContainer = document.querySelector('.ba-container');
+      const baSlider = document.querySelector('.ba-slider');
+      
+      if(baContainer && baSlider) {
+        // Update CSS variable --expose based on slider value
+        const updateSlider = (val) => {
+          baContainer.style.setProperty('--expose', `${val}%`);
+        };
+        
+        baSlider.addEventListener('input', (e) => {
+          updateSlider(e.target.value);
+        });
+
+        // Initialize at 50
+        updateSlider(50);
+      }
+
+      // 4. Form Submission Simulation
+      const contactForm = document.getElementById('contactForm');
+      if(contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const btn = contactForm.querySelector('button');
+          const originalText = btn.innerHTML;
+          
+          btn.innerHTML = 'Sending...';
+          btn.style.opacity = '0.8';
+          
+          // Simulate network request delay
+          setTimeout(() => {
+            btn.innerHTML = 'Enquiry Sent ✓';
+            btn.style.background = '#fff';
+            btn.style.color = '#101214';
+            contactForm.reset();
+            
+            setTimeout(() => {
+              btn.innerHTML = originalText;
+              btn.style.background = 'var(--volt)';
+            }, 3000);
+          }, 1500);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex Collision | Precision Auto Body Repair</title>
+  <meta name="description" content="Collision repair, structural measurement, bodywork, and precision paint refinishing.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Lenis CSS -->
+  <style>
+    html.lenis, html.lenis body { height: auto; width: 100vw; overflow-x: hidden; }
+    .lenis.lenis-smooth { scroll-behavior: auto !important; }
+    .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+    .lenis.lenis-stopped { overflow: hidden; }
+    .lenis.lenis-smooth iframe { pointer-events: none; }
+  </style>
+
+  <!-- Core CSS -->
+  <style>
+    :root {
+      /* Design Tokens */
+      --color-bg: #111418;
+      --color-surface: #1B2026;
+      --color-paper: #F2F0EB;
+      --color-accent: #F15B35;
+      --color-text: #F6F5F1;
+      --color-muted: #A7ADB5;
+      --color-border: rgba(255, 255, 255, 0.12);
+      --color-border-dark: rgba(17, 20, 24, 0.12);
+      --color-steel: #8DA7B4;
+
+      /* Typography */
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-tech: 'IBM Plex Mono', monospace;
+
+      /* Spacing & Layout */
+      --container: 1440px;
+      --radius-card: 1rem;
+      --radius-panel: 1.5rem;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    img { max-width: 100%; display: block; object-fit: cover; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    .container {
+      width: min(calc(100% - 3rem), var(--container));
+      margin-inline: auto;
+    }
+
+    /* Typography Scale */
+    .hero-heading { font-family: var(--font-display); font-size: clamp(3rem, 7vw, 7.5rem); line-height: 1.05; font-weight: 500; letter-spacing: -0.02em; }
+    .section-heading { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 4.5rem); line-height: 1.1; font-weight: 500; letter-spacing: -0.02em; }
+    .card-heading { font-family: var(--font-display); font-size: clamp(1.2rem, 2vw, 1.8rem); font-weight: 500; }
+    .eyebrow { font-family: var(--font-tech); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-accent); }
+    .tech-text { font-family: var(--font-tech); font-size: 0.75rem; color: var(--color-muted); }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 1rem 1.75rem;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+    }
+    .btn-primary { background: var(--color-accent); color: #fff; }
+    .btn-primary:hover { background: #d94e2d; transform: translateY(-2px); }
+    .btn-outline { background: transparent; border-color: var(--color-border); color: var(--color-text); }
+    .btn-outline:hover { background: rgba(255,255,255,0.05); }
+
+    /* Navigation */
+    header {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      z-index: 100;
+      padding: 1.5rem 0;
+      transition: all 0.4s ease;
+    }
+    header.scrolled {
+      background: rgba(17, 20, 24, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1rem 0;
+    }
+    .nav-container { display: flex; justify-content: space-between; align-items: center; }
+    .brand { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; letter-spacing: 0.05em; }
+    .brand span { font-size: 0.7rem; color: var(--color-muted); display: block; font-family: var(--font-tech); }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a { font-size: 0.875rem; color: var(--color-text); transition: color 0.3s; }
+    .nav-links a:hover { color: var(--color-accent); }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 6rem;
+      position: relative;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: clamp(2rem, 5vw, 6rem);
+      align-items: center;
+      height: 80vh;
+    }
+    .hero-content { z-index: 2; padding-right: 2rem; }
+    .hero-title-wrapper { overflow: hidden; }
+    .hero-description { font-size: 1.125rem; color: var(--color-muted); margin: 2rem 0; max-width: 90%; }
+    .hero-actions { display: flex; gap: 1rem; align-items: center; }
+    
+    .hero-visual {
+      position: relative;
+      height: 100%;
+      border-radius: var(--radius-panel);
+      overflow: hidden;
+    }
+    .hero-visual img { width: 100%; height: 100%; }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-panel);
+      background: linear-gradient(to bottom, transparent 60%, var(--color-bg) 100%);
+    }
+    .tech-line { position: absolute; background: var(--color-accent); }
+    .tech-line.h { height: 1px; width: 100%; top: 30%; left: 0; opacity: 0.5; }
+    .tech-line.v { width: 1px; height: 100%; left: 60%; top: 0; opacity: 0.5; }
+    .tech-label { position: absolute; bottom: 2rem; right: 2rem; writing-mode: vertical-rl; transform: rotate(180deg); }
+
+    /* Light Story Section */
+    .story-section {
+      background: var(--color-paper);
+      color: var(--color-bg);
+      padding: 8rem 0;
+      border-top-left-radius: 2rem;
+      border-top-right-radius: 2rem;
+    }
+    .story-section .section-heading { margin-bottom: 4rem; max-width: 800px; }
+    .story-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .story-card {
+      padding: 2.5rem 2rem;
+      border: 1px solid var(--color-border-dark);
+      border-radius: var(--radius-card);
+      display: flex; flex-direction: column; gap: 1.5rem;
+    }
+    .story-card p { color: #4A5057; font-size: 1.05rem; }
+
+    /* Precision Services */
+    .services-section { padding: 8rem 0; }
+    .services-header { margin-bottom: 4rem; max-width: 700px; }
+    .bento-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 1.5rem; }
+    .bento-card {
+      grid-column: span 4;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: 2.5rem;
+      display: flex; flex-direction: column; gap: 1.5rem;
+      transition: border-color 0.3s;
+    }
+    .bento-card:hover { border-color: rgba(255,255,255,0.3); }
+    .bento-card ul { margin-top: 1rem; color: var(--color-muted); display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.95rem; }
+    .bento-card ul li::before { content: '—'; margin-right: 0.5rem; color: var(--color-accent); }
+    
+    .bento-small-grid { grid-column: span 12; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 1rem; }
+    .bento-small { background: var(--color-surface); padding: 1.5rem; border-radius: var(--radius-card); border: 1px solid var(--color-border); }
+
+    /* Before/After Gallery */
+    .gallery-section { padding: 6rem 0; background: var(--color-bg); }
+    .slider-container {
+      position: relative;
+      width: 100%;
+      height: 600px;
+      border-radius: var(--radius-panel);
+      overflow: hidden;
+      cursor: ew-resize;
+    }
+    .slider-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .img-after { z-index: 1; }
+    .img-before { z-index: 2; clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); }
+    .slider-handle {
+      position: absolute;
+      top: 0; left: 50%;
+      width: 2px; height: 100%;
+      background: var(--color-accent);
+      z-index: 3;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+    .slider-handle::after {
+      content: '< >';
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 48px; height: 32px;
+      background: var(--color-accent);
+      color: #fff; border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-tech); font-size: 12px; letter-spacing: 2px;
+    }
+    .slider-labels { display: flex; justify-content: space-between; margin-top: 1.5rem; font-family: var(--font-tech); font-size: 0.85rem; color: var(--color-muted); text-transform: uppercase; }
+
+    /* Estimate Form */
+    .estimate-section { padding: 8rem 0; background: var(--color-surface); border-radius: 2rem; margin: 4rem 0; }
+    .form-container { max-width: 600px; margin: 0 auto; background: var(--color-bg); padding: 3rem; border-radius: var(--radius-panel); border: 1px solid var(--color-border); }
+    .form-progress { height: 4px; background: var(--color-border); border-radius: 2px; margin-bottom: 2rem; overflow: hidden; }
+    .form-progress-bar { height: 100%; width: 25%; background: var(--color-accent); transition: width 0.4s ease; }
+    .form-step { display: none; }
+    .form-step.active { display: block; animation: fadeIn 0.4s ease; }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-size: 0.875rem; color: var(--color-muted); }
+    .form-group input, .form-group select {
+      width: 100%; padding: 1rem;
+      background: transparent; border: 1px solid var(--color-border);
+      border-radius: 0.5rem; color: var(--color-text); font-family: var(--font-body);
+    }
+    .form-group input:focus { outline: none; border-color: var(--color-accent); }
+    
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Footer */
+    footer { padding: 4rem 0 2rem; border-top: 1px solid var(--color-border); }
+    .footer-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+    .footer-col h4 { font-family: var(--font-display); margin-bottom: 1.5rem; }
+    .footer-col p, .footer-col a { color: var(--color-muted); font-size: 0.9rem; margin-bottom: 0.5rem; display: block; }
+    .footer-bottom { border-top: 1px solid var(--color-border); padding-top: 2rem; text-align: center; font-size: 0.8rem; color: var(--color-muted); font-family: var(--font-tech); }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr 1fr; }
+      .bento-card { grid-column: span 6; }
+      .bento-small-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; } /* Simplified for mobile */
+      .hero { padding-top: 8rem; }
+      .hero-grid { grid-template-columns: 1fr; height: auto; }
+      .hero-visual { height: 400px; margin-top: 2rem; }
+      .story-grid { grid-template-columns: 1fr; }
+      .bento-card { grid-column: span 12; }
+      .bento-small-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .slider-container { height: 400px; }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header id="header">
+    <div class="container nav-container">
+      <a href="#" class="brand">
+        APEX COLLISION
+        <span>REPAIR • REFINISH • RESTORE</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#process">Our process</a>
+        <a href="#services">Services</a>
+        <a href="#gallery">Repair stories</a>
+        <a href="tel:5550198">Call: (555) 0198</a>
+        <a href="#estimate" class="btn btn-primary">Request an estimate ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <span class="eyebrow hero-eyebrow">Collision Repair • Structural Precision</span>
+        <h1 class="hero-heading" style="margin-top: 1.5rem;">
+          <div class="hero-title-wrapper"><div class="hero-title-line">The impact is only</div></div>
+          <div class="hero-title-wrapper"><div class="hero-title-line">the beginning.</div></div>
+        </h1>
+        <p class="hero-description">Precision brings everything back into alignment. From hidden structural damage to a seamless paint finish, every repair begins with a careful assessment.</p>
+        <div class="hero-actions">
+          <a href="#estimate" class="btn btn-primary">Get a repair estimate ↗</a>
+          <a href="#process" class="btn btn-outline">Explore our process ↓</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <!-- Using a high-quality mechanical/automotive unsplash image as technical fallback -->
+        <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&q=80&w=1200" alt="Precision structural repair bay">
+        <div class="hero-overlay">
+          <div class="tech-line h"></div>
+          <div class="tech-line v"></div>
+          <span class="tech-text tech-label">REPAIR / 001 - SYSTEM ACTIVE</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story Section (Light) -->
+  <section id="process" class="story-section">
+    <div class="container">
+      <h2 class="section-heading">The damage you see isn't always the damage that matters.</h2>
+      
+      <div class="story-grid">
+        <div class="story-card">
+          <span class="eyebrow">Chapter 01 / What you see</span>
+          <h3 class="card-heading">A damaged panel is only part of the picture.</h3>
+          <p>A dent, a misaligned hood, or a cracked bumper can be obvious. What isn't obvious is whether surrounding components have shifted.</p>
+        </div>
+        <div class="story-card">
+          <span class="eyebrow">Chapter 02 / What we investigate</span>
+          <h3 class="card-heading">Look beyond the surface.</h3>
+          <p>Our assessment examines visible damage and identifies areas requiring structural measurement or manufacturer-specific diagnostics.</p>
+        </div>
+        <div class="story-card">
+          <span class="eyebrow">Chapter 03 / The repair plan</span>
+          <h3 class="card-heading">Measure first. Repair with purpose.</h3>
+          <p>When structural damage is suspected, measuring equipment and OEM repair information help establish the correct sequence of repairs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Precision Services (Dark) -->
+  <section id="services" class="services-section">
+    <div class="container">
+      <div class="services-header">
+        <span class="eyebrow">Our Approach / Three Precision Systems</span>
+        <h2 class="section-heading">Engineered back to specification.</h2>
+        <p class="hero-description" style="margin-top:1rem;">Structural integrity, panel fit, and finish quality are different parts of the same repair. We bring them together through a documented process.</p>
+      </div>
+
+      <div class="bento-grid">
+        <div class="bento-card">
+          <span class="eyebrow">01 / Structure</span>
+          <h3 class="card-heading">Laser frame straightening & measurement</h3>
+          <p>A collision can affect structural reference points. Appropriate measurement helps technicians determine whether the structure is within tolerances.</p>
+          <ul>
+            <li>Initial structural assessment</li>
+            <li>Electronic or laser-assisted measurement</li>
+            <li>Repair planning using OEM procedures</li>
+          </ul>
+        </div>
+        <div class="bento-card">
+          <span class="eyebrow">02 / Refinishing</span>
+          <h3 class="card-heading">Paint matching beyond the paint code</h3>
+          <p>Lighting, age, finish type, and existing paint variation can affect how a color looks. We match the vehicle, not just the code.</p>
+          <ul>
+            <li>Spectrophotometer-assisted analysis</li>
+            <li>Spray-out testing and visual comparison</li>
+            <li>Appropriate blending & preparation</li>
+          </ul>
+        </div>
+        <div class="bento-card">
+          <span class="eyebrow">03 / Bodywork</span>
+          <h3 class="card-heading">Panel fit. Surface quality. Finish.</h3>
+          <p>From damaged panels to component replacement, every repair begins with an assessment of what can be repaired safely.</p>
+          <ul>
+            <li>Panel repair or replacement</li>
+            <li>Gap and alignment checks</li>
+            <li>Reassembly and final inspection</li>
+          </ul>
+        </div>
+
+        <!-- Small grid for secondary services -->
+        <div class="bento-small-grid">
+          <div class="bento-small">
+            <h4 class="card-heading" style="font-size:1.1rem; margin-bottom:0.5rem;">Bumper & Panel</h4>
+            <p class="tech-text">Repair or replacement based on damage & material.</p>
+          </div>
+          <div class="bento-small">
+            <h4 class="card-heading" style="font-size:1.1rem; margin-bottom:0.5rem;">Full-body Refinishing</h4>
+            <p class="tech-text">Preparation, color application, clearcoat.</p>
+          </div>
+          <div class="bento-small">
+            <h4 class="card-heading" style="font-size:1.1rem; margin-bottom:0.5rem;">ADAS Calibration</h4>
+            <p class="tech-text">Applicable scans and calibration coordination.</p>
+          </div>
+          <div class="bento-small">
+            <h4 class="card-heading" style="font-size:1.1rem; margin-bottom:0.5rem;">Post-repair Check</h4>
+            <p class="tech-text">Fitment checks and completion documentation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Before & After Gallery -->
+  <section id="gallery" class="gallery-section">
+    <div class="container">
+      <div class="services-header">
+        <span class="eyebrow">Real Repair Stories</span>
+        <h2 class="section-heading">Every detail has a before and after.</h2>
+      </div>
+      
+      <!-- Interactive Slider -->
+      <div class="slider-container" id="ba-slider">
+        <img src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&q=80&w=1400" alt="Car After Repair" class="slider-img img-after" draggable="false">
+        <img src="https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&q=80&w=1400" alt="Car Before Repair - Damaged" class="slider-img img-before" id="img-before" draggable="false">
+        <div class="slider-handle" id="slider-handle"></div>
+      </div>
+      <div class="slider-labels">
+        <span>← Before: Front-end Collision</span>
+        <span>After: Bodywork and Refinishing →</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Estimate Form UI -->
+  <section id="estimate" class="container">
+    <div class="estimate-section">
+      <div class="form-container">
+        <span class="eyebrow">Repair Intake</span>
+        <h2 class="section-heading" style="font-size:2rem; margin: 0.5rem 0 2rem;">Let's start with your vehicle.</h2>
+        
+        <div class="form-progress"><div class="form-progress-bar" id="progress-bar"></div></div>
+        
+        <form id="estimate-form" onsubmit="event.preventDefault();">
+          <!-- Step 1 -->
+          <div class="form-step active" id="step-1">
+            <div class="form-group">
+              <label>Vehicle Make</label>
+              <input type="text" placeholder="e.g. Audi" required>
+            </div>
+            <div class="form-group">
+              <label>Vehicle Model</label>
+              <input type="text" placeholder="e.g. Q5" required>
+            </div>
+            <div class="form-group">
+              <label>Vehicle Year</label>
+              <input type="number" placeholder="2023" required>
+            </div>
+            <button type="button" class="btn btn-primary" style="width:100%; margin-top:1rem;" onclick="nextStep(2)">Continue →</button>
+          </div>
+
+          <!-- Step 2 (Visual mockup) -->
+          <div class="form-step" id="step-2">
+            <div class="form-group">
+              <label>Describe the damage</label>
+              <input type="text" placeholder="Front right bumper and headlight" required>
+            </div>
+            <div class="form-group">
+              <label>Upload Photos (Optional)</label>
+              <div style="border: 1px dashed var(--color-border); padding: 2rem; text-align: center; border-radius: 0.5rem; color: var(--color-muted); font-size: 0.875rem;">
+                Click to upload JPG, PNG (Max 5MB)
+              </div>
+            </div>
+            <div style="display:flex; gap:1rem; margin-top:1rem;">
+              <button type="button" class="btn btn-outline" style="width:30%" onclick="nextStep(1)">Back</button>
+              <button type="button" class="btn btn-primary" style="width:70%" onclick="nextStep(3)">Continue →</button>
+            </div>
+          </div>
+
+          <!-- Step 3 (Visual mockup) -->
+          <div class="form-step" id="step-3">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" placeholder="Jane Doe" required>
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" placeholder="(555) 000-0000" required>
+            </div>
+            <div style="display:flex; gap:1rem; margin-top:1rem;">
+              <button type="button" class="btn btn-outline" style="width:30%" onclick="nextStep(2)">Back</button>
+              <button type="button" class="btn btn-primary" style="width:70%" onclick="alert('Estimate request submitted! (Frontend Prototype)')">Submit Request</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>APEX COLLISION</h4>
+          <p>OEM-Guided Frame & Paint Precision.</p>
+          <p>The impact is only the beginning.</p>
+        </div>
+        <div class="footer-col">
+          <h4 style="font-family:var(--font-body); font-size:1rem; color:var(--color-text);">Contact</h4>
+          <a href="tel:5550198">(555) 0198-APEX</a>
+          <a href="#">estimates@apexcollision.com</a>
+          <p style="margin-top:1rem;">100 Precision Way,<br>Industrial District, 90210</p>
+        </div>
+        <div class="footer-col">
+          <h4 style="font-family:var(--font-body); font-size:1rem; color:var(--color-text);">Hours</h4>
+          <p>Monday - Friday: 8:00 AM - 6:00 PM</p>
+          <p>Saturday: Estimates by appointment</p>
+          <p>Sunday: Closed</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Apex Collision Repair Studio. All rights reserved. (Design System Prototype)</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <!-- GSAP Core & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- Lenis for Smooth Scrolling -->
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+  <script>
+    // 1. Initialize Lenis (Smooth Scroll)
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smooth: true,
+    });
+    
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // Integrate Lenis with GSAP ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // 2. Sticky Header Effect
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // 3. Hero Animation Sequence (GSAP)
+    const heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    
+    heroTl.from(".hero-eyebrow", {
+      y: 18, opacity: 0, duration: 0.5, delay: 0.2
+    })
+    .from(".hero-title-line", {
+      yPercent: 110, opacity: 0, stagger: 0.12, duration: 0.85
+    }, "-=0.15")
+    .from(".hero-description", {
+      y: 20, opacity: 0, duration: 0.55
+    }, "-=0.35")
+    .from(".hero-actions", {
+      y: 14, opacity: 0, duration: 0.45
+    }, "-=0.2")
+    .from(".hero-visual", {
+      clipPath: "inset(0 0 100% 0)", duration: 1.1, ease: "power2.inOut"
+    }, 0.2)
+    .from(".tech-line", {
+      scaleX: 0, scaleY: 0, transformOrigin: "top left", duration: 0.8, stagger: 0.2
+    }, "-=0.5")
+    .from(".tech-label", {
+      opacity: 0, duration: 0.5
+    }, "-=0.4");
+
+    // 4. Story Section Reveal (ScrollTrigger)
+    gsap.utils.toArray(".story-card").forEach((card, i) => {
+      gsap.from(card, {
+        y: 40,
+        opacity: 0,
+        duration: 0.7,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 85%",
+          once: true
+        }
+      });
+    });
+
+    // 5. Before/After Slider Interaction (Vanilla JS equivalent to Framer Motion drag)
+    const slider = document.getElementById('ba-slider');
+    const imgBefore = document.getElementById('img-before');
+    const handle = document.getElementById('slider-handle');
+    let isDragging = false;
+
+    function updateSlider(x) {
+      const rect = slider.getBoundingClientRect();
+      let percent = ((x - rect.left) / rect.width) * 100;
+      percent = Math.max(0, Math.min(100, percent)); // clamp 0-100
+      imgBefore.style.clipPath = `polygon(0 0, ${percent}% 0, ${percent}% 100%, 0 100%)`;
+      handle.style.left = `${percent}%`;
+    }
+
+    slider.addEventListener('mousedown', (e) => { isDragging = true; updateSlider(e.clientX); });
+    window.addEventListener('mouseup', () => { isDragging = false; });
+    window.addEventListener('mousemove', (e) => { if (isDragging) updateSlider(e.clientX); });
+    
+    // Touch support for slider
+    slider.addEventListener('touchstart', (e) => { isDragging = true; updateSlider(e.touches[0].clientX); }, {passive:true});
+    window.addEventListener('touchend', () => { isDragging = false; });
+    window.addEventListener('touchmove', (e) => { if(isDragging) updateSlider(e.touches[0].clientX); }, {passive:true});
+
+    // 6. Multi-step Form Logic (Vanilla JS alternative to React State)
+    function nextStep(stepNumber) {
+      // Hide all steps
+      document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+      // Show target step
+      document.getElementById(`step-${stepNumber}`).classList.add('active');
+      // Update progress bar
+      const progress = (stepNumber / 3) * 100;
+      document.getElementById('progress-bar').style.width = `${progress}%`;
+    }
+  </script>
+</body>
+</html>

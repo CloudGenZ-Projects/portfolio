@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura | Organic Skin Rejuvenation & Body Contouring</title>
+    <!-- Fonts: Elegant Playfair + Clean Manrope -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Immersive Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- 3D Organic Morphing Background Elements -->
+    <div class="organic-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Particle Engine Canvas (Floating Nature Elements) -->
+    <div id="particle-canvas"></div>
+
+    <!-- Glassmorphic SaaS Header -->
+    <header class="saas-header bento-glass">
+        <div class="logo">AURA<span>.</span></div>
+        <nav class="desktop-nav">
+            <a href="#philosophy">Our Philosophy</a>
+            <a href="#services">Treatments</a>
+            <a href="#case-studies">Case Studies</a>
+        </nav>
+        <button class="cta-btn primary">Book Consultation</button>
+    </header>
+
+    <main>
+        <!-- ================= HERO SECTION (3D Spatial) ================= -->
+        <section class="hero observer-section">
+            <div class="hero-content">
+                <div class="badge fade-in">Physician-Led Aesthetics</div>
+                <h1 class="hero-title fade-in delay-1">Rejuvenation, <br>Rooted in <i class="organic-text">Nature</i>.</h1>
+                <p class="hero-desc fade-in delay-2">We blend organic artistry with clinical precision to restore your skin at a cellular level and contour your body naturally.</p>
+                <div class="hero-actions fade-in delay-3">
+                    <button class="cta-btn primary large">Explore Treatments</button>
+                    <button class="cta-btn secondary large">View Gallery</button>
+                </div>
+            </div>
+            
+            <div class="hero-3d-visual bento-tilt">
+                <div class="glass-orb"></div>
+                <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80" alt="Spa Rejuvenation" class="soft-img">
+                <div class="floating-badge top-right">
+                    <span>99%</span> Satisfaction
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SERVICES BENTO GRID ================= -->
+        <section id="services" class="bento-section observer-section">
+            <h2 class="section-title">Curated Modalities</h2>
+            <p class="section-subtitle">Holistic approaches engineered for noticeable, natural results.</p>
+            
+            <div class="bento-grid">
+                <!-- Large Feature Card -->
+                <div class="bento-card span-2 bento-glass bento-tilt">
+                    <div class="card-content">
+                        <h3>Laser & Organic Serums</h3>
+                        <p>Combining state-of-the-art fractional lasers with plant-derived stem cells for ultimate cellular matrix repair.</p>
+                        <a href="#" class="text-link">Explore Protocol &rarr;</a>
+                    </div>
+                    <div class="card-visual">
+                        <img src="https://images.unsplash.com/photo-1552693673-1bf958298935?auto=format&fit=crop&w=600&q=80" alt="Serum">
+                    </div>
+                </div>
+
+                <!-- Dark Mode Card -->
+                <div class="bento-card bento-dark bento-tilt">
+                    <div class="card-content">
+                        <h3>Body Contouring</h3>
+                        <p>Non-invasive thermal sculpting mapped to your unique anatomical curves.</p>
+                        <a href="#" class="text-link light">Learn More &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Metric Card -->
+                <div class="bento-card stat-card bento-glass bento-tilt">
+                    <h2 class="stat-number" data-target="12000">0</h2>
+                    <p>Procedures Completed</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= GALLERY & CASE STUDIES (In-Depth) ================= -->
+        <section id="case-studies" class="gallery-section observer-section">
+            <div class="section-header">
+                <h2 class="section-title">Clinical Case Studies</h2>
+                <p class="section-subtitle">Real results from our physician-led protocols.</p>
+            </div>
+
+            <div class="case-study-container">
+                <!-- Case Study 1: Skin Rejuvenation with Interactive Slider -->
+                <div class="case-study-bento bento-glass bento-tilt">
+                    <div class="case-info">
+                        <div class="badge">Skin Rejuvenation</div>
+                        <h3>The Cellular Reset Protocol</h3>
+                        <p class="patient-bio"><strong>Patient:</strong> 42yo Female <br><strong>Concern:</strong> Hyperpigmentation & Volume Loss</p>
+                        <p class="case-desc">A 12-week regimen utilizing our proprietary botanical peel combined with RF Microneedling to stimulate deep dermal collagen.</p>
+                        
+                        <div class="metrics-grid">
+                            <div class="metric"><span>94%</span> Texture Improvement</div>
+                            <div class="metric"><span>3</span> Sessions</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Vanilla JS Before/After Image Slider -->
+                    <div class="before-after-slider">
+                        <!-- 'After' Image (Base) -->
+                        <div class="image-after">
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80" alt="After Treatment">
+                            <span class="label label-after">After</span>
+                        </div>
+                        <!-- 'Before' Image (Clipped via JS) -->
+                        <div class="image-before">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80" alt="Before Treatment" style="filter: contrast(0.85) sepia(0.2);">
+                            <span class="label label-before">Before</span>
+                        </div>
+                        <!-- Slider Handle -->
+                        <input type="range" min="0" max="100" value="50" class="slider-input" aria-label="Percentage of before photo shown">
+                        <div class="slider-line">
+                            <div class="slider-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case Study 2: Body Contouring -->
+                <div class="case-study-bento bento-glass bento-tilt reverse-layout">
+                    <div class="case-info">
+                        <div class="badge">Body Sculpting</div>
+                        <h3>Organic Contour Mapping</h3>
+                        <p class="patient-bio"><strong>Patient:</strong> 35yo Male <br><strong>Concern:</strong> Stubborn abdominal adipose tissue</p>
+                        <p class="case-desc">Non-invasive cryo-aesthetics paired with lymphatic drainage massage utilizing ginger-root infused organic oils.</p>
+                        <button class="cta-btn secondary">Read Full Study</button>
+                    </div>
+                    <div class="case-image-grid">
+                        <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=600&q=80" alt="Body Contouring Detail 1" class="soft-img shadow-img">
+                        <img src="https://images.unsplash.com/photo-1519824145371-296894a0daa9?auto=format&fit=crop&w=600&q=80" alt="Body Contouring Detail 2" class="soft-img shadow-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BOTTOM CTA ================= -->
+        <section class="bottom-cta observer-section">
+            <div class="cta-box bento-tilt">
+                <h2>Reveal Your Aura</h2>
+                <p>Schedule your personalized physician consultation.</p>
+                <div class="input-group">
+                    <input type="email" placeholder="Enter your email address">
+                    <button class="cta-btn primary">Begin Journey</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

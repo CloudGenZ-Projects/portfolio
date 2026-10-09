@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Quiet Ritual | Therapeutic Deep Tissue & Infrared Sauna Retreat</title>
+    
+    <!-- Typography System -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* 1. Design Tokens & Variables */
+        :root {
+            /* Colors */
+            --c-porcelain: #F2EDE3;
+            --c-sage: #78816A;
+            --c-moss: #303A32;
+            --c-amber: #C49A70;
+            --c-white: #FFFFFF;
+            
+            /* Typography */
+            --f-display: 'Cormorant Garamond', serif;
+            --f-interface: 'Inter', sans-serif;
+            
+            /* Spacing Scale */
+            --s-xs: 8px;
+            --s-sm: 16px;
+            --s-md: 24px;
+            --s-lg: 40px;
+            --s-xl: 64px;
+            --s-2xl: 96px;
+            --s-3xl: 128px;
+            
+            /* Motion */
+            --ease-out: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1.000);
+            --t-fast: 250ms;
+            --t-med: 600ms;
+            --t-slow: 1000ms;
+        }
+
+        /* 2. Reset & Base */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--c-porcelain);
+            color: var(--c-moss);
+            font-family: var(--f-interface);
+            font-weight: 300;
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color var(--t-slow) var(--ease-out);
+        }
+
+        img { max-width: 100%; height: auto; display: block; object-fit: cover; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* Typography Classes */
+        h1, h2, h3, .display-text {
+            font-family: var(--f-display);
+            font-weight: 400;
+            line-height: 1.1;
+        }
+        
+        .eyebrow {
+            font-family: var(--f-interface);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-bottom: var(--s-sm);
+            display: block;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: var(--s-sm) var(--s-lg);
+            background-color: var(--c-moss);
+            color: var(--c-porcelain);
+            border: 1px solid var(--c-moss);
+            font-family: var(--f-interface);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all var(--t-fast) var(--ease-out);
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--c-moss);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--c-moss);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--c-moss);
+            color: var(--c-porcelain);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-padding { padding: var(--s-3xl) 0; }
+
+        /* Animation Utility Classes (Triggered via JS) */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity var(--t-med) var(--ease-out), transform var(--t-med) var(--ease-out);
+        }
+        .reveal-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-1 { transition-delay: 100ms; }
+        .delay-2 { transition-delay: 200ms; }
+        .delay-3 { transition-delay: 300ms; }
+
+        /* -----------------------------------
+           3. Navbar
+        ----------------------------------- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: var(--s-md) 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: linear-gradient(to bottom, rgba(242, 237, 227, 0.9), rgba(242, 237, 227, 0));
+            backdrop-filter: blur(5px);
+        }
+        .logo { font-family: var(--f-display); font-size: 1.5rem; letter-spacing: 0.05em;}
+        .nav-links { display: flex; gap: var(--s-lg); font-size: 0.85rem;}
+
+        /* -----------------------------------
+           4. Hero Section - The moment you slow down
+        ----------------------------------- */
+        .hero {
+            height: 100vh;
+            min-height: 700px;
+            position: relative;
+            display: grid;
+            grid-template-columns: 55% 45%;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Breathing Background */
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .ambient-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.6;
+            animation: breathe 15s infinite alternate var(--ease-in-out);
+        }
+        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--c-sage); }
+        .blob-2 { bottom: -20%; right: 20%; width: 40vw; height: 40vw; background: var(--c-amber); animation-delay: -5s; }
+
+        @keyframes breathe {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.1) translate(30px, 30px); }
+        }
+
+        .hero-content {
+            padding-left: 10%;
+            padding-right: var(--s-xl);
+            z-index: 2;
+        }
+        
+        .hero-content h1 {
+            font-size: clamp(3rem, 5vw, 5.5rem);
+            margin-bottom: var(--s-md);
+        }
+        
+        .hero-content p {
+            font-size: 1.1rem;
+            max-width: 480px;
+            margin-bottom: var(--s-lg);
+        }
+
+        .hero-actions { display: flex; gap: var(--s-md); align-items: center;}
+
+        .hero-image-wrapper {
+            height: 100vh;
+            position: relative;
+        }
+        .hero-image-wrapper img {
+            width: 100%; height: 100%; object-fit: cover;
+            border-radius: 200px 0 0 200px; /* Asymmetric organic feel */
+        }
+        
+        /* Floating element */
+        .floating-badge {
+            position: absolute;
+            bottom: 15%;
+            left: -50px;
+            width: 140px; height: 140px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            text-align: center;
+            font-family: var(--f-display);
+            font-size: 1.1rem;
+            color: var(--c-white);
+            animation: rotateSlow 20s linear infinite;
+        }
+        
+        .floating-badge span {
+            animation: rotateSlow 20s linear infinite reverse; /* Keeps text upright */
+        }
+
+        @keyframes rotateSlow { 100% { transform: rotate(360deg); } }
+
+        /* -----------------------------------
+           5. Intro - The Art of Unwinding
+        ----------------------------------- */
+        .intro-section .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--s-3xl);
+            align-items: center;
+        }
+
+        .intro-text h2 {
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            margin-bottom: var(--s-lg);
+            position: relative;
+            padding-left: var(--s-lg);
+        }
+        
+        /* Progress Line */
+        .intro-text h2::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 10px;
+            width: 2px;
+            height: 0%;
+            background: var(--c-amber);
+            transition: height 1.5s var(--ease-out);
+        }
+        .intro-text h2.is-visible::before { height: 80%; }
+
+        .intro-principles {
+            display: flex; gap: var(--s-lg);
+            margin-top: var(--s-2xl);
+            border-top: 1px solid rgba(48, 58, 50, 0.1);
+            padding-top: var(--s-md);
+        }
+        .principle { font-size: 0.85rem; }
+
+        .intro-image img { border-radius: 4px; }
+
+        /* -----------------------------------
+           6. Asymmetric Bento Grid - Services
+        ----------------------------------- */
+        .bento-header { text-align: center; margin-bottom: var(--s-2xl); max-width: 600px; margin-inline: auto;}
+        .bento-header h2 { font-size: 3rem; margin-bottom: var(--s-sm); }
+        
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: minmax(250px, auto);
+            gap: var(--s-sm);
+        }
+
+        .bento-card {
+            position: relative;
+            background: var(--c-white);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex; flex-direction: column;
+            text-decoration: none;
+            color: var(--c-moss);
+        }
+
+        /* Asymmetric placements */
+        .card-feature { grid-column: span 2; grid-row: span 2; }
+        .card-sauna { grid-column: span 1; grid-row: span 1; background: var(--c-amber); color: var(--c-porcelain);}
+        .card-slow { grid-column: span 1; grid-row: span 1; }
+        .card-combo { grid-column: span 3; grid-row: span 1; flex-direction: row; align-items: center;}
+
+        .bento-img-wrap { width: 100%; height: 100%; overflow: hidden; position: absolute; inset: 0; z-index: 1;}
+        .bento-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--t-med) var(--ease-out); }
+        
+        /* Dark overlay for text readability over images */
+        .card-feature::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(48,58,50,0.8) 0%, rgba(48,58,50,0) 60%);
+            z-index: 2;
+        }
+
+        .bento-content {
+            position: relative; z-index: 3;
+            padding: var(--s-lg);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            height: 100%;
+        }
+        
+        .card-feature .bento-content { color: var(--c-porcelain); }
+        .card-combo .bento-content { width: 50%; padding-right: 0;}
+        .card-combo .bento-img-wrap { position: relative; width: 50%; height: 100%; }
+
+        .bento-card h3 { font-size: 2rem; margin-bottom: var(--s-xs); }
+        .bento-card .bento-num { position: absolute; top: var(--s-md); right: var(--s-md); font-family: var(--f-display); font-size: 1.5rem; opacity: 0.5;}
+
+        /* Hover Interactions */
+        .bento-card:hover .bento-img-wrap img { transform: scale(1.04); }
+        .arrow { display: inline-block; transition: transform var(--t-fast); margin-left: 8px;}
+        .bento-card:hover .arrow { transform: translate(4px, -4px); }
+
+        /* -----------------------------------
+           7. Interactive Selector
+        ----------------------------------- */
+        .selector-section { background-color: var(--c-white); padding: var(--s-3xl) 0; }
+        .selector-ui {
+            background: var(--c-porcelain);
+            padding: var(--s-2xl);
+            border-radius: 16px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .selector-group { margin-bottom: var(--s-lg); }
+        .selector-group h4 { font-family: var(--f-interface); font-weight: 400; margin-bottom: var(--s-sm); }
+        
+        .options-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-sm);
+        }
+        
+        .option-btn {
+            background: var(--c-white);
+            border: 1px solid rgba(48,58,50,0.1);
+            padding: var(--s-md);
+            text-align: left;
+            cursor: pointer;
+            transition: all var(--t-fast);
+        }
+        .option-btn h5 { font-family: var(--f-display); font-size: 1.25rem; margin-bottom: 4px;}
+        .option-btn p { font-size: 0.8rem; opacity: 0.7;}
+        .option-btn:hover, .option-btn.active { border-color: var(--c-moss); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+
+        .time-options { display: flex; gap: var(--s-sm); }
+        .time-btn { padding: var(--s-sm) var(--s-lg); border: 1px solid rgba(48,58,50,0.2); background: transparent; cursor: pointer; transition: all 0.2s;}
+        .time-btn.active { background: var(--c-moss); color: var(--c-porcelain); }
+
+        .selector-result { margin-top: var(--s-2xl); border-top: 1px solid rgba(48,58,50,0.1); padding-top: var(--s-lg); display: flex; justify-content: space-between; align-items: center;}
+
+        /* -----------------------------------
+           8. Sticky Scroll Storytelling (The Signature Ritual)
+        ----------------------------------- */
+        .story-section {
+            padding: 0; /* Reset for sticky layout */
+            position: relative;
+        }
+        
+        .story-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+        }
+
+        .story-text-side {
+            padding: var(--s-3xl) 10%;
+        }
+
+        .chapter {
+            height: 100vh; /* Each chapter takes full height to force scroll */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0.3;
+            transition: opacity var(--t-med) var(--ease-out);
+            position: relative;
+        }
+        .chapter.is-active { opacity: 1; }
+        
+        .chapter-line {
+            position: absolute; left: -20px; top: 0; bottom: 0; width: 1px; background: rgba(48,58,50,0.1);
+        }
+        .chapter.is-active .chapter-line::after {
+            content: ''; position: absolute; top:0; left: 0; width: 2px; height: 100%; background: var(--c-sage);
+            animation: fillLine 1s forwards;
+        }
+
+        @keyframes fillLine { 0% { height: 0; } 100% { height: 100%; } }
+
+        .chapter h2 { font-size: 3rem; margin-bottom: var(--s-sm); }
+        
+        .story-image-side {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .story-image {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%; object-fit: cover;
+            opacity: 0;
+            transition: opacity var(--t-slow) var(--ease-out), transform 3s ease-out;
+            transform: scale(1.05);
+        }
+        .story-image.is-active { opacity: 1; transform: scale(1); }
+
+        /* -----------------------------------
+           9. Sauna Feature
+        ----------------------------------- */
+        .sauna-section {
+            background-color: var(--c-amber);
+            color: var(--c-porcelain);
+            text-align: center;
+        }
+        
+        .sauna-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-md); margin-top: var(--s-2xl);
+            text-align: left;
+        }
+        .sauna-card { border-top: 1px solid rgba(255,255,255,0.2); padding-top: var(--s-md); }
+        .sauna-card h4 { font-family: var(--f-display); font-size: 1.5rem; margin-bottom: 8px;}
+        .sauna-card p { font-size: 0.85rem; opacity: 0.9;}
+
+        /* -----------------------------------
+           10. Footer & CTA
+        ----------------------------------- */
+        .final-cta {
+            text-align: center;
+            background: linear-gradient(to bottom, var(--c-porcelain), #E6DFD1);
+            padding: 150px 0;
+        }
+        .final-cta h2 { font-size: 4rem; margin-bottom: var(--s-md); }
+
+        footer {
+            background-color: var(--c-moss);
+            color: var(--c-porcelain);
+            padding: var(--s-3xl) 0 var(--s-md) 0;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: var(--s-2xl);
+            margin-bottom: var(--s-3xl);
+        }
+        
+        .footer-col h4 { font-family: var(--f-display); font-size: 1.25rem; margin-bottom: var(--s-md); color: var(--c-sage);}
+        .footer-col ul li { margin-bottom: 12px; font-size: 0.85rem; opacity: 0.8;}
+        .footer-col ul li:hover { opacity: 1; }
+        
+        .newsletter input {
+            background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.2);
+            color: white; padding: 8px 0; width: 100%; margin-bottom: var(--s-sm);
+            font-family: var(--f-interface); outline: none;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: var(--s-md);
+            display: flex; justify-content: space-between; font-size: 0.75rem; opacity: 0.5;
+        }
+
+        /* -----------------------------------
+           Responsive Design (Media Queries)
+        ----------------------------------- */
+        @media (max-width: 1024px) {
+            .bento-grid { grid-template-columns: 1fr 1fr; }
+            .card-combo, .card-feature { grid-column: span 2; }
+            .story-layout { grid-template-columns: 1fr; }
+            .story-image-side { display: none; /* Simplify on smaller tablets for flow */ }
+            .chapter { height: auto; padding: var(--s-3xl) 0; opacity: 1; }
+            .sauna-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .hero { grid-template-columns: 1fr; text-align: center; padding-top: 100px;}
+            .hero-content { padding: 0 5%; }
+            .hero-actions { justify-content: center; }
+            .hero-image-wrapper { display: none; }
+            .intro-section .container { grid-template-columns: 1fr; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .card-combo, .card-feature, .card-sauna, .card-slow { grid-column: span 1; }
+            .card-combo { flex-direction: column; }
+            .card-combo .bento-content, .card-combo .bento-img-wrap { width: 100%; height: 250px;}
+            .options-grid { grid-template-columns: 1fr; }
+            .sauna-grid, .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">The Quiet Ritual</div>
+        <div class="nav-links">
+            <a href="#treatments">Treatments</a>
+            <a href="#sauna">Sauna</a>
+            <a href="#story">Experience</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- 1. Hero Section -->
+        <section class="hero" id="arrive">
+            <div class="hero-bg">
+                <div class="ambient-blob blob-1"></div>
+                <div class="ambient-blob blob-2"></div>
+            </div>
+            
+            <div class="hero-content">
+                <span class="eyebrow reveal-up">A space to return to yourself</span>
+                <h1 class="reveal-up delay-1">Your body has been carrying enough.</h1>
+                <p class="reveal-up delay-2">Therapeutic deep tissue massage, restorative bodywork, and infrared sauna rituals designed to help you slow down, reconnect with your body, and make room for rest.</p>
+                <div class="hero-actions reveal-up delay-3">
+                    <a href="#reserve" class="btn">Reserve Your Ritual</a>
+                    <a href="#treatments" class="btn btn-outline">Explore Treatments</a>
+                </div>
+            </div>
+
+            <div class="hero-image-wrapper">
+                <!-- Using high quality Unsplash spa/linen aesthetic images -->
+                <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Spa treatment room with soft light">
+                <div class="floating-badge">
+                    <span>Your time.<br>Your ritual.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Emotional Introduction -->
+        <section class="section-padding intro-section" id="exhale">
+            <div class="container">
+                <div class="intro-text">
+                    <span class="eyebrow">The Art of Unwinding</span>
+                    <h2 class="reveal-up">You don't have to earn your rest.</h2>
+                    <p class="reveal-up delay-1">The long hours. The tight shoulders. The constant feeling of needing to be somewhere else. We created this space for the moment you decide to pause.</p>
+                    <p class="reveal-up delay-2" style="margin-top: 16px;">Every detail — from the warmth of the room to the rhythm of each treatment — is designed to help you step away from the noise and give your body the attention it deserves.</p>
+                    
+                    <div class="intro-principles reveal-up delay-3">
+                        <div class="principle"><strong>01</strong> Listen to your body</div>
+                        <div class="principle"><strong>02</strong> Move at your pace</div>
+                        <div class="principle"><strong>03</strong> Make space for rest</div>
+                    </div>
+                </div>
+                <div class="intro-image reveal-up delay-2">
+                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Massage therapy oils and hands">
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Asymmetric Bento Grid -->
+        <section class="section-padding" id="treatments">
+            <div class="container">
+                <div class="bento-header reveal-up">
+                    <span class="eyebrow">Find your way back to balance</span>
+                    <h2>Different needs. Thoughtful rituals.</h2>
+                    <p>Some days call for focused therapeutic bodywork. Others call for warmth, quiet, and the luxury of doing absolutely nothing.</p>
+                </div>
+
+                <div class="bento-grid">
+                    <!-- Feature Card -->
+                    <a href="#" class="bento-card card-feature reveal-up">
+                        <div class="bento-img-wrap"><img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Deep tissue massage"></div>
+                        <div class="bento-content">
+                            <span class="eyebrow">Therapeutic Bodywork</span>
+                            <h3>Deep Tissue Reset</h3>
+                            <p>Focused, intentional pressure tailored to areas of persistent muscle tension and physical strain.</p>
+                        </div>
+                        <span class="bento-num">01</span>
+                    </a>
+                    
+                    <!-- Small Card 1 -->
+                    <a href="#" class="bento-card card-sauna reveal-up delay-1">
+                        <div class="bento-content">
+                            <span class="eyebrow">Heat Ritual</span>
+                            <h3>Infrared Sauna</h3>
+                            <p>A quiet, warmth-focused ritual in a dedicated infrared sauna space.</p>
+                            <span style="margin-top:auto; font-size: 0.8rem; font-weight: 500;">30 / 45 minutes <span class="arrow">↗</span></span>
+                        </div>
+                        <span class="bento-num">02</span>
+                    </a>
+
+                    <!-- Small Card 2 -->
+                    <a href="#" class="bento-card card-slow reveal-up delay-2">
+                        <div class="bento-img-wrap"><img src="https://images.unsplash.com/photo-1552693673-1bf958298935?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gentle massage"></div>
+                        <div class="bento-content">
+                            <span class="eyebrow">Slow Bodywork</span>
+                            <h3>Restorative Massage</h3>
+                            <span style="margin-top:auto; font-size: 0.8rem; font-weight: 500;">60 / 90 minutes <span class="arrow">↗</span></span>
+                        </div>
+                        <span class="bento-num">03</span>
+                    </a>
+
+                    <!-- Horizontal Combo Card -->
+                    <a href="#" class="bento-card card-combo reveal-up delay-3">
+                        <div class="bento-content">
+                            <span class="eyebrow">The Complete Experience</span>
+                            <h3>The Full Reset</h3>
+                            <p>Pair a massage with an infrared sauna session for a thoughtfully paced visit.</p>
+                            <span style="margin-top: 16px; display: inline-block;" class="btn btn-outline">Explore Combo <span class="arrow">↗</span></span>
+                        </div>
+                        <div class="bento-img-wrap"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Spa interior"></div>
+                        <span class="bento-num">04</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Interactive Treatment Selector -->
+        <section class="selector-section section-padding">
+            <div class="container reveal-up">
+                <div class="bento-header">
+                    <span class="eyebrow">Your personalized starting point</span>
+                    <h2>What would feel right today?</h2>
+                </div>
+                
+                <div class="selector-ui">
+                    <div class="selector-group">
+                        <h4>Choose the experience that matches your needs:</h4>
+                        <div class="options-grid">
+                            <div class="option-btn active" onclick="selectOption(this, 'Deep Tissue')">
+                                <h5>Focused muscle work</h5>
+                                <p>Targeted approach for tight or overworked areas.</p>
+                            </div>
+                            <div class="option-btn" onclick="selectOption(this, 'Restorative')">
+                                <h5>A slower, gentler massage</h5>
+                                <p>Calming session with flowing movements.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="selector-group" style="margin-top: var(--s-lg);">
+                        <h4>Time set aside:</h4>
+                        <div class="time-options">
+                            <button class="time-btn" onclick="selectTime(this, '30')">30m</button>
+                            <button class="time-btn active" onclick="selectTime(this, '60')">60m</button>
+                            <button class="time-btn" onclick="selectTime(this, '90')">90m</button>
+                        </div>
+                    </div>
+
+                    <div class="selector-result">
+                        <div>
+                            <span class="eyebrow">Suggested Point</span>
+                            <h3 id="result-title" style="font-family: var(--f-display); font-size: 2rem;">Deep Tissue Reset</h3>
+                            <p id="result-desc" style="font-size: 0.9rem; margin-top: 4px;">Your selected time: 60 minutes.</p>
+                        </div>
+                        <button class="btn">Select & Book</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Scroll-driven Storytelling (Signature Ritual) -->
+        <section class="story-section" id="story">
+            <div class="story-layout">
+                <div class="story-text-side">
+                    <!-- Chapter 1 -->
+                    <div class="chapter" data-bg="var(--c-porcelain)" data-img="story-img-1">
+                        <div class="chapter-line"></div>
+                        <span class="eyebrow">Chapter 01 · Arrival</span>
+                        <h2>Leave the rush at the door.</h2>
+                        <p>Arrive a little early. Put your phone away. Settle into a quieter space where the next hour belongs to you.</p>
+                    </div>
+                    <!-- Chapter 2 -->
+                    <div class="chapter" data-bg="#EAECE5" data-img="story-img-2"> <!-- Slight transition to sage hint -->
+                        <div class="chapter-line"></div>
+                        <span class="eyebrow">Chapter 02 · Listen</span>
+                        <h2>Your needs come first.</h2>
+                        <p>We begin with a conversation about pressure, preferences, areas of concern, and what would make the session feel comfortable for you.</p>
+                    </div>
+                    <!-- Chapter 3 -->
+                    <div class="chapter" data-bg="#D9DEC7" data-img="story-img-3"> <!-- Deeper sage -->
+                        <div class="chapter-line"></div>
+                        <span class="eyebrow">Chapter 03 · Restore</span>
+                        <h2>Thoughtful care, at your pace.</h2>
+                        <p>Your treatment is adapted to your comfort. Whether you choose targeted bodywork or a gentler massage, communication remains part of the experience.</p>
+                    </div>
+                    <!-- Chapter 4 -->
+                    <div class="chapter" data-bg="var(--c-amber)" data-img="story-img-4"> <!-- Amber sauna finish -->
+                        <div class="chapter-line"></div>
+                        <span class="eyebrow" style="color:white;">Chapter 04 · Unwind</span>
+                        <h2 style="color:white;">Let the moment linger.</h2>
+                        <p style="color:white;">Choose an infrared sauna session where appropriate, or simply take a few quiet minutes to rest and enjoy a cup of tea.</p>
+                    </div>
+                </div>
+                
+                <div class="story-image-side">
+                    <img src="https://images.unsplash.com/photo-1596178065887-1198b6148b2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" id="story-img-1" class="story-image is-active" alt="Spa arrival">
+                    <img src="https://images.unsplash.com/photo-1600334129128-685054110de4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" id="story-img-2" class="story-image" alt="Consultation">
+                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" id="story-img-3" class="story-image" alt="Massage therapy">
+                    <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" id="story-img-4" class="story-image" alt="Sauna warmth">
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Sauna Feature -->
+        <section class="sauna-section section-padding" id="sauna">
+            <div class="container reveal-up">
+                <span class="eyebrow" style="color:rgba(255,255,255,0.7);">The Warmth Ritual</span>
+                <h2 style="font-size: 3.5rem; max-width: 700px; margin: 0 auto var(--s-lg) auto;">Step into warmth. Leave room for quiet.</h2>
+                <p style="max-width: 600px; margin: 0 auto var(--s-xl) auto; font-size: 1.1rem;">A dedicated moment to pause, settle in, and experience gentle radiant heat in a thoughtfully designed infrared sauna.</p>
+                
+                <a href="#reserve" class="btn" style="background: var(--c-porcelain); color: var(--c-amber); border-color: var(--c-porcelain);">Explore Sessions</a>
+
+                <div class="sauna-grid reveal-up delay-2">
+                    <div class="sauna-card">
+                        <h4>A considered environment</h4>
+                        <p>Clear guidance on duration, settings, and how the sauna works.</p>
+                    </div>
+                    <div class="sauna-card">
+                        <h4>Preparation</h4>
+                        <p>Practical advice and reminders to hydrate before your visit.</p>
+                    </div>
+                    <div class="sauna-card">
+                        <h4>Time to settle</h4>
+                        <p>Understandable structure with time to prepare and cool down.</p>
+                    </div>
+                    <div class="sauna-card">
+                        <h4>Suitability</h4>
+                        <p>Clear safety info and opportunity to discuss health concerns.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Final CTA -->
+        <section class="final-cta reveal-up" id="reserve">
+            <div class="container">
+                <span class="eyebrow">When you're ready, we're here.</span>
+                <h2>Give yourself permission to pause.</h2>
+                <p style="margin-bottom: var(--s-lg);">Choose a treatment, find a time that works for you, and let the rest of the day begin a little differently.</p>
+                <button class="btn" style="padding: var(--s-md) var(--s-xl); font-size: 1rem;">Book Your Spa Experience</button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: var(--s-md); font-size: 2rem;">The Quiet Ritual</div>
+                    <p style="opacity: 0.8; font-size: 0.9rem; max-width: 300px;">Organic luxury meets therapeutic wellness. Come as you are, leave with space to breathe.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="#">Massage Treatments</a></li>
+                        <li><a href="#">Infrared Sauna</a></li>
+                        <li><a href="#">The Full Reset Package</a></li>
+                        <li><a href="#">Gift Cards</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Your Visit</h4>
+                    <ul>
+                        <li><a href="#">Book an Appointment</a></li>
+                        <li><a href="#">First Visit Guide</a></li>
+                        <li><a href="#">Frequently Asked Questions</a></li>
+                        <li><a href="#">Cancellation Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col newsletter">
+                    <h4>Stay Connected</h4>
+                    <p style="font-size: 0.8rem; margin-bottom: 12px; opacity: 0.8;">Occasional notes on mindful rituals and making room for rest.</p>
+                    <input type="email" placeholder="Your email address">
+                    <button class="btn btn-outline" style="border-color: rgba(255,255,255,0.5); color: white; width: 100%;">Join the list</button>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 The Quiet Ritual Studio. All rights reserved.</p>
+                <div style="display:flex; gap:16px;">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts for Interactions & Scroll Animations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Scroll Reveal Logic (Intersection Observer)
+            const revealElements = document.querySelectorAll('.reveal-up');
+            
+            // Respect prefers-reduced-motion
+            const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+            if (mediaQuery.matches) {
+                revealElements.forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'none';
+                    el.classList.add('is-visible');
+                });
+            } else {
+                const revealObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            
+                            // Specific trigger for the line animation in Intro
+                            if(entry.target.tagName === 'H2' && entry.target.closest('.intro-text')) {
+                                entry.target.classList.add('is-visible');
+                            }
+                            revealObserver.unobserve(entry.target); // Run once
+                        }
+                    });
+                }, {
+                    root: null,
+                    threshold: 0.15,
+                    rootMargin: "0px 0px -50px 0px"
+                });
+
+                revealElements.forEach(el => revealObserver.observe(el));
+            }
+
+            // 2. Sticky Storytelling Logic (Color & Image swapping based on scroll)
+            const chapters = document.querySelectorAll('.chapter');
+            const storyImages = document.querySelectorAll('.story-image');
+            const body = document.body;
+
+            const chapterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Highlight text
+                        chapters.forEach(c => c.classList.remove('is-active'));
+                        entry.target.classList.add('is-active');
+
+                        // Change Background Global Color
+                        const newBg = entry.target.getAttribute('data-bg');
+                        // Only change body bg if we are primarily in the story section
+                        // To prevent color bleeding into other sections, we reset when leaving story section
+                        body.style.backgroundColor = newBg;
+
+                        // Swap Image
+                        const targetImgId = entry.target.getAttribute('data-img');
+                        storyImages.forEach(img => {
+                            if(img.id === targetImgId) {
+                                img.classList.add('is-active');
+                            } else {
+                                img.classList.remove('is-active');
+                            }
+                        });
+                    }
+                });
+            }, {
+                root: null,
+                threshold: 0.5 // Trigger when chapter is 50% visible in viewport
+            });
+
+            chapters.forEach(chapter => chapterObserver.observe(chapter));
+
+            // Reset background color when leaving the story section
+            const storySection = document.querySelector('.story-section');
+            const storySectionObserver = new IntersectionObserver((entries) => {
+                 if(!entries[0].isIntersecting) {
+                     // If story section is out of view, revert to default porcelain background
+                     body.style.backgroundColor = 'var(--c-porcelain)';
+                 }
+            }, { threshold: 0 });
+            storySectionObserver.observe(storySection);
+
+
+            // 3. Simple UI logic for Interactive Selector
+            window.selectOption = function(el, type) {
+                // Reset siblings
+                const siblings = el.parentElement.querySelectorAll('.option-btn');
+                siblings.forEach(s => s.classList.remove('active'));
+                el.classList.add('active');
+                
+                // Update UI visually
+                const title = document.getElementById('result-title');
+                if(type === 'Deep Tissue') {
+                    title.innerText = 'Deep Tissue Reset';
+                } else {
+                    title.innerText = 'Restorative Massage';
+                }
+            }
+
+            window.selectTime = function(el, time) {
+                const siblings = el.parentElement.querySelectorAll('.time-btn');
+                siblings.forEach(s => s.classList.remove('active'));
+                el.classList.add('active');
+                
+                const desc = document.getElementById('result-desc');
+                desc.innerText = `Your selected time: ${time} minutes.`;
+            }
+        });
+    </script>
+</body>
+</html>

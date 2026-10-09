@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vFence Installer | Architectural Wood, Aluminum & Privacy Perimeters</title>
+  <meta name="description" content="Wood, aluminum, and privacy fencing thoughtfully designed and expertly installed. Define your space with vFence Installer.">
+  
+  <!-- Typography: Manrope (Headings) & DM Sans (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. DESIGN SYSTEM FOUNDATIONS (MD3 x Fluent 2)
+       ========================================================================== */
+    :root {
+      /* Color System */
+      --color-charcoal: #202522; /* Primary */
+      --color-limestone: #F5F3EE; /* Background */
+      --color-sage: #7C8A72; /* Secondary */
+      --color-oak: #B88A61; /* Tertiary */
+      --color-stone: #DCD8CE; /* Surface Container */
+      --color-graphite: #343B37;
+      --color-surface: #FFFFFF;
+      --color-outline: #D1CEC7;
+      --color-error: #9C2A2A;
+      --color-success: #2E593F;
+
+      /* Spacing System (8-point rhythm) */
+      --space-1: 4px;   --space-2: 8px;   --space-3: 12px;
+      --space-4: 16px;  --space-6: 24px;  --space-8: 32px;
+      --space-12: 48px; --space-16: 64px; --space-24: 96px;
+
+      /* Typography System */
+      --font-display: 'Manrope', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+
+      /* Shape & Elevation (Fluent 2 / MD3) */
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --shadow-soft: 0 4px 24px rgba(32, 37, 34, 0.06);
+      
+      /* Transitions */
+      --ease-micro: 150ms cubic-bezier(0.2, 0, 0, 1);
+      --ease-standard: 250ms cubic-bezier(0.2, 0, 0, 1);
+      --ease-reveal: 500ms cubic-bezier(0.2, 0, 0, 1);
+    }
+
+    /* ==========================================================================
+       2. RESET & BASE STYLES
+       ========================================================================== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background-color: var(--color-limestone);
+      color: var(--color-charcoal);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; height: auto; display: block; object-fit: cover; }
+    a { text-decoration: none; color: inherit; transition: color var(--ease-micro); }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    ul { list-style: none; }
+
+    /* ==========================================================================
+       3. TYPOGRAPHY
+       ========================================================================== */
+    h1, h2, h3, .display {
+      font-family: var(--font-display);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--color-charcoal);
+    }
+    .display { font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.0; }
+    h1 { font-size: clamp(2.25rem, 4vw, 3.75rem); line-height: 1.1; }
+    h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.2; }
+    h3 { font-size: 1.5rem; line-height: 1.3; }
+    .eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      color: var(--color-graphite);
+      margin-bottom: var(--space-4);
+      display: block;
+    }
+    .body-large { font-size: 1.125rem; line-height: 1.7; color: var(--color-graphite); }
+    .text-center { text-align: center; }
+
+    /* ==========================================================================
+       4. LAYOUT & GRID
+       ========================================================================== */
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 var(--space-6);
+    }
+    .section-padding { padding: var(--space-16) 0; }
+    @media (min-width: 768px) {
+      .container { padding: 0 var(--space-12); }
+      .section-padding { padding: var(--space-24) 0; }
+    }
+    .grid { display: grid; gap: var(--space-6); }
+    @media (min-width: 768px) {
+      .grid-2 { grid-template-columns: repeat(2, 1fr); gap: var(--space-12); }
+      .grid-3 { grid-template-columns: repeat(3, 1fr); gap: var(--space-8); }
+      .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    }
+    .editorial-grid { display: grid; gap: var(--space-12); }
+    @media (min-width: 1024px) {
+      .editorial-grid { grid-template-columns: 5fr 7fr; align-items: center; }
+    }
+
+    /* ==========================================================================
+       5. COMPONENTS
+       ========================================================================== */
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0 var(--space-6); height: 48px;
+      font-weight: 500; font-size: 0.95rem;
+      border-radius: var(--radius-md);
+      transition: all var(--ease-micro);
+    }
+    .btn-primary {
+      background-color: var(--color-charcoal); color: var(--color-surface);
+    }
+    .btn-primary:hover {
+      background-color: var(--color-graphite); transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background-color: transparent; border: 1px solid var(--color-outline);
+      color: var(--color-charcoal);
+    }
+    .btn-secondary:hover {
+      border-color: var(--color-charcoal); background-color: var(--color-surface);
+    }
+    .btn-text {
+      color: var(--color-charcoal); border-bottom: 1px solid transparent;
+      padding: 0; height: auto; border-radius: 0;
+    }
+    .btn-text:hover { border-bottom-color: var(--color-charcoal); }
+
+    /* Cards */
+    .card {
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-outline);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: border-color var(--ease-standard);
+    }
+    .card:hover { border-color: var(--color-charcoal); }
+    .card-img { height: 280px; width: 100%; border-bottom: 1px solid var(--color-outline); }
+    .card-content { padding: var(--space-6); }
+
+    /* Forms */
+    .input-group { margin-bottom: var(--space-4); }
+    .input-label { display: block; font-size: 0.875rem; font-weight: 500; margin-bottom: var(--space-2); }
+    .input-field {
+      width: 100%; height: 48px; padding: 0 var(--space-3);
+      border: 1px solid var(--color-outline); border-radius: var(--radius-md);
+      background-color: var(--color-surface); font-family: inherit; font-size: 1rem;
+      transition: all var(--ease-micro);
+    }
+    .input-field:focus {
+      outline: none; border-color: var(--color-charcoal); box-shadow: 0 0 0 2px rgba(32,37,34,0.1);
+    }
+    .radio-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); margin-bottom: var(--space-4); }
+    .radio-card {
+      border: 1px solid var(--color-outline); border-radius: var(--radius-md);
+      padding: var(--space-4); cursor: pointer; text-align: center; font-weight: 500;
+      transition: all var(--ease-micro); background: var(--color-surface);
+    }
+    .radio-card input { display: none; }
+    .radio-card:hover { border-color: var(--color-sage); }
+    .radio-card.selected { border-color: var(--color-charcoal); background-color: var(--color-stone); }
+
+    /* Animations (Motion System) */
+    .reveal { opacity: 0; transform: translateY(20px); transition: all var(--ease-reveal); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
+    /* ==========================================================================
+       6. SECTION SPECIFIC STYLES
+       ========================================================================== */
+    
+    /* Header & Nav */
+    header {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+      height: 80px; display: flex; align-items: center;
+      transition: background-color var(--ease-standard), border-bottom var(--ease-standard);
+      border-bottom: 1px solid transparent;
+    }
+    header.scrolled {
+      background-color: rgba(245, 243, 238, 0.95); /* Limestone with opacity */
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-outline);
+    }
+    .nav-container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+    .logo { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; letter-spacing: 0.05em; }
+    .logo span { display: block; font-family: var(--font-body); font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; color: var(--color-graphite); }
+    .nav-links { display: none; gap: var(--space-8); }
+    .nav-links a { font-weight: 500; font-size: 0.9rem; }
+    .nav-links a:hover { color: var(--color-oak); }
+    .mobile-menu-btn { display: block; padding: var(--space-2); }
+    @media (min-width: 1024px) {
+      .nav-links { display: flex; align-items: center; }
+      .mobile-menu-btn { display: none; }
+    }
+
+    /* Hero (Split Composition) */
+    .hero {
+      min-height: 100vh; padding-top: 80px; display: flex; align-items: center;
+    }
+    .hero-grid { align-items: center; }
+    .hero-content { padding-right: var(--space-8); }
+    .hero-img-wrapper {
+      height: 60vh; width: 100%; border-radius: var(--radius-sm); overflow: hidden;
+    }
+    @media (min-width: 1024px) {
+      .hero-img-wrapper { height: 80vh; }
+    }
+    .hero-img { width: 100%; height: 100%; object-position: center; transition: transform 6s ease-out; }
+    .hero:hover .hero-img { transform: scale(1.03); }
+    .hero-ctas { display: flex; gap: var(--space-4); margin-top: var(--space-8); flex-wrap: wrap; }
+
+    /* Trust Strip */
+    .trust-strip { background-color: var(--color-stone); padding: var(--space-6) 0; }
+    .trust-items { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-4); }
+    .trust-item { flex: 1; min-width: 200px; }
+    .trust-item h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: var(--space-1); }
+    .trust-item p { font-size: 0.8rem; color: var(--color-graphite); }
+
+    /* Intro Statement */
+    .intro-img { border-radius: var(--radius-sm); height: 100%; min-height: 400px; }
+
+    /* Portfolio (Asymmetrical) */
+    .portfolio-grid { display: grid; gap: var(--space-6); }
+    .portfolio-item { position: relative; border-radius: var(--radius-sm); overflow: hidden; }
+    .portfolio-item img { transition: transform 0.6s cubic-bezier(0.2, 0, 0, 1); }
+    .portfolio-item:hover img { transform: scale(1.04); }
+    .portfolio-meta {
+      position: absolute; bottom: 0; left: 0; width: 100%;
+      padding: var(--space-6); background: linear-gradient(to top, rgba(32,37,34,0.9), transparent);
+      color: var(--color-surface);
+    }
+    @media (min-width: 1024px) {
+      .portfolio-grid { grid-template-columns: repeat(12, 1fr); grid-auto-rows: 300px; gap: var(--space-4); }
+      .p-large { grid-column: span 8; grid-row: span 2; }
+      .p-small-1 { grid-column: span 4; grid-row: span 1; }
+      .p-small-2 { grid-column: span 4; grid-row: span 1; }
+      .portfolio-item img { height: 100%; width: 100%; }
+    }
+
+    /* Process Section */
+    .process-step { border-top: 1px solid var(--color-outline); padding: var(--space-6) 0; }
+    .process-num { font-family: var(--font-display); font-size: 1.5rem; color: var(--color-oak); margin-bottom: var(--space-2); }
+
+    /* FAQ Accordion */
+    .faq-item { border-bottom: 1px solid var(--color-outline); }
+    .faq-btn {
+      width: 100%; text-align: left; padding: var(--space-6) 0;
+      font-size: 1.125rem; font-family: var(--font-display); font-weight: 600;
+      display: flex; justify-content: space-between; align-items: center; color: var(--color-charcoal);
+    }
+    .faq-icon { transition: transform var(--ease-standard); }
+    .faq-btn[aria-expanded="true"] .faq-icon { transform: rotate(45deg); }
+    .faq-content { max-height: 0; overflow: hidden; transition: max-height var(--ease-standard); }
+    .faq-content-inner { padding-bottom: var(--space-6); color: var(--color-graphite); }
+
+    /* Footer */
+    footer { background-color: var(--color-charcoal); color: var(--color-limestone); padding: var(--space-12) 0 var(--space-6); }
+    footer .logo span { color: var(--color-stone); }
+    .footer-grid { border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: var(--space-12); margin-bottom: var(--space-6); }
+    .footer-links h4 { color: var(--color-surface); margin-bottom: var(--space-4); }
+    .footer-links li { margin-bottom: var(--space-2); }
+    .footer-links a { color: var(--color-stone); font-size: 0.9rem; }
+    .footer-links a:hover { color: var(--color-surface); }
+    .footer-bottom { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--color-stone); }
+
+    /* Estimate Modal (HTML Dialog) */
+    dialog {
+      margin: auto; border: none; border-radius: var(--radius-lg);
+      padding: 0; width: 90%; max-width: 600px; background: var(--color-surface);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.2);
+    }
+    dialog::backdrop { background: rgba(32, 37, 34, 0.7); backdrop-filter: blur(4px); }
+    .modal-header { padding: var(--space-6); border-bottom: 1px solid var(--color-outline); display: flex; justify-content: space-between; align-items: center; }
+    .modal-body { padding: var(--space-6); }
+    .modal-close { font-size: 1.5rem; line-height: 1; color: var(--color-graphite); padding: var(--space-1); }
+    .form-step { display: none; animation: fadeIn var(--ease-standard); }
+    .form-step.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .progress-bar { height: 4px; background: var(--color-stone); margin-bottom: var(--space-6); border-radius: 2px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--color-charcoal); transition: width var(--ease-standard); }
+    .form-footer { margin-top: var(--space-8); display: flex; justify-content: space-between; align-items: center; }
+    
+  </style>
+</head>
+<body>
+
+  <!-- ================= HEADER / NAVIGATION ================= -->
+  <header id="navbar">
+    <div class="container nav-container">
+      <a href="#" class="logo">
+        vFence Installer
+        <span>ARCHITECTURAL FENCING</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#portfolio">Projects</a>
+        <a href="#process">Process</a>
+        <a href="#about">About</a>
+        <a href="#faq">FAQ</a>
+        <button class="btn btn-primary" onclick="openEstimateModal()">Get an Estimate ↗</button>
+      </nav>
+      <button class="mobile-menu-btn" aria-label="Open menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="grid editorial-grid hero-grid">
+          <div class="hero-content reveal">
+            <span class="eyebrow">ARCHITECTURAL FENCE INSTALLATION</span>
+            <h1 class="display">Define Your Space.</h1>
+            <h2 class="text-h3" style="margin: var(--space-4) 0; font-family: var(--font-body); font-weight: 500; color: var(--color-graphite);">A Better Boundary Begins Here.</h2>
+            <p class="body-large">Your fence does more than mark a property line. It shapes the way you experience your outdoor space, creates privacy where you need it, and adds a finishing touch to your home's architecture.</p>
+            <p class="body-large" style="margin-top: var(--space-2);">We install wood, aluminum, and privacy fencing with a focus on thoughtful design, quality materials, and precise workmanship.</p>
+            
+            <div class="hero-ctas">
+              <button class="btn btn-primary" onclick="openEstimateModal()">Request an Estimate ↗</button>
+              <a href="#portfolio" class="btn btn-secondary">Explore Our Work ↗</a>
+            </div>
+          </div>
+          <div class="hero-img-wrapper reveal" style="transition-delay: 200ms;">
+            <!-- Premium Architectural House exterior with fence -->
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1400" alt="Modern home exterior with architectural fencing" class="hero-img">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TRUST & SERVICE HIGHLIGHTS ================= -->
+    <section class="trust-strip">
+      <div class="container trust-items">
+        <div class="trust-item reveal">
+          <h4>Wood Fencing</h4>
+          <p>Natural texture and timeless character.</p>
+        </div>
+        <div class="trust-item reveal" style="transition-delay: 100ms;">
+          <h4>Aluminum Fencing</h4>
+          <p>Clean lines and a contemporary finish.</p>
+        </div>
+        <div class="trust-item reveal" style="transition-delay: 200ms;">
+          <h4>Privacy Solutions</h4>
+          <p>Thoughtful screening for everyday living.</p>
+        </div>
+        <div class="trust-item reveal" style="transition-delay: 300ms;">
+          <h4>Planned Installation</h4>
+          <p>A clear process from site review to completion.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= INTRO BRAND STATEMENT ================= -->
+    <section class="section-padding" id="about">
+      <div class="container">
+        <div class="grid editorial-grid">
+          <div class="reveal">
+            <span class="eyebrow">MORE THAN A PROPERTY LINE</span>
+            <h2>The Right Fence Changes How a Space Feels.</h2>
+            <br>
+            <p>It creates a sense of enclosure without compromising the character of your property. It can introduce warmth, add visual structure, define an outdoor room, or create a quieter and more private place to unwind.</p>
+            <br>
+            <p>Our approach starts with understanding the property, the purpose of the fence, and the style you want to achieve. From material selection to the final alignment, every decision should contribute to a finished result that feels intentional.</p>
+            <br>
+            <p style="font-weight: 500; font-size: 1.125rem;">Good fencing is not just installed. It is considered.</p>
+          </div>
+          <div class="reveal" style="transition-delay: 200ms; height: 100%;">
+            <!-- Close up of material / architectural wood detail -->
+            <img src="https://images.unsplash.com/photo-1601628828688-632f38a5a7d0?auto=format&fit=crop&q=80&w=1200" alt="Close up architectural timber fence detail" class="intro-img">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SERVICES OVERVIEW ================= -->
+    <section class="section-padding" style="background-color: var(--color-surface);" id="services">
+      <div class="container">
+        <div class="text-center reveal" style="max-width: 700px; margin: 0 auto var(--space-12);">
+          <span class="eyebrow">WHAT WE INSTALL</span>
+          <h2>Fencing Designed Around Your Needs.</h2>
+          <p style="margin-top: var(--space-4);">Every property has different priorities. Whether you're looking for natural warmth, a clean contemporary boundary, greater privacy, or a combination of materials, we'll help you explore the options that suit your space.</p>
+        </div>
+
+        <div class="grid grid-3">
+          <!-- Service 1 -->
+          <div class="card reveal">
+            <img src="https://images.unsplash.com/photo-1512411985331-50e41a995e87?auto=format&fit=crop&q=80&w=800" alt="Wood fencing installation" class="card-img">
+            <div class="card-content">
+              <span class="eyebrow">01 / NATURAL MATERIALS</span>
+              <h3 style="margin-bottom: var(--space-2);">Wood Fencing</h3>
+              <p style="font-size: 0.95rem; margin-bottom: var(--space-4); color: var(--color-graphite);">Bring warmth, texture, and timeless character to your property with wood fencing selected for the look and function you want.</p>
+              <button class="btn-text" onclick="openEstimateModal()">Explore Wood Fencing ↗</button>
+            </div>
+          </div>
+          <!-- Service 2 -->
+          <div class="card reveal" style="transition-delay: 150ms;">
+            <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&q=80&w=800" alt="Modern aluminum fencing" class="card-img">
+            <div class="card-content">
+              <span class="eyebrow">02 / CONTEMPORARY LINES</span>
+              <h3 style="margin-bottom: var(--space-2);">Aluminum Fencing</h3>
+              <p style="font-size: 0.95rem; margin-bottom: var(--space-4); color: var(--color-graphite);">Give your exterior a crisp, modern look with clean profiles and carefully considered lines.</p>
+              <button class="btn-text" onclick="openEstimateModal()">Explore Aluminum Fencing ↗</button>
+            </div>
+          </div>
+          <!-- Service 3 -->
+          <div class="card reveal" style="transition-delay: 300ms;">
+            <img src="https://images.unsplash.com/photo-1599598425947-330026e643ae?auto=format&fit=crop&q=80&w=800" alt="Privacy fencing outdoors" class="card-img">
+            <div class="card-content">
+              <span class="eyebrow">03 / PERSONAL SPACE</span>
+              <h3 style="margin-bottom: var(--space-2);">Privacy Fencing</h3>
+              <p style="font-size: 0.95rem; margin-bottom: var(--space-4); color: var(--color-graphite);">Create a more secluded outdoor environment with a fence planned around sightlines, boundaries, and the way you use your property.</p>
+              <button class="btn-text" onclick="openEstimateModal()">Explore Privacy Fencing ↗</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FEATURED PROJECTS ================= -->
+    <section class="section-padding" id="portfolio">
+      <div class="container">
+        <div class="reveal" style="margin-bottom: var(--space-8);">
+          <span class="eyebrow">SELECTED WORK</span>
+          <h2>Real Properties. Considered Solutions.</h2>
+          <p style="max-width: 600px; margin-top: var(--space-4);">Explore fencing ideas through material, layout, and architectural style. Every property has its own requirements; these examples help you identify the looks and details that inspire you.</p>
+        </div>
+
+        <div class="portfolio-grid reveal">
+          <!-- Main Project -->
+          <div class="portfolio-item p-large">
+            <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&q=80&w=1200" alt="Warm timber privacy fence">
+            <div class="portfolio-meta">
+              <h3 style="color: #fff;">Warm Timber Privacy</h3>
+              <p style="font-size: 0.9rem; color: var(--color-stone);">Wood · Contemporary residential</p>
+            </div>
+          </div>
+          <!-- Sub Project 1 -->
+          <div class="portfolio-item p-small-1">
+            <img src="https://images.unsplash.com/photo-1510627498534-cf7e9002facc?auto=format&fit=crop&q=80&w=800" alt="Modern aluminum boundary">
+            <div class="portfolio-meta">
+              <h3 style="color: #fff; font-size: 1.25rem;">Modern Aluminum Boundary</h3>
+              <p style="font-size: 0.8rem; color: var(--color-stone);">Aluminum · Contemporary exterior</p>
+            </div>
+          </div>
+          <!-- Sub Project 2 -->
+          <div class="portfolio-item p-small-2">
+            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=800" alt="Privacy fence backyard">
+            <div class="portfolio-meta">
+              <h3 style="color: #fff; font-size: 1.25rem;">A More Private Backyard</h3>
+              <p style="font-size: 0.8rem; color: var(--color-stone);">Privacy fencing · Outdoor living</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= INSTALLATION PROCESS ================= -->
+    <section class="section-padding" style="background-color: var(--color-surface);" id="process">
+      <div class="container">
+        <div class="grid editorial-grid">
+          <div class="reveal">
+            <span class="eyebrow">FROM FIRST CONVERSATION TO FINAL DETAIL</span>
+            <h2>A Clear Process.<br>A Better-Planned Project.</h2>
+            <p style="margin-top: var(--space-4); margin-bottom: var(--space-8);">Knowing what happens next makes a fencing project easier to plan. We guide you through the essential decisions, from understanding your requirements to reviewing the finished work.</p>
+            <button class="btn btn-primary" onclick="openEstimateModal()">Start Your Project</button>
+          </div>
+          
+          <div class="reveal" style="transition-delay: 200ms;">
+            <div class="process-step">
+              <div class="process-num">01</div>
+              <h3>Tell Us About Your Project</h3>
+              <p>Share your property location, approximate dimensions, intended use, preferred material, and any inspiration images.</p>
+            </div>
+            <div class="process-step">
+              <div class="process-num">02</div>
+              <h3>Review the Site and Requirements</h3>
+              <p>Confirm the relevant boundaries, terrain, access, gates, desired height, and any local restrictions that need consideration.</p>
+            </div>
+            <div class="process-step">
+              <div class="process-num">03</div>
+              <h3>Choose the Right Solution</h3>
+              <p>Review suitable materials, fence layouts, finishes, and the project scope before approving a proposal.</p>
+            </div>
+            <div class="process-step">
+              <div class="process-num">04</div>
+              <h3>Schedule and Install</h3>
+              <p>Coordinate the agreed work, site access, material delivery, and installation schedule.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FAQ SECTION ================= -->
+    <section class="section-padding" id="faq">
+      <div class="container" style="max-width: 800px;">
+        <div class="text-center reveal" style="margin-bottom: var(--space-12);">
+          <span class="eyebrow">GOOD QUESTIONS</span>
+          <h2>Before You Build, Know What to Expect.</h2>
+        </div>
+
+        <div class="faq-list reveal">
+          <div class="faq-item">
+            <button class="faq-btn" aria-expanded="false">
+              How much does fence installation cost?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-content">
+              <div class="faq-content-inner">Pricing depends on the fence length, material, height, layout, gates, ground conditions, access, and preparation required. Share your approximate dimensions and preferred style to begin a project-specific estimate.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" aria-expanded="false">
+              Which material should I choose: wood or aluminum?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-content">
+              <div class="faq-content-inner">Wood is a strong starting point when natural character and a wide range of privacy designs are priorities. Aluminum can suit contemporary architecture and open-profile designs. The right choice depends on your intended use, desired appearance, maintenance expectations, and budget.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" aria-expanded="false">
+              Can I customize the height and style?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-content">
+              <div class="faq-content-inner">Potentially, depending on the material system, property conditions, and applicable local rules. The proposed design should be checked against relevant height, setback, and visibility requirements before work begins.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn" aria-expanded="false">
+              Do I need a permit?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-content">
+              <div class="faq-content-inner">Requirements vary by location and project. Check the relevant local authority's rules before installation. Property boundaries, easements, and utility locations may also need to be confirmed.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CLOSING CTA ================= -->
+    <section class="section-padding" style="background-color: var(--color-charcoal); color: var(--color-surface);">
+      <div class="container">
+        <div class="grid editorial-grid" style="align-items: center;">
+          <div class="reveal">
+            <span class="eyebrow" style="color: var(--color-sage);">YOUR NEXT PROJECT STARTS HERE</span>
+            <h2 style="color: var(--color-surface);">Let's Define Your Space.</h2>
+            <p style="color: var(--color-stone); margin: var(--space-4) 0 var(--space-8);">Tell us about your property, the privacy or design you're looking for, and the fence you have in mind. We'll help you determine the next steps.</p>
+            <button class="btn btn-primary" style="background-color: var(--color-surface); color: var(--color-charcoal);" onclick="openEstimateModal()">Request an Estimate ↗</button>
+          </div>
+          <div class="reveal" style="transition-delay: 200ms;">
+            <img src="https://images.unsplash.com/photo-1510627498534-cf7e9002facc?auto=format&fit=crop&q=80&w=1200" alt="Architectural fence completed project" style="border-radius: var(--radius-sm); filter: brightness(0.8);">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <div class="container">
+      <div class="grid grid-3 footer-grid">
+        <div>
+          <a href="#" class="logo" style="color: var(--color-surface);">
+            vFence Installer.
+            <span>ARCHITECTURAL FENCING</span>
+          </a>
+          <p style="color: var(--color-stone); margin-top: var(--space-4); font-size: 0.9rem; max-width: 300px;">Thoughtfully designed wood, aluminum, and privacy fencing for properties that deserve a considered finish.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Projects</a></li>
+            <li><a href="#process">Our Process</a></li>
+            <li><a href="#about">About</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="#faq">FAQs</a></li>
+            <li><a href="#" onclick="openEstimateModal()">Request an Estimate</a></li>
+            <li><a href="mailto:contact@vfenceinstaller.com">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 vFence Installer. All rights reserved.</p>
+        <p>Privacy Policy &middot; Terms</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= MULTI-STEP ESTIMATE MODAL ================= -->
+  <dialog id="estimate-modal">
+    <div class="modal-header">
+      <div>
+        <span class="eyebrow" style="margin: 0;">LET'S PLAN YOUR PROJECT</span>
+        <h3 style="font-size: 1.25rem;">Request an Estimate</h3>
+      </div>
+      <button class="modal-close" onclick="closeEstimateModal()" aria-label="Close">&times;</button>
+    </div>
+    
+    <div class="modal-body">
+      <div class="progress-bar">
+        <div class="progress-fill" id="modal-progress" style="width: 33%;"></div>
+      </div>
+      
+      <form id="estimate-form" onsubmit="handleFormSubmit(event)">
+        <!-- Step 1 -->
+        <div class="form-step active" id="step-1">
+          <p style="font-weight: 500; margin-bottom: var(--space-4);">1. What type of fence are you considering?</p>
+          <div class="radio-card-grid">
+            <label class="radio-card">
+              <input type="radio" name="fence_type" value="wood" onchange="selectRadio(this)"> Wood fencing
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="fence_type" value="aluminum" onchange="selectRadio(this)"> Aluminum fencing
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="fence_type" value="privacy" onchange="selectRadio(this)"> Privacy fencing
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="fence_type" value="unsure" onchange="selectRadio(this)"> I'm not sure yet
+            </label>
+          </div>
+          <div class="form-footer">
+            <span style="font-size: 0.8rem; color: var(--color-graphite);">Step 1 of 3</span>
+            <button type="button" class="btn btn-primary" onclick="nextStep(2)">Next Step &rarr;</button>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="form-step" id="step-2">
+          <div class="input-group">
+            <label class="input-label">Project ZIP / Postal Code</label>
+            <input type="text" class="input-field" placeholder="Enter code" required>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Approximate Fence Length (Optional)</label>
+            <select class="input-field">
+              <option value="">Select length</option>
+              <option value="under100">Under 100 ft</option>
+              <option value="100-200">100–200 ft</option>
+              <option value="over200">Over 200 ft</option>
+              <option value="unsure">Not measured yet</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Project Details</label>
+            <textarea class="input-field" style="height: 80px; padding: var(--space-2) var(--space-3);" placeholder="Tell us briefly about your property and needs..."></textarea>
+          </div>
+          <div class="form-footer">
+            <button type="button" class="btn btn-secondary" onclick="nextStep(1)">&larr; Back</button>
+            <button type="button" class="btn btn-primary" onclick="nextStep(3)">Next Step &rarr;</button>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="form-step" id="step-3">
+          <div class="input-group">
+            <label class="input-label">Full Name</label>
+            <input type="text" class="input-field" required>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Email Address</label>
+            <input type="email" class="input-field" required>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Phone Number</label>
+            <input type="tel" class="input-field">
+          </div>
+          <div class="form-footer">
+            <button type="button" class="btn btn-secondary" onclick="nextStep(2)">&larr; Back</button>
+            <button type="submit" class="btn btn-primary">Request My Estimate</button>
+          </div>
+        </div>
+
+        <!-- Success State -->
+        <div class="form-step text-center" id="step-success" style="padding: var(--space-8) 0;">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--color-success)" stroke-width="2" style="margin-bottom: var(--space-4);">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          <h3>Your Project Details Are Ready.</h3>
+          <p style="color: var(--color-graphite); margin-top: var(--space-2);">Thank you for reaching out. We've received your fence project inquiry. Our team will review the information and follow up shortly.</p>
+          <button type="button" class="btn btn-secondary" style="margin-top: var(--space-6);" onclick="closeEstimateModal()">Close Window</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+    // 1. Header Scroll Effect (Transparent to Solid)
+    const header = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // 2. Scroll Reveal Animations (Intersection Observer)
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
+    
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // 3. FAQ Accordion Logic
+    const faqBtns = document.querySelectorAll('.faq-btn');
+    faqBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        const content = btn.nextElementSibling;
+        
+        // Close all others
+        faqBtns.forEach(otherBtn => {
+          if (otherBtn !== btn) {
+            otherBtn.setAttribute('aria-expanded', 'false');
+            otherBtn.nextElementSibling.style.maxHeight = null;
+          }
+        });
+
+        // Toggle current
+        btn.setAttribute('aria-expanded', !expanded);
+        if (!expanded) {
+          content.style.maxHeight = content.scrollHeight + "px";
+        } else {
+          content.style.maxHeight = null;
+        }
+      });
+    });
+
+    // 4. Modal Multi-Step Form Logic
+    const modal = document.getElementById('estimate-modal');
+    function openEstimateModal() {
+      modal.showModal();
+      document.body.style.overflow = 'hidden';
+    }
+    function closeEstimateModal() {
+      modal.close();
+      document.body.style.overflow = '';
+      // Reset form after closing
+      setTimeout(() => {
+        document.getElementById('estimate-form').reset();
+        nextStep(1);
+        document.querySelectorAll('.radio-card').forEach(c => c.classList.remove('selected'));
+      }, 300);
+    }
+    
+    // Close on backdrop click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeEstimateModal();
+    });
+
+    // Form Navigation
+    function nextStep(stepNumber) {
+      document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
+      document.getElementById('step-' + stepNumber).classList.add('active');
+      
+      const progressBar = document.getElementById('modal-progress');
+      if(stepNumber === 1) progressBar.style.width = '33%';
+      if(stepNumber === 2) progressBar.style.width = '66%';
+      if(stepNumber === 3) progressBar.style.width = '100%';
+    }
+
+    // Radio Card Styling Selection
+    function selectRadio(input) {
+      const cards = input.closest('.radio-card-grid').querySelectorAll('.radio-card');
+      cards.forEach(card => card.classList.remove('selected'));
+      input.closest('.radio-card').classList.add('selected');
+    }
+
+    // Form Submit Simulation
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      // Hide steps and show success
+      document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
+      document.getElementById('step-success').classList.add('active');
+      document.getElementById('modal-progress').style.width = '100%';
+      document.getElementById('modal-progress').style.backgroundColor = 'var(--color-success)';
+    }
+  </script>
+</body>
+</html>

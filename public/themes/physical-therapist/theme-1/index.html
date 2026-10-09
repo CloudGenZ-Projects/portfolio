@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Alex Mercer | Elite Physical Therapy & Biomechanics</title>
+    <meta name="description" content="High-performance physical therapy, biomechanics, dry needling, and return-to-sport rehab.">
+    
+    <!-- Google Fonts: Outfit for Headers, Inter for Body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==========================================================================
+           1. DESIGN SYSTEM & VARIABLES
+           ========================================================================== */
+        :root {
+            /* Colors */
+            --bg-base: #030303;
+            --bg-surface: #111111;
+            --bg-surface-light: #1a1a1a;
+            --accent-primary: #ccff00; /* Volt Green */
+            --accent-hover: #b3e600;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(204, 255, 0, 0.3);
+            
+            /* Typography */
+            --font-display: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            
+            /* Spacing & Layout */
+            --container-max: 1400px;
+            --container-padding: 2rem;
+            --gap-sm: 1rem;
+            --gap-md: 1.5rem;
+            --gap-lg: 2rem;
+            
+            /* Radii */
+            --radius-sm: 12px;
+            --radius-md: 24px;
+            --radius-lg: 32px;
+            --radius-pill: 100px;
+            
+            /* Transitions */
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-fast: 0.2s var(--ease-out-expo);
+            --transition-slow: 0.6s var(--ease-out-expo);
+            --shadow-glow: 0 10px 30px rgba(204, 255, 0, 0.15);
+        }
+
+        /* ==========================================================================
+           2. RESET & GLOBAL STYLES
+           ========================================================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: none; /* Custom cursor */
+        }
+
+        /* Disable custom cursor on mobile/touch devices */
+        @media (hover: none) and (pointer: coarse) {
+            body { cursor: auto; }
+            .cursor-dot, .cursor-outline { display: none !important; }
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        p { margin-bottom: 1.2rem; color: var(--text-secondary); font-size: 1.05rem; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; border-radius: inherit; }
+
+        /* Custom Cursor */
+        .cursor-dot {
+            width: 8px; height: 8px; background: var(--accent-primary);
+            position: fixed; top: 0; left: 0; border-radius: 50%;
+            pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
+        }
+        .cursor-outline {
+            width: 40px; height: 40px; border: 1px solid var(--accent-primary);
+            position: fixed; top: 0; left: 0; border-radius: 50%;
+            pointer-events: none; z-index: 9998; transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, background 0.2s;
+        }
+
+        /* Utility Classes */
+        .container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-padding); }
+        
+        .section-title {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .section-subtitle { text-align: center; color: var(--text-secondary); font-size: 1.2rem; margin-bottom: 4rem; max-width: 600px; margin-left: auto; margin-right: auto;}
+        .section-title span { color: var(--accent-primary); }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 1.1rem 2.2rem; border-radius: var(--radius-pill);
+            font-family: var(--font-display); font-weight: 700;
+            font-size: 1rem; cursor: pointer; transition: all var(--transition-fast);
+            border: none; gap: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        
+        .btn-primary { background: var(--accent-primary); color: #000; }
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-3px); box-shadow: var(--shadow-glow);
+        }
+        
+        .btn-outline { background: transparent; border: 1px solid var(--border-color); color: var(--text-primary); }
+        .btn-outline:hover { border-color: var(--accent-primary); color: var(--accent-primary); background: rgba(204, 255, 0, 0.05); }
+
+        .tag {
+            display: inline-block; padding: 0.5rem 1.2rem;
+            background: rgba(204, 255, 0, 0.1); color: var(--accent-primary);
+            border: 1px solid rgba(204, 255, 0, 0.2); border-radius: var(--radius-pill);
+            font-size: 0.85rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; margin-bottom: 1.5rem;
+        }
+
+        /* Animations */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s var(--ease-out-expo); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* ==========================================================================
+           3. RESPONSIVE NAVIGATION
+           ========================================================================== */
+        header {
+            position: fixed; top: 1.5rem; left: 50%; transform: translateX(-50%);
+            width: calc(100% - 4rem); max-width: var(--container-max);
+            z-index: 1000; display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 1.5rem 1rem 2.5rem; background: rgba(17, 17, 17, 0.8);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color); border-radius: var(--radius-pill);
+            transition: all var(--transition-fast);
+        }
+
+        .logo { font-family: var(--font-display); font-size: 1.6rem; font-weight: 900; letter-spacing: -0.5px; color: #fff;}
+        .logo span { color: var(--accent-primary); }
+
+        .nav-wrapper { display: flex; align-items: center; gap: 2rem; }
+        
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a { font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-secondary); transition: color var(--transition-fast); }
+        .nav-links a:hover { color: var(--accent-primary); }
+
+        .menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; }
+
+        /* ==========================================================================
+           4. BENTO GRID SYSTEM 
+           ========================================================================== */
+        .bento-grid {
+            display: grid; grid-template-columns: repeat(12, 1fr);
+            gap: var(--gap-md); margin-top: 10rem;
+        }
+
+        .bento-card {
+            background: var(--bg-surface); border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg); padding: 3rem;
+            position: relative; overflow: hidden; display: flex; flex-direction: column;
+            transition: transform var(--transition-slow), border-color var(--transition-fast);
+        }
+
+        /* Interactive Glow */
+        .bento-card::before {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(204, 255, 0, 0.08), transparent 40%);
+            z-index: 0; opacity: 0; transition: opacity 0.3s; pointer-events: none;
+        }
+        .bento-card:hover::before { opacity: 1; }
+        .bento-card > * { position: relative; z-index: 1; }
+        .bento-card:hover { border-color: rgba(255, 255, 255, 0.2); transform: translateY(-5px); }
+
+        /* ==========================================================================
+           5. SECTION: HERO 
+           ========================================================================== */
+        .hero-main { grid-column: span 8; grid-row: span 3; background: radial-gradient(circle at top right, #1a2200 0%, var(--bg-surface) 70%); justify-content: center; padding: 5rem 4rem;}
+        .hero-main h1 { font-size: clamp(3.5rem, 7vw, 6.5rem); line-height: 1; margin-bottom: 1.5rem; letter-spacing: -0.04em;}
+        .hero-main p { font-size: 1.25rem; max-width: 85%; margin-bottom: 3rem; color: var(--text-secondary);}
+        
+        .hero-video { grid-column: span 4; grid-row: span 2; padding: 0; }
+        .hero-video img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: var(--transition-slow); }
+        .hero-video:hover img { filter: grayscale(0%); transform: scale(1.05); }
+
+        .hero-stat-1 { grid-column: span 2; grid-row: span 1; background: var(--accent-primary); color: #000; align-items: center; justify-content: center; text-align: center; }
+        .hero-stat-1 h3 { color: #000; font-size: clamp(2.5rem, 4vw, 3.5rem); margin: 0; letter-spacing: -2px; }
+        .hero-stat-1 p { color: #111; font-weight: 700; text-transform: uppercase; font-size: 0.85rem; margin: 0; letter-spacing: 1px;}
+
+        .hero-stat-2 { grid-column: span 2; grid-row: span 1; display: flex; justify-content: center; align-items: center; }
+        .hero-stat-2 i { font-size: 3.5rem; color: var(--accent-primary); }
+
+        /* ==========================================================================
+           6. INFINITE MARQUEE
+           ========================================================================== */
+        .marquee-section { padding: 4rem 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); overflow: hidden; background: var(--bg-surface); margin: 6rem 0; }
+        .marquee-container { display: flex; width: max-content; animation: marquee 25s linear infinite; }
+        .marquee-item { font-family: var(--font-display); font-size: 2.5rem; font-weight: 800; text-transform: uppercase; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.4); margin: 0 3rem; display: flex; align-items: center; gap: 3rem; letter-spacing: 1px;}
+        .marquee-item i { color: var(--accent-primary); -webkit-text-stroke: 0; font-size: 1.8rem; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* ==========================================================================
+           7. ABOUT THE SPECIALIST
+           ========================================================================== */
+        .about-img { grid-column: span 4; grid-row: span 2; padding: 0; min-height: 500px;}
+        .about-img img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.1) grayscale(80%); transition: var(--transition-slow); }
+        .about-img:hover img { filter: grayscale(0%); }
+
+        .about-text-1 { grid-column: span 8; background: var(--bg-surface-light); justify-content: center; }
+        .about-text-1 h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+        
+        .about-text-2 { grid-column: span 8; display: flex; flex-direction: row; gap: 2rem; align-items: center; }
+        .cred-item { flex: 1; border-left: 2px solid var(--accent-primary); padding-left: 1.5rem; }
+        .cred-item h4 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .cred-item p { margin: 0; font-size: 0.95rem; }
+
+        /* ==========================================================================
+           8. SECTION: IN-DEPTH METHODOLOGY
+           ========================================================================== */
+        .services-grid { margin-top: 2rem; margin-bottom: 8rem; }
+        
+        .service-card { grid-column: span 4; min-height: 480px; display: flex; flex-direction: column;}
+        .service-icon-wrap { width: 80px; height: 80px; background: rgba(255,255,255,0.03); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2.5rem; border: 1px solid var(--border-color); transition: var(--transition-fast); }
+        .service-card:hover .service-icon-wrap { background: var(--accent-primary); border-color: var(--accent-primary); transform: scale(1.1);}
+        .service-card:hover .service-icon-wrap i { color: #000; }
+        .service-icon-wrap i { font-size: 2rem; color: var(--accent-primary); transition: var(--transition-fast); }
+        
+        .service-card h3 { font-size: 2.2rem; margin-bottom: 1rem; }
+        .service-list { margin-top: auto; padding-top: 2rem; border-top: 1px solid var(--border-color); }
+        .service-list li { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 1rem; font-size: 1rem; color: var(--text-secondary); }
+        .service-list li i { color: var(--accent-primary); font-size: 0.9rem; margin-top: 5px; }
+
+        /* ==========================================================================
+           9. THE 4-PHASE PROTOCOL
+           ========================================================================== */
+        .protocol-grid { margin-top: 2rem; margin-bottom: 8rem; }
+        .phase-card { grid-column: span 3; background: var(--bg-surface-light); padding: 2.5rem;}
+        .phase-num { font-family: var(--font-display); font-size: 4rem; font-weight: 900; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.2); line-height: 1; margin-bottom: 1rem; transition: var(--transition-fast); }
+        .phase-card:hover .phase-num { -webkit-text-stroke: 1px var(--accent-primary); color: rgba(204,255,0,0.1); transform: translateY(-10px);}
+        .phase-card h4 { font-size: 1.5rem; color: #fff; margin-bottom: 1rem; }
+
+        /* ==========================================================================
+           10. MODERN PHOTO GALLERY
+           ========================================================================== */
+        .gallery-grid { grid-template-rows: 350px 350px; margin-top: 2rem; margin-bottom: 8rem; }
+        .gal-item { border-radius: var(--radius-md); overflow: hidden; position: relative; cursor: pointer; border: 1px solid var(--border-color); }
+        .gal-item img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) brightness(0.8); transition: all 0.6s var(--ease-out-expo); }
+        .gal-item:hover img { filter: grayscale(0%) brightness(1); transform: scale(1.08); }
+        
+        .gal-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent 60%); opacity: 0; transition: var(--transition-fast); display: flex; align-items: flex-end; padding: 2rem; }
+        .gal-item:hover .gal-overlay { opacity: 1; }
+        .gal-overlay h4 { margin: 0; font-size: 1.5rem; color: #fff; transform: translateY(20px); transition: transform 0.4s var(--ease-out-expo); }
+        .gal-item:hover .gal-overlay h4 { transform: translateY(0); }
+
+        .gal-1 { grid-column: span 6; grid-row: span 2; }
+        .gal-2 { grid-column: span 3; grid-row: span 1; }
+        .gal-3 { grid-column: span 3; grid-row: span 2; }
+        .gal-4 { grid-column: span 3; grid-row: span 1; }
+
+        /* ==========================================================================
+           11. ATHLETE REVIEWS SLIDER
+           ========================================================================== */
+        .reviews-section { padding: 6rem 4rem; background: var(--bg-surface-light); border-radius: var(--radius-lg); margin-bottom: 8rem; border: 1px solid var(--border-color); position: relative; overflow: hidden; }
+        .reviews-section::after { content: "\f10d"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; top: -20px; right: 40px; font-size: 15rem; color: rgba(255,255,255,0.02); z-index: 0; pointer-events: none; }
+
+        .review-container { max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+        .stars { color: var(--accent-primary); font-size: 1.5rem; margin-bottom: 2.5rem; letter-spacing: 5px; }
+        
+        .slider-wrapper { position: relative; min-height: 250px; overflow: hidden; }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; opacity: 0; transform: scale(0.95); transition: all 0.6s var(--ease-out-expo); pointer-events: none; }
+        .slide.active { opacity: 1; transform: scale(1); pointer-events: all; }
+        
+        .slide-text { font-size: clamp(1.4rem, 3vw, 2.2rem); font-family: var(--font-display); font-weight: 400; line-height: 1.5; margin-bottom: 2.5rem; font-style: italic; color: #fff;}
+        .slide-author { font-weight: 800; color: #fff; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px;}
+        .slide-sport { color: var(--accent-primary); font-size: 1rem; font-weight: 600; letter-spacing: 1px; margin-top: 0.5rem;}
+
+        .slider-controls { display: flex; justify-content: center; gap: 1rem; margin-top: 3rem; }
+        .ctrl-btn { width: 55px; height: 55px; border-radius: 50%; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: #fff; cursor: pointer; transition: var(--transition-fast); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+        .ctrl-btn:hover { background: var(--accent-primary); color: #000; border-color: var(--accent-primary); transform: scale(1.1);}
+
+        /* ==========================================================================
+           12. FAQ ACCORDION
+           ========================================================================== */
+        .faq-section { max-width: 900px; margin: 0 auto; padding-bottom: 6rem; }
+        .faq-item { border-bottom: 1px solid var(--border-color); margin-bottom: 1rem; }
+        .faq-question { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 2rem 0; background: transparent; border: none; color: #fff; font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; text-align: left; cursor: pointer; }
+        .faq-icon { color: var(--accent-primary); transition: transform 0.4s var(--ease-out-expo); font-size: 1.5rem; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s var(--ease-out-expo); color: var(--text-secondary); }
+        .faq-answer-inner { padding-bottom: 2rem; line-height: 1.8; font-size: 1.1rem; }
+        .faq-item.active .faq-icon { transform: rotate(135deg); } 
+        .faq-item.active .faq-answer { max-height: 600px; }
+
+        /* ==========================================================================
+           13. PERFECTLY POSITIONED CTA & FOOTER
+           ========================================================================== */
+        /* The CTA Container is placed right above the footer with negative margin to pull the footer up behind it */
+        .cta-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-bottom: -120px; /* Pulls footer up */
+            z-index: 10; /* Keeps it above the footer */
+            padding: 0 var(--container-padding);
+        }
+
+        .cta-card { 
+            background: var(--accent-primary); 
+            border-radius: var(--radius-lg); 
+            padding: 5rem 2rem; 
+            text-align: center; 
+            color: #000; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
+            width: 100%;
+        }
+        
+        .cta-card h2 { font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 1.5rem; letter-spacing: -0.03em;}
+        .cta-card p { color: #222; font-size: 1.3rem; margin-bottom: 3rem; font-weight: 600; max-width: 700px; margin-left: auto; margin-right: auto;}
+        .cta-card .btn { background: #000; color: #fff; padding: 1.5rem 3.5rem; font-size: 1.1rem; }
+        .cta-card .btn:hover { background: #222; color: var(--accent-primary); transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.4); }
+
+        footer { 
+            background: var(--bg-surface); 
+            padding: 180px 0 2rem 0; /* Huge top padding to accommodate the overlapped CTA */
+            border-top: 1px solid var(--border-color); 
+        }
+        
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+        .footer-brand p { margin-top: 1.5rem; max-width: 320px; font-size: 1rem;}
+        
+        .social-links { display: flex; gap: 1rem; margin-top: 2.5rem; }
+        .social-links a { width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; transition: var(--transition-fast); border: 1px solid var(--border-color); font-size: 1.2rem;}
+        .social-links a:hover { background: var(--accent-primary); color: #000; transform: translateY(-5px); }
+        
+        .footer-col h4 { font-size: 1.3rem; margin-bottom: 2rem; color: #fff; font-weight: 700;}
+        .footer-col ul li { margin-bottom: 1rem; }
+        .footer-col ul li a { color: var(--text-secondary); transition: color var(--transition-fast); font-size: 1rem;}
+        .footer-col ul li a:hover { color: var(--accent-primary); padding-left: 5px;}
+
+        .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; color: var(--text-secondary); font-size: 0.95rem; }
+
+        /* ==========================================================================
+           14. BOOKING MODAL
+           ========================================================================== */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(15px); z-index: 2000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; padding: 1rem;}
+        .modal-overlay.active { opacity: 1; pointer-events: all; }
+        
+        .modal-content { background: var(--bg-surface); width: 100%; max-width: 650px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 4rem; position: relative; transform: scale(0.95) translateY(20px); transition: all 0.4s var(--ease-out-expo); max-height: 90vh; overflow-y: auto;}
+        .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
+        
+        .close-modal { position: absolute; top: 1.5rem; right: 2rem; background: none; border: none; color: var(--text-secondary); font-size: 2rem; cursor: pointer; transition: color 0.2s; }
+        .close-modal:hover { color: var(--accent-primary); }
+
+        .form-group { margin-bottom: 1.8rem; }
+        .form-group label { display: block; margin-bottom: 0.8rem; font-size: 0.95rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;}
+        .form-control { width: 100%; padding: 1.2rem; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: #fff; font-family: var(--font-body); font-size: 1rem; transition: all 0.3s; }
+        .form-control:focus { outline: none; border-color: var(--accent-primary); background: rgba(204,255,0,0.02); box-shadow: 0 0 15px rgba(204,255,0,0.1);}
+        select.form-control { appearance: none; cursor: pointer; }
+
+        /* ==========================================================================
+           15. RESPONSIVE MEDIA QUERIES
+           ========================================================================== */
+        /* LARGE TABLETS (MAX 1200px) */
+        @media (max-width: 1200px) {
+            .hero-main { padding: 3rem; }
+            .hero-main h1 { font-size: clamp(3rem, 6vw, 4.5rem); }
+            
+            .gal-1 { grid-column: span 12; grid-row: span 1; }
+            .gal-2, .gal-3, .gal-4 { grid-column: span 4; grid-row: span 1; }
+            .gallery-grid { grid-template-rows: 400px 300px; }
+
+            .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 3rem; }
+        }
+
+        /* TABLETS (MAX 992px) */
+        @media (max-width: 992px) {
+            .bento-grid { gap: var(--gap-sm); }
+            
+            .hero-main { grid-column: span 12; grid-row: auto; text-align: center; align-items: center;}
+            .hero-main p { max-width: 100%; margin-left: auto; margin-right: auto;}
+            .hero-video { grid-column: span 12; height: 400px; grid-row: auto;}
+            .hero-stat-1, .hero-stat-2 { grid-column: span 6; padding: 2rem; }
+            
+            .about-img { grid-column: span 12; grid-row: auto; height: 400px;}
+            .about-text-1, .about-text-2 { grid-column: span 12; }
+            
+            .service-card { grid-column: span 6; }
+            .phase-card { grid-column: span 6; }
+        }
+
+        /* MOBILE (MAX 768px) */
+        @media (max-width: 768px) {
+            /* Navbar Mobile */
+            header { top: 1rem; width: calc(100% - 2rem); padding: 1rem 1.5rem; border-radius: var(--radius-md); flex-wrap: wrap;}
+            .menu-toggle { display: block; }
+            .nav-wrapper { width: 100%; display: none; flex-direction: column; padding-top: 1.5rem; margin-top: 1rem; border-top: 1px solid var(--border-color); gap: 1.5rem; }
+            .nav-wrapper.active { display: flex; animation: slideDown 0.3s ease forwards; }
+            @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+            
+            .nav-links { flex-direction: column; width: 100%; gap: 1.5rem; }
+            .nav-links a { font-size: 1.1rem; }
+            .nav-wrapper .btn { width: 100%; }
+
+            /* Grid Layout Mobile */
+            .bento-grid { display: flex; flex-direction: column; margin-top: 7rem; }
+            .bento-card { padding: 2rem; min-height: auto;}
+            
+            .hero-main { padding: 3rem 1.5rem; }
+            .hero-video { height: 300px; }
+            
+            .marquee-item { font-size: 1.8rem; margin: 0 1.5rem; gap: 1.5rem;}
+            
+            .about-text-2 { flex-direction: column; align-items: flex-start; gap: 1.5rem;}
+            .cred-item { padding-left: 1rem; }
+
+            .gal-item { height: 250px; }
+            .gallery-grid { display: flex; flex-direction: column; }
+
+            .reviews-section { padding: 4rem 1.5rem; }
+            .slide-text { font-size: 1.3rem; }
+            .faq-question { font-size: 1.1rem; padding: 1.5rem 0; }
+
+            /* Footer & CTA Mobile Alignment */
+            .cta-container { 
+                margin-bottom: -100px; /* Adjust negative margin for mobile */
+                padding: 0 1rem; 
+            }
+            .cta-card { 
+                padding: 3rem 1.5rem; 
+            }
+            .cta-card h2 { 
+                font-size: 2.2rem; 
+            }
+            footer { 
+                padding: 140px 0 2rem 0; /* Adjust padding to match the new margin */
+            }
+            .footer-grid { 
+                grid-template-columns: 1fr; 
+                gap: 2.5rem; 
+            }
+            .footer-bottom { 
+                flex-direction: column; gap: 1rem; text-align: center; 
+            }
+
+            .modal-content { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <!-- Navigation -->
+    <header>
+        <a href="#" class="logo">DR. MERCER<span>PT</span></a>
+        
+        <button class="menu-toggle" id="mobile-menu-btn" aria-label="Toggle Menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="nav-wrapper" id="nav-wrapper">
+            <nav class="nav-links">
+                <a href="#about">The Specialist</a>
+                <a href="#services">Methodology</a>
+                <a href="#protocol">Protocol</a>
+                <a href="#facility">Facility</a>
+                <a href="#faq">FAQ</a>
+            </nav>
+            <button class="btn btn-primary open-modal-btn" style="padding: 0.8rem 1.5rem; font-size: 0.85rem;">Book Consult</button>
+        </div>
+    </header>
+
+    <!-- MAIN WRAPPER -->
+    <main class="container">
+        
+        <!-- 1. HERO BENTO GRID -->
+        <section class="bento-grid reveal">
+            <div class="bento-card hero-main">
+                <span class="tag"><i class="fa-solid fa-bolt"></i> Elite Sports Rehabilitation</span>
+                <h1>Engineered for Movement.<br>Built for <span>Performance.</span></h1>
+                <p>Advanced biomechanics, precision dry needling, and data-driven return-to-sport protocols designed for athletes who refuse to settle for "good enough."</p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: inherit;">
+                    <button class="btn btn-primary open-modal-btn">Start Recovery <i class="fa-solid fa-arrow-right"></i></button>
+                    <a href="#services" class="btn btn-outline">Explore Methodology</a>
+                </div>
+            </div>
+
+            <div class="bento-card hero-video">
+                <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80&w=1000" alt="Athlete training sprint">
+            </div>
+
+            <div class="bento-card hero-stat-1">
+                <h3>98%</h3>
+                <p>RTS Success Rate</p>
+            </div>
+
+            <div class="bento-card hero-stat-2">
+                <i class="fa-solid fa-staff-snake"></i>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 2. INFINITE MARQUEE -->
+    <div class="marquee-section reveal">
+        <div class="marquee-container">
+            <div class="marquee-item">Biomechanics <i class="fa-solid fa-asterisk"></i></div>
+            <div class="marquee-item">Dry Needling <i class="fa-solid fa-asterisk"></i></div>
+            <div class="marquee-item">Manual Therapy <i class="fa-solid fa-asterisk"></i></div>
+            <div class="marquee-item">Force Plates <i class="fa-solid fa-asterisk"></i></div>
+            <div class="marquee-item">Return to Sport <i class="fa-solid fa-asterisk"></i></div>
+            
+            <!-- Duplicated for seamless loop -->
+            <div class="marquee-item">Biomechanics <i class="fa-solid fa-asterisk"></i></div>
+            <div class="marquee-item">Dry Needling <i class="fa-solid fa-asterisk"></i></div>
+            <div class="marquee-item">Manual Therapy <i class="fa-solid fa-asterisk"></i></div>
+            <div class="marquee-item">Force Plates <i class="fa-solid fa-asterisk"></i></div>
+            <div class="marquee-item">Return to Sport <i class="fa-solid fa-asterisk"></i></div>
+        </div>
+    </div>
+
+    <main class="container">
+
+        <!-- 3. ABOUT THE SPECIALIST -->
+        <section id="about" style="padding-top: 2rem;">
+            <h2 class="section-title reveal">Meet The <span>Specialist</span></h2>
+            <p class="section-subtitle reveal">Bridging the gap between traditional rehabilitation and high-performance athletic strength and conditioning.</p>
+            
+            <div class="bento-grid" style="margin-top: 2rem; margin-bottom: 6rem;">
+                <div class="bento-card about-img reveal">
+                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=800" alt="Dr. Alex Mercer PT">
+                </div>
+                
+                <div class="bento-card about-text-1 reveal" style="transition-delay: 0.1s;">
+                    <h2>Dr. Alex Mercer, DPT, OCS, CSCS</h2>
+                    <p>I founded this clinic out of frustration. Traditional physical therapy too often fails athletes by discharging them when the "pain is gone," rather than when they are truly ready for the demands of their sport. My approach combines doctoral-level clinical diagnostics with elite strength and conditioning principles to ensure you return stronger, faster, and more resilient than before.</p>
+                </div>
+                
+                <div class="bento-card about-text-2 reveal" style="transition-delay: 0.2s;">
+                    <div class="cred-item">
+                        <h4>Doctor of Physical Therapy</h4>
+                        <p>Specializing in orthopedic and sports rehabilitation.</p>
+                    </div>
+                    <div class="cred-item">
+                        <h4>Board Certified (OCS)</h4>
+                        <p>Orthopedic Clinical Specialist recognized by the APTA.</p>
+                    </div>
+                    <div class="cred-item">
+                        <h4>Strength Specialist (CSCS)</h4>
+                        <p>Certified Strength & Conditioning Specialist (NSCA).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. SERVICES DEEP DIVE BENTO -->
+        <section id="services" style="padding-top: 4rem;">
+            <h2 class="section-title reveal">The <span>Methodology</span></h2>
+            <p class="section-subtitle reveal">We leverage technology, data, and advanced manual techniques to optimize your kinetic chain.</p>
+            
+            <div class="bento-grid services-grid">
+                <!-- Biomechanics Card -->
+                <div class="bento-card service-card reveal">
+                    <div class="service-icon-wrap"><i class="fa-solid fa-person-running"></i></div>
+                    <h3>Biomechanics Lab</h3>
+                    <p>We don't guess, we measure. Utilizing high-speed 3D motion capture and dual force plates to analyze your kinetic chain.</p>
+                    <ul class="service-list">
+                        <li><i class="fa-solid fa-check"></i> 3D Gait & Sprint Analysis</li>
+                        <li><i class="fa-solid fa-check"></i> Asymmetry Detection</li>
+                        <li><i class="fa-solid fa-check"></i> Ground Reaction Force Testing</li>
+                        <li><i class="fa-solid fa-check"></i> Power Output Optimization</li>
+                    </ul>
+                </div>
+
+                <!-- Dry Needling Card -->
+                <div class="bento-card service-card reveal" style="transition-delay: 0.1s;">
+                    <div class="service-icon-wrap"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                    <h3>Precision Needling</h3>
+                    <p>Intramuscular stimulation targeting myofascial trigger points to reset the neuromuscular system and accelerate healing.</p>
+                    <ul class="service-list">
+                        <li><i class="fa-solid fa-check"></i> Pain Modulation via CNS</li>
+                        <li><i class="fa-solid fa-check"></i> Improved Tissue Extensibility</li>
+                        <li><i class="fa-solid fa-check"></i> Accelerated Blood Flow</li>
+                        <li><i class="fa-solid fa-check"></i> Post-Op Scar Tissue Breakdown</li>
+                    </ul>
+                </div>
+
+                <!-- Return to Sport Card -->
+                <div class="bento-card service-card reveal" style="transition-delay: 0.2s;">
+                    <div class="service-icon-wrap"><i class="fa-solid fa-dumbbell"></i></div>
+                    <h3>Manual & Strength</h3>
+                    <p>Combining hands-on joint mobilization with heavy, progressive resistance training to rebuild structural integrity.</p>
+                    <ul class="service-list">
+                        <li><i class="fa-solid fa-check"></i> Grade V Joint Manipulations</li>
+                        <li><i class="fa-solid fa-check"></i> Hypertrophy & Tissue Loading</li>
+                        <li><i class="fa-solid fa-check"></i> Blood Flow Restriction (BFR)</li>
+                        <li><i class="fa-solid fa-check"></i> Sport-Specific Periodization</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. THE 4-PHASE PROTOCOL -->
+        <section id="protocol" style="padding-top: 4rem;">
+            <h2 class="section-title reveal">Return to Sport <span>Timeline</span></h2>
+            <p class="section-subtitle reveal">Our criteria-based, rather than time-based, approach to getting you back on the field safely.</p>
+            
+            <div class="bento-grid protocol-grid">
+                <div class="bento-card phase-card reveal">
+                    <div class="phase-num">01</div>
+                    <h4>Pain & Inflammation</h4>
+                    <p>Controlling swelling, restoring basic range of motion, and activating inhibited musculature using manual therapy and modalities.</p>
+                </div>
+                <div class="bento-card phase-card reveal" style="transition-delay: 0.1s;">
+                    <div class="phase-num">02</div>
+                    <h4>Strength & Capacity</h4>
+                    <p>Progressive overload. We rebuild foundational strength through heavy resistance training to ensure tissues can handle load.</p>
+                </div>
+                <div class="bento-card phase-card reveal" style="transition-delay: 0.2s;">
+                    <div class="phase-num">03</div>
+                    <h4>Power & Plyometrics</h4>
+                    <p>Transitioning strength into speed. Reintroducing jumping, landing mechanics, and rate of force development (RFD).</p>
+                </div>
+                <div class="bento-card phase-card reveal" style="transition-delay: 0.3s;">
+                    <div class="phase-num">04</div>
+                    <h4>Chaos & Agility</h4>
+                    <p>Unplanned, reactive movements replicating sport-specific scenarios. Cleared only when testing shows >95% symmetry.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. MODERN PHOTO GALLERY -->
+        <section id="facility" style="padding-top: 4rem;">
+            <h2 class="section-title reveal">The <span>Facility</span></h2>
+            <p class="section-subtitle reveal">A clinical environment built like a high-performance training facility.</p>
+            
+            <div class="bento-grid gallery-grid reveal">
+                <div class="gal-item gal-1">
+                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=1200" alt="Gym Facility">
+                    <div class="gal-overlay"><h4>State-of-the-art Strength Floor</h4></div>
+                </div>
+                <div class="gal-item gal-2">
+                    <img src="https://images.unsplash.com/photo-1579722820308-d74e571900a9?auto=format&fit=crop&q=80&w=800" alt="Treatment Room">
+                    <div class="gal-overlay"><h4>Private Treatment Suites</h4></div>
+                </div>
+                <div class="gal-item gal-3">
+                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=800" alt="Force Plates">
+                    <div class="gal-overlay"><h4>Biomechanics Lab</h4></div>
+                </div>
+                <div class="gal-item gal-4">
+                    <img src="https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&q=80&w=800" alt="Rehab Equipment">
+                    <div class="gal-overlay"><h4>Recovery Tools</h4></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. ATHLETE REVIEWS SLIDER -->
+        <section id="reviews" class="reviews-section reveal">
+            <div class="review-container">
+                <div class="stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                
+                <div class="slider-wrapper">
+                    <div class="slide active">
+                        <p class="slide-text">"Dr. Mercer completely changed my trajectory. The dry needling combined with biomechanical tweaks got me back on the track 2 months ahead of schedule after my hamstring tear."</p>
+                        <p class="slide-author">Sarah Jenkins</p>
+                        <p class="slide-sport">D1 Collegiate Sprinter</p>
+                    </div>
+                    <div class="slide">
+                        <p class="slide-text">"I struggled with chronic shoulder pain for years. The personalized return-to-sport protocol rebuilt my strength from the ground up. Best PT in the city, hands down."</p>
+                        <p class="slide-author">Marcus Torres</p>
+                        <p class="slide-sport">CrossFit Games Competitor</p>
+                    </div>
+                    <div class="slide">
+                        <p class="slide-text">"Not your average physical therapy clinic. It feels like a high-performance lab. The attention to detail in my gait analysis was mind-blowing and fixed my knee pain permanently."</p>
+                        <p class="slide-author">Emma Watson</p>
+                        <p class="slide-sport">Marathon Runner</p>
+                    </div>
+                </div>
+
+                <div class="slider-controls">
+                    <button class="ctrl-btn" id="prevSlide" aria-label="Previous Review"><i class="fa-solid fa-arrow-left"></i></button>
+                    <button class="ctrl-btn" id="nextSlide" aria-label="Next Review"><i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. FAQ ACCORDION -->
+        <section id="faq" class="faq-section reveal">
+            <h2 class="section-title">Patient <span>FAQ</span></h2>
+            
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                    What should I expect on my first visit?
+                    <i class="fa-solid fa-plus faq-icon"></i>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Your initial 60-minute evaluation involves a deep dive into your injury history, goals, and a comprehensive biomechanical movement screen. Depending on your needs, this may include force plate testing, gait analysis, and preliminary manual therapy. We finish by building a roadmap for your complete return to sport.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                    Does Dry Needling hurt?
+                    <i class="fa-solid fa-plus faq-icon"></i>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Most patients report little to no pain during needle insertion. When the needle hits a trigger point, you may experience a brief "twitch response," which feels like a quick muscle cramp. This is the desired neurophysiological response that resets the muscle and alleviates pain.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                    Do you take insurance?
+                    <i class="fa-solid fa-plus faq-icon"></i>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        We operate as an out-of-network, cash-based clinic. This model allows us to spend full 60-minute sessions one-on-one with you, utilizing advanced tech without insurance constraints dictating your care. We provide Superbills upon request for you to submit to your insurance for out-of-network reimbursement.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">
+                    How long does Return-to-Sport take?
+                    <i class="fa-solid fa-plus faq-icon"></i>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Timeline varies wildly based on the injury (e.g., an ankle sprain vs. an ACL reconstruction). However, our protocol is strictly criteria-based, not time-based. You progress when your metrics (strength, power, LSI) dictate you are ready, ensuring the absolute lowest risk of re-injury.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main> <!-- End Container -->
+
+    <!-- ==========================================================================
+         9. FIXED CTA OVERLAY & FOOTER 
+         ========================================================================== -->
+    
+    <!-- CTA Wrapper perfectly aligns itself natively in the DOM flow -->
+    <div class="cta-container reveal">
+        <div class="cta-card">
+            <h2>Ready to move <span>pain-free?</span></h2>
+            <p>Stop letting injuries dictate your athletic potential. Book a comprehensive evaluation today and get back to the sport you love.</p>
+            <button class="btn open-modal-btn">Schedule Your Evaluation <i class="fa-solid fa-calendar-check"></i></button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">DR. MERCER<span>PT</span></a>
+                    <p>Elevating human performance through advanced rehabilitation and movement science.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Biomechanics Analysis</a></li>
+                        <li><a href="#">Dry Needling</a></li>
+                        <li><a href="#">Post-Op Rehab</a></li>
+                        <li><a href="#">Return to Sport Testing</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Clinic</h4>
+                    <ul>
+                        <li><a href="#about">About Dr. Mercer</a></li>
+                        <li><a href="#facility">The Facility</a></li>
+                        <li><a href="#reviews">Testimonials</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><i class="fa-solid fa-location-dot" style="color:var(--accent-primary); margin-right:8px;"></i> 1200 Performance Way<br>Suite 100, Austin, TX</li>
+                        <li><i class="fa-solid fa-phone" style="color:var(--accent-primary); margin-right:8px;"></i> (555) 123-4567</li>
+                        <li><i class="fa-solid fa-envelope" style="color:var(--accent-primary); margin-right:8px;"></i> info@mercerpt.com</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 Dr. Alex Mercer PT. All Rights Reserved.</p>
+                <p>Designed with a modern bento architecture.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 10. BOOKING MODAL -->
+    <div class="modal-overlay" id="bookingModal" role="dialog" aria-modal="true">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal" aria-label="Close Modal"><i class="fa-solid fa-xmark"></i></button>
+            <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem; font-family: var(--font-display);">Request Consultation</h2>
+            <p style="margin-bottom: 2.5rem; color: var(--text-secondary);">Fill out the form below and our team will contact you within 24 hours to schedule.</p>
+            
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" class="form-control" required placeholder="Jane Doe">
+                </div>
+                
+                <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                    <div class="form-group" style="flex: 1; min-width: 200px;">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" required placeholder="jane@example.com">
+                    </div>
+                    <div class="form-group" style="flex: 1; min-width: 200px;">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-control" required placeholder="(555) 000-0000">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="service">Primary Interest</label>
+                    <select id="service" class="form-control">
+                        <option value="evaluation">Initial 60-Min Evaluation</option>
+                        <option value="dry_needling">Dry Needling Session</option>
+                        <option value="rts">Return to Sport Testing (Force Plates)</option>
+                        <option value="other">Other Inquiry</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Briefly describe your injury/goals</label>
+                    <textarea id="message" class="form-control" rows="4" placeholder="e.g., 6 months post-op ACL, looking to return to playing soccer..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem; padding: 1.2rem;">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         JAVASCRIPT CORE
+         ========================================================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. MOBILE MENU TOGGLE LOGIC
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const navWrapper = document.getElementById('nav-wrapper');
+            const navLinksMobile = document.querySelectorAll('.nav-links a');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navWrapper.classList.toggle('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                if(navWrapper.classList.contains('active')){
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                } else {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            // Close mobile menu on link click
+            navLinksMobile.forEach(link => {
+                link.addEventListener('click', () => {
+                    if(window.innerWidth <= 768) {
+                        navWrapper.classList.remove('active');
+                        mobileMenuBtn.querySelector('i').classList.remove('fa-xmark');
+                        mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+                    }
+                });
+            });
+
+            // 2. CUSTOM CURSOR LOGIC (Desktop Only)
+            const cursorDot = document.getElementById('cursor-dot');
+            const cursorOutline = document.getElementById('cursor-outline');
+            
+            // Check if device supports hover (non-touch)
+            if (window.matchMedia("(any-hover: hover)").matches) {
+                window.addEventListener('mousemove', (e) => {
+                    const posX = e.clientX;
+                    const posY = e.clientY;
+                    
+                    cursorDot.style.left = `${posX}px`;
+                    cursorDot.style.top = `${posY}px`;
+                    
+                    cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 400, fill: "forwards" });
+                });
+
+                const interactiveElements = document.querySelectorAll('a, button, .bento-card, .gal-item, .faq-question');
+                interactiveElements.forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        cursorOutline.style.width = '60px'; cursorOutline.style.height = '60px';
+                        cursorOutline.style.backgroundColor = 'rgba(204, 255, 0, 0.1)';
+                    });
+                    el.addEventListener('mouseleave', () => {
+                        cursorOutline.style.width = '40px'; cursorOutline.style.height = '40px';
+                        cursorOutline.style.backgroundColor = 'transparent';
+                    });
+                });
+            }
+
+            // 3. BENTO CARD MOUSE TRACKING GLOW
+            const bentoCards = document.querySelectorAll('.bento-card');
+            bentoCards.forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                });
+            });
+
+            // 4. SCROLL REVEAL ANIMATIONS
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+            
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                });
+            }, revealOptions);
+            revealElements.forEach(el => revealOnScroll.observe(el));
+
+            // 5. TESTIMONIAL SLIDER LOGIC
+            const slides = document.querySelectorAll('.slide');
+            const btnNext = document.getElementById('nextSlide');
+            const btnPrev = document.getElementById('prevSlide');
+            let currentSlide = 0;
+            let slideInterval;
+
+            const goToSlide = (index) => {
+                slides.forEach(slide => slide.classList.remove('active'));
+                slides[index].classList.add('active');
+            };
+
+            const nextSlide = () => { currentSlide = (currentSlide + 1) % slides.length; goToSlide(currentSlide); };
+            const prevSlide = () => { currentSlide = (currentSlide - 1 + slides.length) % slides.length; goToSlide(currentSlide); };
+
+            btnNext.addEventListener('click', () => { nextSlide(); resetInterval(); });
+            btnPrev.addEventListener('click', () => { prevSlide(); resetInterval(); });
+
+            const startInterval = () => { slideInterval = setInterval(nextSlide, 7000); };
+            const resetInterval = () => { clearInterval(slideInterval); startInterval(); };
+            startInterval();
+
+            // 6. FAQ ACCORDION LOGIC
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const btn = item.querySelector('.faq-question');
+                btn.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all others and reset aria
+                    faqItems.forEach(i => {
+                        i.classList.remove('active');
+                        i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                    });
+                    
+                    // Open clicked item
+                    if (!isActive) {
+                        item.classList.add('active');
+                        btn.setAttribute('aria-expanded', 'true');
+                    }
+                });
+            });
+
+            // 7. MODAL LOGIC
+            const modal = document.getElementById('bookingModal');
+            const openBtns = document.querySelectorAll('.open-modal-btn');
+            const closeBtn = document.getElementById('closeModal');
+
+            openBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // prevent bg scroll
+                });
+            });
+
+            const closeModal = () => {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            };
+
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal(); // Close if clicked on overlay
+            });
+
+            // Form Submit Mock
+            document.getElementById('bookingForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = e.target.querySelector('button');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+                
+                setTimeout(() => {
+                    alert('Consultation request successfully sent! We will contact you soon.');
+                    closeModal();
+                    e.target.reset();
+                    btn.innerHTML = originalText;
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>

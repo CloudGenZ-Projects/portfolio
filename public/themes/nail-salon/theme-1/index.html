@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nail Theory Studio | Editorial Nail Art</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. DESIGN TOKENS & FOUNDATION --- */
+        :root {
+            /* Colors */
+            --porcelain: #F8F2EC;
+            --ballet-pink: #EBCBD1;
+            --berry-lacquer: #6E243D;
+            --ink-plum: #211A20;
+            --champagne: #D9C7B0;
+            --sage: #B6C4B0;
+            --white: #FFFFFF;
+            
+            /* Typography */
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Manrope', sans-serif;
+            
+            /* Layout & Spacing */
+            --container-width: 1400px;
+            --padding-section: 120px 5%;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-pill: 100px;
+            
+            /* Motion */
+            --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+            --ease-editorial: cubic-bezier(0.65, 0, 0.35, 1);
+            --transition-fast: 200ms ease;
+            --transition-slow: 600ms var(--ease-editorial);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--porcelain);
+            color: var(--ink-plum);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 400; line-height: 1.1; }
+        h1 { font-size: clamp(3.5rem, 8vw, 6rem); letter-spacing: -0.02em; }
+        h2 { font-size: clamp(2.5rem, 5vw, 4rem); }
+        h3 { font-size: 2rem; }
+        p { font-size: 1.1rem; opacity: 0.85; max-width: 600px; }
+        img { max-width: 100%; height: auto; display: block; object-fit: cover; }
+        a { text-decoration: none; color: inherit; }
+        li { list-style: none; }
+
+        .container { max-width: var(--container-width); margin: 0 auto; width: 100%; }
+        section { padding: var(--padding-section); }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 1rem 2rem; border-radius: var(--radius-pill);
+            font-family: var(--font-body); font-weight: 500; font-size: 0.95rem;
+            cursor: pointer; transition: all var(--transition-fast);
+            border: none;
+        }
+        .btn-primary { background-color: var(--berry-lacquer); color: var(--white); }
+        .btn-primary:hover { background-color: var(--ink-plum); transform: translateY(-2px); }
+        .btn-secondary { background-color: transparent; border: 1px solid var(--ink-plum); color: var(--ink-plum); }
+        .btn-secondary:hover { background-color: var(--ink-plum); color: var(--white); }
+
+        /* --- 2. HEADER --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+            padding: 1.5rem 5%; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(248, 242, 236, 0.8); backdrop-filter: blur(12px);
+        }
+        .logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
+        nav ul { display: flex; gap: 2.5rem; align-items: center; }
+        nav a { font-size: 0.9rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; transition: color var(--transition-fast); }
+        nav a:hover { color: var(--berry-lacquer); }
+        
+        /* --- 3. HERO SECTION (SaaS meets Editorial) --- */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center; position: relative;
+            padding-top: 120px;
+        }
+        .hero-bg-blur {
+            position: absolute; top: -10%; right: -10%; width: 60vw; height: 60vw;
+            background: radial-gradient(circle, var(--ballet-pink) 0%, transparent 70%);
+            opacity: 0.4; filter: blur(80px); z-index: -1;
+            animation: pulseBg 10s infinite alternate linear;
+        }
+        .hero-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+        }
+        .hero-content .eyebrow { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; display: block; color: var(--berry-lacquer); }
+        .hero-content p { margin: 2rem 0; font-size: 1.25rem; }
+        .hero-actions { display: flex; gap: 1rem; align-items: center; }
+        
+        /* Hero Visuals (Overlapping composition) */
+        .hero-visuals { position: relative; height: 600px; }
+        .hero-img-card {
+            position: absolute; border-radius: var(--radius-lg); overflow: hidden;
+            box-shadow: 0 20px 40px rgba(33, 26, 32, 0.1);
+        }
+        .hero-img-1 { width: 60%; height: 80%; top: 0; left: 0; z-index: 2; animation: float 6s ease-in-out infinite; }
+        .hero-img-2 { width: 50%; height: 60%; bottom: 0; right: 0; z-index: 3; animation: float 8s ease-in-out infinite 1s; }
+        .hero-img-3 { width: 40%; height: 50%; top: 10%; right: 10%; z-index: 1; opacity: 0.8; animation: float 7s ease-in-out infinite 2s; }
+        .glass-badge {
+            position: absolute; bottom: 20%; left: -10%; z-index: 4;
+            background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(16px);
+            padding: 1rem 1.5rem; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.8);
+            font-family: var(--font-display); font-size: 1.2rem;
+            animation: float 5s ease-in-out infinite 0.5s;
+        }
+
+        /* --- 4. SIGNATURE SERVICES (Bento Grid) --- */
+        .bento-grid {
+            display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; margin-top: 4rem;
+        }
+        .bento-card {
+            background: var(--white); border-radius: var(--radius-lg); overflow: hidden;
+            padding: 2.5rem; display: flex; flex-direction: column; position: relative;
+            transition: transform var(--transition-slow); border: 1px solid rgba(0,0,0,0.03);
+        }
+        .bento-card:hover { transform: translateY(-5px); }
+        .bento-feature { grid-column: span 8; min-height: 500px; justify-content: space-between; }
+        .bento-small { grid-column: span 4; min-height: 240px; }
+        .bento-feature .bento-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: 0; opacity: 0.9;
+        }
+        .bento-content { position: relative; z-index: 1; }
+        .bento-feature .bento-content { background: rgba(255,255,255,0.85); backdrop-filter: blur(10px); padding: 2rem; border-radius: var(--radius-md); align-self: flex-start; max-width: 80%; }
+        .bento-card h3 { margin-bottom: 0.5rem; }
+        .bento-card .price { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-top: auto; display: block; padding-top: 1.5rem;}
+        .bento-link { margin-top: 1rem; font-weight: 600; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem;}
+
+        /* --- 5. NAIL ARCHIVE (Gallery) --- */
+        .gallery-section { background-color: var(--white); border-radius: 40px; margin: 0 2%; }
+        .filter-nav { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 3rem 0; }
+        .filter-btn {
+            padding: 0.5rem 1.25rem; border: 1px solid var(--champagne); border-radius: var(--radius-pill);
+            background: transparent; font-family: var(--font-body); cursor: pointer; transition: all var(--transition-fast);
+        }
+        .filter-btn.active, .filter-btn:hover { background: var(--ink-plum); color: var(--white); border-color: var(--ink-plum); }
+        
+        .masonry-grid {
+            column-count: 3; column-gap: 1.5rem;
+        }
+        .gallery-item {
+            break-inside: avoid; margin-bottom: 1.5rem; position: relative;
+            border-radius: var(--radius-md); overflow: hidden; cursor: zoom-in;
+        }
+        .gallery-item img { transition: transform 0.8s var(--ease-editorial); }
+        .gallery-item:hover img { transform: scale(1.05); }
+        .gallery-overlay {
+            position: absolute; inset: 0; background: rgba(33, 26, 32, 0.4);
+            display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem;
+            opacity: 0; transition: opacity var(--transition-fast); color: var(--white);
+        }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-overlay span { font-family: var(--font-display); font-size: 1.5rem; }
+
+        /* --- 6. THE PROCESS (Narrative) --- */
+        .process-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; margin-top: 4rem;
+        }
+        .process-step { margin-bottom: 4rem; position: relative; padding-left: 3rem; }
+        .process-step::before {
+            content: ''; position: absolute; left: 0; top: 0; bottom: -4rem; width: 1px; background: var(--champagne);
+        }
+        .process-step:last-child::before { display: none; }
+        .step-num {
+            position: absolute; left: -14px; top: 0; width: 28px; height: 28px;
+            background: var(--porcelain); border: 1px solid var(--champagne); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 600;
+            transition: all var(--transition-slow);
+        }
+        .process-step.is-active .step-num { background: var(--berry-lacquer); border-color: var(--berry-lacquer); color: var(--white); }
+        .process-img-sticky { position: sticky; top: 150px; height: 600px; border-radius: var(--radius-lg); overflow: hidden; }
+
+        /* --- 7. STYLE SELECTOR (Interactive Form) --- */
+        .selector-section { background: var(--ink-plum); color: var(--porcelain); text-align: center; border-radius: 40px; margin: 0 2%; padding: 100px 5%;}
+        .selector-section h2 { color: var(--porcelain); margin-bottom: 3rem;}
+        .selector-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; text-align: left; margin-bottom: 3rem;}
+        .selector-group { background: rgba(255,255,255,0.05); padding: 2rem; border-radius: var(--radius-md); }
+        .selector-group h4 { margin-bottom: 1.5rem; font-family: var(--font-body); font-size: 1rem; color: var(--champagne); text-transform: uppercase; letter-spacing: 0.05em;}
+        .option-btn {
+            display: block; width: 100%; text-align: left; padding: 1rem; margin-bottom: 0.5rem;
+            background: transparent; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px;
+            color: var(--porcelain); cursor: pointer; transition: all var(--transition-fast);
+        }
+        .option-btn:hover { background: rgba(255,255,255,0.1); }
+        .option-btn.selected { background: var(--berry-lacquer); border-color: var(--berry-lacquer); }
+
+        /* --- 8. FOOTER --- */
+        footer { padding: 4rem 5%; background: var(--porcelain); border-top: 1px solid var(--champagne); margin-top: 4rem; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; }
+        .footer-col h4 { font-family: var(--font-body); font-size: 0.9rem; text-transform: uppercase; margin-bottom: 1.5rem; letter-spacing: 0.05em; }
+        .footer-col ul li { margin-bottom: 0.75rem; }
+        .footer-col a { opacity: 0.7; transition: opacity var(--transition-fast); }
+        .footer-col a:hover { opacity: 1; color: var(--berry-lacquer); }
+
+        /* --- UTILITY & ANIMATIONS --- */
+        .reveal-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--ease-editorial), transform 0.8s var(--ease-editorial); }
+        .reveal-up.is-visible { opacity: 1; transform: translateY(0); }
+        
+        .stagger-group .stagger-item { opacity: 0; transform: translateY(30px); transition: all 0.6s var(--ease-editorial); }
+        .stagger-group.is-visible .stagger-item { opacity: 1; transform: translateY(0); }
+        .stagger-group.is-visible .stagger-item:nth-child(1) { transition-delay: 100ms; }
+        .stagger-group.is-visible .stagger-item:nth-child(2) { transition-delay: 200ms; }
+        .stagger-group.is-visible .stagger-item:nth-child(3) { transition-delay: 300ms; }
+        .stagger-group.is-visible .stagger-item:nth-child(4) { transition-delay: 400ms; }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(1deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        @keyframes pulseBg {
+            0% { transform: scale(1); opacity: 0.3; }
+            100% { transform: scale(1.1); opacity: 0.6; }
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 1024px) {
+            h1 { font-size: 4rem; }
+            .hero-grid, .process-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .hero-visuals { height: 500px; order: -1; }
+            .bento-feature, .bento-small { grid-column: span 6; }
+            .masonry-grid { column-count: 2; }
+            .selector-grid { grid-template-columns: 1fr 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            nav ul { display: none; } /* Mobile menu simplified for demo */
+            .bento-feature, .bento-small { grid-column: span 12; }
+            .selector-grid, .footer-grid { grid-template-columns: 1fr; }
+            .masonry-grid { column-count: 1; }
+            .process-img-sticky { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Nail Theory</div>
+        <nav>
+            <ul>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#gallery">Archive</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="#book" class="btn btn-primary" style="color:white;">Book Now</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero container">
+        <div class="hero-bg-blur"></div>
+        <div class="hero-grid">
+            <div class="hero-content reveal-up">
+                <span class="eyebrow">Nail Art, Reimagined</span>
+                <h1>Your nails.<br>Your canvas.</h1>
+                <p>Apres Gel-X extensions, dimensional finishes, and hand-painted details — designed around your style, your mood, and your next main-character moment.</p>
+                <div class="hero-actions">
+                    <a href="#book" class="btn btn-primary">Book Appointment</a>
+                    <a href="#gallery" class="btn btn-secondary">Explore Gallery</a>
+                </div>
+            </div>
+            <div class="hero-visuals">
+                <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&q=80&w=800" alt="Editorial Nail Art" class="hero-img-card hero-img-1">
+                <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=600" alt="Chrome Nails" class="hero-img-card hero-img-2">
+                <img src="https://images.unsplash.com/photo-1596547610444-a006c04f29a0?auto=format&fit=crop&q=80&w=500" alt="Detail Nails" class="hero-img-card hero-img-3">
+                <div class="glass-badge">✧ Your next set</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Manifesto / Intro -->
+    <section class="container reveal-up" style="text-align: center; padding-top: 50px; padding-bottom: 50px;">
+        <h2 style="max-width: 800px; margin: 0 auto;">Tiny canvases.<br>Extraordinary art.</h2>
+        <p style="margin: 2rem auto;">Every manicure is custom-designed. A blend of a luxury beauty campaign and a polished digital product, crafted at your fingertips.</p>
+    </section>
+
+    <!-- Signature Services (Bento) -->
+    <section id="services" class="container">
+        <div class="reveal-up">
+            <span class="eyebrow" style="color: var(--berry-lacquer); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.1em;">The Studio Menu</span>
+            <h2>Your next set starts here.</h2>
+        </div>
+        
+        <div class="bento-grid stagger-group">
+            <!-- Featured Card -->
+            <div class="bento-card bento-feature stagger-item">
+                <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?auto=format&fit=crop&q=80&w=1200" alt="Gel-X Extensions" class="bento-bg">
+                <div class="bento-content">
+                    <h3>01 / Gel-X Extensions</h3>
+                    <p>Lightweight, sculpted extensions with your choice of length, shape, and finish. Ideal for a refined everyday set or a dramatic statement look.</p>
+                    <a href="#" class="bento-link">Explore Gel-X &rarr;</a>
+                </div>
+            </div>
+            
+            <!-- Small Cards -->
+            <div class="bento-card bento-small stagger-item">
+                <div class="bento-content">
+                    <h3>Custom Nail Art</h3>
+                    <p>Every detail tells a story — from delicate linework to expressive hand-painted designs.</p>
+                    <span class="price">Price varies by complexity</span>
+                </div>
+            </div>
+            
+            <div class="bento-card bento-small stagger-item">
+                <div class="bento-content">
+                    <h3>Chrome & Effects</h3>
+                    <p>Reflective chrome, glazed finishes, cat-eye effects, and dimensional details.</p>
+                    <span class="price">Add-on pricing applies</span>
+                </div>
+            </div>
+            
+            <div class="bento-card bento-small stagger-item" style="background: var(--ballet-pink);">
+                <div class="bento-content">
+                    <h3>The Clean Set</h3>
+                    <p>Natural-looking manicures, glossy neutrals, and beautifully finished nails.</p>
+                    <a href="#" class="bento-link">Book Classic &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nail Archive (Gallery) -->
+    <section id="gallery" class="gallery-section">
+        <div class="container reveal-up">
+            <h2>The Nail Archive</h2>
+            <p>Explore our archive of custom sets, signature finishes, and little details worth looking at twice.</p>
+            
+            <div class="filter-nav">
+                <button class="filter-btn active" data-filter="all">All Sets</button>
+                <button class="filter-btn" data-filter="gelx">Gel-X</button>
+                <button class="filter-btn" data-filter="chrome">Chrome</button>
+                <button class="filter-btn" data-filter="art">Hand-Painted</button>
+            </div>
+
+            <div class="masonry-grid" id="gallery-grid">
+                <!-- Gallery items with data-category for filtering -->
+                <div class="gallery-item" data-category="chrome">
+                    <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&q=80&w=600" alt="Chrome">
+                    <div class="gallery-overlay"><span>Glazed Pearl</span></div>
+                </div>
+                <div class="gallery-item" data-category="art">
+                    <img src="https://images.unsplash.com/photo-1596547610444-a006c04f29a0?auto=format&fit=crop&q=80&w=600" alt="Art">
+                    <div class="gallery-overlay"><span>Fine Linework</span></div>
+                </div>
+                <div class="gallery-item" data-category="gelx">
+                    <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=600" alt="GelX">
+                    <div class="gallery-overlay"><span>Almond Structure</span></div>
+                </div>
+                <div class="gallery-item" data-category="art">
+                    <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?auto=format&fit=crop&q=80&w=600" alt="Art">
+                    <div class="gallery-overlay"><span>Floral Accents</span></div>
+                </div>
+                 <div class="gallery-item" data-category="chrome">
+                    <img src="https://images.unsplash.com/photo-1629813293816-7782b5247ee0?auto=format&fit=crop&q=80&w=600" alt="Chrome">
+                    <div class="gallery-overlay"><span>Midnight Chrome</span></div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="#book" class="btn btn-secondary">Love a look? Book it.</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Process -->
+    <section id="process" class="container">
+        <div class="reveal-up">
+            <h2>Artistry is in the details.</h2>
+            <p>A sequence of thoughtful choices, precise technique, and finishing touches.</p>
+        </div>
+        
+        <div class="process-grid">
+            <div class="process-narrative stagger-group">
+                <div class="process-step stagger-item">
+                    <div class="step-num">1</div>
+                    <h3>The conversation</h3>
+                    <p>We talk about your inspiration, lifestyle, preferred shape, and the look you want to achieve.</p>
+                </div>
+                <div class="process-step stagger-item">
+                    <div class="step-num">2</div>
+                    <h3>The foundation</h3>
+                    <p>Your nails are prepared with care. We discuss the appropriate extension or manicure approach.</p>
+                </div>
+                <div class="process-step stagger-item">
+                    <div class="step-num">3</div>
+                    <h3>The artistry</h3>
+                    <p>Color, texture, linework, chrome, and custom details come together one careful step at a time.</p>
+                </div>
+                <div class="process-step stagger-item">
+                    <div class="step-num">4</div>
+                    <h3>The final reveal</h3>
+                    <p>We refine the shape, check the finish, and capture your finished set.</p>
+                </div>
+            </div>
+            
+            <div class="process-visual reveal-up">
+                <img src="https://images.unsplash.com/photo-1595868227653-8f0a04da2880?auto=format&fit=crop&q=80&w=800" alt="Nail Process" class="process-img-sticky">
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Style Selector -->
+    <section class="selector-section reveal-up">
+        <h2>Your Style Direction</h2>
+        <p style="margin: 0 auto 3rem auto; color: var(--champagne);">Build a concept brief before you book.</p>
+        
+        <div class="selector-grid">
+            <div class="selector-group">
+                <h4>1. Shape</h4>
+                <button class="option-btn" onclick="selectOption(this, 'shape')">Almond</button>
+                <button class="option-btn" onclick="selectOption(this, 'shape')">Square</button>
+                <button class="option-btn" onclick="selectOption(this, 'shape')">Coffin</button>
+            </div>
+            <div class="selector-group">
+                <h4>2. Finish</h4>
+                <button class="option-btn" onclick="selectOption(this, 'finish')">High-Gloss</button>
+                <button class="option-btn" onclick="selectOption(this, 'finish')">Chrome</button>
+                <button class="option-btn" onclick="selectOption(this, 'finish')">French</button>
+            </div>
+             <div class="selector-group">
+                <h4>3. Mood</h4>
+                <button class="option-btn" onclick="selectOption(this, 'mood')">Minimal</button>
+                <button class="option-btn" onclick="selectOption(this, 'mood')">Soft Glam</button>
+                <button class="option-btn" onclick="selectOption(this, 'mood')">Statement</button>
+            </div>
+            <div class="selector-group">
+                <h4>4. Length</h4>
+                <button class="option-btn" onclick="selectOption(this, 'length')">Short</button>
+                <button class="option-btn" onclick="selectOption(this, 'length')">Medium</button>
+                <button class="option-btn" onclick="selectOption(this, 'length')">Long</button>
+            </div>
+        </div>
+        
+        <button class="btn btn-primary" style="background: var(--porcelain); color: var(--ink-plum);" onclick="alert('Brief generated! Redirecting to booking form...')">Build My Nail-Art Brief</button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h3 style="font-family: var(--font-display); font-size: 2rem; margin-bottom: 1rem;">Nail Theory</h3>
+                <p style="font-size: 0.9rem;">Tiny canvases. Extraordinary art.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">Our Team</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Info</h4>
+                <ul>
+                    <li><a href="#">FAQ & Policies</a></li>
+                    <li><a href="#">Hygiene Standards</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">TikTok</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Interactions -->
+    <script>
+        // 1. Scroll Reveal Animation using Intersection Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    
+                    // Specific logic for process steps activating on scroll
+                    if(entry.target.classList.contains('process-step')) {
+                        document.querySelectorAll('.process-step').forEach(step => step.classList.remove('is-active'));
+                        entry.target.classList.add('is-active');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-up, .stagger-group, .process-step').forEach(el => {
+            observer.observe(el);
+        });
+
+        // 2. Gallery Filtering Logic
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                const filterValue = btn.getAttribute('data-filter');
+
+                galleryItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.style.display = 'block';
+                        // Small timeout to allow display:block to apply before animating opacity
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 50);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.8)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300); // match transition speed
+                    }
+                });
+            });
+        });
+
+        // 3. Interactive Style Selector Logic
+        function selectOption(button, category) {
+            // Find the parent group
+            const group = button.parentElement;
+            // Remove 'selected' class from all buttons in this group
+            group.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected'));
+            // Add 'selected' class to the clicked button
+            button.classList.add('selected');
+        }
+    </script>
+</body>
+</html>

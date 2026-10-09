@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atelier / Build | Turnkey Luxury Renovations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           Design Tokens & Setup (SLDS / Paste Influence)
+           ========================================================================== */
+        :root {
+            /* Colors */
+            --color-obsidian: #20211F;
+            --color-limestone: #F4F1EA;
+            --color-bronze: #A77D52;
+            --color-porcelain: #FFFFFF;
+            --color-slate: #777A72;
+            --color-sandstone: #DCD4C7;
+            --color-overlay: rgba(32, 33, 31, 0.4);
+
+            /* Typography */
+            --font-ui: 'Manrope', sans-serif;
+            --font-display: 'Cormorant Garamond', serif;
+
+            /* Spacing (Base 8px) */
+            --sp-1: 8px;
+            --sp-2: 16px;
+            --sp-3: 24px;
+            --sp-4: 32px;
+            --sp-6: 48px;
+            --sp-8: 64px;
+            --sp-12: 96px;
+            --sp-16: 128px;
+            --max-width: 1440px;
+
+            /* Radii */
+            --radius-card: 16px;
+            --radius-btn: 6px;
+
+            /* Motion */
+            --motion-fast: 180ms;
+            --motion-base: 300ms;
+            --motion-reveal: 700ms;
+            --motion-cinematic: 1200ms;
+            --ease-standard: ease-out;
+            --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-ui);
+            background-color: var(--color-limestone);
+            color: var(--color-obsidian);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Typography utility */
+        .text-display-1 { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5.5rem); line-height: 1.1; font-weight: 500; }
+        .text-display-2 { font-family: var(--font-display); font-size: clamp(2.5rem, 4vw, 4rem); line-height: 1.1; font-weight: 400; }
+        .text-display-3 { font-family: var(--font-display); font-size: clamp(2rem, 3vw, 2.5rem); line-height: 1.2; }
+        .text-body-lg { font-size: clamp(1.125rem, 2vw, 1.25rem); line-height: 1.6; color: var(--color-slate); }
+        .text-body { font-size: 1rem; color: var(--color-slate); }
+        .text-caption { font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; color: var(--color-obsidian); }
+        
+        .accent-color { color: var(--color-bronze); }
+
+        /* Layout */
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--sp-4);
+        }
+        
+        section {
+            padding: var(--sp-12) 0;
+        }
+
+        /* Buttons & Links */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--sp-2) var(--sp-4);
+            background-color: var(--color-obsidian);
+            color: var(--color-porcelain);
+            text-decoration: none;
+            border-radius: var(--radius-btn);
+            font-weight: 500;
+            border: 1px solid var(--color-obsidian);
+            cursor: pointer;
+            transition: all var(--motion-fast) var(--ease-standard);
+        }
+        
+        .btn:hover, .btn:focus-visible {
+            background-color: var(--color-bronze);
+            border-color: var(--color-bronze);
+            outline: 2px solid var(--color-bronze);
+            outline-offset: 2px;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--color-obsidian);
+            border: 1px solid var(--color-obsidian);
+        }
+
+        .link-arrow {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--sp-1);
+            color: var(--color-obsidian);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color var(--motion-fast);
+        }
+        .link-arrow::after {
+            content: '↗';
+            transition: transform var(--motion-fast);
+        }
+        .link-arrow:hover { color: var(--color-bronze); }
+        .link-arrow:hover::after { transform: translate(4px, -4px); }
+
+        /* Focus States for Accessibility (Paste influence) */
+        a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+            outline: 2px solid var(--color-bronze);
+            outline-offset: 2px;
+        }
+
+        /* Animation Classes */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity var(--motion-reveal) var(--ease-editorial), transform var(--motion-reveal) var(--ease-editorial);
+        }
+        .reveal-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-1 { transition-delay: 100ms; }
+        .delay-2 { transition-delay: 200ms; }
+        .delay-3 { transition-delay: 300ms; }
+
+        /* ==========================================================================
+           Components & Sections
+           ========================================================================== */
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            padding: var(--sp-3) var(--sp-4);
+            transition: background-color var(--motion-base), padding var(--motion-base);
+        }
+        header.scrolled {
+            background-color: rgba(244, 241, 234, 0.95);
+            backdrop-filter: blur(10px);
+            padding: var(--sp-2) var(--sp-4);
+            box-shadow: 0 1px 0 rgba(32,33,31,0.05);
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+        .logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; text-decoration: none; color: inherit; }
+        .header-dark-text .logo, .header-dark-text nav a { color: var(--color-porcelain); }
+        header.scrolled .logo, header.scrolled nav a { color: var(--color-obsidian); }
+        nav { display: flex; gap: var(--sp-4); }
+        nav a { text-decoration: none; font-weight: 500; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; }
+
+        /* Section 01: Hero */
+        .hero {
+            height: 100vh;
+            min-height: 600px;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: var(--sp-12);
+            overflow: hidden;
+            color: var(--color-porcelain);
+        }
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.08);
+            animation: zoomOut var(--motion-cinematic) var(--ease-editorial) forwards;
+            z-index: -2;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(32,33,31,0.8) 0%, rgba(32,33,31,0.2) 60%, rgba(32,33,31,0.4) 100%);
+            z-index: -1;
+        }
+        @keyframes zoomOut { to { transform: scale(1); } }
+        .hero-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            width: 100%;
+            flex-wrap: wrap;
+            gap: var(--sp-4);
+        }
+        .hero-title { max-width: 800px; }
+        .stagger-line { display: block; overflow: hidden; }
+        .stagger-line span { display: block; transform: translateY(100%); animation: slideUp 1s var(--ease-editorial) forwards; }
+        .stagger-line:nth-child(2) span { animation-delay: 0.1s; }
+        .stagger-line:nth-child(3) span { animation-delay: 0.2s; }
+        @keyframes slideUp { to { transform: translateY(0); } }
+        .hero-meta { max-width: 300px; }
+
+        /* Section 02: Intro */
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--sp-8);
+            align-items: start;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--sp-4);
+            border-top: 1px solid var(--color-sandstone);
+            padding-top: var(--sp-4);
+        }
+        .feature-item h4 { margin-bottom: var(--sp-1); font-size: 1.1rem; }
+
+        /* Section 03: Services (Bento Grid) */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: minmax(300px, auto);
+            gap: var(--sp-3);
+            margin-top: var(--sp-8);
+        }
+        .bento-card {
+            background-color: var(--color-porcelain);
+            border-radius: var(--radius-card);
+            padding: var(--sp-6);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--color-sandstone);
+            transition: border-color var(--motion-base);
+        }
+        .bento-card:hover { border-color: var(--color-bronze); }
+        .bento-card-1 { grid-column: span 8; grid-row: span 2; background-image: url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'); background-size: cover; color: var(--color-porcelain); }
+        .bento-card-1 .bento-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); z-index: 1; }
+        .bento-card-1 > * { position: relative; z-index: 2; }
+        .bento-card-2 { grid-column: span 4; grid-row: span 1; }
+        .bento-card-3 { grid-column: span 4; grid-row: span 1; }
+        .bento-card-4 { grid-column: span 12; grid-row: span 1; flex-direction: row; align-items: center; gap: var(--sp-4); }
+        .bento-num { font-family: var(--font-display); font-size: 2rem; color: var(--color-bronze); }
+
+        /* Section 04: Portfolio */
+        .portfolio-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: var(--sp-6); }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: var(--sp-4); }
+        .project-card { display: block; text-decoration: none; color: inherit; group; }
+        .project-img-wrapper { border-radius: var(--radius-card); overflow: hidden; aspect-ratio: 4/3; margin-bottom: var(--sp-3); }
+        .project-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--motion-reveal) var(--ease-editorial); }
+        .project-card:hover img { transform: scale(1.05); }
+
+        /* Section 05: Before & After */
+        .ba-container { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: var(--radius-card); overflow: hidden; background: #ddd; margin-top: var(--sp-6); }
+        .ba-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+        .ba-overlay { position: absolute; top: 0; left: 0; height: 100%; width: 50%; overflow: hidden; border-right: 2px solid var(--color-porcelain); }
+        .ba-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; z-index: 10; }
+        .ba-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; background: var(--color-porcelain); border-radius: 50%; display: flex; align-items: center; justify-content: center; pointer-events: none; z-index: 5; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .ba-handle::before, .ba-handle::after { content: ''; width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
+        .ba-handle::before { border-right: 6px solid var(--color-obsidian); margin-right: 4px; }
+        .ba-handle::after { border-left: 6px solid var(--color-obsidian); margin-left: 4px; }
+        .ba-labels { position: absolute; bottom: var(--sp-2); left: var(--sp-2); right: var(--sp-2); display: flex; justify-content: space-between; z-index: 5; pointer-events: none; }
+        .ba-label { background: rgba(32,33,31,0.7); color: white; padding: 4px 12px; border-radius: 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Section 06: Process Timeline */
+        .process-list { margin-top: var(--sp-8); position: relative; }
+        .process-list::before { content: ''; position: absolute; top: 0; left: 24px; width: 2px; height: 100%; background: var(--color-sandstone); }
+        .process-item { display: flex; gap: var(--sp-6); margin-bottom: var(--sp-6); position: relative; }
+        .process-num { width: 50px; height: 50px; border-radius: 50%; background: var(--color-porcelain); border: 2px solid var(--color-sandstone); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; z-index: 2; flex-shrink: 0; }
+        .process-item.is-visible .process-num { border-color: var(--color-bronze); color: var(--color-bronze); transition: all var(--motion-reveal); }
+
+        /* Section 07: Craftsmanship */
+        .craft-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-8); align-items: center; }
+        .craft-img { border-radius: var(--radius-card); overflow: hidden; }
+        .craft-img img { width: 100%; height: auto; display: block; }
+        .craft-list { list-style: none; margin-top: var(--sp-4); }
+        .craft-list li { padding: var(--sp-2) 0; border-bottom: 1px solid var(--color-sandstone); }
+
+        /* Section 08: Testimonial */
+        .testimonial { text-align: center; max-width: 800px; margin: 0 auto; padding: var(--sp-12) 0; }
+        .testimonial h3 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-style: italic; margin-bottom: var(--sp-4); color: var(--color-bronze); }
+
+        /* Section 09: FAQ */
+        .faq-list { max-width: 800px; margin: var(--sp-8) auto 0; }
+        details { border-bottom: 1px solid var(--color-sandstone); }
+        summary { padding: var(--sp-4) 0; font-size: 1.25rem; font-weight: 500; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: '+'; font-size: 1.5rem; transition: transform var(--motion-fast); }
+        details[open] summary::after { transform: rotate(45deg); }
+        .faq-content { padding-bottom: var(--sp-4); color: var(--color-slate); line-height: 1.6; }
+
+        /* Section 10: Form */
+        .inquiry-section { background-color: var(--color-porcelain); padding: var(--sp-12) 0; }
+        .form-container { max-width: 600px; margin: 0 auto; background: var(--color-limestone); padding: var(--sp-6); border-radius: var(--radius-card); }
+        .form-step { display: none; }
+        .form-step.active { display: block; animation: fadeIn var(--motion-base); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .form-group { margin-bottom: var(--sp-4); }
+        .form-group label { display: block; font-weight: 600; margin-bottom: var(--sp-1); font-size: 0.9rem; }
+        .form-group input, .form-group select { width: 100%; padding: var(--sp-2); border: 1px solid var(--color-sandstone); border-radius: var(--radius-btn); font-family: inherit; font-size: 1rem; background: var(--color-porcelain); transition: border-color var(--motion-fast); }
+        
+        .radio-group { display: grid; gap: var(--sp-2); }
+        .radio-label { display: flex; align-items: center; padding: var(--sp-2); border: 1px solid var(--color-sandstone); border-radius: var(--radius-btn); cursor: pointer; background: var(--color-porcelain); transition: all var(--motion-fast); }
+        .radio-label:hover { border-color: var(--color-bronze); }
+        .radio-label input { margin-right: var(--sp-2); accent-color: var(--color-bronze); }
+        .radio-label:has(input:checked) { border-color: var(--color-bronze); background: #fdfaf6; }
+
+        .form-actions { display: flex; justify-content: space-between; margin-top: var(--sp-6); }
+        .step-indicator { font-size: 0.875rem; color: var(--color-slate); margin-bottom: var(--sp-4); text-transform: uppercase; font-weight: 600; }
+
+        /* Footer */
+        footer { background-color: var(--color-obsidian); color: var(--color-porcelain); padding: var(--sp-12) 0 var(--sp-4); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--sp-8); margin-bottom: var(--sp-8); }
+        footer h4 { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: var(--sp-4); color: var(--color-bronze); }
+        footer ul { list-style: none; }
+        footer ul li { margin-bottom: var(--sp-2); }
+        footer a { color: var(--color-sandstone); text-decoration: none; transition: color var(--motion-fast); }
+        footer a:hover { color: var(--color-porcelain); }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: var(--sp-4); display: flex; justify-content: space-between; font-size: 0.875rem; color: var(--color-slate); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .bento-card-1 { grid-column: span 12; }
+            .bento-card-2, .bento-card-3 { grid-column: span 6; }
+            .bento-card-4 { flex-direction: column; align-items: flex-start; }
+            .craft-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .text-display-1 { font-size: 2.5rem; }
+            nav { display: none; /* In production, implement a mobile menu */ }
+            .intro-grid { grid-template-columns: 1fr; gap: var(--sp-4); }
+            .bento-grid { display: flex; flex-direction: column; }
+            .portfolio-header { flex-direction: column; align-items: flex-start; gap: var(--sp-2); }
+            .footer-grid { grid-template-columns: 1fr; gap: var(--sp-4); }
+            .form-actions { flex-direction: column-reverse; gap: var(--sp-2); }
+            .form-actions button { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header id="site-header" class="header-dark-text">
+        <div class="header-inner container">
+            <a href="#" class="logo">ATELIER / BUILD</a>
+            <nav>
+                <a href="#services">Services</a>
+                <a href="#work">Work</a>
+                <a href="#process">Process</a>
+                <a href="#contact" class="accent-color">Inquire</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Section 01: Hero -->
+        <section class="hero" id="home">
+            <div class="hero-bg"></div>
+            <div class="hero-overlay"></div>
+            <div class="container hero-content">
+                <div class="hero-title">
+                    <span class="text-caption" style="color: var(--color-sandstone); display: block; margin-bottom: var(--sp-2);">General Contracting · Design + Build</span>
+                    <h1 class="text-display-1">
+                        <span class="stagger-line"><span>Built around</span></span>
+                        <span class="stagger-line"><span>your vision.</span></span>
+                    </h1>
+                </div>
+                <div class="hero-meta reveal-up delay-3">
+                    <p class="text-body-lg" style="color: var(--color-sandstone); margin-bottom: var(--sp-4);">Turnkey luxury renovations, bespoke additions, and thoughtfully executed transformations.</p>
+                    <a href="#contact" class="btn">Start your project ↗</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 02: Intro -->
+        <section class="container" id="about">
+            <div class="intro-grid">
+                <div class="reveal-up">
+                    <span class="text-caption">The People Behind The Build</span>
+                    <h2 class="text-display-2" style="margin-top: var(--sp-2);">One team. Every detail. A better building experience.</h2>
+                </div>
+                <div class="reveal-up delay-1">
+                    <p class="text-body-lg" style="margin-bottom: var(--sp-4);">Renovating or expanding your home should feel exciting, not overwhelming. We bring planning, craftsmanship, scheduling, and project coordination together under one roof — so you can move from initial ideas to a finished space with greater clarity and confidence.</p>
+                    <div class="features">
+                        <div class="feature-item">
+                            <h4>Whole-home renovations</h4>
+                            <p class="text-body">Thoughtful transformations, room to room.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>Custom additions</h4>
+                            <p class="text-body">More space, integrated with your home.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>Material craftsmanship</h4>
+                            <p class="text-body">Finishes selected with purpose.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>Managed delivery</h4>
+                            <p class="text-body">One coordinated process.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 03: Services (Bento) -->
+        <section class="container" id="services">
+            <div class="reveal-up">
+                <span class="text-caption">Expertise</span>
+                <h2 class="text-display-2">Built around your next chapter.</h2>
+                <p class="text-body-lg" style="max-width: 600px;">From reimagining existing interiors to creating entirely new living space, each project begins with your goals.</p>
+            </div>
+
+            <div class="bento-grid">
+                <!-- Transform -->
+                <div class="bento-card bento-card-1 reveal-up delay-1">
+                    <div class="bento-overlay"></div>
+                    <div>
+                        <span class="bento-num">01 / TRANSFORM</span>
+                        <h3 class="text-display-3" style="margin-top: var(--sp-2);">Whole-Home Renovations</h3>
+                    </div>
+                    <div>
+                        <p style="margin-bottom: var(--sp-2); max-width: 400px; opacity: 0.9;">Reconfigure layouts, modernize interiors, upgrade materials, and create a cohesive design across your home.</p>
+                        <a href="#" class="link-arrow" style="color: var(--color-porcelain);">Explore renovations</a>
+                    </div>
+                </div>
+                <!-- Expand -->
+                <div class="bento-card bento-card-2 reveal-up delay-2">
+                    <span class="bento-num">02 / EXPAND</span>
+                    <h3 class="text-display-3" style="margin-top: var(--sp-2); margin-bottom: var(--sp-2);">Custom Home Additions</h3>
+                    <p class="text-body" style="margin-bottom: var(--sp-4);">Add bedrooms, expand kitchens, or build a seamless extension that feels like it was always there.</p>
+                    <a href="#" class="link-arrow mt-auto">Explore additions</a>
+                </div>
+                <!-- Refine -->
+                <div class="bento-card bento-card-3 reveal-up delay-3">
+                    <span class="bento-num">03 / REFINE</span>
+                    <h3 class="text-display-3" style="margin-top: var(--sp-2); margin-bottom: var(--sp-2);">Luxury Kitchen & Bath</h3>
+                    <p class="text-body" style="margin-bottom: var(--sp-4);">Custom cabinetry, premium surfaces, and carefully coordinated finishes.</p>
+                    <a href="#" class="link-arrow mt-auto">Explore interiors</a>
+                </div>
+                <!-- Reimagine -->
+                <div class="bento-card bento-card-4 reveal-up">
+                    <div style="flex: 1;">
+                        <span class="bento-num">04 / REIMAGINE</span>
+                        <h3 class="text-display-3">Basement & Interior Remodeling</h3>
+                    </div>
+                    <div style="flex: 1;">
+                        <p class="text-body" style="margin-bottom: var(--sp-2);">Turn underused space into a welcoming family room, guest suite, or entertainment area.</p>
+                        <a href="#" class="link-arrow">Explore remodeling</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 04: Portfolio -->
+        <section class="container" id="work">
+            <div class="portfolio-header reveal-up">
+                <div>
+                    <span class="text-caption">Selected Projects / 2024–2026</span>
+                    <h2 class="text-display-2">Every transformation has a story.</h2>
+                </div>
+                <a href="#" class="btn btn-outline">View all projects</a>
+            </div>
+
+            <div class="portfolio-grid">
+                <a href="#" class="project-card reveal-up delay-1">
+                    <div class="project-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Modern Residence Living Room" loading="lazy">
+                    </div>
+                    <h4 class="text-display-3" style="font-size: 1.5rem;">The Modern Residence</h4>
+                    <p class="text-body">Whole-home renovation</p>
+                </a>
+                <a href="#" class="project-card reveal-up delay-2">
+                    <div class="project-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1556912173-3bb406ef7e77?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Oak Kitchen" loading="lazy">
+                    </div>
+                    <h4 class="text-display-3" style="font-size: 1.5rem;">The Oak Kitchen</h4>
+                    <p class="text-body">Kitchen transformation</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- Section 05: Before/After -->
+        <section class="container" id="before-after">
+            <div class="reveal-up">
+                <span class="text-caption">The difference is in the details</span>
+                <h2 class="text-display-2">See the potential in your space.</h2>
+            </div>
+            
+            <div class="ba-container reveal-up delay-1" id="ba-container">
+                <!-- After Image (Background) -->
+                <img src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Renovated Concept" class="ba-image">
+                
+                <!-- Before Image (Clipped Overlay) -->
+                <div class="ba-overlay" id="ba-overlay">
+                    <img src="https://images.unsplash.com/photo-1588015525530-58dc78f77342?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Existing Condition" class="ba-image" style="width: 200%; max-width: none;">
+                </div>
+                
+                <!-- Handle UI -->
+                <div class="ba-handle" id="ba-handle" style="left: 50%;"></div>
+                
+                <!-- Range Input (Accessible control) -->
+                <input type="range" min="0" max="100" value="50" class="ba-slider" id="ba-slider" aria-label="Compare before and after renovation">
+                
+                <div class="ba-labels">
+                    <span class="ba-label">Before</span>
+                    <span class="ba-label">After</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 06: Process -->
+        <section class="container" id="process">
+            <div class="reveal-up">
+                <span class="text-caption">Turnkey Process</span>
+                <h2 class="text-display-2">A clear process. From first conversation to final walkthrough.</h2>
+            </div>
+
+            <div class="process-list">
+                <div class="process-item reveal-up">
+                    <div class="process-num">1</div>
+                    <div>
+                        <h4 class="text-display-3" style="font-size: 1.5rem;">Discover</h4>
+                        <p class="text-body-lg">We discuss your vision, existing space, priorities, timeline, and investment range.</p>
+                        <p class="text-caption" style="margin-top: var(--sp-1); color: var(--color-bronze);">Deliverable: Initial project brief</p>
+                    </div>
+                </div>
+                <div class="process-item reveal-up">
+                    <div class="process-num">2</div>
+                    <div>
+                        <h4 class="text-display-3" style="font-size: 1.5rem;">Assess & Plan</h4>
+                        <p class="text-body-lg">We review the property, scope requirements, feasibility, and potential permitting.</p>
+                        <p class="text-caption" style="margin-top: var(--sp-1); color: var(--color-bronze);">Deliverable: Proposed scope</p>
+                    </div>
+                </div>
+                <div class="process-item reveal-up">
+                    <div class="process-num">3</div>
+                    <div>
+                        <h4 class="text-display-3" style="font-size: 1.5rem;">Design & Estimate</h4>
+                        <p class="text-body-lg">We coordinate design decisions, material selections, and a detailed estimate before work proceeds.</p>
+                        <p class="text-caption" style="margin-top: var(--sp-1); color: var(--color-bronze);">Deliverable: Agreed scope & pricing</p>
+                    </div>
+                </div>
+                <div class="process-item reveal-up">
+                    <div class="process-num">4</div>
+                    <div>
+                        <h4 class="text-display-3" style="font-size: 1.5rem;">Build & Coordinate</h4>
+                        <p class="text-body-lg">We manage construction activities, communicate progress, coordinate trades, and document changes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 07: Craftsmanship -->
+        <section class="container">
+            <div class="craft-grid">
+                <div class="reveal-up">
+                    <span class="text-caption">Quality is built into every decision</span>
+                    <h2 class="text-display-2" style="margin: var(--sp-2) 0;">The finish matters. So does everything behind it.</h2>
+                    <p class="text-body-lg">Great renovation work is more than a beautiful final photograph. It is the coordination of materials, workmanship, sequencing, and detail that helps the finished space perform as intended.</p>
+                    <ul class="craft-list text-body">
+                        <li><strong>Material selection:</strong> Finishes chosen for appearance, durability, and practical use.</li>
+                        <li><strong>Detail execution:</strong> Attention to alignment, transitions, and finishing details.</li>
+                        <li><strong>Project coordination:</strong> Sequencing trades, decisions, and construction milestones.</li>
+                    </ul>
+                </div>
+                <div class="craft-img reveal-up delay-2">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Detail of craftsmanship" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 08: Testimonials -->
+        <section class="container reveal-up">
+            <div class="testimonial">
+                <h3>“The best projects are built on trust, communication, and attention to detail.”</h3>
+                <span class="text-caption">Client Stories — Real experiences. Real projects.</span>
+            </div>
+        </section>
+
+        <!-- Section 09: FAQ -->
+        <section class="container" id="faq">
+            <div class="text-center reveal-up">
+                <h2 class="text-display-2" style="text-align: center;">Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-list reveal-up delay-1">
+                <details open>
+                    <summary>What does turnkey renovation mean?</summary>
+                    <div class="faq-content">
+                        Turnkey renovation typically means a coordinated process covering agreed planning, construction, trade coordination, finishing, and handover. The exact scope should be documented in your contract.
+                    </div>
+                </details>
+                <details>
+                    <summary>How much does a luxury renovation cost?</summary>
+                    <div class="faq-content">
+                        Costs vary significantly based on scope, materials, and existing conditions. During our discovery and estimation phases, we provide detailed pricing tailored to your specific project requirements.
+                    </div>
+                </details>
+                <details>
+                    <summary>How long will my renovation take?</summary>
+                    <div class="faq-content">
+                        Timelines depend on the complexity and scale of the project, as well as permitting schedules. A firm schedule is provided once the design and scope are finalized.
+                    </div>
+                </details>
+                <details>
+                    <summary>Do I need permits for a home addition?</summary>
+                    <div class="faq-content">
+                        Yes. As a full-service design-build firm, we handle the preparation, submission, and management of all necessary architectural and construction permits required by local municipalities.
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- Section 10: Multi-step Form -->
+        <section class="inquiry-section" id="contact">
+            <div class="container">
+                <div class="form-container reveal-up">
+                    <div style="text-align: center; margin-bottom: var(--sp-6);">
+                        <span class="text-caption">Your project starts here</span>
+                        <h2 class="text-display-3">Let's build something worth coming home to.</h2>
+                    </div>
+
+                    <form id="inquiryForm" aria-label="Project Inquiry Form" onsubmit="event.preventDefault(); submitForm();">
+                        
+                        <!-- Step 1: Project Type -->
+                        <div class="form-step active" id="step1">
+                            <div class="step-indicator">Step 1 of 3: Project Type</div>
+                            <div class="form-group">
+                                <label>Select the type of work you are considering:</label>
+                                <div class="radio-group">
+                                    <label class="radio-label"><input type="radio" name="projectType" value="Whole-home" required> Whole-home renovation</label>
+                                    <label class="radio-label"><input type="radio" name="projectType" value="Kitchen/Bath"> Kitchen or bathroom</label>
+                                    <label class="radio-label"><input type="radio" name="projectType" value="Addition"> Custom home addition</label>
+                                    <label class="radio-label"><input type="radio" name="projectType" value="Basement"> Basement remodeling</label>
+                                    <label class="radio-label"><input type="radio" name="projectType" value="Other"> Other project</label>
+                                </div>
+                            </div>
+                            <div class="form-actions" style="justify-content: flex-end;">
+                                <button type="button" class="btn" onclick="nextStep(1)">Continue</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Details -->
+                        <div class="form-step" id="step2">
+                            <div class="step-indicator">Step 2 of 3: Project Details</div>
+                            <div class="form-group">
+                                <label for="location">Project location (City/Neighborhood)</label>
+                                <input type="text" id="location" name="location" placeholder="e.g., Montecito, CA" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="budget">Estimated investment range</label>
+                                <select id="budget" name="budget" required>
+                                    <option value="" disabled selected>Select a range...</option>
+                                    <option value="Under 50k">Under $50,000</option>
+                                    <option value="50k-100k">$50,000–$100,000</option>
+                                    <option value="100k-250k">$100,000–$250,000</option>
+                                    <option value="250k+">$250,000+</option>
+                                    <option value="Not sure">Not sure yet</option>
+                                </select>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline" onclick="prevStep(2)">Back</button>
+                                <button type="button" class="btn" onclick="nextStep(2)">Continue</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Contact Info -->
+                        <div class="form-step" id="step3">
+                            <div class="step-indicator">Step 3 of 3: Your Details</div>
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            <p class="text-caption" style="font-size: 0.75rem; color: var(--color-slate); margin-bottom: var(--sp-4); text-transform: none; font-weight: normal;">By submitting this form, you agree to our privacy policy regarding the collection of your information for project correspondence.</p>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline" onclick="prevStep(3)">Back</button>
+                                <button type="submit" class="btn">Submit Inquiry ↗</button>
+                            </div>
+                        </div>
+
+                        <!-- Success Message -->
+                        <div class="form-step" id="step-success" style="text-align: center; padding: var(--sp-6) 0;">
+                            <h3 class="text-display-3" style="color: var(--color-bronze); margin-bottom: var(--sp-2);">Thank You</h3>
+                            <p class="text-body-lg">We have received your project details and will be in touch shortly to discuss the next steps.</p>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>ATELIER / BUILD</h4>
+                    <p style="max-width: 300px; color: var(--color-sandstone); margin-bottom: var(--sp-4);">Planning, construction, and every finishing detail — coordinated under one roof.</p>
+                </div>
+                <div>
+                    <h5 class="text-caption" style="color: var(--color-sandstone); margin-bottom: var(--sp-2);">Services</h5>
+                    <ul>
+                        <li><a href="#">Whole-Home Renovations</a></li>
+                        <li><a href="#">Custom Additions</a></li>
+                        <li><a href="#">Kitchens & Bathrooms</a></li>
+                        <li><a href="#">Basement Remodeling</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-caption" style="color: var(--color-sandstone); margin-bottom: var(--sp-2);">Company</h5>
+                    <ul>
+                        <li><a href="#">Portfolio</a></li>
+                        <li><a href="#">Our Process</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Atelier Build. All rights reserved.</p>
+                <div style="display: flex; gap: var(--sp-4);">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Interactions -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Header Morph on Scroll
+            const header = document.getElementById('site-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                    header.classList.remove('header-dark-text');
+                } else {
+                    header.classList.remove('scrolled');
+                    header.classList.add('header-dark-text');
+                }
+            });
+
+            // 2. Intersection Observer for Scroll Reveals
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -10% 0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Run once
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal-up, .process-item').forEach(el => {
+                observer.observe(el);
+            });
+
+            // 3. Before/After Slider Logic
+            const slider = document.getElementById('ba-slider');
+            const overlay = document.getElementById('ba-overlay');
+            const handle = document.getElementById('ba-handle');
+
+            if(slider && overlay && handle) {
+                slider.addEventListener('input', (e) => {
+                    const value = e.target.value;
+                    overlay.style.width = `${value}%`;
+                    handle.style.left = `${value}%`;
+                });
+            }
+
+            // 4. Smooth FAQ Accordion behavior (ensuring only one open if desired, but native behavior allows multiple. Left native for Paste accessibility preference).
+        });
+
+        // 5. Multi-step Form Logic
+        function validateStep(stepNum) {
+            const stepElement = document.getElementById(`step${stepNum}`);
+            const inputs = stepElement.querySelectorAll('input[required], select[required]');
+            let isValid = true;
+
+            inputs.forEach(input => {
+                if (!input.checkValidity()) {
+                    input.reportValidity();
+                    isValid = false;
+                }
+            });
+
+            // Handle radio button group validation specially
+            if(stepNum === 1) {
+                const radios = stepElement.querySelectorAll('input[type="radio"]');
+                let radioChecked = Array.from(radios).some(radio => radio.checked);
+                if(!radioChecked) {
+                    // Trigger native validation message on first radio
+                    radios[0].setCustomValidity('Please select a project type.');
+                    radios[0].reportValidity();
+                    isValid = false;
+                } else {
+                    radios[0].setCustomValidity('');
+                }
+            }
+
+            return isValid;
+        }
+
+        function nextStep(currentStep) {
+            if (validateStep(currentStep)) {
+                document.getElementById(`step${currentStep}`).classList.remove('active');
+                document.getElementById(`step${currentStep + 1}`).classList.add('active');
+                // Announce to screen readers (basic implementation)
+                document.getElementById('inquiryForm').setAttribute('aria-live', 'polite');
+            }
+        }
+
+        function prevStep(currentStep) {
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.getElementById(`step${currentStep - 1}`).classList.add('active');
+        }
+
+        function submitForm() {
+            if(validateStep(3)) {
+                // Hide step 3, show success
+                document.getElementById('step3').classList.remove('active');
+                document.getElementById('step-success').classList.add('active');
+                
+                // Here you would normally send the data via fetch/XHR
+                console.log("Form submitted successfully. (Mock implementation)");
+            }
+        }
+    </script>
+</body>
+</html>

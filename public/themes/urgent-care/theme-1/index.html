@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RapidCare | Walk-In Urgent Care & Digital X-Ray</title>
+    
+    <!-- Fonts: Manrope for Headings, Inter for Body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           1. DESIGN TOKENS & BASE STYLES
+           ========================================================================== */
+        :root {
+            /* Colors */
+            --deep-teal: #123B3A;
+            --soft-sage: #E6F3ED;
+            --warm-ivory: #F8F6F0;
+            --signal-amber: #F1B94C;
+            --cool-mist: #E8EFEE;
+            --urgent-red: #B83D39;
+            --white: #FFFFFF;
+            --text-dark: #1A1A1A;
+            --text-muted: #4A5568;
+
+            /* Spacing Scale */
+            --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; 
+            --sp-6: 24px; --sp-8: 32px; --sp-12: 48px; --sp-16: 64px; --sp-24: 96px;
+
+            /* Radii & Layout */
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --container-width: 1280px;
+            --section-pad: 100px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--warm-ivory);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Manrope', sans-serif; color: var(--deep-teal); }
+        h1 { font-size: clamp(38px, 5vw, 76px); line-height: 1.1; letter-spacing: -0.02em; }
+        h2 { font-size: clamp(32px, 4vw, 48px); line-height: 1.2; letter-spacing: -0.01em; }
+        h3 { font-size: clamp(24px, 3vw, 32px); line-height: 1.3; }
+        p { font-size: clamp(16px, 1.5vw, 18px); color: var(--text-muted); }
+        
+        a { text-decoration: none; color: var(--deep-teal); font-weight: 500; transition: color 0.2s; }
+        a:hover { color: var(--signal-amber); }
+        
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 var(--sp-6); }
+        .section { padding: var(--section-pad) 0; }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            height: 52px; padding: 0 var(--sp-8); border-radius: 50px;
+            font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;
+            text-decoration: none; border: none; gap: var(--sp-2);
+        }
+        .btn-primary { background-color: var(--deep-teal); color: var(--white); }
+        .btn-primary:hover { background-color: #0d2a29; transform: translateY(-2px); color: var(--white); }
+        .btn-secondary { background-color: var(--white); color: var(--deep-teal); border: 2px solid var(--cool-mist); }
+        .btn-secondary:hover { border-color: var(--deep-teal); transform: translateY(-2px); }
+        
+        /* Emergency Banner */
+        .emergency-banner {
+            background-color: var(--urgent-red); color: var(--white);
+            text-align: center; padding: var(--sp-3) var(--sp-4); font-size: 14px; font-weight: 500;
+        }
+
+        /* Utilities */
+        .text-center { text-align: center; }
+        .bg-teal { background-color: var(--deep-teal); color: var(--white); }
+        .bg-teal p, .bg-teal h2, .bg-teal h3 { color: var(--white); }
+        .bg-teal p { opacity: 0.9; }
+        .grid { display: grid; gap: var(--sp-6); }
+        .eyebrow { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--signal-amber); margin-bottom: var(--sp-4); display: block; }
+        
+        /* Animation Classes */
+        .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+        .stagger-1 { transition-delay: 100ms; }
+        .stagger-2 { transition-delay: 200ms; }
+        .stagger-3 { transition-delay: 300ms; }
+
+        @media (max-width: 768px) {
+            :root { --section-pad: 64px; }
+        }
+
+        /* ==========================================================================
+           2. SECTIONS IMPLEMENTATION
+           ========================================================================== */
+
+        /* Header / Nav */
+        header { background-color: var(--white); padding: var(--sp-4) 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Manrope', sans-serif; font-size: 24px; font-weight: 800; color: var(--deep-teal); }
+        .nav-links { display: flex; gap: var(--sp-6); align-items: center; }
+        @media (max-width: 992px) { .nav-links { display: none; } }
+
+        /* Section 01: Hero */
+        .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--sp-12); align-items: center; padding: var(--sp-12) 0; }
+        .hero-img-wrapper { position: relative; width: 100%; border-radius: var(--radius-lg); overflow: hidden; }
+        .hero-img-wrapper img { width: 100%; height: 600px; object-fit: cover; display: block; }
+        .hero-card {
+            position: absolute; background: var(--white); padding: var(--sp-4);
+            border-radius: var(--radius-md); box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            bottom: var(--sp-6); width: 220px;
+        }
+        .hero-card.left { left: -20px; }
+        .hero-card.right { right: -20px; bottom: 120px; }
+        .hero-card h4 { font-size: 16px; margin-bottom: var(--sp-1); }
+        .hero-card p { font-size: 12px; line-height: 1.4; color: var(--text-muted); }
+        .hero-actions { display: flex; gap: var(--sp-4); margin-top: var(--sp-8); }
+        @media (max-width: 992px) { 
+            .hero { grid-template-columns: 1fr; }
+            .hero-img-wrapper img { height: 400px; }
+            .hero-card { display: none; }
+            .hero-actions { flex-direction: column; }
+        }
+
+        /* Section 02: Quick Action Bento Grid */
+        .bento-quick { grid-template-columns: 2fr 1fr 1fr; }
+        .bento-card {
+            background: var(--white); border-radius: var(--radius-lg); padding: var(--sp-8);
+            transition: transform 0.2s, box-shadow 0.2s; border: 1px solid var(--cool-mist);
+            display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between;
+            min-height: 250px; cursor: pointer;
+        }
+        .bento-card:hover { transform: translateY(-4px); box-shadow: 0 15px 35px rgba(18,59,58,0.08); border-color: var(--soft-sage); }
+        .bento-card h3 { margin-bottom: var(--sp-2); }
+        .bento-card .icon { width: 48px; height: 48px; background: var(--soft-sage); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: var(--sp-6); color: var(--deep-teal); }
+        .bento-card.large { background: var(--soft-sage); border: none; }
+        .bento-card.large .icon { background: var(--white); }
+        @media (max-width: 992px) { .bento-quick { grid-template-columns: 1fr; } }
+
+        /* Section 03: Clinical Services */
+        .services-grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-6); margin-top: var(--sp-8); }
+        .service-card { position: relative; border-radius: var(--radius-lg); overflow: hidden; height: 320px; display: flex; align-items: flex-end; }
+        .service-card img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; transition: transform 0.5s; }
+        .service-card:hover img { transform: scale(1.05); }
+        .service-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to top, rgba(18,59,58,0.9) 0%, rgba(18,59,58,0.2) 100%); z-index: 2; }
+        .service-content { position: relative; z-index: 3; padding: var(--sp-6); color: var(--white); }
+        .service-content h3 { color: var(--white); margin-bottom: var(--sp-2); }
+        .service-content p { color: var(--cool-mist); font-size: 15px; margin-bottom: var(--sp-4); }
+        .service-link { color: var(--signal-amber); display: inline-flex; align-items: center; font-weight: 600; }
+        @media (max-width: 768px) { .services-grid { grid-template-columns: 1fr; } }
+
+        /* Section 04: Digital X-Ray */
+        .xray-section { background-color: var(--deep-teal); color: var(--white); overflow: hidden; }
+        .timeline { display: flex; gap: var(--sp-6); margin-top: var(--sp-12); position: relative; }
+        .timeline::before { content: ''; position: absolute; top: 24px; left: 0; right: 0; height: 2px; background: rgba(255,255,255,0.1); z-index: 1; }
+        .timeline-step { flex: 1; position: relative; z-index: 2; }
+        .step-num { width: 48px; height: 48px; background: var(--signal-amber); color: var(--deep-teal); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px; margin-bottom: var(--sp-4); }
+        @media (max-width: 768px) { 
+            .timeline { flex-direction: column; gap: var(--sp-8); }
+            .timeline::before { top: 0; bottom: 0; left: 24px; right: auto; width: 2px; height: 100%; }
+        }
+
+        /* Section 05: Patient Storytelling */
+        .story-container { max-width: 800px; margin: 0 auto; padding-left: var(--sp-8); border-left: 2px solid var(--cool-mist); position: relative; }
+        .story-chapter { margin-bottom: var(--sp-12); position: relative; }
+        .story-chapter::before { content: ''; position: absolute; left: calc(-32px - 9px); top: 8px; width: 16px; height: 16px; background: var(--warm-ivory); border: 4px solid var(--deep-teal); border-radius: 50%; transition: all 0.3s; }
+        .story-chapter:hover::before { background: var(--signal-amber); border-color: var(--signal-amber); }
+        .story-chapter img { width: 100%; height: 300px; object-fit: cover; border-radius: var(--radius-md); margin-bottom: var(--sp-4); filter: grayscale(40%); transition: filter 0.5s; }
+        .story-chapter:hover img { filter: grayscale(0%); }
+
+        /* Section 06: Visit Explained */
+        .stepper { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-4); margin-top: var(--sp-8); }
+        .step-card { background: var(--white); padding: var(--sp-6); border-radius: var(--radius-md); border: 1px solid var(--cool-mist); }
+        .step-card h4 { font-size: 18px; margin: var(--sp-4) 0 var(--sp-2); }
+        .step-card p { font-size: 14px; }
+        .info-box { background: var(--soft-sage); padding: var(--sp-4); border-radius: var(--radius-md); margin-top: var(--sp-6); display: flex; align-items: center; gap: var(--sp-4); }
+        @media (max-width: 992px) { .stepper { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 576px) { .stepper { grid-template-columns: 1fr; } }
+
+        /* Section 07: Care that feels personal */
+        .team-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: var(--sp-6); align-items: stretch; margin-top: var(--sp-8); }
+        .team-main { width: 100%; height: 100%; min-height: 400px; object-fit: cover; border-radius: var(--radius-lg); }
+        .team-profiles { display: grid; grid-template-rows: 1fr 1fr; gap: var(--sp-6); }
+        .profile-card { background: var(--white); padding: var(--sp-4); border-radius: var(--radius-md); display: flex; align-items: center; gap: var(--sp-4); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .profile-card img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; }
+        @media (max-width: 768px) { .team-grid { grid-template-columns: 1fr; } .team-main { height: 300px; } }
+
+        /* Section 08: Patient Reviews */
+        .review-card { background: var(--white); padding: var(--sp-8); border-radius: var(--radius-lg); border: 1px solid var(--cool-mist); max-width: 800px; margin: 0 auto; text-align: center; }
+        .review-quote { font-size: clamp(20px, 2vw, 28px); font-family: 'Manrope'; color: var(--deep-teal); margin-bottom: var(--sp-6); font-style: italic; }
+        .review-metrics { display: flex; justify-content: center; gap: var(--sp-8); flex-wrap: wrap; margin-top: var(--sp-6); padding-top: var(--sp-6); border-top: 1px solid var(--cool-mist); }
+        .metric { font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: var(--sp-2); }
+        
+        /* Section 09: Insurance & Pricing */
+        .pricing-bento { grid-template-columns: repeat(3, 1fr); margin-top: var(--sp-8); }
+        @media (max-width: 768px) { .pricing-bento { grid-template-columns: 1fr; } }
+
+        /* Section 10: Location & Hours */
+        .location-section { background: var(--white); }
+        .location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-8); align-items: center; }
+        .location-card { background: var(--warm-ivory); padding: var(--sp-8); border-radius: var(--radius-lg); }
+        .map-placeholder { width: 100%; height: 400px; background: var(--cool-mist); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: var(--text-muted); }
+        @media (max-width: 768px) { .location-grid { grid-template-columns: 1fr; } }
+
+        /* Section 11: FAQs */
+        .faq-wrapper { max-width: 800px; margin: var(--sp-8) auto 0; }
+        details { background: var(--white); border: 1px solid var(--cool-mist); border-radius: var(--radius-md); margin-bottom: var(--sp-4); overflow: hidden; }
+        summary { padding: var(--sp-4) var(--sp-6); font-weight: 600; font-family: 'Manrope'; font-size: 18px; color: var(--deep-teal); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: '+'; font-size: 24px; color: var(--signal-amber); transition: transform 0.3s; }
+        details[open] summary::after { transform: rotate(45deg); }
+        .faq-content { padding: 0 var(--sp-6) var(--sp-6); color: var(--text-muted); }
+
+        /* Section 12: Conversion */
+        .cta-section { background: var(--soft-sage); text-align: center; border-radius: var(--radius-lg); margin: var(--sp-12) auto; padding: var(--sp-16) var(--sp-4); max-width: var(--container-width); width: calc(100% - 48px); }
+
+        /* Section 13: Footer */
+        footer { background: var(--deep-teal); color: var(--cool-mist); padding: var(--sp-12) 0 var(--sp-6); font-size: 14px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-8); margin-bottom: var(--sp-12); }
+        .footer-col h4 { color: var(--white); margin-bottom: var(--sp-4); font-size: 16px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: var(--sp-2); }
+        .footer-col a { color: var(--cool-mist); font-weight: 400; }
+        .footer-col a:hover { color: var(--signal-amber); }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: var(--sp-6); display: flex; flex-direction: column; gap: var(--sp-4); text-align: center; }
+        .footer-warning { background: rgba(184, 61, 57, 0.1); border: 1px solid var(--urgent-red); padding: var(--sp-4); border-radius: var(--radius-md); color: #ffb3b0; }
+        @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+
+        /* SVGs */
+        .icon svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+</head>
+<body>
+
+    <!-- Emergency Banner -->
+    <div class="emergency-banner">
+        Medical Emergency? Call 911 immediately. Do not delay care for life-threatening symptoms.
+    </div>
+
+    <!-- Header / Navigation -->
+    <header>
+        <div class="container nav-wrapper">
+            <div class="logo">RapidCare</div>
+            <nav class="nav-links">
+                <a href="#services">Our Services</a>
+                <a href="#xray">Digital X-Ray</a>
+                <a href="#expect">What to Expect</a>
+                <a href="#pricing">Insurance & Pricing</a>
+                <a href="#location">Location & Hours</a>
+            </nav>
+            <a href="#location" class="btn btn-primary">Plan Your Visit</a>
+        </div>
+    </header>
+
+    <!-- SECTION 01: Hero -->
+    <section class="section">
+        <div class="container hero">
+            <div class="hero-content fade-up">
+                <span class="eyebrow">Walk-In Urgent Care · Digital X-Ray Onsite</span>
+                <h1>Care without the uncertainty.</h1>
+                <p style="margin-top: 16px; font-size: 20px;">Unexpected illness or injury can disrupt your entire day. Get professional evaluation for non-life-threatening medical concerns, with convenient walk-in care and onsite digital X-ray when appropriate.</p>
+                
+                <div class="hero-actions">
+                    <a href="#location" class="btn btn-primary">Plan Your Visit</a>
+                    <a href="#services" class="btn btn-secondary">Explore Our Services</a>
+                </div>
+            </div>
+            
+            <div class="hero-img-wrapper fade-up stagger-1">
+                <!-- Using realistic unplash medical photo -->
+                <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1000&q=80" alt="Doctor calming patient">
+                
+                <div class="hero-card left">
+                    <h4>Digital X-Ray Onsite</h4>
+                    <p>Imaging recommended after clinical assessment depending on capabilities.</p>
+                </div>
+                <div class="hero-card right">
+                    <h4>Walk-In Care</h4>
+                    <p>Check today's verified hours before coming in.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 02: Quick Action Bento Grid -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="grid bento-quick">
+                <!-- Large Card -->
+                <a href="#services" class="bento-card large fade-up">
+                    <div>
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                        </div>
+                        <h3>Something doesn't feel right?</h3>
+                        <p>Explore common illnesses and minor injuries treated at our clinic.</p>
+                    </div>
+                    <span class="btn btn-primary" style="margin-top: 24px; height: 40px;">Explore conditions &rarr;</span>
+                </a>
+                
+                <!-- Small Card 1 -->
+                <a href="#xray" class="bento-card fade-up stagger-1">
+                    <div>
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                        </div>
+                        <h3>Need an X-ray?</h3>
+                        <p>Learn how onsite imaging works.</p>
+                    </div>
+                    <span style="color: var(--deep-teal); font-weight: 600; margin-top: 24px;">How it works &rarr;</span>
+                </a>
+
+                <!-- Small Card 2 -->
+                <a href="#location" class="bento-card fade-up stagger-2">
+                    <div>
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <h3>Find our clinic</h3>
+                        <p>Check directions, hours and arrival instructions.</p>
+                    </div>
+                    <span style="color: var(--deep-teal); font-weight: 600; margin-top: 24px;">Plan your visit &rarr;</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 03: Clinical Services -->
+    <section id="services" class="section">
+        <div class="container">
+            <div class="text-center fade-up">
+                <span class="eyebrow">Our Scope of Care</span>
+                <h2>The care you need for life's unexpected moments.</h2>
+                <p style="max-width: 700px; margin: 16px auto 0;">Not every condition can be managed onsite. Review our primary treatment areas below.</p>
+            </div>
+
+            <div class="grid services-grid">
+                <!-- Card 1 -->
+                <a href="#" class="service-card fade-up">
+                    <img src="https://images.unsplash.com/photo-1583454155184-870a1f63aebc?auto=format&fit=crop&w=800&q=80" alt="Ankle injury">
+                    <div class="service-content">
+                        <h3>Minor injuries & sprains</h3>
+                        <p>Evaluation of strains, sprains, minor sports injuries and selected minor fractures.</p>
+                        <span class="service-link">Explore injury care &rarr;</span>
+                    </div>
+                </a>
+                
+                <!-- Card 2 -->
+                <a href="#" class="service-card fade-up stagger-1">
+                    <img src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&w=800&q=80" alt="Doctor checkup">
+                    <div class="service-content">
+                        <h3>Common illnesses</h3>
+                        <p>Assessment of symptoms such as cough, sore throat, fever, congestion and acute concerns.</p>
+                        <span class="service-link">Explore illness care &rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Card 3 -->
+                <a href="#" class="service-card fade-up">
+                    <img src="https://images.unsplash.com/photo-1512678080530-7760d81faba6?auto=format&fit=crop&w=800&q=80" alt="Wound care">
+                    <div class="service-content">
+                        <h3>Minor cuts & wounds</h3>
+                        <p>Assessment and treatment of selected minor cuts, scrapes and wounds.</p>
+                        <span class="service-link">Explore wound care &rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Card 4 -->
+                <a href="#" class="service-card fade-up stagger-1">
+                    <img src="https://images.unsplash.com/photo-1530497610245-94d7016db923?auto=format&fit=crop&w=800&q=80" alt="Xray tech">
+                    <div class="service-content">
+                        <h3>Digital X-ray services</h3>
+                        <p>Onsite diagnostic imaging for selected injuries when clinically appropriate.</p>
+                        <span class="service-link">Explore X-ray services &rarr;</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 04: Digital X-ray feature -->
+    <section id="xray" class="section xray-section">
+        <div class="container">
+            <div class="fade-up">
+                <span class="eyebrow">Onsite Imaging · Clinician-Guided</span>
+                <h2>Less uncertainty. A clearer next step.</h2>
+                <p style="max-width: 800px; margin-top: 16px;">When an injury or symptom may require imaging, having digital X-ray equipment onsite makes the evaluation process more convenient. Your clinician will determine whether an X-ray is appropriate.</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-step fade-up stagger-1">
+                    <div class="step-num">1</div>
+                    <h3>Clinical assessment</h3>
+                    <p>A clinician evaluates your symptoms, history and examination findings.</p>
+                </div>
+                <div class="timeline-step fade-up stagger-2">
+                    <div class="step-num">2</div>
+                    <h3>Imaging when appropriate</h3>
+                    <p>If indicated and available, the team arranges an X-ray of the relevant area.</p>
+                </div>
+                <div class="timeline-step fade-up stagger-3">
+                    <div class="step-num">3</div>
+                    <h3>Results and next steps</h3>
+                    <p>A qualified clinician reviews the available findings and explains the treatment or referral plan.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 64px;" class="fade-up">
+                <p style="font-size: 14px; opacity: 0.7; max-width: 900px;">*Onsite digital X-ray is designed to support clinical evaluation. Not every concern requires imaging, and an X-ray cannot detect every type of injury. Some conditions require additional testing at a hospital.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 05: Patient Storytelling -->
+    <section class="section">
+        <div class="container">
+            <div class="text-center fade-up" style="margin-bottom: 64px;">
+                <span class="eyebrow">Patient Experience</span>
+                <h2>One unexpected moment. A clearer next step.</h2>
+            </div>
+
+            <div class="story-container">
+                <!-- Chapter 1 -->
+                <div class="story-chapter fade-up">
+                    <span class="eyebrow">The Moment</span>
+                    <h3>It happened in seconds.</h3>
+                    <p>A weekend run turns into an ankle injury. Walking hurts, and the patient is unsure whether it is a sprain or something more serious.</p>
+                    <img style="margin-top: 24px;" src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?auto=format&fit=crop&w=1000&q=80" alt="Runner resting">
+                </div>
+                <!-- Chapter 2 -->
+                <div class="story-chapter fade-up">
+                    <span class="eyebrow">The Arrival</span>
+                    <h3>The first step is being heard.</h3>
+                    <p>The patient checks the clinic's hours, arrives for a walk-in evaluation and explains how the injury happened.</p>
+                    <img style="margin-top: 24px;" src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1000&q=80" alt="Hospital arrival">
+                </div>
+                <!-- Chapter 3 -->
+                <div class="story-chapter fade-up">
+                    <span class="eyebrow">The Evaluation</span>
+                    <h3>The right questions come first.</h3>
+                    <p>After an examination, the clinician decides whether an X-ray or another assessment is appropriate.</p>
+                </div>
+                <!-- Chapter 4 -->
+                <div class="story-chapter fade-up">
+                    <span class="eyebrow">The Next Step</span>
+                    <h3>Leave knowing what comes next.</h3>
+                    <p>The patient receives an explanation of the findings, appropriate treatment guidance and instructions for follow-up or referral if needed.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 06: Visit Explained -->
+    <section id="expect" class="section" style="background-color: var(--white);">
+        <div class="container">
+            <div class="fade-up">
+                <span class="eyebrow">Your Visit, Explained</span>
+                <h2>Know what to expect before you arrive.</h2>
+                <p>A straightforward visit begins with knowing the process.</p>
+            </div>
+
+            <div class="stepper">
+                <div class="step-card fade-up stagger-1">
+                    <div class="icon" style="color: var(--deep-teal);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                    <h4>1. Check details</h4>
+                    <p>Confirm the clinic's current hours, walk-in policy and scope of care.</p>
+                </div>
+                <div class="step-card fade-up stagger-2">
+                    <div class="icon" style="color: var(--deep-teal);"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                    <h4>2. Check in</h4>
+                    <p>Share your symptoms, medical history and insurance info if applicable.</p>
+                </div>
+                <div class="step-card fade-up stagger-3">
+                    <div class="icon" style="color: var(--deep-teal);"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+                    <h4>3. Get evaluated</h4>
+                    <p>A qualified clinician assesses your condition and recommends treatment.</p>
+                </div>
+                <div class="step-card fade-up stagger-1">
+                    <div class="icon" style="color: var(--deep-teal);"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+                    <h4>4. Understand plan</h4>
+                    <p>Review instructions, prescriptions, and referral needs before leaving.</p>
+                </div>
+            </div>
+
+            <div class="info-box fade-up">
+                <div class="icon" style="color: var(--signal-amber);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+                <div>
+                    <h4 style="font-size: 16px; margin-bottom: 4px;">What to bring</h4>
+                    <p style="font-size: 14px;">Photo ID, insurance details, medication list, and allergy information. Wait times vary based on patient volume.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 07: Care that feels personal -->
+    <section class="section">
+        <div class="container">
+            <div class="fade-up">
+                <span class="eyebrow">Our Medical Team</span>
+                <h2>Professional care starts with listening.</h2>
+                <p style="max-width: 700px; margin-top: 16px;">Every patient arrives with a different concern and history. Our approach begins with understanding what brought you in, clear explanations without unnecessary jargon, and decisions based on individual assessment.</p>
+            </div>
+
+            <div class="team-grid">
+                <img class="team-main fade-up" src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=1000&q=80" alt="Doctor consulting patient">
+                <div class="team-profiles">
+                    <div class="profile-card fade-up stagger-1">
+                        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=200&q=80" alt="Dr. Sarah Jenkins">
+                        <div>
+                            <h4>Dr. Sarah Jenkins, MD</h4>
+                            <p style="font-size: 14px;">Lead Medical Director</p>
+                        </div>
+                    </div>
+                    <div class="profile-card fade-up stagger-2">
+                        <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=200&q=80" alt="Mark Thorne, PA-C">
+                        <div>
+                            <h4>Mark Thorne, PA-C</h4>
+                            <p style="font-size: 14px;">Physician Assistant</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 08: Patient Reviews -->
+    <section class="section" style="background-color: var(--white);">
+        <div class="container fade-up">
+            <div class="review-card">
+                <div class="icon" style="color: var(--signal-amber); margin: 0 auto 24px;"><svg viewBox="0 0 24 24" style="width: 40px; height: 40px; fill: currentColor; stroke: none;"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                <p class="review-quote">"I knew what to expect at every step. The clinician listened, explained the X-ray results clearly, and gave me a practical recovery plan."</p>
+                <p style="font-size: 14px; font-weight: 600;">— Verified Patient Review</p>
+
+                <div class="review-metrics">
+                    <div class="metric"><div class="icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div> Clear communication</div>
+                    <div class="metric"><div class="icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div> Respectful care</div>
+                    <div class="metric"><div class="icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div> Helpful guidance</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 09: Insurance & Pricing -->
+    <section id="pricing" class="section">
+        <div class="container">
+            <div class="text-center fade-up">
+                <span class="eyebrow">Billing & Cost</span>
+                <h2>Understand your options before your visit.</h2>
+                <p style="max-width: 800px; margin: 16px auto 0;">Review our accepted insurance plans, self-pay information and payment policies. Your final cost may depend on the services provided and insurance coverage.</p>
+            </div>
+
+            <div class="grid pricing-bento">
+                <div class="bento-card fade-up">
+                    <div>
+                        <h3>Insurance</h3>
+                        <p>View accepted plans and coverage-verification guidance.</p>
+                    </div>
+                    <a href="#" style="margin-top: 24px; display: block;">Check coverage &rarr;</a>
+                </div>
+                <div class="bento-card fade-up stagger-1">
+                    <div>
+                        <h3>Self-pay</h3>
+                        <p>View current published fees and payment methods, if offered.</p>
+                    </div>
+                    <a href="#" style="margin-top: 24px; display: block;">View pricing &rarr;</a>
+                </div>
+                <div class="bento-card fade-up stagger-2">
+                    <div>
+                        <h3>Billing questions</h3>
+                        <p>Contact the clinic to ask about evaluation fees, imaging charges, and out-of-pocket costs.</p>
+                    </div>
+                    <a href="#location" style="margin-top: 24px; display: block;">Contact clinic &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 10: Location & Hours -->
+    <section id="location" class="section location-section">
+        <div class="container">
+            <div class="location-grid">
+                <div class="location-card fade-up">
+                    <span class="eyebrow">Find Us</span>
+                    <h2>Care starts with knowing where to go.</h2>
+                    
+                    <div style="margin: 32px 0;">
+                        <h4 style="font-size: 18px; margin-bottom: 8px;">Clinic Address</h4>
+                        <p>123 Medical Plaza, Suite 100<br>Jersey City, NJ 07302</p>
+                    </div>
+                    
+                    <div style="margin: 32px 0;">
+                        <h4 style="font-size: 18px; margin-bottom: 8px;">Today's Hours</h4>
+                        <p style="font-weight: 600; color: var(--deep-teal);">8:00 AM – 8:00 PM</p>
+                        <p style="font-size: 14px;">Walk-ins welcome. No appointment needed.</p>
+                    </div>
+
+                    <div style="margin: 32px 0;">
+                        <h4 style="font-size: 18px; margin-bottom: 8px;">Call the Clinic</h4>
+                        <p style="font-size: 20px; font-weight: 600; color: var(--deep-teal);">(555) 123-4567</p>
+                    </div>
+
+                    <div class="hero-actions" style="margin-top: 32px;">
+                        <button class="btn btn-primary">Get Directions</button>
+                        <button class="btn btn-secondary">Call Before Visiting</button>
+                    </div>
+                </div>
+
+                <div class="map-placeholder fade-up stagger-1">
+                    <!-- Interactive map would go here -->
+                    <div class="text-center">
+                        <div class="icon" style="margin: 0 auto 16px; color: var(--deep-teal);"><svg viewBox="0 0 24 24" style="width: 48px; height: 48px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                        <p>Interactive Map Embed Area</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 11: FAQs -->
+    <section class="section">
+        <div class="container text-center fade-up">
+            <h2>Frequently asked questions</h2>
+        </div>
+        <div class="container faq-wrapper">
+            <details class="fade-up stagger-1">
+                <summary>Do I need an appointment?</summary>
+                <div class="faq-content">This clinic is presented as a walk-in facility, but please confirm our current walk-in policy and hours before travelling. Some specific services may require additional arrangements.</div>
+            </details>
+            <details class="fade-up stagger-1">
+                <summary>Can I get an X-ray onsite?</summary>
+                <div class="faq-content">Yes, we have digital X-ray equipment onsite. A qualified clinician will evaluate your condition first to determine if imaging is medically appropriate for your specific injury or symptom.</div>
+            </details>
+            <details class="fade-up stagger-1">
+                <summary>How long will my visit take?</summary>
+                <div class="faq-content">Visit times vary based on the number of patients currently in the clinic and the complexity of your evaluation. We prioritize severe cases, and will do our best to evaluate you efficiently.</div>
+            </details>
+            <details class="fade-up stagger-1">
+                <summary>What conditions can urgent care treat?</summary>
+                <div class="faq-content">We treat non-life-threatening illnesses and injuries, including minor cuts, sprains, common infections, and cold/flu symptoms. We do not treat severe emergencies like chest pain or major trauma.</div>
+            </details>
+            <details class="fade-up stagger-1">
+                <summary>What should I bring?</summary>
+                <div class="faq-content">Please bring a valid photo identification, your insurance details (if applicable), a list of current medications, relevant allergy information, and any useful medical records.</div>
+            </details>
+        </div>
+    </section>
+
+    <!-- SECTION 12: Final Conversion -->
+    <section class="section">
+        <div class="cta-section fade-up">
+            <span class="eyebrow" style="color: var(--deep-teal);">Here when you need a next step</span>
+            <h2 style="margin-bottom: 24px;">Don't let uncertainty be the only thing you take home.</h2>
+            <p style="margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">Learn about your care options, confirm our hours and location, and plan your visit with confidence.</p>
+            <a href="#location" class="btn btn-primary">Plan Your Walk-In Visit</a>
+        </div>
+    </section>
+
+    <!-- SECTION 13: Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Clinic</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Medical Team</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact Details</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Patient Resources</h4>
+                    <ul>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#xray">X-Ray Information</a></li>
+                        <li><a href="#">Patient Forms</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Visit Information</h4>
+                    <ul>
+                        <li><a href="#location">Location & Hours</a></li>
+                        <li><a href="#pricing">Insurance Accepted</a></li>
+                        <li><a href="#pricing">Billing Information</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal & Privacy</h4>
+                    <ul>
+                        <li><a href="#">Privacy Notice</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Accessibility Statement</a></li>
+                        <li><a href="#">Patient Rights</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-warning">
+                    <strong>Medical emergency?</strong> If you have severe or potentially life-threatening symptoms — such as severe difficulty breathing, signs of stroke, severe chest pain or uncontrolled bleeding — seek emergency medical help immediately. Call 911. Do not delay emergency care to use this website or visit an urgent care clinic.
+                </div>
+                <p style="margin-top: 16px;">&copy; 2026 RapidCare Urgent Clinic (Sample Brand). All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Interactions & Animations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Intersection Observer for Fade-Up Animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Respect reduced motion preference
+                        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                        
+                        if (prefersReducedMotion) {
+                            entry.target.style.transition = 'none';
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'none';
+                        }
+                        
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Only animate once
+                    }
+                });
+            }, observerOptions);
+
+            const animatedElements = document.querySelectorAll('.fade-up');
+            animatedElements.forEach(el => observer.observe(el));
+
+            // Smooth Scrolling for Anchor Links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+                        const headerOffset = 80;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
