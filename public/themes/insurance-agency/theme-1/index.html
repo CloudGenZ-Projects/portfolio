@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SecureLife Insurance | Comprehensive Risk Coverage for Auto, Home & Business</title>
+  <meta name="description" content="Protect What Matters Most. Comprehensive Risk Coverage for Auto, Home & Commercial. Personalized insurance solutions to protect your family and business.">
+
+  <!-- Google Fonts: Manrope + Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       SECURELIFE INSURANCE - DESIGN SYSTEM
+       Identity: Corporate, trust-focused, professional, dependable.
+       Colors: Deep navy, royal blue, sky blue, light blue-grey.
+       Typography: Manrope + Playfair Display.
+       ========================================================================== */
+    :root {
+      --color-navy: #102B50;
+      --color-navy-dark: #0a1c36;
+      --color-navy-card: #153765;
+      --color-royal: #2675D8;
+      --color-royal-hover: #1e5eb0;
+      --color-sky: #55B7F5;
+      --color-sky-light: rgba(85, 183, 245, 0.15);
+      --color-bg-light: #F4F8FC;
+      --color-white: #ffffff;
+      --color-text-main: #1e293b;
+      --color-text-muted: #64748b;
+      --color-border: #e2e8f0;
+      --color-border-subtle: rgba(16, 43, 80, 0.08);
+
+      --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-heading: 'Playfair Display', Georgia, serif;
+
+      --container: 1260px;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-pill: 999px;
+      --shadow-sm: 0 4px 14px rgba(16, 43, 80, 0.06);
+      --shadow-md: 0 12px 30px rgba(16, 43, 80, 0.1);
+      --transition: all 0.25s ease;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--color-bg-light);
+      color: var(--color-text-main);
+      font-family: var(--font-body);
+    }
+
+    body {
+      background-color: var(--color-bg-light);
+      color: var(--color-text-main);
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* 01. ANNOUNCEMENT BAR */
+    .announcement-bar {
+      background: var(--color-navy-dark);
+      color: #fff;
+      padding: 9px 0;
+      font-size: 0.82rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .announcement-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .announcement-promo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .announcement-badge {
+      background: var(--color-royal);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+      text-transform: uppercase;
+    }
+
+    /* HEADER */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 18px 0;
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: var(--color-navy);
+      letter-spacing: -0.5px;
+    }
+
+    .brand-shield {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-royal) 100%);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.2rem;
+    }
+
+    .brand-logo span {
+      color: var(--color-royal);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--color-text-main);
+    }
+
+    .nav-link:hover {
+      color: var(--color-royal);
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 28px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+    }
+
+    .btn-royal {
+      background: var(--color-royal);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(38, 117, 216, 0.3);
+    }
+
+    .btn-royal:hover {
+      background: var(--color-royal-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(38, 117, 216, 0.4);
+    }
+
+    .btn-outline {
+      border: 1.5px solid var(--color-navy);
+      color: var(--color-navy);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      background: var(--color-navy);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .mobile-toggle {
+      display: none;
+      font-size: 1.5rem;
+      color: var(--color-navy);
+    }
+
+    /* MOBILE DRAWER */
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: 76px;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      border-bottom: 2px solid var(--color-royal);
+      padding: 24px;
+      z-index: 99;
+      box-shadow: var(--shadow-md);
+    }
+
+    .mobile-drawer.open {
+      display: block;
+    }
+
+    .mobile-drawer ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mobile-drawer a {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--color-navy);
+    }
+
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      padding: 90px 0 110px;
+      background: radial-gradient(circle at 80% 20%, rgba(85, 183, 245, 0.18), transparent 50%),
+                  linear-gradient(180deg, #ffffff 0%, var(--color-bg-light) 100%);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-sky-light);
+      border: 1px solid rgba(85, 183, 245, 0.4);
+      color: var(--color-navy);
+      padding: 6px 16px;
+      border-radius: var(--radius-pill);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 22px;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(3rem, 5.5vw, 4.4rem);
+      line-height: 1.12;
+      font-weight: 700;
+      color: var(--color-navy);
+      margin-bottom: 22px;
+    }
+
+    .hero-title span {
+      color: var(--color-royal);
+      font-style: italic;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      line-height: 1.75;
+      color: var(--color-text-muted);
+      margin-bottom: 38px;
+      max-width: 530px;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 45px;
+    }
+
+    .hero-trust-bar {
+      display: flex;
+      gap: 36px;
+      border-top: 1px solid var(--color-border);
+      padding-top: 24px;
+    }
+
+    .trust-col h4 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--color-navy);
+      line-height: 1;
+    }
+
+    .trust-col p {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      margin-top: 4px;
+    }
+
+    /* Hero Visual */
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-card-img {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      border: 6px solid #fff;
+    }
+
+    .hero-card-img img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+    }
+
+    .hero-floating-stat {
+      position: absolute;
+      bottom: -15px;
+      left: -15px;
+      background: #fff;
+      border: 1px solid var(--color-border);
+      padding: 16px 22px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-left: 4px solid var(--color-royal);
+    }
+
+    /* SECTION STYLES */
+    .section {
+      padding: 100px 0;
+    }
+
+    .section-white {
+      background: #ffffff;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 60px;
+    }
+
+    .section-badge {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--color-royal);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.4rem, 4vw, 3.4rem);
+      font-weight: 700;
+      color: var(--color-navy);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      color: var(--color-text-muted);
+      font-size: 1.05rem;
+    }
+
+    /* 02. INSURANCE CATEGORIES */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .category-card {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 34px 28px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .category-card:hover {
+      border-color: var(--color-royal);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .category-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-sm);
+      background: var(--color-sky-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+      color: var(--color-royal);
+    }
+
+    .category-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--color-navy);
+      margin-bottom: 10px;
+    }
+
+    .category-desc {
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .category-link {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--color-royal);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* 03. WHY CHOOSE SECURELIFE */
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .why-info h3 {
+      font-family: var(--font-heading);
+      font-size: clamp(2.4rem, 4vw, 3.4rem);
+      font-weight: 700;
+      color: var(--color-navy);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .why-info p {
+      color: var(--color-text-muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .reasons-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .reason-box {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .reason-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--color-sky-light);
+      color: var(--color-royal);
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .reason-text h4 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--color-navy);
+    }
+
+    .reason-text p {
+      font-size: 0.92rem;
+      color: var(--color-text-muted);
+      margin-bottom: 0;
+    }
+
+    .why-image img {
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      height: 480px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    /* 04. HOW IT WORKS */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .step-card {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 34px 24px;
+      position: relative;
+    }
+
+    .step-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--color-navy);
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+
+    .step-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--color-navy);
+      margin-bottom: 10px;
+    }
+
+    .step-desc {
+      color: var(--color-text-muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    /* 05. CLAIMS ASSISTANCE */
+    .claims-banner {
+      background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-dark) 100%);
+      color: #fff;
+      border-radius: var(--radius-lg);
+      padding: 60px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 50px;
+      align-items: center;
+      box-shadow: var(--shadow-md);
+    }
+
+    .claims-info h3 {
+      font-family: var(--font-heading);
+      font-size: clamp(2.4rem, 4vw, 3.4rem);
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+
+    .claims-info p {
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 26px;
+    }
+
+    .claims-card-box {
+      background: #fff;
+      color: var(--color-text-main);
+      border-radius: var(--radius-md);
+      padding: 34px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* 06. CUSTOMER TESTIMONIALS */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .test-card {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .test-quote {
+      font-style: italic;
+      color: var(--color-text-main);
+      font-size: 0.98rem;
+      line-height: 1.7;
+      margin-bottom: 22px;
+    }
+
+    .test-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .test-avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--color-royal);
+    }
+
+    .test-name {
+      font-weight: 800;
+      color: var(--color-navy);
+      font-size: 0.95rem;
+    }
+
+    .test-policy {
+      font-size: 0.8rem;
+      color: var(--color-royal);
+    }
+
+    /* 07. INSURANCE KNOWLEDGE CENTER */
+    .knowledge-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .article-card {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .article-img {
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .article-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .article-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .article-tag {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--color-royal);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .article-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--color-navy);
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+
+    .article-desc {
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 18px;
+      flex-grow: 1;
+    }
+
+    /* 08. FINAL CTA & QUOTE FORM */
+    .quote-card {
+      background: linear-gradient(135deg, var(--color-navy) 0%, #153765 100%);
+      color: #fff;
+      border-radius: var(--radius-lg);
+      padding: 60px;
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 50px;
+      align-items: center;
+      box-shadow: var(--shadow-md);
+    }
+
+    .quote-info h3 {
+      font-family: var(--font-heading);
+      font-size: clamp(2.6rem, 4.5vw, 3.8rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 18px;
+      line-height: 1.1;
+    }
+
+    .quote-info p {
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 26px;
+    }
+
+    .quote-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: #f1f5f9;
+    }
+
+    .quote-bullets li::before {
+      content: '✓ ';
+      color: var(--color-sky);
+      font-weight: 800;
+    }
+
+    .quote-form-box {
+      background: #fff;
+      color: var(--color-text-main);
+      border-radius: var(--radius-md);
+      padding: 34px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-text-muted);
+      margin-bottom: 6px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      border-color: var(--color-royal);
+    }
+
+    /* FOOTER */
+    .footer {
+      background: var(--color-navy-dark);
+      color: #fff;
+      padding: 80px 0 36px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand p {
+      color: #94a3b8;
+      font-size: 0.92rem;
+      margin-top: 16px;
+      max-width: 320px;
+      line-height: 1.7;
+    }
+
+    .footer-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-sky);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .hero-grid, .why-grid, .claims-banner, .quote-card {
+        grid-template-columns: 1fr;
+      }
+      .hero-content {
+        text-align: center;
+      }
+      .hero-subtitle {
+        margin: 0 auto 38px;
+      }
+      .hero-cta-group, .hero-trust-bar {
+        justify-content: center;
+      }
+      .categories-grid, .steps-grid, .testimonials-grid, .knowledge-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .desktop-nav, .header-cta, .announcement-bar {
+        display: none;
+      }
+      .mobile-toggle {
+        display: block;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 01. ANNOUNCEMENT BAR -->
+  <div class="announcement-bar">
+    <div class="container announcement-inner">
+      <div class="announcement-promo">
+        <span class="announcement-badge">Multi-Policy Discount</span>
+        <span>Bundle Home & Auto Insurance to save up to 25% annually.</span>
+      </div>
+      <div>
+        <span>24/7 Dedicated Claims Hotline: <strong>1-800-555-LIFE</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER / NAVIGATION -->
+  <header class="header">
+    <div class="container nav-wrapper">
+      <a href="#" class="brand-logo">
+        <div class="brand-shield">🛡️</div>
+        <div>Secure<span>Life</span></div>
+      </a>
+
+      <nav class="desktop-nav">
+        <ul class="nav-links">
+          <li><a href="#coverage" class="nav-link">Coverage</a></li>
+          <li><a href="#why" class="nav-link">Why Us</a></li>
+          <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+          <li><a href="#claims" class="nav-link">Claims</a></li>
+          <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+          <li><a href="#knowledge" class="nav-link">Resources</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-cta">
+        <a href="#quote" class="btn btn-royal">Get a Quote ➔</a>
+      </div>
+
+      <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle Menu">☰</button>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <ul>
+        <li><a href="#coverage" onclick="toggleMenu()">Coverage Categories</a></li>
+        <li><a href="#why" onclick="toggleMenu()">Why SecureLife</a></li>
+        <li><a href="#how-it-works" onclick="toggleMenu()">How It Works</a></li>
+        <li><a href="#claims" onclick="toggleMenu()">Claims Assistance</a></li>
+        <li><a href="#testimonials" onclick="toggleMenu()">Testimonials</a></li>
+        <li><a href="#knowledge" onclick="toggleMenu()">Knowledge Center</a></li>
+        <li><a href="#quote" class="btn btn-royal" style="width: 100%; margin-top: 10px;" onclick="toggleMenu()">Get a Free Quote</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- 01. HERO SECTION -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-eyebrow">Comprehensive Risk Coverage</div>
+        <h1 class="hero-title">Protect What <span>Matters Most.</span></h1>
+        <p class="hero-subtitle">Comprehensive Risk Coverage for Auto, Home & Commercial. Personalized insurance solutions that help protect your family, property and business against life's uncertainties.</p>
+        
+        <div class="hero-cta-group">
+          <a href="#quote" class="btn btn-royal">Get a Free Quote ➔</a>
+          <a href="#coverage" class="btn btn-outline">Explore Coverage</a>
+        </div>
+
+        <div class="hero-trust-bar">
+          <div class="trust-col">
+            <h4>$2.4B+</h4>
+            <p>Assets Protected</p>
+          </div>
+          <div class="trust-col">
+            <h4>98.7%</h4>
+            <p>Claim Payout Ratio</p>
+          </div>
+          <div class="trust-col">
+            <h4>45K+</h4>
+            <p>Active Policyholders</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-card-img">
+          <img src="https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=1200&q=85" alt="Happy family protected by SecureLife insurance">
+        </div>
+        <div class="hero-floating-stat">
+          <div style="font-size: 2rem;">🛡️</div>
+          <div>
+            <div style="font-weight: 800; font-size: 1.05rem; color: var(--color-navy);">A+ Superior Financial Rating</div>
+            <div style="font-size: 0.8rem; color: var(--color-text-muted);">AM Best Independent Insurance Evaluation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02. INSURANCE CATEGORIES -->
+  <section class="section" id="coverage">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Coverage Options</span>
+        <h2 class="section-title">Insurance Categories</h2>
+        <p class="section-desc">Tailored policies designed to safeguard what you've worked hard to build.</p>
+      </div>
+
+      <div class="categories-grid">
+        <!-- 1. Auto Insurance -->
+        <div class="category-card">
+          <div class="category-icon">🚗</div>
+          <h3 class="category-title">Auto Insurance</h3>
+          <p class="category-desc">Protection for your everyday journeys. Comprehensive collision, liability, roadside assistance, and uninsured motorist coverage.</p>
+          <a href="#quote" class="category-link">Get Auto Quote ➔</a>
+        </div>
+
+        <!-- 2. Home Insurance -->
+        <div class="category-card">
+          <div class="category-icon">🏡</div>
+          <h3 class="category-title">Home Insurance</h3>
+          <p class="category-desc">Coverage for your home and belongings against fire, weather damage, theft, and personal property liability.</p>
+          <a href="#quote" class="category-link">Get Home Quote ➔</a>
+        </div>
+
+        <!-- 3. Commercial Insurance -->
+        <div class="category-card">
+          <div class="category-icon">🏢</div>
+          <h3 class="category-title">Commercial Insurance</h3>
+          <p class="category-desc">Protect your business operations, physical property, commercial fleet, and business interruption risks.</p>
+          <a href="#quote" class="category-link">Get Business Quote ➔</a>
+        </div>
+
+        <!-- 4. Umbrella Coverage -->
+        <div class="category-card">
+          <div class="category-icon">☂️</div>
+          <h3 class="category-title">Umbrella Coverage</h3>
+          <p class="category-desc">Additional liability protection beyond standard auto and homeowners limits to shield your personal savings and future earnings.</p>
+          <a href="#quote" class="category-link">Explore Umbrella ➔</a>
+        </div>
+
+        <!-- 5. Life Insurance -->
+        <div class="category-card">
+          <div class="category-icon">❤️</div>
+          <h3 class="category-title">Life Insurance</h3>
+          <p class="category-desc">Financial protection for loved ones. Term and whole life policies structured to replace income and secure your family's future.</p>
+          <a href="#quote" class="category-link">Calculate Life Needs ➔</a>
+        </div>
+
+        <!-- 6. Business Liability -->
+        <div class="category-card">
+          <div class="category-icon">⚖️</div>
+          <h3 class="category-title">Business Liability</h3>
+          <p class="category-desc">Manage business-related risks, errors & omissions (E&O), directors & officers (D&O), and cyber liability threats.</p>
+          <a href="#quote" class="category-link">View Liability Plans ➔</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03. WHY CHOOSE SECURELIFE? -->
+  <section class="section section-white" id="why">
+    <div class="container why-grid">
+      <div class="why-info">
+        <span class="section-badge">Client First Standard</span>
+        <h3>Why Choose SecureLife?</h3>
+        <p>Insurance shouldn't be confusing or transactional. We act as your trusted fiduciary risk advisors, pairing you with top-rated carriers.</p>
+        
+        <div class="reasons-list">
+          <div class="reason-box">
+            <div class="reason-dot">✓</div>
+            <div class="reason-text">
+              <h4>Personalized Coverage Recommendations</h4>
+              <p>We analyze your unique lifestyle and business risk profile to ensure no underinsured gaps or costly duplicate coverages.</p>
+            </div>
+          </div>
+
+          <div class="reason-box">
+            <div class="reason-dot">✓</div>
+            <div class="reason-text">
+              <h4>Multiple Insurance Options</h4>
+              <p>As an independent agency, we shop across 25+ top-rated national carriers to find your optimal rate and terms.</p>
+            </div>
+          </div>
+
+          <div class="reason-box">
+            <div class="reason-dot">✓</div>
+            <div class="reason-text">
+              <h4>Dedicated Customer Support</h4>
+              <p>Direct access to your assigned licensed agent—no endless automated phone trees when you need answers.</p>
+            </div>
+          </div>
+
+          <div class="reason-box">
+            <div class="reason-dot">✓</div>
+            <div class="reason-text">
+              <h4>Clear Policy Explanations</h4>
+              <p>We explain deductibles, exclusions, and endorsements in plain English so you know exactly what is protected.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="why-image">
+        <img src="https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=800&q=80" alt="Insurance advisor explaining policy documents to couple">
+      </div>
+    </div>
+  </section>
+
+  <!-- 04. HOW IT WORKS -->
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Simple 4-Step Process</span>
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-desc">Getting the right insurance policy has never been more straightforward.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-badge">1</div>
+          <h4 class="step-title">Tell Us Your Needs</h4>
+          <p class="step-desc">Share basic details about your vehicle, property, business, or family protection goals in 2 minutes.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-badge">2</div>
+          <h4 class="step-title">Compare Options</h4>
+          <p class="step-desc">We generate side-by-side comparison quotes from top national carriers with transparent deductible options.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-badge">3</div>
+          <h4 class="step-title">Choose Your Policy</h4>
+          <p class="step-desc">Select the policy that fits your budget. We handle seamless digital paperwork and policy binding.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-badge">4</div>
+          <h4 class="step-title">Get Ongoing Support</h4>
+          <p class="step-desc">Annual policy reviews, seamless renewals, and priority claims advocacy whenever you need it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05. CLAIMS ASSISTANCE -->
+  <section class="section section-white" id="claims">
+    <div class="container">
+      <div class="claims-banner">
+        <div class="claims-info">
+          <span class="section-badge" style="color: var(--color-sky);">Fast & Compassionate</span>
+          <h3>Claims Assistance</h3>
+          <p>Need help with a claim? Our dedicated support team can guide you through the process, incident documentation, and direct repair authorizations.</p>
+          <a href="#quote" class="btn btn-royal" style="background: var(--color-sky); color: var(--color-navy);">Get Claims Assistance ➔</a>
+        </div>
+
+        <div class="claims-card-box">
+          <h4 style="font-size: 1.25rem; font-weight: 800; color: var(--color-navy); margin-bottom: 12px;">3-Step Emergency Claims</h4>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 14px; font-size: 0.92rem; color: var(--color-text-main);">
+            <li><strong>1. Call Direct:</strong> 24/7 hotline with human claim specialists.</li>
+            <li><strong>2. Upload Proof:</strong> Snap photos of damages directly via our secure portal.</li>
+            <li><strong>3. Direct Payout:</strong> Expedited adjuster approvals and direct deposit reimbursement.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06. CUSTOMER TESTIMONIALS -->
+  <section class="section" id="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Trusted by Thousands</span>
+        <h2 class="section-title">Customer Testimonials</h2>
+        <p class="section-desc">See why families and business owners rate SecureLife 4.9 out of 5 stars.</p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="test-card">
+          <p class="test-quote">"When a burst pipe flooded our ground floor, SecureLife had an emergency response adjuster on-site the next morning. Our repair claim was approved and funded within 48 hours. Lifesavers!"</p>
+          <div class="test-author">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Sarah Jenkins" class="test-avatar">
+            <div>
+              <div class="test-name">Sarah Jenkins</div>
+              <div class="test-policy">Homeowner & Auto Policyholder</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <p class="test-quote">"As a growing logistics business with 15 delivery vans, our commercial insurance was skyrocketing. SecureLife audited our risk controls, bundled our fleet, and cut our annual premiums by $18,000."</p>
+          <div class="test-author">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Marcus Reynolds" class="test-avatar">
+            <div>
+              <div class="test-name">Marcus Reynolds</div>
+              <div class="test-policy">Commercial Fleet & Liability</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <p class="test-quote">"The team took the time to explain umbrella liability in simple terms. Knowing my family's savings are sheltered against catastrophic liability gives us total peace of mind."</p>
+          <div class="test-author">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="David Sterling" class="test-avatar">
+            <div>
+              <div class="test-name">David Sterling</div>
+              <div class="test-policy">Umbrella & Life Insurance</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07. INSURANCE KNOWLEDGE CENTER -->
+  <section class="section section-white" id="knowledge">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Education & Guides</span>
+        <h2 class="section-title">Insurance Knowledge Center</h2>
+        <p class="section-desc">Articles about coverage, deductibles, premiums and proactive risk management.</p>
+      </div>
+
+      <div class="knowledge-grid">
+        <div class="article-card">
+          <div class="article-img">
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80" alt="Home insurance guide">
+          </div>
+          <div class="article-body">
+            <div class="article-tag">Homeowners</div>
+            <h4 class="article-title">Understanding Replacement Cost vs Actual Cash Value</h4>
+            <p class="article-desc">Why choosing replacement cost coverage ensures your home is rebuilt at today's lumber and labor prices without depreciation penalties.</p>
+            <a href="#quote" style="color: var(--color-royal); font-weight: 700; font-size: 0.88rem;">Read Article ➔</a>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="article-img">
+            <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80" alt="Auto insurance tips">
+          </div>
+          <div class="article-body">
+            <div class="article-tag">Auto Insurance</div>
+            <h4 class="article-title">How Deductibles Impact Your Annual Auto Premium</h4>
+            <p class="article-desc">A breakdown of how adjusting your collision and comprehensive deductibles can safely optimize your monthly budget.</p>
+            <a href="#quote" style="color: var(--color-royal); font-weight: 700; font-size: 0.88rem;">Read Article ➔</a>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="article-img">
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="Commercial risk management">
+          </div>
+          <div class="article-body">
+            <div class="article-tag">Commercial Risk</div>
+            <h4 class="article-title">Top 5 Cyber Liability Vulnerabilities for Small Businesses</h4>
+            <p class="article-desc">Essential protections required to defend against ransomware, wire transfer fraud, and customer data breaches.</p>
+            <a href="#quote" style="color: var(--color-royal); font-weight: 700; font-size: 0.88rem;">Read Article ➔</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08. FINAL CTA & QUOTE FORM -->
+  <section class="section" id="quote">
+    <div class="container">
+      <div class="quote-card">
+        <div class="quote-info">
+          <span class="section-badge" style="color: var(--color-sky);">Free No-Obligation Quote</span>
+          <h3>Ready to Protect Your Future?</h3>
+          <p>Get personalized guidance from our insurance team. We compare quotes across top carriers to get you the strongest coverage at competitive rates.</p>
+          
+          <ul class="quote-bullets">
+            <li>Comparison rates from 25+ top-rated carriers</li>
+            <li>Multi-policy discounts automatically calculated</li>
+            <li>Licensed local agents dedicated to your account</li>
+            <li>Zero spam calls or third-party lead selling</li>
+          </ul>
+        </div>
+
+        <div class="quote-form-box">
+          <form id="quoteForm" onsubmit="handleQuoteSubmit(event)">
+            <div class="form-group">
+              <label class="form-label">Full Name *</label>
+              <input type="text" class="form-control" placeholder="e.g. Michael Cooper" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address *</label>
+              <input type="email" class="form-control" placeholder="michael@email.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone Number *</label>
+              <input type="tel" class="form-control" placeholder="(555) 019-3388" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Insurance Type Desired</label>
+              <select class="form-control">
+                <option>Bundled Home & Auto (Save up to 25%)</option>
+                <option>Auto Insurance Only</option>
+                <option>Homeowners / Renters Insurance</option>
+                <option>Commercial Business Insurance</option>
+                <option>Umbrella Liability Protection</option>
+                <option>Term / Whole Life Insurance</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-royal" style="width: 100%; margin-top: 10px;">Request Your Free Quote ➔</button>
+          </form>
+          <div id="quoteSuccess" style="display: none; margin-top: 15px; color: var(--color-royal); text-align: center; font-weight: 700; font-size: 0.9rem;">
+            ✓ Quote request submitted! An agent will prepare your rate comparison and contact you shortly.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="brand-logo" style="color: #fff;">
+          <div class="brand-shield">🛡️</div>
+          <div>Secure<span>Life</span></div>
+        </div>
+        <p>Comprehensive risk coverage for individuals, families, and businesses. Independent agency licensed in 48 states.</p>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Insurance Coverage</h4>
+        <ul class="footer-links">
+          <li><a href="#coverage">Auto Insurance</a></li>
+          <li><a href="#coverage">Home Insurance</a></li>
+          <li><a href="#coverage">Commercial Business</a></li>
+          <li><a href="#coverage">Umbrella Protection</a></li>
+          <li><a href="#coverage">Life Insurance</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Client Support</h4>
+        <ul class="footer-links">
+          <li><a href="#claims">File a Claim</a></li>
+          <li><a href="#claims">Claims Assistance</a></li>
+          <li><a href="#knowledge">Knowledge Center</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#quote">Request Free Quote</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Agency Headquarters</h4>
+        <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.8;">
+          400 Sentinel Boulevard, Suite 500<br>
+          Financial District, NY 10005<br>
+          <strong style="color: #fff;">Policy Inquiries:</strong> <a href="mailto:info@securelife.com" style="color: var(--color-sky);">info@securelife.com</a><br>
+          <strong style="color: #fff;">Claims Hotline:</strong> 1-800-555-LIFE
+        </p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div>© 2026 SecureLife Insurance Agency LLC. All rights reserved. Licensed Independent Agency.</div>
+      <div style="display: flex; gap: 24px;">
+        <a href="#coverage">Coverage</a>
+        <a href="#why">About Us</a>
+        <a href="#claims">Claims</a>
+        <a href="#knowledge">Resources</a>
+        <a href="#quote">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const drawer = document.getElementById('mobileDrawer');
+      drawer.classList.toggle('open');
+    }
+    document.getElementById('mobileMenuBtn').addEventListener('click', toggleMenu);
+
+    function handleQuoteSubmit(e) {
+      e.preventDefault();
+      document.getElementById('quoteSuccess').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('quoteForm').reset();
+      }, 1000);
+    }
+  </script>
+</body>
+</html>

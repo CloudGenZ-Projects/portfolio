@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrustNotary | Certified Mobile & Online Notary Public</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --navy-dark: #0A192F;
+      --navy-primary: #0F223D;
+      --navy-light: #1E3A8A;
+      --navy-surface: #F8FAFC;
+      --blue-accent: #2563EB;
+      --blue-sky: #E0F2FE;
+      --gold-accent: #C5A059;
+      --text-dark: #1E293B;
+      --text-muted: #64748B;
+      --text-light: #F8FAFC;
+      --border-color: #E2E8F0;
+      --border-focus: #3B82F6;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 10px 25px -5px rgba(15, 34, 61, 0.08);
+      --shadow-lg: 0 20px 35px -5px rgba(15, 34, 61, 0.12);
+      --font-serif: 'Merriweather', Georgia, serif;
+      --font-sans: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+      --transition: all 0.25s ease-in-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #FFFFFF;
+      color: var(--text-dark);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Top Trust Bar */
+    .top-bar {
+      background: var(--navy-dark);
+      color: #94A3B8;
+      font-size: 13px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .top-bar-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .top-bar-badges {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .top-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #E2E8F0;
+    }
+
+    .top-badge i {
+      color: var(--gold-accent);
+    }
+
+    .top-contact {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .top-contact a {
+      color: #E2E8F0;
+      font-weight: 700;
+    }
+
+    /* Header Nav */
+    .header {
+      background: #FFFFFF;
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 84px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-seal {
+      width: 44px;
+      height: 44px;
+      background: var(--navy-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-accent);
+      font-size: 20px;
+      box-shadow: 0 2px 8px rgba(15, 34, 61, 0.2);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy-primary);
+      line-height: 1.1;
+    }
+
+    .logo-sub {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dark);
+      transition: var(--transition);
+    }
+
+    .nav-link:hover {
+      color: var(--blue-accent);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--navy-primary);
+      color: #FFFFFF;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 12px rgba(15, 34, 61, 0.15);
+    }
+
+    .btn-primary:hover {
+      background: var(--navy-light);
+      transform: translateY(-1px);
+    }
+
+    .btn-blue {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--blue-accent);
+      color: #FFFFFF;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-blue:hover {
+      background: #1D4ED8;
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--navy-primary);
+      padding: 11px 22px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--navy-primary);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-outline:hover {
+      background: var(--navy-surface);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: var(--navy-primary);
+      cursor: pointer;
+    }
+
+    .mobile-drawer {
+      position: fixed;
+      top: 120px;
+      left: 0;
+      width: 100%;
+      background: #FFFFFF;
+      border-bottom: 2px solid var(--navy-primary);
+      box-shadow: var(--shadow-lg);
+      padding: 24px;
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 999;
+    }
+
+    .mobile-drawer.open {
+      display: flex;
+    }
+
+    .mobile-drawer a {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-dark);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    /* Section Global */
+    section {
+      padding: 90px 0;
+    }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--blue-accent);
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(30px, 3.8vw, 44px);
+      color: var(--navy-primary);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+
+    .section-subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 640px;
+      line-height: 1.7;
+    }
+
+    .center-header {
+      text-align: center;
+      margin-bottom: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* 01. Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #0A192F 0%, #0F223D 60%, #172E54 100%);
+      color: #FFFFFF;
+      padding: 100px 0 80px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(37, 99, 235, 0.2);
+      border: 1px solid rgba(147, 197, 253, 0.4);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #BFDBFE;
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(36px, 4.8vw, 54px);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .hero-title span {
+      color: #93C5FD;
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      color: #CBD5E1;
+      line-height: 1.7;
+      margin-bottom: 36px;
+      max-width: 580px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .trust-credential-pills {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding-top: 24px;
+    }
+
+    .credential-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cred-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(197, 160, 89, 0.15);
+      border: 1px solid var(--gold-accent);
+      color: var(--gold-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+    }
+
+    .cred-text {
+      font-size: 12px;
+      line-height: 1.3;
+      color: #E2E8F0;
+    }
+
+    .cred-text strong {
+      display: block;
+      color: #FFFFFF;
+      font-size: 13px;
+    }
+
+    /* Quick Booking Widget in Hero */
+    .hero-widget {
+      background: #FFFFFF;
+      color: var(--text-dark);
+      padding: 32px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-color);
+    }
+
+    .widget-title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      color: var(--navy-primary);
+      margin-bottom: 8px;
+    }
+
+    .widget-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .widget-field {
+      margin-bottom: 16px;
+    }
+
+    .widget-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+
+    .widget-input,
+    .widget-select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--text-dark);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .widget-input:focus,
+    .widget-select:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    /* 02. Notary Services */
+    .services-section {
+      background: var(--navy-surface);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .service-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: #CBD5E1;
+    }
+
+    .service-icon-box {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-sm);
+      background: var(--blue-sky);
+      color: var(--blue-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    .service-card-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      color: var(--navy-primary);
+      margin-bottom: 12px;
+    }
+
+    .service-card-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .service-docs-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-dark);
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+    }
+
+    .service-docs-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .service-docs-list li i {
+      color: #10B981;
+      font-size: 12px;
+    }
+
+    /* 03. Mobile Notary Convenience */
+    .mobile-convenience-section {
+      background: #FFFFFF;
+    }
+
+    .convenience-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .convenience-locations {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .loc-card {
+      background: var(--navy-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .loc-card i {
+      color: var(--blue-accent);
+      font-size: 20px;
+      margin-top: 2px;
+    }
+
+    .loc-card strong {
+      display: block;
+      font-size: 14px;
+      color: var(--navy-primary);
+      margin-bottom: 4px;
+    }
+
+    .loc-card p {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .convenience-image-box {
+      position: relative;
+    }
+
+    .convenience-img {
+      width: 100%;
+      height: 460px;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .badge-float {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      background: var(--navy-primary);
+      color: #FFFFFF;
+      padding: 20px 24px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-md);
+      border-left: 4px solid var(--gold-accent);
+    }
+
+    /* 04. How It Works (4 Steps) */
+    .steps-section {
+      background: var(--navy-surface);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .step-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 30px 24px;
+      text-align: center;
+      position: relative;
+    }
+
+    .step-num-badge {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background: var(--navy-primary);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 18px;
+    }
+
+    .step-title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      color: var(--navy-primary);
+      margin-bottom: 10px;
+    }
+
+    .step-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* 05. Pricing & Packages */
+    .pricing-section {
+      background: #FFFFFF;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .pricing-card {
+      background: var(--navy-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .pricing-card.featured {
+      background: #FFFFFF;
+      border: 2px solid var(--blue-accent);
+      box-shadow: var(--shadow-md);
+    }
+
+    .featured-tag {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--blue-accent);
+      color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 4px 12px;
+      border-radius: 12px;
+    }
+
+    .price-name {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      color: var(--navy-primary);
+      margin-bottom: 8px;
+    }
+
+    .price-value {
+      font-size: 34px;
+      font-weight: 900;
+      color: var(--navy-primary);
+      margin-bottom: 16px;
+    }
+
+    .price-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+      flex-grow: 1;
+    }
+
+    .price-features li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .price-features li i {
+      color: #10B981;
+      font-size: 12px;
+    }
+
+    /* 06. Service Areas Matrix */
+    .areas-section {
+      background: var(--navy-primary);
+      color: #FFFFFF;
+    }
+
+    .areas-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .area-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-sm);
+      padding: 24px;
+    }
+
+    .area-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #93C5FD;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .area-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 13px;
+      color: #CBD5E1;
+    }
+
+    /* 07. FAQ Accordion */
+    .faq-section {
+      background: #FFFFFF;
+    }
+
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      padding: 18px 24px;
+      background: var(--navy-surface);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy-primary);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      padding: 20px 24px;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      display: none;
+      background: #FFFFFF;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    /* 08. Appointment Form */
+    .booking-section {
+      background: var(--navy-surface);
+      border-top: 1px solid var(--border-color);
+    }
+
+    .booking-box {
+      max-width: 840px;
+      margin: 0 auto;
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 44px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .form-full {
+      grid-column: span 2;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+
+    .form-input-ctrl {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-input-ctrl:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    /* Non-Attorney Disclaimer */
+    .disclaimer-banner {
+      background: #FEF3C7;
+      border-top: 1px solid #FCD34D;
+      border-bottom: 1px solid #FCD34D;
+      padding: 20px 0;
+      font-size: 12px;
+      color: #92400E;
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--navy-dark);
+      color: #94A3B8;
+      padding: 70px 0 30px;
+      font-size: 14px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+
+    .footer-col-title {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      color: #FFFFFF;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .footer-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-list a:hover {
+      color: #FFFFFF;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 12px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .services-grid,
+      .steps-grid,
+      .pricing-grid,
+      .areas-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .hero-grid,
+      .convenience-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links,
+      .top-contact {
+        display: none;
+      }
+      .mobile-menu-btn {
+        display: block;
+      }
+      .services-grid,
+      .steps-grid,
+      .pricing-grid,
+      .areas-grid,
+      .footer-grid,
+      .trust-credential-pills {
+        grid-template-columns: 1fr;
+      }
+      .form-grid-2 {
+        grid-template-columns: 1fr;
+      }
+      .form-full {
+        grid-column: span 1;
+      }
+      .booking-box {
+        padding: 24px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Trust Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div class="top-bar-badges">
+        <div class="top-badge"><i class="fas fa-certificate"></i> NNA Certified Signing Agent</div>
+        <div class="top-badge"><i class="fas fa-shield-alt"></i> $1,000,000 E&O Insured</div>
+        <div class="top-badge"><i class="fas fa-user-check"></i> State Commissioned & Bonded</div>
+      </div>
+      <div class="top-contact">
+        <span>24/7 Mobile Dispatch: <a href="tel:18005558787">(800) 555-8787</a></span>
+        <a href="#booking" style="color: var(--gold-accent);">Schedule Online</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-content">
+      <a href="#" class="logo">
+        <div class="logo-seal"><i class="fas fa-stamp"></i></div>
+        <div class="logo-text">
+          <span class="logo-title">TrustNotary</span>
+          <span class="logo-sub">Mobile & Online Notary</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#convenience" class="nav-link">Mobile Travel</a></li>
+        <li><a href="#steps" class="nav-link">How It Works</a></li>
+        <li><a href="#pricing" class="nav-link">Fee Schedule</a></li>
+        <li><a href="#areas" class="nav-link">Service Areas</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+      </ul>
+
+      <div class="header-actions">
+        <a href="#booking" class="btn-primary"><i class="fas fa-calendar-check"></i> Book Notary</a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <a href="#services" onclick="toggleMenu()">Services</a>
+      <a href="#convenience" onclick="toggleMenu()">Mobile Travel</a>
+      <a href="#steps" onclick="toggleMenu()">How It Works</a>
+      <a href="#pricing" onclick="toggleMenu()">Fee Schedule</a>
+      <a href="#areas" onclick="toggleMenu()">Service Areas</a>
+      <a href="#faq" onclick="toggleMenu()">FAQ</a>
+      <a href="#booking" onclick="toggleMenu()" style="color: var(--blue-accent);">Book Appointment</a>
+    </div>
+  </header>
+
+  <!-- 01. Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-tag">
+            <i class="fas fa-bolt"></i> Mobile Traveling & Remote Online Notary (RON)
+          </div>
+          <h1 class="hero-title">
+            Certified Mobile Notary.<br>
+            <span>At Your Door Within 60 Mins.</span>
+          </h1>
+          <p class="hero-desc">
+            Fast, meticulous, and fully bonded notarization for real estate loan packages, powers of attorney, trusts, affidavits, and corporate agreements. We come to your home, office, hospital, or connect securely online.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#booking" class="btn-blue"><i class="fas fa-car"></i> Book Mobile Notary</a>
+            <a href="#booking" class="btn-outline" style="color: #FFFFFF; border-color: #FFFFFF;"><i class="fas fa-laptop"></i> Start Remote Online (RON)</a>
+          </div>
+
+          <div class="trust-credential-pills">
+            <div class="credential-item">
+              <div class="cred-icon"><i class="fas fa-stamp"></i></div>
+              <div class="cred-text">
+                <strong>NNA Certified</strong>
+                Background Screened
+              </div>
+            </div>
+            <div class="credential-item">
+              <div class="cred-icon"><i class="fas fa-shield-alt"></i></div>
+              <div class="cred-text">
+                <strong>$1,000,000</strong>
+                E&O Insurance Policy
+              </div>
+            </div>
+            <div class="credential-item">
+              <div class="cred-icon"><i class="fas fa-file-signature"></i></div>
+              <div class="cred-text">
+                <strong>15,000+</strong>
+                Signings Completed
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Quick Widget -->
+        <div class="hero-widget">
+          <h3 class="widget-title">Check Instant Availability</h3>
+          <p class="widget-sub">Enter signing location and document type for an instant quote.</p>
+          <form onsubmit="handleQuickQuote(event)">
+            <div class="widget-field">
+              <label class="widget-label">Service Format</label>
+              <select class="widget-select">
+                <option>Mobile Notary (We travel to you)</option>
+                <option>Remote Online Notarization (RON)</option>
+                <option>Loan Signing Agent (Mortgage / Escrow)</option>
+                <option>Hospital or Assisted Living Signing</option>
+              </select>
+            </div>
+            <div class="widget-field">
+              <label class="widget-label">Your Zip Code</label>
+              <input type="text" class="widget-input" placeholder="e.g. 90210" required>
+            </div>
+            <div class="widget-field">
+              <label class="widget-label">Number of Notarized Signatures</label>
+              <select class="widget-select">
+                <option>1 - 2 Signatures</option>
+                <option>3 - 5 Signatures</option>
+                <option>Full Loan Package (100+ pages)</option>
+                <option>Apostille Processing</option>
+              </select>
+            </div>
+            <button type="submit" class="btn-primary" style="width: 100%; margin-top: 8px;">
+              Calculate Travel Fee & Availability
+            </button>
+            <p id="calcFeedback" style="display:none; color: #16A34A; font-size: 13px; margin-top: 12px; text-align: center; font-weight: 700;">
+              Notary available within your zip code! Standard travel: $35.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02. Notary Services -->
+  <section class="services-section" id="services">
+    <div class="container">
+      <div class="center-header">
+        <div class="section-eyebrow"><i class="fas fa-clipboard-check"></i> Comprehensive Legal Acts</div>
+        <h2 class="section-title">Notary Services We Provide</h2>
+        <p class="section-subtitle">
+          Every notarization is executed in strict compliance with state statutory requirements, accurate journal recordkeeping, and biometric thumbprint verification.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <!-- 1 -->
+        <div class="service-card">
+          <div class="service-icon-box"><i class="fas fa-home"></i></div>
+          <h3 class="service-card-title">Real Estate & Loan Signings</h3>
+          <p class="service-card-desc">Specialized loan signing agents equipped with dual-tray laser printers to execute purchase, refinance, HELOC, and seller packages flawlessly.</p>
+          <ul class="service-docs-list">
+            <li><i class="fas fa-check-circle"></i> Closing Disclosures & Notes</li>
+            <li><i class="fas fa-check-circle"></i> Deed of Trust & Affidavits</li>
+            <li><i class="fas fa-check-circle"></i> Reverse Mortgages</li>
+          </ul>
+        </div>
+
+        <!-- 2 -->
+        <div class="service-card">
+          <div class="service-icon-box"><i class="fas fa-heartbeat"></i></div>
+          <h3 class="service-card-title">Estate Planning & Directives</h3>
+          <p class="service-card-desc">Compassionate notarization for living trusts, wills, advance healthcare directives, and durable powers of attorney at residences or hospice care.</p>
+          <ul class="service-docs-list">
+            <li><i class="fas fa-check-circle"></i> Living Trusts & Amendments</li>
+            <li><i class="fas fa-check-circle"></i> Healthcare Power of Attorney</li>
+            <li><i class="fas fa-check-circle"></i> Last Will and Testaments</li>
+          </ul>
+        </div>
+
+        <!-- 3 -->
+        <div class="service-card">
+          <div class="service-icon-box"><i class="fas fa-briefcase"></i></div>
+          <h3 class="service-card-title">Business & Corporate Documents</h3>
+          <p class="service-card-desc">Supporting law firms, corporations, and startups with commercial leases, partnership resolutions, bills of sale, and NDA execution.</p>
+          <ul class="service-docs-list">
+            <li><i class="fas fa-check-circle"></i> Articles of Incorporation</li>
+            <li><i class="fas fa-check-circle"></i> Commercial Contracts & Leases</li>
+            <li><i class="fas fa-check-circle"></i> Board Resolutions</li>
+          </ul>
+        </div>
+
+        <!-- 4 -->
+        <div class="service-card">
+          <div class="service-icon-box"><i class="fas fa-globe-americas"></i></div>
+          <h3 class="service-card-title">Apostille & Embassy Legalization</h3>
+          <p class="service-card-desc">Expedited state authentication and Hague Convention apostille certificates for documents to be utilized internationally.</p>
+          <ul class="service-docs-list">
+            <li><i class="fas fa-check-circle"></i> Birth / Marriage Certificates</li>
+            <li><i class="fas fa-check-circle"></i> University Diplomas & Transcripts</li>
+            <li><i class="fas fa-check-circle"></i> Secretary of State Courier Service</li>
+          </ul>
+        </div>
+
+        <!-- 5 -->
+        <div class="service-card">
+          <div class="service-icon-box"><i class="fas fa-laptop"></i></div>
+          <h3 class="service-card-title">Remote Online Notarization (RON)</h3>
+          <p class="service-card-desc">Sign from anywhere across the globe using our secure video audio platform with digital credential analysis and audit trails.</p>
+          <ul class="service-docs-list">
+            <li><i class="fas fa-check-circle"></i> MISMO-compliant digital seals</li>
+            <li><i class="fas fa-check-circle"></i> Knowledge-based authentication (KBA)</li>
+            <li><i class="fas fa-check-circle"></i> Immediate PDF download</li>
+          </ul>
+        </div>
+
+        <!-- 6 -->
+        <div class="service-card">
+          <div class="service-icon-box"><i class="fas fa-user-friends"></i></div>
+          <h3 class="service-card-title">Family & Parental Authorizations</h3>
+          <p class="service-card-desc">Notarization for child travel consent forms, passport parent declarations, adoption dossiers, and custody agreements.</p>
+          <ul class="service-docs-list">
+            <li><i class="fas fa-check-circle"></i> Minor Travel Consent Letters</li>
+            <li><i class="fas fa-check-circle"></i> DS-3053 Passport Consents</li>
+            <li><i class="fas fa-check-circle"></i> Motor Vehicle Title Transfers</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03. Mobile Notary Convenience -->
+  <section class="mobile-convenience-section" id="convenience">
+    <div class="container">
+      <div class="convenience-grid">
+        <div>
+          <div class="section-eyebrow"><i class="fas fa-map-marked-alt"></i> On-Demand Mobile Service</div>
+          <h2 class="section-title">We Come Directly To You. Anytime. Anywhere.</h2>
+          <p class="section-subtitle">
+            Skip traffic and waiting in retail lobbies. Our commissioned notaries travel equipped with high-speed scanners and all official journal supplies.
+          </p>
+
+          <div class="convenience-locations">
+            <div class="loc-card">
+              <i class="fas fa-home"></i>
+              <div>
+                <strong>Private Residences</strong>
+                <p>Comfortable evening or weekend signings in your living room.</p>
+              </div>
+            </div>
+
+            <div class="loc-card">
+              <i class="fas fa-building"></i>
+              <div>
+                <strong>Corporate Offices</strong>
+                <p>Conference room signings for executives and staff without disruption.</p>
+              </div>
+            </div>
+
+            <div class="loc-card">
+              <i class="fas fa-hospital"></i>
+              <div>
+                <strong>Hospitals & Care Centers</strong>
+                <p>Prompt, respectful bedside notarizations with patient verification.</p>
+              </div>
+            </div>
+
+            <div class="loc-card">
+              <i class="fas fa-plane-departure"></i>
+              <div>
+                <strong>Airports & Public Spots</strong>
+                <p>Urgent airport departures or quiet coffee shop meetings.</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 32px;">
+            <a href="#booking" class="btn-primary">Schedule a Traveling Notary</a>
+          </div>
+        </div>
+
+        <div class="convenience-image-box">
+          <img src="https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80" alt="Mobile Notary Signing" class="convenience-img">
+          <div class="badge-float">
+            <div style="font-weight: 700; font-size: 16px; margin-bottom: 4px;">Punctual Arrival Guarantee</div>
+            <div style="font-size: 13px; color: #CBD5E1;">If our mobile notary arrives late, travel fees are 50% refunded.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04. How It Works -->
+  <section class="steps-section" id="steps">
+    <div class="container">
+      <div class="center-header">
+        <div class="section-eyebrow"><i class="fas fa-list-ol"></i> Step-by-Step Flow</div>
+        <h2 class="section-title">How Your Notarization Works</h2>
+        <p class="section-subtitle">
+          Four straightforward steps ensuring full statutory compliance and peace of mind.
+        </p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num-badge">1</div>
+          <h4 class="step-title">Book Time & Place</h4>
+          <p class="step-desc">Select mobile dispatch or online RON session, provide your location, and specify document count.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num-badge">2</div>
+          <h4 class="step-title">Prepare Valid ID</h4>
+          <p class="step-desc">Have current government-issued photo ID ready (driver's license, passport, or military ID).</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num-badge">3</div>
+          <h4 class="step-title">Sign Before Notary</h4>
+          <p class="step-desc">The notary confirms identity, ensures willingness and comprehension, and witnesses execution.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num-badge">4</div>
+          <h4 class="step-title">Official Seal Affixed</h4>
+          <p class="step-desc">Official state stamp, certificate wording, and journal entries are legally finalized on the spot.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05. Fee Schedule & Packages -->
+  <section class="pricing-section" id="pricing">
+    <div class="container">
+      <div class="center-header">
+        <div class="section-eyebrow"><i class="fas fa-tag"></i> Clear Fee Schedule</div>
+        <h2 class="section-title">Transparent, Regulated Pricing</h2>
+        <p class="section-subtitle">
+          Statutory state notary fees plus reasonable travel costs with zero hidden charges.
+        </p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- 1 -->
+        <div class="pricing-card">
+          <h3 class="price-name">General Notary</h3>
+          <div class="price-value">$15<span style="font-size: 14px; font-weight: normal; color: var(--text-muted);"> / signature</span></div>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">Affidavits, acknowledgments, simple forms at our meeting spots.</p>
+          <ul class="price-features">
+            <li><i class="fas fa-check"></i> Statutory state per-stamp rate</li>
+            <li><i class="fas fa-check"></i> Standard journal logging</li>
+            <li><i class="fas fa-check"></i> Identification verification</li>
+            <li><i class="fas fa-check"></i> Same-day appointments</li>
+          </ul>
+          <a href="#booking" class="btn-outline" style="width: 100%; text-align: center;">Book Single Act</a>
+        </div>
+
+        <!-- 2 -->
+        <div class="pricing-card featured">
+          <span class="featured-tag">Most Common</span>
+          <h3 class="price-name">Mobile Signing</h3>
+          <div class="price-value">$45<span style="font-size: 14px; font-weight: normal; color: var(--text-muted);"> travel + fee</span></div>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">We travel to your home, office, or coffee shop within our local radius.</p>
+          <ul class="price-features">
+            <li><i class="fas fa-check"></i> Up to 25 mile travel radius</li>
+            <li><i class="fas fa-check"></i> Flexible evening & weekend slots</li>
+            <li><i class="fas fa-check"></i> Thumbprint registry included</li>
+            <li><i class="fas fa-check"></i> On-time arrival guarantee</li>
+          </ul>
+          <a href="#booking" class="btn-primary" style="width: 100%; text-align: center;">Book Mobile Visit</a>
+        </div>
+
+        <!-- 3 -->
+        <div class="pricing-card">
+          <h3 class="price-name">Loan Signing Agent</h3>
+          <div class="price-value">$175<span style="font-size: 14px; font-weight: normal; color: var(--text-muted);"> flat package</span></div>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">Comprehensive escrow/mortgage refinance or buyer package.</p>
+          <ul class="price-features">
+            <li><i class="fas fa-check"></i> Dual-tray laser print & prep</li>
+            <li><i class="fas fa-check"></i> Full 100+ page loan package</li>
+            <li><i class="fas fa-check"></i> Scanbacks delivered within 2 hrs</li>
+            <li><i class="fas fa-check"></i> FedEx / UPS drop-off same day</li>
+          </ul>
+          <a href="#booking" class="btn-outline" style="width: 100%; text-align: center;">Book Loan Signing</a>
+        </div>
+
+        <!-- 4 -->
+        <div class="pricing-card">
+          <h3 class="price-name">Remote Online (RON)</h3>
+          <div class="price-value">$25<span style="font-size: 14px; font-weight: normal; color: var(--text-muted);"> / session</span></div>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">Legally binding digital notarization anywhere in the United States.</p>
+          <ul class="price-features">
+            <li><i class="fas fa-check"></i> Encrypted video audio room</li>
+            <li><i class="fas fa-check"></i> ID credential analysis</li>
+            <li><i class="fas fa-check"></i> Tamper-evident PDF seal</li>
+            <li><i class="fas fa-check"></i> 10-Year audio/video archive</li>
+          </ul>
+          <a href="#booking" class="btn-outline" style="width: 100%; text-align: center;">Launch RON Session</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06. Service Areas Matrix -->
+  <section class="areas-section" id="areas">
+    <div class="container">
+      <div class="center-header">
+        <div class="section-eyebrow" style="color: #93C5FD;"><i class="fas fa-compass"></i> Regional Coverage</div>
+        <h2 class="section-title" style="color: #FFFFFF;">Counties & Municipalities Served</h2>
+        <p class="section-subtitle" style="color: #CBD5E1;">
+          Our mobile traveling fleet serves metro counties with under 60-minute dispatch response times.
+        </p>
+      </div>
+
+      <div class="areas-grid">
+        <div class="area-card">
+          <h4 class="area-title"><i class="fas fa-map-pin"></i> Central Metro</h4>
+          <ul class="area-list">
+            <li>Downtown Financial District</li>
+            <li>Midtown Commercial Center</li>
+            <li>West End & Arts Corridor</li>
+            <li>University Medical Center</li>
+          </ul>
+        </div>
+
+        <div class="area-card">
+          <h4 class="area-title"><i class="fas fa-map-pin"></i> North Suburbs</h4>
+          <ul class="area-list">
+            <li>Oakwood & Green Hills</li>
+            <li>Highland Corporate Park</li>
+            <li>Riverbend Residential</li>
+            <li>Northgate Airport Vicinity</li>
+          </ul>
+        </div>
+
+        <div class="area-card">
+          <h4 class="area-title"><i class="fas fa-map-pin"></i> South Counties</h4>
+          <ul class="area-list">
+            <li>Silver Creek Valley</li>
+            <li>Southshore Marina Area</li>
+            <li>Heritage Pointe</li>
+            <li>Cedar Grove Executive Estates</li>
+          </ul>
+        </div>
+
+        <div class="area-card">
+          <h4 class="area-title"><i class="fas fa-map-pin"></i> Nationwide RON</h4>
+          <ul class="area-list">
+            <li>All 50 US States via RON</li>
+            <li>US Military stationed overseas</li>
+            <li>Expatriates & International signers</li>
+            <li>Secure MISMO digital compliance</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07. FAQ Accordion -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div class="center-header">
+        <div class="section-eyebrow"><i class="fas fa-question-circle"></i> Got Questions?</div>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="faq-container">
+        <div class="faq-item active">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>What forms of identification are legally acceptable?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            State laws require unexpired government-issued identification containing a photograph, signature, physical description, and serial number. Accepted IDs include state driver’s licenses, state ID cards, US passports, foreign passports stamped by USCIS, and US military identification.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Can a notary draft or provide legal advice on my document?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            No. A Notary Public is not an attorney licensed to practice law and cannot give legal advice, prepare legal documents, or advise you on which form to sign. If you have questions about legal rights or consequences, please consult an attorney.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>How fast can a mobile notary arrive for an emergency signing?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            For urgent requests (hospital bedside, jail visitation, or last-minute flight departures), we can usually dispatch an agent to arrive within 45 to 60 minutes across our primary metro territory.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>What if a signer does not possess a valid government photo ID?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Under state notary law, identity can often be established through one or two credible witnesses who personally know the signer, have valid photo ID, and are impartial third parties with no financial interest in the document.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08. Booking Form -->
+  <section class="booking-section" id="booking">
+    <div class="container">
+      <div class="booking-box">
+        <div style="text-align: center;">
+          <div class="section-eyebrow"><i class="fas fa-calendar-alt"></i> Easy Online Scheduling</div>
+          <h2 class="section-title">Book an Appointment or Mobile Dispatch</h2>
+          <p class="section-subtitle" style="margin: 0 auto;">
+            Complete the form below to lock in your appointment time. We confirm within 15 minutes.
+          </p>
+        </div>
+
+        <form class="form-grid-2" onsubmit="handleBooking(event)">
+          <div>
+            <label class="form-label">Full Name of Signer *</label>
+            <input type="text" class="form-input-ctrl" placeholder="e.g. Robert Henderson" required>
+          </div>
+          <div>
+            <label class="form-label">Email Address *</label>
+            <input type="email" class="form-input-ctrl" placeholder="robert@example.com" required>
+          </div>
+          <div>
+            <label class="form-label">Phone Number *</label>
+            <input type="tel" class="form-input-ctrl" placeholder="(555) 000-0000" required>
+          </div>
+          <div>
+            <label class="form-label">Service Type</label>
+            <select class="form-input-ctrl">
+              <option>Mobile Notary (Travel to Location)</option>
+              <option>Remote Online Notary (RON)</option>
+              <option>Loan Signing Package (Purchase / Refi)</option>
+              <option>Hospital Bedside Urgent Notarization</option>
+              <option>Apostille Document Service</option>
+            </select>
+          </div>
+          <div>
+            <label class="form-label">Requested Date</label>
+            <input type="date" class="form-input-ctrl" required>
+          </div>
+          <div>
+            <label class="form-label">Preferred Time Window</label>
+            <select class="form-input-ctrl">
+              <option>Morning (08:00 AM - 12:00 PM)</option>
+              <option>Afternoon (12:00 PM - 05:00 PM)</option>
+              <option>Evening (05:00 PM - 09:00 PM)</option>
+              <option>ASAP Emergency Dispatch</option>
+            </select>
+          </div>
+          <div class="form-full">
+            <label class="form-label">Signing Address (for Mobile Notary)</label>
+            <input type="text" class="form-input-ctrl" placeholder="Street Address, Suite/Apt, City, State, Zip Code">
+          </div>
+          <div class="form-full">
+            <label class="form-label">Document Details & Special Instructions</label>
+            <input type="text" class="form-input-ctrl" placeholder="Types of documents (Power of Attorney, Title, Trust), number of signers...">
+          </div>
+          <div class="form-full" style="text-align: center; margin-top: 10px;">
+            <button type="submit" class="btn-primary" style="padding: 14px 40px; font-size: 15px;">
+              Confirm Notary Appointment
+            </button>
+            <p id="bookingSuccess" style="display:none; color: #16A34A; margin-top: 16px; font-weight: 700; font-size: 15px;">
+              Appointment received! A signing coordinator will call you to confirm dispatch and travel ETA.
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Non-Attorney Legal Disclaimer -->
+  <div class="disclaimer-banner">
+    <div class="container" style="text-align: center;">
+      <strong>MANDATORY STATUTORY NOTICE:</strong> We are not attorneys licensed to practice law in this state. We are not allowed to draft legal documents, give advice on legal matters (including how you should sign or whether your documents are legally adequate), or accept fees for legal advice.
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="logo" style="margin-bottom: 16px;">
+            <div class="logo-seal"><i class="fas fa-stamp"></i></div>
+            <div class="logo-text">
+              <span class="logo-title" style="color: #FFFFFF;">TrustNotary</span>
+              <span class="logo-sub" style="color: #94A3B8;">Commissioned Notary Public</span>
+            </div>
+          </div>
+          <p style="font-size: 13px; line-height: 1.7; max-width: 320px;">
+            Professional traveling mobile notary public and loan signing services. National Notary Association (NNA) certified, background screened, and $1,000,000 E&O insured.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Services</h4>
+          <ul class="footer-list">
+            <li><a href="#services">Mobile Notary Travel</a></li>
+            <li><a href="#services">Loan Signing Agent</a></li>
+            <li><a href="#services">Remote Online RON</a></li>
+            <li><a href="#services">Living Trusts & POA</a></li>
+            <li><a href="#services">Apostille Authentication</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Client Resources</h4>
+          <ul class="footer-list">
+            <li><a href="#steps">Acceptable ID Requirements</a></li>
+            <li><a href="#pricing">Travel Fee Schedule</a></li>
+            <li><a href="#areas">Service County Map</a></li>
+            <li><a href="#faq">Notary FAQ</a></li>
+            <li><a href="#booking">Verify Credentials</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Dispatch Center</h4>
+          <p style="font-size: 13px; line-height: 1.8; color: #CBD5E1;">
+            <strong>Toll Free:</strong> (800) 555-8787<br>
+            <strong>Direct Dispatch:</strong> (555) 234-9810<br>
+            <strong>Email:</strong> dispatch@trustnotary-public.com<br>
+            <strong>Hours:</strong> Mon - Sun: 7:00 AM - 10:00 PM (Emergency 24/7)
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 TrustNotary Public Services LLC. State Commission #2481093. All Rights Reserved.
+        </div>
+        <div>
+          NNA Member ID #16049281 | Bonded & Insured
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Drawer
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    function toggleMenu() {
+      mobileDrawer.classList.toggle('open');
+      const icon = mobileBtn.querySelector('i');
+      if (mobileDrawer.classList.contains('open')) {
+        icon.classList.replace('fa-bars', 'fa-times');
+      } else {
+        icon.classList.replace('fa-times', 'fa-bars');
+      }
+    }
+    mobileBtn.addEventListener('click', toggleMenu);
+
+    // FAQ Accordion
+    function toggleFaq(el) {
+      const parent = el.parentElement;
+      parent.classList.toggle('active');
+    }
+
+    // Quick Quote Handler
+    function handleQuickQuote(e) {
+      e.preventDefault();
+      document.getElementById('calcFeedback').style.display = 'block';
+    }
+
+    // Booking Handler
+    function handleBooking(e) {
+      e.preventDefault();
+      document.getElementById('bookingSuccess').style.display = 'block';
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>

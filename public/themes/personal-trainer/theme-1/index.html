@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PeakFit | High-Performance Athletic Training & Personal Coaching</title>
+  <meta name="description" content="Stronger Than Yesterday. Build strength, transform your body and unlock your full athletic potential through intelligent training.">
+
+  <!-- Google Fonts: Bebas Neue + Barlow -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       PEAKFIT - DESIGN SYSTEM & TOKENS
+       Identity: High-performance athletic brand.
+       Colors: Deep black, graphite, red, white.
+       Typography: Heavy uppercase display fonts + bold athletic sans.
+       ========================================================================== */
+    :root {
+      --color-black: #0c0d10;
+      --color-graphite-dark: #14161b;
+      --color-graphite-card: #1c1f26;
+      --color-graphite-border: #292d37;
+      --color-red: #ef4444;
+      --color-red-dark: #dc2626;
+      --color-red-glow: rgba(239, 68, 68, 0.35);
+      --color-white: #ffffff;
+      --color-gray-light: #e2e8f0;
+      --color-gray-muted: #94a3b8;
+
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-athletic: 'Barlow', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      --container: 1260px;
+      --radius-sm: 4px;
+      --radius-md: 10px;
+      --radius-pill: 999px;
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--color-black);
+      color: var(--color-white);
+      font-family: var(--font-athletic);
+    }
+
+    body {
+      background: var(--color-black);
+      color: var(--color-white);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* HEADER */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(12, 13, 16, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--color-graphite-border);
+      padding: 18px 0;
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-size: 2.3rem;
+      letter-spacing: 2px;
+      color: #fff;
+    }
+
+    .brand-logo .logo-slash {
+      color: var(--color-red);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-gray-muted);
+    }
+
+    .nav-link:hover {
+      color: var(--color-red);
+    }
+
+    /* ATHLETIC BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 30px;
+      font-family: var(--font-athletic);
+      font-size: 0.95rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      transition: var(--transition);
+      border-radius: var(--radius-sm);
+    }
+
+    .btn-red {
+      background: var(--color-red);
+      color: #fff;
+      box-shadow: 0 8px 24px var(--color-red-glow);
+    }
+
+    .btn-red:hover {
+      background: var(--color-red-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(239, 68, 68, 0.5);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #fff;
+      border: 1px solid var(--color-graphite-border);
+    }
+
+    .btn-outline:hover {
+      border-color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .mobile-toggle {
+      display: none;
+      font-size: 1.6rem;
+      color: #fff;
+    }
+
+    /* MOBILE DRAWER */
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: 76px;
+      left: 0;
+      width: 100%;
+      background: var(--color-graphite-dark);
+      border-bottom: 1px solid var(--color-graphite-border);
+      padding: 24px;
+      z-index: 99;
+    }
+
+    .mobile-drawer.open {
+      display: block;
+    }
+
+    .mobile-drawer ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mobile-drawer a {
+      font-size: 1.1rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      padding: 90px 0 110px;
+      background: radial-gradient(circle at 80% 20%, rgba(239, 68, 68, 0.16), transparent 50%),
+                  linear-gradient(180deg, var(--color-black) 0%, var(--color-graphite-dark) 100%);
+      border-bottom: 1px solid var(--color-graphite-border);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .hero-tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: var(--color-red);
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3.6rem, 7vw, 6.2rem);
+      line-height: 0.92;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #fff;
+      margin-bottom: 22px;
+    }
+
+    .hero-title .red-text {
+      color: var(--color-red);
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: var(--color-gray-muted);
+      margin-bottom: 38px;
+      max-width: 540px;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 45px;
+    }
+
+    .hero-stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      border-top: 1px solid var(--color-graphite-border);
+      padding-top: 28px;
+    }
+
+    .stat-card h3 {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .stat-card h3 span {
+      color: var(--color-red);
+    }
+
+    .stat-card p {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-gray-muted);
+      margin-top: 4px;
+    }
+
+    /* Hero Visual */
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-athlete-card {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--color-graphite-border);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+    }
+
+    .hero-athlete-card img {
+      width: 100%;
+      height: 540px;
+      object-fit: cover;
+    }
+
+    .live-metric-card {
+      position: absolute;
+      bottom: -15px;
+      right: -15px;
+      background: var(--color-graphite-card);
+      border: 1px solid var(--color-red);
+      padding: 16px 24px;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .metric-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(239, 68, 68, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-red);
+      font-size: 1.3rem;
+    }
+
+    /* SECTION STYLES */
+    .section {
+      padding: 110px 0;
+    }
+
+    .section-graphite {
+      background: var(--color-graphite-dark);
+      border-top: 1px solid var(--color-graphite-border);
+      border-bottom: 1px solid var(--color-graphite-border);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 65px;
+    }
+
+    .section-eyebrow {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--color-red);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      line-height: 0.95;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      color: var(--color-gray-muted);
+      font-size: 1.05rem;
+    }
+
+    /* TRAINING PROGRAMS */
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .program-card {
+      background: var(--color-graphite-card);
+      border: 1px solid var(--color-graphite-border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .program-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--color-red);
+      box-shadow: 0 15px 35px rgba(239, 68, 68, 0.15);
+    }
+
+    .program-img {
+      height: 220px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .program-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .program-card:hover .program-img img {
+      transform: scale(1.08);
+    }
+
+    .program-tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--color-red);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+    }
+
+    .program-body {
+      padding: 26px 22px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .program-title {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      line-height: 1.1;
+      letter-spacing: 1px;
+      color: #fff;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .program-desc {
+      color: var(--color-gray-muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .program-meta {
+      border-top: 1px solid var(--color-graphite-border);
+      padding-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .program-meta span {
+      color: var(--color-red);
+    }
+
+    /* PHILOSOPHY */
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .philosophy-text h3 {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 4vw, 3.8rem);
+      line-height: 1;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 22px;
+    }
+
+    .philosophy-text p {
+      color: var(--color-gray-muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .pillars-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .pillar-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .pillar-num {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      color: var(--color-red);
+      line-height: 1;
+    }
+
+    .pillar-title {
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    .pillar-desc {
+      color: var(--color-gray-muted);
+      font-size: 0.9rem;
+    }
+
+    .philosophy-visual img {
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-graphite-border);
+      height: 480px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    /* MEET YOUR COACHES */
+    .coaches-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .coach-card {
+      background: var(--color-graphite-card);
+      border: 1px solid var(--color-graphite-border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .coach-card:hover {
+      border-color: var(--color-red);
+      transform: translateY(-4px);
+    }
+
+    .coach-img {
+      height: 340px;
+      overflow: hidden;
+    }
+
+    .coach-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .coach-card:hover .coach-img img {
+      transform: scale(1.05);
+    }
+
+    .coach-body {
+      padding: 26px;
+    }
+
+    .coach-name {
+      font-family: var(--font-display);
+      font-size: 1.9rem;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .coach-role {
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--color-red);
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .coach-bio {
+      color: var(--color-gray-muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .coach-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--color-gray-light);
+    }
+
+    /* TRANSFORMATION STORIES */
+    .transformations-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .trans-card {
+      background: var(--color-graphite-card);
+      border: 1px solid var(--color-graphite-border);
+      border-radius: var(--radius-sm);
+      padding: 28px;
+      position: relative;
+    }
+
+    .trans-metrics-banner {
+      display: flex;
+      justify-content: space-between;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 20px;
+    }
+
+    .trans-metric {
+      text-align: center;
+    }
+
+    .trans-metric h4 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      color: var(--color-red);
+      line-height: 1;
+    }
+
+    .trans-metric span {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--color-gray-muted);
+    }
+
+    .trans-quote {
+      font-style: italic;
+      color: var(--color-gray-light);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .trans-member {
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    .trans-program {
+      font-size: 0.8rem;
+      color: var(--color-red);
+    }
+
+    /* MEMBERSHIP PLANS */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    .pricing-card {
+      background: var(--color-graphite-card);
+      border: 1px solid var(--color-graphite-border);
+      border-radius: var(--radius-sm);
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .pricing-card:hover {
+      border-color: var(--color-red);
+    }
+
+    .pricing-card.popular {
+      background: linear-gradient(180deg, #222630 0%, #171920 100%);
+      border: 2px solid var(--color-red);
+      transform: scale(1.03);
+    }
+
+    .popular-tag {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--color-red);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 4px 14px;
+      border-radius: var(--radius-pill);
+    }
+
+    .plan-name {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      color: #fff;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .plan-desc {
+      color: var(--color-gray-muted);
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+    }
+
+    .plan-price {
+      font-family: var(--font-display);
+      font-size: 3.8rem;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 26px;
+    }
+
+    .plan-price span {
+      font-size: 1.2rem;
+      color: var(--color-gray-muted);
+      font-family: var(--font-athletic);
+      font-weight: 600;
+    }
+
+    .plan-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 36px;
+      flex-grow: 1;
+    }
+
+    .plan-features li {
+      font-size: 0.92rem;
+      color: var(--color-gray-light);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .plan-features li::before {
+      content: '✓';
+      color: var(--color-red);
+      font-weight: 800;
+    }
+
+    /* FAQ ACCORDION */
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border: 1px solid var(--color-graphite-border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 14px;
+      background: var(--color-graphite-card);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 22px 24px;
+      text-align: left;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-question:hover {
+      color: var(--color-red);
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 24px 22px;
+      color: var(--color-gray-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    .faq-item.active .faq-question span {
+      transform: rotate(45deg);
+      color: var(--color-red);
+    }
+
+    /* ASSESSMENT BOOKING FORM */
+    .assessment-card {
+      background: radial-gradient(circle at 100% 50%, rgba(239, 68, 68, 0.22), transparent 70%),
+                  var(--color-graphite-card);
+      border: 1px solid var(--color-graphite-border);
+      border-radius: var(--radius-md);
+      padding: 60px;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 50px;
+      align-items: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .assessment-info h3 {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 4.5vw, 4rem);
+      line-height: 0.95;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 18px;
+    }
+
+    .assessment-info p {
+      color: var(--color-gray-muted);
+      font-size: 1.05rem;
+      margin-bottom: 24px;
+    }
+
+    .assessment-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-weight: 700;
+      color: var(--color-gray-light);
+    }
+
+    .assessment-bullets li::before {
+      content: '⚡ ';
+      color: var(--color-red);
+    }
+
+    .assessment-form {
+      background: var(--color-graphite-dark);
+      border: 1px solid var(--color-graphite-border);
+      padding: 34px;
+      border-radius: var(--radius-sm);
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-gray-muted);
+      margin-bottom: 6px;
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--color-black);
+      border: 1px solid var(--color-graphite-border);
+      border-radius: var(--radius-sm);
+      color: #fff;
+      font-family: var(--font-athletic);
+      font-size: 0.95rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-input:focus, .form-select:focus {
+      border-color: var(--color-red);
+    }
+
+    /* FOOTER */
+    .footer {
+      background: #08090a;
+      border-top: 1px solid var(--color-graphite-border);
+      padding: 80px 0 36px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand p {
+      color: var(--color-gray-muted);
+      margin-top: 16px;
+      max-width: 320px;
+      font-size: 0.95rem;
+    }
+
+    .footer-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      color: var(--color-gray-muted);
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-red);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--color-graphite-border);
+      padding-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--color-gray-muted);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .hero-grid, .philosophy-grid, .assessment-card {
+        grid-template-columns: 1fr;
+      }
+      .hero-content {
+        text-align: center;
+      }
+      .hero-subtitle {
+        margin: 0 auto 38px;
+      }
+      .hero-cta-group, .hero-stats-row {
+        justify-content: center;
+      }
+      .programs-grid, .coaches-grid, .pricing-grid, .transformations-grid {
+        grid-template-columns: 1fr;
+      }
+      .pricing-card.popular {
+        transform: scale(1);
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .desktop-nav, .header-cta {
+        display: none;
+      }
+      .mobile-toggle {
+        display: block;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container nav-wrapper">
+      <a href="#" class="brand-logo">
+        <span>PEAK<span class="logo-slash">FIT</span></span>
+      </a>
+
+      <nav class="desktop-nav">
+        <ul class="nav-links">
+          <li><a href="#programs" class="nav-link">Programs</a></li>
+          <li><a href="#philosophy" class="nav-link">Philosophy</a></li>
+          <li><a href="#coaches" class="nav-link">Coaches</a></li>
+          <li><a href="#results" class="nav-link">Results</a></li>
+          <li><a href="#pricing" class="nav-link">Membership</a></li>
+          <li><a href="#faq" class="nav-link">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-cta">
+        <a href="#assessment" class="btn btn-red">Book Assessment ⚡</a>
+      </div>
+
+      <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle Menu">☰</button>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <ul>
+        <li><a href="#programs" onclick="toggleMenu()">Programs</a></li>
+        <li><a href="#philosophy" onclick="toggleMenu()">Philosophy</a></li>
+        <li><a href="#coaches" onclick="toggleMenu()">Coaches</a></li>
+        <li><a href="#results" onclick="toggleMenu()">Results</a></li>
+        <li><a href="#pricing" onclick="toggleMenu()">Membership</a></li>
+        <li><a href="#faq" onclick="toggleMenu()">FAQ</a></li>
+        <li><a href="#assessment" class="btn btn-red" style="width: 100%; margin-top: 10px;" onclick="toggleMenu()">Book Assessment</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-tagline">⚡ Intelligent Strength & Athletic Performance</div>
+        <h1 class="hero-title">Stronger <br><span class="red-text">Than Yesterday.</span></h1>
+        <p class="hero-subtitle">Build strength, transform your body and unlock your full athletic potential through intelligent training.</p>
+        
+        <div class="hero-cta-group">
+          <a href="#assessment" class="btn btn-red">Book Your First Session ➔</a>
+          <a href="#programs" class="btn btn-outline">Explore Programs</a>
+        </div>
+
+        <div class="hero-stats-row">
+          <div class="stat-card">
+            <h3>98<span>%</span></h3>
+            <p>Transformation Success</p>
+          </div>
+          <div class="stat-card">
+            <h3>14<span>K+</span></h3>
+            <p>Sessions Completed</p>
+          </div>
+          <div class="stat-card">
+            <h3>12</h3>
+            <p>Certified Elite Coaches</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-athlete-card">
+          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=85" alt="High performance athletic training at PeakFit gym">
+        </div>
+        <div class="live-metric-card">
+          <div class="metric-icon">🔥</div>
+          <div>
+            <div style="font-family: var(--font-display); font-size: 1.5rem; color: #fff; line-height: 1;">820 KCAL / HR</div>
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--color-gray-muted); text-transform: uppercase;">Peak Metabolic Output</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAINING PROGRAMS -->
+  <section class="section" id="programs">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Targeted Athletic Development</span>
+        <h2 class="section-title">Training Programs</h2>
+        <p class="section-desc">Engineered for real-world strength, sustainable body recomposition, and elite conditioning.</p>
+      </div>
+
+      <div class="programs-grid">
+        <!-- 1. Personal Training -->
+        <div class="program-card">
+          <div class="program-img">
+            <span class="program-tag">1-on-1</span>
+            <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=800&q=80" alt="Personal Training">
+          </div>
+          <div class="program-body">
+            <h3 class="program-title">Personal Training</h3>
+            <p class="program-desc">Customized periodization, biomechanical screening, and real-time form correction. Tailored 100% to your physiology and schedule.</p>
+            <div class="program-meta">
+              <span>Intensive Focus</span>
+              <a href="#assessment">Enroll ➔</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Strength & Conditioning -->
+        <div class="program-card">
+          <div class="program-img">
+            <span class="program-tag">Barbell</span>
+            <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80" alt="Strength and Conditioning">
+          </div>
+          <div class="program-body">
+            <h3 class="program-title">Strength & Conditioning</h3>
+            <p class="program-desc">Master the squat, bench, deadlift, and clean. Develop explosive power, joint longevity, and neurological force production.</p>
+            <div class="program-meta">
+              <span>Heavy Lifting</span>
+              <a href="#assessment">Enroll ➔</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Fat Loss & Body Composition -->
+        <div class="program-card">
+          <div class="program-img">
+            <span class="program-tag">MetCon</span>
+            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=800&q=80" alt="Fat Loss & Conditioning">
+          </div>
+          <div class="program-body">
+            <h3 class="program-title">Fat Loss & Composition</h3>
+            <p class="program-desc">High-density conditioning combined with personalized caloric budgeting to strip body fat while preserving hard-earned lean muscle.</p>
+            <div class="program-meta">
+              <span>High Intensity</span>
+              <a href="#assessment">Enroll ➔</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Muscle Development -->
+        <div class="program-card">
+          <div class="program-img">
+            <span class="program-tag">Hypertrophy</span>
+            <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=800&q=80" alt="Muscle Development">
+          </div>
+          <div class="program-body">
+            <h3 class="program-title">Muscle Development</h3>
+            <p class="program-desc">Targeted hypertrophy protocols maximizing mechanical tension and metabolic stress to sculpt muscle symmetry and dense muscle mass.</p>
+            <div class="program-meta">
+              <span>Hypertrophy</span>
+              <a href="#assessment">Enroll ➔</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR TRAINING PHILOSOPHY -->
+  <section class="section section-graphite" id="philosophy">
+    <div class="container philosophy-grid">
+      <div class="philosophy-text">
+        <span class="section-eyebrow">The PeakFit Code</span>
+        <h3>Our Training Philosophy</h3>
+        <p>We reject fitness fads, gimmicks, and random sweat sessions. Our system is built on exercise science, data tracking, progressive overload, and uncompromising consistency.</p>
+        
+        <div class="pillars-list">
+          <div class="pillar-item">
+            <div class="pillar-num">01</div>
+            <div>
+              <div class="pillar-title">Biomechanical Precision</div>
+              <div class="pillar-desc">We optimize joint angles, levers, and movement paths so you lift heavier without pain or injury risk.</div>
+            </div>
+          </div>
+
+          <div class="pillar-item">
+            <div class="pillar-num">02</div>
+            <div>
+              <div class="pillar-title">Measurable Progressive Overload</div>
+              <div class="pillar-desc">Every set, rep, and load is logged in our athlete app to guarantee continuous weekly progress.</div>
+            </div>
+          </div>
+
+          <div class="pillar-item">
+            <div class="pillar-num">03</div>
+            <div>
+              <div class="pillar-title">Nutrition & Recovery Protocol</div>
+              <div class="pillar-desc">Workouts stimulate adaptation; recovery builds it. We dial in your protein targets, sleep hygiene, and hydration.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="philosophy-visual">
+        <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=800&q=80" alt="Coach instructing barbell squat form">
+      </div>
+    </div>
+  </section>
+
+  <!-- MEET YOUR COACHES -->
+  <section class="section" id="coaches">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">World-Class Mentorship</span>
+        <h2 class="section-title">Meet Your Coaches</h2>
+        <p class="section-desc">Our coaches hold master's degrees in kinesiology and elite CSCS credentials. No weekend certifications.</p>
+      </div>
+
+      <div class="coaches-grid">
+        <div class="coach-card">
+          <div class="coach-img">
+            <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?auto=format&fit=crop&w=800&q=80" alt="Head Coach Marcus Cole">
+          </div>
+          <div class="coach-body">
+            <h4 class="coach-name">Marcus Cole</h4>
+            <div class="coach-role">Head of Strength & Biomechanics</div>
+            <p class="coach-bio">Former collegiate strength coach with 12+ years experience preparing pro athletes and competitive powerlifters.</p>
+            <span class="coach-badge">CSCS · USAW Level 2</span>
+          </div>
+        </div>
+
+        <div class="coach-card">
+          <div class="coach-img">
+            <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&w=800&q=80" alt="Coach Elena Vance">
+          </div>
+          <div class="coach-body">
+            <h4 class="coach-name">Elena Vance</h4>
+            <div class="coach-role">Physique & Metabolic Conditioning</div>
+            <p class="coach-bio">Specializing in rapid body recomposition, hormonal optimization, and high-performance female athletic training.</p>
+            <span class="coach-badge">MS Kinesiology · CPT</span>
+          </div>
+        </div>
+
+        <div class="coach-card">
+          <div class="coach-img">
+            <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=800&q=80" alt="Coach Tyler Hayes">
+          </div>
+          <div class="coach-body">
+            <h4 class="coach-name">Tyler Hayes</h4>
+            <div class="coach-role">Olympic Lifting & Mobility</div>
+            <p class="coach-bio">National-level weightlifter dedicated to explosive speed, hip mobility, and bulletproofing shoulders and knees.</p>
+            <span class="coach-badge">USA Weightlifting · FMS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSFORMATION STORIES -->
+  <section class="section section-graphite" id="results">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Verified Outcomes</span>
+        <h2 class="section-title">Transformation Stories</h2>
+        <p class="section-desc">Real members. Real biometric scans. Zero shortcuts.</p>
+      </div>
+
+      <div class="transformations-grid">
+        <div class="trans-card">
+          <div class="trans-metrics-banner">
+            <div class="trans-metric">
+              <h4>-28 LBS</h4>
+              <span>Fat Lost</span>
+            </div>
+            <div class="trans-metric">
+              <h4>+8 LBS</h4>
+              <span>Muscle Gained</span>
+            </div>
+            <div class="trans-metric">
+              <h4>16 WKS</h4>
+              <span>Timeline</span>
+            </div>
+          </div>
+          <p class="trans-quote">"After years of spinning my wheels with random gym classes, PeakFit gave me structured periodization and accountability. I'm in the best shape of my life at 42."</p>
+          <div class="trans-member">David K. — Tech Executive</div>
+          <div class="trans-program">1-on-1 Performance Coaching</div>
+        </div>
+
+        <div class="trans-card">
+          <div class="trans-metrics-banner">
+            <div class="trans-metric">
+              <h4>+135 LBS</h4>
+              <span>Deadlift PR</span>
+            </div>
+            <div class="trans-metric">
+              <h4>-12%</h4>
+              <span>Body Fat</span>
+            </div>
+            <div class="trans-metric">
+              <h4>24 WKS</h4>
+              <span>Timeline</span>
+            </div>
+          </div>
+          <p class="trans-quote">"The coaches fixed my chronic lower back impingement in week two. Now I deadlift over 300 lbs pain-free and have boundless energy for my kids."</p>
+          <div class="trans-member">Jessica M. — Attorney</div>
+          <div class="trans-program">Strength & Conditioning</div>
+        </div>
+
+        <div class="trans-card">
+          <div class="trans-metrics-banner">
+            <div class="trans-metric">
+              <h4>-34 LBS</h4>
+              <span>Total Weight</span>
+            </div>
+            <div class="trans-metric">
+              <h4>6 IN</h4>
+              <span>Waist Drop</span>
+            </div>
+            <div class="trans-metric">
+              <h4>20 WKS</h4>
+              <span>Timeline</span>
+            </div>
+          </div>
+          <p class="trans-quote">"The nutrition strategy alone was a revelation. No starvation, just high protein and progressive workouts that felt rewarding every single day."</p>
+          <div class="trans-member">Brian T. — Entrepreneur</div>
+          <div class="trans-program">Metabolic Fat Loss Protocol</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEMBERSHIP PLANS -->
+  <section class="section" id="pricing">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Investment In Yourself</span>
+        <h2 class="section-title">Membership Plans</h2>
+        <p class="section-desc">Transparent pricing with zero hidden cancellation fees. Choose your training tier.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Starter -->
+        <div class="pricing-card">
+          <div class="plan-name">Starter</div>
+          <p class="plan-desc">For motivated self-starters needing gym facility access and guided programming.</p>
+          <div class="plan-price">$89 <span>/month</span></div>
+          <ul class="plan-features">
+            <li>Unlimited facility access</li>
+            <li>PeakFit training smartphone app</li>
+            <li>Monthly InBody composition scan</li>
+            <li>Access to open turf & lifting platforms</li>
+            <li>Locker room & recovery sauna</li>
+          </ul>
+          <a href="#assessment" class="btn btn-outline" style="width: 100%;">Select Starter</a>
+        </div>
+
+        <!-- Performance (Popular) -->
+        <div class="pricing-card popular">
+          <div class="popular-tag">Most Popular</div>
+          <div class="plan-name">Performance</div>
+          <p class="plan-desc">Accelerated results with small group coaching and monthly nutrition adjustments.</p>
+          <div class="plan-price">$169 <span>/month</span></div>
+          <ul class="plan-features">
+            <li>Everything in Starter plan</li>
+            <li>Unlimited semi-private coaching sessions</li>
+            <li>Monthly personalized macro coaching</li>
+            <li>Bi-weekly progress check-ins</li>
+            <li>Heart rate performance monitoring</li>
+            <li>Priority scheduling for equipment</li>
+          </ul>
+          <a href="#assessment" class="btn btn-red" style="width: 100%;">Select Performance ⚡</a>
+        </div>
+
+        <!-- Elite Coaching -->
+        <div class="pricing-card">
+          <div class="plan-name">Elite Coaching</div>
+          <p class="plan-desc">The ultimate concierge training experience with dedicated 1-on-1 coach access.</p>
+          <div class="plan-price">$289 <span>/month</span></div>
+          <ul class="plan-features">
+            <li>3x Weekly private 1-on-1 coaching sessions</li>
+            <li>Customized periodization program</li>
+            <li>24/7 Direct WhatsApp coach access</li>
+            <li>Complete weekly meal planning & prep guide</li>
+            <li>Quarterly sports bloodwork review</li>
+            <li>Guest passes & recovery suite unlimited</li>
+          </ul>
+          <a href="#assessment" class="btn btn-outline" style="width: 100%;">Select Elite</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="section section-graphite" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Got Questions?</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-desc">Everything you need to know before stepping foot inside PeakFit.</p>
+      </div>
+
+      <div class="faq-container">
+        <div class="faq-item active">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            What is included in the initial assessment?
+            <span>+</span>
+          </button>
+          <div class="faq-answer">
+            Our 60-minute assessment includes a medical history intake, a full InBody 570 body composition analysis (lean mass, fat percentage, visceral fat), a 7-point functional movement screening, and a benchmark strength test. You will leave with a precise roadmap.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            I am a beginner. Is PeakFit too intense for me?
+            <span>+</span>
+          </button>
+          <div class="faq-answer">
+            Not at all. Over 40% of our members started with zero barbell experience. Every movement is scaled to your current fitness level. We prioritize flawless technique and progressive adaptation before adding heavy weight.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Do I need to sign a long-term contract?
+            <span>+</span>
+          </button>
+          <div class="faq-answer">
+            No. All PeakFit memberships run on a month-to-month basis. We earn your loyalty through visible results, not restrictive contracts. You can pause or cancel anytime with 14 days notice.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            What equipment does the facility feature?
+            <span>+</span>
+          </button>
+          <div class="faq-answer">
+            We feature Eleiko competition powerlifting bars and calibrated bumper plates, Rogue monster racks, dual cable pulleys, SkiErgs, Concept2 rowers, assault runners, dumbbell sets from 5 lbs up to 150 lbs, and a 40-yard sled turf.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOK YOUR ASSESSMENT -->
+  <section class="section" id="assessment">
+    <div class="container">
+      <div class="assessment-card">
+        <div class="assessment-info">
+          <span class="section-eyebrow">Take Action Now</span>
+          <h3>Book Your Assessment</h3>
+          <p>Stop guessing your training and nutrition. Meet with a Senior Coach for your complimentary 60-minute movement screening, InBody scan, and custom roadmap.</p>
+          
+          <ul class="assessment-bullets">
+            <li>InBody 570 full body composition scan</li>
+            <li>Biomechanical posture & movement screen</li>
+            <li>Custom 90-day training progression roadmap</li>
+            <li>Zero obligation or sales pressure</li>
+          </ul>
+        </div>
+
+        <div class="assessment-form">
+          <form id="assessmentForm" onsubmit="handleAssessmentSubmit(event)">
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-input" placeholder="e.g. Jason Miller" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-input" placeholder="jason@email.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone Number</label>
+              <input type="tel" class="form-input" placeholder="(555) 019-4822" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Primary Training Goal</label>
+              <select class="form-select">
+                <option>Fat Loss & Body Recomposition</option>
+                <option>Maximal Strength & Powerlifting</option>
+                <option>Lean Muscle Hypertrophy</option>
+                <option>Athletic Conditioning & Mobility</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-red" style="width: 100%; margin-top: 10px;">Claim Free Assessment ➔</button>
+          </form>
+          <div id="assessmentSuccess" style="display: none; margin-top: 15px; color: #4ade80; text-align: center; font-weight: 700; font-size: 0.9rem;">
+            ✓ Assessment booked! Coach Marcus will contact you within 4 hours to confirm your time slot.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="brand-logo">
+          <span>PEAK<span class="logo-slash">FIT</span></span>
+        </a>
+        <p>Intelligent training, biomechanical precision, and results-driven athletic conditioning for dedicated individuals.</p>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Programs</h4>
+        <ul class="footer-links">
+          <li><a href="#programs">Personal Training</a></li>
+          <li><a href="#programs">Strength & Conditioning</a></li>
+          <li><a href="#programs">Fat Loss & Composition</a></li>
+          <li><a href="#programs">Muscle Development</a></li>
+          <li><a href="#pricing">Membership Pricing</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Company</h4>
+        <ul class="footer-links">
+          <li><a href="#coaches">Our Coaches</a></li>
+          <li><a href="#philosophy">Training Philosophy</a></li>
+          <li><a href="#results">Transformation Stories</a></li>
+          <li><a href="#faq">Frequently Asked Questions</a></li>
+          <li><a href="#assessment">Book Assessment</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Gym Facility</h4>
+        <p style="color: var(--color-gray-muted); font-size: 0.9rem; line-height: 1.8;">
+          800 Ironworks Boulevard, Suite 100<br>
+          Metropolitan Athletics District<br>
+          <strong style="color: #fff;">Hours:</strong> Mon–Fri: 5am–10pm | Sat–Sun: 7am–8pm<br>
+          <a href="tel:5550198844" style="color: var(--color-red); font-weight: 700;">(555) 019-8844</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div>© 2026 PeakFit Athletic Systems. All rights reserved. Stronger Than Yesterday.</div>
+      <div style="display: flex; gap: 24px;">
+        <a href="#programs">Programs</a>
+        <a href="#coaches">Coaches</a>
+        <a href="#results">Results</a>
+        <a href="#pricing">Membership</a>
+        <a href="#assessment">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const drawer = document.getElementById('mobileDrawer');
+      drawer.classList.toggle('open');
+    }
+    document.getElementById('mobileMenuBtn').addEventListener('click', toggleMenu);
+
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      item.classList.toggle('active');
+    }
+
+    function handleAssessmentSubmit(e) {
+      e.preventDefault();
+      document.getElementById('assessmentSuccess').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('assessmentForm').reset();
+      }, 1000);
+    }
+  </script>
+</body>
+</html>

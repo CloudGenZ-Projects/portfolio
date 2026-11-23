@@ -3,274 +3,1609 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stacked & Smoked | Gourmet Street Eats</title>
-  <meta name="description" content="Crispy-edged smashburgers. Street-style tacos. Sauces made to steal the show.">
+  <title>Street Bites | Gourmet Street Eats & Smashburgers</title>
+  <meta name="description" content="Gourmet Street Eats. Unforgettable Bites. Smashburgers, handcrafted tacos and bold street-food flavors made fresh for every craving.">
   
-  <!-- Google Fonts -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       STREET BITES - DESIGN SYSTEM & TOKENS
+       Identity: Urban, energetic, bold, appetite-driven.
+       ========================================================================== */
+    :root {
+      --bg-main: #111215;
+      --bg-surface: #1a1b20;
+      --bg-surface-elevated: #24262d;
+      --bg-cream: #fbf6ee;
+      --color-burnt-orange: #ff5722;
+      --color-orange-glow: #ff7844;
+      --color-burnt-dark: #d84315;
+      --color-mustard: #ffb300;
+      --color-cream: #fef8f0;
+      --text-main: #ffffff;
+      --text-muted: #a3a8b5;
+      --text-dark: #121316;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-orange: rgba(255, 87, 34, 0.35);
+      
+      --font-headline: 'Bebas Neue', sans-serif;
+      --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      
+      --container-max: 1240px;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.35);
+      --shadow-orange: 0 10px 30px rgba(255, 87, 34, 0.28);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: var(--font-body);
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navigation */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(17, 18, 21, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 16px 0;
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-headline);
+      font-size: 2rem;
+      letter-spacing: 1px;
+      color: #fff;
+    }
+
+    .brand-logo .flame-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      background: var(--color-burnt-orange);
+      border-radius: var(--radius-sm);
+      transform: rotate(-4deg);
+      box-shadow: 0 4px 15px rgba(255, 87, 34, 0.4);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-link:hover {
+      color: var(--color-burnt-orange);
+    }
+
+    .nav-cta-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .live-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #4ade80;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #22c55e;
+      animation: pulse 1.6s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 26px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-radius: var(--radius-sm);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-primary {
+      background: var(--color-burnt-orange);
+      color: #fff;
+      box-shadow: var(--shadow-orange);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-orange-glow);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(255, 87, 34, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .mobile-toggle {
+      display: none;
+      font-size: 1.5rem;
+      color: #fff;
+    }
+
+    /* Mobile Drawer */
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      width: 100%;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 24px;
+      z-index: 99;
+    }
+
+    .mobile-drawer.open {
+      display: block;
+    }
+
+    .mobile-drawer ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .mobile-drawer a {
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      padding: 80px 0 100px;
+      overflow: hidden;
+      background: radial-gradient(circle at 75% 30%, rgba(255, 87, 34, 0.15), transparent 50%),
+                  linear-gradient(180deg, #111215 0%, #16171d 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 87, 34, 0.12);
+      border: 1px solid var(--border-orange);
+      color: var(--color-burnt-orange);
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-family: var(--font-headline);
+      font-size: clamp(3.2rem, 6.5vw, 5.8rem);
+      line-height: 0.95;
+      letter-spacing: 0.5px;
+      color: #fff;
+      margin-bottom: 22px;
+      text-transform: uppercase;
+    }
+
+    .hero-title .highlight {
+      color: var(--color-burnt-orange);
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      max-width: 540px;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .hero-tag {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--color-cream);
+      background: var(--bg-surface);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-subtle);
+    }
+
+    /* Hero Visual */
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-image-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      transform: perspective(1000px) rotateY(-4deg) rotateX(2deg);
+      transition: transform 0.4s ease;
+    }
+
+    .hero-image-card:hover {
+      transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+    }
+
+    .hero-image-card img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+    }
+
+    .floating-card {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      background: var(--bg-surface-elevated);
+      padding: 16px 22px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--border-orange);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .floating-card .rating-stars {
+      color: var(--color-mustard);
+      font-size: 1.1rem;
+    }
+
+    .floating-badge {
+      position: absolute;
+      top: 20px;
+      right: -15px;
+      background: var(--color-burnt-orange);
+      color: #fff;
+      font-family: var(--font-headline);
+      font-size: 1.3rem;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      transform: rotate(8deg);
+      box-shadow: var(--shadow-orange);
+    }
+
+    /* SECTION BASICS */
+    .section {
+      padding: 100px 0;
+    }
+
+    .section-darker {
+      background: #0d0e11;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 60px;
+    }
+
+    .section-badge {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--color-burnt-orange);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-headline);
+      font-size: clamp(2.4rem, 4vw, 3.8rem);
+      line-height: 1;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    /* SIGNATURE MENU BENTO */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+
+    .menu-card {
+      background: var(--bg-surface);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-orange);
+      box-shadow: 0 15px 35px rgba(255, 87, 34, 0.15);
+    }
+
+    .menu-card-img {
+      position: relative;
+      height: 230px;
+      overflow: hidden;
+    }
+
+    .menu-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .menu-card:hover .menu-card-img img {
+      transform: scale(1.06);
+    }
+
+    .menu-item-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: var(--color-burnt-orange);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+    }
+
+    .menu-card-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .menu-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .menu-card-title {
+      font-family: var(--font-headline);
+      font-size: 1.6rem;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+
+    .menu-card-price {
+      font-family: var(--font-headline);
+      font-size: 1.5rem;
+      color: var(--color-mustard);
+    }
+
+    .menu-card-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .menu-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 16px;
+    }
+
+    .flavor-tag {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-burnt-orange);
+    }
+
+    .order-item-btn {
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .order-item-btn:hover {
+      color: var(--color-burnt-orange);
+    }
+
+    /* WHY STREET BITES */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .feature-card {
+      background: var(--bg-surface);
+      border-radius: var(--radius-md);
+      padding: 36px 30px;
+      border: 1px solid var(--border-subtle);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s ease;
+    }
+
+    .feature-card:hover {
+      border-color: var(--border-orange);
+    }
+
+    .feature-number {
+      font-family: var(--font-headline);
+      font-size: 3.5rem;
+      color: rgba(255, 87, 34, 0.2);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .feature-title {
+      font-family: var(--font-headline);
+      font-size: 1.8rem;
+      color: #fff;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .feature-desc {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    /* WHERE WE'RE ROLLING (SCHEDULE & LOCATIONS) */
+    .schedule-wrapper {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .weekly-schedule-box {
+      background: var(--bg-surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      overflow: hidden;
+    }
+
+    .schedule-header {
+      padding: 24px;
+      background: var(--bg-surface-elevated);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .schedule-header h3 {
+      font-family: var(--font-headline);
+      font-size: 1.5rem;
+      color: #fff;
+    }
+
+    .schedule-list {
+      list-style: none;
+    }
+
+    .schedule-item {
+      display: grid;
+      grid-template-columns: 100px 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background 0.2s ease;
+    }
+
+    .schedule-item:last-child {
+      border-bottom: none;
+    }
+
+    .schedule-item:hover {
+      background: rgba(255, 87, 34, 0.05);
+    }
+
+    .schedule-item.today {
+      background: rgba(255, 87, 34, 0.12);
+      border-left: 4px solid var(--color-burnt-orange);
+    }
+
+    .schedule-day {
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      color: #fff;
+    }
+
+    .schedule-loc {
+      font-weight: 600;
+      color: var(--color-cream);
+      font-size: 0.95rem;
+    }
+
+    .schedule-loc span {
+      display: block;
+      font-weight: 400;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    .schedule-time {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--color-mustard);
+      background: var(--bg-surface-elevated);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* Festival Cards */
+    .festivals-box {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .festival-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      position: relative;
+    }
+
+    .festival-badge {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--color-burnt-orange);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .festival-name {
+      font-family: var(--font-headline);
+      font-size: 1.4rem;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .festival-info {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+    }
+
+    /* FOOD GALLERY */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .gallery-item {
+      position: relative;
+      height: 260px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 60%);
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-caption {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #fff;
+    }
+
+    /* CUSTOMER REVIEWS */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .review-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .review-stars {
+      color: var(--color-mustard);
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+    }
+
+    .review-text {
+      color: var(--text-main);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .reviewer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .reviewer-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--color-burnt-orange);
+    }
+
+    .reviewer-name {
+      font-weight: 700;
+      color: #fff;
+      font-size: 0.95rem;
+    }
+
+    .reviewer-tag {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* PRIVATE EVENTS & CATERING */
+    .catering-cta-card {
+      background: radial-gradient(circle at 100% 50%, rgba(255, 87, 34, 0.25), transparent 70%),
+                  var(--bg-surface-elevated);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-orange);
+      padding: 60px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 50px;
+      align-items: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .catering-content h3 {
+      font-family: var(--font-headline);
+      font-size: clamp(2.4rem, 4vw, 3.5rem);
+      line-height: 1;
+      color: #fff;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+    }
+
+    .catering-content p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .catering-perks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 30px;
+    }
+
+    .perk-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--color-cream);
+    }
+
+    .perk-item svg {
+      color: var(--color-burnt-orange);
+      flex-shrink: 0;
+    }
+
+    .catering-form-box {
+      background: var(--bg-surface);
+      padding: 32px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--bg-main);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--color-burnt-orange);
+    }
+
+    /* FOOTER */
+    .footer {
+      background: #090a0c;
+      border-top: 1px solid var(--border-subtle);
+      padding: 80px 0 40px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand p {
+      color: var(--text-muted);
+      margin-top: 16px;
+      max-width: 320px;
+      font-size: 0.95rem;
+    }
+
+    .footer-title {
+      font-family: var(--font-headline);
+      font-size: 1.4rem;
+      color: #fff;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-burnt-orange);
+    }
+
+    .footer-social-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .social-icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      border: 1px solid var(--border-subtle);
+      transition: all 0.2s ease;
+    }
+
+    .social-icon-btn:hover {
+      background: var(--color-burnt-orange);
+      border-color: var(--color-burnt-orange);
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-subtitle {
+        margin: 0 auto 36px;
+      }
+      .hero-cta-row, .hero-tags {
+        justify-content: center;
+      }
+      .hero-image-card img {
+        height: 420px;
+      }
+      .catering-cta-card {
+        grid-template-columns: 1fr;
+        padding: 40px 24px;
+      }
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      .schedule-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .reviews-grid {
+        grid-template-columns: 1fr;
+      }
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .desktop-nav, .nav-cta-group {
+        display: none;
+      }
+      .mobile-toggle {
+        display: block;
+      }
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Navigation -->
-  <header class="site-header" id="header">
-    <div class="header-container section-shell">
-      <a href="#" class="brand-wordmark">STACKED & SMOKED</a>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container nav-wrapper">
+      <a href="#" class="brand-logo">
+        <span class="flame-icon">🔥</span>
+        <span>STREET BITES</span>
+      </a>
+
       <nav class="desktop-nav">
-        <a href="#menu">Menu</a>
-        <a href="#story">Our Story</a>
-        <a href="#location">Find Us</a>
-        <a href="#catering">Catering</a>
+        <ul class="nav-links">
+          <li><a href="#menu" class="nav-link">Menu</a></li>
+          <li><a href="#why" class="nav-link">Why Us</a></li>
+          <li><a href="#locations" class="nav-link">Find Our Truck</a></li>
+          <li><a href="#gallery" class="nav-link">Gallery</a></li>
+          <li><a href="#reviews" class="nav-link">Reviews</a></li>
+          <li><a href="#catering" class="nav-link">Catering</a></li>
+        </ul>
       </nav>
-      <div class="header-actions">
-        <div class="location-status"><span class="pulse"></span> Open Now</div>
-        <a href="#menu" class="button-primary">Get the menu</a>
+
+      <div class="nav-cta-group">
+        <div class="live-status">
+          <span class="pulse-dot"></span>
+          <span>Grilling Live Now</span>
+        </div>
+        <a href="#locations" class="btn btn-primary">Find Our Truck</a>
       </div>
+
+      <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle Navigation">☰</button>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <ul>
+        <li><a href="#menu" onclick="toggleMenu()">Menu</a></li>
+        <li><a href="#why" onclick="toggleMenu()">Why Us</a></li>
+        <li><a href="#locations" onclick="toggleMenu()">Find Our Truck</a></li>
+        <li><a href="#gallery" onclick="toggleMenu()">Gallery</a></li>
+        <li><a href="#reviews" onclick="toggleMenu()">Reviews</a></li>
+        <li><a href="#catering" onclick="toggleMenu()">Catering</a></li>
+        <li><a href="#locations" class="btn btn-primary" style="margin-top: 10px; width: 100%;" onclick="toggleMenu()">Find Our Truck</a></li>
+      </ul>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero-section">
-    <div class="section-shell hero-grid">
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="container hero-grid">
       <div class="hero-content">
-        <div class="eyebrow reveal delay-1">GOURMET STREET FOOD · MADE FRESH ON THE GRILL</div>
-        <h1 class="hero-title reveal delay-2">BIG FLAVOR.<br>ZERO BORING BITES.</h1>
-        <p class="hero-copy reveal delay-3">
-          Crispy-edged smashburgers. Street-style tacos. Sauces made to steal the show. 
-          We bring serious flavor, fresh ingredients, and a little beautiful chaos to every street corner.
-        </p>
-        <div class="hero-actions reveal delay-4">
-          <a href="#menu" class="button-primary">Explore the menu ↗</a>
-          <a href="#location" class="button-secondary">Find our next stop</a>
-        </div>
-        <div class="location-strip reveal delay-5">
-          <span class="mono-text">📍 Find us around town:</span>
-          <span id="rotating-text">Fresh off the grill</span>
-        </div>
-      </div>
-      <div class="hero-image-wrapper reveal delay-3 tilt-card">
-        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=1200" alt="The Double Stack Smashburger" class="hero-burger">
-        <div class="floating-label label-1">Crispy Edges</div>
-        <div class="floating-label label-2">House Sauce</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Story Section -->
-  <section class="story-section" id="story">
-    <div class="section-shell">
-      <div class="story-grid">
-        <div class="story-text">
-          <div class="eyebrow reveal">THE ORIGIN</div>
-          <h2 class="section-heading reveal">IT STARTED WITH A HOT GRIDDLE AND A BIG IDEA.</h2>
-          <p class="reveal">We didn't set out to make another food truck. We wanted to make the kind of food people talk about on the drive home.</p>
-          <p class="reveal">It began with late-night burger experiments, a griddle running hot, and the search for that perfect combination: crispy beef edges, melted cheese, a soft toasted bun, and sauce that brings everything together.</p>
-        </div>
-        <div class="story-image reveal">
-          <img src="https://images.unsplash.com/photo-1588675646184-f5b0b0b0b2de?auto=format&fit=crop&q=80&w=800" alt="Chef working on a hot griddle">
-        </div>
-      </div>
-      
-      <div class="principles-bento">
-        <div class="principle-card reveal delay-1">
-          <div class="mono-text accent">01 / THE GRIDDLE</div>
-          <h3>High heat. Hard sear.</h3>
-          <p>Golden, crispy edges locked in every time.</p>
-        </div>
-        <div class="principle-card reveal delay-2">
-          <div class="mono-text accent">02 / THE TORTILLA</div>
-          <h3>Warm & Punchy</h3>
-          <p>Fresh tortillas, bold fillings, bright citrus finishes.</p>
-        </div>
-        <div class="principle-card reveal delay-3">
-          <div class="mono-text accent">03 / THE SAUCE</div>
-          <h3>House-made Magic</h3>
-          <p>Flavor that ties every single ingredient together.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Menu Section -->
-  <section class="menu-section" id="menu">
-    <div class="section-shell">
-      <div class="menu-header reveal">
-        <h2 class="section-heading">MEET YOUR NEXT FAVORITE BITE.</h2>
-        <p>Big burgers. Bold tacos. Sides that never play second fiddle.</p>
-      </div>
-      
-      <div class="menu-bento">
-        <!-- Signature Dish (Spans larger area) -->
-        <div class="food-card signature reveal delay-1">
-          <div class="food-card__image">
-            <img src="https://images.unsplash.com/photo-1594212202878-8319f357f897?auto=format&fit=crop&q=80&w=1000" alt="The Double Stack">
-          </div>
-          <div class="food-card__content">
-            <div class="card-meta"><span class="badge">Bestseller</span> <span class="mono-text">HOUSE FAVORITE · 01</span></div>
-            <h3>The Double Stack</h3>
-            <p>Two smashed beef patties, American cheese, pickles, grilled onions, house sauce, toasted bun.</p>
-            <div class="price mono-text">$12</div>
-          </div>
+        <div class="hero-badge">⚡ Pure Street Flavor · Fresh Off The Griddle</div>
+        <h1 class="hero-title">Gourmet Street Eats. <br><span class="highlight">Unforgettable Bites.</span></h1>
+        <p class="hero-subtitle">Smashburgers, handcrafted tacos and bold street-food flavors made fresh for every craving.</p>
+        
+        <div class="hero-cta-row">
+          <a href="#menu" class="btn btn-primary">Explore Our Menu 🍔</a>
+          <a href="#locations" class="btn btn-secondary">Find Our Truck 📍</a>
         </div>
 
-        <!-- Standard Dishes -->
-        <div class="food-card reveal delay-2">
-          <div class="food-card__image">
-            <img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&q=80&w=800" alt="Birria Street Tacos">
-          </div>
-          <div class="food-card__content">
-            <h3>Birria Street Tacos</h3>
-            <p>Slow-cooked beef, onion, cilantro, salsa, lime.</p>
-            <div class="price mono-text">$14 <span class="sub-price">/ 3 Tacos</span></div>
-          </div>
+        <div class="hero-tags">
+          <span class="hero-tag">🔥 100% Angus Beef</span>
+          <span class="hero-tag">🌮 Handcrafted Tortillas</span>
+          <span class="hero-tag">⭐ 4.9/5 Star Rating</span>
         </div>
+      </div>
 
-        <div class="food-card reveal delay-3">
-          <div class="food-card__image">
-            <img src="https://images.unsplash.com/photo-1576107232684-1279f390859f?auto=format&fit=crop&q=80&w=800" alt="Loaded Street Fries">
-          </div>
-          <div class="food-card__content">
-            <h3>Loaded Street Fries</h3>
-            <p>Golden fries, house cheese sauce, jalapeños, smoky seasoning.</p>
-            <div class="price mono-text">$8</div>
-          </div>
+      <div class="hero-visual">
+        <div class="hero-image-card">
+          <!-- Gourmet Double Smash Burger with Crispy Bacon and Melted Cheese on a Spatula -->
+          <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1200&q=85" alt="Gourmet Double Smash Burger with Crispy Bacon and Melted Cheese on a Spatula">
         </div>
         
-        <div class="food-card reveal delay-4">
-          <div class="food-card__image">
-            <img src="https://images.unsplash.com/photo-1626074353765-517a681e40be?auto=format&fit=crop&q=80&w=800" alt="Hot Bird Sandwich">
-          </div>
-          <div class="food-card__content">
-            <div class="card-meta"><span class="badge red">Spicy</span></div>
-            <h3>Hot Bird Sandwich</h3>
-            <p>Crispy chicken, spicy glaze, crunchy pickles, cool slaw.</p>
-            <div class="price mono-text">$11</div>
+        <div class="floating-badge">HARD SEAR · CRISPY EDGES</div>
+        
+        <div class="floating-card">
+          <div style="font-size: 2rem;">🏆</div>
+          <div>
+            <div class="rating-stars">★★★★★</div>
+            <div style="font-weight: 800; font-size: 0.95rem; color: #fff;">City's #1 Rated Smashburger</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">Over 14,000+ happy street foodies</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Location & Schedule -->
-  <section class="location-section" id="location">
-    <div class="section-shell location-grid">
-      <div class="location-info reveal">
-        <h2 class="section-heading">TRUCK STATUS. FIND US OUT THERE.</h2>
-        <div class="live-status-card">
-          <div class="status-header">
-            <span class="pulse-icon"></span>
-            <strong>SERVING NOW</strong>
-          </div>
-          <h3 class="editorial-title">Downtown Market Square</h3>
-          <p class="mono-text">TODAY · 5:00 PM – 10:00 PM</p>
-          <a href="#" class="button-primary">Get Directions ↗</a>
-        </div>
+  <!-- OUR SIGNATURE MENU -->
+  <section class="section" id="menu">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Crafted On The Fire</span>
+        <h2 class="section-title">Our Signature Menu</h2>
+        <p class="section-desc">Every item is smashed, seared, and assembled to order with our proprietary scratch seasonings and house sauces.</p>
       </div>
-      <div class="schedule-table reveal delay-2">
-        <h3>Weekly Schedule</h3>
-        <div class="schedule-row">
-          <div class="day mono-text">TUE</div>
-          <div class="place">Downtown Market</div>
-          <div class="time mono-text">5–9 PM</div>
+
+      <div class="menu-grid">
+        <!-- Item 1: Classic Smashburger -->
+        <div class="menu-card">
+          <div class="menu-card-img">
+            <span class="menu-item-badge">Bestseller</span>
+            <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=800&q=80" alt="Classic Smashburger">
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-header">
+              <h3 class="menu-card-title">Classic Smashburger</h3>
+              <span class="menu-card-price">$11.50</span>
+            </div>
+            <p class="menu-card-desc">Single 100% Angus beef patty smashed ultra-thin with lacey crispy edges, American cheese, dill pickle chips, shaved sweet onions, and Street Sauce on toasted potato bun.</p>
+            <div class="menu-card-footer">
+              <span class="flavor-tag">🔥 Signature Lacey Edges</span>
+              <a href="#locations" class="order-item-btn">Order Live →</a>
+            </div>
+          </div>
         </div>
-        <div class="schedule-row">
-          <div class="day mono-text">WED</div>
-          <div class="place">Brewery District</div>
-          <div class="time mono-text">5–10 PM</div>
+
+        <!-- Item 2: Double Cheese Smash -->
+        <div class="menu-card">
+          <div class="menu-card-img">
+            <span class="menu-item-badge" style="background: #e11d48;">Crowd Favorite</span>
+            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80" alt="Double Cheese Smash">
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-header">
+              <h3 class="menu-card-title">Double Cheese Smash</h3>
+              <span class="menu-card-price">$14.00</span>
+            </div>
+            <p class="menu-card-desc">Twin seared Angus patties, double melted aged cheddar, applewood smoked crispy bacon strips, caramelized onions, and smoky chipotle aioli on a butter-griddled brioche.</p>
+            <div class="menu-card-footer">
+              <span class="flavor-tag">🥓 Double Beef & Bacon</span>
+              <a href="#locations" class="order-item-btn">Order Live →</a>
+            </div>
+          </div>
         </div>
-        <div class="schedule-row">
-          <div class="day mono-text">THU</div>
-          <div class="place">University Area</div>
-          <div class="time mono-text">5–10 PM</div>
+
+        <!-- Item 3: Street-Style Chicken Tacos -->
+        <div class="menu-card">
+          <div class="menu-card-img">
+            <span class="menu-item-badge" style="background: #10b981;">Fresh & Zesty</span>
+            <img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&w=800&q=80" alt="Street-Style Chicken Tacos">
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-header">
+              <h3 class="menu-card-title">Street-Style Chicken Tacos</h3>
+              <span class="menu-card-price">$13.00</span>
+            </div>
+            <p class="menu-card-desc">Trio of charred corn tortillas stacked with citrus-marinated flame-grilled chicken, fresh chopped cilantro, diced white onion, cotija cheese, and house avocado salsa verde.</p>
+            <div class="menu-card-footer">
+              <span class="flavor-tag">🌮 Trio of Handcrafted Tacos</span>
+              <a href="#locations" class="order-item-btn">Order Live →</a>
+            </div>
+          </div>
         </div>
-        <div class="schedule-row">
-          <div class="day mono-text">FRI</div>
-          <div class="place">Night Market</div>
-          <div class="time mono-text">5–11 PM</div>
+
+        <!-- Item 4: Loaded Street Fries -->
+        <div class="menu-card">
+          <div class="menu-card-img">
+            <span class="menu-item-badge" style="background: #f59e0b; color: #111;">Must-Try Side</span>
+            <img src="https://images.unsplash.com/photo-1576107232684-1279f390859f?auto=format&fit=crop&w=800&q=80" alt="Loaded Street Fries">
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-header">
+              <h3 class="menu-card-title">Loaded Street Fries</h3>
+              <span class="menu-card-price">$8.50</span>
+            </div>
+            <p class="menu-card-desc">Crispy golden russet skin-on fries smothered in hot jalapeño beer cheese sauce, chopped bacon, pickled red onions, cotija crumbles, cilantro, and drizzled crema.</p>
+            <div class="menu-card-footer">
+              <span class="flavor-tag">🍟 Hot Beer Cheese & Bacon</span>
+              <a href="#locations" class="order-item-btn">Order Live →</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Catering / Forms -->
-  <section class="catering-section" id="catering">
-    <div class="section-shell catering-grid">
-      <div class="catering-content reveal">
-        <h2 class="section-heading">BRING THE GRIDDLE TO YOUR GUEST LIST.</h2>
-        <p>Office lunches. Birthday parties. Campus festivals. Weddings with a little more personality. We'll bring the truck, the menu, and the kind of food that gets people talking.</p>
-        <ul class="catering-list">
-          <li><strong>Corporate Events:</strong> Make team lunches exciting.</li>
-          <li><strong>Private Parties:</strong> Birthdays and backyard gatherings.</li>
-          <li><strong>Weddings:</strong> Unconventional, memorable menus.</li>
+  <!-- WHY STREET BITES? -->
+  <section class="section section-darker" id="why">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">The Street Standard</span>
+        <h2 class="section-title">Why Street Bites?</h2>
+        <p class="section-desc">We never cut corners. Our mobile kitchen runs with the precision of a Michelin star brigade and the passion of a street food block party.</p>
+      </div>
+
+      <div class="features-grid">
+        <!-- Feature 1: Fresh ingredients -->
+        <div class="feature-card">
+          <div class="feature-number">01</div>
+          <h3 class="feature-title">Fresh Ingredients</h3>
+          <p class="feature-desc">We partner directly with local family bakeries for daily-baked potato rolls, farm-fresh produce picked weekly, and custom ground 100% Angus beef delivered fresh every morning. Never frozen, ever.</p>
+        </div>
+
+        <!-- Feature 2: Made-to-order meals -->
+        <div class="feature-card">
+          <div class="feature-number">02</div>
+          <h3 class="feature-title">Made-To-Order Meals</h3>
+          <p class="feature-desc">No heat lamps or pre-cooked patties sitting in holding pans. Your burger hits our 550° flat-top griddle only when you order, creating that unmistakable caramelized crust and piping-hot juicy center.</p>
+        </div>
+
+        <!-- Feature 3: Bold original flavors -->
+        <div class="feature-card">
+          <div class="feature-number">03</div>
+          <h3 class="feature-title">Bold Original Flavors</h3>
+          <p class="feature-desc">From our secret 12-spice smoky smash rub to small-batch pickled chilis and slow-simmered birria reductions, every bite delivers a punch of authentic street-level complexity you won’t find anywhere else.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHERE WE'RE ROLLING (SCHEDULE & FESTIVALS) -->
+  <section class="section" id="locations">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Find Us On The Streets</span>
+        <h2 class="section-title">Where We're Rolling</h2>
+        <p class="section-desc">Track our mobile kitchen throughout the week or catch us headlining this season's hottest food festivals.</p>
+      </div>
+
+      <div class="schedule-wrapper">
+        <!-- Weekly Truck Locations -->
+        <div class="weekly-schedule-box">
+          <div class="schedule-header">
+            <h3>Weekly Truck Locations</h3>
+            <span style="font-size: 0.85rem; color: #4ade80; font-weight: 700;">● Live GPS Enabled</span>
+          </div>
+          <ul class="schedule-list">
+            <li class="schedule-item today">
+              <span class="schedule-day">Monday</span>
+              <div class="schedule-loc">
+                Arts District Square
+                <span>Near 4th & Main St — By the Mural Wall</span>
+              </div>
+              <span class="schedule-time">11:30 AM - 3:00 PM</span>
+            </li>
+            <li class="schedule-item">
+              <span class="schedule-day">Tuesday</span>
+              <div class="schedule-loc">
+                Financial Plaza Center
+                <span>100 Commerce Way — Courtyard Plaza</span>
+              </div>
+              <span class="schedule-time">11:00 AM - 2:30 PM</span>
+            </li>
+            <li class="schedule-item">
+              <span class="schedule-day">Wednesday</span>
+              <div class="schedule-loc">
+                Innovation Tech Campus
+                <span>Tech Park Loop — Between Bldgs A & B</span>
+              </div>
+              <span class="schedule-time">11:30 AM - 3:00 PM</span>
+            </li>
+            <li class="schedule-item">
+              <span class="schedule-day">Thursday</span>
+              <div class="schedule-loc">
+                University Food Quad
+                <span>College Ave & Campus Center Green</span>
+              </div>
+              <span class="schedule-time">12:00 PM - 5:00 PM</span>
+            </li>
+            <li class="schedule-item">
+              <span class="schedule-day">Friday</span>
+              <div class="schedule-loc">
+                Eastside Brewery Row
+                <span>Hopworks Craft Brewery Parking Lot</span>
+              </div>
+              <span class="schedule-time">4:00 PM - 10:00 PM</span>
+            </li>
+            <li class="schedule-item">
+              <span class="schedule-day">Saturday</span>
+              <div class="schedule-loc">
+                Downtown Night Market
+                <span>Riverfront Promenade — Booth #14</span>
+              </div>
+              <span class="schedule-time">2:00 PM - 11:00 PM</span>
+            </li>
+            <li class="schedule-item">
+              <span class="schedule-day">Sunday</span>
+              <div class="schedule-loc">
+                Waterfront Sunset Park
+                <span>Marina Boulevard Overlook</span>
+              </div>
+              <span class="schedule-time">12:00 PM - 7:00 PM</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Upcoming Food Festivals -->
+        <div class="festivals-box">
+          <div class="festival-card">
+            <div class="festival-badge">Featured Festival · This Month</div>
+            <h4 class="festival-name">Great American Burger Brawl</h4>
+            <p class="festival-info">📍 Bayfront Park Grounds | 📅 Nov 28 - Nov 30<br>Defending our "Best Double Smash" trophy! Come taste the competition special.</p>
+            <a href="#catering" class="btn btn-secondary" style="width: 100%; font-size: 0.85rem; padding: 10px;">Get Festival Fast Pass</a>
+          </div>
+
+          <div class="festival-card">
+            <div class="festival-badge">Winter Street Fest</div>
+            <h4 class="festival-name">Craft Beer & Food Truck Rodeo</h4>
+            <p class="festival-info">📍 Central Fairgrounds | 📅 Dec 12 - Dec 14<br>Featuring exclusive holiday bacon bourbon smashburgers and loaded spiced churro fries.</p>
+            <a href="#catering" class="btn btn-secondary" style="width: 100%; font-size: 0.85rem; padding: 10px;">View Festival Menu</a>
+          </div>
+
+          <div class="festival-card" style="border-color: var(--border-orange); background: rgba(255, 87, 34, 0.06);">
+            <div class="festival-badge">VIP Truck Alert</div>
+            <h4 class="festival-name">Want Us at Your Venue?</h4>
+            <p class="festival-info">We roll up to corporate campuses, breweries, neighborhood block parties, and sports stadiums.</p>
+            <a href="#catering" class="btn btn-primary" style="width: 100%; font-size: 0.85rem; padding: 10px;">Request A Truck Visit</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOD GALLERY -->
+  <section class="section section-darker" id="gallery">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Feast With Your Eyes</span>
+        <h2 class="section-title">Food Gallery</h2>
+        <p class="section-desc">No filters needed. Just hot grease, melted cheese, searing flame, and genuine street food mastery.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80" alt="Crispy Double Smash">
+          <div class="gallery-overlay">
+            <div class="gallery-caption">Crispy Lacey Edge Perfection</div>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=800&q=80" alt="Authentic Mexican Street Tacos">
+          <div class="gallery-overlay">
+            <div class="gallery-caption">Fresh Charred Tortillas & Lime</div>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1576107232684-1279f390859f?auto=format&fit=crop&w=800&q=80" alt="Loaded Fries with Cotija">
+          <div class="gallery-overlay">
+            <div class="gallery-caption">Smothered Jalapeño Queso Fries</div>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1588675646184-f5b0b0b0b2de?auto=format&fit=crop&w=800&q=80" alt="Chef smashing burgers on the griddle">
+          <div class="gallery-overlay">
+            <div class="gallery-caption">Sizzling On The 550° Griddle</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUSTOMER REVIEWS -->
+  <section class="section" id="reviews">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Street Cred</span>
+        <h2 class="section-title">Customer Reviews</h2>
+        <p class="section-desc">Hear what real burger fanatics and street food lovers say about their Street Bites fix.</p>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div>
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"Hands down the best smashburger in the state! The crispy edges on the Double Cheese Smash are unmatched, and the house sauce is pure magic. I track this truck everywhere it goes."</p>
+          </div>
+          <div class="reviewer">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Marcus Vance" class="reviewer-avatar">
+            <div>
+              <div class="reviewer-name">Marcus Vance</div>
+              <div class="reviewer-tag">Food Blogger & Local Guide</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div>
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"We booked Street Bites for our company summer party and they served 220 hungry engineers in under an hour without missing a single beat. Guests are still talking about the loaded fries!"</p>
+          </div>
+          <div class="reviewer">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Sarah Lin" class="reviewer-avatar">
+            <div>
+              <div class="reviewer-name">Sarah Lin</div>
+              <div class="reviewer-tag">Head of People, Apex Tech</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div>
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"The street-style chicken tacos are legendary. The citrus marinade, the warm grilled corn tortillas, and the avocado salsa verde taste straight out of Mexico City. 10/10 every single time!"</p>
+          </div>
+          <div class="reviewer">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80" alt="Diego Morales" class="reviewer-avatar">
+            <div>
+              <div class="reviewer-name">Diego Morales</div>
+              <div class="reviewer-tag">Verified Food Truck Regular</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVATE EVENTS & CATERING -->
+  <section class="section section-darker" id="catering">
+    <div class="container">
+      <div class="catering-cta-card">
+        <div class="catering-content">
+          <span class="section-badge">Bring The Fire To You</span>
+          <h3>Private Events & Catering</h3>
+          <p>Elevate your weddings, corporate gatherings, birthday bashes, and festival events with our rolling gourmet kitchen. We bring fast service, custom printed menus, and unforgettable vibes.</p>
+          
+          <div class="catering-perks">
+            <div class="perk-item">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Serves 50 to 500+ guests</span>
+            </div>
+            <div class="perk-item">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Customized menu packages</span>
+            </div>
+            <div class="perk-item">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Dietary & vegan options</span>
+            </div>
+            <div class="perk-item">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              <span>Rapid 90-second ticket times</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="catering-form-box">
+          <form id="cateringForm" onsubmit="handleCateringSubmit(event)">
+            <div class="form-group">
+              <label class="form-label">Your Name</label>
+              <input type="text" class="form-input" placeholder="e.g. Alex Morgan" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-input" placeholder="alex@company.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Event Type & Date</label>
+              <input type="text" class="form-input" placeholder="Corporate Summer Gala - Oct 18" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Estimated Guest Count</label>
+              <select class="form-select">
+                <option>50 - 100 Guests</option>
+                <option>100 - 250 Guests</option>
+                <option>250 - 500+ Guests</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Send Catering Request 🚀</button>
+          </form>
+          <div id="cateringSuccess" style="display: none; margin-top: 15px; color: #4ade80; text-align: center; font-weight: 700; font-size: 0.9rem;">
+            ✓ Request received! Our events team will reply within 2 hours.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="brand-logo">
+          <span class="flame-icon">🔥</span>
+          <span>STREET BITES</span>
+        </a>
+        <p>Gourmet street food made fresh for every craving. Smashing burgers and building flavor on the streets since 2021.</p>
+        <div class="footer-social-row">
+          <a href="#" class="social-icon-btn" aria-label="Instagram">📸</a>
+          <a href="#" class="social-icon-btn" aria-label="TikTok">🎵</a>
+          <a href="#" class="social-icon-btn" aria-label="Twitter">🐦</a>
+          <a href="#" class="social-icon-btn" aria-label="Facebook">📘</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="#menu">Our Menu</a></li>
+          <li><a href="#locations">Weekly Locations</a></li>
+          <li><a href="#locations">Festival Calendar</a></li>
+          <li><a href="#why">Our Story</a></li>
+          <li><a href="#reviews">Reviews</a></li>
         </ul>
       </div>
-      <div class="catering-form-card reveal delay-2">
-        <h3>Let's plan your event</h3>
-        <form id="catering-form">
-          <div class="form-group">
-            <label for="event-type">What kind of event?</label>
-            <select id="event-type" required>
-              <option value="">Select event type...</option>
-              <option value="corporate">Corporate Event</option>
-              <option value="private">Private Party</option>
-              <option value="wedding">Wedding</option>
-              <option value="festival">Festival / Pop-up</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="guest-count">Estimated guest count</label>
-            <select id="guest-count" required>
-              <option value="">Select guests...</option>
-              <option value="under-50">Under 50</option>
-              <option value="50-100">50–100 guests</option>
-              <option value="100-250">100–250 guests</option>
-              <option value="250+">250+ guests</option>
-            </select>
-          </div>
-          <button type="submit" class="button-primary full-width">Continue to contact details</button>
-        </form>
+
+      <div>
+        <h4 class="footer-title">Get In Touch</h4>
+        <ul class="footer-links">
+          <li><a href="#catering">Private Catering</a></li>
+          <li><a href="#catering">Event Inquiries</a></li>
+          <li><a href="mailto:truck@streetbites.com">truck@streetbites.com</a></li>
+          <li><a href="tel:5550198822">(555) 019-8822</a></li>
+          <li><a href="#">Instagram @StreetBitesTruck</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Truck Hours</h4>
+        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 12px;">
+          <strong style="color: #fff;">Lunch Grille:</strong> 11:30 AM – 3:00 PM<br>
+          <strong style="color: #fff;">Evening Shifts:</strong> 5:00 PM – 10:30 PM<br>
+          <strong style="color: #fff;">Weekends:</strong> Open late till midnight
+        </p>
+        <div style="font-size: 0.85rem; color: var(--color-mustard); font-weight: 700;">
+          📍 Current GPS: Arts District Plaza
+        </div>
       </div>
     </div>
-  </section>
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="section-shell">
-      <div class="footer-cta reveal">
-        <h2 class="hero-title">DON'T JUST SCROLL PAST. COME TAKE A BITE.</h2>
-        <p>Find the truck, bring your crew, and come hungry.</p>
-        <div class="footer-actions">
-          <a href="#location" class="button-primary">Find today's stop ↗</a>
-        </div>
-      </div>
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <h3>STACKED & SMOKED</h3>
-          <p>Big flavor. No shortcuts.</p>
-        </div>
-        <div class="footer-links">
-          <h4>THE TRUCK</h4>
-          <a href="#story">Our story</a>
-          <a href="#menu">Menu</a>
-          <a href="#location">Find us</a>
-          <a href="#catering">Catering</a>
-        </div>
-        <div class="footer-links">
-          <h4>FOLLOW ALONG</h4>
-          <a href="#">Instagram</a>
-          <a href="#">TikTok</a>
-          <a href="#">Contact</a>
-        </div>
-      </div>
-      <div class="footer-bottom mono-text">
-        © 2026 Stacked & Smoked — Fictional brand concept for demonstration.
+    <div class="container footer-bottom">
+      <div>© 2026 Street Bites Gourmet Food Truck. All rights reserved.</div>
+      <div style="display: flex; gap: 20px;">
+        <a href="#menu">Menu</a>
+        <a href="#locations">Locations</a>
+        <a href="#catering">Events</a>
+        <a href="#why">Our Story</a>
+        <a href="#catering">Contact</a>
+        <a href="#">Instagram</a>
       </div>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    function toggleMenu() {
+      const drawer = document.getElementById('mobileDrawer');
+      drawer.classList.toggle('open');
+    }
+
+    document.getElementById('mobileMenuBtn').addEventListener('click', toggleMenu);
+
+    function handleCateringSubmit(e) {
+      e.preventDefault();
+      document.getElementById('cateringSuccess').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('cateringForm').reset();
+      }, 1000);
+    }
+  </script>
 </body>
 </html>

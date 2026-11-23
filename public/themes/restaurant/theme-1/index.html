@@ -1,0 +1,2739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="The Harvest Journal — A seasonal table. A slower way of dining. Farm-to-table tasting menus, thoughtful pairings, and field-led hospitality." />
+  <title>The Harvest Journal — Farm-to-Table Seasonal Dining</title>
+
+  <!-- Google Fonts: Cormorant Garamond & DM Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       01. DESIGN TOKENS & RESET
+       ========================================================================== */
+    :root {
+      --color-forest: #374536;
+      --color-forest-dark: #2A3629;
+      --color-linen: #F3EBDD;
+      --color-sand: #B7A58A;
+      --color-sand-light: #DDD4C4;
+      --color-charcoal: #252A22;
+      --color-muted: #69735D;
+      --color-rule: #D7CDBB;
+      --color-surface: #FAF6EE;
+      --color-white: #FFFFFF;
+      --color-accent-subtle: #EDE4D3;
+
+      --font-display: "Cormorant Garamond", Georgia, serif;
+      --font-body: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+      --page-width: 1360px;
+      --page-gutter: clamp(20px, 4.5vw, 72px);
+      --section-space: clamp(72px, 8.5vw, 140px);
+
+      --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+      --duration-fast: 220ms;
+      --duration-reveal: 850ms;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 96px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--color-linen);
+      color: var(--color-charcoal);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--duration-fast) ease;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    h1, h2, h3, h4 {
+      color: var(--color-forest);
+      font-family: var(--font-display);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+    }
+
+    p {
+      color: var(--color-charcoal);
+      font-weight: 400;
+    }
+
+    /* Container Utilities */
+    .container {
+      width: min(calc(100% - 2 * var(--page-gutter)), var(--page-width));
+      margin-inline: auto;
+    }
+
+    .section {
+      padding-block: var(--section-space);
+      position: relative;
+    }
+
+    .section-header {
+      max-width: 760px;
+      margin-bottom: clamp(40px, 5vw, 68px);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--color-muted);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(38px, 5vw, 64px);
+      margin-bottom: 18px;
+    }
+
+    .section-sub {
+      font-size: clamp(17px, 1.3vw, 20px);
+      color: var(--color-muted);
+      line-height: 1.6;
+    }
+
+    .rule-divider {
+      height: 1px;
+      background-color: var(--color-rule);
+      border: none;
+      width: 100%;
+    }
+
+    /* Primary & Outline Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 28px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: all var(--duration-fast) ease;
+      position: relative;
+    }
+
+    .btn-primary {
+      background-color: var(--color-forest);
+      color: var(--color-linen);
+      border: 1px solid var(--color-forest);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--color-charcoal);
+      border-color: var(--color-charcoal);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--color-forest);
+      border: 1px solid var(--color-forest);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--color-forest);
+      color: var(--color-linen);
+      transform: translateY(-1px);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    /* Accessibility Focus States */
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid var(--color-muted);
+      outline-offset: 3px;
+    }
+
+    /* Motion Reveal Classes */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity var(--duration-reveal) var(--ease-editorial),
+                  transform var(--duration-reveal) var(--ease-editorial);
+      will-change: opacity, transform;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .delay-1 { transition-delay: 120ms; }
+    .delay-2 { transition-delay: 240ms; }
+    .delay-3 { transition-delay: 360ms; }
+
+    /* ==========================================================================
+       02. ANNOUNCEMENT BAR & NAVIGATION
+       ========================================================================== */
+    .announcement-bar {
+      background-color: var(--color-forest);
+      color: var(--color-linen);
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .announcement-bar a {
+      color: var(--color-sand);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      margin-left: 6px;
+    }
+
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(243, 235, 221, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid transparent;
+      transition: background-color 300ms ease, border-color 300ms ease;
+    }
+
+    .site-nav.scrolled {
+      border-bottom-color: var(--color-rule);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 84px;
+    }
+
+    .brand-logo {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      color: var(--color-forest);
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+
+    .brand-subtitle {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      color: var(--color-muted);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--color-charcoal);
+      position: relative;
+      padding-block: 4px;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 1px;
+      background-color: var(--color-forest);
+      transition: width 260ms ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      width: 32px;
+      padding: 6px 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .mobile-menu-btn span {
+      display: block;
+      height: 1.5px;
+      background-color: var(--color-forest);
+      width: 100%;
+      transition: transform 300ms ease, opacity 300ms ease;
+    }
+
+    .mobile-menu-btn.active span:nth-child(1) {
+      transform: translateY(7.5px) rotate(45deg);
+    }
+    .mobile-menu-btn.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .mobile-menu-btn.active span:nth-child(3) {
+      transform: translateY(-7.5px) rotate(-45deg);
+    }
+
+    /* Mobile Drawer */
+    .mobile-nav-panel {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: var(--color-linen);
+      z-index: 99;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px var(--page-gutter);
+      transform: translateY(-100%);
+      transition: transform 450ms var(--ease-editorial);
+    }
+
+    .mobile-nav-panel.open {
+      transform: translateY(0);
+    }
+
+    .mobile-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      margin-bottom: 40px;
+    }
+
+    .mobile-links a {
+      font-family: var(--font-display);
+      font-size: 38px;
+      color: var(--color-forest);
+      display: inline-block;
+    }
+
+    /* ==========================================================================
+       03. SECTION 01 — HERO (THE OPENING SCENE)
+       ========================================================================== */
+    .hero-section {
+      padding-top: clamp(24px, 4vw, 56px);
+      padding-bottom: 0;
+    }
+
+    .hero-split-grid {
+      display: grid;
+      grid-template-columns: 46% 54%;
+      min-height: 640px;
+      align-items: stretch;
+      gap: clamp(24px, 4vw, 56px);
+    }
+
+    .hero-narrative {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-right: 20px;
+    }
+
+    .hero-headline {
+      font-size: clamp(48px, 6vw, 92px);
+      line-height: 0.96;
+      margin-top: 8px;
+      margin-bottom: 24px;
+    }
+
+    .hero-body {
+      font-size: clamp(16px, 1.2vw, 18px);
+      line-height: 1.7;
+      color: var(--color-charcoal);
+      margin-bottom: 36px;
+      max-width: 480px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .hero-aside-badge {
+      padding-top: 24px;
+      border-top: 1px solid var(--color-rule);
+      max-width: 400px;
+    }
+
+    .hero-aside-badge h4 {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .hero-aside-badge p {
+      font-size: 13px;
+      color: var(--color-muted);
+    }
+
+    .hero-media-wrapper {
+      position: relative;
+      height: 100%;
+      min-height: 520px;
+      overflow: hidden;
+      clip-path: inset(0 0 0 0);
+    }
+
+    .hero-media-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.03);
+      transition: transform 1200ms var(--ease-editorial);
+    }
+
+    .hero-media-wrapper:hover img {
+      transform: scale(1.0);
+    }
+
+    .hero-image-caption {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      background-color: rgba(37, 42, 34, 0.78);
+      color: var(--color-linen);
+      backdrop-filter: blur(6px);
+      padding: 8px 16px;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    /* Strip info below hero */
+    .hero-info-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--color-rule);
+      border-bottom: 1px solid var(--color-rule);
+      margin-top: clamp(48px, 6vw, 80px);
+      padding-block: 20px;
+    }
+
+    .info-strip-col {
+      padding: 0 16px;
+      border-right: 1px solid var(--color-rule);
+    }
+
+    .info-strip-col:last-child {
+      border-right: none;
+    }
+
+    .info-strip-label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 4px;
+    }
+
+    .info-strip-val {
+      font-family: var(--font-display);
+      font-size: 20px;
+      color: var(--color-forest);
+    }
+
+    /* ==========================================================================
+       04. SECTION 02 — THE SEASON AT A GLANCE (INGREDIENT GRID)
+       ========================================================================== */
+    .season-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(24px, 3.5vw, 48px);
+      margin-bottom: 56px;
+    }
+
+    .ingredient-card {
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-rule);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+    }
+
+    .ingredient-card:hover {
+      border-color: var(--color-sand);
+    }
+
+    .card-media {
+      height: 280px;
+      overflow: hidden;
+      background-color: var(--color-accent-subtle);
+      position: relative;
+    }
+
+    .card-media img {
+      transition: transform 900ms var(--ease-editorial);
+    }
+
+    .ingredient-card:hover .card-media img {
+      transform: scale(1.04);
+    }
+
+    .card-content {
+      padding: 32px 36px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-sand);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .card-desc {
+      font-size: 15px;
+      color: var(--color-charcoal);
+      line-height: 1.6;
+    }
+
+    .season-footer-note {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--color-rule);
+      padding-top: 36px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .season-footer-note p {
+      font-size: 18px;
+      font-family: var(--font-display);
+      color: var(--color-forest);
+      max-width: 600px;
+    }
+
+    /* ==========================================================================
+       05. SECTION 03 — A NOTE FROM THE FARMER (PROVENANCE)
+       ========================================================================== */
+    .farmer-section {
+      background-color: #EFE6D6;
+    }
+
+    .farmer-grid {
+      display: grid;
+      grid-template-columns: 48% 52%;
+      gap: clamp(32px, 5vw, 72px);
+      align-items: center;
+    }
+
+    .farmer-portrait-box {
+      position: relative;
+    }
+
+    .farmer-img-container {
+      height: 600px;
+      overflow: hidden;
+      border: 1px solid var(--color-rule);
+    }
+
+    .farmer-annotation {
+      position: absolute;
+      top: -18px;
+      left: -18px;
+      background-color: var(--color-forest);
+      color: var(--color-linen);
+      padding: 10px 18px;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 17px;
+    }
+
+    .farmer-letter {
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-rule);
+      padding: clamp(32px, 5vw, 56px);
+      box-shadow: 0 10px 30px rgba(37, 42, 34, 0.03);
+    }
+
+    .letter-salutation {
+      font-family: var(--font-display);
+      font-size: 26px;
+      color: var(--color-forest);
+      margin-bottom: 20px;
+    }
+
+    .letter-body p {
+      margin-bottom: 18px;
+      font-size: 15.5px;
+      line-height: 1.8;
+      color: var(--color-charcoal);
+    }
+
+    .letter-signature {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--color-rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .sign-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      color: var(--color-forest);
+    }
+
+    .sign-sub {
+      font-size: 12px;
+      color: var(--color-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .provenance-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 36px;
+    }
+
+    .provenance-pill {
+      background-color: var(--color-accent-subtle);
+      border: 1px solid var(--color-sand);
+      padding: 8px 16px;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      color: var(--color-forest);
+      cursor: pointer;
+      transition: all var(--duration-fast) ease;
+    }
+
+    .provenance-pill:hover,
+    .provenance-pill.active {
+      background-color: var(--color-forest);
+      color: var(--color-linen);
+      border-color: var(--color-forest);
+    }
+
+    .provenance-detail-box {
+      margin-top: 16px;
+      padding: 16px;
+      background-color: var(--color-white);
+      border-left: 3px solid var(--color-forest);
+      font-size: 13.5px;
+      display: none;
+    }
+
+    /* ==========================================================================
+       06. SECTION 04 — THE SEASONAL TASTING MENU
+       ========================================================================== */
+    .menu-editorial-wrapper {
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-rule);
+      padding: clamp(36px, 6vw, 80px);
+      max-width: 1040px;
+      margin-inline: auto;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.02);
+    }
+
+    .menu-header-center {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .menu-header-center h3 {
+      font-size: clamp(38px, 4.5vw, 56px);
+      margin-top: 8px;
+      margin-bottom: 12px;
+    }
+
+    .menu-course-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid var(--color-rule);
+    }
+
+    .course-item {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--color-rule);
+      cursor: pointer;
+      transition: background-color var(--duration-fast) ease;
+    }
+
+    .course-item:hover {
+      background-color: rgba(183, 165, 138, 0.06);
+    }
+
+    .course-summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+    }
+
+    .course-num {
+      font-family: var(--font-body);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-sand);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .course-title {
+      font-size: 26px;
+      color: var(--color-forest);
+    }
+
+    .course-tags {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      text-align: right;
+    }
+
+    .course-description {
+      margin-top: 8px;
+      font-size: 15px;
+      color: var(--color-charcoal);
+      max-width: 680px;
+    }
+
+    .course-accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 380ms ease, margin-top 380ms ease;
+    }
+
+    .course-item.open .course-accordion-content {
+      max-height: 180px;
+      margin-top: 16px;
+    }
+
+    .provenance-tag-box {
+      background: var(--color-linen);
+      padding: 14px 20px;
+      border: 1px solid var(--color-sand-light);
+      font-size: 13px;
+      color: var(--color-forest);
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .menu-pricing-bar {
+      margin-top: 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--color-rule);
+    }
+
+    .price-tag {
+      font-family: var(--font-display);
+      font-size: 34px;
+      color: var(--color-forest);
+    }
+
+    .price-caption {
+      font-size: 12px;
+      color: var(--color-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* Sub-experiences */
+    .menu-variants-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .variant-box {
+      border: 1px solid var(--color-rule);
+      background-color: var(--color-linen);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .variant-box h4 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .variant-box p {
+      font-size: 14.5px;
+      margin-bottom: 20px;
+      color: var(--color-charcoal);
+    }
+
+    .inline-link {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-forest);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .inline-link:hover {
+      color: var(--color-sand);
+    }
+
+    /* ==========================================================================
+       07. SECTION 05 — A CONSIDERED POUR (WINE JOURNAL)
+       ========================================================================== */
+    .wine-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(20px, 3vw, 36px);
+      margin-top: 48px;
+    }
+
+    .wine-card {
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-rule);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wine-media {
+      height: 240px;
+      overflow: hidden;
+    }
+
+    .wine-card-body {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .wine-tag {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-sand);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .wine-title {
+      font-size: 26px;
+      margin-bottom: 12px;
+    }
+
+    .wine-desc {
+      font-size: 14.5px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      flex-grow: 1;
+    }
+
+    .wine-meta {
+      border-top: 1px solid var(--color-rule);
+      padding-top: 14px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       08. SECTION 06 — FIELD NOTES (EDITORIAL PHOTO ESSAY)
+       ========================================================================== */
+    .field-notes-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 220px;
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid var(--color-rule);
+      background-color: var(--color-charcoal);
+    }
+
+    .gallery-item img {
+      transition: transform 900ms var(--ease-editorial), opacity 400ms ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
+
+    .item-span-1 {
+      grid-column: span 7;
+      grid-row: span 2;
+    }
+
+    .item-span-2 {
+      grid-column: span 5;
+      grid-row: span 1;
+    }
+
+    .item-span-3 {
+      grid-column: span 5;
+      grid-row: span 1;
+    }
+
+    .item-span-4 {
+      grid-column: span 12;
+      grid-row: span 2;
+    }
+
+    .gallery-overlay-badge {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      background-color: rgba(37, 42, 34, 0.85);
+      color: var(--color-linen);
+      padding: 6px 14px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      backdrop-filter: blur(4px);
+    }
+
+    /* Lightbox Modal */
+    .lightbox-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(37, 42, 34, 0.96);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(20px, 4vw, 60px);
+    }
+
+    .lightbox-modal.active {
+      display: flex;
+    }
+
+    .lightbox-inner {
+      max-width: 960px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .lightbox-img-box {
+      width: 100%;
+      height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-img-box img {
+      max-height: 100%;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .lightbox-meta {
+      margin-top: 16px;
+      color: var(--color-linen);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .lightbox-close,
+    .lightbox-nav-btn {
+      color: var(--color-linen);
+      font-size: 28px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 10px;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -46px;
+      right: 0;
+    }
+
+    .lightbox-controls {
+      display: flex;
+      gap: 16px;
+    }
+
+    /* ==========================================================================
+       09. SECTION 07 — GATHER AROUND THE TABLE (OCCASIONS)
+       ========================================================================== */
+    .occasions-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .occasion-card {
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-rule);
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform var(--duration-fast) ease, border-color var(--duration-fast) ease;
+    }
+
+    .occasion-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--color-sand);
+    }
+
+    .occasion-num {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-sand);
+      letter-spacing: 0.16em;
+      margin-bottom: 18px;
+    }
+
+    .occasion-card h4 {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .occasion-card p {
+      font-size: 14px;
+      color: var(--color-charcoal);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       10. SECTION 08 — WORDS FROM OUR GUESTS (REVIEWS)
+       ========================================================================== */
+    .reviews-carousel-wrapper {
+      position: relative;
+      max-width: 920px;
+      margin-inline: auto;
+      margin-top: 48px;
+    }
+
+    .review-slide-box {
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-rule);
+      padding: clamp(36px, 6vw, 68px);
+      text-align: center;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 24px rgba(37, 42, 34, 0.02);
+    }
+
+    .review-quote-mark {
+      font-family: var(--font-display);
+      font-size: 64px;
+      color: var(--color-sand);
+      line-height: 0.5;
+      margin-bottom: 20px;
+    }
+
+    .review-quote-text {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 2.5vw, 32px);
+      line-height: 1.35;
+      color: var(--color-forest);
+      margin-bottom: 24px;
+      max-width: 740px;
+    }
+
+    .review-author {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-charcoal);
+      margin-bottom: 4px;
+    }
+
+    .review-source {
+      font-size: 11px;
+      color: var(--color-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .carousel-nav-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      margin-top: 28px;
+    }
+
+    .carousel-bullet {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--color-rule);
+      border: none;
+      cursor: pointer;
+      transition: background-color var(--duration-fast) ease;
+    }
+
+    .carousel-bullet.active {
+      background-color: var(--color-forest);
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    /* ==========================================================================
+       11. SECTION 09 — THE PRINTED INVITATION (RESERVATION FORM)
+       ========================================================================== */
+    .reservation-wrapper {
+      max-width: 880px;
+      margin-inline: auto;
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-rule);
+      padding: clamp(36px, 6vw, 72px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.03);
+      position: relative;
+    }
+
+    .reservation-card-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .reservation-card-header h3 {
+      font-size: clamp(34px, 4vw, 48px);
+      margin-top: 6px;
+      margin-bottom: 12px;
+    }
+
+    .reservation-form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .form-group-full {
+      grid-column: span 2;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 11.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--color-muted);
+      margin-bottom: 8px;
+    }
+
+    .field-input,
+    .field-select,
+    .field-textarea {
+      width: 100%;
+      background-color: var(--color-linen);
+      border: 1px solid var(--color-rule);
+      padding: 13px 16px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--color-charcoal);
+      border-radius: 0;
+      transition: border-color var(--duration-fast) ease;
+    }
+
+    .field-input:focus,
+    .field-select:focus,
+    .field-textarea:focus {
+      border-color: var(--color-forest);
+    }
+
+    .field-textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    .reservation-disclaimer {
+      font-size: 12px;
+      color: var(--color-muted);
+      line-height: 1.6;
+      margin-top: 16px;
+    }
+
+    .booking-summary-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(37, 42, 34, 0.7);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .booking-summary-modal.active {
+      display: flex;
+    }
+
+    .summary-card {
+      background-color: var(--color-linen);
+      border: 1px solid var(--color-sand);
+      max-width: 540px;
+      width: 100%;
+      padding: 44px;
+      position: relative;
+    }
+
+    .summary-card h4 {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .summary-details-list {
+      margin-block: 24px;
+      border-top: 1px solid var(--color-rule);
+      border-bottom: 1px solid var(--color-rule);
+      padding-block: 16px;
+      font-size: 14.5px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* ==========================================================================
+       12. SECTION 10 — PRACTICAL DETAILS (FIND YOUR WAY HERE)
+       ========================================================================== */
+    .practical-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(24px, 3.5vw, 48px);
+      margin-top: 48px;
+    }
+
+    .practical-card {
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-rule);
+      padding: 36px 32px;
+    }
+
+    .practical-card h4 {
+      font-size: 26px;
+      margin-bottom: 14px;
+    }
+
+    .practical-card p,
+    .practical-card address {
+      font-style: normal;
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: var(--color-charcoal);
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dashed var(--color-rule);
+      padding-block: 6px;
+      font-size: 13.5px;
+    }
+
+    /* ==========================================================================
+       13. SECTION 11 — LETTERS FROM THE HARVEST (NEWSLETTER)
+       ========================================================================== */
+    .newsletter-section {
+      background-color: var(--color-forest);
+      color: var(--color-linen);
+    }
+
+    .newsletter-section h2,
+    .newsletter-section h3,
+    .newsletter-section .eyebrow {
+      color: var(--color-sand-light);
+    }
+
+    .newsletter-section p {
+      color: #D3CDC2;
+    }
+
+    .newsletter-box {
+      max-width: 680px;
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    .newsletter-box h3 {
+      font-size: clamp(36px, 4vw, 54px);
+      margin-bottom: 16px;
+    }
+
+    .newsletter-box p {
+      font-size: 16px;
+      margin-bottom: 32px;
+    }
+
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .newsletter-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      padding: 14px 18px;
+      background-color: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--color-muted);
+      color: var(--color-linen);
+      font-family: var(--font-body);
+      font-size: 15px;
+    }
+
+    .newsletter-input::placeholder {
+      color: var(--color-sand);
+    }
+
+    .newsletter-input:focus {
+      border-color: var(--color-sand);
+      background-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .consent-check {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--color-sand);
+      text-align: left;
+    }
+
+    .consent-check input {
+      accent-color: var(--color-sand);
+    }
+
+    .newsletter-feedback {
+      display: none;
+      padding: 14px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--color-sand);
+      color: var(--color-linen);
+      font-size: 14px;
+      margin-top: 16px;
+    }
+
+    /* ==========================================================================
+       14. SECTION 12 — THE CLOSING NOTE (FOOTER)
+       ========================================================================== */
+    .site-footer {
+      background-color: var(--color-charcoal);
+      color: var(--color-linen);
+      padding-top: clamp(60px, 8vw, 100px);
+      padding-bottom: 40px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: clamp(24px, 4vw, 60px);
+      margin-bottom: 64px;
+    }
+
+    .footer-brand h3 {
+      color: var(--color-linen);
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand p {
+      color: var(--color-sand);
+      font-size: 15px;
+      max-width: 320px;
+      line-height: 1.6;
+    }
+
+    .footer-col-title {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-sand);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .footer-links-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links-list a {
+      font-size: 14px;
+      color: #CEC7BA;
+      transition: color var(--duration-fast) ease;
+    }
+
+    .footer-links-list a:hover {
+      color: var(--color-linen);
+    }
+
+    .footer-bottom-bar {
+      border-top: 1px solid rgba(215, 205, 187, 0.18);
+      padding-top: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 12px;
+      color: var(--color-sand);
+    }
+
+    .footer-closing-statement {
+      margin-bottom: 24px;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 19px;
+      color: var(--color-sand-light);
+    }
+
+    /* ==========================================================================
+       15. RESPONSIVE MEDIA QUERIES
+       ========================================================================== */
+    @media (max-width: 1024px) {
+      .hero-split-grid {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .hero-media-wrapper {
+        min-height: 440px;
+      }
+      .farmer-grid {
+        grid-template-columns: 1fr;
+      }
+      .farmer-img-container {
+        height: 440px;
+      }
+      .wine-grid {
+        grid-template-columns: 1fr;
+      }
+      .occasions-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .practical-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-actions .btn-outline {
+        display: none;
+      }
+      .mobile-menu-btn {
+        display: flex;
+      }
+      .season-grid {
+        grid-template-columns: 1fr;
+      }
+      .field-notes-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+      }
+      .item-span-1, .item-span-2, .item-span-3, .item-span-4 {
+        grid-column: span 1;
+        grid-row: span 1;
+        height: 280px;
+      }
+      .hero-info-strip {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .info-strip-col {
+        border-right: none;
+        border-bottom: 1px solid var(--color-rule);
+        padding-bottom: 12px;
+      }
+      .info-strip-col:last-child {
+        border-bottom: none;
+      }
+      .reservation-form-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-group-full {
+        grid-column: span 1;
+      }
+      .occasions-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .menu-variants-grid {
+        grid-template-columns: 1fr;
+      }
+      .newsletter-row {
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       ANNOUNCEMENT BAR
+       ========================================================================== -->
+  <aside class="announcement-bar" role="complementary" aria-label="Seasonal announcement">
+    Autumn at the Table — Our new seasonal menu is here · 
+    <a href="#reservation">Reserve your place ↗</a>
+  </aside>
+
+  <!-- ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== -->
+  <header class="site-nav" id="mainHeader">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo" aria-label="The Harvest Journal - Home">
+        <span class="brand-title">The Harvest Journal</span>
+        <span class="brand-subtitle">Field · Kitchen · Table</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-links">
+          <li><a href="#story">Our Story</a></li>
+          <li><a href="#season">The Season</a></li>
+          <li><a href="#menu">The Menu</a></li>
+          <li><a href="#wine">Wine Journal</a></li>
+          <li><a href="#field-notes">Field Notes</a></li>
+          <li><a href="#visit">Visit Us</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#reservation" class="btn btn-primary" style="padding: 10px 20px; font-size: 11px;">Reserve a Table ↗</a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation drawer" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-panel" id="mobileNavDrawer" aria-hidden="true">
+    <ul class="mobile-links">
+      <li><a href="#story" class="mob-link">Our Story</a></li>
+      <li><a href="#season" class="mob-link">The Season</a></li>
+      <li><a href="#menu" class="mob-link">The Menu</a></li>
+      <li><a href="#wine" class="mob-link">Wine Journal</a></li>
+      <li><a href="#field-notes" class="mob-link">Field Notes</a></li>
+      <li><a href="#visit" class="mob-link">Visit Us</a></li>
+    </ul>
+    <a href="#reservation" class="btn btn-primary mob-link" style="width: 100%;">Reserve a Table ↗</a>
+  </div>
+
+  <main id="main-content">
+    <!-- ==========================================================================
+         SECTION 01: HERO — THE OPENING SCENE
+         ========================================================================== -->
+    <section class="section hero-section">
+      <div class="container">
+        <div class="hero-split-grid">
+          <!-- Left: Narrative -->
+          <div class="hero-narrative">
+            <span class="eyebrow reveal">Autumn / Vol. 04 / 2026</span>
+            <h1 class="hero-headline reveal delay-1">A season to gather. A table to remember.</h1>
+            <p class="hero-body reveal delay-2">
+              Rooted in the rhythm of the land, our kitchen follows the harvest to create thoughtful plates, considered pairings, and unhurried moments around the table.
+            </p>
+            <div class="hero-ctas reveal delay-3">
+              <a href="#menu" class="btn btn-outline">Explore the seasonal menu ↗</a>
+              <a href="#reservation" class="btn btn-primary">Reserve a table</a>
+            </div>
+            <div class="hero-aside-badge reveal delay-3">
+              <h4>Harvest-led dining</h4>
+              <p>A menu shaped entirely by what is ready in the soil and orchard today.</p>
+            </div>
+          </div>
+
+          <!-- Right: Cinematic Split Hero Media -->
+          <div class="hero-media-wrapper reveal">
+            <img 
+              src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200&auto=format&fit=crop" 
+              alt="Harvest table laden with warm sourdough, roasted roots, and natural wine glasses"
+              loading="eager"
+            />
+            <div class="hero-image-caption">Gathered in the Countryside · Autumn 2026</div>
+          </div>
+        </div>
+
+        <!-- Hero Bottom Info Strip -->
+        <div class="hero-info-strip reveal">
+          <div class="info-strip-col">
+            <div class="info-strip-label">Current Edition</div>
+            <div class="info-strip-val">Autumn Harvest Tasting Menu</div>
+          </div>
+          <div class="info-strip-col">
+            <div class="info-strip-label">Location</div>
+            <div class="info-strip-val">Oak Valley Estate, High Meadow</div>
+          </div>
+          <div class="info-strip-col">
+            <div class="info-strip-label">Dining Format</div>
+            <div class="info-strip-val">Five Courses · Pairing Option</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 02: THE SEASON AT A GLANCE
+         ========================================================================== -->
+    <section class="section" id="season">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="eyebrow">What the Land is Offering</span>
+          <h2 class="section-title">Right now, the season tastes like this.</h2>
+          <p class="section-sub">
+            Our menu begins with ingredients at their best. These are the flavors guiding the kitchen this season, subject to daily dawn availability.
+          </p>
+        </div>
+
+        <div class="season-grid">
+          <!-- Card 1 -->
+          <article class="ingredient-card reveal">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?q=80&w=800&auto=format&fit=crop" alt="Freshly dug heirloom carrots and beets" loading="lazy" />
+            </div>
+            <div class="card-content">
+              <span class="card-eyebrow">01 / From the Soil</span>
+              <h3 class="card-title">Earthy roots</h3>
+              <p class="card-desc">Carrots, beets and late-season roots, slow-roasted until their natural sugars caramelize and deepen into rich earthiness.</p>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="ingredient-card reveal delay-1">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1568571780765-9276ac8b75a2?q=80&w=800&auto=format&fit=crop" alt="Ripe autumn pears on branch" loading="lazy" />
+            </div>
+            <div class="card-content">
+              <span class="card-eyebrow">02 / From the Orchard</span>
+              <h3 class="card-title">Orchard fruit</h3>
+              <p class="card-desc">Crisp apples and aromatic heritage pears bringing delicate perfume, brightness, and natural acidity to savory and sweet courses alike.</p>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="ingredient-card reveal">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1509358271058-acd22cc93898?q=80&w=800&auto=format&fit=crop" alt="Fresh garden rosemary and sage" loading="lazy" />
+            </div>
+            <div class="card-content">
+              <span class="card-eyebrow">03 / From the Garden</span>
+              <h3 class="card-title">Fragrant herbs</h3>
+              <p class="card-desc">Woody sage, garden thyme, and rosemary gathered each morning to impart warmth, aromatic resin, and clean pine notes to the pan.</p>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="ingredient-card reveal delay-1">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?q=80&w=800&auto=format&fit=crop" alt="Crusty fresh sourdough bread with cultured butter" loading="lazy" />
+            </div>
+            <div class="card-content">
+              <span class="card-eyebrow">04 / From the Oven</span>
+              <h3 class="card-title">Slow-made bread</h3>
+              <p class="card-desc">Stone-milled heritage wheat sourdough fermented over thirty-six hours, accompanied by cultured farm butter churned in-house.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="season-footer-note reveal">
+          <p>“The harvest never stands still. Our kitchen doesn't either. What you taste today is an unrepeatable snapshot of this week's field.”</p>
+          <a href="#menu" class="btn btn-outline">Discover the autumn menu →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 03: A NOTE FROM THE FARMER
+         ========================================================================== -->
+    <section class="section farmer-section" id="story">
+      <div class="container">
+        <div class="farmer-grid">
+          <!-- Grower Portrait -->
+          <div class="farmer-portrait-box reveal">
+            <span class="farmer-annotation">A note from the farm</span>
+            <div class="farmer-img-container">
+              <img src="https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?q=80&w=900&auto=format&fit=crop" alt="Farmer in natural morning light in vegetable field" loading="lazy" />
+            </div>
+          </div>
+
+          <!-- Letter -->
+          <div class="farmer-letter reveal delay-1">
+            <span class="eyebrow">People and Provenance</span>
+            <h3 class="letter-salutation">Dear guest,</h3>
+            <div class="letter-body">
+              <p>Every growing season teaches us to pay attention. To the soil after rain. To the first tender leaves in spring. To the fruit that needs another week, and the vegetables that are ready today whether or not we planned for them.</p>
+              <p>Our work begins long before a plate is served. We grow, gather, and select with the season in mind, accepting that nature does not follow a calendar printed in ink.</p>
+              <p>Working closely with the kitchen gives each harvest purpose. What comes out of the ground shapes what goes onto your plate, and what is flourishing today inspires tomorrow's service.</p>
+              <p>We hope you taste that sense of place in every course: not just in the ingredients, but in the quiet care that brought them here.</p>
+            </div>
+            <div class="letter-signature">
+              <div>
+                <div class="sign-title">Julian & Clara Thorne</div>
+                <div class="sign-sub">Field Stewards & Farm Founders</div>
+              </div>
+              <span class="eyebrow" style="margin: 0;">High Meadow Farm</span>
+            </div>
+
+            <!-- Provenance detail pills -->
+            <div class="provenance-pills">
+              <button class="provenance-pill active" data-provenance="soil">Grown with Care</button>
+              <button class="provenance-pill" data-provenance="region">Known Origins</button>
+              <button class="provenance-pill" data-provenance="rhythm">Season-led Choices</button>
+            </div>
+
+            <div class="provenance-detail-box" id="provenanceDetailBox" style="display: block;">
+              <strong>Living Cultivation Practices:</strong> No chemical insecticides or synthetic stimulants. Living soil nurtured with green manure, composted vine trimmings, and rainwater swales.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 04: THE SEASONAL TASTING MENU
+         ========================================================================== -->
+    <section class="section" id="menu">
+      <div class="container">
+        <div class="menu-editorial-wrapper reveal">
+          <div class="menu-header-center">
+            <span class="eyebrow">The Autumn Edition</span>
+            <h3>The Harvest Menu</h3>
+            <p class="section-sub">Vol. 04 / Autumn · Served at an unhurried tempo to make room for conversation.</p>
+          </div>
+
+          <div class="menu-course-list">
+            <!-- Course 1 -->
+            <div class="course-item" tabindex="0" role="button" aria-expanded="false">
+              <div class="course-num">Course 01 · To Begin</div>
+              <div class="course-summary">
+                <h4 class="course-title">Warm bread, cultured butter</h4>
+                <div class="course-tags">Wheat · Dairy</div>
+              </div>
+              <p class="course-description">House-baked naturally leavened sourdough, cultured farm butter, roasted seasonal herb salt.</p>
+              <div class="course-accordion-content">
+                <div class="provenance-tag-box">
+                  <span><strong>Grain:</strong> Stone-ground heritage red wheat</span>
+                  <span><strong>Butter:</strong> 48-hr cultured raw cream</span>
+                  <span><strong>Salt:</strong> Foraged sage & sea crystals</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Course 2 -->
+            <div class="course-item" tabindex="0" role="button" aria-expanded="false">
+              <div class="course-num">Course 02 · The Garden</div>
+              <div class="course-summary">
+                <h4 class="course-title">Roots, leaves & orchard acid</h4>
+                <div class="course-tags">Seeds · Allergen safe</div>
+              </div>
+              <p class="course-description">Charred golden beets, baby winter greens, fermented pear vinaigrette and toasted pumpkin seeds.</p>
+              <div class="course-accordion-content">
+                <div class="provenance-tag-box">
+                  <span><strong>Roots:</strong> South Garden plot #3</span>
+                  <span><strong>Acidity:</strong> 1-year oak-barrel cider vinegar</span>
+                  <span><strong>Crunch:</strong> Dry-roasted heirloom pepitas</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Course 3 -->
+            <div class="course-item" tabindex="0" role="button" aria-expanded="false">
+              <div class="course-num">Course 03 · From the Kitchen</div>
+              <div class="course-summary">
+                <h4 class="course-title">The slow-roasted centerpiece</h4>
+                <div class="course-tags">Kitchen Availability</div>
+              </div>
+              <p class="course-description">Slow-braised pasture centerpiece with concentrated pan juices, caramelized shallot puree and wild garden savory.</p>
+              <div class="course-accordion-content">
+                <div class="provenance-tag-box">
+                  <span><strong>Braised:</strong> 14-hour gentle clay pot simmer</span>
+                  <span><strong>Vegetables:</strong> Late-picked autumn shallots</span>
+                  <span><strong>Finish:</strong> Hand-picked mountain savory</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Course 4 -->
+            <div class="course-item" tabindex="0" role="button" aria-expanded="false">
+              <div class="course-num">Course 04 · A Quieter Course</div>
+              <div class="course-summary">
+                <h4 class="course-title">A pause between seasons</h4>
+                <div class="course-tags">Clean · Botanical</div>
+              </div>
+              <p class="course-description">A delicate palate cleanser of crushed wild apples, chilled verbena infusion, and elderflower ice.</p>
+              <div class="course-accordion-content">
+                <div class="provenance-tag-box">
+                  <span><strong>Fruit:</strong> Wild cider apples from hedgerow</span>
+                  <span><strong>Botanical:</strong> Lemon verbena garden crop</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Course 5 -->
+            <div class="course-item" tabindex="0" role="button" aria-expanded="false">
+              <div class="course-num">Course 05 · To Finish</div>
+              <div class="course-summary">
+                <h4 class="course-title">Baked orchard fruit</h4>
+                <div class="course-tags">Wheat · Dairy</div>
+              </div>
+              <p class="course-description">Honey-baked heritage russet pears, toasted rolled oat crumble, and a cool spoonful of raw jersey cream.</p>
+              <div class="course-accordion-content">
+                <div class="provenance-tag-box">
+                  <span><strong>Pears:</strong> Old Orchard plot, 60-yr trees</span>
+                  <span><strong>Honey:</strong> Autumn wildflower apiary harvest</span>
+                  <span><strong>Cream:</strong> Single-herd raw jersey milk</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-pricing-bar">
+            <div>
+              <div class="price-tag">₹2,400 <span style="font-size: 18px; color: var(--color-muted); font-family: var(--font-body);">/ guest</span></div>
+              <div class="price-caption">Full 5-Course Harvest Tasting Experience</div>
+            </div>
+            <a href="#reservation" class="btn btn-primary">Reserve Tasting Table</a>
+          </div>
+
+          <!-- Alternative Menus -->
+          <div class="menu-variants-grid">
+            <div class="variant-box">
+              <div>
+                <span class="eyebrow">Alternative Table</span>
+                <h4>The Garden Menu</h4>
+                <p>A plant-led parallel journey through heirloom vegetables, grains, wild mushrooms, and orchard syrups.</p>
+              </div>
+              <a href="#reservation" class="inline-link">Enquire for Garden Menu ↗</a>
+            </div>
+            <div class="variant-box">
+              <div>
+                <span class="eyebrow">Private Gathering</span>
+                <h4>The Chef's Table</h4>
+                <p>An intimate seven-course dinner seated overlooking the kitchen hearth with extended pairings.</p>
+              </div>
+              <a href="#reservation" class="inline-link">Chef's Table Enquiries ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 05: A CONSIDERED POUR — THE WINE JOURNAL
+         ========================================================================== -->
+    <section class="section" id="wine">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="eyebrow">Cellar & Barrel</span>
+          <h2 class="section-title">Good wine doesn't compete with the meal. It completes the conversation.</h2>
+          <p class="section-sub">
+            Our cellar centers on low-intervention, character-rich vintages from growers who treat their vineyards with the same patient reverence we give our fields.
+          </p>
+        </div>
+
+        <div class="wine-grid">
+          <!-- Pairing 01 -->
+          <article class="wine-card reveal">
+            <div class="wine-media">
+              <img src="https://images.unsplash.com/photo-1569919659476-f0852f6834b7?q=80&w=800&auto=format&fit=crop" alt="Pouring crisp white wine in glass" loading="lazy" />
+            </div>
+            <div class="wine-card-body">
+              <span class="wine-tag">Pairing 01 · The Garden</span>
+              <h3 class="wine-title">Fresh, mineral white</h3>
+              <p class="wine-desc">Bright acidity and flinty wet-stone minerality bring vibrancy to leafy greens, wild herbs, and apple vinaigrettes.</p>
+              <div class="wine-meta">Style: Crisp · Citrus · Mineral Notes</div>
+            </div>
+          </article>
+
+          <!-- Pairing 02 -->
+          <article class="wine-card reveal delay-1">
+            <div class="wine-media">
+              <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80&w=800&auto=format&fit=crop" alt="Rustic bottle and glass of expressive red wine" loading="lazy" />
+            </div>
+            <div class="wine-card-body">
+              <span class="wine-tag">Pairing 02 · The Centerpiece</span>
+              <h3 class="wine-title">Soft, expressive red</h3>
+              <p class="wine-desc">Velvety tannins and bramble fruit notes offering warmth and depth without masking roasted roots or braised dishes.</p>
+              <div class="wine-meta">Style: Red Fruit · Savory · Gentle Tannins</div>
+            </div>
+          </article>
+
+          <!-- Pairing 03 -->
+          <article class="wine-card reveal delay-2">
+            <div class="wine-media">
+              <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=800&auto=format&fit=crop" alt="Golden dessert wine poured at table" loading="lazy" />
+            </div>
+            <div class="wine-card-body">
+              <span class="wine-tag">Pairing 03 · The Last Course</span>
+              <h3 class="wine-title">A gentle, fragrant finish</h3>
+              <p class="wine-desc">A late-harvest botanical wine balancing honeyed pear sweetness with lively citrus freshness for a lingering departure.</p>
+              <div class="wine-meta">Style: Honeyed · Balanced · Lingering Finish</div>
+            </div>
+          </article>
+        </div>
+
+        <div style="text-align: center; margin-top: 48px;" class="reveal">
+          <a href="#reservation" class="btn btn-outline">Explore Full Wine Cellar List ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 06: FIELD NOTES — THE EDITORIAL PHOTO ESSAY
+         ========================================================================== -->
+    <section class="section" id="field-notes" style="background-color: #EFE8DA;">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="eyebrow">From Soil to Plate</span>
+          <h2 class="section-title">A meal has a life before it reaches the table.</h2>
+          <p class="section-sub">
+            We follow that story in small details: the morning light across damp loam, the crate arriving at the back door, and plates shared among friends. Click any frame to inspect the journal.
+          </p>
+        </div>
+
+        <div class="field-notes-grid">
+          <!-- Item 1: Large -->
+          <div class="gallery-item item-span-1 reveal" data-caption="01 / The Land — First morning light over the damp loam of the upper terrace gardens.">
+            <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1200&auto=format&fit=crop" alt="Misty field in morning golden light" loading="lazy" />
+            <div class="gallery-overlay-badge">01 / The Land · Dawn</div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="gallery-item item-span-2 reveal delay-1" data-caption="02 / The Harvest — Gathering brassicas and roots at peak morning turgor.">
+            <img src="https://images.unsplash.com/photo-1518843875459-f738682238a6?q=80&w=800&auto=format&fit=crop" alt="Wooden crate of harvested fresh vegetables" loading="lazy" />
+            <div class="gallery-overlay-badge">02 / The Harvest · Selection</div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="gallery-item item-span-3 reveal delay-2" data-caption="03 / The Kitchen — Clean prep work that honors every peel, leaf, and seed.">
+            <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=800&auto=format&fit=crop" alt="Chefs chopping fresh seasonal produce quietly in open kitchen" loading="lazy" />
+            <div class="gallery-overlay-badge">03 / The Kitchen · Craft</div>
+          </div>
+
+          <!-- Item 4: Wide -->
+          <div class="gallery-item item-span-4 reveal" data-caption="04 / The Table — Unhurried conversation and candles burning down into the evening.">
+            <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1400&auto=format&fit=crop" alt="Guests gathered at warm evening restaurant table" loading="lazy" />
+            <div class="gallery-overlay-badge">04 / The Table · Together</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-label="Field notes photo viewer">
+      <div class="lightbox-inner">
+        <button class="lightbox-close" id="lightboxCloseBtn" aria-label="Close photo view">✕</button>
+        <div class="lightbox-img-box">
+          <img id="lightboxImg" src="" alt="Enlarged field note" />
+        </div>
+        <div class="lightbox-meta">
+          <div id="lightboxCaption">Caption details</div>
+          <div class="lightbox-controls">
+            <button class="lightbox-nav-btn" id="lightboxPrevBtn" aria-label="Previous photo">←</button>
+            <button class="lightbox-nav-btn" id="lightboxNextBtn" aria-label="Next photo">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         SECTION 07: GATHER AROUND THE TABLE (OCCASIONS)
+         ========================================================================== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="eyebrow">Gatherings & Dining Experiences</span>
+          <h2 class="section-title">Some evenings deserve a table of their own.</h2>
+          <p class="section-sub">
+            Whether you are marking an anniversary, sharing bread with old companions, or hosting a quiet private luncheon.
+          </p>
+        </div>
+
+        <div class="occasions-grid">
+          <div class="occasion-card reveal">
+            <div>
+              <div class="occasion-num">01 / Intimate</div>
+              <h4>The Intimate Table</h4>
+              <p>Corner alcoves tailored for date nights, anniversaries, and personal milestones with soft linen lighting.</p>
+            </div>
+            <a href="#reservation" class="inline-link">Plan an evening ↗</a>
+          </div>
+
+          <div class="occasion-card reveal delay-1">
+            <div>
+              <div class="occasion-num">02 / Celebrations</div>
+              <h4>Gather Together</h4>
+              <p>Long banquets for groups of eight to sixteen. Shared harvest bowls and customized seasonal pairings.</p>
+            </div>
+            <a href="#reservation" class="inline-link">Enquire for groups ↗</a>
+          </div>
+
+          <div class="occasion-card reveal delay-2">
+            <div>
+              <div class="occasion-num">03 / Exploration</div>
+              <h4>The Chef's Counter</h4>
+              <p>Front-row counter seating directly observing hearth embers and plating dialogue with the culinary team.</p>
+            </div>
+            <a href="#reservation" class="inline-link">Counter availability ↗</a>
+          </div>
+
+          <div class="occasion-card reveal delay-3">
+            <div>
+              <div class="occasion-num">04 / Evenings</div>
+              <h4>Wine Evenings</h4>
+              <p>Occasional twilight salons with visiting vintners, comparing cellared bottles against field dishes.</p>
+            </div>
+            <a href="#reservation" class="inline-link">Discover evenings ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 08: WORDS FROM OUR GUESTS (SOCIAL PROOF)
+         ========================================================================== -->
+    <section class="section" style="background-color: var(--color-surface); border-top: 1px solid var(--color-rule); border-bottom: 1px solid var(--color-rule);">
+      <div class="container">
+        <div class="section-header reveal" style="text-align: center; margin-inline: auto;">
+          <span class="eyebrow">Guest Impressions</span>
+          <h2 class="section-title">The moments that stay with you.</h2>
+        </div>
+
+        <div class="reviews-carousel-wrapper reveal">
+          <div class="review-slide-box">
+            <div class="review-quote-mark">“</div>
+            <p class="review-quote-text" id="reviewQuote">
+              “A meal that felt entirely connected to the ground beneath our feet. Unhurried, deeply generous, and without pretension.”
+            </p>
+            <div class="review-author" id="reviewAuthor">Eleanor & Marcus Vance</div>
+            <div class="review-source" id="reviewSource">Verified Guest Visit · Autumn Harvest 2026</div>
+          </div>
+
+          <div class="carousel-nav-bar">
+            <button class="carousel-bullet active" data-index="0" aria-label="Review 1"></button>
+            <button class="carousel-bullet" data-index="1" aria-label="Review 2"></button>
+            <button class="carousel-bullet" data-index="2" aria-label="Review 3"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 09: THE PRINTED INVITATION (RESERVATION FORM)
+         ========================================================================== -->
+    <section class="section" id="reservation">
+      <div class="container">
+        <div class="reservation-wrapper reveal">
+          <div class="reservation-card-header">
+            <span class="eyebrow">The Printed Invitation</span>
+            <h3>Come as you are. Stay for the season.</h3>
+            <p class="section-sub" style="font-size: 16px;">
+              Choose a date, bring someone you love, and let us take care of the rest.
+            </p>
+          </div>
+
+          <form id="reservationForm" novalidate>
+            <div class="reservation-form-grid">
+              <!-- Date -->
+              <div>
+                <label for="resDate" class="field-label">Preferred Date *</label>
+                <input type="date" id="resDate" class="field-input" required />
+              </div>
+
+              <!-- Time -->
+              <div>
+                <label for="resTime" class="field-label">Preferred Time *</label>
+                <select id="resTime" class="field-select" required>
+                  <option value="" disabled selected>Select dining seating</option>
+                  <option value="12:30 PM">12:30 PM — Afternoon Luncheon</option>
+                  <option value="1:30 PM">1:30 PM — Late Luncheon</option>
+                  <option value="6:00 PM">6:00 PM — Twilight Seating</option>
+                  <option value="7:30 PM">7:30 PM — Evening Dinner</option>
+                  <option value="8:45 PM">8:45 PM — Night Dinner</option>
+                </select>
+              </div>
+
+              <!-- Party size -->
+              <div>
+                <label for="resGuests" class="field-label">Number of Guests *</label>
+                <select id="resGuests" class="field-select" required>
+                  <option value="1 Guest">1 Guest (Solo Table)</option>
+                  <option value="2 Guests" selected>2 Guests</option>
+                  <option value="3 Guests">3 Guests</option>
+                  <option value="4 Guests">4 Guests</option>
+                  <option value="5-8 Guests">5 to 8 Guests (Banquette)</option>
+                  <option value="Large Group">9+ Guests (Private Dining)</option>
+                </select>
+              </div>
+
+              <!-- Experience -->
+              <div>
+                <label for="resExperience" class="field-label">Dining Experience *</label>
+                <select id="resExperience" class="field-select" required>
+                  <option value="Autumn Tasting Menu (₹2,400)">Autumn Tasting Menu (₹2,400)</option>
+                  <option value="The Garden Plant Menu (₹2,200)">The Garden Plant-led Menu (₹2,200)</option>
+                  <option value="Tasting Menu + Wine Pairing (₹4,100)">Tasting Menu + Wine Pairing (₹4,100)</option>
+                  <option value="Chef's Counter Experience (₹3,600)">Chef's Counter Hearth Table (₹3,600)</option>
+                </select>
+              </div>
+
+              <!-- Full Name -->
+              <div>
+                <label for="resName" class="field-label">Your Full Name *</label>
+                <input type="text" id="resName" class="field-input" placeholder="e.g. Clara Montgomery" required />
+              </div>
+
+              <!-- Email -->
+              <div>
+                <label for="resEmail" class="field-label">Email Address *</label>
+                <input type="email" id="resEmail" class="field-input" placeholder="clara@example.com" required />
+              </div>
+
+              <!-- Phone -->
+              <div class="form-group-full">
+                <label for="resPhone" class="field-label">Contact Phone Number *</label>
+                <input type="tel" id="resPhone" class="field-input" placeholder="+91 98765 43210" required />
+              </div>
+
+              <!-- Dietary Notes -->
+              <div class="form-group-full">
+                <label for="resDietary" class="field-label">Dietary Requirements or Allergies</label>
+                <textarea id="resDietary" class="field-textarea" placeholder="Please list any allergies or dietary preferences for your party..."></textarea>
+              </div>
+
+              <!-- Special Notes -->
+              <div class="form-group-full">
+                <label for="resNotes" class="field-label">Are you celebrating an occasion?</label>
+                <input type="text" id="resNotes" class="field-input" placeholder="Anniversary, birthday, or personal milestone..." />
+              </div>
+            </div>
+
+            <p class="reservation-disclaimer">
+              * Note: Submitting this form prepares your table booking request. Our maître d' verifies table pacing and confirms within two hours. For urgent same-day inquiries, please telephone the farm desk directly.
+            </p>
+
+            <div style="margin-top: 32px; text-align: center;">
+              <button type="submit" class="btn btn-primary" style="width: 100%; max-width: 360px;">Prepare Reservation Request ↗</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reservation Summary / Confirmation Dialog -->
+    <div class="booking-summary-modal" id="bookingModal" role="dialog" aria-modal="true" aria-label="Reservation Summary Confirmation">
+      <div class="summary-card">
+        <span class="eyebrow">Request Summary Prepared</span>
+        <h4>We've noted your place.</h4>
+        <p style="font-size: 14px; color: var(--color-charcoal);">
+          Thank you for gathering with us. Here is the reservation summary prepared for our host:
+        </p>
+
+        <div class="summary-details-list" id="summaryDetailsList">
+          <!-- Populated by JS -->
+        </div>
+
+        <p style="font-size: 12.5px; color: var(--color-muted); margin-bottom: 24px;">
+          A written confirmation and travel note has been dispatched to your email address. We look forward to setting your place at the table.
+        </p>
+
+        <button class="btn btn-primary" id="closeSummaryBtn" style="width: 100%;">Return to Journal</button>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         SECTION 10: PRACTICAL DETAILS & LOCATION
+         ========================================================================== -->
+    <section class="section" id="visit">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="eyebrow">Find Your Way Here</span>
+          <h2 class="section-title">The countryside is closer than you think.</h2>
+          <p class="section-sub">
+            Find your way to the table, settle in, and give yourself enough time to enjoy the evening.
+          </p>
+        </div>
+
+        <div class="practical-grid reveal">
+          <!-- Card 1: Find Us -->
+          <div class="practical-card">
+            <span class="eyebrow">Location</span>
+            <h4>Find our gates</h4>
+            <address>
+              The Harvest Journal Estate<br />
+              Plot 42, High Meadow Country Lane<br />
+              Oak Valley, Postcode 410 201<br />
+              State Countryside
+            </address>
+            <div style="margin-top: 20px;">
+              <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="inline-link">Open in Navigation Maps ↗</a>
+            </div>
+          </div>
+
+          <!-- Card 2: Hours -->
+          <div class="practical-card">
+            <span class="eyebrow">Schedule</span>
+            <h4>Opening hours</h4>
+            <div class="hours-row">
+              <span>Wednesday – Friday</span>
+              <strong>5:30 PM – 11:00 PM</strong>
+            </div>
+            <div class="hours-row">
+              <span>Saturday</span>
+              <strong>12:30 PM – 11:30 PM</strong>
+            </div>
+            <div class="hours-row">
+              <span>Sunday</span>
+              <strong>12:30 PM – 8:30 PM</strong>
+            </div>
+            <div class="hours-row" style="border: none;">
+              <span>Monday & Tuesday</span>
+              <em style="color: var(--color-muted);">Closed for harvesting</em>
+            </div>
+          </div>
+
+          <!-- Card 3: Contact & Arrival -->
+          <div class="practical-card">
+            <span class="eyebrow">Arrival Notes</span>
+            <h4>Speak with our team</h4>
+            <p style="margin-bottom: 12px;">
+              Complimentary on-site gravel parking is available adjacent to the apple orchard. Step-free level access is provided to all dining pavilions.
+            </p>
+            <p>
+              <strong>Telephone:</strong> +91 (0) 22 5550 4918<br />
+              <strong>General Inquiries:</strong> table@harvestjournal.com
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 11: LETTERS FROM THE HARVEST (NEWSLETTER)
+         ========================================================================== -->
+    <section class="section newsletter-section">
+      <div class="container">
+        <div class="newsletter-box reveal">
+          <span class="eyebrow">Letters From The Harvest</span>
+          <h3>A little of the season, delivered.</h3>
+          <p>
+            Notes from the farm, new seasonal menus from the kitchen, upcoming wine evenings, and quiet reasons to gather around the table. Occasional letters. Always thoughtful.
+          </p>
+
+          <form class="newsletter-form" id="newsletterForm">
+            <div class="newsletter-row">
+              <input type="text" class="newsletter-input" placeholder="Your first name (optional)" id="newsName" />
+              <input type="email" class="newsletter-input" placeholder="Your email address" id="newsEmail" required />
+              <button type="submit" class="btn btn-primary" style="background-color: var(--color-sand); color: var(--color-charcoal); border-color: var(--color-sand);">
+                Subscribe
+              </button>
+            </div>
+            <label class="consent-check">
+              <input type="checkbox" required id="consentCheck" />
+              <span>I consent to receive seasonal letters. Unsubscribe with one click anytime.</span>
+            </label>
+            <div class="newsletter-feedback" id="newsletterFeedback">
+              Thank you for joining our seasonal circle. Your first letter will arrive with the next harvest change.
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       SECTION 12: THE CLOSING NOTE (FOOTER)
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-closing-statement">
+        “From the first gathering in the field to the last glass at the table, thank you for being part of our season.”
+      </div>
+
+      <div class="footer-grid">
+        <!-- Col 1 -->
+        <div class="footer-brand">
+          <h3>The Harvest Journal</h3>
+          <p>Good ingredients. Thoughtful cooking. Time well spent in the countryside.</p>
+        </div>
+
+        <!-- Col 2 -->
+        <div>
+          <div class="footer-col-title">Explore</div>
+          <ul class="footer-links-list">
+            <li><a href="#story">Our story</a></li>
+            <li><a href="#season">The harvest</a></li>
+            <li><a href="#menu">Seasonal menu</a></li>
+            <li><a href="#wine">Wine journal</a></li>
+            <li><a href="#field-notes">Field notes</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3 -->
+        <div>
+          <div class="footer-col-title">Plan Your Visit</div>
+          <ul class="footer-links-list">
+            <li><a href="#reservation">Reservations</a></li>
+            <li><a href="#reservation">Private dining</a></li>
+            <li><a href="#visit">Contact & host</a></li>
+            <li><a href="#visit">Travel directions</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4 -->
+        <div>
+          <div class="footer-col-title">Journal Dispatch</div>
+          <p style="font-size: 13.5px; color: var(--color-sand); margin-bottom: 14px;">
+            High Meadow Farm & Kitchen Pavilion<br />
+            Oak Valley Estate, High Meadow
+          </p>
+          <div style="display: flex; gap: 16px;">
+            <a href="#" class="inline-link" style="color: var(--color-sand-light);">Instagram ↗</a>
+            <a href="#" class="inline-link" style="color: var(--color-sand-light);">Journal RSS ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>© 2026 The Harvest Journal. All rights reserved.</div>
+        <div style="display: flex; gap: 20px;">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Accessibility</a>
+          <a href="#">Reservation Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       JAVASCRIPT — MOTION, LIGHTBOX, CAROUSEL & FORMS
+       ========================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      /* ---------------------------------------------------------
+         1. SCROLL INTERSECTION OBSERVER FOR EDITORIAL REVEALS
+         --------------------------------------------------------- */
+      const revealElements = document.querySelectorAll('.reveal');
+      
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      revealElements.forEach(el => revealObserver.observe(el));
+
+      /* ---------------------------------------------------------
+         2. STICKY NAVBAR BACKGROUND TRANSITION ON SCROLL
+         --------------------------------------------------------- */
+      const header = document.getElementById('mainHeader');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 40) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      }, { passive: true });
+
+      /* ---------------------------------------------------------
+         3. MOBILE NAVIGATION DRAWER & FOCUS MANAGEMENT
+         --------------------------------------------------------- */
+      const mobileBtn = document.getElementById('mobileMenuBtn');
+      const mobileNav = document.getElementById('mobileNavDrawer');
+      const mobileLinks = document.querySelectorAll('.mob-link');
+
+      function toggleMobileMenu(forceState) {
+        const isOpen = typeof forceState === 'boolean' ? forceState : !mobileNav.classList.contains('open');
+        mobileNav.classList.toggle('open', isOpen);
+        mobileBtn.classList.toggle('active', isOpen);
+        mobileBtn.setAttribute('aria-expanded', isOpen);
+        mobileNav.setAttribute('aria-hidden', !isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      }
+
+      mobileBtn.addEventListener('click', () => toggleMobileMenu());
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', () => toggleMobileMenu(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
+          toggleMobileMenu(false);
+          mobileBtn.focus();
+        }
+      });
+
+      /* ---------------------------------------------------------
+         4. PROVENANCE PILL INTERACTION (FARMER STORY)
+         --------------------------------------------------------- */
+      const provenanceData = {
+        soil: "<strong>Living Cultivation Practices:</strong> No chemical insecticides or synthetic stimulants. Living soil nurtured with green manure, composted vine trimmings, and rainwater swales.",
+        region: "<strong>Known Origins:</strong> Cultivated within a 14-mile radius at High Meadow Plots, Thorne Family Orchard, and the Elder Valley dairy cooperatives.",
+        rhythm: "<strong>Season-led Choices:</strong> Menus adapt strictly to weekly rainfall and ground readiness; dishes transition naturally as crops peak and taper."
+      };
+
+      const provPills = document.querySelectorAll('.provenance-pill');
+      const provBox = document.getElementById('provenanceDetailBox');
+
+      provPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          provPills.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          const key = pill.getAttribute('data-provenance');
+          provBox.innerHTML = provenanceData[key];
+        });
+      });
+
+      /* ---------------------------------------------------------
+         5. TASTING MENU COURSE ACCORDIONS
+         --------------------------------------------------------- */
+      const courseItems = document.querySelectorAll('.course-item');
+      courseItems.forEach(item => {
+        const toggleAccordion = () => {
+          const isOpen = item.classList.contains('open');
+          courseItems.forEach(c => {
+            c.classList.remove('open');
+            c.setAttribute('aria-expanded', 'false');
+          });
+          if (!isOpen) {
+            item.classList.add('open');
+            item.setAttribute('aria-expanded', 'true');
+          }
+        };
+
+        item.addEventListener('click', toggleAccordion);
+        item.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleAccordion();
+          }
+        });
+      });
+
+      /* ---------------------------------------------------------
+         6. FIELD NOTES LIGHTBOX GALLERY WITH KEYBOARD SUPPORT
+         --------------------------------------------------------- */
+      const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+      const lightbox = document.getElementById('lightboxModal');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const lightboxCaption = document.getElementById('lightboxCaption');
+      const lightboxClose = document.getElementById('lightboxCloseBtn');
+      const lightboxPrev = document.getElementById('lightboxPrevBtn');
+      const lightboxNext = document.getElementById('lightboxNextBtn');
+
+      let currentPhotoIndex = 0;
+
+      function openLightbox(index) {
+        currentPhotoIndex = index;
+        const target = galleryItems[index];
+        const img = target.querySelector('img');
+        const caption = target.getAttribute('data-caption');
+
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCaption.textContent = caption;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        lightboxClose.focus();
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      function showNextPhoto() {
+        currentPhotoIndex = (currentPhotoIndex + 1) % galleryItems.length;
+        openLightbox(currentPhotoIndex);
+      }
+
+      function showPrevPhoto() {
+        currentPhotoIndex = (currentPhotoIndex - 1 + galleryItems.length) % galleryItems.length;
+        openLightbox(currentPhotoIndex);
+      }
+
+      galleryItems.forEach((item, idx) => {
+        item.addEventListener('click', () => openLightbox(idx));
+      });
+
+      lightboxClose.addEventListener('click', closeLightbox);
+      lightboxNext.addEventListener('click', showNextPhoto);
+      lightboxPrev.addEventListener('click', showPrevPhoto);
+
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') showNextPhoto();
+        if (e.key === 'ArrowLeft') showPrevPhoto();
+      });
+
+      /* ---------------------------------------------------------
+         7. GUEST REVIEWS CAROUSEL
+         --------------------------------------------------------- */
+      const reviews = [
+        {
+          quote: "“A meal that felt entirely connected to the ground beneath our feet. Unhurried, deeply generous, and without pretension.”",
+          author: "Eleanor & Marcus Vance",
+          source: "Verified Guest Visit · Autumn Harvest 2026"
+        },
+        {
+          quote: "“The slow-roasted centerpiece and sourdough with cultured butter redefine what countryside hospitality can be. An absolute treasure.”",
+          author: "Julian Chen",
+          source: "Dining Table Review · October 2026"
+        },
+        {
+          quote: "“To sit by the candles and savor wine poured with such care was the highlight of our autumn. We left feeling nourished in every way.”",
+          author: "Sophie Laurent & David Meyer",
+          source: "Anniversary Table Guest · Autumn 2026"
+        }
+      ];
+
+      const reviewQuote = document.getElementById('reviewQuote');
+      const reviewAuthor = document.getElementById('reviewAuthor');
+      const reviewSource = document.getElementById('reviewSource');
+      const reviewBullets = document.querySelectorAll('.carousel-bullet');
+
+      reviewBullets.forEach(bullet => {
+        bullet.addEventListener('click', () => {
+          const idx = parseInt(bullet.getAttribute('data-index'), 10);
+          reviewBullets.forEach(b => b.classList.remove('active'));
+          bullet.classList.add('active');
+
+          reviewQuote.textContent = reviews[idx].quote;
+          reviewAuthor.textContent = reviews[idx].author;
+          reviewSource.textContent = reviews[idx].source;
+        });
+      });
+
+      /* ---------------------------------------------------------
+         8. RESERVATION FORM HANDLING & SUMMARY DIALOG
+         --------------------------------------------------------- */
+      const resForm = document.getElementById('reservationForm');
+      const bookingModal = document.getElementById('bookingModal');
+      const closeSummaryBtn = document.getElementById('closeSummaryBtn');
+      const summaryList = document.getElementById('summaryDetailsList');
+
+      // Set default minimum date to today
+      const today = new Date().toISOString().split('T')[0];
+      const dateInput = document.getElementById('resDate');
+      if (dateInput) {
+        dateInput.min = today;
+        dateInput.value = today;
+      }
+
+      resForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Basic validation
+        if (!resForm.checkValidity()) {
+          resForm.reportValidity();
+          return;
+        }
+
+        const date = document.getElementById('resDate').value;
+        const time = document.getElementById('resTime').value;
+        const guests = document.getElementById('resGuests').value;
+        const experience = document.getElementById('resExperience').value;
+        const name = document.getElementById('resName').value;
+        const email = document.getElementById('resEmail').value;
+        const phone = document.getElementById('resPhone').value;
+        const dietary = document.getElementById('resDietary').value || 'None noted';
+        const notes = document.getElementById('resNotes').value || 'Standard gathering';
+
+        summaryList.innerHTML = `
+          <div><strong>Guest:</strong> ${name} (${email} · ${phone})</div>
+          <div><strong>Date & Time:</strong> ${date} at ${time}</div>
+          <div><strong>Party Size:</strong> ${guests}</div>
+          <div><strong>Experience:</strong> ${experience}</div>
+          <div><strong>Dietary / Allergens:</strong> ${dietary}</div>
+          <div><strong>Occasion Note:</strong> ${notes}</div>
+        `;
+
+        bookingModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+
+      closeSummaryBtn.addEventListener('click', () => {
+        bookingModal.classList.remove('active');
+        document.body.style.overflow = '';
+        resForm.reset();
+        if (dateInput) dateInput.value = today;
+      });
+
+      bookingModal.addEventListener('click', (e) => {
+        if (e.target === bookingModal) {
+          bookingModal.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+
+      /* ---------------------------------------------------------
+         9. NEWSLETTER FORM CONFIRMATION
+         --------------------------------------------------------- */
+      const newsForm = document.getElementById('newsletterForm');
+      const newsFeedback = document.getElementById('newsletterFeedback');
+
+      newsForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        newsFeedback.style.display = 'block';
+        newsForm.reset();
+        setTimeout(() => {
+          newsFeedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+      });
+
+    });
+  </script>
+</body>
+</html>

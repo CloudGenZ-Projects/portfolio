@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WealthVista | Fiduciary Wealth Management & Retirement Roadmaps</title>
+  <meta name="description" content="Plan Today. Prosper Tomorrow. Fiduciary Wealth Management & Retirement Roadmaps. Build, preserve and manage your wealth through thoughtful financial planning.">
+
+  <!-- Google Fonts: DM Sans + Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       WEALTHVISTA - DESIGN SYSTEM
+       Identity: Luxury financial consulting, fiduciary, institutional rigor.
+       Colors: Navy, ivory, champagne gold, slate.
+       Typography: DM Sans + Playfair Display.
+       ========================================================================== */
+    :root {
+      --color-navy: #0F172A;
+      --color-navy-dark: #070B14;
+      --color-navy-card: #1E293B;
+      --color-ivory: #FDFBF7;
+      --color-ivory-warm: #F4EFE6;
+      --color-gold: #C5A059;
+      --color-gold-hover: #b38b3f;
+      --color-gold-light: rgba(197, 160, 89, 0.15);
+      --color-slate: #334155;
+      --color-slate-light: #94A3B8;
+      --color-border: rgba(197, 160, 89, 0.25);
+      --color-border-subtle: rgba(255, 255, 255, 0.08);
+
+      --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+
+      --container: 1260px;
+      --radius-sm: 4px;
+      --radius-md: 10px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 4px 14px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 15px 35px rgba(15, 23, 42, 0.12);
+      --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--color-ivory);
+      color: var(--color-navy);
+      font-family: var(--font-body);
+    }
+
+    body {
+      background-color: var(--color-ivory);
+      color: var(--color-navy);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* HEADER */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(253, 251, 247, 0.96);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 18px 0;
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--color-navy);
+      letter-spacing: 0.5px;
+    }
+
+    .brand-logo span {
+      color: var(--color-gold);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--color-slate);
+      letter-spacing: 0.5px;
+    }
+
+    .nav-link:hover {
+      color: var(--color-gold);
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 28px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+    }
+
+    .btn-gold {
+      background: var(--color-gold);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(197, 160, 89, 0.25);
+    }
+
+    .btn-gold:hover {
+      background: var(--color-gold-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(197, 160, 89, 0.35);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--color-navy);
+      color: var(--color-navy);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      background: var(--color-navy);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .mobile-toggle {
+      display: none;
+      font-size: 1.5rem;
+      color: var(--color-navy);
+    }
+
+    /* MOBILE DRAWER */
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: 76px;
+      left: 0;
+      width: 100%;
+      background: var(--color-ivory);
+      border-bottom: 2px solid var(--color-gold);
+      padding: 24px;
+      z-index: 99;
+      box-shadow: var(--shadow-md);
+    }
+
+    .mobile-drawer.open {
+      display: block;
+    }
+
+    .mobile-drawer ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mobile-drawer a {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--color-navy);
+    }
+
+    /* 01. HERO SECTION */
+    .hero {
+      position: relative;
+      padding: 90px 0 110px;
+      background: linear-gradient(180deg, var(--color-ivory) 0%, var(--color-ivory-warm) 100%);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-gold-light);
+      border: 1px solid var(--color-border);
+      color: var(--color-gold);
+      padding: 6px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 22px;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(3rem, 5.5vw, 4.4rem);
+      line-height: 1.12;
+      font-weight: 700;
+      color: var(--color-navy);
+      margin-bottom: 22px;
+    }
+
+    .hero-title span {
+      color: var(--color-gold);
+      font-style: italic;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      line-height: 1.75;
+      color: var(--color-slate);
+      margin-bottom: 38px;
+      max-width: 530px;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 45px;
+    }
+
+    .hero-fiduciary-bar {
+      display: flex;
+      gap: 36px;
+      border-top: 1px solid var(--color-border);
+      padding-top: 24px;
+    }
+
+    .fiduciary-col h4 {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: var(--color-gold);
+      line-height: 1;
+    }
+
+    .fiduciary-col p {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-slate);
+      margin-top: 4px;
+    }
+
+    /* Hero Visual */
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-card-img {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--color-border);
+    }
+
+    .hero-card-img img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+    }
+
+    .hero-metric-badge {
+      position: absolute;
+      bottom: -15px;
+      left: -15px;
+      background: var(--color-navy);
+      color: #fff;
+      border: 1px solid var(--color-gold);
+      padding: 16px 22px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-md);
+    }
+
+    .hero-metric-badge h5 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: var(--color-gold);
+    }
+
+    .hero-metric-badge span {
+      font-size: 0.78rem;
+      color: var(--color-slate-light);
+    }
+
+    /* SECTION BASICS */
+    .section {
+      padding: 100px 0;
+    }
+
+    .section-navy {
+      background: var(--color-navy);
+      color: #fff;
+    }
+
+    .section-white {
+      background: #ffffff;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 60px;
+    }
+
+    .section-badge {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--color-gold);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 4vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      color: var(--color-slate);
+      font-size: 1.05rem;
+    }
+
+    .section-navy .section-desc {
+      color: var(--color-slate-light);
+    }
+
+    /* 02. FINANCIAL SERVICES */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .service-card {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 36px 30px;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+    }
+
+    .service-card:hover {
+      border-color: var(--color-gold);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .service-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--color-navy);
+      margin-bottom: 12px;
+    }
+
+    .service-desc {
+      color: var(--color-slate);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      margin-bottom: 22px;
+      flex-grow: 1;
+    }
+
+    .service-link {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--color-gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* 03. YOUR GOALS. OUR GUIDANCE. */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .pillar-card {
+      background: var(--color-navy-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 38px 30px;
+      color: #fff;
+      border-top: 4px solid var(--color-gold);
+    }
+
+    .pillar-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      margin-bottom: 14px;
+      color: #fff;
+    }
+
+    .pillar-card p {
+      color: var(--color-slate-light);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    /* 04. PLANNING PROCESS */
+    .process-timeline {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+
+    .process-node {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 28px 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .process-step-num {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      color: var(--color-gold);
+      margin-bottom: 8px;
+    }
+
+    .process-step-name {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--color-navy);
+      margin-bottom: 8px;
+    }
+
+    .process-step-desc {
+      font-size: 0.85rem;
+      color: var(--color-slate);
+      line-height: 1.5;
+    }
+
+    /* 05. INTERACTIVE PORTFOLIO OVERVIEW */
+    .portfolio-box {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 44px;
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .portfolio-info h3 {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: var(--color-navy);
+      margin-bottom: 14px;
+    }
+
+    .portfolio-info p {
+      color: var(--color-slate);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .allocation-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .alloc-item-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .alloc-track {
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .alloc-fill {
+      height: 100%;
+      background: var(--color-gold);
+      border-radius: 4px;
+    }
+
+    .illustrative-tag {
+      font-size: 0.75rem;
+      color: var(--color-slate-light);
+      font-style: italic;
+      margin-top: 16px;
+      display: block;
+    }
+
+    /* 06. MEET YOUR FINANCIAL ADVISOR */
+    .advisor-row {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .advisor-img-box img {
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+    }
+
+    .advisor-details h3 {
+      font-family: var(--font-serif);
+      font-size: 2.4rem;
+      color: var(--color-navy);
+      margin-bottom: 6px;
+    }
+
+    .advisor-cred {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--color-gold);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 20px;
+    }
+
+    .advisor-bio {
+      color: var(--color-slate);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    /* 07. FINANCIAL INSIGHTS */
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .insight-card {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 26px;
+      transition: var(--transition);
+    }
+
+    .insight-card:hover {
+      border-color: var(--color-gold);
+    }
+
+    .insight-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-gold);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .insight-title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: var(--color-navy);
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+
+    .insight-desc {
+      color: var(--color-slate);
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    /* 08. FAQ */
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .faq-q {
+      width: 100%;
+      padding: 20px 24px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--color-navy);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-a {
+      display: none;
+      padding: 0 24px 20px;
+      color: var(--color-slate);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .faq-item.active .faq-a {
+      display: block;
+    }
+
+    .faq-item.active .faq-q span {
+      transform: rotate(45deg);
+      color: var(--color-gold);
+    }
+
+    /* 09. CONSULTATION CTA */
+    .consult-banner {
+      background: var(--color-navy);
+      color: #fff;
+      border-radius: var(--radius-md);
+      padding: 60px;
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 50px;
+      align-items: center;
+      border: 1px solid var(--color-border);
+    }
+
+    .consult-form-box {
+      background: #fff;
+      color: var(--color-navy);
+      border-radius: var(--radius-sm);
+      padding: 34px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-slate);
+      margin-bottom: 6px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      border-color: var(--color-gold);
+    }
+
+    /* FOOTER */
+    .footer {
+      background: var(--color-navy-dark);
+      color: #fff;
+      padding: 80px 0 36px;
+      border-top: 1px solid var(--color-border-subtle);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand p {
+      color: var(--color-slate-light);
+      font-size: 0.92rem;
+      margin-top: 16px;
+      max-width: 320px;
+      line-height: 1.7;
+    }
+
+    .footer-title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      color: var(--color-slate-light);
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-gold);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      color: var(--color-slate-light);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .hero-grid, .portfolio-box, .advisor-row, .consult-banner {
+        grid-template-columns: 1fr;
+      }
+      .hero-content {
+        text-align: center;
+      }
+      .hero-subtitle {
+        margin: 0 auto 38px;
+      }
+      .hero-cta-group, .hero-fiduciary-bar {
+        justify-content: center;
+      }
+      .services-grid, .pillars-grid, .process-timeline, .insights-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .desktop-nav, .header-cta {
+        display: none;
+      }
+      .mobile-toggle {
+        display: block;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container nav-wrapper">
+      <a href="#" class="brand-logo">
+        Wealth<span>Vista</span>
+      </a>
+
+      <nav class="desktop-nav">
+        <ul class="nav-links">
+          <li><a href="#services" class="nav-link">Services</a></li>
+          <li><a href="#approach" class="nav-link">Our Approach</a></li>
+          <li><a href="#process" class="nav-link">Process</a></li>
+          <li><a href="#portfolio" class="nav-link">Portfolios</a></li>
+          <li><a href="#advisor" class="nav-link">About</a></li>
+          <li><a href="#insights" class="nav-link">Insights</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-cta">
+        <a href="#consultation" class="btn btn-gold">Schedule a Call ✦</a>
+      </div>
+
+      <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle Menu">☰</button>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <ul>
+        <li><a href="#services" onclick="toggleMenu()">Financial Services</a></li>
+        <li><a href="#approach" onclick="toggleMenu()">Our Approach</a></li>
+        <li><a href="#process" onclick="toggleMenu()">Planning Process</a></li>
+        <li><a href="#portfolio" onclick="toggleMenu()">Portfolio Overview</a></li>
+        <li><a href="#advisor" onclick="toggleMenu()">Meet Your Advisor</a></li>
+        <li><a href="#insights" onclick="toggleMenu()">Financial Insights</a></li>
+        <li><a href="#consultation" class="btn btn-gold" style="width: 100%; margin-top: 10px;" onclick="toggleMenu()">Schedule Consultation</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- 01. HERO SECTION -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-eyebrow">Fiduciary Wealth Advisory</div>
+        <h1 class="hero-title">Plan Today. <br><span>Prosper Tomorrow.</span></h1>
+        <p class="hero-subtitle">Fiduciary Wealth Management & Retirement Roadmaps. Build, preserve and manage your wealth through thoughtful financial planning and personalized investment guidance.</p>
+        
+        <div class="hero-cta-group">
+          <a href="#consultation" class="btn btn-gold">Schedule a Consultation ✦</a>
+          <a href="#services" class="btn btn-outline">Explore Our Services</a>
+        </div>
+
+        <div class="hero-fiduciary-bar">
+          <div class="fiduciary-col">
+            <h4>$680M+</h4>
+            <p>Assets Under Advisory</p>
+          </div>
+          <div class="fiduciary-col">
+            <h4>100%</h4>
+            <p>Fiduciary Standard of Care</p>
+          </div>
+          <div class="fiduciary-col">
+            <h4>20+ Yrs</h4>
+            <p>Institutional Experience</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-card-img">
+          <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&q=85" alt="Senior financial advisor consulting executive client">
+        </div>
+        <div class="hero-metric-badge">
+          <h5>True Fee-Only Fiduciary</h5>
+          <span>Zero Commission Conflicts · Client Interests Always First</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02. FINANCIAL SERVICES -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Comprehensive Solutions</span>
+        <h2 class="section-title">Financial Services</h2>
+        <p class="section-desc">Sophisticated wealth strategies tailored to executive careers, high-net-worth families, and business founders.</p>
+      </div>
+
+      <div class="services-grid">
+        <!-- 1. Investment Management -->
+        <div class="service-card">
+          <h3 class="service-title">Investment Management</h3>
+          <p class="service-desc">Portfolio construction and ongoing investment oversight utilizing evidence-based factor diversification, low expense ratios, and automated rebalancing.</p>
+          <a href="#consultation" class="service-link">Explore Service →</a>
+        </div>
+
+        <!-- 2. Retirement Planning -->
+        <div class="service-card">
+          <h3 class="service-title">Retirement Planning</h3>
+          <p class="service-desc">Create a long-term retirement income strategy designed to support your lifestyle goals, model Monte Carlo longevity probabilities, and navigate Social Security timing.</p>
+          <a href="#consultation" class="service-link">Explore Service →</a>
+        </div>
+
+        <!-- 3. Financial Planning -->
+        <div class="service-card">
+          <h3 class="service-title">Financial Planning</h3>
+          <p class="service-desc">Align financial decisions with your life goals. Comprehensive cash flow modeling, major capital purchase evaluations, and education funding roadmaps.</p>
+          <a href="#consultation" class="service-link">Explore Service →</a>
+        </div>
+
+        <!-- 4. Tax-Efficient Strategies -->
+        <div class="service-card">
+          <h3 class="service-title">Tax-Efficient Strategies</h3>
+          <p class="service-desc">Explore tax-aware financial planning approaches, including asset location optimization, Roth IRA conversions, tax-loss harvesting, and charitable gifting.</p>
+          <a href="#consultation" class="service-link">Explore Service →</a>
+        </div>
+
+        <!-- 5. Estate Planning Coordination -->
+        <div class="service-card">
+          <h3 class="service-title">Estate Planning Coordination</h3>
+          <p class="service-desc">Coordinate wealth transfer planning with legal professionals to protect multi-generational assets, structure trusts, and minimize probate friction.</p>
+          <a href="#consultation" class="service-link">Explore Service →</a>
+        </div>
+
+        <!-- 6. Business Owner Advisory -->
+        <div class="service-card">
+          <h3 class="service-title">Business Owner Advisory</h3>
+          <p class="service-desc">Financial guidance for entrepreneurs and executives. Key-man protections, defined-benefit cash balance plans, liquidity event planning, and exit strategy.</p>
+          <a href="#consultation" class="service-link">Explore Service →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03. YOUR GOALS. OUR GUIDANCE. -->
+  <section class="section section-navy" id="approach">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge" style="color: var(--color-gold);">Three Core Pillars</span>
+        <h2 class="section-title" style="color: #fff;">Your Goals. Our Guidance.</h2>
+        <p class="section-desc">A structured framework to protect your family's future across every life stage.</p>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <h3>Build Wealth</h3>
+          <p>Disciplined, low-cost institutional global market exposure designed to capture long-term equity premiums without market-timing emotional traps.</p>
+        </div>
+
+        <div class="pillar-card">
+          <h3>Preserve Wealth</h3>
+          <p>Defensive portfolio positioning, fixed-income ladders, and comprehensive risk mitigation to insulate your capital against market downturns and inflation.</p>
+        </div>
+
+        <div class="pillar-card">
+          <h3>Plan Your Legacy</h3>
+          <p>Thoughtful wealth transfer strategies that prepare heirs, support philanthropic passions, and ensure your values endure for generations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04. OUR FINANCIAL PLANNING PROCESS -->
+  <section class="section" id="process">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Methodical Execution</span>
+        <h2 class="section-title">Our Financial Planning Process</h2>
+        <p class="section-desc">Five clear phases ensuring your roadmap remains dynamic and aligned as your life evolves.</p>
+      </div>
+
+      <div class="process-timeline">
+        <div class="process-node">
+          <div class="process-step-num">01</div>
+          <div class="process-step-name">Discovery</div>
+          <p class="process-step-desc">In-depth discussion of your values, risk appetite, family priorities, and long-term vision.</p>
+        </div>
+
+        <div class="process-node">
+          <div class="process-step-num">02</div>
+          <div class="process-step-name">Assessment</div>
+          <p class="process-step-desc">Thorough audit of your existing assets, debt, tax returns, and employer benefits.</p>
+        </div>
+
+        <div class="process-node">
+          <div class="process-step-num">03</div>
+          <div class="process-step-name">Strategy</div>
+          <p class="process-step-desc">Customized financial roadmap with asset allocation models and tax-smart recommendations.</p>
+        </div>
+
+        <div class="process-node">
+          <div class="process-step-num">04</div>
+          <div class="process-step-name">Implementation</div>
+          <p class="process-step-desc">Seamless account onboarding, custodian transfer, and disciplined portfolio execution.</p>
+        </div>
+
+        <div class="process-node">
+          <div class="process-step-num">05</div>
+          <div class="process-step-name">Ongoing Reviews</div>
+          <p class="process-step-desc">Semi-annual milestone reviews, tax harvesting adjustments, and life-event updates.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05. INTERACTIVE PORTFOLIO OVERVIEW -->
+  <section class="section section-white" id="portfolio">
+    <div class="container">
+      <div class="portfolio-box">
+        <div class="portfolio-info">
+          <span class="section-badge">Asset Allocation Modeling</span>
+          <h3>Interactive Portfolio Overview</h3>
+          <p>Proper asset allocation accounts for over 90% of long-term investment return variation. We build globally diversified, tax-located portfolios balancing growth with capital preservation.</p>
+          
+          <div class="allocation-bars">
+            <div>
+              <div class="alloc-item-header">
+                <span>Global Equities (US & International Developed)</span>
+                <span>55%</span>
+              </div>
+              <div class="alloc-track"><div class="alloc-fill" style="width: 55%;"></div></div>
+            </div>
+
+            <div>
+              <div class="alloc-item-header">
+                <span>Fixed Income & Short-Term Treasuries</span>
+                <span>25%</span>
+              </div>
+              <div class="alloc-track"><div class="alloc-fill" style="width: 25%; background: var(--color-navy);"></div></div>
+            </div>
+
+            <div>
+              <div class="alloc-item-header">
+                <span>Real Assets & Inflation Protected (TIPS / REITs)</span>
+                <span>10%</span>
+              </div>
+              <div class="alloc-track"><div class="alloc-fill" style="width: 10%; background: #475569;"></div></div>
+            </div>
+
+            <div>
+              <div class="alloc-item-header">
+                <span>Strategic Liquidity & Cash Reserves</span>
+                <span>10%</span>
+              </div>
+              <div class="alloc-track"><div class="alloc-fill" style="width: 10%; background: #94a3b8;"></div></div>
+            </div>
+          </div>
+
+          <span class="illustrative-tag">*Sample allocation shown for illustrative purposes only. Individual client allocations are customized based on personal risk profile and timeline.</span>
+        </div>
+
+        <div style="background: var(--color-navy); padding: 34px; border-radius: var(--radius-sm); color: #fff; border: 1px solid var(--color-gold);">
+          <h4 style="font-family: var(--font-serif); font-size: 1.4rem; color: var(--color-gold); margin-bottom: 12px;">Institutional Custody</h4>
+          <p style="font-size: 0.9rem; color: var(--color-slate-light); line-height: 1.7; margin-bottom: 18px;">
+            All client assets are custodied with independent, publicly traded institutions (Charles Schwab & Fidelity Institutional). WealthVista never takes direct possession of your funds.
+          </p>
+          <div style="font-size: 0.82rem; font-weight: 700; color: #fff; border-top: 1px solid var(--color-border-subtle); padding-top: 14px;">
+            ✓ SIPC Insured Account Protections up to $500,000
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06. MEET YOUR FINANCIAL ADVISOR -->
+  <section class="section" id="advisor">
+    <div class="container advisor-row">
+      <div class="advisor-img-box">
+        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80" alt="Arthur Vance, CFP, CFA">
+      </div>
+      <div class="advisor-details">
+        <span class="section-badge">Leadership & Lineage</span>
+        <h3>Arthur Vance, CFP®, CFA</h3>
+        <div class="advisor-cred">Founder & Principal Fiduciary Wealth Advisor</div>
+        <p class="advisor-bio">
+          With over two decades of capital markets and wealth management experience, Arthur founded WealthVista to provide transparent, commission-free financial guidance. Formerly a Senior Vice President of Portfolio Strategy at Merrill Lynch, he holds both the Certified Financial Planner (CFP®) and Chartered Financial Analyst (CFA) designations.
+        </p>
+        <p class="advisor-bio" style="font-style: italic; border-left: 2px solid var(--color-gold); padding-left: 20px;">
+          "True wealth management is not about beating the market next Tuesday; it is about building an unshakeable foundation so your family never worries about market volatility again."
+        </p>
+        <a href="#consultation" class="btn btn-gold">Schedule an Introductory Call ✦</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07. FINANCIAL INSIGHTS -->
+  <section class="section section-white" id="insights">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Thought Leadership</span>
+        <h2 class="section-title">Financial Insights</h2>
+        <p class="section-desc">Educational whitepapers, retirement guides, and wealth management strategies.</p>
+      </div>
+
+      <div class="insights-grid">
+        <div class="insight-card">
+          <div class="insight-tag">Retirement Planning</div>
+          <h4 class="insight-title">The Sequence of Returns Risk in Early Retirement</h4>
+          <p class="insight-desc">How market downturns in your first 5 years of retirement impact portfolio survivability, and how buffer assets mitigate this risk.</p>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-tag">Investment Fundamentals</div>
+          <h4 class="insight-title">Why Market Timing Consistently Fails Long-Term Investors</h4>
+          <p class="insight-desc">Examining 50 years of S&P 500 returns and the devastating compounding cost of missing the market's 10 best trading days.</p>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-tag">Tax Strategies</div>
+          <h4 class="insight-title">Strategic Roth Conversions During Low-Income Years</h4>
+          <p class="insight-desc">How executive career gaps, early retirement bridges, or market dips create generational tax arbitrage windows.</p>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-tag">Estate & Legacy</div>
+          <h4 class="insight-title">Revocable Living Trusts vs Wills: Protecting Privacy</h4>
+          <p class="insight-desc">Why high-net-worth families utilize living trusts to avoid costly public probate and ensure seamless multi-generational transfer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08. FAQ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Clear Clarity</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-desc">Transparent answers regarding our fiduciary standard, fee structure, and client relationships.</p>
+      </div>
+
+      <div class="faq-container">
+        <div class="faq-item active">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            What does it mean that WealthVista is a Fiduciary?
+            <span>+</span>
+          </button>
+          <div class="faq-a">
+            As a Registered Investment Advisor (RIA), we are legally bound to the fiduciary standard. This means we are required by law to put your interests ahead of our own at all times. We do not sell proprietary products, accept third-party commissions, or earn referral kickbacks.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            How are your advisory fees structured?
+            <span>+</span>
+          </button>
+          <div class="faq-a">
+            We charge a transparent, tiered percentage fee based on Assets Under Management (AUM), starting at 0.85% annually and scaling down as your portfolio grows. There are no hidden trading charges or termination fees.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            What is your typical client portfolio size?
+            <span>+</span>
+          </button>
+          <div class="faq-a">
+            Our private wealth practice typically works with individuals and families who have $500,000 or more in investable assets. We also offer specialized fixed-fee financial planning arrangements for emerging high-income professionals.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Where are my funds held?
+            <span>+</span>
+          </button>
+          <div class="faq-a">
+            Your assets are held in your name at Charles Schwab or Fidelity Institutional. WealthVista has limited trading authority to manage your portfolio according to your approved investment policy statement, but cannot withdraw funds.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09. CONSULTATION CTA -->
+  <section class="section" id="consultation">
+    <div class="container">
+      <div class="consult-banner">
+        <div>
+          <span class="section-badge" style="color: var(--color-gold);">Complimentary Strategy Call</span>
+          <h3 style="font-family: var(--font-serif); font-size: clamp(2.4rem, 4vw, 3.4rem); margin-bottom: 16px;">Schedule a Confidential Consultation</h3>
+          <p style="color: var(--color-slate-light); font-size: 1.05rem; line-height: 1.7; margin-bottom: 24px;">
+            Take the first step toward lifelong financial clarity. Meet with a Principal Advisor to review your current portfolio, retirement trajectory, and tax minimization opportunities.
+          </p>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.95rem; color: #fff;">
+            <li>✓ 30-Minute introductory discovery video call</li>
+            <li>✓ High-level review of your current asset allocation</li>
+            <li>✓ Zero sales pressure or product pitches</li>
+          </ul>
+        </div>
+
+        <div class="consult-form-box">
+          <form id="consultForm" onsubmit="handleConsultSubmit(event)">
+            <div class="form-group">
+              <label class="form-label">Full Name *</label>
+              <input type="text" class="form-control" placeholder="e.g. Eleanor Vance" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address *</label>
+              <input type="email" class="form-control" placeholder="eleanor@email.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Approximate Investable Assets</label>
+              <select class="form-control">
+                <option>$500,000 – $1,000,000</option>
+                <option>$1,000,000 – $3,000,000</option>
+                <option>$3,000,000 – $10,000,000+</option>
+                <option>Business Owner Seeking Exit Strategy</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-gold" style="width: 100%; margin-top: 10px;">Request Introductory Call ✦</button>
+          </form>
+          <div id="consultSuccess" style="display: none; margin-top: 15px; color: var(--color-gold); text-align: center; font-weight: 700; font-size: 0.9rem;">
+            ✓ Consultation request received. Arthur Vance's executive assistant will reach out with calendar times.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="brand-logo" style="color: #fff;">
+          Wealth<span style="color: var(--color-gold);">Vista</span>
+        </div>
+        <p>Fee-only fiduciary wealth management, comprehensive retirement modeling, and estate coordination for individuals and families.</p>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Services</h4>
+        <ul class="footer-links">
+          <li><a href="#services">Investment Management</a></li>
+          <li><a href="#services">Retirement Roadmaps</a></li>
+          <li><a href="#services">Tax-Efficient Strategies</a></li>
+          <li><a href="#services">Estate Coordination</a></li>
+          <li><a href="#services">Business Owner Advisory</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-title">About & Process</h4>
+        <ul class="footer-links">
+          <li><a href="#approach">Our Fiduciary Philosophy</a></li>
+          <li><a href="#process">5-Step Planning Process</a></li>
+          <li><a href="#advisor">Meet Arthur Vance, CFA</a></li>
+          <li><a href="#insights">Financial Insights</a></li>
+          <li><a href="#faq">Client FAQs</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Headquarters</h4>
+        <p style="color: var(--color-slate-light); font-size: 0.9rem; line-height: 1.8;">
+          750 Wealth Tower, 42nd Floor<br>
+          Financial District, Boston, MA 02110<br>
+          <strong style="color: #fff;">Direct Line:</strong> <a href="tel:18005559898" style="color: var(--color-gold);">+1 (800) 555-9898</a><br>
+          <a href="mailto:fiduciary@wealthvista.com" style="color: var(--color-slate-light);">fiduciary@wealthvista.com</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div>© 2026 WealthVista Fiduciary Advisors LLC. Member FINRA/SIPC. All rights reserved.</div>
+      <div style="display: flex; gap: 24px;">
+        <a href="#services">Services</a>
+        <a href="#approach">Approach</a>
+        <a href="#insights">Insights</a>
+        <a href="#faq">Disclosures</a>
+        <a href="#consultation">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const drawer = document.getElementById('mobileDrawer');
+      drawer.classList.toggle('open');
+    }
+    document.getElementById('mobileMenuBtn').addEventListener('click', toggleMenu);
+
+    function toggleFaq(btn) {
+      btn.parentElement.classList.toggle('active');
+    }
+
+    function handleConsultSubmit(e) {
+      e.preventDefault();
+      document.getElementById('consultSuccess').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('consultForm').reset();
+      }, 1000);
+    }
+  </script>
+</body>
+</html>

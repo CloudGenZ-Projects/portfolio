@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZenFlow | Mindful Movement, Reformer Pilates & Yoga Sanctuary</title>
+  <meta name="description" content="Move. Breathe. Feel Alive. Discover the balance of movement, strength and mindfulness through Pilates, yoga and breathwork.">
+
+  <!-- Google Fonts: Cormorant Garamond + Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       ZENFLOW - DESIGN SYSTEM & TOKENS
+       Identity: Wellness, calm, minimalist luxury, mindfulness.
+       Colors: Sage green, ivory, sand, muted olive.
+       Typography: Elegant serif + clean sans-serif.
+       ========================================================================== */
+    :root {
+      --color-sage: #536b56;
+      --color-sage-dark: #3f5242;
+      --color-sage-light: #eef3ef;
+      --color-sage-subtle: rgba(83, 107, 86, 0.12);
+      --color-olive-muted: #7c8771;
+      --color-ivory: #faf8f5;
+      --color-ivory-pure: #ffffff;
+      --color-sand: #eee7db;
+      --color-sand-dark: #dfd7c9;
+      --color-charcoal: #242824;
+      --color-charcoal-muted: #646a63;
+      --color-border: rgba(83, 107, 86, 0.18);
+
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      --container: 1240px;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 32px;
+      --radius-full: 999px;
+      --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--color-ivory);
+      color: var(--color-charcoal);
+      font-family: var(--font-sans);
+    }
+
+    body {
+      background-color: var(--color-ivory);
+      color: var(--color-charcoal);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* HEADER */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 248, 245, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 20px 0;
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-lotus {
+      width: 32px;
+      height: 32px;
+      color: var(--color-sage);
+    }
+
+    .brand-name {
+      font-family: var(--font-serif);
+      font-size: 2.1rem;
+      letter-spacing: 2px;
+      color: var(--color-charcoal);
+      font-weight: 500;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: var(--color-charcoal-muted);
+      position: relative;
+    }
+
+    .nav-link:hover {
+      color: var(--color-sage);
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 28px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      border-radius: var(--radius-full);
+      transition: var(--transition);
+    }
+
+    .btn-sage {
+      background: var(--color-sage);
+      color: #fff;
+    }
+
+    .btn-sage:hover {
+      background: var(--color-sage-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(83, 107, 86, 0.25);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--color-sage);
+      color: var(--color-sage);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      background: var(--color-sage-subtle);
+      transform: translateY(-2px);
+    }
+
+    .mobile-toggle {
+      display: none;
+      font-size: 1.5rem;
+      color: var(--color-charcoal);
+    }
+
+    /* MOBILE DRAWER */
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: 76px;
+      left: 0;
+      width: 100%;
+      background: var(--color-ivory);
+      border-bottom: 1px solid var(--color-border);
+      padding: 28px;
+      z-index: 99;
+    }
+
+    .mobile-drawer.open {
+      display: block;
+    }
+
+    .mobile-drawer ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .mobile-drawer a {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--color-charcoal);
+    }
+
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      padding: 90px 0 110px;
+      background: radial-gradient(circle at 75% 25%, rgba(83, 107, 86, 0.08), transparent 60%),
+                  linear-gradient(180deg, var(--color-ivory) 0%, var(--color-sand) 100%);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-sage-subtle);
+      color: var(--color-sage);
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(3.4rem, 6vw, 5.4rem);
+      line-height: 1.05;
+      font-weight: 400;
+      color: var(--color-charcoal);
+      margin-bottom: 24px;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--color-sage);
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: var(--color-charcoal-muted);
+      margin-bottom: 40px;
+      max-width: 520px;
+      font-weight: 400;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 45px;
+    }
+
+    .hero-trust-row {
+      display: flex;
+      gap: 36px;
+      border-top: 1px solid var(--color-border);
+      padding-top: 24px;
+    }
+
+    .trust-item h4 {
+      font-family: var(--font-serif);
+      font-size: 1.9rem;
+      font-weight: 500;
+      color: var(--color-sage);
+      line-height: 1;
+    }
+
+    .trust-item p {
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      color: var(--color-charcoal-muted);
+      margin-top: 4px;
+    }
+
+    /* Hero Visual */
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-img-wrap {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(63, 82, 66, 0.14);
+      border: 8px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .hero-img-wrap img {
+      width: 100%;
+      height: 540px;
+      object-fit: cover;
+    }
+
+    .hero-floating-quote {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      background: var(--color-ivory-pure);
+      padding: 20px 26px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 15px 35px rgba(63, 82, 66, 0.12);
+      border: 1px solid var(--color-border);
+      max-width: 280px;
+    }
+
+    .hero-floating-quote p {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--color-charcoal);
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+
+    .hero-floating-quote span {
+      font-size: 0.75rem;
+      color: var(--color-sage);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* SECTION STYLES */
+    .section {
+      padding: 110px 0;
+    }
+
+    .section-sand {
+      background: var(--color-sand);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 65px;
+    }
+
+    .section-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-sage);
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.6rem, 4.5vw, 3.8rem);
+      line-height: 1.1;
+      font-weight: 400;
+      color: var(--color-charcoal);
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      color: var(--color-charcoal-muted);
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    /* OUR CLASSES */
+    .classes-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 26px;
+    }
+
+    .class-card {
+      background: var(--color-ivory-pure);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+    }
+
+    .class-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(83, 107, 86, 0.12);
+      border-color: var(--color-sage);
+    }
+
+    .class-img {
+      height: 220px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .class-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .class-card:hover .class-img img {
+      transform: scale(1.06);
+    }
+
+    .class-intensity {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(250, 248, 245, 0.92);
+      backdrop-filter: blur(8px);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--color-sage);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      letter-spacing: 0.5px;
+    }
+
+    .class-body {
+      padding: 26px 22px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .class-title {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: var(--color-charcoal);
+      margin-bottom: 10px;
+    }
+
+    .class-desc {
+      color: var(--color-charcoal-muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .class-meta {
+      border-top: 1px solid var(--color-border);
+      padding-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--color-sage);
+      font-weight: 600;
+    }
+
+    /* FIND YOUR PRACTICE (INTERACTIVE QUIZ) */
+    .practice-box {
+      background: var(--color-ivory-pure);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      padding: 50px;
+      box-shadow: 0 15px 40px rgba(63, 82, 66, 0.06);
+    }
+
+    .practice-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+    }
+
+    .practice-tab-btn {
+      padding: 10px 24px;
+      border-radius: var(--radius-full);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--color-charcoal-muted);
+      border: 1px solid var(--color-border);
+      transition: var(--transition);
+    }
+
+    .practice-tab-btn.active, .practice-tab-btn:hover {
+      background: var(--color-sage);
+      color: #fff;
+      border-color: var(--color-sage);
+    }
+
+    .practice-content-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .practice-detail h3 {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      font-weight: 500;
+      color: var(--color-charcoal);
+      margin-bottom: 16px;
+    }
+
+    .practice-detail p {
+      color: var(--color-charcoal-muted);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .practice-img-card {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      height: 320px;
+    }
+
+    .practice-img-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* STUDIO EXPERIENCE */
+    .experience-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 26px;
+    }
+
+    .exp-item {
+      background: var(--color-ivory-pure);
+      padding: 36px 26px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      text-align: center;
+    }
+
+    .exp-icon {
+      font-size: 2.4rem;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .exp-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--color-charcoal);
+      margin-bottom: 10px;
+    }
+
+    .exp-desc {
+      color: var(--color-charcoal-muted);
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    /* MEET OUR INSTRUCTORS */
+    .instructors-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .instructor-card {
+      background: var(--color-ivory-pure);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .instructor-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(83, 107, 86, 0.1);
+    }
+
+    .instructor-img {
+      height: 360px;
+      overflow: hidden;
+    }
+
+    .instructor-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .instructor-body {
+      padding: 28px;
+      text-align: center;
+    }
+
+    .instructor-name {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: var(--color-charcoal);
+    }
+
+    .instructor-role {
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--color-sage);
+      margin: 4px 0 14px;
+    }
+
+    .instructor-bio {
+      color: var(--color-charcoal-muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    /* CLASS TIMETABLE */
+    .timetable-wrapper {
+      background: var(--color-ivory-pure);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(83, 107, 86, 0.05);
+    }
+
+    .timetable-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .timetable-table th, .timetable-table td {
+      padding: 18px 24px;
+      text-align: left;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .timetable-table th {
+      background: var(--color-sage-subtle);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-sage);
+    }
+
+    .timetable-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .class-time {
+      font-weight: 700;
+      color: var(--color-charcoal);
+    }
+
+    .class-tag-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: var(--color-sage-light);
+      color: var(--color-sage);
+    }
+
+    /* MEMBERSHIP OPTIONS */
+    .membership-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    .membership-card {
+      background: var(--color-ivory-pure);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 44px 32px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .membership-card:hover {
+      border-color: var(--color-sage);
+    }
+
+    .membership-card.sanctuary {
+      background: var(--color-sage);
+      color: #fff;
+      transform: scale(1.04);
+      box-shadow: 0 20px 50px rgba(83, 107, 86, 0.25);
+    }
+
+    .membership-card.sanctuary .mem-title,
+    .membership-card.sanctuary .mem-price,
+    .membership-card.sanctuary .mem-desc,
+    .membership-card.sanctuary li {
+      color: #fff;
+    }
+
+    .membership-card.sanctuary .btn-sage {
+      background: var(--color-ivory);
+      color: var(--color-sage);
+    }
+
+    .mem-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--color-olive-muted);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 16px;
+      border-radius: var(--radius-full);
+    }
+
+    .mem-title {
+      font-family: var(--font-serif);
+      font-size: 2.1rem;
+      font-weight: 500;
+      color: var(--color-charcoal);
+      margin-bottom: 8px;
+    }
+
+    .mem-desc {
+      color: var(--color-charcoal-muted);
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+    }
+
+    .mem-price {
+      font-family: var(--font-serif);
+      font-size: 3.5rem;
+      color: var(--color-charcoal);
+      line-height: 1;
+      margin-bottom: 28px;
+    }
+
+    .mem-price span {
+      font-size: 1.1rem;
+      font-family: var(--font-sans);
+    }
+
+    .mem-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 34px;
+      flex-grow: 1;
+      text-align: left;
+    }
+
+    .mem-list li {
+      font-size: 0.9rem;
+      color: var(--color-charcoal);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mem-list li::before {
+      content: '✦';
+      color: var(--color-sage);
+      font-size: 0.8rem;
+    }
+
+    .membership-card.sanctuary .mem-list li::before {
+      color: #fff;
+    }
+
+    /* STUDENT STORIES */
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .story-card {
+      background: var(--color-ivory-pure);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 36px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .story-quote {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--color-charcoal);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .student-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .student-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .student-name {
+      font-weight: 700;
+      color: var(--color-charcoal);
+      font-size: 0.95rem;
+    }
+
+    .student-practice {
+      font-size: 0.8rem;
+      color: var(--color-sage);
+    }
+
+    /* BOOK FIRST CLASS BANNER */
+    .booking-banner {
+      background: radial-gradient(circle at 100% 50%, rgba(83, 107, 86, 0.2), transparent 70%),
+                  var(--color-sage);
+      color: #fff;
+      border-radius: var(--radius-lg);
+      padding: 70px 60px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 50px;
+      align-items: center;
+      box-shadow: 0 25px 60px rgba(63, 82, 66, 0.2);
+    }
+
+    .booking-text h3 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 4.5vw, 4rem);
+      line-height: 1.1;
+      font-weight: 400;
+      margin-bottom: 18px;
+    }
+
+    .booking-text p {
+      color: #e5ece6;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: 26px;
+    }
+
+    .booking-form-box {
+      background: var(--color-ivory-pure);
+      color: var(--color-charcoal);
+      padding: 36px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-charcoal-muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      border-color: var(--color-sage);
+    }
+
+    /* FOOTER */
+    .footer {
+      background: #1c221d;
+      color: #fff;
+      padding: 90px 0 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand p {
+      color: #a4aea6;
+      font-size: 0.92rem;
+      margin-top: 16px;
+      max-width: 320px;
+      line-height: 1.7;
+    }
+
+    .footer-title {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      color: #fff;
+      margin-bottom: 22px;
+      font-weight: 500;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      color: #a4aea6;
+      font-size: 0.88rem;
+    }
+
+    .footer-links a:hover {
+      color: #fff;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      color: #79857b;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .hero-grid, .practice-content-card, .booking-banner {
+        grid-template-columns: 1fr;
+      }
+      .hero-content {
+        text-align: center;
+      }
+      .hero-subtitle {
+        margin: 0 auto 40px;
+      }
+      .hero-cta-group, .hero-trust-row {
+        justify-content: center;
+      }
+      .classes-grid, .experience-grid, .instructors-grid, .membership-grid, .stories-grid {
+        grid-template-columns: 1fr;
+      }
+      .membership-card.sanctuary {
+        transform: scale(1);
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .desktop-nav, .header-cta {
+        display: none;
+      }
+      .mobile-toggle {
+        display: block;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container nav-wrapper">
+      <a href="#" class="brand-logo">
+        <svg class="brand-lotus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M12 3c-1.5 3-4 6-7 7 3 1 5.5 4 7 7 1.5-3 4-6 7-7-3-1-5.5-4-7-7z"/>
+          <path d="M12 17c-2 2-5 3-8 3 3 1 7 1 8-3z"/>
+          <path d="M12 17c2 2 5 3 8 3-3 1-7 1-8-3z"/>
+        </svg>
+        <span class="brand-name">ZenFlow</span>
+      </a>
+
+      <nav class="desktop-nav">
+        <ul class="nav-links">
+          <li><a href="#classes" class="nav-link">Classes</a></li>
+          <li><a href="#practice" class="nav-link">Find Practice</a></li>
+          <li><a href="#studio" class="nav-link">Studio Experience</a></li>
+          <li><a href="#instructors" class="nav-link">Instructors</a></li>
+          <li><a href="#schedule" class="nav-link">Timetable</a></li>
+          <li><a href="#membership" class="nav-link">Sanctuary Passes</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-cta">
+        <a href="#book" class="btn btn-sage">Book A Session ✦</a>
+      </div>
+
+      <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle Menu">☰</button>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <ul>
+        <li><a href="#classes" onclick="toggleMenu()">Our Classes</a></li>
+        <li><a href="#practice" onclick="toggleMenu()">Find Your Practice</a></li>
+        <li><a href="#studio" onclick="toggleMenu()">Studio Experience</a></li>
+        <li><a href="#instructors" onclick="toggleMenu()">Instructors</a></li>
+        <li><a href="#schedule" onclick="toggleMenu()">Class Timetable</a></li>
+        <li><a href="#membership" onclick="toggleMenu()">Membership</a></li>
+        <li><a href="#book" class="btn btn-sage" style="width: 100%; margin-top: 10px;" onclick="toggleMenu()">Book First Class</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">Mindful Movement · Reformer Pilates · Breathwork</div>
+        <h1 class="hero-title">Move. Breathe. <br><em>Feel Alive.</em></h1>
+        <p class="hero-subtitle">Discover the balance of movement, strength and mindfulness through Pilates, yoga and breathwork.</p>
+        
+        <div class="hero-cta-group">
+          <a href="#classes" class="btn btn-sage">Explore Classes ✦</a>
+          <a href="#book" class="btn btn-outline">Book a Session</a>
+        </div>
+
+        <div class="hero-trust-row">
+          <div class="trust-item">
+            <h4>42°C</h4>
+            <p>Infrared Studio Heat</p>
+          </div>
+          <div class="trust-item">
+            <h4>500+</h4>
+            <p>Hours Certified Instructors</p>
+          </div>
+          <div class="trust-item">
+            <h4>100%</h4>
+            <p>Organic Non-Toxic Linens</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-img-wrap">
+          <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1200&q=85" alt="Serene woman in mindful yoga pose with natural daylight">
+        </div>
+        <div class="hero-floating-quote">
+          <p>"The body benefits from movement, and the mind benefits from stillness."</p>
+          <span>Sakyong Mipham</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR CLASSES -->
+  <section class="section" id="classes">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Conscious Disciplines</span>
+        <h2 class="section-title">Our Classes</h2>
+        <p class="section-desc">Each session is structured to cultivate neuromuscular connection, deep core stability, and somatic release.</p>
+      </div>
+
+      <div class="classes-grid">
+        <!-- 1. Reformer Pilates -->
+        <div class="class-card">
+          <div class="class-img">
+            <span class="class-intensity">Signature Strength</span>
+            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=800&q=80" alt="Reformer Pilates Class">
+          </div>
+          <div class="class-body">
+            <h3 class="class-title">Reformer Pilates</h3>
+            <p class="class-desc">Spring-loaded resistance on our custom Allegro 2 reformers. Sculpt long, lean muscle, improve posture, and cultivate core resilience.</p>
+            <div class="class-meta">
+              <span>50 Minutes</span>
+              <a href="#book">Book ✦</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Heated Vinyasa -->
+        <div class="class-card">
+          <div class="class-img">
+            <span class="class-intensity">Infrared Warmth</span>
+            <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80" alt="Heated Vinyasa Yoga">
+          </div>
+          <div class="class-body">
+            <h3 class="class-title">Heated Vinyasa</h3>
+            <p class="class-desc">Gentle infrared warmth warms the joints while continuous breath-synchronized flows flush toxins and expand cardiovascular endurance.</p>
+            <div class="class-meta">
+              <span>60 Minutes</span>
+              <a href="#book">Book ✦</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Mat Pilates -->
+        <div class="class-card">
+          <div class="class-img">
+            <span class="class-intensity">Classical Foundation</span>
+            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=800&q=80" alt="Mat Pilates">
+          </div>
+          <div class="class-body">
+            <h3 class="class-title">Mat Pilates</h3>
+            <p class="class-desc">Traditional Joseph Pilates sequencing combined with small props (magic circles, resistance bands) to tone the deep pelvic floor and back.</p>
+            <div class="class-meta">
+              <span>45 Minutes</span>
+              <a href="#book">Book ✦</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Breathwork -->
+        <div class="class-card">
+          <div class="class-img">
+            <span class="class-intensity">Somatic Healing</span>
+            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80" alt="Breathwork and Sound Bath">
+          </div>
+          <div class="class-body">
+            <h3 class="class-title">Breathwork</h3>
+            <p class="class-desc">Pranayama breathing techniques paired with 432Hz frosted quartz singing bowl frequencies to downregulate the nervous system into restorative theta states.</p>
+            <div class="class-meta">
+              <span>55 Minutes</span>
+              <a href="#book">Book ✦</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIND YOUR PRACTICE (INTERACTIVE SELECTOR) -->
+  <section class="section section-sand" id="practice">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Personalized Wellness</span>
+        <h2 class="section-title">Find Your Practice</h2>
+        <p class="section-desc">Whether you seek cardiovascular vitality, spinal rehabilitation, or mental stillness, there is a tailored mat waiting for you.</p>
+      </div>
+
+      <div class="practice-box">
+        <div class="practice-tabs">
+          <button class="practice-tab-btn active" onclick="switchPractice('beginner', this)">Gentle & Beginner</button>
+          <button class="practice-tab-btn" onclick="switchPractice('athletic', this)">Athletic Strength</button>
+          <button class="practice-tab-btn" onclick="switchPractice('restorative', this)">Deep Restoration</button>
+          <button class="practice-tab-btn" onclick="switchPractice('stress', this)">Stress & Nervous System</button>
+        </div>
+
+        <div class="practice-content-card" id="practiceContent">
+          <div class="practice-detail">
+            <h3 id="pTitle">Foundation Reformer & Gentle Flow</h3>
+            <p id="pDesc">Designed for those new to mindful movement or returning after an injury. Our instructors guide you with tactile cues, proper spring setting setup, and foundational spinal mechanics in a welcoming, low-pressure sanctuary.</p>
+            <a href="#book" class="btn btn-sage">Start With Beginner Intro ✦</a>
+          </div>
+          <div class="practice-img-card">
+            <img id="pImg" src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80" alt="Gentle yoga practice">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR STUDIO EXPERIENCE -->
+  <section class="section" id="studio">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Architectural Sanctuary</span>
+        <h2 class="section-title">Our Studio Experience</h2>
+        <p class="section-desc">Every detail of our space has been carefully curated to awaken tranquility the moment you step off the street.</p>
+      </div>
+
+      <div class="experience-grid">
+        <div class="exp-item">
+          <span class="exp-icon">☀️</span>
+          <h4 class="exp-title">Infrared Radiant Heat</h4>
+          <p class="exp-desc">Therapeutic radiant heating warms the body directly rather than heating stale air, easing tight muscles without stuffiness.</p>
+        </div>
+
+        <div class="exp-item">
+          <span class="exp-icon">🌿</span>
+          <h4 class="exp-title">Eucalyptus Steam</h4>
+          <p class="exp-desc">Complimentary post-class organic eucalyptus showers, plush bamboo towels, and chilled botanical lavender cloths.</p>
+        </div>
+
+        <div class="exp-item">
+          <span class="exp-icon">✨</span>
+          <h4 class="exp-title">Acoustic Soundscapes</h4>
+          <p class="exp-desc">Custom sound absorption and spatial audio calibrated to organic frequencies that induce parasympathetic restoration.</p>
+        </div>
+
+        <div class="exp-item">
+          <span class="exp-icon">🍵</span>
+          <h4 class="exp-title">Herbal Tea Lounge</h4>
+          <p class="exp-desc">Unwind before and after practice in our serene lounge with organic loose-leaf infusions and filtered alkaline hydration.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEET OUR INSTRUCTORS -->
+  <section class="section section-sand" id="instructors">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Soulful Guides</span>
+        <h2 class="section-title">Meet Our Instructors</h2>
+        <p class="section-desc">Guiding your journey with empathy, rigorous anatomical credentials, and genuine warmth.</p>
+      </div>
+
+      <div class="instructors-grid">
+        <div class="instructor-card">
+          <div class="instructor-img">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Instructor Maya Lin">
+          </div>
+          <div class="instructor-body">
+            <h4 class="instructor-name">Maya Lin</h4>
+            <div class="instructor-role">Lead Reformer & Movement Specialist</div>
+            <p class="instructor-bio">Certified Classical Pilates instructor with 10 years experience helping clients realign the spine and build lifelong core integrity.</p>
+          </div>
+        </div>
+
+        <div class="instructor-card">
+          <div class="instructor-img">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="Instructor Priya Sharma">
+          </div>
+          <div class="instructor-body">
+            <h4 class="instructor-name">Priya Sharma</h4>
+            <div class="instructor-role">500-RYT Vinyasa & Breathwork Guide</div>
+            <p class="instructor-bio">Trained in Rishikesh and California. Priya blends dynamic fluid transitions with grounding pranayama and sound bowl therapy.</p>
+          </div>
+        </div>
+
+        <div class="instructor-card">
+          <div class="instructor-img">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80" alt="Instructor Julian Mercer">
+          </div>
+          <div class="instructor-body">
+            <h4 class="instructor-name">Julian Mercer</h4>
+            <div class="instructor-role">Somatic Yoga & Mobility Coach</div>
+            <p class="instructor-bio">Kinesiologist dedicated to nervous system down-regulation, myofascial release, and mindful mobility for everyday resilience.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLASS TIMETABLE -->
+  <section class="section" id="schedule">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Plan Your Week</span>
+        <h2 class="section-title">Class Timetable</h2>
+        <p class="section-desc">Reserve your reformer or mat up to 7 days in advance through our studio schedule.</p>
+      </div>
+
+      <div class="timetable-wrapper">
+        <table class="timetable-table">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Class Discipline</th>
+              <th>Instructor</th>
+              <th>Room</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="class-time">07:00 AM</td>
+              <td><strong>Morning Sunrise Flow</strong> <span class="class-tag-badge">Heated Vinyasa</span></td>
+              <td>Priya Sharma</td>
+              <td>Lotus Sanctuary (40°C)</td>
+              <td><a href="#book" class="btn btn-outline" style="padding: 6px 16px; font-size: 0.78rem;">Reserve</a></td>
+            </tr>
+            <tr>
+              <td class="class-time">09:30 AM</td>
+              <td><strong>Sculpt & Core Allegro</strong> <span class="class-tag-badge">Reformer Pilates</span></td>
+              <td>Maya Lin</td>
+              <td>Reformer Studio A</td>
+              <td><a href="#book" class="btn btn-outline" style="padding: 6px 16px; font-size: 0.78rem;">Reserve</a></td>
+            </tr>
+            <tr>
+              <td class="class-time">12:15 PM</td>
+              <td><strong>Express Midday Recharge</strong> <span class="class-tag-badge">Mat Pilates</span></td>
+              <td>Julian Mercer</td>
+              <td>Grounding Hall</td>
+              <td><a href="#book" class="btn btn-outline" style="padding: 6px 16px; font-size: 0.78rem;">Reserve</a></td>
+            </tr>
+            <tr>
+              <td class="class-time">05:30 PM</td>
+              <td><strong>Athletic Power Vinyasa</strong> <span class="class-tag-badge">Heated Vinyasa</span></td>
+              <td>Priya Sharma</td>
+              <td>Lotus Sanctuary (42°C)</td>
+              <td><a href="#book" class="btn btn-outline" style="padding: 6px 16px; font-size: 0.78rem;">Reserve</a></td>
+            </tr>
+            <tr>
+              <td class="class-time">07:00 PM</td>
+              <td><strong>Candlelight Sound Bath</strong> <span class="class-tag-badge">Breathwork</span></td>
+              <td>Julian Mercer</td>
+              <td>Acoustic Sanctuary</td>
+              <td><a href="#book" class="btn btn-outline" style="padding: 6px 16px; font-size: 0.78rem;">Reserve</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEMBERSHIP OPTIONS -->
+  <section class="section section-sand" id="membership">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Commitment To Self</span>
+        <h2 class="section-title">Membership Options</h2>
+        <p class="section-desc">Designed with flexibility and serenity in mind. Choose your journey.</p>
+      </div>
+
+      <div class="membership-grid">
+        <!-- Drop-in -->
+        <div class="membership-card">
+          <h3 class="mem-title">Single Drop-In</h3>
+          <p class="mem-desc">Ideal for traveling visitors or those wanting to try a single session.</p>
+          <div class="mem-price">$32 <span>/class</span></div>
+          <ul class="mem-list">
+            <li>Access to any Mat or Heated class</li>
+            <li>Complimentary eco-mat and towel hire</li>
+            <li>Eucalyptus shower & steam access</li>
+            <li>Valid for 30 days from purchase</li>
+          </ul>
+          <a href="#book" class="btn btn-outline" style="width: 100%;">Buy Single Class</a>
+        </div>
+
+        <!-- 10-Class Pack -->
+        <div class="membership-card">
+          <h3 class="mem-title">10-Class Pack</h3>
+          <p class="mem-desc">Flexibility for those practicing once or twice a week.</p>
+          <div class="mem-price">$260 <span>/10 pack</span></div>
+          <ul class="mem-list">
+            <li>Save $60 compared to drop-in rates</li>
+            <li>Valid for Reformer, Yoga, & Breathwork</li>
+            <li>Bring a guest free once per pack</li>
+            <li>Valid for 6 full months</li>
+          </ul>
+          <a href="#book" class="btn btn-outline" style="width: 100%;">Get 10-Class Pack</a>
+        </div>
+
+        <!-- Sanctuary Unlimited -->
+        <div class="membership-card sanctuary">
+          <span class="mem-badge">Most Loved</span>
+          <h3 class="mem-title">Unlimited Sanctuary</h3>
+          <p class="mem-desc">For dedicated practitioners making movement their daily ritual.</p>
+          <div class="mem-price">$195 <span>/month</span></div>
+          <ul class="mem-list">
+            <li>Unlimited Heated Yoga, Mat & Breathwork</li>
+            <li>4 Reformer Pilates classes per month</li>
+            <li>10% off studio boutique & sound workshops</li>
+            <li>Pause anytime for travel up to 30 days</li>
+            <li>Complimentary mat storage locker</li>
+          </ul>
+          <a href="#book" class="btn btn-sage" style="width: 100%;">Join Sanctuary ✦</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STUDENT STORIES -->
+  <section class="section" id="stories">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Shared Resonance</span>
+        <h2 class="section-title">Student Stories</h2>
+        <p class="section-desc">Voices from our cherished wellness community.</p>
+      </div>
+
+      <div class="stories-grid">
+        <div class="story-card">
+          <p class="story-quote">"ZenFlow is my quiet sanctuary in the middle of a frantic week. The reformer classes completely healed my chronic sciatica, and Maya is the most intuitive instructor I've ever had."</p>
+          <div class="student-info">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80" alt="Chloe Bennett" class="student-avatar">
+            <div>
+              <div class="student-name">Chloe Bennett</div>
+              <div class="student-practice">Practicing 2 Years · Reformer Pilates</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="story-card">
+          <p class="story-quote">"The heated infrared yoga studio feels completely different from stuffy hot yoga studios. My lung capacity has expanded, my shoulders feel free, and the Friday evening sound bath is pure medicine."</p>
+          <div class="student-info">
+            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&q=80" alt="Lucas Moreau" class="student-avatar">
+            <div>
+              <div class="student-name">Lucas Moreau</div>
+              <div class="student-practice">Practicing 18 Months · Heated Vinyasa</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="story-card">
+          <p class="story-quote">"As a busy mother of three, the 55-minute breathwork class was the first time in years I felt genuinely grounded and still. The eucalyptus showers afterward are heavenly."</p>
+          <div class="student-info">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Nadia Ramos" class="student-avatar">
+            <div>
+              <div class="student-name">Nadia Ramos</div>
+              <div class="student-practice">Practicing 1 Year · Breathwork & Mat</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOK YOUR FIRST CLASS (WELCOME OFFER) -->
+  <section class="section section-sand" id="book">
+    <div class="container">
+      <div class="booking-banner">
+        <div class="booking-text">
+          <span class="section-eyebrow" style="color: #e2ede4;">New Student Invitation</span>
+          <h3>Book Your First Class</h3>
+          <p>Experience the ZenFlow sanctuary with our welcome offer: <strong>$49 for 14 Days of Unlimited Classes</strong>. Mat and organic bamboo towel hire included.</p>
+        </div>
+
+        <div class="booking-form-box">
+          <form id="bookingForm" onsubmit="handleBookingSubmit(event)">
+            <div class="form-group">
+              <label class="form-label">Your Name</label>
+              <input type="text" class="form-control" placeholder="E.g. Emma Watson" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-control" placeholder="emma@email.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Preferred Discipline</label>
+              <select class="form-control">
+                <option>Reformer Pilates (Allegro 2)</option>
+                <option>Heated Vinyasa Yoga (Infrared)</option>
+                <option>Classical Mat Pilates</option>
+                <option>Pranayama Breathwork & Sound Bath</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-sage" style="width: 100%; margin-top: 10px;">Claim $49 Welcome Pass ✦</button>
+          </form>
+          <div id="bookingSuccess" style="display: none; margin-top: 15px; color: var(--color-sage); text-align: center; font-weight: 600; font-size: 0.9rem;">
+            ✓ Your invitation is confirmed! Check your inbox for studio arrival instructions.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div style="display: flex; align-items: center; gap: 10px; font-family: var(--font-serif); font-size: 2rem;">
+          <span>ZenFlow</span>
+        </div>
+        <p>A minimalist luxury movement sanctuary dedicated to mindful breath, athletic Pilates, and holistic nervous system harmony.</p>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Disciplines</h4>
+        <ul class="footer-links">
+          <li><a href="#classes">Reformer Pilates</a></li>
+          <li><a href="#classes">Heated Vinyasa</a></li>
+          <li><a href="#classes">Mat Pilates</a></li>
+          <li><a href="#classes">Pranayama Breathwork</a></li>
+          <li><a href="#classes">Sound Healing</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Studio</h4>
+        <ul class="footer-links">
+          <li><a href="#studio">Studio Experience</a></li>
+          <li><a href="#schedule">Class Timetable</a></li>
+          <li><a href="#instructors">Our Instructors</a></li>
+          <li><a href="#membership">Sanctuary Passes</a></li>
+          <li><a href="#stories">Community Stories</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Sanctuary Location</h4>
+        <p style="color: #a4aea6; font-size: 0.9rem; line-height: 1.8;">
+          240 Lotus Meadow Way, Garden Pavilion<br>
+          Metropolitan Wellness Enclave<br>
+          <strong style="color: #fff;">Open:</strong> Mon–Sun 6:30 AM – 9:00 PM<br>
+          <a href="tel:5550198855" style="color: #fff;">(555) 019-8855</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div>© 2026 ZenFlow Mindful Studio. All rights reserved. Move. Breathe. Feel Alive.</div>
+      <div style="display: flex; gap: 24px;">
+        <a href="#classes">Classes</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#studio">Studio</a>
+        <a href="#instructors">Instructors</a>
+        <a href="#book">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const drawer = document.getElementById('mobileDrawer');
+      drawer.classList.toggle('open');
+    }
+    document.getElementById('mobileMenuBtn').addEventListener('click', toggleMenu);
+
+    const practiceData = {
+      beginner: {
+        title: "Foundation Reformer & Gentle Flow",
+        desc: "Designed for those new to mindful movement or returning after an injury. Our instructors guide you with tactile cues, proper spring setting setup, and foundational spinal mechanics in a welcoming, low-pressure sanctuary.",
+        img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80"
+      },
+      athletic: {
+        title: "High-Intensity Reformer & Power Vinyasa",
+        desc: "Dynamic athletic sequencing incorporating heavy reformer carriage jumps, isometric holds, core burnouts, and challenging balance postures to boost strength and muscle tone.",
+        img: "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=800&q=80"
+      },
+      restorative: {
+        title: "Yin & Myofascial Somatic Release",
+        desc: "Long-held passive poses supported by organic cork blocks and organic cotton bolsters. Targets deep connective fascia, joint ligaments, and quiet emotional surrender.",
+        img: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=800&q=80"
+      },
+      stress: {
+        title: "Breathwork, Yoga Nidra & Sound Immersion",
+        desc: "A soothing balm for busy minds. Transition gently through slow nervous-system reset postures before resting in guided Yoga Nidra accompanied by crystal singing bowls.",
+        img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80"
+      }
+    };
+
+    function switchPractice(key, btn) {
+      document.querySelectorAll('.practice-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const data = practiceData[key];
+      document.getElementById('pTitle').textContent = data.title;
+      document.getElementById('pDesc').textContent = data.desc;
+      document.getElementById('pImg').src = data.img;
+    }
+
+    function handleBookingSubmit(e) {
+      e.preventDefault();
+      document.getElementById('bookingSuccess').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('bookingForm').reset();
+      }, 1000);
+    }
+  </script>
+</body>
+</html>

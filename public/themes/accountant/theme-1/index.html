@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProTax | Modern Accounting, Strategic Tax Planning & Fractional CFO</title>
+  <meta name="description" content="Smarter Tax Decisions. Stronger Financial Futures. Strategic tax planning, reliable accounting and fractional CFO services to help businesses make confident financial decisions.">
+
+  <!-- Google Fonts: Plus Jakarta Sans / Manrope -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       PROTAX - DESIGN SYSTEM & TOKENS
+       Identity: Modern financial advisory, fintech precision, corporate trust.
+       Colors: Pure white, navy blue, royal blue, light grey, mint green.
+       Typography: Professional geometric sans-serif + technical monospace accents.
+       ========================================================================== */
+    :root {
+      --color-white: #ffffff;
+      --color-bg-light: #f8fafc;
+      --color-navy-dark: #090e1a;
+      --color-navy: #0f172a;
+      --color-navy-card: #1e293b;
+      --color-blue-royal: #2563eb;
+      --color-blue-hover: #1d4ed8;
+      --color-blue-light: #eff6ff;
+      --color-mint: #10b981;
+      --color-mint-light: rgba(16, 185, 129, 0.12);
+      --color-text-main: #0f172a;
+      --color-text-muted: #64748b;
+      --color-border: #e2e8f0;
+      --color-border-card: rgba(226, 232, 240, 0.8);
+
+      --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'Space Grotesk', monospace;
+
+      --container: 1260px;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-pill: 999px;
+      --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 12px 32px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 20px 50px rgba(37, 99, 235, 0.12);
+      --transition: all 0.25s ease;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--color-bg-light);
+      color: var(--color-text-main);
+      font-family: var(--font-main);
+    }
+
+    body {
+      background-color: var(--color-bg-light);
+      color: var(--color-text-main);
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* HEADER */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 16px 0;
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--color-navy);
+      letter-spacing: -0.5px;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--color-blue-royal) 0%, #1e40af 100%);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .brand-logo span {
+      color: var(--color-blue-royal);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--color-text-main);
+    }
+
+    .nav-link:hover {
+      color: var(--color-blue-royal);
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 26px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+    }
+
+    .btn-blue {
+      background: var(--color-blue-royal);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-blue:hover {
+      background: var(--color-blue-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(37, 99, 235, 0.4);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--color-border);
+      color: var(--color-navy);
+      background: #fff;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--color-blue-royal);
+      color: var(--color-blue-royal);
+      transform: translateY(-2px);
+    }
+
+    .mobile-toggle {
+      display: none;
+      font-size: 1.5rem;
+      color: var(--color-navy);
+    }
+
+    /* MOBILE DRAWER */
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: 76px;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      border-bottom: 2px solid var(--color-blue-royal);
+      padding: 24px;
+      z-index: 99;
+      box-shadow: var(--shadow-md);
+    }
+
+    .mobile-drawer.open {
+      display: block;
+    }
+
+    .mobile-drawer ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mobile-drawer a {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--color-navy);
+    }
+
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      padding: 90px 0 110px;
+      background: radial-gradient(circle at 75% 20%, rgba(37, 99, 235, 0.08), transparent 50%),
+                  linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-blue-light);
+      border: 1px solid rgba(37, 99, 235, 0.2);
+      color: var(--color-blue-royal);
+      padding: 6px 16px;
+      border-radius: var(--radius-pill);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 22px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.8rem, 5vw, 4.3rem);
+      line-height: 1.1;
+      font-weight: 800;
+      color: var(--color-navy);
+      letter-spacing: -1px;
+      margin-bottom: 22px;
+    }
+
+    .hero-title span {
+      color: var(--color-blue-royal);
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: var(--color-text-muted);
+      margin-bottom: 38px;
+      max-width: 530px;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 45px;
+    }
+
+    .hero-metrics-bar {
+      display: flex;
+      gap: 36px;
+      border-top: 1px solid var(--color-border);
+      padding-top: 24px;
+    }
+
+    .metric-col h4 {
+      font-family: var(--font-mono);
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--color-navy);
+      line-height: 1;
+    }
+
+    .metric-col p {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      margin-top: 4px;
+    }
+
+    /* Hero Dashboard Visual */
+    .hero-visual {
+      position: relative;
+    }
+
+    .dashboard-preview-card {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      padding: 30px;
+      position: relative;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .dashboard-live-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--color-mint-light);
+      color: var(--color-mint);
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+    }
+
+    .kpi-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .kpi-box {
+      background: var(--color-bg-light);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+    }
+
+    .kpi-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 6px;
+    }
+
+    .kpi-value {
+      font-family: var(--font-mono);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--color-navy);
+      line-height: 1;
+    }
+
+    .kpi-delta {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--color-mint);
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .cashflow-chart-snippet {
+      background: var(--color-navy-dark);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      color: #fff;
+    }
+
+    .chart-bar-group {
+      display: flex;
+      align-items: flex-end;
+      gap: 14px;
+      height: 90px;
+      margin-top: 14px;
+      padding-top: 10px;
+    }
+
+    .chart-bar {
+      flex: 1;
+      background: var(--color-blue-royal);
+      border-radius: 4px 4px 0 0;
+      transition: height 0.5s ease;
+    }
+
+    .chart-bar.highlight {
+      background: var(--color-mint);
+    }
+
+    /* SECTION BASICS */
+    .section {
+      padding: 100px 0;
+    }
+
+    .section-white {
+      background: #ffffff;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 60px;
+    }
+
+    .section-badge {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--color-blue-royal);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .section-title {
+      font-size: clamp(2.4rem, 4vw, 3.4rem);
+      font-weight: 800;
+      color: var(--color-navy);
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      color: var(--color-text-muted);
+      font-size: 1.05rem;
+    }
+
+    /* OUR SERVICES (6 CARDS) */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .service-card {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 36px 30px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .service-card:hover {
+      border-color: var(--color-blue-royal);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .service-icon-box {
+      width: 50px;
+      height: 50px;
+      border-radius: var(--radius-sm);
+      background: var(--color-blue-light);
+      color: var(--color-blue-royal);
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+    }
+
+    .service-card-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--color-navy);
+      margin-bottom: 12px;
+    }
+
+    .service-card-desc {
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      margin-bottom: 22px;
+      flex-grow: 1;
+    }
+
+    .service-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border-top: 1px solid var(--color-border);
+      padding-top: 18px;
+      font-size: 0.85rem;
+      color: var(--color-text-main);
+      margin-bottom: 16px;
+    }
+
+    .service-features li::before {
+      content: '✓ ';
+      color: var(--color-blue-royal);
+      font-weight: 800;
+    }
+
+    .service-action-link {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--color-blue-royal);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* WHO WE SERVE */
+    .industries-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .client-segment-card {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 32px 24px;
+      box-shadow: var(--shadow-sm);
+      border-top: 4px solid var(--color-blue-royal);
+    }
+
+    .segment-name {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--color-navy);
+      margin-bottom: 10px;
+    }
+
+    .segment-desc {
+      color: var(--color-text-muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .segment-metric {
+      background: var(--color-bg-light);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--color-blue-royal);
+    }
+
+    /* OUR FINANCIAL APPROACH */
+    .approach-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .approach-text h3 {
+      font-size: clamp(2.4rem, 4vw, 3.4rem);
+      font-weight: 800;
+      color: var(--color-navy);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .approach-text p {
+      color: var(--color-text-muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 26px;
+    }
+
+    .approach-pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .pillar-row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .pillar-icon-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--color-mint-light);
+      color: var(--color-mint);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .pillar-row h4 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--color-navy);
+    }
+
+    .pillar-row p {
+      font-size: 0.92rem;
+      color: var(--color-text-muted);
+      margin-bottom: 0;
+    }
+
+    .approach-media img {
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      height: 480px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    /* MEET OUR EXPERTS */
+    .experts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .expert-card {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .expert-card:hover {
+      border-color: var(--color-blue-royal);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .expert-img {
+      height: 320px;
+      overflow: hidden;
+    }
+
+    .expert-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .expert-body {
+      padding: 26px;
+    }
+
+    .expert-name {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--color-navy);
+    }
+
+    .expert-role {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--color-blue-royal);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 4px 0 14px;
+    }
+
+    .expert-bio {
+      color: var(--color-text-muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    /* CLIENT SUCCESS STORIES */
+    .case-studies-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .case-card {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .case-metric-banner {
+      background: var(--color-mint-light);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .case-metric-val {
+      font-family: var(--font-mono);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #047857;
+      line-height: 1;
+    }
+
+    .case-metric-sub {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-top: 4px;
+    }
+
+    .case-quote {
+      font-style: italic;
+      color: var(--color-text-main);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    .case-client h5 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--color-navy);
+    }
+
+    .case-client span {
+      font-size: 0.8rem;
+      color: var(--color-blue-royal);
+    }
+
+    /* FINANCIAL INSIGHTS & CALCULATOR */
+    .calc-container {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 50px;
+      box-shadow: var(--shadow-md);
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .calc-info h3 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--color-navy);
+      margin-bottom: 16px;
+    }
+
+    .calc-info p {
+      color: var(--color-text-muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .calc-box {
+      background: var(--color-bg-light);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 30px;
+    }
+
+    .range-group {
+      margin-bottom: 20px;
+    }
+
+    .range-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .calc-result-box {
+      background: var(--color-navy);
+      color: #fff;
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    .calc-res-num {
+      font-family: var(--font-mono);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--color-mint);
+      line-height: 1;
+    }
+
+    /* BOOK YOUR CONSULTATION */
+    .consult-card {
+      background: linear-gradient(135deg, var(--color-navy) 0%, #1e293b 100%);
+      color: #fff;
+      border-radius: var(--radius-lg);
+      padding: 60px;
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 50px;
+      align-items: center;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .consult-info h3 {
+      font-size: clamp(2.6rem, 4.5vw, 3.8rem);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 18px;
+      line-height: 1.1;
+    }
+
+    .consult-info p {
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 26px;
+    }
+
+    .consult-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: #f1f5f9;
+    }
+
+    .consult-bullets li::before {
+      content: '✓ ';
+      color: var(--color-mint);
+      font-weight: 800;
+    }
+
+    .consult-form-box {
+      background: #fff;
+      color: var(--color-text-main);
+      border-radius: var(--radius-md);
+      padding: 34px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-text-muted);
+      margin-bottom: 6px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-main);
+      font-size: 0.95rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      border-color: var(--color-blue-royal);
+    }
+
+    /* FOOTER */
+    .footer {
+      background: #090e1a;
+      color: #fff;
+      padding: 80px 0 36px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand p {
+      color: #94a3b8;
+      font-size: 0.92rem;
+      margin-top: 16px;
+      max-width: 320px;
+      line-height: 1.7;
+    }
+
+    .footer-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-blue-royal);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .hero-grid, .approach-grid, .calc-container, .consult-card {
+        grid-template-columns: 1fr;
+      }
+      .hero-content {
+        text-align: center;
+      }
+      .hero-subtitle {
+        margin: 0 auto 38px;
+      }
+      .hero-cta-group, .hero-metrics-bar {
+        justify-content: center;
+      }
+      .services-grid, .industries-grid, .experts-grid, .case-studies-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .desktop-nav, .header-cta {
+        display: none;
+      }
+      .mobile-toggle {
+        display: block;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container nav-wrapper">
+      <a href="#" class="brand-logo">
+        <div class="brand-icon">P</div>
+        <div>Pro<span>Tax</span></div>
+      </a>
+
+      <nav class="desktop-nav">
+        <ul class="nav-links">
+          <li><a href="#services" class="nav-link">Our Services</a></li>
+          <li><a href="#industries" class="nav-link">Who We Serve</a></li>
+          <li><a href="#approach" class="nav-link">Financial Approach</a></li>
+          <li><a href="#experts" class="nav-link">Meet Experts</a></li>
+          <li><a href="#results" class="nav-link">Case Studies</a></li>
+          <li><a href="#calculator" class="nav-link">Tax Calculator</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-cta">
+        <a href="#consultation" class="btn btn-blue">Book Consultation ➔</a>
+      </div>
+
+      <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle Menu">☰</button>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <ul>
+        <li><a href="#services" onclick="toggleMenu()">Our Services</a></li>
+        <li><a href="#industries" onclick="toggleMenu()">Who We Serve</a></li>
+        <li><a href="#approach" onclick="toggleMenu()">Financial Approach</a></li>
+        <li><a href="#experts" onclick="toggleMenu()">Meet Experts</a></li>
+        <li><a href="#results" onclick="toggleMenu()">Case Studies</a></li>
+        <li><a href="#calculator" onclick="toggleMenu()">Tax Calculator</a></li>
+        <li><a href="#consultation" class="btn btn-blue" style="width: 100%; margin-top: 10px;" onclick="toggleMenu()">Book Consultation</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">CPA & Advisory · Modern Fintech Accounting</div>
+        <h1 class="hero-title">Smarter Tax Decisions. <br><span>Stronger Financial Futures.</span></h1>
+        <p class="hero-subtitle">Strategic tax planning, reliable accounting and fractional CFO services to help businesses make confident financial decisions.</p>
+        
+        <div class="hero-cta-group">
+          <a href="#consultation" class="btn btn-blue">Book a Consultation ➔</a>
+          <a href="#services" class="btn btn-outline">Explore Our Services</a>
+        </div>
+
+        <div class="hero-metrics-bar">
+          <div class="metric-col">
+            <h4>$42M+</h4>
+            <p>Tax Liability Saved</p>
+          </div>
+          <div class="metric-col">
+            <h4>99.8%</h4>
+            <p>On-Time Filing Record</p>
+          </div>
+          <div class="metric-col">
+            <h4>350+</h4>
+            <p>Active Corporate Clients</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="dashboard-preview-card">
+          <div class="dashboard-header">
+            <div>
+              <div style="font-weight: 800; font-size: 1.1rem; color: var(--color-navy);">Executive Financial Overview</div>
+              <div style="font-size: 0.8rem; color: var(--color-text-muted);">Real-time GAAP Reconciliation</div>
+            </div>
+            <span class="dashboard-live-tag">● Live Synced</span>
+          </div>
+
+          <div class="kpi-row">
+            <div class="kpi-box">
+              <div class="kpi-title">Effective Tax Rate</div>
+              <div class="kpi-value">16.4%</div>
+              <div class="kpi-delta">↓ -8.2% via R&D Credits</div>
+            </div>
+            <div class="kpi-box">
+              <div class="kpi-title">Monthly Net Margin</div>
+              <div class="kpi-value">31.8%</div>
+              <div class="kpi-delta">↑ +4.5% vs Prior Qtr</div>
+            </div>
+          </div>
+
+          <div class="cashflow-chart-snippet">
+            <div style="display: flex; justify-content: space-between; font-size: 0.82rem;">
+              <span>Cash Flow Forecast (Next 6 Mo)</span>
+              <span style="color: var(--color-mint); font-weight: 700;">Runway: 22 Months</span>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar" style="height: 50%;"></div>
+              <div class="chart-bar" style="height: 65%;"></div>
+              <div class="chart-bar" style="height: 58%;"></div>
+              <div class="chart-bar" style="height: 80%;"></div>
+              <div class="chart-bar" style="height: 72%;"></div>
+              <div class="chart-bar highlight" style="height: 95%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR SERVICES (6 CORE PILLARS) -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Full-Service Financial Suite</span>
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-desc">From corporate compliance to forward-looking fractional CFO modeling, we manage your complete fiscal lifecycle.</p>
+      </div>
+
+      <div class="services-grid">
+        <!-- 1. Tax Preparation -->
+        <div class="service-card">
+          <div class="service-icon-box">📊</div>
+          <h3 class="service-card-title">Tax Preparation</h3>
+          <p class="service-card-desc">Federal, multi-state, and cross-border corporate returns prepared by licensed CPAs. Rigorous review to maximize depreciation, credits, and audit insulation.</p>
+          <ul class="service-features">
+            <li>Form 1120, 1120-S, 1065 & State Filings</li>
+            <li>R&D Tax Credit (Section 41) Filings</li>
+            <li>IRS Audit Representation & Defense</li>
+          </ul>
+          <a href="#consultation" class="service-action-link">Learn More ➔</a>
+        </div>
+
+        <!-- 2. Business Accounting -->
+        <div class="service-card">
+          <div class="service-icon-box">📑</div>
+          <h3 class="service-card-title">Business Accounting</h3>
+          <p class="service-card-desc">Accrual-based GAAP financial accounting. Monthly closes, balance sheet reconciliation, and customized financial packets ready for stakeholders and lenders.</p>
+          <ul class="service-features">
+            <li>Monthly Close & Financial Statements</li>
+            <li>Inventory & Deferred Revenue Accounting</li>
+            <li>Bank & Merchant Payment Reconciliation</li>
+          </ul>
+          <a href="#consultation" class="service-action-link">Learn More ➔</a>
+        </div>
+
+        <!-- 3. Financial Planning -->
+        <div class="service-card">
+          <div class="service-icon-box">📈</div>
+          <h3 class="service-card-title">Financial Planning</h3>
+          <p class="service-card-desc">Long-term wealth and entity preservation. We design tax-advantaged holding structures, executive retirement contributions, and corporate cash yield strategies.</p>
+          <ul class="service-features">
+            <li>Tax-Advantaged Entity Optimization</li>
+            <li>Defined Benefit & 401(k) Structuring</li>
+            <li>Capital Expenditure Planning</li>
+          </ul>
+          <a href="#consultation" class="service-action-link">Learn More ➔</a>
+        </div>
+
+        <!-- 4. Fractional CFO -->
+        <div class="service-card">
+          <div class="service-icon-box">💼</div>
+          <h3 class="service-card-title">Fractional CFO</h3>
+          <p class="service-card-desc">Executive-level financial leadership without the $350K full-time salary. Cash runway modeling, investor board decks, SaaS unit economics, and capital budgeting.</p>
+          <ul class="service-features">
+            <li>Rolling 13-Week Cash Flow Models</li>
+            <li>SaaS Metrics (LTV, CAC, Magic Number)</li>
+            <li>Fundraising & Venture Due Diligence</li>
+          </ul>
+          <a href="#consultation" class="service-action-link">Learn More ➔</a>
+        </div>
+
+        <!-- 5. Bookkeeping -->
+        <div class="service-card">
+          <div class="service-icon-box">⚡</div>
+          <h3 class="service-card-title">Cloud Bookkeeping</h3>
+          <p class="service-card-desc">Flawless, automated daily transaction categorization using modern cloud stacks (QuickBooks Online, Xero, Gusto, Stripe). Always audit-ready.</p>
+          <ul class="service-features">
+            <li>Automated Bank Feed Reconciliation</li>
+            <li>Accounts Payable & Bill.com Management</li>
+            <li>Payroll Processing & Digital Receipt Vault</li>
+          </ul>
+          <a href="#consultation" class="service-action-link">Learn More ➔</a>
+        </div>
+
+        <!-- 6. Business Advisory -->
+        <div class="service-card">
+          <div class="service-icon-box">🤝</div>
+          <h3 class="service-card-title">Business Advisory</h3>
+          <p class="service-card-desc">Data-backed strategic insights for founders. Unit margin analysis, pricing overhaul, M&A target financial evaluation, and restructuring.</p>
+          <ul class="service-features">
+            <li>Mergers & Acquisitions Financial Vetting</li>
+            <li>Pricing Architecture & Gross Margin Audits</li>
+            <li>Exit Strategy & Valuation Multiple Prep</li>
+          </ul>
+          <a href="#consultation" class="service-action-link">Learn More ➔</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO WE SERVE -->
+  <section class="section section-white" id="industries">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Targeted Industry Focus</span>
+        <h2 class="section-title">Who We Serve</h2>
+        <p class="section-desc">Tailored financial architecture matched to your business growth phase and revenue model.</p>
+      </div>
+
+      <div class="industries-grid">
+        <div class="client-segment-card">
+          <h4 class="segment-name">Startups</h4>
+          <p class="segment-desc">Seed to Series B technology firms requiring GAAP-compliant books, cap table hygiene, and investor-ready reporting.</p>
+          <div class="segment-metric">Average R&D Credit: $68,000</div>
+        </div>
+
+        <div class="client-segment-card">
+          <h4 class="segment-name">Small Businesses</h4>
+          <p class="segment-desc">Medical practices, agencies, and retail owners seeking to minimize personal pass-through tax exposure and automate payroll.</p>
+          <div class="segment-metric">Average Tax Savings: 22%</div>
+        </div>
+
+        <div class="client-segment-card">
+          <h4 class="segment-name">Growing Companies</h4>
+          <p class="segment-desc">Mid-market companies with $5M–$50M revenue needing fractional CFO forecasting, bank covenant tracking, and multi-entity consolidation.</p>
+          <div class="segment-metric">Runway Extended: +6 Months</div>
+        </div>
+
+        <div class="client-segment-card">
+          <h4 class="segment-name">Independent Pros</h4>
+          <p class="segment-desc">High-earning consultants, corporate partners, and physicians optimizing deductions, S-Corp salaries, and solo 401(k) allocations.</p>
+          <div class="segment-metric">Deductions Increased: 35%</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR FINANCIAL APPROACH -->
+  <section class="section" id="approach">
+    <div class="container approach-grid">
+      <div class="approach-text">
+        <span class="section-badge">Modern Operating System</span>
+        <h3>Our Financial Approach</h3>
+        <p>Traditional accounting looks backward once a year when it is too late to change outcomes. We operate on live cloud data, forward-looking forecasts, and proactive tax mitigation every month.</p>
+        
+        <div class="approach-pillars">
+          <div class="pillar-row">
+            <div class="pillar-icon-dot">✓</div>
+            <div>
+              <h4>Real-Time Cloud Visibility</h4>
+              <p>Your books stay current every week. No surprise tax bills or 9-month-old financial reports that are useless for operational decisions.</p>
+            </div>
+          </div>
+
+          <div class="pillar-row">
+            <div class="pillar-icon-dot">✓</div>
+            <div>
+              <h4>Year-Round Tax Mitigation</h4>
+              <p>We execute tax strategies continuously—quarterly bonus calculations, Section 179 equipment elections, and retirement plan contributions before year-end.</p>
+            </div>
+          </div>
+
+          <div class="pillar-row">
+            <div class="pillar-icon-dot">✓</div>
+            <div>
+              <h4>Predictive Cash Flow Forecasting</h4>
+              <p>Model best-case, expected, and recession scenarios before hiring, leasing new facilities, or committing to inventory purchase orders.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="approach-media">
+        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80" alt="Executive team reviewing financial dashboard charts">
+      </div>
+    </div>
+  </section>
+
+  <!-- MEET OUR EXPERTS -->
+  <section class="section section-white" id="experts">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Certified Leadership</span>
+        <h2 class="section-title">Meet Our Experts</h2>
+        <p class="section-desc">Guided by licensed CPAs, CFAs, and Enrolled Agents with alumni backgrounds from top global advisory firms.</p>
+      </div>
+
+      <div class="experts-grid">
+        <div class="expert-card">
+          <div class="expert-img">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80" alt="David Chen, CPA">
+          </div>
+          <div class="expert-body">
+            <h4 class="expert-name">David Chen, CPA</h4>
+            <div class="expert-role">Managing Partner · Strategic Tax Planning</div>
+            <p class="expert-bio">Master of Science in Taxation (MST). Former Big 4 Senior Manager with 16 years advising high-growth ventures and family offices on tax mitigation.</p>
+          </div>
+        </div>
+
+        <div class="expert-card">
+          <div class="expert-img">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Laura Vance, CFA">
+          </div>
+          <div class="expert-body">
+            <h4 class="expert-name">Laura Vance, CFA</h4>
+            <div class="expert-role">Partner · Fractional CFO & Advisory</div>
+            <p class="expert-bio">Chartered Financial Analyst who has steered 24 tech startups from initial seed round through Series B fundraises and successful private equity exits.</p>
+          </div>
+        </div>
+
+        <div class="expert-card">
+          <div class="expert-img">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80" alt="Marcus Miller, EA">
+          </div>
+          <div class="expert-body">
+            <h4 class="expert-name">Marcus Miller, EA</h4>
+            <div class="expert-role">Tax Director · IRS Audit Defense & Credits</div>
+            <p class="expert-bio">Federally licensed Enrolled Agent empowered to represent taxpayers before all administrative levels of the IRS. Specialist in R&D and ERC credit defense.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENT SUCCESS STORIES -->
+  <section class="section" id="results">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Proven Results</span>
+        <h2 class="section-title">Client Success Stories</h2>
+        <p class="section-desc">Measurable return on investment delivered across our corporate client portfolio.</p>
+      </div>
+
+      <div class="case-studies-grid">
+        <div class="case-card">
+          <div class="case-metric-banner">
+            <div class="case-metric-val">$84,000</div>
+            <div class="case-metric-sub">R&D Tax Credit Recovered</div>
+          </div>
+          <p class="case-quote">"ProTax identified four software engineering initiatives that qualified for Federal and State R&D credits which our previous accounting firm had completely missed. Instant liquidity for our dev team."</p>
+          <div class="case-client">
+            <h5>Apex Cloud Technologies</h5>
+            <span>Series A B2B SaaS Provider</span>
+          </div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-metric-banner">
+            <div class="case-metric-val">45%</div>
+            <div class="case-metric-sub">Monthly Close Acceleration</div>
+          </div>
+          <p class="case-quote">"We went from receiving our financials on the 28th of the following month to having fully reconciled books by the 5th business day. The clarity in board meetings has been night and day."</p>
+          <div class="case-client">
+            <h5>Vanguard Medical Group</h5>
+            <span>Multi-Clinic Healthcare Practice</span>
+          </div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-metric-banner">
+            <div class="case-metric-val">$120K</div>
+            <div class="case-metric-sub">Annual S-Corp Tax Savings</div>
+          </div>
+          <p class="case-quote">"David Chen completely restructured our partnership entity into an optimized holding and management company. Our effective corporate tax rate dropped by nearly 9% in year one."</p>
+          <div class="case-client">
+            <h5>Summit Logistics LLC</h5>
+            <span>Regional Freight & Fleet Operator</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINANCIAL INSIGHTS & CALCULATOR -->
+  <section class="section section-white" id="calculator">
+    <div class="container">
+      <div class="calc-container">
+        <div class="calc-info">
+          <span class="section-badge">Interactive Estimator</span>
+          <h3>Estimate Your Potential Tax Savings</h3>
+          <p>Most growing businesses overpay taxes by 15% to 25% due to missed entity structural elections, overlooked federal R&D credits, and passive deduction timing. Drag the sliders to see what proactive planning can recover.</p>
+          <a href="#consultation" class="btn btn-blue">Request Formal Tax Audit ➔</a>
+        </div>
+
+        <div class="calc-box">
+          <div class="range-group">
+            <div class="range-header">
+              <span>Annual Business Net Profit:</span>
+              <span id="profitDisplay" style="color: var(--color-blue-royal); font-family: var(--font-mono);">$500,000</span>
+            </div>
+            <input type="range" id="profitRange" min="100000" max="2500000" step="50000" value="500000" style="width: 100%; cursor: pointer;" oninput="updateTaxSavings()">
+          </div>
+
+          <div class="range-group">
+            <div class="range-header">
+              <span>Payroll / R&D Engineering Spend:</span>
+              <span id="rdDisplay" style="color: var(--color-blue-royal); font-family: var(--font-mono);">$200,000</span>
+            </div>
+            <input type="range" id="rdRange" min="0" max="1000000" step="25000" value="200000" style="width: 100%; cursor: pointer;" oninput="updateTaxSavings()">
+          </div>
+
+          <div class="calc-result-box">
+            <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; margin-bottom: 6px;">Estimated Annual Tax Savings</div>
+            <div class="calc-res-num" id="calcSavings">$48,500</div>
+            <div style="font-size: 0.75rem; color: #cbd5e1; margin-top: 6px;">*Based on S-Corp optimization & Section 41 R&D credit capture</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOK YOUR CONSULTATION -->
+  <section class="section" id="consultation">
+    <div class="container">
+      <div class="consult-card">
+        <div class="consult-info">
+          <span class="section-badge" style="color: #93c5fd;">Take Control of Your Numbers</span>
+          <h3>Book Your Consultation</h3>
+          <p>Schedule a 30-minute introductory strategy session with our CPA partners. We review your current corporate tax returns, examine your books, and identify immediate recovery opportunities.</p>
+          
+          <ul class="consult-bullets">
+            <li>Complimentary review of prior 2 years business tax returns</li>
+            <li>Identification of missed deductions & state tax credits</li>
+            <li>Personalized fractional CFO & accounting pricing proposal</li>
+            <li>SOC 2 certified bank-grade confidentiality</li>
+          </ul>
+        </div>
+
+        <div class="consult-form-box">
+          <form id="consultForm" onsubmit="handleConsultSubmit(event)">
+            <div class="form-group">
+              <label class="form-label">Full Name *</label>
+              <input type="text" class="form-control" placeholder="e.g. Rachel Sterling" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Company Email *</label>
+              <input type="email" class="form-control" placeholder="rachel@company.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Company Name & Annual Revenue</label>
+              <input type="text" class="form-control" placeholder="Sterling Media ($2M - $5M)" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Primary Advisory Need</label>
+              <select class="form-control">
+                <option>Strategic Corporate Tax Planning & Prep</option>
+                <option>Monthly GAAP Bookkeeping & Accounting</option>
+                <option>Fractional CFO & Runway Modeling</option>
+                <option>R&D Tax Credit Study & Filing</option>
+                <option>Complete Financial Outsourcing</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-blue" style="width: 100%; margin-top: 10px;">Confirm Consultation Request ➔</button>
+          </form>
+          <div id="consultSuccess" style="display: none; margin-top: 15px; color: var(--color-mint); text-align: center; font-weight: 700; font-size: 0.9rem;">
+            ✓ Consultation requested! Managing Partner David Chen will email you calendar options within 2 hours.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="brand-logo" style="color: #fff;">
+          <div class="brand-icon">P</div>
+          <div>Pro<span style="color: var(--color-blue-royal);">Tax</span></div>
+        </div>
+        <p>Modern CPA practice delivering proactive corporate tax planning, GAAP bookkeeping, and fractional CFO leadership to ambitious enterprises.</p>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Services</h4>
+        <ul class="footer-links">
+          <li><a href="#services">Corporate Tax Prep</a></li>
+          <li><a href="#services">Business Accounting</a></li>
+          <li><a href="#services">Fractional CFO</a></li>
+          <li><a href="#services">R&D Tax Credits</a></li>
+          <li><a href="#services">Cloud Bookkeeping</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Who We Serve</h4>
+        <ul class="footer-links">
+          <li><a href="#industries">Venture Startups</a></li>
+          <li><a href="#industries">Small Businesses</a></li>
+          <li><a href="#industries">Mid-Market Companies</a></li>
+          <li><a href="#industries">Independent Professionals</a></li>
+          <li><a href="#calculator">Tax Savings Calculator</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-title">Corporate Headquarters</h4>
+        <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.8;">
+          500 Financial Plaza, 32nd Floor<br>
+          Metropolitan Financial District<br>
+          <strong style="color: #fff;">Inquiries:</strong> <a href="mailto:contact@protaxadvisory.com" style="color: #93c5fd;">contact@protaxadvisory.com</a><br>
+          <strong style="color: #fff;">Direct Line:</strong> <a href="tel:18005557722" style="color: #fff;">+1 (800) 555-7722</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div>© 2026 ProTax Advisory Group LLC. Licensed CPAs. All rights reserved. SOC 2 Type II Certified.</div>
+      <div style="display: flex; gap: 24px;">
+        <a href="#services">Services</a>
+        <a href="#industries">Industries</a>
+        <a href="#experts">About</a>
+        <a href="#consultation">Contact</a>
+        <a href="#">Privacy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const drawer = document.getElementById('mobileDrawer');
+      drawer.classList.toggle('open');
+    }
+    document.getElementById('mobileMenuBtn').addEventListener('click', toggleMenu);
+
+    function updateTaxSavings() {
+      const profit = parseInt(document.getElementById('profitRange').value, 10);
+      const rd = parseInt(document.getElementById('rdRange').value, 10);
+      document.getElementById('profitDisplay').textContent = '$' + profit.toLocaleString();
+      document.getElementById('rdDisplay').textContent = '$' + rd.toLocaleString();
+
+      // Estimated heuristic: 7% on net profit via S-corp/entity restructuring + 6.5% on R&D spend
+      const savings = Math.round((profit * 0.07) + (rd * 0.065));
+      document.getElementById('calcSavings').textContent = '$' + savings.toLocaleString();
+    }
+
+    function handleConsultSubmit(e) {
+      e.preventDefault();
+      document.getElementById('consultSuccess').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('consultForm').reset();
+      }, 1000);
+    }
+  </script>
+</body>
+</html>

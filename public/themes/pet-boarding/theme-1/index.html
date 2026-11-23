@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HappyPaws Luxury Pet Resort | All-Suite Boarding & Doggy Daycare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --sky-primary: #0284C7;
+      --sky-light: #38BDF8;
+      --sky-surface: #F0F9FF;
+      --mint-accent: #10B981;
+      --mint-light: #D1FAE5;
+      --navy-dark: #0F172A;
+      --navy-card: #1E293B;
+      --text-dark: #1E293B;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 2px 4px rgba(2, 132, 199, 0.04);
+      --shadow-md: 0 10px 25px -5px rgba(2, 132, 199, 0.1);
+      --shadow-lg: 0 20px 40px -5px rgba(2, 132, 199, 0.15);
+      --font-heading: 'Poppins', sans-serif;
+      --font-body: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+      --transition: all 0.28s ease-in-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #FFFFFF;
+      color: var(--text-dark);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      background: var(--navy-dark);
+      color: #94A3B8;
+      font-size: 13px;
+      padding: 9px 0;
+      font-weight: 700;
+    }
+
+    .top-bar-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .top-perks {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .top-perk {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #E2E8F0;
+    }
+
+    .top-perk i {
+      color: var(--sky-light);
+    }
+
+    /* Header Navigation */
+    .header {
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 84px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--sky-surface);
+      border: 2px solid var(--sky-light);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sky-primary);
+      font-size: 22px;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-title {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--navy-dark);
+      line-height: 1.1;
+    }
+
+    .logo-title span {
+      color: var(--sky-primary);
+    }
+
+    .logo-sub {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      font-weight: 800;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dark);
+      transition: var(--transition);
+    }
+
+    .nav-link:hover {
+      color: var(--sky-primary);
+    }
+
+    .btn-sky {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--sky-primary);
+      color: #FFFFFF;
+      padding: 12px 24px;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-radius: var(--radius-full);
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.25);
+    }
+
+    .btn-sky:hover {
+      background: #0369A1;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(2, 132, 199, 0.35);
+    }
+
+    .btn-mint {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--mint-accent);
+      color: #FFFFFF;
+      padding: 12px 24px;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-radius: var(--radius-full);
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-mint:hover {
+      background: #059669;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: var(--navy-dark);
+      cursor: pointer;
+    }
+
+    .mobile-drawer {
+      position: fixed;
+      top: 120px;
+      left: 0;
+      width: 100%;
+      background: #FFFFFF;
+      border-bottom: 3px solid var(--sky-primary);
+      padding: 24px;
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 999;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .mobile-drawer.open {
+      display: flex;
+    }
+
+    .mobile-drawer a {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-dark);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    /* Section Global */
+    section {
+      padding: 95px 0;
+      position: relative;
+    }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--sky-surface);
+      color: var(--sky-primary);
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(30px, 3.8vw, 44px);
+      color: var(--navy-dark);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+
+    .section-title span {
+      color: var(--sky-primary);
+    }
+
+    .section-subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 640px;
+      line-height: 1.7;
+    }
+
+    .center-header {
+      text-align: center;
+      margin-bottom: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* 01. Hero Section */
+    .hero {
+      background: radial-gradient(circle at top right, #E0F2FE 0%, #FFFFFF 65%);
+      padding: 90px 0 100px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(36px, 5vw, 56px);
+      line-height: 1.15;
+      font-weight: 900;
+      margin-bottom: 22px;
+    }
+
+    .hero-desc {
+      font-size: 18px;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 36px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .hero-perk-row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .hero-perk-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--navy-dark);
+    }
+
+    .hero-perk-item i {
+      color: var(--mint-accent);
+    }
+
+    .hero-img-box {
+      position: relative;
+    }
+
+    .hero-main-img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      border: 6px solid #FFFFFF;
+    }
+
+    .webcam-badge-float {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      color: #FFFFFF;
+      padding: 10px 16px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+    }
+
+    .live-dot {
+      width: 10px;
+      height: 10px;
+      background: #EF4444;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.3); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* 02. Suites & Services */
+    .services-section {
+      background: #FFFFFF;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .service-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--sky-light);
+    }
+
+    .service-img {
+      height: 220px;
+      position: relative;
+    }
+
+    .service-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .service-body {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .service-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--navy-dark);
+      margin-bottom: 10px;
+    }
+
+    .service-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .service-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-dark);
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+    }
+
+    .service-features li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .service-features li i {
+      color: var(--sky-primary);
+    }
+
+    /* 03. Resort Amenities */
+    .amenities-section {
+      background: var(--sky-surface);
+    }
+
+    .amenities-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .amenity-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 28px 24px;
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .amenity-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .amenity-icon {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 16px;
+      background: var(--sky-surface);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sky-primary);
+      font-size: 24px;
+    }
+
+    .amenity-title {
+      font-family: var(--font-heading);
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--navy-dark);
+      margin-bottom: 8px;
+    }
+
+    .amenity-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* 04. Daily Routine Timeline */
+    .routine-section {
+      background: #FFFFFF;
+    }
+
+    .routine-timeline {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+    }
+
+    .routine-item {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 24px 16px;
+      text-align: center;
+      position: relative;
+    }
+
+    .routine-time {
+      display: inline-block;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--sky-primary);
+      background: var(--sky-surface);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      margin-bottom: 12px;
+    }
+
+    .routine-name {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--navy-dark);
+      margin-bottom: 8px;
+    }
+
+    .routine-details {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* 05. Live Webcams Feature */
+    .webcam-section {
+      background: var(--navy-dark);
+      color: #FFFFFF;
+    }
+
+    .webcam-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .webcam-preview {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .webcam-preview img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+    }
+
+    .cam-ui-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.9) 100%);
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    /* 06. Rates & Packages */
+    .pricing-section {
+      background: #FFFFFF;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .pricing-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 40px 30px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .pricing-card.popular {
+      border: 2px solid var(--sky-primary);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .pop-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--sky-primary);
+      color: #FFFFFF;
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: var(--radius-full);
+    }
+
+    .price-title {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--navy-dark);
+      margin-bottom: 8px;
+    }
+
+    .price-rate {
+      font-size: 38px;
+      font-weight: 900;
+      color: var(--navy-dark);
+      margin-bottom: 20px;
+    }
+
+    .price-rate span {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .price-perks {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      flex-grow: 1;
+    }
+
+    .price-perks li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .price-perks li i {
+      color: var(--mint-accent);
+      margin-top: 4px;
+    }
+
+    /* 07. Reviews */
+    .reviews-section {
+      background: var(--sky-surface);
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .review-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 32px 26px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .review-stars {
+      color: #F59E0B;
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+
+    .review-text {
+      font-size: 14px;
+      font-style: italic;
+      color: var(--text-dark);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .review-author {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--navy-dark);
+    }
+
+    .review-pet {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* 08. Reservation Form */
+    .reservation-section {
+      background: #FFFFFF;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .reservation-box {
+      max-width: 840px;
+      margin: 0 auto;
+      background: var(--sky-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 44px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 26px;
+    }
+
+    .form-full {
+      grid-column: span 2;
+    }
+
+    .field-lbl {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--navy-dark);
+      margin-bottom: 6px;
+    }
+
+    .field-ctrl {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 14px;
+      outline: none;
+      background: #FFFFFF;
+      transition: var(--transition);
+    }
+
+    .field-ctrl:focus {
+      border-color: var(--sky-primary);
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--navy-dark);
+      color: #94A3B8;
+      padding: 80px 0 35px;
+      font-size: 14px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+
+    .footer-col-title {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 18px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a:hover {
+      color: #FFFFFF;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 12px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .services-grid,
+      .pricing-grid,
+      .reviews-grid,
+      .amenities-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .routine-timeline {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .hero-grid,
+      .webcam-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links,
+      .top-perks {
+        display: none;
+      }
+      .mobile-menu-btn {
+        display: block;
+      }
+      .services-grid,
+      .pricing-grid,
+      .reviews-grid,
+      .amenities-grid,
+      .routine-timeline,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-full {
+        grid-column: span 1;
+      }
+      .reservation-box {
+        padding: 24px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div class="top-perks">
+        <div class="top-perk"><i class="fas fa-video"></i> 24/7 Live HD Webcams for Parents</div>
+        <div class="top-perk"><i class="fas fa-user-md"></i> On-Site Veterinary Staff Around the Clock</div>
+        <div class="top-perk"><i class="fas fa-shield-virus"></i> Medical-Grade HEPA Air Purification</div>
+      </div>
+      <div>
+        <span>Reservations & Tours: <strong>(555) 792-7297</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header Nav -->
+  <header class="header">
+    <div class="container header-content">
+      <a href="#" class="logo">
+        <div class="logo-icon"><i class="fas fa-hotel"></i></div>
+        <div class="logo-text">
+          <span class="logo-title">Happy<span>Paws</span></span>
+          <span class="logo-sub">Luxury Pet Resort</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#services" class="nav-link">Suites & Daycare</a></li>
+        <li><a href="#amenities" class="nav-link">Resort Amenities</a></li>
+        <li><a href="#routine" class="nav-link">Daily Routine</a></li>
+        <li><a href="#webcam" class="nav-link">Live Cameras</a></li>
+        <li><a href="#pricing" class="nav-link">Suite Rates</a></li>
+        <li><a href="#reviews" class="nav-link">Happy Tails</a></li>
+      </ul>
+
+      <div class="header-actions">
+        <a href="#reservation" class="btn-sky"><i class="fas fa-calendar-check"></i> Reserve Stay</a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <a href="#services" onclick="toggleMenu()">Suites & Daycare</a>
+      <a href="#amenities" onclick="toggleMenu()">Resort Amenities</a>
+      <a href="#routine" onclick="toggleMenu()">Daily Routine</a>
+      <a href="#webcam" onclick="toggleMenu()">Live Cameras</a>
+      <a href="#pricing" onclick="toggleMenu()">Suite Rates</a>
+      <a href="#reviews" onclick="toggleMenu()">Happy Tails</a>
+      <a href="#reservation" onclick="toggleMenu()" style="color: var(--sky-primary);">Reserve Stay</a>
+    </div>
+  </header>
+
+  <!-- 01. Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="section-eyebrow"><i class="fas fa-paw"></i> The Ultimate Dog & Cat Vacation</div>
+          <h1 class="hero-title">
+            Your Pet’s Favorite<br>
+            <span>Luxury Vacation Home.</span>
+          </h1>
+          <p class="hero-desc">
+            All-suite private accommodations with orthopedic bedding, private TVs playing DogTV, expansive turf waterparks, and 24/7 crystal-clear webcam streaming to your phone.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#reservation" class="btn-sky"><i class="fas fa-door-open"></i> Check Suite Availability</a>
+            <a href="#webcam" class="btn-mint"><i class="fas fa-video"></i> Preview Live Webcams</a>
+          </div>
+
+          <div class="hero-perk-row">
+            <div class="hero-perk-item"><i class="fas fa-check-circle"></i> Never Caged</div>
+            <div class="hero-perk-item"><i class="fas fa-check-circle"></i> 5+ Daily Play Sessions</div>
+            <div class="hero-perk-item"><i class="fas fa-check-circle"></i> 100% Climate Controlled</div>
+          </div>
+        </div>
+
+        <div class="hero-img-box">
+          <img src="https://images.unsplash.com/photo-1548767797-d8c844163c4c?auto=format&fit=crop&w=800&q=80" alt="Happy Paws Resort Dogs" class="hero-main-img">
+          <div class="webcam-badge-float">
+            <span class="live-dot"></span> Yard Cam 03: Big Dog Splash Pool
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02. Suites & Services -->
+  <section class="services-section" id="services">
+    <div class="container">
+      <div class="center-header">
+        <div class="section-eyebrow"><i class="fas fa-bed"></i> Accommodations</div>
+        <h2 class="section-title">Five-Star Boarding Suites</h2>
+        <p class="section-subtitle">
+          Engineered for serenity, sound isolation, and hygienic comfort with raised Kuranda beds and individual climate controls.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <!-- 1 -->
+        <div class="service-card">
+          <div class="service-img">
+            <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=700&q=80" alt="Canine Executive Suite">
+          </div>
+          <div class="service-body">
+            <h3 class="service-title">Canine Executive Suites</h3>
+            <p class="service-desc">Spacious private rooms featuring tempered glass doors, orthopedic fleece beds, wall-mounted TVs playing DogTV, and individual nightlights.</p>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> 4 Daily outdoor group play sessions</li>
+              <li><i class="fas fa-check"></i> Private HD camera app stream</li>
+              <li><i class="fas fa-check"></i> Bedtime Kong treat & tuck-in cuddle</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="service-card">
+          <div class="service-img">
+            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=700&q=80" alt="Feline Cat Condos">
+          </div>
+          <div class="service-body">
+            <h3 class="service-title">Feline Penthouse Condos</h3>
+            <p class="service-desc">Located in our completely dog-free quiet zone, multi-tiered climbing lofts offer bird watching windows, scratching posts, and cozy cat caves.</p>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> Soundproofed serene wing</li>
+              <li><i class="fas fa-check"></i> Multi-level vertical climbing tree</li>
+              <li><i class="fas fa-check"></i> Private separate litter box suite</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="service-card">
+          <div class="service-img">
+            <img src="https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?auto=format&fit=crop&w=700&q=80" alt="Doggy Daycare Camp">
+          </div>
+          <div class="service-body">
+            <h3 class="service-title">Cage-Free Social Daycare</h3>
+            <p class="service-desc">Over 15,000 sq ft of indoor and outdoor antimicrobial K9 grass yards grouped strictly by dog size, energy level, and playstyle personality.</p>
+            <ul class="service-features">
+              <li><i class="fas fa-check"></i> Continuous supervision by pack leaders</li>
+              <li><i class="fas fa-check"></i> Splash pools & agility play bridges</li>
+              <li><i class="fas fa-check"></i> Midday nap in darkened quiet rooms</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03. Resort Amenities -->
+  <section class="amenities-section" id="amenities">
+    <div class="container">
+      <div class="center-header">
+        <div class="section-eyebrow"><i class="fas fa-star"></i> Clean & Safe</div>
+        <h2 class="section-title">Resort Amenities Designed for Health</h2>
+        <p class="section-subtitle">
+          We maintain higher sanitization standards than most veterinary hospitals, guaranteeing a fresh, odor-free, healthy environment.
+        </p>
+      </div>
+
+      <div class="amenities-grid">
+        <div class="amenity-card">
+          <div class="amenity-icon"><i class="fas fa-wind"></i></div>
+          <h4 class="amenity-title">Hospital-Grade HEPA</h4>
+          <p class="amenity-desc">Continuous 100% fresh air turnover with UV germicidal sanitizers eliminating airborne canine viruses.</p>
+        </div>
+
+        <div class="amenity-card">
+          <div class="amenity-icon"><i class="fas fa-swimming-pool"></i></div>
+          <h4 class="amenity-title">Turf Splash Waterpark</h4>
+          <p class="amenity-desc">Bone-shaped splash wading pools and water fountains running on purified circulating water filters.</p>
+        </div>
+
+        <div class="amenity-card">
+          <div class="amenity-icon"><i class="fas fa-shield-alt"></i></div>
+          <h4 class="amenity-title">24/7 On-Site Monitoring</h4>
+          <p class="amenity-desc">Our overnight care technicians sleep on-premises so your pet is never left alone in an empty building.</p>
+        </div>
+
+        <div class="amenity-card">
+          <div class="amenity-icon"><i class="fas fa-pills"></i></div>
+          <h4 class="amenity-title">Custom Med Administration</h4>
+          <p class="amenity-desc">Insulin injections, supplements, and oral medications administered accurately on strict veterinary schedules.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04. Daily Routine Timeline -->
+  <section class="routine-section" id="routine">
+    <div class="container">
+      <div class="center-header">
+        <div class="section-eyebrow"><i class="fas fa-clock"></i> The Schedule</div>
+        <h2 class="section-title">A Day in the Life of a Resort Guest</h2>
+        <p class="section-subtitle">
+          Predictable, structured routines keep dogs happy, relaxed, and sleeping soundly through the night.
+        </p>
+      </div>
+
+      <div class="routine-timeline">
+        <div class="routine-item">
+          <span class="routine-time">07:00 AM</span>
+          <h4 class="routine-name">Morning Stretch</h4>
+          <p class="routine-details">First potty break in outdoor yards followed by fresh chef breakfast.</p>
+        </div>
+
+        <div class="routine-item">
+          <span class="routine-time">09:00 AM</span>
+          <h4 class="routine-name">Morning Pack Play</h4>
+          <p class="routine-details">Running with friends, ball fetching, and splash pool swimming.</p>
+        </div>
+
+        <div class="routine-item">
+          <span class="routine-time">12:30 PM</span>
+          <h4 class="routine-name">Nap & Kong Treat</h4>
+          <p class="routine-details">Relaxation in private suites with soft classical music and peanut butter Kongs.</p>
+        </div>
+
+        <div class="routine-item">
+          <span class="routine-time">02:30 PM</span>
+          <h4 class="routine-name">Sensory Yard Fun</h4>
+          <p class="routine-details">Agility obstacle navigation, bubble machines, and one-on-one cuddles.</p>
+        </div>
+
+        <div class="routine-item">
+          <span class="routine-time">05:30 PM</span>
+          <h4 class="routine-name">Gourmet Dinner</h4>
+          <p class="routine-details">Individual dining, fresh filtered water bowls, and digestion rest.</p>
+        </div>
+
+        <div class="routine-item">
+          <span class="routine-time">08:30 PM</span>
+          <h4 class="routine-name">Tuck-In & Lights Out</h4>
+          <p class="routine-details">Final evening stroll, soft blanket adjustments, and peaceful bedtime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05. Live Webcams -->
+  <section class="webcam-section" id="webcam">
+    <div class="container">
+      <div class="webcam-grid">
+        <div class="webcam-preview">
+          <img src="https://images.unsplash.com/photo-1541599540903-216a46ca1dc0?auto=format&fit=crop&w=900&q=80" alt="Live Webcam Demo">
+          <div class="cam-ui-overlay">
+            <div>
+              <strong style="display:block; color:#FFFFFF;"><i class="fas fa-video"></i> CAM 04: Meadow Play Yard</strong>
+              <span style="color:#94A3B8; font-size:11px;">1080p 60FPS Live Broadcast</span>
+            </div>
+            <span style="background:#EF4444; color:#FFFFFF; padding:4px 10px; border-radius:12px; font-weight:800; font-size:11px;">
+              LIVE STREAM
+            </span>
+          </div>
+        </div>
+
+        <div>
+          <div class="section-eyebrow" style="background: rgba(56, 189, 248, 0.15); color: var(--sky-light);">
+            <i class="fas fa-mobile-alt"></i> Parent Peace of Mind
+          </div>
+          <h2 class="section-title" style="color: #FFFFFF;">Check In on Your Furry Family From Anywhere.</h2>
+          <p style="color: #CBD5E1; font-size: 16px; line-height: 1.75; margin-bottom: 24px;">
+            Whether you're sunbathing in Hawaii, boarding a flight, or sitting at your desk, our mobile app gives you instant password-protected access to crystal-clear HD video feeds of your pet's private suite and daytime play yards.
+          </p>
+          <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+            <a href="#reservation" class="btn-sky"><i class="fas fa-play"></i> Test Webcam Feed</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06. Rates & Packages -->
+  <section class="pricing-section" id="pricing">
+    <div class="container">
+      <div class="center-header">
+        <div class="section-eyebrow"><i class="fas fa-tag"></i> Nightly Rates</div>
+        <h2 class="section-title">All-Inclusive Boarding Rates</h2>
+        <p class="section-subtitle">
+          No extra charges for playtime, tummy rubs, or feeding your own food. Everything is included in the nightly rate.
+        </p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- 1 -->
+        <div class="pricing-card">
+          <h3 class="price-title">Cozy Standard Suite</h3>
+          <div class="price-rate">$49 <span>/ night</span></div>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">Comfortable private suite for small and medium canines.</p>
+          <ul class="price-perks">
+            <li><i class="fas fa-check"></i> Raised Kuranda orthopedic bed</li>
+            <li><i class="fas fa-check"></i> 3 Daily group play sessions</li>
+            <li><i class="fas fa-check"></i> Premium lamb & rice diet included</li>
+            <li><i class="fas fa-check"></i> Daily photo update sent via SMS</li>
+          </ul>
+          <a href="#reservation" class="btn-sky" style="width: 100%; text-align: center;">Select Standard</a>
+        </div>
+
+        <!-- 2 -->
+        <div class="pricing-card popular">
+          <span class="pop-badge">Guest Favorite</span>
+          <h3 class="price-title">Executive Balcony Suite</h3>
+          <div class="price-rate">$69 <span>/ night</span></div>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">Spacious luxury suite with private outdoor balcony patio.</p>
+          <ul class="price-perks">
+            <li><i class="fas fa-check"></i> Memory foam mattress with fleece topper</li>
+            <li><i class="fas fa-check"></i> 5 Daily group play & splash sessions</li>
+            <li><i class="fas fa-check"></i> Private TV playing DogTV programming</li>
+            <li><i class="fas fa-check"></i> 24/7 Live webcam access in suite</li>
+            <li><i class="fas fa-check"></i> Nightly gourmet Kong peanut butter treat</li>
+          </ul>
+          <a href="#reservation" class="btn-sky" style="width: 100%; text-align: center;">Select Executive</a>
+        </div>
+
+        <!-- 3 -->
+        <div class="pricing-card">
+          <h3 class="price-title">The Royal VIP Penthouse</h3>
+          <div class="price-rate">$95 <span>/ night</span></div>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">The pinnacle of pet luxury for multiple dogs or royal treatment.</p>
+          <ul class="price-perks">
+            <li><i class="fas fa-check"></i> 120 Sq ft palace room with toddler bed</li>
+            <li><i class="fas fa-check"></i> Unlimited all-day playtime access</li>
+            <li><i class="fas fa-check"></i> Complimentary departure bath & blow-dry</li>
+            <li><i class="fas fa-check"></i> 4K PTZ webcam with two-way audio</li>
+            <li><i class="fas fa-check"></i> Ice cream sundae & bedtime story</li>
+          </ul>
+          <a href="#reservation" class="btn-sky" style="width: 100%; text-align: center;">Select Penthouse</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07. Reviews -->
+  <section class="reviews-section" id="reviews">
+    <div class="container">
+      <div class="center-header">
+        <div class="section-eyebrow"><i class="fas fa-heart"></i> Happy Tails</div>
+        <h2 class="section-title">What Pet Parents Say</h2>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <p class="review-text">
+            “Leaving our rescue dog used to give me immense guilt. At HappyPaws, watching him sprint through the splash park on the live webcam made our entire vacation stress-free!”
+          </p>
+          <div class="review-author">Brooke Sterling</div>
+          <div class="review-pet">Mom to Cooper (Lab Mix)</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <p class="review-text">
+            “The cleanest boarding facility I’ve ever stepped into. Zero smell, super attentive staff, and my two Golden Retrievers came home exhausted and completely happy.”
+          </p>
+          <div class="review-author">Jonathan Vance</div>
+          <div class="review-pet">Dad to Bailey & Tucker</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <p class="review-text">
+            “The Cat Condos are wonderful! Our cat had bird feeders outside her window and received gentle brushings every morning. We will definitely board her here again.”
+          </p>
+          <div class="review-author">Alissa Chang</div>
+          <div class="review-pet">Cat Mom to Cleo</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08. Reservation Form -->
+  <section class="reservation-section" id="reservation">
+    <div class="container">
+      <div class="reservation-box">
+        <div style="text-align: center;">
+          <div class="section-eyebrow"><i class="fas fa-calendar-alt"></i> Booking Request</div>
+          <h2 class="section-title">Reserve Your Pet's Suite</h2>
+          <p class="section-subtitle" style="margin: 0 auto;">
+            Submit your requested stay dates. Our reservation concierge will confirm availability and verify vaccinations.
+          </p>
+        </div>
+
+        <form class="form-grid" onsubmit="handleReservationSubmit(event)">
+          <div>
+            <label class="field-lbl">Owner Name *</label>
+            <input type="text" class="field-ctrl" placeholder="e.g. Samantha Hayes" required>
+          </div>
+          <div>
+            <label class="field-lbl">Phone Number *</label>
+            <input type="tel" class="field-ctrl" placeholder="(555) 000-0000" required>
+          </div>
+          <div>
+            <label class="field-lbl">Pet Name(s) & Breed *</label>
+            <input type="text" class="field-ctrl" placeholder="e.g. Winston (French Bulldog)" required>
+          </div>
+          <div>
+            <label class="field-lbl">Desired Accommodation</label>
+            <select class="field-ctrl">
+              <option>Executive Balcony Suite ($69/night)</option>
+              <option>Cozy Standard Suite ($49/night)</option>
+              <option>The Royal VIP Penthouse ($95/night)</option>
+              <option>Feline Penthouse Cat Condo ($38/night)</option>
+              <option>Doggy Daycare Only</option>
+            </select>
+          </div>
+          <div>
+            <label class="field-lbl">Check-In Date *</label>
+            <input type="date" class="field-ctrl" required>
+          </div>
+          <div>
+            <label class="field-lbl">Check-Out Date *</label>
+            <input type="date" class="field-ctrl" required>
+          </div>
+          <div class="form-full">
+            <label class="field-lbl">Special Care Notes & Add-Ons (Grooming, Medication, Food Preferences)</label>
+            <textarea class="field-ctrl" rows="3" placeholder="Tell us about food portions, required medication timings, departure bath requests..."></textarea>
+          </div>
+          <div class="form-full" style="text-align: center; margin-top: 10px;">
+            <button type="submit" class="btn-sky" style="padding: 16px 48px; font-size: 14px;">
+              Submit Reservation Request
+            </button>
+            <p id="resSuccess" style="display:none; color: var(--sky-primary); font-weight: 800; margin-top: 16px;">
+              Reservation request submitted! Our concierge will text you your confirmation details within 2 hours.
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="logo" style="margin-bottom: 16px;">
+            <div class="logo-icon" style="background: rgba(255, 255, 255, 0.1); border-color: var(--sky-light); color: #FFFFFF;"><i class="fas fa-hotel"></i></div>
+            <div class="logo-text">
+              <span class="logo-title" style="color: #FFFFFF;">Happy<span style="color: var(--sky-light);">Paws</span></span>
+              <span class="logo-sub" style="color: #94A3B8;">Luxury Pet Resort</span>
+            </div>
+          </div>
+          <p style="font-size: 13px; line-height: 1.7; max-width: 320px;">
+            Award-winning luxury pet boarding, cage-free daycare, and spa retreat. Fully certified staff, 24/7 webcams, and medical-grade care.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Resort Wings</h4>
+          <ul class="footer-links">
+            <li><a href="#services">Canine Executive Suites</a></li>
+            <li><a href="#services">Feline Cat Condos</a></li>
+            <li><a href="#services">Social Doggy Daycare</a></li>
+            <li><a href="#amenities">Turf Splash Park</a></li>
+            <li><a href="#pricing">VIP Penthouse</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Guest Policies</h4>
+          <ul class="footer-links">
+            <li><a href="#reservation">Vaccination Requirements</a></li>
+            <li><a href="#webcam">Live Webcam App Setup</a></li>
+            <li><a href="#routine">Drop-Off & Pick-Up Hours</a></li>
+            <li><a href="#amenities">Medical Administration</a></li>
+            <li><a href="#reviews">Cancellation Policy</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Resort Location</h4>
+          <p style="font-size: 13px; line-height: 1.8;">
+            <strong>Resort:</strong> 720 Whispering Pines Parkway<br>
+            <strong>Phone:</strong> (555) 792-7297<br>
+            <strong>Lobby Hours:</strong> Mon - Sun: 7:00 AM - 7:00 PM<br>
+            <strong>Drop-Offs:</strong> 7:00 AM - 1:00 PM | Pick-Ups: Until 7:00 PM
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 HappyPaws Pet Resort LLC. All Rights Reserved.</div>
+        <div>Licensed & Insured Animal Facility</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Drawer
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    function toggleMenu() {
+      mobileDrawer.classList.toggle('open');
+      const icon = mobileBtn.querySelector('i');
+      if (mobileDrawer.classList.contains('open')) {
+        icon.classList.replace('fa-bars', 'fa-times');
+      } else {
+        icon.classList.replace('fa-times', 'fa-bars');
+      }
+    }
+    mobileBtn.addEventListener('click', toggleMenu);
+
+    // Reservation Handler
+    function handleReservationSubmit(e) {
+      e.preventDefault();
+      document.getElementById('resSuccess').style.display = 'block';
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
