@@ -1834,6 +1834,242 @@
       display: flex;
       gap: var(--space-24);
     }
+
+    /* ==========================================================================
+       SCANDINAVIAN MINIMAL PRONTO-INSPIRED ON-DEMAND MODULES
+       ========================================================================== */
+    .aura-cities-bar {
+      background: var(--bg-warm-white);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: var(--space-16) 0;
+    }
+
+    .aura-cities-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-16);
+    }
+
+    .aura-chips-wrap {
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+      flex-wrap: wrap;
+    }
+
+    .aura-city-chip {
+      background: var(--pure-white);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      transition: var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .aura-city-chip:hover {
+      background: var(--primary-forest);
+      color: var(--pure-white);
+    }
+
+    .aura-why-section {
+      padding: 85px 0;
+      background: var(--pure-white);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .aura-why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-24);
+      margin-top: var(--space-48);
+    }
+
+    .aura-why-card {
+      background: var(--bg-soft-mint);
+      border: 1px solid rgba(18, 53, 43, 0.08);
+      border-radius: 20px;
+      padding: var(--space-32);
+      transition: var(--transition-smooth);
+    }
+
+    .aura-why-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px rgba(18, 53, 43, 0.08);
+    }
+
+    .aura-why-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--pure-white);
+      color: var(--primary-forest);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.125rem;
+      margin-bottom: var(--space-20);
+    }
+
+    .aura-why-num {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary-forest);
+      line-height: 1;
+      margin-bottom: var(--space-8);
+      letter-spacing: -0.02em;
+    }
+
+    .aura-why-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: var(--space-8);
+    }
+
+    .aura-why-desc {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .aura-express-section {
+      padding: 95px 0;
+      background: var(--bg-warm-white);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .aura-express-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-24);
+      margin-top: var(--space-48);
+    }
+
+    .aura-express-card {
+      background: var(--pure-white);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition-smooth);
+    }
+
+    .aura-express-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 36px rgba(18, 53, 43, 0.09);
+      border-color: var(--primary-forest);
+    }
+
+    .aura-express-img-wrap {
+      height: 200px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .aura-express-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+
+    .aura-express-card:hover .aura-express-img-wrap img {
+      transform: scale(1.06);
+    }
+
+    .aura-express-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(18, 53, 43, 0.85);
+      backdrop-filter: blur(6px);
+      color: var(--accent-lime);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .aura-express-body {
+      padding: var(--space-24);
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .aura-express-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary-forest);
+      margin-bottom: var(--space-8);
+    }
+
+    .aura-express-desc {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: var(--space-20);
+      flex: 1;
+    }
+
+    .aura-express-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: var(--space-16);
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .aura-express-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--primary-forest);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .aura-express-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-soft-mint);
+      color: var(--primary-forest);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8125rem;
+      transition: var(--transition-fast);
+    }
+
+    .aura-express-card:hover .aura-express-btn {
+      background: var(--primary-forest);
+      color: var(--accent-lime);
+      transform: translateX(3px);
+    }
+
+    @media (max-width: 1024px) {
+      .aura-why-grid,
+      .aura-express-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .aura-why-grid,
+      .aura-express-grid {
+        grid-template-columns: 1fr;
+      }
+      .aura-cities-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1983,6 +2219,180 @@
           <div class="trust-item reveal-on-scroll">
             <div class="trust-number" data-count="100" data-suffix="%">0</div>
             <div class="trust-label">Non-Toxic Botanicals</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SCANDINAVIAN ON-DEMAND COVERAGE & APP STRIP
+         ========================================================================== -->
+    <section class="aura-cities-bar" aria-label="Live City Availability">
+      <div class="container aura-cities-inner">
+        <div class="aura-chips-wrap">
+          <span style="font-size: 0.8125rem; font-weight: 800; color: var(--primary-forest); text-transform: uppercase; letter-spacing: 0.08em; display: inline-flex; align-items: center; gap: 6px;">
+            <i class="fas fa-seedling" style="color: #16A34A;"></i> LIVE IN:
+          </span>
+          <span class="aura-city-chip">Stockholm</span>
+          <span class="aura-city-chip">Copenhagen</span>
+          <span class="aura-city-chip">London</span>
+          <span class="aura-city-chip">Oslo</span>
+          <span class="aura-city-chip">Amsterdam</span>
+          <span class="aura-city-chip">Zurich</span>
+          <span style="font-size: 0.75rem; font-weight: 700; color: var(--primary-forest); cursor: pointer;">+ 8 more cities &rarr;</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: var(--space-16); flex-wrap: wrap;">
+          <div style="font-size: 0.8125rem; font-weight: 700; color: var(--text-primary); display: flex; align-items: center; gap: 6px;">
+            <span style="color: #EAB308;">★★★★★</span>
+            <span>4.96 from 19,200+ ratings</span>
+          </div>
+          <a href="#booking" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.8125rem;"><i class="fas fa-mobile-alt"></i> On-Demand App</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         WHY AURA (PRONTO-INSPIRED MINDFUL STATS)
+         ========================================================================== -->
+    <section class="aura-why-section" id="why-aura">
+      <div class="container">
+        <div class="section-header reveal-on-scroll">
+          <span class="section-tag">WHY US?</span>
+          <h2 class="section-title">No more planning around your house help.</h2>
+          <p class="section-subtitle">Our team of background-checked, career-minded Aura Specialists are always on time with 100% plant-based essentials.</p>
+        </div>
+
+        <div class="aura-why-grid">
+          <div class="aura-why-card reveal-on-scroll">
+            <div class="aura-why-icon"><i class="fas fa-home"></i></div>
+            <div class="aura-why-num">350,000+</div>
+            <div class="aura-why-title">Living Spaces Reclaimed</div>
+            <div class="aura-why-desc">From compact city studios to multi-story Scandinavian retreats, our specialists restore clarity and hygiene to everyday homes.</div>
+          </div>
+
+          <div class="aura-why-card reveal-on-scroll">
+            <div class="aura-why-icon"><i class="fas fa-clock"></i></div>
+            <div class="aura-why-num">850,000+</div>
+            <div class="aura-why-title">Hours Given Back to Life</div>
+            <div class="aura-why-desc">Reclaim your weekends for what truly matters: creative projects, outdoor nature walks, and uninterrupted family tranquility.</div>
+          </div>
+
+          <div class="aura-why-card reveal-on-scroll">
+            <div class="aura-why-icon"><i class="fas fa-shield-alt"></i></div>
+            <div class="aura-why-num">100%</div>
+            <div class="aura-why-title">Certified Non-Toxic Botanicals</div>
+            <div class="aura-why-desc">Zero harsh bleach, zero synthetic phthalates. Breathe deeply knowing every surface is treated with pure, food-safe chemistry.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         BOOK TRUSTED HOUSE HELP (PRONTO-INSPIRED MICRO-SERVICES)
+         ========================================================================== -->
+    <section class="aura-express-section" id="express-services">
+      <div class="container">
+        <div class="section-header reveal-on-scroll">
+          <span class="section-tag">OUR SERVICES</span>
+          <h2 class="section-title">Book trusted house help.</h2>
+          <p class="section-subtitle">From hourly bookings to express cleans to daily upkeep. 6 core disciplines with transparent flat pricing.</p>
+        </div>
+
+        <div class="aura-express-grid">
+          <!-- 1 -->
+          <div class="aura-express-card reveal-on-scroll">
+            <div class="aura-express-img-wrap">
+              <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=80" alt="Hourly Bookings">
+              <span class="aura-express-badge">From $35 / hr</span>
+            </div>
+            <div class="aura-express-body">
+              <h3 class="aura-express-title">Hourly Bookings</h3>
+              <p class="aura-express-desc">Flexible hourly help for customized domestic tasks: folding bed linens, tidying toys, dusting high shelves, or seasonal reorganizing.</p>
+              <div class="aura-express-footer">
+                <span class="aura-express-tag">Hourly Flex</span>
+                <a href="#booking" class="aura-express-btn" aria-label="Book Hourly Clean"><i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2 -->
+          <div class="aura-express-card reveal-on-scroll">
+            <div class="aura-express-img-wrap">
+              <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80" alt="Bathroom Spa Reset">
+              <span class="aura-express-badge">$65 Flat</span>
+            </div>
+            <div class="aura-express-body">
+              <h3 class="aura-express-title">Bathroom Spa Reset</h3>
+              <p class="aura-express-desc">Plant-based mineral descaling on glass enclosures, toilet sanitation, eco-scrub on porous ceramic tiles, and mirror polishing.</p>
+              <div class="aura-express-footer">
+                <span class="aura-express-tag">Deep Sanitation</span>
+                <a href="#booking" class="aura-express-btn" aria-label="Book Bathroom Reset"><i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3 -->
+          <div class="aura-express-card reveal-on-scroll">
+            <div class="aura-express-img-wrap">
+              <img src="https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=600&q=80" alt="Fridge & Pantry Clean">
+              <span class="aura-express-badge">$55 Flat</span>
+            </div>
+            <div class="aura-express-body">
+              <h3 class="aura-express-title">Fridge &amp; Pantry Detailing</h3>
+              <p class="aura-express-desc">Shelf-by-shelf sanitization with food-safe botanical degreasers. Neutralizes odors and neatly organizes fresh produce.</p>
+              <div class="aura-express-footer">
+                <span class="aura-express-tag">Food-Safe Eco</span>
+                <a href="#booking" class="aura-express-btn" aria-label="Book Fridge Clean"><i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 -->
+          <div class="aura-express-card reveal-on-scroll">
+            <div class="aura-express-img-wrap">
+              <img src="https://images.unsplash.com/photo-1558997519-83ea9252def8?auto=format&fit=crop&w=600&q=80" alt="Packing or Unpacking">
+              <span class="aura-express-badge">$40 / hr</span>
+            </div>
+            <div class="aura-express-body">
+              <h3 class="aura-express-title">Packing or Unpacking</h3>
+              <p class="aura-express-desc">Careful categorization, wrapping of delicate glassware, and structured closet alignment when relocating or decluttering rooms.</p>
+              <div class="aura-express-footer">
+                <span class="aura-express-tag">Declutter Squad</span>
+                <a href="#booking" class="aura-express-btn" aria-label="Book Packing Service"><i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5 -->
+          <div class="aura-express-card reveal-on-scroll">
+            <div class="aura-express-img-wrap">
+              <img src="https://images.unsplash.com/photo-1585837575652-267c041d77d4?auto=format&fit=crop&w=600&q=80" alt="Utensils & Sink Care">
+              <span class="aura-express-badge">$38 Flat</span>
+            </div>
+            <div class="aura-express-body">
+              <h3 class="aura-express-title">Utensils &amp; Sink Care</h3>
+              <p class="aura-express-desc">Complete wash, air-dry, and storage of dinnerware and cooking vessels. Polishing stainless sink basin and faucet fixtures.</p>
+              <div class="aura-express-footer">
+                <span class="aura-express-tag">Kitchen Reset</span>
+                <a href="#booking" class="aura-express-btn" aria-label="Book Utensils Care"><i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6 -->
+          <div class="aura-express-card reveal-on-scroll">
+            <div class="aura-express-img-wrap">
+              <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80" alt="Kitchen Prep & Wipe">
+              <span class="aura-express-badge">$50 Flat</span>
+            </div>
+            <div class="aura-express-body">
+              <h3 class="aura-express-title">Kitchen Prep &amp; Counters</h3>
+              <p class="aura-express-desc">Citrus-enzyme surface degreasing on countertops, range cooker tops, microwave interior, and cabinet exterior handles.</p>
+              <div class="aura-express-footer">
+                <span class="aura-express-tag">Culinary Fresh</span>
+                <a href="#booking" class="aura-express-btn" aria-label="Book Kitchen Prep"><i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -1,0 +1,2200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SteriCore | Hospital-Grade Environmental Hygiene & Clinical Cleaning</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --navy-deep: #0B1B2B;
+      --navy-surface: #11263C;
+      --navy-card: #18334E;
+      --clinical-white: #FFFFFF;
+      --clinical-surface: #F4F8FA;
+      --medical-blue: #1D4ED8;
+      --medical-blue-hover: #1E40AF;
+      --aqua-accent: #06B6D4;
+      --aqua-soft: #E0F7FA;
+      --mint-success: #10B981;
+      --mint-soft: #D1FAE5;
+      --text-dark: #0F172A;
+      --text-muted: #64748B;
+      --text-light: #F8FAFC;
+      --border-clinical: #E2E8F0;
+      --border-dark: rgba(255, 255, 255, 0.12);
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      --shadow-clinical: 0 10px 30px -5px rgba(11, 27, 43, 0.08);
+      --shadow-card: 0 16px 36px -8px rgba(11, 27, 43, 0.12);
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --transition: all 0.28s ease-in-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #FFFFFF;
+      color: var(--text-dark);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Top Compliance Ribbon */
+    .top-compliance-bar {
+      background: var(--navy-deep);
+      color: #94A3B8;
+      font-size: 12px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-weight: 600;
+    }
+
+    .compliance-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .compliance-badges {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .c-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #E2E8F0;
+    }
+
+    .c-badge i {
+      color: var(--mint-success);
+    }
+
+    /* Header Nav */
+    .header {
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border-clinical);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 84px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-cross-shield {
+      width: 44px;
+      height: 44px;
+      background: var(--navy-deep);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--aqua-accent);
+      font-size: 20px;
+      box-shadow: 0 4px 12px rgba(6, 182, 212, 0.25);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-name {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy-deep);
+      line-height: 1.1;
+    }
+
+    .logo-name span {
+      color: var(--medical-blue);
+    }
+
+    .logo-tag {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-dark);
+      transition: var(--transition);
+    }
+
+    .nav-link:hover {
+      color: var(--medical-blue);
+    }
+
+    .btn-blue {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--medical-blue);
+      color: #FFFFFF;
+      padding: 12px 24px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 14px rgba(29, 78, 216, 0.25);
+    }
+
+    .btn-blue:hover {
+      background: var(--medical-blue-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline-navy {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--navy-deep);
+      border: 1.5px solid var(--navy-deep);
+      padding: 11px 22px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-outline-navy:hover {
+      background: var(--navy-deep);
+      color: #FFFFFF;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: var(--navy-deep);
+      cursor: pointer;
+    }
+
+    .mobile-drawer {
+      position: fixed;
+      top: 120px;
+      left: 0;
+      width: 100%;
+      background: #FFFFFF;
+      border-bottom: 3px solid var(--medical-blue);
+      padding: 24px;
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 999;
+      box-shadow: var(--shadow-card);
+    }
+
+    .mobile-drawer.open {
+      display: flex;
+    }
+
+    .mobile-drawer a {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy-deep);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-clinical);
+    }
+
+    /* Section Global */
+    section {
+      padding: 95px 0;
+      position: relative;
+    }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--aqua-soft);
+      color: #0E7490;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(32px, 4vw, 46px);
+      color: var(--navy-deep);
+      font-weight: 700;
+      line-height: 1.18;
+      margin-bottom: 18px;
+    }
+
+    .section-title span {
+      color: var(--medical-blue);
+    }
+
+    .section-subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 650px;
+      line-height: 1.7;
+    }
+
+    .center-header {
+      text-align: center;
+      margin-bottom: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* 01. Authority Hero */
+    .hero {
+      background: linear-gradient(135deg, #0B1B2B 0%, #11263C 60%, #18334E 100%);
+      color: #FFFFFF;
+      padding: 100px 0 90px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .hero-protocol-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(6, 182, 212, 0.15);
+      border: 1px solid var(--aqua-accent);
+      color: #A5F3FC;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(36px, 5.2vw, 56px);
+      line-height: 1.12;
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
+
+    .hero-title span {
+      color: var(--aqua-accent);
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      color: #CBD5E1;
+      line-height: 1.75;
+      margin-bottom: 38px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .hero-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding-top: 28px;
+    }
+
+    .h-metric {
+      border-left: 2px solid var(--aqua-accent);
+      padding-left: 14px;
+    }
+
+    .h-metric-num {
+      font-family: var(--font-heading);
+      font-size: 26px;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .h-metric-lbl {
+      font-size: 12px;
+      color: #94A3B8;
+    }
+
+    /* Floating Protocol Card */
+    .hero-card-box {
+      position: relative;
+    }
+
+    .hero-hospital-img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .floating-qa-card {
+      position: absolute;
+      bottom: -25px;
+      left: -20px;
+      background: #FFFFFF;
+      color: var(--text-dark);
+      padding: 22px 24px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border-clinical);
+      max-width: 310px;
+    }
+
+    .qa-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .qa-card-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--mint-success);
+      background: var(--mint-soft);
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+    }
+
+    /* 02. Our Cleaning Standards */
+    .standards-section {
+      background: #FFFFFF;
+    }
+
+    .standards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .standard-item {
+      background: var(--clinical-surface);
+      border: 1px solid var(--border-clinical);
+      border-radius: var(--radius-md);
+      padding: 32px 24px;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .standard-item:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-clinical);
+      border-color: var(--medical-blue);
+    }
+
+    .standard-icon-box {
+      width: 52px;
+      height: 52px;
+      background: #FFFFFF;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--medical-blue);
+      font-size: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .standard-item-title {
+      font-family: var(--font-heading);
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--navy-deep);
+      margin-bottom: 10px;
+    }
+
+    .standard-item-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* 03. Industry Solutions */
+    .solutions-section {
+      background: var(--clinical-surface);
+      border-top: 1px solid var(--border-clinical);
+      border-bottom: 1px solid var(--border-clinical);
+    }
+
+    .solutions-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .solution-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-clinical);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+    }
+
+    .solution-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-card);
+      border-color: var(--aqua-accent);
+    }
+
+    .solution-thumb {
+      height: 200px;
+      position: relative;
+    }
+
+    .solution-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .solution-tag {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(11, 27, 43, 0.85);
+      color: #FFFFFF;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+    }
+
+    .solution-body {
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .solution-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy-deep);
+      margin-bottom: 8px;
+    }
+
+    .solution-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 18px;
+      flex-grow: 1;
+    }
+
+    .solution-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-dark);
+      border-top: 1px solid var(--border-clinical);
+      padding-top: 14px;
+    }
+
+    .solution-features li {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .solution-features li i {
+      color: var(--mint-success);
+    }
+
+    /* Scroll Reveal & Animations */
+    .reveal-fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-fade-up.is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* 03b. Clinical Case Studies Carousel */
+    .case-studies-section {
+      background: var(--clinical-surface);
+      border-top: 1px solid var(--border-clinical);
+      border-bottom: 1px solid var(--border-clinical);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .case-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 35px;
+    }
+
+    .case-nav-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .case-nav-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: #FFFFFF;
+      border: 1px solid var(--border-clinical);
+      color: var(--navy-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 14px;
+      transition: var(--transition);
+    }
+
+    .case-nav-btn:hover {
+      background: var(--blue-medical);
+      color: #FFFFFF;
+      border-color: var(--blue-medical);
+      transform: scale(1.05);
+    }
+
+    .case-carousel-wrapper {
+      position: relative;
+      overflow: hidden;
+      cursor: grab;
+    }
+
+    .case-carousel-wrapper:active {
+      cursor: grabbing;
+    }
+
+    .case-track {
+      display: flex;
+      gap: 25px;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
+    }
+
+    .case-slide {
+      flex: 0 0 calc(50% - 13px);
+      min-width: calc(50% - 13px);
+      background: #FFFFFF;
+      border: 1px solid var(--border-clinical);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .case-slide:hover {
+      border-color: var(--aqua-accent);
+      box-shadow: var(--shadow-card);
+      transform: translateY(-4px);
+    }
+
+    .case-slide-media {
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .case-slide-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .case-metric-tag {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(11, 27, 43, 0.9);
+      color: var(--mint-success);
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .case-slide-body {
+      padding: 26px 22px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .case-facility-name {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy-deep);
+      margin-bottom: 6px;
+    }
+
+    .case-facility-loc {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .case-stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      background: var(--clinical-surface);
+      border: 1px solid var(--border-clinical);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      margin-top: auto;
+    }
+
+    .stat-micro-lbl {
+      font-size: 10px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .stat-micro-val {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--navy-deep);
+    }
+
+    /* 04. Operational Workflow */
+    .workflow-section {
+      background: #FFFFFF;
+    }
+
+    .workflow-steps {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+    }
+
+    .wf-step {
+      background: var(--clinical-surface);
+      border: 1px solid var(--border-clinical);
+      border-radius: var(--radius-md);
+      padding: 24px 18px;
+      text-align: center;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .wf-step:hover {
+      border-color: var(--medical-blue);
+      box-shadow: var(--shadow-clinical);
+    }
+
+    .wf-num {
+      width: 44px;
+      height: 44px;
+      margin: 0 auto 14px;
+      background: var(--navy-deep);
+      color: var(--aqua-accent);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .wf-title {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy-deep);
+      margin-bottom: 8px;
+    }
+
+    .wf-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* 05. Quality Assurance Dashboard */
+    .qa-dashboard-section {
+      background: var(--navy-deep);
+      color: #FFFFFF;
+    }
+
+    .qa-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .dashboard-mockup {
+      background: var(--navy-surface);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      padding: 30px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .dash-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-dark);
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+    }
+
+    .dash-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--mint-success);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--mint-success);
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.4; }
+      100% { opacity: 1; }
+    }
+
+    .dash-metrics-duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .dash-metric-box {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-dark);
+      padding: 18px;
+      border-radius: var(--radius-sm);
+    }
+
+    .dash-val {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--aqua-accent);
+      margin-bottom: 4px;
+    }
+
+    .dash-lbl {
+      font-size: 12px;
+      color: #94A3B8;
+    }
+
+    .dash-log-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 12px;
+    }
+
+    .log-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--mint-success);
+    }
+
+    /* 06. Why SteriCore */
+    .why-section {
+      background: #FFFFFF;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .why-card {
+      background: var(--clinical-surface);
+      border: 1px solid var(--border-clinical);
+      border-radius: var(--radius-md);
+      padding: 28px 22px;
+      text-align: center;
+    }
+
+    .why-card i {
+      font-size: 28px;
+      color: var(--medical-blue);
+      margin-bottom: 14px;
+    }
+
+    .why-card h4 {
+      font-family: var(--font-heading);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy-deep);
+      margin-bottom: 8px;
+    }
+
+    .why-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* 07. Facility Assessment Form */
+    .assessment-section {
+      background: var(--clinical-surface);
+      border-top: 1px solid var(--border-clinical);
+    }
+
+    .assessment-box {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #FFFFFF;
+      border: 1px solid var(--border-clinical);
+      border-radius: var(--radius-md);
+      padding: 44px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 26px;
+    }
+
+    .form-full {
+      grid-column: span 2;
+    }
+
+    .field-lbl {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--navy-deep);
+      margin-bottom: 6px;
+    }
+
+    .field-ctrl {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border-clinical);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 14px;
+      outline: none;
+      transition: var(--transition);
+      background: #FFFFFF;
+    }
+
+    .field-ctrl:focus {
+      border-color: var(--medical-blue);
+      box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--navy-deep);
+      color: #94A3B8;
+      padding: 80px 0 35px;
+      font-size: 13px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+
+    .footer-title {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 18px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a:hover {
+      color: #FFFFFF;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 12px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .standards-grid,
+      .solutions-grid,
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .workflow-steps {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .hero-grid,
+      .qa-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links,
+      .compliance-badges {
+        display: none;
+      }
+      .mobile-menu-btn {
+        display: block;
+      }
+      .standards-grid,
+      .solutions-grid,
+      .workflow-steps,
+      .why-grid,
+      .footer-grid,
+      .hero-metrics-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-full {
+        grid-column: span 1;
+      }
+      .assessment-box {
+        padding: 24px 18px;
+      }
+      .steri-why-grid,
+      .steri-micro-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .steri-telemetry-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* ==========================================================================
+       CLINICAL TELEMETRY PRONTO-INSPIRED ON-DEMAND MODULES
+       ========================================================================== */
+    .steri-telemetry-bar {
+      background: var(--navy-deep);
+      border-bottom: 1px solid rgba(6, 182, 212, 0.2);
+      padding: 16px 0;
+      color: #FFFFFF;
+    }
+
+    .steri-telemetry-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .steri-city-tag {
+      background: var(--navy-card);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      color: #FFFFFF;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 600;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .steri-city-tag:hover {
+      background: var(--aqua-accent);
+      color: var(--navy-deep);
+      border-color: var(--aqua-accent);
+    }
+
+    .steri-why-section {
+      padding: 95px 0;
+      background: var(--clinical-surface);
+      border-bottom: 1px solid #E2E8F0;
+    }
+
+    .steri-why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 50px;
+    }
+
+    .steri-why-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: var(--radius-md);
+      padding: 36px 30px;
+      box-shadow: 0 4px 20px rgba(11, 27, 43, 0.05);
+      transition: var(--transition);
+      border-top: 4px solid var(--medical-blue);
+    }
+
+    .steri-why-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 36px rgba(11, 27, 43, 0.1);
+      border-color: var(--aqua-accent);
+    }
+
+    .steri-why-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: var(--aqua-soft);
+      color: var(--medical-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-bottom: 22px;
+    }
+
+    .steri-why-num {
+      font-size: 38px;
+      font-weight: 900;
+      color: var(--navy-deep);
+      line-height: 1;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .steri-why-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy-surface);
+      margin-bottom: 8px;
+    }
+
+    .steri-why-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .steri-micro-section {
+      padding: 100px 0;
+      background: #FFFFFF;
+      border-bottom: 1px solid #E2E8F0;
+    }
+
+    .steri-micro-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+      margin-top: 50px;
+    }
+
+    .steri-micro-card {
+      background: var(--clinical-surface);
+      border: 1px solid #E2E8F0;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+    }
+
+    .steri-micro-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 32px rgba(11, 27, 43, 0.08);
+      border-color: var(--aqua-accent);
+    }
+
+    .steri-micro-img-wrap {
+      height: 190px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .steri-micro-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+
+    .steri-micro-card:hover .steri-micro-img-wrap img {
+      transform: scale(1.06);
+    }
+
+    .steri-micro-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--navy-deep);
+      color: var(--aqua-accent);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid rgba(6, 182, 212, 0.3);
+    }
+
+    .steri-micro-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .steri-micro-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--navy-deep);
+      margin-bottom: 8px;
+    }
+
+    .steri-micro-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+
+    .steri-micro-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px solid #E2E8F0;
+    }
+
+    .steri-micro-tag {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--medical-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .steri-micro-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      border: 1px solid #CBD5E1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--navy-deep);
+      font-size: 12px;
+      transition: var(--transition);
+    }
+
+    .steri-micro-card:hover .steri-micro-btn {
+      background: var(--aqua-accent);
+      color: var(--navy-deep);
+      border-color: var(--aqua-accent);
+      transform: translateX(3px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Compliance Ribbon -->
+  <div class="top-compliance-bar">
+    <div class="container compliance-content">
+      <div class="compliance-badges">
+        <div class="c-badge"><i class="fas fa-check-shield"></i> CDC & OSHA Healthcare Compliance Certified</div>
+        <div class="c-badge"><i class="fas fa-flask"></i> EPA List N Virucidal Disinfection Agents</div>
+        <div class="c-badge"><i class="fas fa-certificate"></i> ISO 9001 Quality Management Certified</div>
+      </div>
+      <div>
+        <span>24/7 Clinical Emergency Line: <strong>+1 (800) 555-STERI</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header Nav -->
+  <header class="header">
+    <div class="container header-content">
+      <a href="#" class="logo">
+        <div class="logo-cross-shield"><i class="fas fa-shield-virus"></i></div>
+        <div class="logo-text">
+          <span class="logo-name">Steri<span>Core</span></span>
+          <span class="logo-tag">Clinical Environmental Hygiene</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#standards" class="nav-link">Standards</a></li>
+        <li><a href="#solutions" class="nav-link">Industries</a></li>
+        <li><a href="#workflow" class="nav-link">Workflow</a></li>
+        <li><a href="#dashboard" class="nav-link">QA Dashboard</a></li>
+        <li><a href="#why" class="nav-link">Why Us</a></li>
+      </ul>
+
+      <div class="header-actions">
+        <a href="#assessment" class="btn-blue"><i class="fas fa-file-medical-alt"></i> Facility Assessment</a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <a href="#standards" onclick="toggleMenu()">Standards</a>
+      <a href="#solutions" onclick="toggleMenu()">Industries</a>
+      <a href="#workflow" onclick="toggleMenu()">Workflow</a>
+      <a href="#dashboard" onclick="toggleMenu()">QA Dashboard</a>
+      <a href="#why" onclick="toggleMenu()">Why SteriCore</a>
+      <a href="#assessment" onclick="toggleMenu()" style="color: var(--medical-blue);">Facility Assessment</a>
+    </div>
+  </header>
+
+  <!-- 01. Authority Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-protocol-pill">
+            <i class="fas fa-biohazard"></i> Medical-Grade Biocidal Decontamination
+          </div>
+          <h1 class="hero-title">
+            Beyond Clean.<br>
+            <span>Engineered for Hygiene.</span>
+          </h1>
+          <p class="hero-desc">
+            Professional cleaning and environmental hygiene solutions for healthcare facilities, commercial properties, laboratories, and high-standard residential environments.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#assessment" class="btn-blue">Request a Facility Assessment</a>
+            <a href="#solutions" class="btn-outline-navy" style="color: #FFFFFF; border-color: rgba(255,255,255,0.4);">Explore Our Capabilities</a>
+          </div>
+
+          <div class="hero-metrics-grid">
+            <div class="h-metric">
+              <div class="h-metric-num">99.999%</div>
+              <div class="h-metric-lbl">Pathogen Reduction Efficacy</div>
+            </div>
+            <div class="h-metric">
+              <div class="h-metric-num">&lt; 10 RLU</div>
+              <div class="h-metric-lbl">ATP Clean Surface Benchmark</div>
+            </div>
+            <div class="h-metric">
+              <div class="h-metric-num">100%</div>
+              <div class="h-metric-lbl">Chain-of-Custody Documented</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card-box">
+          <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80" alt="Hospital Clean Corridor" class="hero-hospital-img">
+          <div class="floating-qa-card">
+            <div class="qa-card-head">
+              <strong style="font-size: 13px;">Surgery Suite 04 Hygiene Log</strong>
+              <span class="qa-card-status"><i class="fas fa-check"></i> Passed</span>
+            </div>
+            <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 8px;">
+              ATP Bioluminescence Score: 4 RLU. Zero microbial colony formation. Biocidal dwell: 10 mins.
+            </p>
+            <div style="font-size: 11px; color: #64748B;">Validated by Certified Lead Hygienist</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pronto-Inspired Clinical Telemetry Strip -->
+  <section class="steri-telemetry-bar" aria-label="Operational Telemetry">
+    <div class="container steri-telemetry-inner">
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <span style="font-size: 12px; font-weight: 800; color: var(--aqua-accent); text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; gap: 6px;">
+          <i class="fas fa-satellite-dish"></i> ACTIVE DEPLOYMENT CLUSTERS:
+        </span>
+        <span class="steri-city-tag">London Metro Labs</span>
+        <span class="steri-city-tag">Oxford Bio-Park</span>
+        <span class="steri-city-tag">Cambridge Science</span>
+        <span class="steri-city-tag">Manchester Clinical</span>
+        <span class="steri-city-tag">Birmingham Health</span>
+        <span style="font-size: 12px; font-weight: 700; color: var(--aqua-accent); cursor: pointer;">+ 4 regional units &rarr;</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+        <div style="font-size: 13px; font-weight: 700; color: #FFFFFF; display: flex; align-items: center; gap: 6px;">
+          <span style="color: var(--mint-success);"><i class="fas fa-shield-virus"></i></span>
+          <span>99.999% Bio-Kill Verification Rate</span>
+        </div>
+        <a href="#assessment" class="btn-primary" style="padding: 7px 16px; font-size: 12px; background: var(--aqua-accent); color: var(--navy-deep);">Emergency Dispatch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pronto-Inspired Why SteriCore Section -->
+  <section class="steri-why-section" id="why-stericore">
+    <div class="container">
+      <div class="center-header">
+        <div class="section-eyebrow" style="background: var(--aqua-soft); color: var(--medical-blue);"><i class="fas fa-vial"></i> CLINICAL ASSURANCE</div>
+        <h2 class="section-title">No More Guesswork Around Hygiene.</h2>
+        <p class="section-subtitle">
+          Our certified biohazard and clinical hygiene specialists arrive with hospital-grade EPA List N biocides and instant ATP luminometer testing.
+        </p>
+      </div>
+
+      <div class="steri-why-grid">
+        <div class="steri-why-card">
+          <div class="steri-why-icon"><i class="fas fa-hospital"></i></div>
+          <div class="steri-why-num">120,000+</div>
+          <div class="steri-why-title">Sterile Facilities Decontaminated</div>
+          <div class="steri-why-desc">Surgical theaters, diagnostic cleanrooms, and medical suites kept compliant with CDC, NHS, and ISO Class 5 standards.</div>
+        </div>
+
+        <div class="steri-why-card">
+          <div class="steri-why-icon"><i class="fas fa-stopwatch"></i></div>
+          <div class="steri-why-num">1,400,000+</div>
+          <div class="steri-why-title">Hygiene Hours Logged</div>
+          <div class="steri-why-desc">Documented bio-vapor decontamination and surface contact sanitization hours verified by chain-of-custody logs.</div>
+        </div>
+
+        <div class="steri-why-card">
+          <div class="steri-why-icon"><i class="fas fa-user-md"></i></div>
+          <div class="steri-why-num">100%</div>
+          <div class="steri-why-title">Certified Bio-Hygienists</div>
+          <div class="steri-why-desc">Every specialist is OSHA 1910.1030 compliant, bloodborne pathogen certified, and equipped with full PPE defense suites.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pronto-Inspired On-Demand Clinical Services -->
+  <section class="steri-micro-section" id="on-demand">
+    <div class="container">
+      <div class="center-header">
+        <div class="section-eyebrow" style="background: #E0F2FE; color: var(--medical-blue);"><i class="fas fa-briefcase-medical"></i> TARGETED UNITS</div>
+        <h2 class="section-title">Book Trusted Hygiene Units.</h2>
+        <p class="section-subtitle">
+          From hourly sanitization deployments to emergency pathogen response. Complete compliance documentation with transparent pricing.
+        </p>
+      </div>
+
+      <div class="steri-micro-grid">
+        <!-- 1 -->
+        <div class="steri-micro-card">
+          <div class="steri-micro-img-wrap">
+            <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=600&q=80" alt="Hourly Sanitization Squad">
+            <span class="steri-micro-badge">From $75 / hr</span>
+          </div>
+          <div class="steri-micro-body">
+            <h3 class="steri-micro-title">Hourly Bio-Sanitization</h3>
+            <p class="steri-micro-desc">Dedicated clinical decontamination squad deployed by the hour for high-touch terminal cleaning, fogging, and room sterilization.</p>
+            <div class="steri-micro-footer">
+              <span class="steri-micro-tag">Hourly Squad</span>
+              <a href="#assessment" class="steri-micro-btn" aria-label="Book Hourly Sanitization"><i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="steri-micro-card">
+          <div class="steri-micro-img-wrap">
+            <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=600&q=80" alt="Surgical Suite Clean">
+            <span class="steri-micro-badge">$180 Flat</span>
+          </div>
+          <div class="steri-micro-body">
+            <h3 class="steri-micro-title">Surgery &amp; Clinic Room Turnover</h3>
+            <p class="steri-micro-desc">Zero-microbial surface wipes, medical-grade biocide dwell, UV-C terminal sweep, and ATP bioluminescence log sign-off.</p>
+            <div class="steri-micro-footer">
+              <span class="steri-micro-tag">Terminal Grade</span>
+              <a href="#assessment" class="steri-micro-btn" aria-label="Book Suite Turnover"><i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="steri-micro-card">
+          <div class="steri-micro-img-wrap">
+            <img src="https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=600&q=80" alt="Cold Chain Bio Scrub">
+            <span class="steri-micro-badge">$120 Flat</span>
+          </div>
+          <div class="steri-micro-body">
+            <h3 class="steri-micro-title">Cold-Chain &amp; Lab Refrigeration</h3>
+            <p class="steri-micro-desc">Cryogenic and standard cold storage sterilization, biological spill containment, pathogen swabs, and calibrated defrost scrub.</p>
+            <div class="steri-micro-footer">
+              <span class="steri-micro-tag">Bio-Cold Care</span>
+              <a href="#assessment" class="steri-micro-btn" aria-label="Book Cold Chain Scrub"><i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="steri-micro-card">
+          <div class="steri-micro-img-wrap">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Cleanroom Decontamination">
+            <span class="steri-micro-badge">$150 Flat</span>
+          </div>
+          <div class="steri-micro-body">
+            <h3 class="steri-micro-title">Cleanroom Particle Extraction</h3>
+            <p class="steri-micro-desc">ISO 14644 particulate verification, high-pressure negative air scrub, electrostatic micro-wiping, and laminar flow shroud clean.</p>
+            <div class="steri-micro-footer">
+              <span class="steri-micro-tag">ISO Protocol</span>
+              <a href="#assessment" class="steri-micro-btn" aria-label="Book Cleanroom Care"><i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="steri-micro-card">
+          <div class="steri-micro-img-wrap">
+            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80" alt="Clinical Washroom Sanitation">
+            <span class="steri-micro-badge">$95 Flat</span>
+          </div>
+          <div class="steri-micro-body">
+            <h3 class="steri-micro-title">Clinical Washroom Disinfection</h3>
+            <p class="steri-micro-desc">Sporicidal dwell treatment on high-touch sanitary fixtures, barrier seal coats against biofilm, and touchless dispenser sterilization.</p>
+            <div class="steri-micro-footer">
+              <span class="steri-micro-tag">Sporicidal Unit</span>
+              <a href="#assessment" class="steri-micro-btn" aria-label="Book Washroom Unit"><i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="steri-micro-card">
+          <div class="steri-micro-img-wrap">
+            <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80" alt="Commercial Kitchen Bio Vapor">
+            <span class="steri-micro-badge">$135 Flat</span>
+          </div>
+          <div class="steri-micro-body">
+            <h3 class="steri-micro-title">Commercial Kitchen Bio-Vapor</h3>
+            <p class="steri-micro-desc">High-temperature 180°C saturated steam degreasing, listeria and salmonella mitigation on stainless steel prep tables.</p>
+            <div class="steri-micro-footer">
+              <span class="steri-micro-tag">Food Hygiene</span>
+              <a href="#assessment" class="steri-micro-btn" aria-label="Book Bio Vapor Scrub"><i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02. Our Cleaning Standards -->
+  <section class="standards-section" id="standards">
+    <div class="container">
+      <div class="center-header">
+        <div class="section-eyebrow"><i class="fas fa-microscope"></i> Scientific Rigor</div>
+        <h2 class="section-title">Our Four Pillars of Hygiene</h2>
+        <p class="section-subtitle">
+          Engineered protocols moving far beyond aesthetic tidiness to eliminate pathogen vectors at the microbiological level.
+        </p>
+      </div>
+
+      <div class="standards-grid">
+        <div class="standard-item">
+          <div class="standard-icon-box"><i class="fas fa-pump-medical"></i></div>
+          <h3 class="standard-item-title">Surface Disinfection</h3>
+          <p class="standard-item-desc">EPA List N registered hospital-grade virucidal chemistry with verified dwell times to eradicate MRSA, C. diff, and viral pathogens.</p>
+        </div>
+
+        <div class="standard-item">
+          <div class="standard-icon-box"><i class="fas fa-shield-virus"></i></div>
+          <h3 class="standard-item-title">Cross-Contamination Barrier</h3>
+          <p class="standard-item-desc">Color-coded microfiber textiles, dedicated single-zone HEPA filtration, and strict PPE protocols preventing microbial transfer between rooms.</p>
+        </div>
+
+        <div class="standard-item">
+          <div class="standard-icon-box"><i class="fas fa-hand-holding-medical"></i></div>
+          <h3 class="standard-item-title">High-Touch Vector Focus</h3>
+          <p class="standard-item-desc">Systematic decontamination of door levers, biometric pads, elevator call buttons, telemetry screens, and medical cabinetry.</p>
+        </div>
+
+        <div class="standard-item">
+          <div class="standard-icon-box"><i class="fas fa-clipboard-check"></i></div>
+          <h3 class="standard-item-title">Documented Inspection</h3>
+          <p class="standard-item-desc">Quantitative ATP swab testing and digital cloud logging providing verifiable regulatory audit trails for accreditation boards.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03. Industry Solutions -->
+  <section class="solutions-section" id="solutions">
+    <div class="container">
+      <div class="center-header">
+        <div class="section-eyebrow"><i class="fas fa-building"></i> Sector Capabilities</div>
+        <h2 class="section-title">Engineered for Specialized Facilities</h2>
+        <p class="section-subtitle">
+          Tailored decontamination solutions compliant with strict regulatory requirements across commercial and scientific sectors.
+        </p>
+      </div>
+
+      <div class="solutions-grid">
+        <!-- 1 -->
+        <div class="solution-card">
+          <div class="solution-thumb">
+            <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=600&q=80" alt="Healthcare Facilities">
+            <span class="solution-tag">Healthcare</span>
+          </div>
+          <div class="solution-body">
+            <h3 class="solution-title">Healthcare Facilities</h3>
+            <p class="solution-desc">Hospitals, ambulatory surgery centers, dialysis clinics, and dental surgical suites requiring infection prevention compliance.</p>
+            <ul class="solution-features">
+              <li><i class="fas fa-check"></i> JCAHO & CDC Compliance</li>
+              <li><i class="fas fa-check"></i> Bio-hazard waste management</li>
+              <li><i class="fas fa-check"></i> Terminal room cleaning</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="solution-card">
+          <div class="solution-thumb">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80" alt="Corporate Offices">
+            <span class="solution-tag">Corporate</span>
+          </div>
+          <div class="solution-body">
+            <h3 class="solution-title">Corporate Campuses</h3>
+            <p class="solution-desc">High-density headquarters, financial trading floors, and executive complexes focused on employee wellness and sick-leave reduction.</p>
+            <ul class="solution-features">
+              <li><i class="fas fa-check"></i> Day-porter & night crews</li>
+              <li><i class="fas fa-check"></i> Indoor air quality audit</li>
+              <li><i class="fas fa-check"></i> Restroom sanitize verification</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="solution-card">
+          <div class="solution-thumb">
+            <img src="https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?auto=format&fit=crop&w=600&q=80" alt="Laboratories and Cleanrooms">
+            <span class="solution-tag">Biotech & Lab</span>
+          </div>
+          <div class="solution-body">
+            <h3 class="solution-title">Laboratories & Cleanrooms</h3>
+            <p class="solution-desc">Controlled environments (ISO Class 5-8), pharmaceutical formulation rooms, and clean manufacturing suites requiring particle limits.</p>
+            <ul class="solution-features">
+              <li><i class="fas fa-check"></i> Non-shedding lint-free textiles</li>
+              <li><i class="fas fa-check"></i> Deionized water flushing</li>
+              <li><i class="fas fa-check"></i> Gowning protocol compliance</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="solution-card">
+          <div class="solution-thumb">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="High-Standard Residential">
+            <span class="solution-tag">Residential</span>
+          </div>
+          <div class="solution-body">
+            <h3 class="solution-title">High-Standard Residences</h3>
+            <p class="solution-desc">Immuno-compromised family care, post-illness clinical disinfection, and allergy-relief deep environmental resets for modern homes.</p>
+            <ul class="solution-features">
+              <li><i class="fas fa-check"></i> Zero toxic residue formulas</li>
+              <li><i class="fas fa-check"></i> True HEPA vacuum exhaust</li>
+              <li><i class="fas fa-check"></i> Pet & infant safe biocides</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03b. Clinical Case Studies Carousel -->
+  <section class="section case-studies-section reveal-fade-up">
+    <div class="container">
+      <div class="case-top-row">
+        <div>
+          <div class="section-eyebrow"><i class="fas fa-microscope"></i> Audited Performance</div>
+          <h2 class="section-title" style="margin-bottom: 0;">Verified Clinical Case Studies</h2>
+        </div>
+        <div class="case-nav-box">
+          <button class="case-nav-btn" id="casePrevBtn" aria-label="Previous Case Study"><i class="fas fa-chevron-left"></i></button>
+          <span style="font-size: 13px; font-weight: 700; color: var(--navy-deep); letter-spacing: 0.1em;" id="caseCounter">01 / 04</span>
+          <button class="case-nav-btn" id="caseNextBtn" aria-label="Next Case Study"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+
+      <div class="case-carousel-wrapper" id="caseCarouselWrapper">
+        <div class="case-track" id="caseTrack">
+          <!-- Slide 1 -->
+          <div class="case-slide">
+            <div class="case-slide-media">
+              <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80" alt="Metro Surgical Pavilion">
+              <div class="case-metric-tag"><i class="fas fa-shield-alt"></i> ATP Reduction: 98.4%</div>
+            </div>
+            <div class="case-slide-body">
+              <h3 class="case-facility-name">Metro Surgical Pavilion</h3>
+              <div class="case-facility-loc">Ambulatory Surgery Center · 18,000 SQ FT</div>
+              <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
+                Nightly terminal room cleaning and micro-mist quaternary biocide dispersion. Reduced microbial surface contamination to near-undetectable thresholds.
+              </p>
+              <div class="case-stat-grid">
+                <div>
+                  <div class="stat-micro-lbl">Initial Reading</div>
+                  <div class="stat-micro-val" style="color: #E63946;">512 RLU (Critical)</div>
+                </div>
+                <div>
+                  <div class="stat-micro-lbl">Post-SteriCore</div>
+                  <div class="stat-micro-val" style="color: var(--mint-success);">7 RLU (Ultra-Clean)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="case-slide">
+            <div class="case-slide-media">
+              <img src="https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?auto=format&fit=crop&w=800&q=80" alt="Apex GeneTherapy Cleanrooms">
+              <div class="case-metric-tag"><i class="fas fa-shield-alt"></i> ISO Class 6 Verified</div>
+            </div>
+            <div class="case-slide-body">
+              <h3 class="case-facility-name">Apex BioSciences Facility</h3>
+              <div class="case-facility-loc">Cell Therapy Cleanroom · 32,000 SQ FT</div>
+              <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
+                Non-shedding microfiber containment wiping and EPA List-N certified vaporized hydrogen peroxide fogging compliant with FDA 21 CFR Part 11.
+              </p>
+              <div class="case-stat-grid">
+                <div>
+                  <div class="stat-micro-lbl">Particulate Count</div>
+                  <div class="stat-micro-val">ISO Class 6 Certified</div>
+                </div>
+                <div>
+                  <div class="stat-micro-lbl">Audit Pass Rate</div>
+                  <div class="stat-micro-val" style="color: var(--mint-success);">100% Zero-Defect</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="case-slide">
+            <div class="case-slide-media">
+              <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" alt="Vertex One Corporate Tower">
+              <div class="case-metric-tag"><i class="fas fa-shield-alt"></i> Employee Health Lift</div>
+            </div>
+            <div class="case-slide-body">
+              <h3 class="case-facility-name">Vertex Financial Center</h3>
+              <div class="case-facility-loc">Class-A Commercial Tower · 42 Floors</div>
+              <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
+                Complete day-porter and night-shift touchpoint sanitization across elevators, trading floors, and air filtration intakes.
+              </p>
+              <div class="case-stat-grid">
+                <div>
+                  <div class="stat-micro-lbl">Sick Leave Impact</div>
+                  <div class="stat-micro-val" style="color: var(--mint-success);">-28% Absenteeism</div>
+                </div>
+                <div>
+                  <div class="stat-micro-lbl">Airborne IAQ</div>
+                  <div class="stat-micro-val">MERV 14 Standard</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 4 -->
+          <div class="case-slide">
+            <div class="case-slide-media">
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Children's Specialty Infusion Suite">
+              <div class="case-metric-tag"><i class="fas fa-shield-alt"></i> Hypoallergenic Protocol</div>
+            </div>
+            <div class="case-slide-body">
+              <h3 class="case-facility-name">Pediatric Infusion Clinic</h3>
+              <div class="case-facility-loc">High-Immunity Outpatient Care · 12,000 SQ FT</div>
+              <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
+                Odor-free, residue-free bio-sanitization designed to protect immunocompromised children while exceeding hospital accreditation benchmarks.
+              </p>
+              <div class="case-stat-grid">
+                <div>
+                  <div class="stat-micro-lbl">Biocide Chemistry</div>
+                  <div class="stat-micro-val">Zero-VOC Botanical</div>
+                </div>
+                <div>
+                  <div class="stat-micro-lbl">Pathogen Clearance</div>
+                  <div class="stat-micro-val" style="color: var(--mint-success);">99.999% Log-5</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="workflow-section" id="workflow">
+    <div class="container">
+      <div class="center-header">
+        <div class="section-eyebrow"><i class="fas fa-tasks"></i> Operational Rigor</div>
+        <h2 class="section-title">The Six-Phase Decontamination Protocol</h2>
+        <p class="section-subtitle">
+          Standardized, audited operating procedures executing zero-defect hygiene standards across your physical footprint.
+        </p>
+      </div>
+
+      <div class="workflow-steps">
+        <div class="wf-step">
+          <div class="wf-num">01</div>
+          <h4 class="wf-title">Assessment</h4>
+          <p class="wf-desc">On-site baseline ATP testing and environmental hazard audit.</p>
+        </div>
+
+        <div class="wf-step">
+          <div class="wf-num">02</div>
+          <h4 class="wf-title">Mapping</h4>
+          <p class="wf-desc">Classification of high-touch vectors and airflow zones.</p>
+        </div>
+
+        <div class="wf-step">
+          <div class="wf-num">03</div>
+          <h4 class="wf-title">Protocol Dev</h4>
+          <p class="wf-desc">Custom chemical matrix and dwell-time schedule creation.</p>
+        </div>
+
+        <div class="wf-step">
+          <div class="wf-num">04</div>
+          <h4 class="wf-title">Execution</h4>
+          <p class="wf-desc">Certified hygiene technicians deploy biocidal cleaning.</p>
+        </div>
+
+        <div class="wf-step">
+          <div class="wf-num">05</div>
+          <h4 class="wf-title">QA Swab</h4>
+          <p class="wf-desc">Quantitative bioluminescent verification of surfaces.</p>
+        </div>
+
+        <div class="wf-step">
+          <div class="wf-num">06</div>
+          <h4 class="wf-title">Audit Log</h4>
+          <p class="wf-desc">Digital compliance certification delivered to administrators.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05. Quality Assurance Dashboard -->
+  <section class="qa-dashboard-section" id="dashboard">
+    <div class="container">
+      <div class="qa-grid">
+        <div class="dashboard-mockup">
+          <div class="dash-header">
+            <div>
+              <div style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; color: #FFFFFF;">
+                SteriCore Environmental QA Portal
+              </div>
+              <div style="font-size: 11px; color: #94A3B8;">Facility ID: MED-METRO-4091 &bull; Active Real-Time Stream</div>
+            </div>
+            <div class="dash-indicator">
+              <span class="pulse-dot"></span> Live Auditing
+            </div>
+          </div>
+
+          <div class="dash-metrics-duo">
+            <div class="dash-metric-box">
+              <div class="dash-val">99.8%</div>
+              <div class="dash-lbl">Standard Checklist Adherence</div>
+            </div>
+            <div class="dash-metric-box">
+              <div class="dash-val">&lt; 8 RLU</div>
+              <div class="dash-lbl">Avg. Swab ATP Reading (Pass &lt; 25)</div>
+            </div>
+          </div>
+
+          <div class="dash-log-list">
+            <div class="log-row">
+              <span>Operating Suite 2 — Terminal Clean</span>
+              <strong style="color: var(--mint-success);">PASS (3 RLU)</strong>
+            </div>
+            <div class="log-row">
+              <span>Biochemistry Cleanroom B — HEPA Wipe</span>
+              <strong style="color: var(--mint-success);">PASS (6 RLU)</strong>
+            </div>
+            <div class="log-row">
+              <span>ICU High-Touch Point Disinfection</span>
+              <strong style="color: var(--mint-success);">PASS (5 RLU)</strong>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="section-eyebrow" style="background: rgba(6, 182, 212, 0.2); color: #A5F3FC;">
+            <i class="fas fa-chart-line"></i> Verifiable Data
+          </div>
+          <h2 class="section-title" style="color: #FFFFFF;">Accountability You Can Verify in Real-Time.</h2>
+          <p style="color: #CBD5E1; font-size: 16px; line-height: 1.75; margin-bottom: 24px;">
+            We don’t ask facility managers to trust our word. Every SteriCore contract includes access to our live compliance dashboard, tracking crew credentials, exact chemical lot numbers, and post-shift ATP surface scores.
+          </p>
+          <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+            <a href="#assessment" class="btn-blue">Request Portal Demonstration</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06. Why SteriCore -->
+  <section class="why-section" id="why">
+    <div class="container">
+      <div class="center-header">
+        <div class="section-eyebrow"><i class="fas fa-shield-alt"></i> Clinical Distinction</div>
+        <h2 class="section-title">Why Enterprise Facilities Trust SteriCore</h2>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card">
+          <i class="fas fa-user-nurse"></i>
+          <h4>Certified Technicians</h4>
+          <p>Every technician completes 120 hours of healthcare pathogen training and background checks.</p>
+        </div>
+
+        <div class="why-card">
+          <i class="fas fa-clipboard-list"></i>
+          <h4>Standardized SOPs</h4>
+          <p>Zero improvisation. Exact protocols, chemical dilutions, and dwell times adhered to on every shift.</p>
+        </div>
+
+        <div class="why-card">
+          <i class="fas fa-file-contract"></i>
+          <h4>Regulatory Audit Defense</h4>
+          <p>Full digital reports formatted specifically for JCAHO, OSHA, and health inspector examinations.</p>
+        </div>
+
+        <div class="why-card">
+          <i class="fas fa-clock"></i>
+          <h4>24/7 Rapid Response</h4>
+          <p>Dedicated bio-hazard and infection outbreak containment crews deployed within 60 minutes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07. Facility Assessment Form -->
+  <section class="assessment-section" id="assessment">
+    <div class="container">
+      <div class="assessment-box">
+        <div style="text-align: center;">
+          <div class="section-eyebrow" style="justify-content: center;"><i class="fas fa-file-medical"></i> Clinical Consultation</div>
+          <h2 class="section-title">Schedule a Professional Facility Assessment</h2>
+          <p class="section-subtitle" style="margin: 0 auto;">
+            Our lead environmental hygienist will inspect your facility, conduct baseline ATP surface tests, and compile an infection prevention action plan.
+          </p>
+        </div>
+
+        <form class="form-grid" onsubmit="handleAssessmentSubmit(event)">
+          <div>
+            <label class="field-lbl">Facility / Organization Name *</label>
+            <input type="text" class="field-ctrl" placeholder="e.g. Metro Ambulatory Surgical Center" required>
+          </div>
+          <div>
+            <label class="field-lbl">Contact Officer Full Name *</label>
+            <input type="text" class="field-ctrl" placeholder="e.g. Dr. Robert Vance" required>
+          </div>
+          <div>
+            <label class="field-lbl">Official Business Email *</label>
+            <input type="email" class="field-ctrl" placeholder="compliance@metrosurg.org" required>
+          </div>
+          <div>
+            <label class="field-lbl">Direct Telephone *</label>
+            <input type="tel" class="field-ctrl" placeholder="+1 (555) 000-0000" required>
+          </div>
+          <div>
+            <label class="field-lbl">Facility Classification</label>
+            <select class="field-ctrl">
+              <option>Hospital or Ambulatory Surgery Center</option>
+              <option>Biotech Laboratory / Cleanroom</option>
+              <option>Corporate Office Tower</option>
+              <option>Dialysis / Medical Clinic</option>
+              <option>High-Standard Residential Decontamination</option>
+            </select>
+          </div>
+          <div>
+            <label class="field-lbl">Approximate Square Footage</label>
+            <select class="field-ctrl">
+              <option>Under 10,000 sq ft</option>
+              <option>10,000 - 35,000 sq ft</option>
+              <option>35,000 - 100,000 sq ft</option>
+              <option>100,000+ sq ft Campus</option>
+            </select>
+          </div>
+          <div class="form-full">
+            <label class="field-lbl">Facility Address & Regulatory Priorities (JCAHO, Outbreak mitigation, recurring night service)</label>
+            <input type="text" class="field-ctrl" placeholder="Street Address, Building, City, State, Regulatory Needs...">
+          </div>
+          <div class="form-full" style="text-align: center; margin-top: 10px;">
+            <button type="submit" class="btn-blue" style="padding: 16px 44px; font-size: 13px;">
+              Request Environmental Assessment
+            </button>
+            <p id="assessSuccess" style="display:none; color: var(--medical-blue); font-weight: 700; margin-top: 16px;">
+              Assessment request recorded. An environmental hygiene director will reach out within 2 business hours.
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="logo" style="margin-bottom: 16px;">
+            <div class="logo-cross-shield" style="background: rgba(255, 255, 255, 0.1);"><i class="fas fa-shield-virus"></i></div>
+            <div class="logo-text">
+              <span class="logo-name" style="color: #FFFFFF;">Steri<span style="color: var(--aqua-accent);">Core</span></span>
+              <span class="logo-tag" style="color: #94A3B8;">Clinical Environmental Hygiene</span>
+            </div>
+          </div>
+          <p style="font-size: 13px; line-height: 1.7; max-width: 320px;">
+            Enterprise environmental hygiene, biocidal disinfection, and cleanroom maintenance for high-liability healthcare and commercial facilities.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Disciplines</h4>
+          <ul class="footer-links">
+            <li><a href="#standards">Surface Disinfection</a></li>
+            <li><a href="#solutions">Healthcare Facilities</a></li>
+            <li><a href="#solutions">Cleanrooms ISO 5-8</a></li>
+            <li><a href="#dashboard">Live QA Portal</a></li>
+            <li><a href="#workflow">Outbreak Response</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Compliance</h4>
+          <ul class="footer-links">
+            <li><a href="#standards">CDC Guideline Adherence</a></li>
+            <li><a href="#standards">EPA List N Registry</a></li>
+            <li><a href="#standards">OSHA Bio-Hazard Safety</a></li>
+            <li><a href="#dashboard">ATP Testing Standards</a></li>
+            <li><a href="#assessment">Chain of Custody Logs</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">National Command</h4>
+          <p style="font-size: 13px; line-height: 1.8;">
+            <strong>HQ:</strong> 1200 Innovation Way, Suite 400<br>
+            <strong>Direct:</strong> +1 (800) 555-STERI<br>
+            <strong>Dispatch:</strong> operations@stericore-hygiene.com<br>
+            <strong>Emergency Response:</strong> 24 Hours / 365 Days
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 SteriCore Environmental Hygiene Systems Inc. All Rights Reserved.</div>
+        <div>EPA Registered Disinfectants &bull; ISO 9001 Certified Quality</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Drawer
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    function toggleMenu() {
+      mobileDrawer.classList.toggle('open');
+      const icon = mobileBtn.querySelector('i');
+      if (mobileDrawer.classList.contains('open')) {
+        icon.classList.replace('fa-bars', 'fa-times');
+      } else {
+        icon.classList.replace('fa-times', 'fa-bars');
+      }
+    }
+    mobileBtn.addEventListener('click', toggleMenu);
+
+    // Case Studies Carousel
+    const caseTrack = document.getElementById('caseTrack');
+    const casePrev = document.getElementById('casePrevBtn');
+    const caseNext = document.getElementById('caseNextBtn');
+    const caseCounter = document.getElementById('caseCounter');
+    let currentCaseIndex = 0;
+    const totalCaseSlides = 4;
+
+    function getCaseSlideWidth() {
+      const slide = document.querySelector('.case-slide');
+      if (!slide) return 0;
+      return slide.getBoundingClientRect().width + 25;
+    }
+
+    function updateCaseCarousel() {
+      const width = getCaseSlideWidth();
+      if (caseTrack) caseTrack.style.transform = `translateX(-${currentCaseIndex * width}px)`;
+      if (caseCounter) caseCounter.textContent = `0${currentCaseIndex + 1} / 0${totalCaseSlides}`;
+    }
+
+    if (caseNext) {
+      caseNext.addEventListener('click', () => {
+        currentCaseIndex = (currentCaseIndex + 1) % totalCaseSlides;
+        updateCaseCarousel();
+      });
+    }
+
+    if (casePrev) {
+      casePrev.addEventListener('click', () => {
+        currentCaseIndex = (currentCaseIndex - 1 + totalCaseSlides) % totalCaseSlides;
+        updateCaseCarousel();
+      });
+    }
+
+    window.addEventListener('resize', updateCaseCarousel);
+
+    // Scroll Reveal
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal-fade-up, .standards-grid, .solutions-grid, .workflow-steps, .why-grid').forEach(el => {
+      el.classList.add('reveal-fade-up');
+      revealObserver.observe(el);
+    });
+
+    // Assessment Handler
+    function handleAssessmentSubmit(e) {
+      e.preventDefault();
+      document.getElementById('assessSuccess').style.display = 'block';
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>

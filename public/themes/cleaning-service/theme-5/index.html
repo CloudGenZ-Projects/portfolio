@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>VELORA | Copper &amp; Plum Estate Stewardship &amp; CleanScore Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ==========================================================================
+       01. DESIGN SYSTEM: ESPRESSO PLUM, BURNISHED COPPER & WARM LINEN
+       ========================================================================== */
+    :root {
+      --plum-deep: #1B1417;
+      --plum-surface: #261D21;
+      --copper: #C25E36;
+      --copper-hover: #A84D29;
+      --copper-soft: #F2E6E0;
+      --olive: #4E6254;
+      --olive-soft: #E8EFEA;
+      --linen-bg: #F6F2EC;
+      --cream-card: #FFFDF9;
+      --ink-primary: #1F191C;
+      --ink-muted: #665B60;
+      --border-hairline: rgba(31, 25, 28, 0.1);
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --header-height: 76px;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --radius-pill: 9999px;
+      --shadow-soft: 0 10px 28px -10px rgba(27, 20, 23, 0.08);
+      --shadow-card: 0 20px 45px -14px rgba(27, 20, 23, 0.15);
+      --transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--linen-bg);
+      color: var(--ink-primary);
+      line-height: 1.6;
+      padding-top: var(--header-height);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    .container { width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 28px; }
+
+    /* ==========================================================================
+       02. FIXED NAVBAR (SINGLE-LINE, CLEAN GAPS)
+       ========================================================================== */
+    .site-navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--header-height);
+      background: rgba(255, 253, 249, 0.95);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border-hairline);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      transition: var(--transition);
+    }
+    .site-navbar.scrolled {
+      background: #FFFFFF;
+      box-shadow: 0 4px 20px rgba(27, 20, 23, 0.07);
+    }
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      width: 100%;
+    }
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    .brand-emblem {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--plum-deep);
+      color: var(--copper);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 700;
+      border: 1px solid rgba(194, 94, 54, 0.4);
+    }
+    .brand-name {
+      font-family: var(--font-serif);
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--plum-deep);
+    }
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+    .nav-item-link {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--ink-muted);
+      white-space: nowrap;
+      transition: var(--transition);
+      padding: 6px 2px;
+    }
+    .nav-item-link:hover {
+      color: var(--copper);
+    }
+    .nav-right-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .zone-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--copper-soft);
+      color: var(--plum-deep);
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .zone-pill .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--copper);
+    }
+    .btn-copper {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--copper);
+      color: #FFFFFF;
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--transition);
+    }
+    .btn-copper:hover {
+      background: var(--copper-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(194, 94, 54, 0.28);
+    }
+    .hamburger-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 22px;
+      color: var(--plum-deep);
+      cursor: pointer;
+    }
+    .mobile-drawer {
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      width: 100%;
+      background: var(--cream-card);
+      border-bottom: 1px solid var(--border-hairline);
+      padding: 20px 28px;
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+      z-index: 9999;
+      box-shadow: var(--shadow-card);
+    }
+    .mobile-drawer.open { display: flex; }
+
+    /* ==========================================================================
+       03. DARK ESPRESSO PLUM COMMAND HERO + INTERACTIVE BOOKING WIDGET
+       ========================================================================== */
+    .command-hero {
+      background-color: var(--plum-deep);
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 46px 46px;
+      padding: 64px 0 80px;
+      color: #FFFFFF;
+      position: relative;
+    }
+    .command-hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .hero-live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(194, 94, 54, 0.16);
+      border: 1px solid rgba(194, 94, 54, 0.4);
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: #F4D5C6;
+      margin-bottom: 20px;
+    }
+    .command-h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.9rem, 4.8vw, 4.3rem);
+      line-height: 1.05;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .command-h1 span {
+      color: var(--copper);
+      font-style: italic;
+    }
+    .command-sub {
+      color: #D5CDD0;
+      font-size: 1.02rem;
+      max-width: 520px;
+      margin-bottom: 28px;
+    }
+
+    /* CleanScore Horizontal KPI Row inside Hero */
+    .hero-kpi-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .hero-kpi-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-md);
+      padding: 14px;
+    }
+    .hero-kpi-box small {
+      display: block;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #B5A7AD;
+      margin-bottom: 4px;
+    }
+    .hero-kpi-box strong {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #FFFFFF;
+    }
+    .hero-kpi-box span {
+      font-size: 0.72rem;
+      color: #E38B67;
+      margin-left: 4px;
+    }
+    .hero-pillars-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.72rem;
+      color: #C7B9BF;
+    }
+    .hero-pillars-4 i {
+      color: var(--copper);
+      margin-bottom: 4px;
+      display: block;
+      font-size: 14px;
+    }
+
+    /* Booking Calculator Card */
+    .velora-calc-card {
+      background: var(--cream-card);
+      color: var(--ink-primary);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.42);
+      border: 1px solid rgba(194, 94, 54, 0.25);
+    }
+    .calc-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      background: var(--linen-bg);
+      padding: 5px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 18px;
+    }
+    .calc-tab {
+      background: none;
+      border: none;
+      padding: 9px 6px;
+      border-radius: 4px;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--ink-muted);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .calc-tab.active {
+      background: var(--plum-deep);
+      color: #FFFFFF;
+    }
+    .calc-label {
+      display: block;
+      font-size: 0.66rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 8px;
+    }
+    .calc-svc-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .calc-svc-btn {
+      border: 1.5px solid var(--border-hairline);
+      background: #FFFFFF;
+      border-radius: 8px;
+      padding: 9px 4px;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .calc-svc-btn i {
+      display: block;
+      font-size: 14px;
+      color: var(--plum-deep);
+      margin-bottom: 4px;
+    }
+    .calc-svc-btn strong {
+      display: block;
+      font-size: 0.66rem;
+      color: var(--ink-primary);
+    }
+    .calc-svc-btn span {
+      font-size: 0.62rem;
+      color: var(--ink-muted);
+    }
+    .calc-svc-btn.active {
+      border-color: var(--copper);
+      background: var(--copper-soft);
+    }
+    .calc-svc-btn.active i, .calc-svc-btn.active strong {
+      color: var(--copper);
+    }
+    .calc-inputs-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .calc-field {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid rgba(31, 25, 28, 0.14);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      background: #FFFFFF;
+      color: var(--ink-primary);
+    }
+    .calc-promo-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .calc-promo-apply {
+      padding: 9px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--copper);
+      background: var(--copper-soft);
+      color: var(--copper);
+      font-weight: 700;
+      font-size: 0.78rem;
+      cursor: pointer;
+    }
+    .calc-total-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-hairline);
+      margin-bottom: 14px;
+    }
+
+    /* ==========================================================================
+       04. BLUSH CLAY 5-PILLAR TRUST BAR
+       ========================================================================== */
+    .trust-clay-bar {
+      background: var(--copper-soft);
+      padding: 22px 0;
+      border-bottom: 1px solid rgba(194, 94, 54, 0.15);
+    }
+    .trust-clay-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+    .trust-clay-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .trust-clay-item i {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: #FFFFFF;
+      color: var(--copper);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .trust-clay-item strong {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--plum-deep);
+    }
+    .trust-clay-item span {
+      font-size: 0.72rem;
+      color: var(--ink-muted);
+    }
+
+    /* ==========================================================================
+       05. ESTATE SHOWCASE CAROUSEL (EDITORIAL HORIZONTAL TRACK)
+       ========================================================================== */
+    .section-pad { padding: 85px 0; }
+    .eyebrow-copper {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--copper);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .eyebrow-copper::before {
+      content: '';
+      width: 18px;
+      height: 2px;
+      background: var(--copper);
+    }
+    .serif-h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+      line-height: 1.1;
+      color: var(--plum-deep);
+    }
+    .carousel-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+    }
+    .carousel-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .circle-nav-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--border-hairline);
+      background: #FFFFFF;
+      color: var(--plum-deep);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+    .circle-nav-btn:hover {
+      background: var(--copper);
+      color: #FFFFFF;
+      border-color: var(--copper);
+    }
+    .estate-viewport {
+      overflow: hidden;
+    }
+    .estate-track {
+      display: flex;
+      gap: 24px;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .estate-slide-card {
+      flex: 0 0 calc(50% - 12px);
+      min-width: calc(50% - 12px);
+      background: var(--cream-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+    }
+    .estate-slide-card img {
+      width: 100%;
+      height: 290px;
+      object-fit: cover;
+    }
+    .estate-slide-body {
+      padding: 22px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* ==========================================================================
+       06. ARCHITECTURAL ICON-DRIVEN SERVICES GRID ("EVERY CLEAN, EXPERTLY HANDLED.")
+       ========================================================================== */
+    .services-arch-section {
+      padding: 88px 0;
+      background: var(--cream-card);
+      border-top: 1px solid var(--border-hairline);
+      border-bottom: 1px solid var(--border-hairline);
+    }
+    .services-arch-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 42px;
+    }
+    .arch-svc-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      transition: var(--transition);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .arch-svc-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--copper);
+      box-shadow: var(--shadow-card);
+    }
+    .arch-svc-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 18px;
+    }
+    .arch-svc-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--copper-soft);
+      color: var(--copper);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    .arch-pill-pop {
+      background: #FEF3C7;
+      color: #92400E;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .arch-pill-booked {
+      background: var(--olive-soft);
+      color: var(--olive);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .arch-svc-card h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--plum-deep);
+      margin-bottom: 8px;
+    }
+    .arch-svc-card p {
+      font-size: 0.86rem;
+      color: var(--ink-muted);
+      margin-bottom: 18px;
+      flex: 1;
+    }
+    .arch-svc-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-hairline);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    /* ==========================================================================
+       07. LINEN 4-STEP HORIZONTAL PROCESS ("SPOTLESS IN 4 STEPS.")
+       ========================================================================== */
+    .process-linen-section {
+      padding: 88px 0;
+      background: var(--linen-bg);
+      text-align: center;
+    }
+    .process-4-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+      position: relative;
+    }
+    .process-4-row::before {
+      content: '';
+      position: absolute;
+      top: 26px;
+      left: 12%;
+      right: 12%;
+      height: 2px;
+      background: rgba(194, 94, 54, 0.35);
+      z-index: 1;
+    }
+    .process-step-box {
+      position: relative;
+      z-index: 2;
+      padding: 0 10px;
+    }
+    .process-num-circle {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--plum-deep);
+      color: #FFFFFF;
+      border: 2px solid var(--copper);
+      font-weight: 800;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      box-shadow: 0 0 0 8px var(--linen-bg);
+    }
+    .process-step-box i {
+      color: var(--copper);
+      font-size: 16px;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .process-step-box h4 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--plum-deep);
+      margin-bottom: 6px;
+    }
+    .process-step-box p {
+      font-size: 0.82rem;
+      color: var(--ink-muted);
+    }
+
+    /* ==========================================================================
+       08. 8-CARD ARCHITECTURAL CITY COVERAGE GRID (GRADIENT + LINE-ART)
+       ========================================================================== */
+    .coverage-section {
+      padding: 88px 0;
+      background: #FFFFFF;
+      border-top: 1px solid var(--border-hairline);
+    }
+    .coverage-grid-8 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .cov-city-card {
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: #FFFFFF;
+      box-shadow: var(--shadow-soft);
+      transition: var(--transition);
+    }
+    .cov-city-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-card);
+    }
+    .cov-banner {
+      height: 120px;
+      padding: 14px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+    }
+    .grad-copper { background: linear-gradient(135deg, #9A3412, #C25E36); }
+    .grad-plum { background: linear-gradient(135deg, #1B1417, #4A2535); }
+    .grad-olive { background: linear-gradient(135deg, #2D3E33, #4E6254); }
+    .grad-burgundy { background: linear-gradient(135deg, #6B1D2F, #9F1239); }
+    .grad-slate { background: linear-gradient(135deg, #1E293B, #334155); }
+    .grad-amber { background: linear-gradient(135deg, #78350F, #B45309); }
+    .cov-pill {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 3px 9px;
+      border-radius: var(--radius-pill);
+      font-size: 0.66rem;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .cov-pill.live {
+      background: #10B981;
+    }
+    .cov-code {
+      position: absolute;
+      right: 10px;
+      bottom: 4px;
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.22);
+    }
+    .cov-body {
+      padding: 15px 16px;
+    }
+    .cov-body h4 {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: var(--plum-deep);
+    }
+    .cov-body p {
+      font-size: 0.74rem;
+      color: var(--ink-muted);
+      margin: 2px 0 8px;
+    }
+    .cov-body span {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--copper);
+    }
+
+    /* ==========================================================================
+       09. WHY VELORA SPLIT + ESPRESSO MOBILE APP MOCKUP
+       ========================================================================== */
+    .why-velora-section {
+      padding: 90px 0;
+      background: var(--linen-bg);
+    }
+    .why-split-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .why-list-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 24px;
+    }
+    .why-row-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      box-shadow: var(--shadow-soft);
+    }
+    .why-row-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--copper-soft);
+      color: var(--copper);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .velora-app-mockup {
+      background: var(--plum-deep);
+      color: #FFFFFF;
+      border-radius: 22px;
+      padding: 26px;
+      box-shadow: 0 28px 60px rgba(27, 20, 23, 0.28);
+      border: 1px solid rgba(194, 94, 54, 0.3);
+      max-width: 440px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .app-active-box {
+      background: rgba(194, 94, 54, 0.16);
+      border: 1px solid rgba(194, 94, 54, 0.45);
+      border-radius: 12px;
+      padding: 14px;
+      margin: 16px 0;
+    }
+    .app-bar-bg {
+      height: 5px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 99px;
+      margin-top: 10px;
+      overflow: hidden;
+    }
+    .app-bar-fill {
+      width: 78%;
+      height: 100%;
+      background: var(--copper);
+    }
+    .app-quick-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .app-q-item {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 10px 4px;
+      text-align: center;
+      font-size: 0.68rem;
+      color: #E2D9DD;
+    }
+    .app-q-item i {
+      display: block;
+      color: var(--copper);
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .app-log-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 10px;
+      margin-bottom: 8px;
+      font-size: 0.76rem;
+    }
+    .pill-done { background: rgba(78, 98, 84, 0.35); color: #A7F3D0; padding: 2px 8px; border-radius: 99px; font-size: 0.65rem; font-weight: 700; }
+    .pill-soon { background: rgba(194, 94, 54, 0.3); color: #FDBA74; padding: 2px 8px; border-radius: 99px; font-size: 0.65rem; font-weight: 700; }
+
+    /* ==========================================================================
+       10. FOOTER
+       ========================================================================== */
+    .velora-footer {
+      background: var(--plum-deep);
+      color: #D5CDD0;
+      padding: 65px 0 30px;
+    }
+    .footer-4col {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 36px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .footer-bottom {
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: #8C7E84;
+    }
+
+    @media (max-width: 1080px) {
+      .nav-menu, .zone-pill { display: none; }
+      .hamburger-btn { display: block; }
+      .command-hero-grid, .why-split-grid { grid-template-columns: 1fr; }
+      .services-arch-grid, .coverage-grid-8 { grid-template-columns: repeat(2, 1fr); }
+      .process-4-row { grid-template-columns: repeat(2, 1fr); }
+      .process-4-row::before { display: none; }
+      .trust-clay-grid { grid-template-columns: repeat(2, 1fr); }
+      .estate-slide-card { flex: 0 0 100%; min-width: 100%; }
+    }
+    @media (max-width: 768px) {
+      .services-arch-grid, .coverage-grid-8, .process-4-row, .footer-4col { grid-template-columns: 1fr; }
+      .calc-svc-grid { grid-template-columns: repeat(3, 1fr); }
+      .hero-kpi-strip { grid-template-columns: 1fr; }
+      .hero-pillars-4 { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FIXED NAVBAR -->
+  <header class="site-navbar" id="siteNavbar">
+    <div class="container nav-container">
+      <a href="#" class="brand-wrap">
+        <div class="brand-emblem">V</div>
+        <span class="brand-name">VELORA</span>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="#booking" class="nav-item-link">CleanScore</a></li>
+        <li><a href="#estates" class="nav-item-link">Estates</a></li>
+        <li><a href="#services" class="nav-item-link">Services</a></li>
+        <li><a href="#process" class="nav-item-link">How It Works</a></li>
+        <li><a href="#cities" class="nav-item-link">Cities</a></li>
+        <li><a href="#why-velora" class="nav-item-link">Why Velora</a></li>
+      </ul>
+
+      <div class="nav-right-group">
+        <div class="zone-pill"><span class="dot"></span> Mayfair <i class="fas fa-chevron-down" style="font-size: 9px;"></i></div>
+        <a href="#booking" class="btn-copper">Reserve Slot</a>
+        <button class="hamburger-btn" id="menuBtn" aria-label="Menu"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-drawer" id="mobileDrawer">
+    <a href="#booking" class="nav-item-link" onclick="toggleMenu()">CleanScore Booking</a>
+    <a href="#estates" class="nav-item-link" onclick="toggleMenu()">Estate Showcase</a>
+    <a href="#services" class="nav-item-link" onclick="toggleMenu()">Services</a>
+    <a href="#process" class="nav-item-link" onclick="toggleMenu()">How It Works</a>
+    <a href="#cities" class="nav-item-link" onclick="toggleMenu()">Cities</a>
+    <a href="#why-velora" class="nav-item-link" onclick="toggleMenu()">Why Velora</a>
+  </div>
+
+  <!-- 01. DARK ESPRESSO PLUM COMMAND HERO + INTERACTIVE BOOKING CALCULATOR -->
+  <section class="command-hero" id="booking">
+    <div class="container command-hero-grid">
+      <div>
+        <div class="hero-live-badge">
+          <i class="fas fa-circle" style="font-size: 6px; color: var(--copper);"></i>
+          <span>Now live in London &amp; NYC · CleanScore™ Intelligence · NDA Protected</span>
+        </div>
+
+        <h1 class="command-h1">
+          Intelligent Care.<br><span>Notable Estates.</span>
+        </h1>
+        <p class="command-sub">
+          Book private residence stewardship, marble restoration, and deep hygiene in 60 seconds — every appointment verified and scored by Velora CleanScore™.
+        </p>
+
+        <div class="hero-kpi-strip">
+          <div class="hero-kpi-box">
+            <small>Estates</small>
+            <strong>98<span>/100</span></strong>
+          </div>
+          <div class="hero-kpi-box">
+            <small>Galleries</small>
+            <strong>99<span>/100</span></strong>
+          </div>
+          <div class="hero-kpi-box">
+            <small>Penthouses</small>
+            <strong>96<span>/100</span></strong>
+          </div>
+        </div>
+
+        <div class="hero-pillars-4">
+          <div><i class="fas fa-microchip"></i><strong>AI Inspection</strong><br>Surface diagnostics</div>
+          <div><i class="fas fa-chart-bar"></i><strong>Live Insights</strong><br>Hygiene telemetry</div>
+          <div><i class="fas fa-user-shield"></i><strong>NDA Vetted</strong><br>Bonded keyholders</div>
+          <div><i class="fas fa-leaf"></i><strong>Zero Toxins</strong><br>pH-neutral botanicals</div>
+        </div>
+      </div>
+
+      <!-- INTERACTIVE INSTANT BOOKING WIDGET -->
+      <div class="velora-calc-card">
+        <div class="calc-tabs">
+          <button class="calc-tab active" onclick="setTab(this)"><i class="fas fa-home"></i> Residence</button>
+          <button class="calc-tab" onclick="setTab(this)"><i class="fas fa-landmark"></i> Estate</button>
+          <button class="calc-tab" onclick="setTab(this)"><i class="fas fa-building"></i> Gallery</button>
+        </div>
+
+        <span class="calc-label">Select Service</span>
+        <div class="calc-svc-grid">
+          <div class="calc-svc-btn active" onclick="pickSvc(this, 195)">
+            <i class="fas fa-sparkles"></i>
+            <strong>Deep Clean</strong>
+            <span>$195+</span>
+          </div>
+          <div class="calc-svc-btn" onclick="pickSvc(this, 110)">
+            <i class="fas fa-bath"></i>
+            <strong>Marble Spa</strong>
+            <span>$110+</span>
+          </div>
+          <div class="calc-svc-btn" onclick="pickSvc(this, 130)">
+            <i class="fas fa-couch"></i>
+            <strong>Upholstery</strong>
+            <span>$130+</span>
+          </div>
+          <div class="calc-svc-btn" onclick="pickSvc(this, 145)">
+            <i class="fas fa-utensils"></i>
+            <strong>Kitchen</strong>
+            <span>$145+</span>
+          </div>
+          <div class="calc-svc-btn" onclick="pickSvc(this, 95)">
+            <i class="fas fa-wind"></i>
+            <strong>Air &amp; AC</strong>
+            <span>$95+</span>
+          </div>
+        </div>
+
+        <div class="calc-inputs-2col">
+          <div>
+            <span class="calc-label">City</span>
+            <select class="calc-field" id="vCity">
+              <option>London</option>
+              <option>New York</option>
+              <option>Paris</option>
+              <option>Zurich</option>
+            </select>
+          </div>
+          <div>
+            <span class="calc-label">Enclave / Zone</span>
+            <input type="text" class="calc-field" value="Mayfair W1">
+          </div>
+          <div>
+            <span class="calc-label">Date</span>
+            <input type="date" class="calc-field" value="2026-11-29">
+          </div>
+          <div>
+            <span class="calc-label">Arrival Window</span>
+            <select class="calc-field">
+              <option>Morning (8–11 AM)</option>
+              <option>Midday (12–3 PM)</option>
+              <option>Evening (4–7 PM)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="calc-promo-row">
+          <input type="text" class="calc-field" id="vPromo" placeholder="Promo code (VELORA25)">
+          <button class="calc-promo-apply" type="button" onclick="applyVPromo()">Apply</button>
+        </div>
+
+        <div class="calc-total-bar">
+          <div>
+            <div style="font-size: 0.78rem; color: var(--ink-muted);">Estimated total</div>
+            <div style="font-size: 0.72rem; color: var(--copper); font-weight: 700;" id="vPromoStatus">Use VELORA25 for $25 off</div>
+          </div>
+          <div style="font-size: 1.65rem; font-weight: 800; color: var(--plum-deep);" id="vTotal">$195</div>
+        </div>
+
+        <button class="btn-copper" style="width: 100%; padding: 14px;" onclick="submitVBooking()">
+          Confirm Private Reservation <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02. BLUSH CLAY 5-PILLAR TRUST BAR -->
+  <section class="trust-clay-bar">
+    <div class="container trust-clay-grid">
+      <div class="trust-clay-item">
+        <i class="fas fa-award"></i>
+        <div><strong>500+ Vetted Stewards</strong><span>Background-checked &amp; NDA</span></div>
+      </div>
+      <div class="trust-clay-item">
+        <i class="fas fa-check-circle"></i>
+        <div><strong>100% Satisfaction</strong><span>Complimentary re-care guarantee</span></div>
+      </div>
+      <div class="trust-clay-item">
+        <i class="fas fa-clock"></i>
+        <div><strong>60-Second Dispatch</strong><span>Web, App or Private Desk</span></div>
+      </div>
+      <div class="trust-clay-item">
+        <i class="fas fa-map-pin"></i>
+        <div><strong>14 Global Enclaves</strong><span>Same-day scheduling active</span></div>
+      </div>
+      <div class="trust-clay-item">
+        <i class="fas fa-leaf"></i>
+        <div><strong>Museum-Safe Care</strong><span>Zero-acid stone formulas</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03. ESTATE SHOWCASE CAROUSEL -->
+  <section class="section-pad" id="estates">
+    <div class="container">
+      <div class="carousel-header-row">
+        <div>
+          <div class="eyebrow-copper">Curated Portfolio</div>
+          <h2 class="serif-h2">Residences under Velora care.</h2>
+        </div>
+        <div class="carousel-controls">
+          <span style="font-size: 0.82rem; font-weight: 700; color: var(--ink-muted);" id="estateCount">01 / 04</span>
+          <button class="circle-nav-btn" onclick="moveEstate(-1)" aria-label="Previous"><i class="fas fa-arrow-left"></i></button>
+          <button class="circle-nav-btn" onclick="moveEstate(1)" aria-label="Next"><i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <div class="estate-viewport">
+        <div class="estate-track" id="estateTrack">
+          <div class="estate-slide-card">
+            <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=80" alt="Kensington Residence">
+            <div class="estate-slide-body">
+              <div><strong style="font-size: 1.05rem;">Kensington Palace Gardens</strong><br><span style="font-size: 0.8rem; color: var(--ink-muted);">London W8 · Walnut Parquet &amp; Fine Art</span></div>
+              <span style="color: var(--copper); font-weight: 800; font-size: 0.85rem;">Score: 99/100</span>
+            </div>
+          </div>
+
+          <div class="estate-slide-card">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80" alt="Cap d'Antibes Villa">
+            <div class="estate-slide-body">
+              <div><strong style="font-size: 1.05rem;">Cap d'Antibes Coastal Villa</strong><br><span style="font-size: 0.8rem; color: var(--ink-muted);">Riviera · Travertine &amp; Belgian Glass</span></div>
+              <span style="color: var(--copper); font-weight: 800; font-size: 0.85rem;">Score: 98/100</span>
+            </div>
+          </div>
+
+          <div class="estate-slide-card">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80" alt="Tribeca Loft">
+            <div class="estate-slide-body">
+              <div><strong style="font-size: 1.05rem;">Tribeca Duplex Penthouse</strong><br><span style="font-size: 0.8rem; color: var(--ink-muted);">Manhattan · Honed Limestone &amp; Brass</span></div>
+              <span style="color: var(--copper); font-weight: 800; font-size: 0.85rem;">Score: 97/100</span>
+            </div>
+          </div>
+
+          <div class="estate-slide-card">
+            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=80" alt="Zurich Villa">
+            <div class="estate-slide-body">
+              <div><strong style="font-size: 1.05rem;">Zürichberg Forest Estate</strong><br><span style="font-size: 0.8rem; color: var(--ink-muted);">Zurich · Quartzite &amp; Cedar Suite</span></div>
+              <span style="color: var(--copper); font-weight: 800; font-size: 0.85rem;">Score: 99/100</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04. ARCHITECTURAL ICON-DRIVEN SERVICES GRID -->
+  <section class="services-arch-section" id="services">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap;">
+        <div>
+          <div class="eyebrow-copper">Our Services</div>
+          <h2 class="serif-h2">Every clean, expertly handled.</h2>
+        </div>
+        <p style="max-width: 440px; color: var(--ink-muted); font-size: 0.94rem;">
+          Professional stewardship for residences, marble suites, couture closets, and private offices — transparent rates, guaranteed outcomes.
+        </p>
+      </div>
+
+      <div class="services-arch-grid">
+        <div class="arch-svc-card">
+          <div class="arch-svc-top">
+            <div class="arch-svc-icon"><i class="fas fa-home"></i></div>
+            <span class="arch-pill-pop">Most Popular</span>
+          </div>
+          <h3>Estate Deep Cleaning</h3>
+          <p>Full-residence conservation including baseboards, timber conditioning, art-wall micro-dusting, and HEPA air scrub.</p>
+          <div class="arch-svc-foot">
+            <span>From $195</span>
+            <a href="#booking" style="color: var(--copper);">Reserve &rarr;</a>
+          </div>
+        </div>
+
+        <div class="arch-svc-card">
+          <div class="arch-svc-top">
+            <div class="arch-svc-icon"><i class="fas fa-wind"></i></div>
+            <span class="arch-pill-booked">Most Booked</span>
+          </div>
+          <h3>Climate &amp; Vent Detailing</h3>
+          <p>Coil sanitization, linear slot diffuser extraction, and pure botanical misting for crisp indoor air quality.</p>
+          <div class="arch-svc-foot">
+            <span>From $95</span>
+            <a href="#booking" style="color: var(--copper);">Reserve &rarr;</a>
+          </div>
+        </div>
+
+        <div class="arch-svc-card">
+          <div class="arch-svc-top">
+            <div class="arch-svc-icon"><i class="fas fa-landmark"></i></div>
+          </div>
+          <h3>Gallery &amp; Private Office</h3>
+          <p>Discreet after-hours maintenance for family offices, private art collections, and executive boardrooms.</p>
+          <div class="arch-svc-foot">
+            <span>From $240</span>
+            <a href="#booking" style="color: var(--copper);">Reserve &rarr;</a>
+          </div>
+        </div>
+
+        <div class="arch-svc-card">
+          <div class="arch-svc-top">
+            <div class="arch-svc-icon"><i class="fas fa-bath"></i></div>
+          </div>
+          <h3>Marble Spa &amp; Bath Reset</h3>
+          <p>Zero-acid deionization for Calacatta &amp; Onyx surfaces, unlacquered brass waxing, and steam sanitization.</p>
+          <div class="arch-svc-foot">
+            <span>From $110</span>
+            <a href="#booking" style="color: var(--copper);">Reserve &rarr;</a>
+          </div>
+        </div>
+
+        <div class="arch-svc-card">
+          <div class="arch-svc-top">
+            <div class="arch-svc-icon"><i class="fas fa-utensils"></i></div>
+          </div>
+          <h3>Chef Kitchen &amp; Sub-Zero</h3>
+          <p>Antimicrobial refrigerator detailing, range hood degreasing, copper cookware polish, and stone sealing.</p>
+          <div class="arch-svc-foot">
+            <span>From $145</span>
+            <a href="#booking" style="color: var(--copper);">Reserve &rarr;</a>
+          </div>
+        </div>
+
+        <div class="arch-svc-card">
+          <div class="arch-svc-top">
+            <div class="arch-svc-icon"><i class="fas fa-tshirt"></i></div>
+          </div>
+          <h3>Wardrobe &amp; Packing Valet</h3>
+          <p>Seasonal garment rotation, Savile Row steaming, cedar shoe tree staging, and trunk packing preparation.</p>
+          <div class="arch-svc-foot">
+            <span>From $125</span>
+            <a href="#booking" style="color: var(--copper);">Reserve &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05. LINEN 4-STEP HORIZONTAL PROCESS -->
+  <section class="process-linen-section" id="process">
+    <div class="container">
+      <div class="eyebrow-copper" style="justify-content: center;">How It Works</div>
+      <h2 class="serif-h2">Spotless in 4 steps.</h2>
+      <p style="color: var(--ink-muted); margin-top: 8px;">No hassle. No surprises. Just effortless shine.</p>
+
+      <div class="process-4-row">
+        <div class="process-step-box">
+          <div class="process-num-circle">1</div>
+          <i class="fas fa-map-marker-alt"></i>
+          <h4>Pick your service</h4>
+          <p>Choose residence, marble spa, kitchen, or valet care in under 60 seconds.</p>
+        </div>
+
+        <div class="process-step-box">
+          <div class="process-num-circle">2</div>
+          <i class="fas fa-calendar-check"></i>
+          <h4>Book a slot</h4>
+          <p>Select your date, arrival window, and enclave with transparent flat rates.</p>
+        </div>
+
+        <div class="process-step-box">
+          <div class="process-num-circle">3</div>
+          <i class="fas fa-user-tie"></i>
+          <h4>Steward arrives</h4>
+          <p>Our uniformed, NDA-vetted specialist arrives on time with botanical kits.</p>
+        </div>
+
+        <div class="process-step-box">
+          <div class="process-num-circle">4</div>
+          <i class="fas fa-sun"></i>
+          <h4>Enjoy the shine</h4>
+          <p>Review your CleanScore™ audit. Anything missed is re-cared for free.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06. 8-CARD ARCHITECTURAL CITY COVERAGE GRID -->
+  <section class="coverage-section" id="cities">
+    <div class="container">
+      <div class="eyebrow-copper">Coverage</div>
+      <h2 class="serif-h2">Starting Mayfair,<br>scaling global enclaves.</h2>
+
+      <div class="coverage-grid-8">
+        <div class="cov-city-card">
+          <div class="cov-banner grad-copper">
+            <span class="cov-pill live">Live Now</span>
+            <i class="fas fa-landmark fa-2x" style="opacity: 0.75;"></i>
+            <span class="cov-code">LDN</span>
+          </div>
+          <div class="cov-body">
+            <h4>London</h4>
+            <p>Mayfair · Kensington · Belgravia</p>
+            <span>14 active zones</span>
+          </div>
+        </div>
+
+        <div class="cov-city-card">
+          <div class="cov-banner grad-plum">
+            <span class="cov-pill live">Live Now</span>
+            <i class="fas fa-city fa-2x" style="opacity: 0.75;"></i>
+            <span class="cov-code">NYC</span>
+          </div>
+          <div class="cov-body">
+            <h4>New York</h4>
+            <p>Tribeca · Fifth Ave · SoHo</p>
+            <span>10 active zones</span>
+          </div>
+        </div>
+
+        <div class="cov-city-card">
+          <div class="cov-banner grad-olive">
+            <span class="cov-pill">Q1 2027</span>
+            <i class="fas fa-archway fa-2x" style="opacity: 0.75;"></i>
+            <span class="cov-code">PAR</span>
+          </div>
+          <div class="cov-body">
+            <h4>Paris</h4>
+            <p>8th Arr. · Saint-Germain</p>
+            <span>Q1 2027</span>
+          </div>
+        </div>
+
+        <div class="cov-city-card">
+          <div class="cov-banner grad-burgundy">
+            <span class="cov-pill">Q1 2027</span>
+            <i class="fas fa-mountain fa-2x" style="opacity: 0.75;"></i>
+            <span class="cov-code">ZRH</span>
+          </div>
+          <div class="cov-body">
+            <h4>Zurich</h4>
+            <p>Bahnhofstrasse · Zürichberg</p>
+            <span>Q1 2027</span>
+          </div>
+        </div>
+
+        <div class="cov-city-card">
+          <div class="cov-banner grad-slate">
+            <span class="cov-pill">Q2 2027</span>
+            <i class="fas fa-umbrella-beach fa-2x" style="opacity: 0.75;"></i>
+            <span class="cov-code">MCO</span>
+          </div>
+          <div class="cov-body">
+            <h4>Monaco</h4>
+            <p>Monte-Carlo · Larvotto</p>
+            <span>Q2 2027</span>
+          </div>
+        </div>
+
+        <div class="cov-city-card">
+          <div class="cov-banner grad-amber">
+            <span class="cov-pill">Q2 2027</span>
+            <i class="fas fa-building fa-2x" style="opacity: 0.75;"></i>
+            <span class="cov-code">DXB</span>
+          </div>
+          <div class="cov-body">
+            <h4>Dubai</h4>
+            <p>Palm Jumeirah · DIFC</p>
+            <span>Q2 2027</span>
+          </div>
+        </div>
+
+        <div class="cov-city-card">
+          <div class="cov-banner grad-copper">
+            <span class="cov-pill">Q3 2027</span>
+            <i class="fas fa-palette fa-2x" style="opacity: 0.75;"></i>
+            <span class="cov-code">MIL</span>
+          </div>
+          <div class="cov-body">
+            <h4>Milan</h4>
+            <p>Brera · Quadrilatero</p>
+            <span>Q3 2027</span>
+          </div>
+        </div>
+
+        <div class="cov-city-card">
+          <div class="cov-banner grad-olive">
+            <span class="cov-pill">Q3 2027</span>
+            <i class="fas fa-snowflake fa-2x" style="opacity: 0.75;"></i>
+            <span class="cov-code">ASP</span>
+          </div>
+          <div class="cov-body">
+            <h4>Aspen</h4>
+            <p>Red Mountain · Snowmass</p>
+            <span>Q3 2027</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07. WHY VELORA SPLIT + ESPRESSO MOBILE APP MOCKUP -->
+  <section class="why-velora-section" id="why-velora">
+    <div class="container why-split-grid">
+      <div>
+        <div class="eyebrow-copper">Why Velora</div>
+        <h2 class="serif-h2">Built different.<br>For private homes.</h2>
+        <p style="color: var(--ink-muted); margin-top: 12px;">
+          We unite European estate-steward craft with instant digital tracking so every surface receives calm, consistent mastery.
+        </p>
+
+        <div class="why-list-cards">
+          <div class="why-row-card">
+            <div class="why-row-icon"><i class="fas fa-bolt"></i></div>
+            <div>
+              <h4 style="font-size: 0.96rem; margin-bottom: 2px;">Instant WhatsApp &amp; Portal Concierge</h4>
+              <p style="font-size: 0.82rem; color: var(--ink-muted);">Book, adjust, and monitor arrival windows seamlessly — zero app download required.</p>
+            </div>
+          </div>
+
+          <div class="why-row-card">
+            <div class="why-row-icon"><i class="fas fa-shield-alt"></i></div>
+            <div>
+              <h4 style="font-size: 0.96rem; margin-bottom: 2px;">100% NDA-Vetted Stewards</h4>
+              <p style="font-size: 0.82rem; color: var(--ink-muted);">Every specialist is career-trained, uniformed, insured, and bound by strict privacy covenants.</p>
+            </div>
+          </div>
+
+          <div class="why-row-card">
+            <div class="why-row-icon"><i class="fas fa-leaf"></i></div>
+            <div>
+              <h4 style="font-size: 0.96rem; margin-bottom: 2px;">Museum-Safe Botanicals Only</h4>
+              <p style="font-size: 0.82rem; color: var(--ink-muted);">Biodegradable, pH-neutral formulas formulated for natural marble, lacquer, and fine art rooms.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="velora-app-mockup">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <span style="font-family: var(--font-serif); font-size: 1.2rem; font-weight: 700;">VELO<span style="color: var(--copper);">RA</span></span>
+          <i class="far fa-bell" style="color: #B5A7AD;"></i>
+        </div>
+        <div style="font-size: 0.72rem; color: #B5A7AD;">Good evening,</div>
+        <div style="font-size: 1.05rem; font-weight: 700;">Arthur Pendelton</div>
+
+        <div class="app-active-box">
+          <div style="font-size: 0.65rem; font-weight: 800; color: #E38B67; letter-spacing: 0.08em;">ACTIVE STEWARDSHIP</div>
+          <div style="font-size: 0.92rem; font-weight: 700; margin-top: 2px;">Estate Deep Clean · Mayfair</div>
+          <div style="font-size: 0.72rem; color: #D5CDD0;">Today · 10:00 AM · CleanScore 99</div>
+          <div class="app-bar-bg"><div class="app-bar-fill"></div></div>
+        </div>
+
+        <div style="font-size: 0.65rem; font-weight: 700; color: #9E8E95; letter-spacing: 0.08em; margin-bottom: 8px;">QUICK RESERVE</div>
+        <div class="app-quick-4">
+          <div class="app-q-item"><i class="fas fa-home"></i>Estate</div>
+          <div class="app-q-item"><i class="fas fa-bath"></i>Marble</div>
+          <div class="app-q-item"><i class="fas fa-couch"></i>Salon</div>
+          <div class="app-q-item"><i class="fas fa-tshirt"></i>Valet</div>
+        </div>
+
+        <div class="app-log-row">
+          <div><strong>Kensington Salon Reset</strong><br><span style="color: #9E8E95; font-size: 0.68rem;">14 Nov 2026</span></div>
+          <span class="pill-done">Done</span>
+        </div>
+        <div class="app-log-row">
+          <div><strong>Marble Spa Polishing</strong><br><span style="color: #9E8E95; font-size: 0.68rem;">29 Nov 2026</span></div>
+          <span class="pill-soon">Soon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="velora-footer">
+    <div class="container">
+      <div class="footer-4col">
+        <div>
+          <div class="brand-name" style="color: #FFFFFF; margin-bottom: 10px;">VELORA</div>
+          <p style="font-size: 0.85rem; color: #B5A7AD; max-width: 280px;">Private residence stewardship and CleanScore™ conservation for notable homes.</p>
+        </div>
+        <div>
+          <h4 style="color: #FFFFFF; font-size: 0.85rem; margin-bottom: 12px;">Disciplines</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.82rem;">
+            <a href="#services">Estate Deep Cleaning</a>
+            <a href="#services">Marble Spa Reset</a>
+            <a href="#services">Chef Kitchen Care</a>
+            <a href="#services">Wardrobe Valet</a>
+          </div>
+        </div>
+        <div>
+          <h4 style="color: #FFFFFF; font-size: 0.85rem; margin-bottom: 12px;">Enclaves</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.82rem;">
+            <a href="#cities">London · Mayfair</a>
+            <a href="#cities">New York · Tribeca</a>
+            <a href="#cities">Paris · 8th Arr.</a>
+            <a href="#cities">Zurich · Bahnhofstrasse</a>
+          </div>
+        </div>
+        <div>
+          <h4 style="color: #FFFFFF; font-size: 0.85rem; margin-bottom: 12px;">Private Desk</h4>
+          <p style="font-size: 0.82rem; color: #B5A7AD;">desk@velora-estates.com<br>(800) 555-VELORA</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 VELORA International Ltd. Strict NDA confidentiality.</span>
+        <span>CleanScore™ Verified · Burnished Copper Edition</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const siteNavbar = document.getElementById('siteNavbar');
+    window.addEventListener('scroll', () => {
+      siteNavbar.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    function toggleMenu() {
+      mobileDrawer.classList.toggle('open');
+    }
+    if (menuBtn) menuBtn.addEventListener('click', toggleMenu);
+
+    let vBase = 195;
+    let vDisc = 0;
+
+    function setTab(el) {
+      document.querySelectorAll('.calc-tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    function pickSvc(el, price) {
+      document.querySelectorAll('.calc-svc-btn').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+      vBase = price;
+      renderVTotal();
+    }
+
+    function applyVPromo() {
+      const val = document.getElementById('vPromo').value.trim().toUpperCase();
+      const status = document.getElementById('vPromoStatus');
+      if (val === 'VELORA25') {
+        vDisc = 25;
+        status.textContent = 'VELORA25 applied! Saving $25';
+      } else {
+        vDisc = 0;
+        status.textContent = 'Try VELORA25 for $25 off';
+      }
+      renderVTotal();
+    }
+
+    function renderVTotal() {
+      document.getElementById('vTotal').textContent = '$' + Math.max(0, vBase - vDisc);
+    }
+
+    function submitVBooking() {
+      const city = document.getElementById('vCity').value;
+      const total = document.getElementById('vTotal').textContent;
+      alert('Velora Private Reservation Received!\nCity: ' + city + '\nEstimated Total: ' + total + '\nYour dedicated estate desk will confirm shortly.');
+    }
+
+    // Estate Carousel
+    let estateIdx = 0;
+    function moveEstate(dir) {
+      const track = document.getElementById('estateTrack');
+      const cards = document.querySelectorAll('.estate-slide-card');
+      if (!track || !cards.length) return;
+      estateIdx = (estateIdx + dir + cards.length) % cards.length;
+      const w = cards[0].getBoundingClientRect().width + 24;
+      const maxShift = window.innerWidth <= 1080 ? estateIdx : Math.min(estateIdx, 2);
+      track.style.transform = `translateX(-${maxShift * w}px)`;
+      document.getElementById('estateCount').textContent = `0${estateIdx + 1} / 0${cards.length}`;
+    }
+  </script>
+</body>
+</html>
