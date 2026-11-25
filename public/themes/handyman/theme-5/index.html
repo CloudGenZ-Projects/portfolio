@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>HANDYMAN™ | Fix It. Done Right. — Modern Animated Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --charcoal: #121417;
+      --charcoal-mid: #1C1F24;
+      --offwhite: #F8F7F4;
+      --orange: #FF5A1F;
+      --orange-hover: #E04810;
+      --blue: #3B82F6;
+      --ink: #121417;
+      --muted: #5F6672;
+      --border: rgba(18, 20, 23, 0.1);
+      --transition: all 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--offwhite);
+      color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    .container { width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 28px; }
+
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes floatTag { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+
+    .floating-nav-wrap { position: fixed; top: 16px; left: 0; width: 100%; z-index: 1000; padding: 0 24px; }
+    .floating-nav {
+      max-width: 1240px;
+      margin: 0 auto;
+      height: 68px;
+      background: rgba(18, 20, 23, 0.9);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 99px;
+      padding: 0 12px 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #FFFFFF;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+    }
+    .nav-logo { font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+    .nav-items { display: flex; align-items: center; gap: 24px; list-style: none; }
+    .nav-items a { font-size: 13.5px; font-weight: 600; color: #CBD5E1; white-space: nowrap; }
+    .nav-items a:hover { color: #FFFFFF; }
+    .btn-electric {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--orange);
+      color: #FFFFFF;
+      padding: 11px 22px;
+      border-radius: 99px;
+      font-size: 13.5px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--transition);
+    }
+    .btn-electric:hover { background: var(--orange-hover); transform: translateY(-2px); }
+
+    .hero-platform { padding: 132px 0 90px; background: radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.08), transparent 45%), var(--offwhite); }
+    .hero-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 48px; align-items: center; }
+    .hero-h1 { font-size: clamp(2.8rem, 5.2vw, 4.4rem); line-height: 1.04; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 18px; }
+    .hero-h1 span { color: var(--orange); }
+    .hero-visual-box { position: relative; }
+    .hero-visual-box img { width: 100%; height: 470px; object-fit: cover; border-radius: 24px; box-shadow: 0 28px 60px rgba(18, 20, 23, 0.16); transition: transform 0.2s ease-out; }
+    .float-tag {
+      position: absolute;
+      background: #FFFFFF;
+      padding: 10px 16px;
+      border-radius: 99px;
+      font-size: 12.5px;
+      font-weight: 700;
+      box-shadow: 0 12px 28px rgba(18, 20, 23, 0.14);
+      animation: floatTag 4s ease-in-out infinite;
+    }
+    .t1 { top: 24px; left: -20px; }
+    .t2 { bottom: 32px; right: -16px; animation-delay: 1.2s; }
+    .rotating-badge {
+      position: absolute;
+      top: -22px;
+      right: -18px;
+      width: 94px;
+      height: 94px;
+      border-radius: 50%;
+      background: var(--charcoal);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      border: 3px solid var(--orange);
+      animation: spinSlow 18s linear infinite;
+    }
+
+    .section-pad { padding: 84px 0; }
+    .selector-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 36px; }
+    .selector-card {
+      position: relative;
+      height: 310px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--charcoal);
+      color: #FFFFFF;
+      cursor: pointer;
+    }
+    .selector-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.55; transition: transform 0.6s ease; }
+    .selector-card:hover img { transform: scale(1.08); opacity: 0.4; }
+    .selector-overlay {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background: linear-gradient(180deg, transparent 20%, rgba(18, 20, 23, 0.94) 100%);
+    }
+
+    /* Interactive Diagnostic Map */
+    .zone-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 28px; margin-top: 32px; }
+    .zone-btn { width: 100%; background: #FFFFFF; border: 1.5px solid var(--border); border-radius: 12px; padding: 16px 18px; text-align: left; cursor: pointer; margin-bottom: 10px; }
+    .zone-btn.active { border-color: var(--orange); background: rgba(255, 90, 31, 0.08); }
+    .zone-panel { background: #FFFFFF; border: 1px solid var(--border); border-radius: 18px; padding: 28px; }
+    .zone-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13.5px; }
+
+    .stats-dark-band { background: var(--charcoal); color: #FFFFFF; padding: 76px 0; }
+    .stats-3-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; text-align: center; }
+    .stat-num { font-size: clamp(2.4rem, 4vw, 3.4rem); font-weight: 800; color: var(--orange); line-height: 1; margin-bottom: 6px; }
+
+    .ba-slider-box { position: relative; height: 380px; border-radius: 20px; overflow: hidden; margin: 28px 0; }
+    .ba-slider-box img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .ba-before-layer { position: absolute; inset: 0; width: 50%; overflow: hidden; border-right: 3px solid var(--orange); }
+    .ba-before-layer img { width: 100vw; max-width: none; filter: grayscale(55%); }
+    .ba-range { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; z-index: 10; }
+
+    .booking-wizard-card { background: #FFFFFF; border: 1px solid var(--border); border-radius: 22px; padding: 36px; max-width: 820px; margin: 32px auto 0; }
+    .wizard-steps-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 24px; }
+    .wiz-pill { padding: 10px; border-radius: 8px; background: var(--offwhite); font-size: 12.5px; font-weight: 700; text-align: center; color: var(--muted); }
+    .wiz-pill.active { background: var(--charcoal); color: #FFFFFF; }
+    .wiz-panel { display: none; }
+    .wiz-panel.active { display: block; }
+    .wiz-opts { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+    .wiz-opt { border: 1.5px solid var(--border); border-radius: 10px; padding: 10px 16px; cursor: pointer; font-size: 13px; font-weight: 700; }
+    .wiz-opt.selected { border-color: var(--orange); background: rgba(255, 90, 31, 0.08); color: var(--orange); }
+    .wiz-input { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; font-family: inherit; font-size: 14px; }
+
+    .reviews-4-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 32px; }
+    .rev-card { background: #FFFFFF; border: 1px solid var(--border); border-radius: 16px; padding: 22px; font-size: 13.5px; }
+    .footer-platform { background: var(--charcoal); color: #CBD5E1; padding: 68px 0 32px; }
+
+    @media (max-width: 1024px) {
+      .hero-grid, .zone-grid { grid-template-columns: 1fr; }
+      .selector-grid, .reviews-4-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-items { display: none; }
+    }
+    @media (max-width: 640px) {
+      .selector-grid, .reviews-4-grid, .stats-3-grid, .wizard-steps-bar { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="floating-nav-wrap">
+    <nav class="floating-nav">
+      <a href="#" class="nav-logo"><i class="fas fa-bolt" style="color: var(--orange);"></i> HANDYMAN™</a>
+      <ul class="nav-items">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#interactive-house">What We Fix</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#before-after">Work Proof</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+      </ul>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <a href="tel:8005553499" style="font-size: 13px; font-weight: 700; color: #E2E8F0; white-space: nowrap;">(800) 555-FIXX</a>
+        <a href="#quote-calculator" class="btn-electric">Get a Free Quote</a>
+      </div>
+    </nav>
+  </div>
+
+  <section class="hero-platform">
+    <div class="container hero-grid">
+      <div class="reveal">
+        <span style="display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px;">Local Handyman Services · Heavy Duty Series 01</span>
+        <h1 class="hero-h1">Fix It. <span>Done Right.</span></h1>
+        <p style="font-size: 16.5px; color: var(--muted); max-width: 500px; margin-bottom: 26px;">
+          From nagging plumbing leaks and light fixtures to custom carpentry and seamless wall repairs. We deliver master-grade craftsmanship for the jobs you don't have time for.
+        </p>
+        <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+          <a href="#quote-calculator" class="btn-electric">Book a Handyman <i class="fas fa-arrow-right"></i></a>
+          <a href="#how-it-works" style="padding: 11px 22px; border-radius: 99px; border: 1.5px solid var(--charcoal); font-weight: 700; font-size: 13.5px;">How We Work</a>
+        </div>
+      </div>
+
+      <div class="hero-visual-box reveal" id="parallaxBox">
+        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=85" alt="Precision Workshop" id="heroParallaxImg">
+        <div class="rotating-badge">100% Guaranteed</div>
+        <div class="float-tag t1"><i class="fas fa-check-circle" style="color: var(--orange);"></i> 4,850+ Jobs Completed</div>
+        <div class="float-tag t2"><i class="fas fa-star" style="color: var(--blue);"></i> 4.9★ Client Rating</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Band -->
+  <section class="stats-dark-band">
+    <div class="container stats-3-grid">
+      <div class="reveal"><div class="stat-num" data-target="4850">0</div><div style="font-size: 13.5px; color: #94A3B8;">Jobs Completed</div></div>
+      <div class="reveal"><div class="stat-num">4.9★</div><div style="font-size: 13.5px; color: #94A3B8;">Verified Client Rating</div></div>
+      <div class="reveal"><div class="stat-num" data-target="100">0</div><div style="font-size: 13.5px; color: #94A3B8;">% Master Craftsmanship Guarantee</div></div>
+    </div>
+  </section>
+
+  <!-- 4-Trade Interactive Cards ("One Call. Many Fixes.") -->
+  <section class="section-pad" id="services">
+    <div class="container">
+      <div class="reveal" style="max-width: 680px;">
+        <span style="font-size: 12px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange);">Comprehensive Capabilities</span>
+        <h2 style="font-size: clamp(2rem, 3.6vw, 2.9rem); font-weight: 800; margin-top: 6px;">One Call. Many Fixes.</h2>
+        <p style="color: var(--muted); font-size: 15px; margin-top: 8px;">Instead of hiring four different single-trade contractors, our multi-skilled craftsmen handle all your interior and exterior repairs in a single visit.</p>
+      </div>
+
+      <div class="selector-grid">
+        <div class="selector-card reveal" onclick="location.href='#quote-calculator'">
+          <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=600&q=80" alt="Minor Plumbing">
+          <div class="selector-overlay">
+            <span style="font-size: 11px; color: var(--orange); font-weight: 800;">01 / PLUMBING</span>
+            <h3 style="font-size: 19px; margin: 4px 0;">Minor Plumbing</h3>
+            <p style="font-size: 12.5px; color: #CBD5E1;">Faucets, drain unclogging, toilets, under-sink seals &amp; disposals.</p>
+          </div>
+        </div>
+        <div class="selector-card reveal" onclick="location.href='#quote-calculator'">
+          <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80" alt="Electrical">
+          <div class="selector-overlay">
+            <span style="font-size: 11px; color: var(--orange); font-weight: 800;">02 / ELECTRICAL</span>
+            <h3 style="font-size: 19px; margin: 4px 0;">Electrical &amp; Fixtures</h3>
+            <p style="font-size: 12.5px; color: #CBD5E1;">Pendants, ceiling fans, smart switches, GFCI outlets &amp; doorbells.</p>
+          </div>
+        </div>
+        <div class="selector-card reveal" onclick="location.href='#quote-calculator'">
+          <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=600&q=80" alt="Carpentry">
+          <div class="selector-overlay">
+            <span style="font-size: 11px; color: var(--orange); font-weight: 800;">03 / CARPENTRY</span>
+            <h3 style="font-size: 19px; margin: 4px 0;">Carpentry &amp; Assembly</h3>
+            <p style="font-size: 12.5px; color: #CBD5E1;">Doors, flat-pack furniture, heavy TV wall mounts &amp; baseboards.</p>
+          </div>
+        </div>
+        <div class="selector-card reveal" onclick="location.href='#quote-calculator'">
+          <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=600&q=80" alt="Walls & Surfaces">
+          <div class="selector-overlay">
+            <span style="font-size: 11px; color: var(--orange); font-weight: 800;">04 / SURFACES</span>
+            <h3 style="font-size: 19px; margin: 4px 0;">Walls &amp; Surfaces</h3>
+            <p style="font-size: 12.5px; color: #CBD5E1;">Drywall patching, texture blending, caulking &amp; tile regrouting.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Diagnostic Map -->
+  <section class="section-pad" id="interactive-house" style="padding-top: 10px;">
+    <div class="container">
+      <div class="reveal">
+        <span style="font-size: 12px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue);">Interactive Diagnostic Map</span>
+        <h2 style="font-size: clamp(2rem, 3.4vw, 2.8rem); font-weight: 800;">What Needs Fixing?</h2>
+      </div>
+      <div class="zone-grid">
+        <div>
+          <button class="zone-btn" onclick="p5Zone('bedroom', this)"><strong>Bedroom</strong><br><span style="font-size: 12px; color: var(--muted);">Wardrobes, Shelving, Doors</span></button>
+          <button class="zone-btn" onclick="p5Zone('bathroom', this)"><strong>Bathroom</strong><br><span style="font-size: 12px; color: var(--muted);">Toilets, Vanities, Caulking</span></button>
+          <button class="zone-btn active" onclick="p5Zone('living', this)"><strong>Living Room</strong><br><span style="font-size: 12px; color: var(--muted);">TV Wall Mount, Lighting, Drywall</span></button>
+          <button class="zone-btn" onclick="p5Zone('kitchen', this)"><strong>Kitchen</strong><br><span style="font-size: 12px; color: var(--muted);">Faucets, Disposals, Cabinets</span></button>
+        </div>
+        <div class="zone-panel">
+          <h3 id="z5Title" style="font-size: 22px; font-weight: 800;">Living Room</h3>
+          <p id="z5Desc" style="font-size: 13.5px; color: var(--muted); margin-bottom: 14px;">Entertainment setups, wall mounting, lighting &amp; structural trims.</p>
+          <div id="z5Rows">
+            <div class="zone-row"><span>Heavy Flat-Screen TV Wall Mounting</span><strong>~ 1.5 hrs</strong></div>
+            <div class="zone-row"><span>Drywall Anchor &amp; Patch Repairs</span><strong>~ 1 hr</strong></div>
+            <div class="zone-row"><span>Ceiling Fan Installation &amp; Balancing</span><strong>~ 2 hrs</strong></div>
+            <div class="zone-row"><span>Curtain Rod &amp; Floating Shelf Mounts</span><strong>~ 1 hr</strong></div>
+          </div>
+          <a href="#quote-calculator" class="btn-electric" style="margin-top: 18px;">Schedule This Zone</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Workflow & Before/After -->
+  <section class="section-pad" id="how-it-works" style="background: #FFFFFF; border-top: 1px solid var(--border);">
+    <div class="container">
+      <div class="reveal" style="text-align: center;">
+        <span style="font-size: 12px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange);">Zero Friction Workflow</span>
+        <h2 style="font-size: 32px; font-weight: 800;">From Problem To Done.</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 32px;">
+        <div class="rev-card reveal"><strong style="color: var(--orange);">01</strong><h4 style="margin: 6px 0;">Tell Us The Job</h4><p style="color: var(--muted);">List the tasks you need completed and get an upfront scope of work.</p></div>
+        <div class="rev-card reveal"><strong style="color: var(--orange);">02</strong><h4 style="margin: 6px 0;">Schedule A Visit</h4><p style="color: var(--muted);">Choose a guaranteed arrival window with real-time dispatch updates.</p></div>
+        <div class="rev-card reveal"><strong style="color: var(--orange);">03</strong><h4 style="margin: 6px 0;">We Fix It Right</h4><p style="color: var(--muted);">Master handyman arrives with commercial-grade tools and backs all work.</p></div>
+      </div>
+
+      <div id="before-after" style="margin-top: 64px;">
+        <h3 style="text-align: center; font-size: 28px; font-weight: 800;">Workmanship Proof · Recently Fixed</h3>
+        <div class="ba-slider-box reveal">
+          <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80" alt="Completed">
+          <div class="ba-before-layer" id="baLayer"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80" alt="Before"></div>
+          <input type="range" min="10" max="90" value="50" class="ba-range" oninput="document.getElementById('baLayer').style.width = this.value + '%'">
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div class="rev-card reveal"><span style="font-size: 11px; font-weight: 800; color: var(--orange);">BLUEPRINT #KP-89</span><h4 style="margin: 4px 0;">Kitchen Modernization — Commercial Faucet &amp; Walnut Shelf</h4><p style="color: var(--muted);">Highland Park — Completed in 4 hours</p></div>
+          <div class="rev-card reveal"><span style="font-size: 11px; font-weight: 800; color: var(--orange);">BLUEPRINT #DR-22</span><h4 style="margin: 4px 0;">Carpentry &amp; Hardware — Solid Core Door &amp; Mortise Latch</h4><p style="color: var(--muted);">Oakwood District — Completed in 2 hours</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews & 4-Step Instant Estimation Engine -->
+  <section class="section-pad" id="reviews">
+    <div class="container">
+      <h2 style="text-align: center; font-size: 30px; font-weight: 800;">The Kind Of Work People Remember.</h2>
+      <div class="reviews-4-grid">
+        <div class="rev-card reveal"><div style="color: var(--orange); margin-bottom: 8px;">★★★★★</div><p>"Booked them for 4 separate repairs. Everything knocked out in 3 hours flat."</p><strong style="display: block; margin-top: 10px;">Sarah Jenkins</strong></div>
+        <div class="rev-card reveal"><div style="color: var(--orange); margin-bottom: 8px;">★★★★★</div><p>"Installed a 75-inch TV into concrete brick and patched old drywall anchor tears cleanly."</p><strong style="display: block; margin-top: 10px;">David Lin</strong></div>
+        <div class="rev-card reveal"><div style="color: var(--orange); margin-bottom: 8px;">★★★★★</div><p>"Upfront pricing, on time, and left the work area cleaner than when he arrived."</p><strong style="display: block; margin-top: 10px;">Marcus Bennett</strong></div>
+        <div class="rev-card reveal"><div style="color: var(--orange); margin-bottom: 8px;">★★★★★</div><p>"Replaced our kitchen disposal and re-caulked both master baths in one morning."</p><strong style="display: block; margin-top: 10px;">Elena Rostova</strong></div>
+      </div>
+
+      <div class="booking-wizard-card reveal" id="quote-calculator" style="margin-top: 56px;">
+        <span style="font-size: 11.5px; font-weight: 800; color: var(--orange); text-transform: uppercase;">Instant Estimation Engine</span>
+        <h3 style="font-size: 28px; font-weight: 800; margin-bottom: 18px;">Not Sure What It Will Cost?</h3>
+        <div class="wizard-steps-bar">
+          <div class="wiz-pill active" id="wp1">01 Category</div>
+          <div class="wiz-pill" id="wp2">02 Details</div>
+          <div class="wiz-pill" id="wp3">03 Location</div>
+          <div class="wiz-pill" id="wp4">04 Schedule</div>
+        </div>
+        <div class="wiz-panel active" id="step1">
+          <div class="wiz-opts">
+            <div class="wiz-opt selected" onclick="this.classList.toggle('selected')">Plumbing Repairs</div>
+            <div class="wiz-opt" onclick="this.classList.toggle('selected')">Lighting &amp; Power</div>
+            <div class="wiz-opt" onclick="this.classList.toggle('selected')">Carpentry &amp; Doors</div>
+            <div class="wiz-opt" onclick="this.classList.toggle('selected')">TV &amp; Wall Mounts</div>
+            <div class="wiz-opt" onclick="this.classList.toggle('selected')">Drywall &amp; Surfaces</div>
+            <div class="wiz-opt" onclick="this.classList.toggle('selected')">Other General Fix</div>
+          </div>
+          <button class="btn-electric" onclick="goWiz(2)">Next Step <i class="fas fa-arrow-right"></i></button>
+        </div>
+        <div class="wiz-panel" id="step2">
+          <textarea class="wiz-input" rows="3" placeholder="Describe what needs fixing..."></textarea>
+          <div style="display: flex; gap: 10px;">
+            <button onclick="goWiz(1)" style="padding: 10px 18px; border-radius: 99px; border: 1px solid var(--border); background: #fff; cursor: pointer;">Back</button>
+            <button class="btn-electric" onclick="goWiz(3)">Next Step</button>
+          </div>
+        </div>
+        <div class="wiz-panel" id="step3">
+          <input type="text" class="wiz-input" placeholder="Full Name">
+          <input type="tel" class="wiz-input" placeholder="Phone Number">
+          <input type="text" class="wiz-input" placeholder="Address / Zip Code">
+          <div style="display: flex; gap: 10px;">
+            <button onclick="goWiz(2)" style="padding: 10px 18px; border-radius: 99px; border: 1px solid var(--border); background: #fff; cursor: pointer;">Back</button>
+            <button class="btn-electric" onclick="goWiz(4)">Next Step</button>
+          </div>
+        </div>
+        <div class="wiz-panel" id="step4">
+          <input type="date" class="wiz-input" value="2026-11-30">
+          <p style="font-size: 12.5px; color: var(--muted); margin-bottom: 14px;">Submitting a request does not automatically confirm the appointment; confirmation follows after our team reviews your scope.</p>
+          <div style="display: flex; gap: 10px;">
+            <button onclick="goWiz(3)" style="padding: 10px 18px; border-radius: 99px; border: 1px solid var(--border); background: #fff; cursor: pointer;">Back</button>
+            <button class="btn-electric" onclick="alert('Estimate request received! Call (800) 555-FIXX for priority support.')">Submit Request</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer-platform">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; padding-bottom: 44px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <div>
+          <span style="font-size: 11px; font-weight: 800; color: var(--orange); text-transform: uppercase;">Priority Help Line</span>
+          <h2 style="font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 800; color: #FFFFFF;">Small Job? Big Headache?</h2>
+          <p style="color: #94A3B8;">Let our precision craftsmen take it completely off your list.</p>
+        </div>
+        <div style="display: flex; gap: 12px;">
+          <a href="#quote-calculator" class="btn-electric">Book A Handyman Today</a>
+          <a href="tel:8005553499" style="padding: 11px 22px; border-radius: 99px; border: 1px solid rgba(255,255,255,0.25); color: #FFFFFF; font-weight: 700; font-size: 13.5px;">Call (800) 555-FIXX</a>
+        </div>
+      </div>
+      <div style="padding-top: 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-size: 13px; color: #64748B;">
+        <span><strong style="color: #FFFFFF;">HANDYMAN™</strong> · dispatch@handyman-pro.com · (800) 555-FIXX</span>
+        <span>&copy; 2026 HANDYMAN™ Technologies Inc. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 40); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    const pBox = document.getElementById('parallaxBox');
+    const pImg = document.getElementById('heroParallaxImg');
+    if (pBox && pImg) {
+      pBox.addEventListener('mousemove', (e) => {
+        const rect = pBox.getBoundingClientRect();
+        pImg.style.transform = `translate(${((e.clientX - rect.left) / rect.width - 0.5) * 14}px, ${((e.clientY - rect.top) / rect.height - 0.5) * 14}px)`;
+      });
+      pBox.addEventListener('mouseleave', () => { pImg.style.transform = 'translate(0,0)'; });
+    }
+
+    const statObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting || !entry.target.dataset.target) return;
+        const el = entry.target, target = parseInt(el.dataset.target, 10);
+        let cur = 0;
+        const step = Math.max(1, Math.ceil(target / 40));
+        const t = setInterval(() => {
+          cur = Math.min(target, cur + step);
+          el.textContent = cur.toLocaleString() + (target === 100 ? '%' : '+');
+          if (cur >= target) clearInterval(t);
+        }, 28);
+        statObs.unobserve(el);
+      });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('.stat-num').forEach(el => statObs.observe(el));
+
+    const z5Data = {
+      living: { title: 'Living Room', desc: 'Entertainment setups, wall mounting, lighting & structural trims.', rows: [['Heavy Flat-Screen TV Wall Mounting', '~ 1.5 hrs'], ['Drywall Anchor & Patch Repairs', '~ 1 hr'], ['Ceiling Fan Installation & Balancing', '~ 2 hrs'], ['Curtain Rod & Floating Shelf Mounts', '~ 1 hr']] },
+      kitchen: { title: 'Kitchen', desc: 'Faucets, disposals, cabinet hardware & lighting.', rows: [['Commercial Faucet Swap', '~ 1.5 hrs'], ['Garbage Disposal Install', '~ 1.5 hrs'], ['Cabinet Hinge Alignment', '~ 1 hr'], ['Under-Cabinet LED Strip', '~ 2 hrs']] },
+      bathroom: { title: 'Bathroom', desc: 'Toilets, vanities, exhaust fans & caulking.', rows: [['Toilet Wax Ring & Valve', '~ 1.5 hrs'], ['Tub & Tile Re-Caulking', '~ 1.5 hrs'], ['Vanity Faucet Upgrade', '~ 1.5 hrs'], ['Towel Bar Anchoring', '~ 1 hr']] },
+      bedroom: { title: 'Bedroom', desc: 'Wardrobes, closet shelving & doors.', rows: [['Flat-Pack Wardrobe Build', '~ 2.5 hrs'], ['Door Trimming & Latches', '~ 1.5 hrs'], ['Smart Dimmer Install', '~ 1 hr'], ['Closet Shelving Mount', '~ 2 hrs']] }
+    };
+    function p5Zone(k, btn) {
+      document.querySelectorAll('.zone-grid .zone-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const d = z5Data[k];
+      document.getElementById('z5Title').textContent = d.title;
+      document.getElementById('z5Desc').textContent = d.desc;
+      document.getElementById('z5Rows').innerHTML = d.rows.map(r => `<div class="zone-row"><span>${r[0]}</span><strong>${r[1]}</strong></div>`).join('');
+    }
+    function goWiz(step) {
+      document.querySelectorAll('.wiz-panel').forEach((p, idx) => p.classList.toggle('active', idx + 1 === step));
+      document.querySelectorAll('.wiz-pill').forEach((p, idx) => p.classList.toggle('active', idx + 1 === step));
+    }
+  </script>
+</body>
+</html>

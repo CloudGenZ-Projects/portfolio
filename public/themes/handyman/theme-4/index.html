@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>HANDYMAN™ | Fix It. Done Right. — Emerald &amp; Amber Animated Edition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --pine-deep: #061816;
+      --pine: #0B2523;
+      --pine-mid: #123834;
+      --emerald: #10B981;
+      --emerald-dark: #059669;
+      --emerald-soft: #ECFDF5;
+      --amber: #F59E0B;
+      --amber-soft: #FFFBEB;
+      --surface: #F3F8F6;
+      --white: #FFFFFF;
+      --ink: #0F1F1D;
+      --muted: #546A67;
+      --border: #D9E6E2;
+      --transition: all 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 28px; }
+
+    /* Top Scroll Progress Bar */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--emerald), var(--amber));
+      z-index: 2000;
+      transition: width 0.08s linear;
+    }
+
+    /* Keyframes */
+    @keyframes wordRise {
+      from { opacity: 0; transform: translateY(24px) rotateX(15deg); }
+      to { opacity: 1; transform: translateY(0) rotateX(0); }
+    }
+    .word-span {
+      display: inline-block;
+      opacity: 0;
+      animation: wordRise 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes maskReveal {
+      from { clip-path: inset(0 100% 0 0); transform: scale(1.06); }
+      to { clip-path: inset(0 0 0 0); transform: scale(1); }
+    }
+    .hero-mask-img { animation: maskReveal 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    @keyframes floatA {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-9px); }
+    }
+    @keyframes floatB {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(8px); }
+    }
+    @keyframes orbDrift {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(24px, -18px) scale(1.08); }
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(1.4); }
+    }
+    @keyframes tickerSlide {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Scroll Reveal Variants */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* 1. Announcement Bar */
+    .announcement-bar {
+      background: var(--pine-deep);
+      color: #D1FAE5;
+      font-size: 12.5px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+    }
+    .ann-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .live-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--emerald);
+      margin-right: 6px;
+      animation: pulseDot 1.8s infinite;
+    }
+
+    /* 2. Sticky Glass Header */
+    .corp-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition);
+    }
+    .corp-header.scrolled {
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 10px 30px rgba(11, 37, 35, 0.08);
+    }
+    .nav-wrap {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .corp-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--pine);
+      white-space: nowrap;
+    }
+    .corp-logo-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--pine), var(--emerald-dark));
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+    }
+    .corp-nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+    .corp-nav a {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--muted);
+      position: relative;
+      padding: 6px 0;
+      white-space: nowrap;
+      transition: var(--transition);
+    }
+    .corp-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--emerald);
+      transition: var(--transition);
+    }
+    .corp-nav a:hover { color: var(--pine); }
+    .corp-nav a:hover::after { width: 100%; }
+
+    .btn-emerald {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--emerald), var(--emerald-dark));
+      color: #FFFFFF;
+      padding: 12px 22px;
+      border-radius: 99px;
+      font-size: 13.5px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--transition);
+      box-shadow: 0 6px 18px rgba(16, 185, 129, 0.28);
+    }
+    .btn-emerald:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 26px rgba(16, 185, 129, 0.4);
+    }
+    .btn-emerald i { transition: transform 0.25s ease; }
+    .btn-emerald:hover i { transform: translateX(4px); }
+
+    .btn-pine-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1.5px solid var(--pine);
+      color: var(--pine);
+      padding: 11px 20px;
+      border-radius: 99px;
+      font-size: 13.5px;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: var(--transition);
+    }
+    .btn-pine-outline:hover { background: var(--pine); color: #FFFFFF; transform: translateY(-2px); }
+
+    /* 3. Animated Aurora Hero */
+    .corp-hero {
+      background: linear-gradient(135deg, #FFFFFF 0%, var(--surface) 100%);
+      padding: 76px 0 88px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.45;
+      pointer-events: none;
+      animation: orbDrift 10s ease-in-out infinite;
+    }
+    .orb-1 { width: 340px; height: 340px; background: #A7F3D0; top: -80px; right: 10%; }
+    .orb-2 { width: 280px; height: 280px; background: #FDE68A; bottom: -60px; left: 5%; animation-delay: 3s; }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 52px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--emerald-soft);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--emerald-dark);
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .hero-h1 {
+      font-size: clamp(2.7rem, 4.6vw, 3.9rem);
+      line-height: 1.06;
+      font-weight: 800;
+      color: var(--pine);
+      margin-bottom: 18px;
+    }
+    .hero-stats-row {
+      display: flex;
+      gap: 30px;
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+    }
+    .hero-stats-row strong { display: block; font-size: 24px; font-weight: 800; color: var(--emerald-dark); }
+    .hero-stats-row span { font-size: 12px; color: var(--muted); font-weight: 600; }
+
+    .hero-img-wrap {
+      position: relative;
+      perspective: 1000px;
+    }
+    .hero-img-wrap img {
+      width: 100%;
+      height: 465px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 26px 55px rgba(11, 37, 35, 0.16);
+      transition: transform 0.25s ease-out;
+    }
+    .hero-float-card {
+      position: absolute;
+      bottom: 24px;
+      left: -24px;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(10px);
+      border-left: 4px solid var(--emerald);
+      padding: 16px 20px;
+      border-radius: 12px;
+      box-shadow: 0 18px 38px rgba(11, 37, 35, 0.14);
+      animation: floatA 4.5s ease-in-out infinite;
+    }
+    .hero-float-rating {
+      position: absolute;
+      top: 24px;
+      right: -18px;
+      background: var(--pine);
+      color: #FFFFFF;
+      padding: 12px 18px;
+      border-radius: 12px;
+      box-shadow: 0 16px 32px rgba(11, 37, 35, 0.2);
+      animation: floatB 5s ease-in-out infinite;
+    }
+
+    /* Animated Marquee Trust Ticker */
+    .marquee-band {
+      background: var(--pine);
+      color: #FFFFFF;
+      padding: 14px 0;
+      overflow: hidden;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .marquee-track {
+      display: flex;
+      gap: 44px;
+      width: max-content;
+      white-space: nowrap;
+      animation: tickerSlide 22s linear infinite;
+    }
+    .marquee-track i { color: var(--amber); margin-right: 8px; }
+
+    /* Services 4-Trade Animated Cards */
+    .section-pad { padding: 86px 0; }
+    .section-head { text-align: center; max-width: 700px; margin: 0 auto 48px; }
+    .eyebrow { font-size: 11.5px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--emerald-dark); margin-bottom: 8px; display: block; }
+    .section-h2 { font-size: clamp(2rem, 3.4vw, 2.75rem); font-weight: 800; color: var(--pine); margin-bottom: 10px; }
+
+    .services-4-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+    .svc-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+      position: relative;
+    }
+    .svc-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--emerald);
+      box-shadow: 0 22px 44px rgba(16, 185, 129, 0.14);
+    }
+    .svc-thumb { height: 165px; overflow: hidden; position: relative; }
+    .svc-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.65s ease; }
+    .svc-card:hover .svc-thumb img { transform: scale(1.08); }
+    .svc-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(11, 37, 35, 0.85);
+      color: var(--amber);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 99px;
+    }
+    .svc-body { padding: 22px; flex: 1; display: flex; flex-direction: column; }
+    .svc-list { list-style: none; font-size: 12.5px; color: var(--muted); margin: 12px 0 18px; flex: 1; }
+    .svc-list li { margin-bottom: 5px; }
+    .svc-list i { color: var(--emerald); margin-right: 6px; }
+    .svc-link {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--emerald-dark);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .svc-card:hover .svc-link i { transform: translateX(5px); transition: transform 0.25s ease; }
+
+    /* Interactive Diagnostic Map */
+    .zone-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 28px; align-items: start; }
+    .zone-btn {
+      width: 100%;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      text-align: left;
+      cursor: pointer;
+      margin-bottom: 12px;
+      transition: var(--transition);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .zone-btn:hover { border-color: var(--emerald); transform: translateX(4px); }
+    .zone-btn.active {
+      border-color: var(--emerald);
+      background: var(--emerald-soft);
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.12);
+    }
+    .zone-panel {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 14px 36px rgba(11, 37, 35, 0.06);
+      transition: opacity 0.25s ease;
+    }
+    .zone-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13.5px;
+    }
+
+    /* Animated 3-Step Workflow with Drawing Line */
+    .process-band { background: var(--pine); color: #FFFFFF; padding: 88px 0; }
+    .process-3-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+      margin-top: 48px;
+      position: relative;
+    }
+    .process-line-track {
+      position: absolute;
+      top: 28px;
+      left: 16%;
+      right: 16%;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.12);
+      z-index: 1;
+    }
+    .process-line-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--emerald), var(--amber));
+      transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .process-band.line-active .process-line-fill { width: 100%; }
+    .proc-item {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      background: var(--pine-mid);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 28px 22px;
+      transition: var(--transition);
+    }
+    .proc-item:hover { transform: translateY(-6px); border-color: var(--emerald); }
+    .proc-num {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--emerald);
+      color: var(--pine-deep);
+      font-weight: 800;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      box-shadow: 0 0 0 8px var(--pine-mid);
+    }
+
+    /* Before/After Slider + Portfolio */
+    .compare-box {
+      position: relative;
+      height: 390px;
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 30px;
+      box-shadow: 0 22px 48px rgba(11, 37, 35, 0.14);
+    }
+    .compare-box img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .compare-before { position: absolute; inset: 0; width: 50%; overflow: hidden; border-right: 3px solid var(--emerald); }
+    .compare-before img { width: 100vw; max-width: none; filter: grayscale(60%) contrast(0.95); }
+    .compare-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--emerald);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      pointer-events: none;
+      z-index: 6;
+    }
+    .compare-range { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; z-index: 10; }
+
+    /* Reviews & Interactive 4-Step Estimator */
+    .reviews-4-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .rev-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      font-size: 13.5px;
+      transition: var(--transition);
+    }
+    .rev-card:hover { transform: translateY(-5px); border-color: var(--emerald); background: #FFFFFF; }
+
+    .est-wizard {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px;
+      max-width: 820px;
+      margin: 56px auto 0;
+      box-shadow: 0 20px 50px rgba(11, 37, 35, 0.08);
+    }
+    .est-bar { height: 6px; background: var(--surface); border-radius: 99px; overflow: hidden; margin: 16px 0 24px; }
+    .est-bar-fill { height: 100%; width: 25%; background: linear-gradient(90deg, var(--emerald), var(--amber)); transition: width 0.4s ease; }
+    .est-step { display: none; }
+    .est-step.active { display: block; }
+    .est-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+    .est-chip {
+      padding: 10px 16px;
+      border-radius: 99px;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .est-chip.selected { background: var(--pine); color: #FFFFFF; border-color: var(--pine); }
+    .est-input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      font-family: inherit;
+      font-size: 14px;
+    }
+
+    .final-cta {
+      background: linear-gradient(120deg, var(--pine) 0%, var(--pine-mid) 100%);
+      color: #FFFFFF;
+      padding: 76px 0;
+    }
+    .corp-footer { background: var(--pine-deep); color: #A7F3D0; padding: 54px 0 28px; }
+    .footer-4col { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; padding-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+
+    @media (max-width: 1024px) {
+      .hero-grid, .zone-grid { grid-template-columns: 1fr; }
+      .services-4-grid, .reviews-4-grid, .footer-4col { grid-template-columns: repeat(2, 1fr); }
+      .process-3-grid { grid-template-columns: 1fr; }
+      .process-line-track { display: none; }
+      .corp-nav { display: none; }
+    }
+    @media (max-width: 640px) {
+      .services-4-grid, .reviews-4-grid, .footer-4col { grid-template-columns: 1fr; }
+      .hero-float-card, .hero-float-rating { position: static; margin-top: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <div class="announcement-bar">
+    <div class="container ann-inner">
+      <span><span class="live-dot"></span> Technicians Available for Dispatch · Background Checked &amp; Insured</span>
+      <span>Emergency &amp; Same-Week Scheduling: <strong>(800) 555-FIXX</strong></span>
+    </div>
+  </div>
+
+  <header class="corp-header" id="corpHeader">
+    <div class="container nav-wrap">
+      <a href="#home" class="corp-brand"><div class="corp-logo-mark"><i class="fas fa-tools"></i></div><span>HANDYMAN™</span></a>
+      <ul class="corp-nav">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#interactive-house">What We Fix</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#before-after">Work Proof</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+      </ul>
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <a href="tel:8005553499" class="btn-pine-outline">(800) 555-FIXX</a>
+        <a href="#quote-calculator" class="btn-emerald">Get a Free Quote <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <section class="corp-hero" id="home">
+    <div class="hero-orb orb-1"></div>
+    <div class="hero-orb orb-2"></div>
+    <div class="container hero-grid">
+      <div>
+        <span class="hero-pill"><i class="fas fa-bolt"></i> Heavy Duty Series 01 · Precision Workshop</span>
+        <h1 class="hero-h1" id="heroHeadline">Fix It. Done Right.</h1>
+        <p style="color: var(--muted); font-size: 16px; max-width: 520px; margin-bottom: 26px;" class="reveal">
+          From nagging plumbing leaks and light fixtures to custom carpentry and seamless wall repairs. We deliver master-grade craftsmanship for the jobs you don't have time for.
+        </p>
+        <div style="display: flex; gap: 14px; flex-wrap: wrap;" class="reveal">
+          <a href="#quote-calculator" class="btn-emerald">Book a Handyman <i class="fas fa-arrow-right"></i></a>
+          <a href="#how-it-works" class="btn-pine-outline">How We Work</a>
+        </div>
+        <div class="hero-stats-row reveal">
+          <div><strong class="counter" data-target="4850">0</strong><span>Jobs Completed</span></div>
+          <div><strong>4.9★</strong><span>Client Rating</span></div>
+          <div><strong class="counter" data-target="100">0</strong><span>% Guaranteed</span></div>
+        </div>
+      </div>
+
+      <div class="hero-img-wrap" id="heroTiltWrap">
+        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=85" alt="Precision Workshop" class="hero-mask-img" id="heroTiltImg">
+        <div class="hero-float-rating">
+          <div style="font-size: 16px; font-weight: 800; color: var(--amber);">★★★★★ 4.9</div>
+          <div style="font-size: 11px; opacity: 0.85;">Verified Homeowner Score</div>
+        </div>
+        <div class="hero-float-card">
+          <strong style="display: block; font-size: 15px; color: var(--pine);">Master Craftsmanship Guarantee</strong>
+          <span style="font-size: 12.5px; color: var(--muted);">Plumbing · Electrical · Carpentry · Surfaces</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee-band">
+    <div class="marquee-track">
+      <span><i class="fas fa-check-circle"></i> Background Checked Technicians</span>
+      <span><i class="fas fa-check-circle"></i> Transparent Upfront Pricing</span>
+      <span><i class="fas fa-check-circle"></i> Master Craftsmanship Guarantee</span>
+      <span><i class="fas fa-check-circle"></i> Flexible Same-Week Scheduling</span>
+      <span><i class="fas fa-check-circle"></i> Fully Licensed &amp; Insured</span>
+      <span><i class="fas fa-check-circle"></i> Background Checked Technicians</span>
+      <span><i class="fas fa-check-circle"></i> Transparent Upfront Pricing</span>
+      <span><i class="fas fa-check-circle"></i> Master Craftsmanship Guarantee</span>
+    </div>
+  </div>
+
+  <section class="section-pad" id="services">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Comprehensive Capabilities</span>
+        <h2 class="section-h2">One Call. Many Fixes.</h2>
+        <p style="color: var(--muted); font-size: 15px;">Instead of hiring four different single-trade contractors with high minimum callout fees, our multi-skilled craftsmen handle all your interior and exterior repairs in a single visit.</p>
+      </div>
+
+      <div class="services-4-grid">
+        <div class="svc-card reveal">
+          <div class="svc-thumb"><span class="svc-badge">01 / PLUMBING</span><img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=500&q=80" alt="Minor Plumbing"></div>
+          <div class="svc-body">
+            <h3 style="font-size: 17px; color: var(--pine);">Minor Plumbing</h3>
+            <ul class="svc-list">
+              <li><i class="fas fa-check"></i> Faucet replacement &amp; drain unclogging</li>
+              <li><i class="fas fa-check"></i> Toilet components &amp; wax rings</li>
+              <li><i class="fas fa-check"></i> Under-sink leak seals &amp; shower heads</li>
+              <li><i class="fas fa-check"></i> Garbage disposals</li>
+            </ul>
+            <a href="#quote-calculator" class="svc-link">Book Plumbing Repair <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="svc-card reveal">
+          <div class="svc-thumb"><span class="svc-badge">02 / ELECTRICAL</span><img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=500&q=80" alt="Electrical"></div>
+          <div class="svc-body">
+            <h3 style="font-size: 17px; color: var(--pine);">Electrical &amp; Fixtures</h3>
+            <ul class="svc-list">
+              <li><i class="fas fa-check"></i> Light fixtures, pendants &amp; ceiling fans</li>
+              <li><i class="fas fa-check"></i> Smart switches &amp; dimmers</li>
+              <li><i class="fas fa-check"></i> GFCI outlet upgrades</li>
+              <li><i class="fas fa-check"></i> Video doorbells &amp; smoke alarms</li>
+            </ul>
+            <a href="#quote-calculator" class="svc-link">Book Electrical Install <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="svc-card reveal">
+          <div class="svc-thumb"><span class="svc-badge">03 / CARPENTRY</span><img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=500&q=80" alt="Carpentry"></div>
+          <div class="svc-body">
+            <h3 style="font-size: 17px; color: var(--pine);">Carpentry &amp; Assembly</h3>
+            <ul class="svc-list">
+              <li><i class="fas fa-check"></i> Interior door trimming &amp; hinges</li>
+              <li><i class="fas fa-check"></i> Flat-pack furniture &amp; floating shelves</li>
+              <li><i class="fas fa-check"></i> Heavy TV wall mounting</li>
+              <li><i class="fas fa-check"></i> Cabinet hardware &amp; baseboards</li>
+            </ul>
+            <a href="#quote-calculator" class="svc-link">Book Assembly Job <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="svc-card reveal">
+          <div class="svc-thumb"><span class="svc-badge">04 / SURFACES</span><img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=500&q=80" alt="Walls & Surfaces"></div>
+          <div class="svc-body">
+            <h3 style="font-size: 17px; color: var(--pine);">Walls &amp; Surfaces</h3>
+            <ul class="svc-list">
+              <li><i class="fas fa-check"></i> Drywall hole patching &amp; texture</li>
+              <li><i class="fas fa-check"></i> Caulking sinks, tubs &amp; tiles</li>
+              <li><i class="fas fa-check"></i> Precision gallery wall hanging</li>
+              <li><i class="fas fa-check"></i> Tile regrouting &amp; latch adjustments</li>
+            </ul>
+            <a href="#quote-calculator" class="svc-link">Book Surface Fix <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Diagnostic Map -->
+  <section class="section-pad" id="interactive-house" style="padding-top: 10px;">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Interactive Diagnostic Map</span>
+        <h2 class="section-h2">What Needs Fixing?</h2>
+        <p style="color: var(--muted); font-size: 14.5px;">Click any zone below to uncover the common repairs and installations we carry out daily.</p>
+      </div>
+      <div class="zone-grid">
+        <div>
+          <button class="zone-btn" onclick="pickZ4('bedroom', this)"><div><strong>Bedroom</strong><br><span style="font-size: 12px; color: var(--muted);">Wardrobes, Shelving, Doors</span></div><i class="fas fa-chevron-right" style="color: var(--emerald);"></i></button>
+          <button class="zone-btn" onclick="pickZ4('bathroom', this)"><div><strong>Bathroom</strong><br><span style="font-size: 12px; color: var(--muted);">Toilets, Vanities, Caulking</span></div><i class="fas fa-chevron-right" style="color: var(--emerald);"></i></button>
+          <button class="zone-btn active" onclick="pickZ4('living', this)"><div><strong>Living Room</strong><br><span style="font-size: 12px; color: var(--muted);">TV Wall Mount, Lighting, Drywall</span></div><i class="fas fa-chevron-right" style="color: var(--emerald);"></i></button>
+          <button class="zone-btn" onclick="pickZ4('kitchen', this)"><div><strong>Kitchen</strong><br><span style="font-size: 12px; color: var(--muted);">Faucets, Disposals, Cabinets</span></div><i class="fas fa-chevron-right" style="color: var(--emerald);"></i></button>
+        </div>
+        <div class="zone-panel" id="z4Panel">
+          <h3 id="z4Title" style="font-size: 22px; font-weight: 800; color: var(--pine);">Living Room</h3>
+          <p id="z4Desc" style="font-size: 13.5px; color: var(--muted); margin-bottom: 14px;">Entertainment setups, wall mounting, lighting &amp; structural trims.</p>
+          <div id="z4Rows">
+            <div class="zone-row"><span>Heavy Flat-Screen TV Wall Mounting</span><strong style="color: var(--emerald-dark);">~ 1.5 hrs</strong></div>
+            <div class="zone-row"><span>Drywall Anchor &amp; Patch Repairs</span><strong style="color: var(--emerald-dark);">~ 1 hr</strong></div>
+            <div class="zone-row"><span>Ceiling Fan Installation &amp; Balancing</span><strong style="color: var(--emerald-dark);">~ 2 hrs</strong></div>
+            <div class="zone-row"><span>Curtain Rod &amp; Floating Shelf Mounts</span><strong style="color: var(--emerald-dark);">~ 1 hr</strong></div>
+          </div>
+          <a href="#quote-calculator" class="btn-emerald" style="margin-top: 20px;">Schedule This Zone <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Animated 3-Step Workflow -->
+  <section class="process-band" id="how-it-works">
+    <div class="container">
+      <div class="section-head reveal" style="margin-bottom: 10px;">
+        <span class="eyebrow" style="color: var(--amber);">Zero Friction Workflow</span>
+        <h2 class="section-h2" style="color: #FFFFFF;">From Problem To Done.</h2>
+      </div>
+      <div class="process-3-grid">
+        <div class="process-line-track"><div class="process-line-fill"></div></div>
+        <div class="proc-item reveal"><div class="proc-num">01</div><h4>Tell Us The Job</h4><p style="font-size: 13px; color: #A7F3D0; margin-top: 6px;">Use our interactive estimator to list tasks and get an upfront scope of work.</p></div>
+        <div class="proc-item reveal"><div class="proc-num">02</div><h4>Schedule A Visit</h4><p style="font-size: 13px; color: #A7F3D0; margin-top: 6px;">Choose a guaranteed arrival window with real-time dispatch updates.</p></div>
+        <div class="proc-item reveal"><div class="proc-num">03</div><h4>We Fix It Right</h4><p style="font-size: 13px; color: #A7F3D0; margin-top: 6px;">Our equipped master handyman completes the checklist cleanly.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Workmanship Proof & Portfolio -->
+  <section class="section-pad" id="before-after">
+    <div class="container">
+      <div class="section-head reveal"><span class="eyebrow">Workmanship Proof</span><h2 class="section-h2">See The Difference.</h2></div>
+      <div class="compare-box reveal">
+        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80" alt="After">
+        <div class="compare-before" id="emBefore"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80" alt="Before"></div>
+        <div class="compare-handle" id="emHandle"><i class="fas fa-arrows-alt-h"></i></div>
+        <input type="range" min="10" max="90" value="50" class="compare-range" oninput="document.getElementById('emBefore').style.width=this.value+'%'; document.getElementById('emHandle').style.left=this.value+'%';">
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div class="rev-card reveal"><span class="eyebrow">BLUEPRINT #KP-89</span><h4 style="color: var(--pine);">Kitchen Modernization — Commercial Faucet &amp; Walnut Shelf</h4><p style="color: var(--muted);">Highland Park — Completed in 4 hours</p></div>
+        <div class="rev-card reveal"><span class="eyebrow">BLUEPRINT #DR-22</span><h4 style="color: var(--pine);">Carpentry &amp; Hardware — Solid Core Door &amp; Mortise Latch</h4><p style="color: var(--muted);">Oakwood District — Completed in 2 hours</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Client Feedback & 4-Step Estimator -->
+  <section class="section-pad" id="reviews" style="padding-top: 10px;">
+    <div class="container">
+      <div class="section-head reveal"><span class="eyebrow">Client Feedback</span><h2 class="section-h2">The Kind Of Work People Remember.</h2></div>
+      <div class="reviews-4-grid">
+        <div class="rev-card reveal"><div style="color: var(--amber); margin-bottom: 8px;">★★★★★</div><p>"Booked them for 4 separate repairs. Everything knocked out in 3 hours flat."</p><strong style="display: block; margin-top: 10px;">Sarah Jenkins</strong></div>
+        <div class="rev-card reveal"><div style="color: var(--amber); margin-bottom: 8px;">★★★★★</div><p>"Installed a 75-inch TV into concrete brick and patched drywall cleanly."</p><strong style="display: block; margin-top: 10px;">David Lin</strong></div>
+        <div class="rev-card reveal"><div style="color: var(--amber); margin-bottom: 8px;">★★★★★</div><p>"Upfront pricing, on time, and left the work area cleaner than when he arrived."</p><strong style="display: block; margin-top: 10px;">Marcus Bennett</strong></div>
+        <div class="rev-card reveal"><div style="color: var(--amber); margin-bottom: 8px;">★★★★★</div><p>"Replaced our kitchen disposal and re-caulked both master baths in one morning."</p><strong style="display: block; margin-top: 10px;">Elena Rostova</strong></div>
+      </div>
+
+      <div class="est-wizard reveal" id="quote-calculator">
+        <span class="eyebrow">Instant Estimation Engine</span>
+        <h3 style="font-size: 28px; font-weight: 800; color: var(--pine);">Not Sure What It Will Cost?</h3>
+        <div class="est-bar"><div class="est-bar-fill" id="estFill"></div></div>
+
+        <div class="est-step active" id="es1">
+          <p style="font-weight: 700; margin-bottom: 12px;">Step 01: What needs fixing?</p>
+          <div class="est-chips">
+            <button class="est-chip selected" onclick="this.classList.toggle('selected')">Plumbing Repairs</button>
+            <button class="est-chip" onclick="this.classList.toggle('selected')">Lighting &amp; Power</button>
+            <button class="est-chip" onclick="this.classList.toggle('selected')">Carpentry &amp; Doors</button>
+            <button class="est-chip" onclick="this.classList.toggle('selected')">TV &amp; Wall Mounts</button>
+            <button class="est-chip" onclick="this.classList.toggle('selected')">Drywall &amp; Surfaces</button>
+            <button class="est-chip" onclick="this.classList.toggle('selected')">Other General Fix</button>
+          </div>
+          <button class="btn-emerald" onclick="goEst(2)">Next Step <i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <div class="est-step" id="es2">
+          <p style="font-weight: 700; margin-bottom: 12px;">Step 02: Describe the scope</p>
+          <textarea class="est-input" rows="3" placeholder="Tell us about your project or repairs..."></textarea>
+          <div style="display: flex; gap: 10px;"><button class="btn-pine-outline" onclick="goEst(1)">Back</button><button class="btn-emerald" onclick="goEst(3)">Next Step</button></div>
+        </div>
+
+        <div class="est-step" id="es3">
+          <p style="font-weight: 700; margin-bottom: 12px;">Step 03: Preferred date &amp; contact</p>
+          <input type="text" class="est-input" placeholder="Your Full Name">
+          <input type="tel" class="est-input" placeholder="Phone Number">
+          <input type="date" class="est-input" value="2026-11-30">
+          <div style="display: flex; gap: 10px;"><button class="btn-pine-outline" onclick="goEst(2)">Back</button><button class="btn-emerald" onclick="alert('Estimate Request Submitted! Our team will confirm shortly.')">Submit Request</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta" id="contact">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px;">
+      <div>
+        <span class="eyebrow" style="color: var(--amber);">Priority Help Line</span>
+        <h2 style="font-size: clamp(1.9rem, 3.2vw, 2.7rem); font-weight: 800;">Small Job? Big Headache?</h2>
+        <p style="color: #A7F3D0;">Let our precision craftsmen take it completely off your list.</p>
+      </div>
+      <div style="display: flex; gap: 12px;">
+        <a href="#quote-calculator" class="btn-emerald">Book A Handyman Today <i class="fas fa-arrow-right"></i></a>
+        <a href="tel:8005553499" class="btn-pine-outline" style="color: #FFFFFF; border-color: rgba(255,255,255,0.4);">Call (800) 555-FIXX</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="corp-footer">
+    <div class="container">
+      <div class="footer-4col">
+        <div><h4 style="color: #FFFFFF; margin-bottom: 10px;">HANDYMAN™</h4><p style="font-size: 13px;">Precision home maintenance, fixtures, and turnkey installations.</p></div>
+        <div><h4 style="color: #FFFFFF; margin-bottom: 10px;">Services</h4><p style="font-size: 13px;">Minor Plumbing<br>Electrical &amp; Fixtures<br>Carpentry &amp; Assembly<br>Walls &amp; Surfaces</p></div>
+        <div><h4 style="color: #FFFFFF; margin-bottom: 10px;">Company</h4><p style="font-size: 13px;">How It Works<br>Interactive Home Map<br>Before &amp; After Slider<br>Verified Reviews</p></div>
+        <div><h4 style="color: #FFFFFF; margin-bottom: 10px;">Contact</h4><p style="font-size: 13px;">(800) 555-FIXX<br>dispatch@handyman-pro.com<br>Mon – Sat: 7am – 7pm</p></div>
+      </div>
+      <div style="padding-top: 20px; font-size: 12.5px; color: #6EE7B7;">&copy; 2026 HANDYMAN™ Technologies Inc. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll Progress & Sticky Header
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement;
+      const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+      document.getElementById('scrollProgress').style.width = pct + '%';
+      document.getElementById('corpHeader').classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    // Word-by-word Hero Headline
+    const hl = document.getElementById('heroHeadline');
+    if (hl) {
+      hl.innerHTML = hl.innerText.trim().split(/\s+/).map((w, i) => `<span class="word-span" style="animation-delay:${i * 0.09}s">${w}&nbsp;</span>`).join('');
+    }
+
+    // 3D Tilt on Hero Image
+    const tiltWrap = document.getElementById('heroTiltWrap');
+    const tiltImg = document.getElementById('heroTiltImg');
+    if (tiltWrap && tiltImg) {
+      tiltWrap.addEventListener('mousemove', (e) => {
+        const r = tiltWrap.getBoundingClientRect();
+        const rx = ((e.clientY - r.top) / r.height - 0.5) * -8;
+        const ry = ((e.clientX - r.left) / r.width - 0.5) * 8;
+        tiltImg.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.02)`;
+      });
+      tiltWrap.addEventListener('mouseleave', () => { tiltImg.style.transform = 'rotateX(0) rotateY(0) scale(1)'; });
+    }
+
+    // Scroll Reveals & Process Line Fill
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 45);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    const procBand = document.getElementById('how-it-works');
+    if (procBand) {
+      new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) procBand.classList.add('line-active');
+      }, { threshold: 0.25 }).observe(procBand);
+    }
+
+    // Animated Counters
+    new IntersectionObserver((entries, o) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target, target = parseInt(el.dataset.target, 10);
+        let cur = 0;
+        const step = Math.max(1, Math.ceil(target / 40));
+        const t = setInterval(() => {
+          cur = Math.min(target, cur + step);
+          el.textContent = cur.toLocaleString() + (target === 100 ? '%' : '+');
+          if (cur >= target) clearInterval(t);
+        }, 25);
+        o.unobserve(el);
+      });
+    }, { threshold: 0.4 }).observe(document.querySelector('.hero-stats-row'));
+    document.querySelectorAll('.counter').forEach(c => {
+      new IntersectionObserver((entries, o) => {
+        if (!entries[0].isIntersecting) return;
+        const target = parseInt(c.dataset.target, 10);
+        let cur = 0;
+        const step = Math.max(1, Math.ceil(target / 40));
+        const t = setInterval(() => {
+          cur = Math.min(target, cur + step);
+          c.textContent = cur.toLocaleString() + (target === 100 ? '' : '+');
+          if (cur >= target) clearInterval(t);
+        }, 25);
+        o.unobserve(c);
+      }, { threshold: 0.4 }).observe(c);
+    });
+
+    // Zone Switcher with Fade
+    const z4Data = {
+      living: { title: 'Living Room', desc: 'Entertainment setups, wall mounting, lighting & structural trims.', rows: [['Heavy Flat-Screen TV Wall Mounting', '~ 1.5 hrs'], ['Drywall Anchor & Patch Repairs', '~ 1 hr'], ['Ceiling Fan Installation & Balancing', '~ 2 hrs'], ['Curtain Rod & Floating Shelf Mounts', '~ 1 hr']] },
+      kitchen: { title: 'Kitchen', desc: 'Faucets, disposals, cabinet hardware & lighting.', rows: [['Commercial Faucet Swap', '~ 1.5 hrs'], ['Garbage Disposal Install', '~ 1.5 hrs'], ['Cabinet Hinge Alignment', '~ 1 hr'], ['Under-Cabinet LED Strip', '~ 2 hrs']] },
+      bathroom: { title: 'Bathroom', desc: 'Toilets, vanities, exhaust fans & caulking.', rows: [['Toilet Wax Ring & Valve', '~ 1.5 hrs'], ['Tub & Tile Re-Caulking', '~ 1.5 hrs'], ['Vanity Faucet Upgrade', '~ 1.5 hrs'], ['Towel Bar Anchoring', '~ 1 hr']] },
+      bedroom: { title: 'Bedroom', desc: 'Wardrobes, closet shelving & doors.', rows: [['Flat-Pack Wardrobe Build', '~ 2.5 hrs'], ['Door Trimming & Latches', '~ 1.5 hrs'], ['Smart Dimmer Install', '~ 1 hr'], ['Closet Shelving Mount', '~ 2 hrs']] }
+    };
+    function pickZ4(k, btn) {
+      document.querySelectorAll('.zone-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const p = document.getElementById('z4Panel');
+      p.style.opacity = '0.35';
+      setTimeout(() => {
+        const d = z4Data[k];
+        document.getElementById('z4Title').textContent = d.title;
+        document.getElementById('z4Desc').textContent = d.desc;
+        document.getElementById('z4Rows').innerHTML = d.rows.map(r => `<div class="zone-row"><span>${r[0]}</span><strong style="color: var(--emerald-dark);">${r[1]}</strong></div>`).join('');
+        p.style.opacity = '1';
+      }, 150);
+    }
+
+    function goEst(step) {
+      document.querySelectorAll('.est-step').forEach((s, i) => s.classList.toggle('active', i + 1 === step));
+      document.getElementById('estFill').style.width = (step === 1 ? 25 : step === 2 ? 60 : 100) + '%';
+    }
+  </script>
+</body>
+</html>

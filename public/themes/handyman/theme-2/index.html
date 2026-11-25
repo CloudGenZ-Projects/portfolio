@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>HANDYMAN™ | Fix It. Done Right. — Navy &amp; Gold Edition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --navy: #0B2545;
+      --navy-mid: #133B6D;
+      --navy-dark: #071930;
+      --gold: #FBBF24;
+      --gold-hover: #F59E0B;
+      --surface: #F4F7FB;
+      --white: #FFFFFF;
+      --ink: #111827;
+      --muted: #5B6472;
+      --border: #E2E8F0;
+      --shadow-sm: 0 6px 18px rgba(11, 37, 69, 0.06);
+      --shadow-lg: 0 20px 44px rgba(11, 37, 69, 0.14);
+      --transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--surface);
+      color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @keyframes floatSoft {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    @keyframes tickerMove {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Top Utility Bar */
+    .top-utility-bar {
+      background: var(--navy-dark);
+      color: #E2E8F0;
+      font-size: 13px;
+      padding: 9px 0;
+    }
+    .utility-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .utility-item i { color: var(--gold); margin-right: 6px; }
+
+    /* Sticky Navbar */
+    .main-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--navy);
+      white-space: nowrap;
+    }
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--navy);
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      white-space: nowrap;
+      transition: var(--transition);
+    }
+    .nav-links a:hover { color: var(--navy-mid); }
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--gold);
+      color: var(--navy-dark);
+      padding: 11px 20px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--transition);
+    }
+    .btn-gold:hover { background: var(--gold-hover); transform: translateY(-2px); }
+    .btn-outline-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1.5px solid var(--border);
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      white-space: nowrap;
+    }
+
+    /* Hero Section */
+    .hero-band {
+      background: linear-gradient(108deg, var(--navy-dark) 0%, var(--navy) 55%, #D9E2EC 100%);
+      padding: 64px 0 72px;
+      color: #FFFFFF;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.72fr 0.78fr;
+      gap: 28px;
+      align-items: center;
+    }
+    .hero-eyebrow {
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .hero-h1 {
+      font-size: clamp(2.5rem, 4.3vw, 3.6rem);
+      line-height: 1.06;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .hero-h1 span { color: var(--gold); display: block; }
+    .hero-stats-3 {
+      display: flex;
+      gap: 24px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+    }
+    .hero-stats-3 strong { display: block; font-size: 22px; color: var(--gold); }
+    .hero-stats-3 span { font-size: 12px; color: #CBD5E1; }
+    .hero-tech-frame {
+      background: #FFFFFF;
+      padding: 8px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
+      animation: floatSoft 5s ease-in-out infinite;
+    }
+    .hero-tech-frame img { width: 100%; height: 320px; object-fit: cover; border-radius: 12px; }
+    .hero-cards-stack { display: flex; flex-direction: column; gap: 10px; }
+    .hero-feature-pill {
+      background: rgba(255, 255, 255, 0.96);
+      color: var(--navy);
+      border-radius: 10px;
+      padding: 12px 16px;
+      border-left: 4px solid var(--gold);
+      box-shadow: var(--shadow-sm);
+    }
+    .hero-feature-pill strong { display: block; font-size: 13.5px; }
+    .hero-feature-pill span { font-size: 11.5px; color: var(--muted); }
+
+    /* Marquee Trust Strip */
+    .marquee-strip {
+      background: var(--gold);
+      color: var(--navy-dark);
+      padding: 12px 0;
+      overflow: hidden;
+      font-weight: 800;
+      font-size: 13px;
+    }
+    .marquee-track {
+      display: flex;
+      gap: 40px;
+      white-space: nowrap;
+      width: max-content;
+      animation: tickerMove 24s linear infinite;
+    }
+
+    /* Services 4-Trade Grid */
+    .section-pad { padding: 76px 0; }
+    .section-head-center { text-align: center; max-width: 720px; margin: 0 auto 44px; }
+    .eyebrow-navy { font-size: 11.5px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy-mid); margin-bottom: 6px; }
+    .section-h2 { font-size: clamp(1.9rem, 3.2vw, 2.5rem); font-weight: 800; color: var(--navy); margin-bottom: 10px; }
+    .services-4-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .svc-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+    }
+    .svc-card:hover { transform: translateY(-6px); border-color: var(--gold); box-shadow: var(--shadow-lg); }
+    .svc-img-wrap { height: 150px; border-radius: 10px; overflow: hidden; margin-bottom: 14px; position: relative; }
+    .svc-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .svc-code {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: var(--navy);
+      color: var(--gold);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+    .svc-list {
+      list-style: none;
+      font-size: 12.5px;
+      color: var(--muted);
+      margin: 10px 0 16px;
+      flex: 1;
+    }
+    .svc-list li { margin-bottom: 4px; }
+    .svc-list i { color: var(--gold-hover); margin-right: 6px; }
+    .btn-card-book {
+      display: block;
+      width: 100%;
+      background: var(--gold);
+      color: var(--navy-dark);
+      font-weight: 800;
+      font-size: 12.5px;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    /* Interactive Diagnostic Map */
+    .zone-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .zone-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .zone-btn {
+      background: #FFFFFF;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      text-align: left;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .zone-btn.active { border-color: var(--gold); background: #FFFBEB; }
+    .zone-detail-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+    .zone-task-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13.5px;
+    }
+
+    /* 3-Step Workflow + Before/After + Portfolio */
+    .steps-3-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .step-box {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+    .step-num-gold {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: var(--navy-dark);
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+    .compare-box {
+      position: relative;
+      height: 360px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+    .compare-box img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .compare-before { position: absolute; inset: 0; width: 50%; overflow: hidden; border-right: 3px solid var(--gold); }
+    .compare-before img { width: 100vw; max-width: none; filter: grayscale(60%); }
+    .compare-range { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; z-index: 10; }
+    .portfolio-2-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .port-card { background: #FFFFFF; border: 1px solid var(--border); border-radius: 14px; padding: 22px; }
+
+    /* Reviews & 4-Step Quote Calculator */
+    .reviews-4-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .rev-card { background: #FFFFFF; border: 1px solid var(--border); border-radius: 14px; padding: 22px; font-size: 13.5px; }
+    .quote-box {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 780px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-sm);
+    }
+    .cat-chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; }
+    .cat-chip {
+      padding: 9px 16px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .cat-chip.selected { border-color: var(--navy); background: var(--navy); color: var(--gold); }
+
+    .navy-cta { background: var(--navy); color: #FFFFFF; padding: 54px 0; }
+    .footer-navy { background: var(--navy-dark); color: #CBD5E1; padding: 50px 0 28px; }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 28px; }
+
+    @media (max-width: 1024px) {
+      .hero-grid, .zone-grid { grid-template-columns: 1fr; }
+      .services-4-grid, .reviews-4-grid, .footer-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-links, .btn-outline-nav { display: none; }
+    }
+    @media (max-width: 640px) {
+      .services-4-grid, .steps-3-grid, .portfolio-2-grid, .reviews-4-grid, .zone-buttons, .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-utility-bar">
+    <div class="container utility-inner">
+      <div><i class="fas fa-envelope"></i> dispatch@handyman-pro.com</div>
+      <div><i class="fas fa-phone-alt"></i> (800) 555-FIXX</div>
+      <div><i class="fas fa-clock"></i> Mon – Sat: 7am – 7pm · Metro Region &amp; Suburbs</div>
+    </div>
+  </div>
+
+  <header class="main-header">
+    <div class="container nav-inner">
+      <a href="#" class="brand-logo">
+        <div class="brand-icon"><i class="fas fa-wrench"></i></div>
+        <span>HANDYMAN™</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#interactive-house">What We Fix</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#before-after">Work Proof</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+      </ul>
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <a href="tel:8005553499" class="btn-outline-nav">(800) 555-FIXX</a>
+        <a href="#quote-calculator" class="btn-gold">Get a Free Quote</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero-band">
+    <div class="container hero-grid">
+      <div class="reveal">
+        <div class="hero-eyebrow">Local Handyman Services · Heavy Duty Series 01</div>
+        <h1 class="hero-h1">Fix It. <span>Done Right.</span></h1>
+        <p style="color: #E2E8F0; font-size: 15.5px; margin-bottom: 24px;">
+          From nagging plumbing leaks and light fixtures to custom carpentry and seamless wall repairs. We deliver master-grade craftsmanship for the jobs you don't have time for.
+        </p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="#quote-calculator" class="btn-gold">Book a Handyman</a>
+          <a href="#how-it-works" class="btn-outline-nav" style="color: #FFFFFF; border-color: rgba(255,255,255,0.35);">How We Work</a>
+        </div>
+        <div class="hero-stats-3">
+          <div><strong>4,850+</strong><span>Jobs Completed</span></div>
+          <div><strong>4.9★</strong><span>Client Rating</span></div>
+          <div><strong>100%</strong><span>Guaranteed</span></div>
+        </div>
+      </div>
+
+      <div class="hero-tech-frame reveal">
+        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=700&q=80" alt="Precision Workshop Technician">
+      </div>
+
+      <div class="hero-cards-stack reveal">
+        <div class="hero-feature-pill"><strong><i class="fas fa-faucet"></i> Plumbing</strong><span>Faucets, drains, toilets &amp; disposals</span></div>
+        <div class="hero-feature-pill"><strong><i class="fas fa-bolt"></i> Electrical</strong><span>Fixtures, ceiling fans &amp; smart switches</span></div>
+        <div class="hero-feature-pill"><strong><i class="fas fa-chair"></i> Carpentry</strong><span>Doors, heavy TV mounts &amp; shelving</span></div>
+        <div class="hero-feature-pill"><strong><i class="fas fa-paint-roller"></i> Surfaces</strong><span>Drywall patching, texture &amp; regrouting</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span>★ Background Checked Technicians</span>
+      <span>★ Transparent Upfront Pricing</span>
+      <span>★ Master Craftsmanship Guarantee</span>
+      <span>★ Flexible Same-Week Scheduling</span>
+      <span>★ Fully Licensed &amp; Insured</span>
+      <span>★ Background Checked Technicians</span>
+      <span>★ Transparent Upfront Pricing</span>
+      <span>★ Master Craftsmanship Guarantee</span>
+    </div>
+  </div>
+
+  <section class="section-pad" id="services">
+    <div class="container">
+      <div class="section-head-center reveal">
+        <div class="eyebrow-navy">Comprehensive Capabilities</div>
+        <h2 class="section-h2">One Call. Many Fixes.</h2>
+        <p style="font-size: 14.5px; color: var(--muted);">Instead of hiring four different single-trade contractors with high minimum callout fees, our multi-skilled craftsmen handle all your interior and exterior repairs in a single visit.</p>
+      </div>
+
+      <div class="services-4-grid">
+        <div class="svc-card reveal">
+          <div class="svc-img-wrap">
+            <span class="svc-code">01 / PLUMBING</span>
+            <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=500&q=80" alt="Minor Plumbing">
+          </div>
+          <h3 style="font-size: 17px; font-weight: 800; color: var(--navy);">Minor Plumbing</h3>
+          <ul class="svc-list">
+            <li><i class="fas fa-check"></i> Faucet replacement &amp; drain unclogging</li>
+            <li><i class="fas fa-check"></i> Toilet components &amp; wax rings</li>
+            <li><i class="fas fa-check"></i> Under-sink leak seals &amp; shower heads</li>
+            <li><i class="fas fa-check"></i> Garbage disposals</li>
+          </ul>
+          <a href="#quote-calculator" class="btn-card-book">Book Plumbing Repair</a>
+        </div>
+
+        <div class="svc-card reveal">
+          <div class="svc-img-wrap">
+            <span class="svc-code">02 / ELECTRICAL</span>
+            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=500&q=80" alt="Electrical">
+          </div>
+          <h3 style="font-size: 17px; font-weight: 800; color: var(--navy);">Electrical &amp; Fixtures</h3>
+          <ul class="svc-list">
+            <li><i class="fas fa-check"></i> Light fixtures, pendants &amp; ceiling fans</li>
+            <li><i class="fas fa-check"></i> Smart switches &amp; dimmers</li>
+            <li><i class="fas fa-check"></i> GFCI outlet upgrades</li>
+            <li><i class="fas fa-check"></i> Video doorbells &amp; smoke alarms</li>
+          </ul>
+          <a href="#quote-calculator" class="btn-card-book">Book Electrical Install</a>
+        </div>
+
+        <div class="svc-card reveal">
+          <div class="svc-img-wrap">
+            <span class="svc-code">03 / CARPENTRY</span>
+            <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=500&q=80" alt="Carpentry">
+          </div>
+          <h3 style="font-size: 17px; font-weight: 800; color: var(--navy);">Carpentry &amp; Assembly</h3>
+          <ul class="svc-list">
+            <li><i class="fas fa-check"></i> Interior door trimming &amp; hinges</li>
+            <li><i class="fas fa-check"></i> Flat-pack furniture &amp; floating shelves</li>
+            <li><i class="fas fa-check"></i> Heavy TV wall mounting</li>
+            <li><i class="fas fa-check"></i> Cabinet hardware &amp; baseboards</li>
+          </ul>
+          <a href="#quote-calculator" class="btn-card-book">Book Assembly Job</a>
+        </div>
+
+        <div class="svc-card reveal">
+          <div class="svc-img-wrap">
+            <span class="svc-code">04 / SURFACES</span>
+            <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=500&q=80" alt="Walls & Surfaces">
+          </div>
+          <h3 style="font-size: 17px; font-weight: 800; color: var(--navy);">Walls &amp; Surfaces</h3>
+          <ul class="svc-list">
+            <li><i class="fas fa-check"></i> Drywall hole patching &amp; texture blend</li>
+            <li><i class="fas fa-check"></i> Caulking sinks, tubs &amp; tiles</li>
+            <li><i class="fas fa-check"></i> Precision gallery wall hanging</li>
+            <li><i class="fas fa-check"></i> Tile regrouting &amp; latch adjustments</li>
+          </ul>
+          <a href="#quote-calculator" class="btn-card-book">Book Surface Fix</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Diagnostic Map -->
+  <section class="section-pad" id="interactive-house" style="padding-top: 10px;">
+    <div class="container">
+      <div class="section-head-center reveal">
+        <div class="eyebrow-navy">Interactive Diagnostic Map</div>
+        <h2 class="section-h2">What Needs Fixing?</h2>
+        <p style="font-size: 14px; color: var(--muted);">Click any zone below to uncover the common repairs and installations we carry out daily.</p>
+      </div>
+
+      <div class="zone-grid">
+        <div class="zone-buttons">
+          <button class="zone-btn" onclick="pickZone('bedroom', this)"><strong>Bedroom</strong><br><span style="font-size: 12px; color: var(--muted);">Wardrobes, Shelving, Doors</span></button>
+          <button class="zone-btn" onclick="pickZone('bathroom', this)"><strong>Bathroom</strong><br><span style="font-size: 12px; color: var(--muted);">Toilets, Vanities, Caulking</span></button>
+          <button class="zone-btn active" onclick="pickZone('living', this)"><strong>Living Room</strong><br><span style="font-size: 12px; color: var(--muted);">TV Wall Mount, Lighting, Drywall</span></button>
+          <button class="zone-btn" onclick="pickZone('kitchen', this)"><strong>Kitchen</strong><br><span style="font-size: 12px; color: var(--muted);">Faucets, Disposals, Cabinets</span></button>
+        </div>
+
+        <div class="zone-detail-card">
+          <h3 id="zTitle" style="font-size: 20px; font-weight: 800; color: var(--navy);">Living Room</h3>
+          <p id="zDesc" style="font-size: 13.5px; color: var(--muted); margin-bottom: 14px;">Entertainment setups, wall mounting, lighting &amp; structural trims.</p>
+          <div id="zTasks">
+            <div class="zone-task-row"><span>Heavy Flat-Screen TV Wall Mounting</span><strong>~ 1.5 hrs</strong></div>
+            <div class="zone-task-row"><span>Drywall Anchor &amp; Patch Repairs</span><strong>~ 1 hr</strong></div>
+            <div class="zone-task-row"><span>Ceiling Fan Installation &amp; Balancing</span><strong>~ 2 hrs</strong></div>
+            <div class="zone-task-row"><span>Curtain Rod &amp; Floating Shelf Mounts</span><strong>~ 1 hr</strong></div>
+          </div>
+          <a href="#quote-calculator" class="btn-gold" style="margin-top: 18px;">Schedule This Zone</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Zero Friction Workflow -->
+  <section class="section-pad" id="how-it-works" style="padding-top: 10px;">
+    <div class="container">
+      <div class="section-head-center reveal">
+        <div class="eyebrow-navy">Zero Friction Workflow</div>
+        <h2 class="section-h2">From Problem To Done.</h2>
+      </div>
+      <div class="steps-3-grid">
+        <div class="step-box reveal"><div class="step-num-gold">01</div><h4>Tell Us The Job</h4><p style="font-size: 13.5px; color: var(--muted);">Use our interactive estimator to list tasks and get an upfront scope of work.</p></div>
+        <div class="step-box reveal"><div class="step-num-gold">02</div><h4>Schedule A Visit</h4><p style="font-size: 13.5px; color: var(--muted);">Choose a guaranteed arrival window with real-time dispatch updates.</p></div>
+        <div class="step-box reveal"><div class="step-num-gold">03</div><h4>We Fix It Right</h4><p style="font-size: 13.5px; color: var(--muted);">Master handyman arrives with commercial-grade tools and backs all work.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Workmanship Proof & Portfolio -->
+  <section class="section-pad" id="before-after" style="padding-top: 10px;">
+    <div class="container">
+      <div class="section-head-center reveal">
+        <div class="eyebrow-navy">Workmanship Proof</div>
+        <h2 class="section-h2">See The Difference.</h2>
+      </div>
+      <div class="compare-box reveal">
+        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80" alt="After">
+        <div class="compare-before" id="t2Before"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80" alt="Before"></div>
+        <input type="range" min="10" max="90" value="50" class="compare-range" oninput="document.getElementById('t2Before').style.width=this.value+'%'">
+      </div>
+      <div class="portfolio-2-grid">
+        <div class="port-card reveal"><span style="font-size: 11px; font-weight: 800; color: var(--navy-mid);">BLUEPRINT SCHEMATIC #KP-89</span><h4 style="margin: 6px 0;">Kitchen Modernization — Commercial Faucet &amp; Floating Walnut Shelf</h4><p style="font-size: 13px; color: var(--muted);">Highland Park — Completed in 4 hours</p></div>
+        <div class="port-card reveal"><span style="font-size: 11px; font-weight: 800; color: var(--navy-mid);">BLUEPRINT #DR-22</span><h4 style="margin: 6px 0;">Carpentry &amp; Hardware — Solid Core Door Trimming &amp; Mortise Latch</h4><p style="font-size: 13px; color: var(--muted);">Oakwood District — Completed in 2 hours</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Craft Standard & Reviews -->
+  <section class="section-pad" id="reviews" style="padding-top: 10px;">
+    <div class="container">
+      <div class="section-head-center reveal">
+        <div class="eyebrow-navy">Craft Standard &amp; Client Feedback</div>
+        <h2 class="section-h2">The Kind Of Work People Remember.</h2>
+      </div>
+      <div class="reviews-4-grid">
+        <div class="rev-card reveal"><div style="color: var(--gold-hover); margin-bottom: 8px;">★★★★★</div><p>"Booked them for 4 separate repairs: two leaking faucets, a hanging light, and a stubborn door. Knocked out in 3 hours flat."</p><strong style="display: block; margin-top: 10px;">Sarah Jenkins</strong><span style="font-size: 12px; color: var(--muted);">✓ Verified Client</span></div>
+        <div class="rev-card reveal"><div style="color: var(--gold-hover); margin-bottom: 8px;">★★★★★</div><p>"Installed a 75-inch TV into concrete brick and patched old drywall anchor tears so clean you can't tell anything was ever there."</p><strong style="display: block; margin-top: 10px;">David Lin</strong><span style="font-size: 12px; color: var(--muted);">✓ Verified Client</span></div>
+        <div class="rev-card reveal"><div style="color: var(--gold-hover); margin-bottom: 8px;">★★★★★</div><p>"Upfront pricing, on time, and left the work area cleaner than when he arrived. Our go-to handyman service moving forward."</p><strong style="display: block; margin-top: 10px;">Marcus Bennett</strong><span style="font-size: 12px; color: var(--muted);">✓ Verified Client</span></div>
+        <div class="rev-card reveal"><div style="color: var(--gold-hover); margin-bottom: 8px;">★★★★★</div><p>"Replaced our kitchen disposal and re-caulked both master baths in a single morning. A+ communication."</p><strong style="display: block; margin-top: 10px;">Elena Rostova</strong><span style="font-size: 12px; color: var(--muted);">✓ Verified Client</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instant Estimation Engine -->
+  <section class="section-pad" id="quote-calculator" style="padding-top: 10px;">
+    <div class="container">
+      <div class="quote-box reveal">
+        <div class="eyebrow-navy">Instant Estimation Engine</div>
+        <h2 class="section-h2">Not Sure What It Will Cost?</h2>
+        <p style="font-size: 13.5px; color: var(--muted);">Step 01: Select all repair areas that apply to your home project.</p>
+        <div class="cat-chips">
+          <button class="cat-chip selected" onclick="this.classList.toggle('selected')">Plumbing Repairs</button>
+          <button class="cat-chip" onclick="this.classList.toggle('selected')">Lighting &amp; Power</button>
+          <button class="cat-chip" onclick="this.classList.toggle('selected')">Carpentry &amp; Doors</button>
+          <button class="cat-chip" onclick="this.classList.toggle('selected')">TV &amp; Wall Mounts</button>
+          <button class="cat-chip" onclick="this.classList.toggle('selected')">Drywall &amp; Surfaces</button>
+          <button class="cat-chip" onclick="this.classList.toggle('selected')">Other General Fix</button>
+        </div>
+        <button class="btn-gold" onclick="alert('Step 2 unlocked! Call (800) 555-FIXX or submit your details for immediate dispatch.')">Get Tailored Estimate <i class="fas fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Priority Help Line CTA -->
+  <section class="navy-cta">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+      <div>
+        <div class="hero-eyebrow" style="margin-bottom: 4px;">Priority Help Line</div>
+        <h2 style="font-size: 28px; font-weight: 800;">Small Job? Big Headache?</h2>
+        <p style="color: #CBD5E1; font-size: 14px;">Let our precision craftsmen take it completely off your list.</p>
+      </div>
+      <div style="display: flex; gap: 12px;">
+        <a href="#quote-calculator" class="btn-gold">Book A Handyman Today</a>
+        <a href="tel:8005553499" class="btn-outline-nav" style="color: #FFFFFF; border-color: rgba(255,255,255,0.35);">Call (800) 555-FIXX</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer-navy">
+    <div class="container footer-grid">
+      <div><strong style="color: #FFFFFF; font-size: 18px;">HANDYMAN™</strong><p style="font-size: 13px; color: #94A3B8; margin-top: 6px;">Precision home maintenance, fixtures, and turnkey installations.</p></div>
+      <div><strong style="color: #FFFFFF; font-size: 14px;">Services</strong><p style="font-size: 13px; color: #94A3B8; margin-top: 6px;">Minor Plumbing<br>Electrical &amp; Fixtures<br>Carpentry &amp; Assembly<br>Walls &amp; Surfaces</p></div>
+      <div><strong style="color: #FFFFFF; font-size: 14px;">Company</strong><p style="font-size: 13px; color: #94A3B8; margin-top: 6px;">How It Works<br>Interactive Home Map<br>Before &amp; After Slider<br>Verified Reviews</p></div>
+      <div><strong style="color: #FFFFFF; font-size: 14px;">Contact</strong><p style="font-size: 13px; color: #94A3B8; margin-top: 6px;">(800) 555-FIXX<br>dispatch@handyman-pro.com<br>Metro Region &amp; Suburbs</p></div>
+    </div>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 40); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    const zones = {
+      living: { title: 'Living Room', desc: 'Entertainment setups, wall mounting, lighting & structural trims.', tasks: [['Heavy Flat-Screen TV Wall Mounting', '~ 1.5 hrs'], ['Drywall Anchor & Patch Repairs', '~ 1 hr'], ['Ceiling Fan Installation & Balancing', '~ 2 hrs'], ['Curtain Rod & Floating Shelf Mounts', '~ 1 hr']] },
+      kitchen: { title: 'Kitchen', desc: 'Faucets, garbage disposals, cabinet hardware & lighting.', tasks: [['Commercial Faucet & Sprayer Swap', '~ 1.5 hrs'], ['Garbage Disposal Replacement', '~ 1.5 hrs'], ['Cabinet Hinge & Drawer Alignment', '~ 1 hr'], ['Under-Cabinet LED Strip Install', '~ 2 hrs']] },
+      bathroom: { title: 'Bathroom', desc: 'Toilets, vanities, exhaust fans & waterproof caulking.', tasks: [['Toilet Wax Ring & Valve Repair', '~ 1.5 hrs'], ['Tub & Shower Silicone Re-Caulking', '~ 1.5 hrs'], ['Vanity Faucet & Drain Assembly', '~ 1.5 hrs'], ['Towel Bar & Mirror Anchoring', '~ 1 hr']] },
+      bedroom: { title: 'Bedroom', desc: 'Wardrobes, closet shelving, interior doors & dimmers.', tasks: [['Flat-Pack Wardrobe Assembly', '~ 2.5 hrs'], ['Interior Door Trimming & Latches', '~ 1.5 hrs'], ['Smart Dimmer Switch Upgrade', '~ 1 hr'], ['Custom Closet Shelving Mount', '~ 2 hrs']] }
+    };
+    function pickZone(k, btn) {
+      document.querySelectorAll('.zone-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const z = zones[k];
+      document.getElementById('zTitle').textContent = z.title;
+      document.getElementById('zDesc').textContent = z.desc;
+      document.getElementById('zTasks').innerHTML = z.tasks.map(t => `<div class="zone-task-row"><span>${t[0]}</span><strong>${t[1]}</strong></div>`).join('');
+    }
+  </script>
+</body>
+</html>
