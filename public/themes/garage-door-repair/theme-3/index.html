@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>DoorPro | Interactive Garage Door Studio &amp; Full Diagnostic Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --navy: #0B192C;
+      --navy-dark: #06101E;
+      --navy-mid: #142847;
+      --gold: #F5B700;
+      --gold-hover: #DDA300;
+      --bg-light: #F7F8FA;
+      --white: #FFFFFF;
+      --ink: #0F172A;
+      --muted: #5E6A7C;
+      --border: #E2E8F0;
+      --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 28px; }
+
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @keyframes pulseMarker { 0% { box-shadow: 0 0 0 0 rgba(245, 183, 0, 0.65); } 70% { box-shadow: 0 0 0 14px rgba(245, 183, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(245, 183, 0, 0); } }
+    @keyframes routeFlow { to { stroke-dashoffset: -40; } }
+
+    .dp-navbar { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; height: 78px; display: flex; align-items: center; color: #FFFFFF; transition: var(--transition); }
+    .dp-navbar.scrolled { background: rgba(255, 255, 255, 0.98); color: var(--navy); box-shadow: 0 6px 24px rgba(11, 25, 44, 0.08); border-bottom: 1px solid var(--border); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-size: 21px; font-weight: 800; white-space: nowrap; }
+    .brand-icon { width: 38px; height: 38px; border-radius: 10px; background: var(--gold); color: var(--navy); display: flex; align-items: center; justify-content: center; }
+    .nav-menu { display: flex; align-items: center; gap: 20px; list-style: none; }
+    .nav-menu a { font-size: 13.5px; font-weight: 600; white-space: nowrap; opacity: 0.9; }
+    .nav-menu a:hover { color: var(--gold); }
+    .btn-gold { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: var(--navy); padding: 11px 22px; border-radius: 99px; font-size: 13.5px; font-weight: 800; border: none; cursor: pointer; white-space: nowrap; transition: var(--transition); }
+    .btn-gold:hover { background: var(--gold-hover); transform: translateY(-2px); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid rgba(255,255,255,0.45); color: #FFFFFF; padding: 10px 22px; border-radius: 99px; font-size: 13.5px; font-weight: 700; background: transparent; cursor: pointer; }
+
+    .cinematic-hero {
+      position: relative;
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+      padding: 130px 0 95px;
+      color: #FFFFFF;
+      background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=85') center/cover no-repeat;
+    }
+    .cinematic-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(11, 25, 44, 0.94) 0%, rgba(11, 25, 44, 0.72) 55%, rgba(11, 25, 44, 0.35) 100%); }
+    .hero-content { position: relative; z-index: 2; max-width: 650px; }
+    .hero-h1 { font-size: clamp(2.5rem, 4.6vw, 3.7rem); line-height: 1.07; font-weight: 800; margin-bottom: 16px; }
+
+    .section-pad { padding: 78px 0; }
+    .eyebrow { font-size: 11.5px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-hover); margin-bottom: 6px; display: block; }
+    .section-h2 { font-size: clamp(1.9rem, 3.3vw, 2.55rem); font-weight: 800; color: var(--navy); margin-bottom: 10px; }
+
+    /* 02. SERVICE AVAILABILITY CHECKER (TOP SPLIT BAR) */
+    .avail-bar-section { background: var(--bg-light); border-bottom: 1px solid var(--border); padding: 44px 0; }
+    .avail-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 28px; align-items: center; }
+    .avail-map { height: 180px; border-radius: 14px; background: var(--navy); position: relative; overflow: hidden; }
+    .pin { position: absolute; width: 16px; height: 16px; border-radius: 50%; background: var(--gold); animation: pulseMarker 2s infinite; }
+
+    /* 3D Simulator */
+    .sim-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 28px; align-items: center; margin-top: 28px; }
+    .sim-stage { border-radius: 18px; padding: 32px; min-height: 390px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; position: relative; background: linear-gradient(180deg, #CFE8FA 0%, #EAF4FC 65%, #475569 65%, #334155 100%); transition: background 0.5s; }
+    .sim-stage.night { background: linear-gradient(180deg, #07101F 0%, #132238 65%, #1E293B 65%, #0F172A 100%); }
+    .sim-house { width: 100%; max-width: 480px; background: #E2E8F0; border-radius: 10px 10px 0 0; padding: 22px 24px 0; }
+    .sim-stage.night .sim-house { background: #334155; }
+    .sim-opening { height: 220px; background: #0F172A; border: 7px solid #FFFFFF; border-bottom: none; perspective: 900px; overflow: hidden; position: relative; }
+    .sim-leaf { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; gap: 4px; padding: 4px; background: #1E293B; transform-origin: top center; transition: transform 1s cubic-bezier(0.22,1,0.36,1); z-index: 2; }
+    .sim-leaf.open { transform: translateY(-90%) rotateX(62deg); }
+    .sim-panel { flex: 1; border-radius: 3px; border: 1px solid rgba(255,255,255,0.2); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 5px; }
+    .sim-win { background: rgba(186,230,253,0.55); border-radius: 2px; display: none; }
+    .sim-leaf.st-glass .sim-win { display: block; }
+    .sim-leaf.st-steel .sim-panel:first-child .sim-win { display: block; }
+    .sim-leaf.st-carriage .sim-panel:first-child .sim-win { display: block; border-radius: 10px 10px 2px 2px; }
+
+    /* 05. MAINTENANCE CHECKLIST (2-COL) */
+    .chk-split { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 36px; align-items: center; background: var(--navy); color: #FFFFFF; border-radius: 20px; padding: 40px; }
+    .chk-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .chk-pill { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 12px; font-size: 13px; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+
+    /* 07. CUSTOMER REVIEW WALL (CAROUSEL) */
+    .rev-3-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 28px; }
+    .rev-card { background: var(--bg-light); border: 1px solid var(--border); border-radius: 14px; padding: 24px; transition: var(--transition); }
+    .rev-card:hover { transform: translateY(-5px); border-color: var(--gold); background: #FFFFFF; }
+
+    /* 01. QUICK PROBLEM FINDER (HORIZONTAL PILL TABS) */
+    .prob-pills { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0; }
+    .p-pill { padding: 10px 18px; border-radius: 99px; border: 1.5px solid var(--border); background: #FFFFFF; font-weight: 700; font-size: 13.5px; cursor: pointer; }
+    .p-pill.active { background: var(--navy); color: var(--gold); border-color: var(--navy); }
+    .prob-drawer { background: var(--bg-light); border: 1px solid var(--border); border-left: 5px solid var(--gold); border-radius: 14px; padding: 26px; }
+
+    /* 03. TECHNICIAN JOURNEY TIMELINE */
+    .journey-box { background: #0F172A; color: #FFFFFF; border-radius: 18px; padding: 34px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 28px; align-items: center; }
+
+    /* 06. PARTS & BRANDS SHOWCASE */
+    .parts-6-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 28px; }
+    .part-card { background: #FFFFFF; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: var(--transition); }
+    .part-card:hover { transform: translateY(-5px); border-color: var(--gold); }
+    .part-card img { width: 100%; height: 155px; object-fit: cover; }
+
+    /* 04. TRANSPARENT PRICING BREAKDOWN */
+    .dark-pricing-band { background: var(--navy-dark); color: #FFFFFF; padding: 78px 0; }
+    .dp-table { background: #111A2E; border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; max-width: 780px; margin: 28px auto 0; overflow: hidden; }
+    .dp-row { display: flex; justify-content: space-between; padding: 15px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 14px; }
+    .dp-row.total { background: var(--gold); color: var(--navy); font-weight: 800; font-size: 18px; }
+
+    /* 08. EMERGENCY ACTION PANEL */
+    .em-cta-band { background: linear-gradient(120deg, var(--gold) 0%, #FDE047 100%); color: var(--navy); padding: 54px 0; }
+
+    .dp-footer { background: var(--navy); color: #CBD5E1; padding: 48px 0 26px; }
+
+    @media (max-width: 1024px) {
+      .avail-grid, .sim-grid, .chk-split, .journey-box { grid-template-columns: 1fr; }
+      .rev-3-grid, .parts-6-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-menu { display: none; }
+    }
+    @media (max-width: 640px) {
+      .chk-list, .rev-3-grid, .parts-6-grid { grid-template-columns: 1fr; }
+    }
+
+    /* 12 NEW COMPONENTS CSS */
+    .dp12-split { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; margin-top: 24px; }
+    .dp12-card { background: #FFFFFF; border: 1px solid var(--border); border-radius: 16px; padding: 26px; box-shadow: 0 12px 28px rgba(11,25,44,0.06); }
+    .dp12-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 24px; }
+    .dp12-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 24px; }
+    .dp12-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+    .dp12-input { width: 100%; padding: 11px 14px; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 13.5px; margin-bottom: 10px; }
+    .dp12-gal-card { background: #FFFFFF; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: var(--transition); }
+    .dp12-gal-card:hover { transform: translateY(-5px); border-color: var(--gold); }
+    .dp12-gal-card img { width: 100%; height: 170px; object-fit: cover; }
+    .dp12-wave { display: flex; align-items: center; gap: 5px; height: 38px; margin: 10px 0; }
+    @keyframes dpWave { 0%, 100% { transform: scaleY(0.35); } 50% { transform: scaleY(1); } }
+    .dp12-wbar { width: 5px; height: 100%; background: var(--gold); border-radius: 99px; animation: dpWave 0.9s ease-in-out infinite; }
+    .dp12-war { background: var(--bg-light); border: 1px solid var(--border); border-radius: 12px; padding: 18px; cursor: pointer; transition: var(--transition); }
+    .dp12-war:hover { border-color: var(--gold); }
+    .dp12-war-det { display: none; margin-top: 8px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--border); padding-top: 8px; }
+    .dp12-war.open .dp12-war-det { display: block; }
+    .dp12-tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 24px; }
+    .dp12-tech-card { background: #FFFFFF; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 10px 24px rgba(11,25,44,0.06); transition: var(--transition); }
+    .dp12-tech-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+    .dp12-tech-card img { width: 100%; height: 240px; object-fit: cover; object-position: top; display: block; }
+    .dp12-tech-body { padding: 20px; }
+    .dp12-tech-body h4 { font-size: 18px; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+    .dp12-tech-body .role { font-size: 12.5px; font-weight: 700; color: var(--gold-hover); margin-bottom: 8px; }
+    .dp12-tech-body p { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+    .dp12-season-card { background: var(--bg-light); border: 1px solid var(--border); border-radius: 14px; padding: 20px; transition: var(--transition); }
+    .dp12-season-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+    .dp12-season-card h5 { font-size: 15.5px; font-weight: 800; color: var(--navy); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .dp12-season-card p { font-size: 13px; color: var(--muted); line-height: 1.55; }
+    @media (max-width: 960px) { .dp12-split, .dp12-grid-3, .dp12-grid-4, .dp12-grid-2, .dp12-tech-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <header class="dp-navbar" id="dpNav">
+    <div class="container nav-inner">
+      <a href="#home" class="brand"><div class="brand-icon"><i class="fas fa-home"></i></div><span>DoorPro</span></a>
+      <ul class="nav-menu">
+        <li><a href="#availability">Availability</a></li>
+        <li><a href="#simulator">3D Simulator</a></li>
+        <li><a href="#checklist">Checklist</a></li>
+        <li><a href="#problem-finder">Diagnosis</a></li>
+        <li><a href="#parts">Brands</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul>
+      <a href="#emergency" class="btn-gold">Get a Free Quote</a>
+    </div>
+  </header>
+
+  <section class="cinematic-hero" id="home">
+    <div class="container">
+      <div class="hero-content reveal">
+        <span class="eyebrow" style="color: var(--gold);">Premium Garage Door Services</span>
+        <h1 class="hero-h1">Garage Door Repair Made Simple. Service Made Exceptional.</h1>
+        <p style="color: #E2E8F0; font-size: 16px; margin-bottom: 26px;">From emergency spring &amp; opener repairs to custom 3D-visualized door installations.</p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="#simulator" class="btn-gold">Try 3D Simulator <i class="fas fa-cube"></i></a>
+          <a href="#problem-finder" class="btn-ghost">Quick Problem Finder</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02. SERVICE AVAILABILITY CHECKER (TOP POSITION FOR DOORPRO) -->
+  <section class="avail-bar-section" id="availability">
+    <div class="container avail-grid">
+      <div class="reveal">
+        <span class="eyebrow">02 · Service Availability Checker</span>
+        <h2 class="section-h2">Is Our Service Available in Your Area?</h2>
+        <div style="display: flex; gap: 10px; margin: 14px 0;">
+          <input type="text" id="dpZip" placeholder="Enter ZIP Code (e.g. 33139)" style="flex: 1; padding: 12px 14px; border: 1px solid var(--border); border-radius: 99px; font-size: 14px;">
+          <button class="btn-gold" onclick="checkDPZip()">Check Availability</button>
+        </div>
+        <div id="dpZipMsg" style="font-size: 13.5px; font-weight: 700; color: #059669;">✓ Available Now · Nearest DoorPro Hub: 14 mins away</div>
+      </div>
+      <div class="avail-map reveal">
+        <div class="pin" style="top: 32%; left: 26%;"></div>
+        <div class="pin" style="top: 56%; left: 54%;"></div>
+        <div class="pin" style="top: 36%; left: 76%;"></div>
+        <span style="position: absolute; bottom: 12px; left: 14px; color: #FFFFFF; font-size: 12px; font-weight: 700;">Live Service Coverage Pins</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3D SIMULATOR -->
+  <section class="section-pad" id="simulator">
+    <div class="container">
+      <div style="text-align: center;" class="reveal"><span class="eyebrow">Interactive 3D Garage Door Studio</span><h2 class="section-h2">Preview Your Garage Door in 3D</h2></div>
+      <div class="sim-grid">
+        <div class="sim-stage reveal" id="dpSimStage">
+          <button class="btn-gold" style="position: absolute; top: 16px; left: 16px; padding: 7px 14px; font-size: 12px;" onclick="dpNight(this)"><i class="fas fa-moon"></i> Night Mode</button>
+          <div class="sim-house">
+            <div class="sim-opening">
+              <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #94A3B8; font-size: 13px;">Quiet Belt-Drive Track</div>
+              <div class="sim-leaf st-glass" id="dpLeaf">
+                <div class="sim-panel" style="background: #1E293B;"><div class="sim-win"></div><div class="sim-win"></div><div class="sim-win"></div><div class="sim-win"></div></div>
+                <div class="sim-panel" style="background: #1E293B;"><div class="sim-win"></div><div class="sim-win"></div><div class="sim-win"></div><div class="sim-win"></div></div>
+                <div class="sim-panel" style="background: #1E293B;"><div class="sim-win"></div><div class="sim-win"></div><div class="sim-win"></div><div class="sim-win"></div></div>
+                <div class="sim-panel" style="background: #1E293B;"><div class="sim-win"></div><div class="sim-win"></div><div class="sim-win"></div><div class="sim-win"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="background: var(--bg-light); border: 1px solid var(--border); border-radius: 16px; padding: 26px;" class="reveal">
+          <button class="btn-gold" style="width: 100%; justify-content: center; margin-bottom: 18px;" id="dpDoorBtn" onclick="dpToggleDoor()">Open Door</button>
+          <strong style="font-size: 12px; color: var(--muted);">STYLE</strong>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 18px;">
+            <button class="p-pill active" onclick="dpStyle('st-glass', this)">Full-View Glass</button>
+            <button class="p-pill" onclick="dpStyle('st-steel', this)">Modern Steel</button>
+            <button class="p-pill" onclick="dpStyle('st-carriage', this)">Carriage House</button>
+          </div>
+          <strong style="font-size: 12px; color: var(--muted);">FINISH COLOR</strong>
+          <div style="display: flex; gap: 10px; margin-top: 10px;">
+            <span style="width: 28px; height: 28px; border-radius: 50%; background: #1E293B; cursor: pointer;" onclick="dpColor('#1E293B')"></span>
+            <span style="width: 28px; height: 28px; border-radius: 50%; background: #E2E8F0; border: 1px solid #CBD5E1; cursor: pointer;" onclick="dpColor('#E2E8F0')"></span>
+            <span style="width: 28px; height: 28px; border-radius: 50%; background: #5C3A21; cursor: pointer;" onclick="dpColor('#5C3A21')"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW 02: MATERIAL EXPLORER & 06: DESIGN GALLERY -->
+  <section class="section-pad" style="background: var(--bg-light);">
+    <div class="container">
+      <span class="eyebrow">02 · Material Comparison</span>
+      <h2 class="section-h2">Choose the Perfect Garage Door Material.</h2>
+      <div class="prob-pills">
+        <button class="p-pill active" onclick="dpMat('steel', this)">Steel</button>
+        <button class="p-pill" onclick="dpMat('wood', this)">Wood</button>
+        <button class="p-pill" onclick="dpMat('aluminum', this)">Aluminum</button>
+        <button class="p-pill" onclick="dpMat('fiberglass', this)">Fiberglass</button>
+      </div>
+      <div class="dp12-split">
+        <img id="dpMatImg" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Material" style="border-radius:16px; height:280px; width:100%; object-fit:cover;">
+        <div class="dp12-card">
+          <h3 id="dpMatT" style="color:var(--navy); margin-bottom:8px;">Insulated Steel — Durable &amp; Low Maintenance</h3>
+          <p id="dpMatD" style="font-size:14px; color:var(--muted); margin-bottom:16px;">Pros: High security, optional R-18 insulation, rust-resistant finish. Cons: Can dent on heavy impact. Maintenance: Annual wash.</p>
+          <a href="#pricing" class="btn-gold">Request Installation Quote</a>
+        </div>
+      </div>
+
+      <div style="margin-top: 64px;">
+        <span class="eyebrow">06 · Design Gallery</span>
+        <h2 class="section-h2">Find a Garage Door That Matches Your Home.</h2>
+        <div class="prob-pills">
+          <button class="p-pill active" onclick="dpGal('all', this)">All</button>
+          <button class="p-pill" onclick="dpGal('Modern', this)">Modern</button>
+          <button class="p-pill" onclick="dpGal('Traditional', this)">Traditional</button>
+          <button class="p-pill" onclick="dpGal('Carriage', this)">Carriage House</button>
+        </div>
+        <div class="dp12-grid-3" id="dpGalGrid">
+          <div class="dp12-gal-card" data-cat="Modern"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Modern"><div style="padding:18px;"><strong>Full-View Modern Glass</strong><p style="font-size:12.5px; color:var(--muted); margin:6px 0 10px;">Aluminum Frame · Matte Black · Frosted Glass</p><a href="#pricing" style="color:var(--navy); font-weight:800; font-size:13px;">Request Similar Design &rarr;</a></div></div>
+          <div class="dp12-gal-card" data-cat="Traditional"><img src="https://images.unsplash.com/photo-1558036117-15d82a90b9b1?auto=format&fit=crop&w=600&q=80" alt="Traditional"><div style="padding:18px;"><strong>Classic Raised Panel</strong><p style="font-size:12.5px; color:var(--muted); margin:6px 0 10px;">Insulated Steel · Colonial Windows · Crisp White</p><a href="#pricing" style="color:var(--navy); font-weight:800; font-size:13px;">Request Similar Design &rarr;</a></div></div>
+          <div class="dp12-gal-card" data-cat="Carriage"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80" alt="Carriage"><div style="padding:18px;"><strong>Custom Carriage House</strong><p style="font-size:12.5px; color:var(--muted); margin:6px 0 10px;">Cedar Composite · Arched Glass · Walnut</p><a href="#pricing" style="color:var(--navy); font-weight:800; font-size:13px;">Request Similar Design &rarr;</a></div></div>
+        </div>
+      </div>
+
+      <!-- NEW 01: SIZE GUIDE & 10: OPENER COMPATIBILITY -->
+      <div class="dp12-split" style="margin-top: 64px; align-items: start;">
+        <div class="dp12-card">
+          <span class="eyebrow">01 · Size &amp; Measurement Guide</span>
+          <h3 style="font-size:21px; color:var(--navy); margin-bottom:10px;">Find the Right Garage Door Size for Your Home.</h3>
+          <svg viewBox="0 0 300 120" style="width:100%; height:105px; background:#F8FAFC; border-radius:8px; margin-bottom:10px;">
+            <rect x="40" y="18" width="220" height="78" fill="#0B192C" rx="4"/>
+            <line x1="40" y1="106" x2="260" y2="106" stroke="#F5B700" stroke-width="2"/>
+            <text x="150" y="117" text-anchor="middle" font-size="11" font-weight="bold" fill="#0B192C" id="dpSvgW">Width: 16 ft (Double)</text>
+          </svg>
+          <div class="dp12-grid-2" style="margin-top:0;">
+            <select class="dp12-input" id="dpSelW" onchange="dpUpdSize()"><option>8 ft (Single)</option><option>9 ft (Single)</option><option selected>16 ft (Double)</option><option>18 ft (Custom)</option></select>
+            <select class="dp12-input" id="dpSelH" onchange="dpUpdSize()"><option selected>7 ft (Standard)</option><option>8 ft (Tall)</option><option>10 ft (Commercial)</option></select>
+          </div>
+          <a href="#pricing" class="btn-gold" style="width:100%; justify-content:center;">Get Installation Assistance</a>
+        </div>
+
+        <div class="dp12-card">
+          <span class="eyebrow">10 · Opener Compatibility Checker</span>
+          <h3 style="font-size:21px; color:var(--navy); margin-bottom:10px;">Find the Right Opener for Your Garage Door.</h3>
+          <select class="dp12-input"><option>LiftMaster</option><option>Chamberlain</option><option>Genie</option><option>Craftsman</option></select>
+          <input type="text" class="dp12-input" placeholder="Model # (e.g. 87504)" value="87504">
+          <select class="dp12-input"><option>Double Insulated Steel Door</option><option>Single Door</option><option>Heavy Custom Wood</option></select>
+          <button class="btn-gold" style="width:100%; justify-content:center;" onclick="document.getElementById('dpOpOut').textContent='✓ Compatible with Belt-Drive Smart MyQ Openers & Security+ 2.0 Remotes.'">Check Compatibility</button>
+          <div id="dpOpOut" style="font-size:13px; font-weight:700; color:#059669; margin-top:10px;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05. MAINTENANCE CHECKLIST -->
+  <section class="section-pad" id="checklist" style="padding-top: 10px;">
+    <div class="container">
+      <div class="chk-split reveal">
+        <div>
+          <span class="eyebrow" style="color: var(--gold);">05 · Maintenance Checklist</span>
+          <h2 style="font-size: 28px; font-weight: 800; margin-bottom: 10px;">Is Your Garage Door Ready for Everyday Use?</h2>
+          <p style="font-size: 13.5px; color: #CBD5E1; margin-bottom: 16px;">Visual checks only — never attempt to handle high-tension springs or lift cables yourself.</p>
+          <div style="height: 8px; background: rgba(255,255,255,0.12); border-radius: 99px; overflow: hidden; margin-bottom: 16px;">
+            <div id="dpChkFill" style="width: 0%; height: 100%; background: var(--gold); transition: width 0.35s;"></div>
+          </div>
+          <button class="btn-gold" onclick="alert('Annual tune-up & safety check scheduled!')">Schedule Maintenance</button>
+        </div>
+        <div class="chk-list">
+          <label class="chk-pill"><input type="checkbox" onchange="dpChk()"> Door opens smoothly</label>
+          <label class="chk-pill"><input type="checkbox" onchange="dpChk()"> No unusual sounds</label>
+          <label class="chk-pill"><input type="checkbox" onchange="dpChk()"> Safety sensors working</label>
+          <label class="chk-pill"><input type="checkbox" onchange="dpChk()"> Remote functioning</label>
+          <label class="chk-pill"><input type="checkbox" onchange="dpChk()"> No visible cable damage</label>
+          <label class="chk-pill"><input type="checkbox" onchange="dpChk()"> Door closes completely</label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07. CUSTOMER REVIEW WALL -->
+  <section class="section-pad" style="background: var(--bg-light);">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
+        <div><span class="eyebrow">07 · Customer Review Wall</span><h2 class="section-h2">Real Homeowners. Real Experiences.</h2></div>
+        <div style="font-weight: 800; color: var(--navy);">★★★★★ 4.9 / 5.0 · 980+ Verified Google Reviews</div>
+      </div>
+      <div class="rev-3-grid">
+        <div class="rev-card reveal"><div style="color: var(--gold-hover); margin-bottom: 8px;">★★★★★</div><p>"DoorPro fixed our off-track door and noisy rollers within hours. Highly recommend!"</p><strong style="display: block; margin-top: 10px;">Sarah M.</strong><span style="font-size: 12px; color: var(--muted);">Miami Beach · Off-Track Repair</span></div>
+        <div class="rev-card reveal"><div style="color: var(--gold-hover); margin-bottom: 8px;">★★★★★</div><p>"Upgraded our damaged steel panels to Full-View Glass. Looks incredible and runs whisper quiet."</p><strong style="display: block; margin-top: 10px;">Kevin P.</strong><span style="font-size: 12px; color: var(--muted);">Coral Gables · New Installation</span></div>
+        <div class="rev-card reveal"><div style="color: var(--gold-hover); margin-bottom: 8px;">★★★★★</div><p>"Upfront itemized estimate, zero surprises, and live arrival tracking straight to our phone."</p><strong style="display: block; margin-top: 10px;">Laura D.</strong><span style="font-size: 12px; color: var(--muted);">Brickell · Spring Replacement</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01. QUICK PROBLEM FINDER & 03. TECHNICIAN JOURNEY TIMELINE -->
+  <section class="section-pad" id="problem-finder">
+    <div class="container">
+      <span class="eyebrow">01 · Quick Problem Finder</span>
+      <h2 class="section-h2">What's Wrong With Your Garage Door?</h2>
+      <div class="prob-pills">
+        <button class="p-pill active" onclick="dpProb('noise', this)">Door making strange noises</button>
+        <button class="p-pill" onclick="dpProb('open', this)">Door won't open</button>
+        <button class="p-pill" onclick="dpProb('half', this)">Door stuck halfway</button>
+        <button class="p-pill" onclick="dpProb('remote', this)">Remote not working</button>
+        <button class="p-pill" onclick="dpProb('uneven', this)">Door moving unevenly</button>
+        <button class="p-pill" onclick="dpProb('other', this)">Other issue</button>
+      </div>
+      <div class="prob-drawer reveal">
+        <h3 id="dpPTitle" style="font-size: 20px; color: var(--navy); margin-bottom: 6px;">Door Making Strange Noises</h3>
+        <p id="dpPDesc" style="color: var(--muted); font-size: 14.5px; margin-bottom: 14px;">Likely caused by loose hinges/brackets, dry rollers needing garage lubricant (not WD-40), or worn opener gears. Recommended: 25-Point Hardware &amp; Roller Tune-Up.</p>
+        <a href="#pricing" class="btn-gold">See Transparent Cost Breakdown</a>
+      </div>
+
+      <!-- 03. TECHNICIAN JOURNEY TIMELINE -->
+      <div class="journey-box reveal" style="margin-top: 56px;">
+        <div>
+          <span class="eyebrow" style="color: var(--gold);">03 · Technician Journey Timeline</span>
+          <h3 style="font-size: 26px; font-weight: 800; margin-bottom: 10px;">Know When Our Technician Will Arrive.</h3>
+          <p style="font-size: 13.5px; color: #CBD5E1; margin-bottom: 16px;">1. Request Received → 2. Technician Assigned (Alex Mercer) → 3. On The Way (ETA: 12 mins) → 4. Service Completed</p>
+          <a href="tel:8005553667" class="btn-gold">Contact Technician</a>
+        </div>
+        <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 20px;">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80" alt="Alex" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+            <div><strong>Alex Mercer</strong><br><span style="font-size: 12px; color: var(--gold);">Van #14 · En Route (12 mins)</span></div>
+          </div>
+          <div style="height: 6px; background: rgba(255,255,255,0.12); border-radius: 99px;"><div style="width: 72%; height: 100%; background: var(--gold); border-radius: 99px;"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW 05: REPAIR VS REPLACE & 03: NOISE ANALYZER -->
+  <section class="section-pad" style="padding-top: 10px;">
+    <div class="container dp12-split" style="align-items: start;">
+      <div class="dp12-card">
+        <span class="eyebrow">05 · Decision Guide</span>
+        <h3 style="font-size:21px; color:var(--navy); margin-bottom:12px;">Should You Repair or Replace Your Garage Door?</h3>
+        <label style="display:block; margin-bottom:8px; font-size:13.5px;"><input type="checkbox" class="dprvr" onchange="dpRvR()"> Door age over 15 years</label>
+        <label style="display:block; margin-bottom:8px; font-size:13.5px;"><input type="checkbox" class="dprvr" onchange="dpRvR()"> Severe panel damage or rust</label>
+        <label style="display:block; margin-bottom:8px; font-size:13.5px;"><input type="checkbox" class="dprvr" onchange="dpRvR()"> Frequent repair history</label>
+        <label style="display:block; margin-bottom:14px; font-size:13.5px;"><input type="checkbox" class="dprvr" onchange="dpRvR()"> High ongoing maintenance costs</label>
+        <div id="dpRvrRes" style="padding:14px; background:var(--bg-light); border-radius:10px; font-weight:700; color:var(--navy); margin-bottom:14px;">Repair may be appropriate. Professional inspection recommended.</div>
+        <a href="#pricing" class="btn-gold">Schedule an Inspection</a>
+      </div>
+
+      <div class="dp12-card">
+        <span class="eyebrow">03 · Garage Door Noise Analyzer</span>
+        <h3 style="font-size:21px; color:var(--navy);">What Is Your Garage Door Trying to Tell You?</h3>
+        <div class="prob-pills" style="margin: 12px 0;">
+          <button class="p-pill active" onclick="dpNoise('squeak', this)">Squeaking</button>
+          <button class="p-pill" onclick="dpNoise('grind', this)">Grinding</button>
+          <button class="p-pill" onclick="dpNoise('bang', this)">Banging</button>
+          <button class="p-pill" onclick="dpNoise('rattle', this)">Rattling</button>
+          <button class="p-pill" onclick="dpNoise('hum', this)">Humming</button>
+        </div>
+        <div class="dp12-wave"><div class="dp12-wbar"></div><div class="dp12-wbar" style="animation-delay:.15s"></div><div class="dp12-wbar" style="animation-delay:.3s"></div><div class="dp12-wbar" style="animation-delay:.45s"></div><div class="dp12-wbar" style="animation-delay:.2s"></div></div>
+        <strong id="dpNTitle" style="color:var(--navy);">Squeaking Sound</strong>
+        <p id="dpNDesc" style="font-size:13.5px; color:var(--muted); margin:6px 0 8px;">Possible causes: Dry rollers, unlubricated hinges, or tight weather seals.</p>
+        <p style="font-size:12px; color:var(--muted); font-style:italic;">Sound alone cannot diagnose the exact fault — schedule a professional inspection.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW 12: PRIORITY SELECTOR & 04: SAFETY CENTER -->
+  <section class="section-pad" style="background: var(--bg-light);">
+    <div class="container">
+      <div class="dp12-card" style="margin-bottom: 48px;">
+        <span class="eyebrow">12 · Service Request Priority Selector</span>
+        <h2 class="section-h2">Tell Us How Urgent Your Garage Door Problem Is.</h2>
+        <div class="dp12-grid-3" style="margin-bottom: 16px;">
+          <div style="border: 1.5px solid #DC2626; border-radius: 10px; padding: 14px; cursor: pointer;" onclick="document.getElementById('dpPriTxt').textContent='Selected: Emergency (Urgent)'"><strong>Emergency · Urgent</strong><p style="font-size:12.5px; color:var(--muted);">Door stuck open or security concern.</p></div>
+          <div style="border: 1.5px solid var(--gold); border-radius: 10px; padding: 14px; cursor: pointer;" onclick="document.getElementById('dpPriTxt').textContent='Selected: Priority Repair (High)'"><strong>Priority Repair · High</strong><p style="font-size:12.5px; color:var(--muted);">Malfunctioning or inconsistent operation.</p></div>
+          <div style="border: 1.5px solid #10B981; border-radius: 10px; padding: 14px; cursor: pointer;" onclick="document.getElementById('dpPriTxt').textContent='Selected: Routine Service (Standard)'"><strong>Routine · Standard</strong><p style="font-size:12.5px; color:var(--muted);">Maintenance or planned installation.</p></div>
+        </div>
+        <strong id="dpPriTxt" style="display:block; margin-bottom:10px; color:var(--navy);">Selected: Priority Repair (High)</strong>
+        <form onsubmit="event.preventDefault(); alert('Priority request submitted!');">
+          <div class="dp12-grid-3" style="margin-top:0;">
+            <input type="text" class="dp12-input" placeholder="Full Name" required>
+            <input type="tel" class="dp12-input" placeholder="Phone Number" required>
+            <input type="text" class="dp12-input" placeholder="ZIP Code" required>
+          </div>
+          <button type="submit" class="btn-gold">Submit Priority Request</button>
+        </form>
+      </div>
+
+      <span class="eyebrow">04 · Garage Door Safety Center</span>
+      <h2 class="section-h2">Keep Your Garage Safe for Your Family.</h2>
+      <div class="dp12-grid-4">
+        <div class="dp12-card"><strong>Safety Sensor Awareness</strong><p style="font-size:13px; color:var(--muted); margin-top:6px;">Keep infrared beams clear and aligned 6" off the floor.</p></div>
+        <div class="dp12-card"><strong>Automatic Reversal</strong><p style="font-size:13px; color:var(--muted); margin-top:6px;">Door must reverse immediately upon contacting an obstacle.</p></div>
+        <div class="dp12-card"><strong>Balance Warning Signs</strong><p style="font-size:13px; color:var(--muted); margin-top:6px;">Stop using any door that slams shut or feels extremely heavy.</p></div>
+        <div class="dp12-card"><strong>Child &amp; Pet Safety</strong><p style="font-size:13px; color:var(--muted); margin-top:6px;">Keep remotes out of reach and mount wall buttons 5 ft high.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06. PARTS & BRANDS SHOWCASE -->
+  <section class="section-pad" id="parts" style="background: var(--bg-light);">
+    <div class="container">
+      <span class="eyebrow">06 · Supported Brands &amp; Parts</span>
+      <h2 class="section-h2">Quality Parts. Reliable Performance.</h2>
+      <div class="parts-6-grid">
+        <div class="part-card reveal"><img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=500&q=80" alt="Openers"><div style="padding: 16px;"><strong>Garage Door Openers</strong><p style="font-size: 12.5px; color: var(--muted);">LiftMaster &amp; Chamberlain Smart Drives</p></div></div>
+        <div class="part-card reveal"><img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=500&q=80" alt="Springs"><div style="padding: 16px;"><strong>Torsion Springs</strong><p style="font-size: 12.5px; color: var(--muted);">High-Cycle Oil-Tempered Springs</p></div></div>
+        <div class="part-card reveal"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=500&q=80" alt="Panels"><div style="padding: 16px;"><strong>Garage Door Panels</strong><p style="font-size: 12.5px; color: var(--muted);">Clopay &amp; Amarr Insulated Steel</p></div></div>
+        <div class="part-card reveal"><img src="https://images.unsplash.com/photo-1558036117-15d82a90b9b1?auto=format&fit=crop&w=500&q=80" alt="Sensors"><div style="padding: 16px;"><strong>Safety Sensors</strong><p style="font-size: 12.5px; color: var(--muted);">UL-325 Infrared Photo Beams</p></div></div>
+        <div class="part-card reveal"><img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=500&q=80" alt="Remotes"><div style="padding: 16px;"><strong>Remote Controls</strong><p style="font-size: 12.5px; color: var(--muted);">Security+ 2.0 Keypads &amp; Remotes</p></div></div>
+        <div class="part-card reveal"><img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=500&q=80" alt="Rollers"><div style="padding: 16px;"><strong>Rollers &amp; Cables</strong><p style="font-size: 12.5px; color: var(--muted);">Quiet 11-Ball Nylon Rollers</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04. TRANSPARENT PRICING BREAKDOWN -->
+  <section class="dark-pricing-band" id="pricing">
+    <div class="container">
+      <div style="text-align: center;" class="reveal"><span class="eyebrow" style="color: var(--gold);">04 · Transparent Pricing Breakdown</span><h2 class="section-h2" style="color: #FFFFFF;">Know Your Cost Before We Start.</h2></div>
+      <div class="dp-table reveal">
+        <div class="dp-row"><span>Service — Torsion Spring / Opener Repair</span><span>Included Safety Check</span></div>
+        <div class="dp-row"><span>Parts — High-Cycle Components</span><span>Itemized Upfront</span></div>
+        <div class="dp-row"><span>Labor — Certified Technician</span><span>Flat Rate</span></div>
+        <div class="dp-row"><span>Additional — Track / Sensor Adjustment</span><span>If Applicable</span></div>
+        <div class="dp-row total"><span>Total Estimated Range</span><span>$190 – $350</span></div>
+      </div>
+      <div style="text-align: center; margin-top: 24px;"><button class="btn-gold" onclick="alert('Estimate request submitted!')">Request My Estimate</button></div>
+    </div>
+  </section>
+
+  <!-- 08. MEET OUR TECHNICIANS (THEME 3) -->
+  <section class="section-pad" id="technicians" style="background: #fff;">
+    <div class="container">
+      <div class="reveal" style="text-align: center; margin-bottom: 36px;">
+        <span class="eyebrow">Certified Local Team</span>
+        <h2 class="section-h2">Meet Our Garage Door Specialists</h2>
+        <p style="font-size: 15px; color: var(--muted); max-width: 600px; margin: 8px auto 0;">Experienced, background-checked technicians dedicated to safe, transparent service.</p>
+      </div>
+      <div class="dp12-tech-grid reveal">
+        <div class="dp12-tech-card"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" alt="Marcus Vance"><div class="dp12-tech-body"><h4>Marcus Vance</h4><div class="role">Lead Torsion &amp; Hardware Specialist</div><p>11+ years servicing residential and commercial torsion assemblies, counterbalance cables, and heavy-gauge tracks.</p></div></div>
+        <div class="dp12-tech-card"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" alt="Elena Rostova"><div class="dp12-tech-body"><h4>Elena Rostova</h4><div class="role">Smart Opener &amp; Safety Technician</div><p>8 years specializing in DC belt-drive openers, photo-eye safety alignment, smart-home integration, and logic boards.</p></div></div>
+        <div class="dp12-tech-card"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="Devon Brooks"><div class="dp12-tech-body"><h4>Devon Brooks</h4><div class="role">Custom Door Installation Lead</div><p>9 years leading full-door replacements, insulated carriage-house framing, and architectural glass-aluminum retrofits.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07. WARRANTY & SERVICE GUARANTEE PANEL (THEME 3) -->
+  <section class="section-pad" id="warranty" style="background: var(--bg-light);">
+    <div class="container">
+      <div class="reveal" style="text-align: center; margin-bottom: 36px;">
+        <span class="eyebrow">Service Protection</span>
+        <h2 class="section-h2">Warranty &amp; Service Guarantee</h2>
+        <p style="font-size: 15px; color: var(--muted); max-width: 600px; margin: 8px auto 0;">Click any coverage tier to review our written protection commitments.</p>
+      </div>
+      <div class="dp12-grid-4 reveal">
+        <div class="dp12-war" onclick="this.classList.toggle('open')"><h5 style="font-size:15px;font-weight:800;color:var(--navy);margin-bottom:6px;"><i class="fa-solid fa-gear" style="color:var(--gold);"></i> Parts Warranty</h5><p style="font-size:13px;color:var(--muted);">High-cycle springs, rollers, and hardware components.</p><div class="dp12-war-det">All replacement torsion springs, sealed nylon rollers, and hinges carry manufacturer-backed coverage against premature material defects.</div></div>
+        <div class="dp12-war" onclick="this.classList.toggle('open')"><h5 style="font-size:15px;font-weight:800;color:var(--navy);margin-bottom:6px;"><i class="fa-solid fa-wrench" style="color:var(--gold);"></i> Workmanship Guarantee</h5><p style="font-size:13px;color:var(--muted);">Precision installation and calibration assurance.</p><div class="dp12-war-det">Our labor workmanship guarantee covers alignment, tension calibration, and fastener security after every completed repair visit.</div></div>
+        <div class="dp12-war" onclick="this.classList.toggle('open')"><h5 style="font-size:15px;font-weight:800;color:var(--navy);margin-bottom:6px;"><i class="fa-solid fa-door-open" style="color:var(--gold);"></i> Installation Protection</h5><p style="font-size:13px;color:var(--muted);">New door panels, tracks, and weather-seal fitting.</p><div class="dp12-war-det">New residential and commercial door installations include structural track alignment verification and manufacturer panel warranty registration.</div></div>
+        <div class="dp12-war" onclick="this.classList.toggle('open')"><h5 style="font-size:15px;font-weight:800;color:var(--navy);margin-bottom:6px;"><i class="fa-solid fa-headset" style="color:var(--gold);"></i> Follow-Up Support</h5><p style="font-size:13px;color:var(--muted);">Direct technician access after service.</p><div class="dp12-war-det">If your door requires any post-service sensitivity or limit adjustment, our dispatch desk coordinates prompt follow-up support.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. SEASONAL GARAGE DOOR CARE + 09. SERVICE HISTORY LOOKUP (THEME 3) -->
+  <section class="section-pad" id="seasonal-care" style="background: #fff;">
+    <div class="container">
+      <div class="reveal" style="text-align: center; margin-bottom: 36px;">
+        <span class="eyebrow">Year-Round Readiness</span>
+        <h2 class="section-h2">Seasonal Garage Door Care</h2>
+        <p style="font-size: 15px; color: var(--muted); max-width: 600px; margin: 8px auto 0;">Protect moving hardware and weather seals through every seasonal temperature shift.</p>
+      </div>
+      <div class="dp12-grid-4 reveal">
+        <div class="dp12-season-card"><h5><i class="fa-solid fa-seedling" style="color:#16a34a;"></i> Spring</h5><p>Inspect bottom weather stripping after winter, clear track debris, and test safety reversal sensors.</p></div>
+        <div class="dp12-season-card"><h5><i class="fa-solid fa-sun" style="color:#d97706;"></i> Summer</h5><p>Check opener battery backup health, tighten vibration-loosened hinge bolts, and lubricate steel bearings.</p></div>
+        <div class="dp12-season-card"><h5><i class="fa-solid fa-leaf" style="color:#ea580c;"></i> Fall</h5><p>Schedule a pre-winter balance and seal inspection to prevent drafts and cold-weather strain on springs.</p></div>
+        <div class="dp12-season-card"><h5><i class="fa-solid fa-snowflake" style="color:#0284c7;"></i> Winter</h5><p>Keep snow clear of the bottom seal to prevent freezing, and listen for stiff cold-start opener labor.</p></div>
+      </div>
+
+      <div class="dp12-card reveal" style="margin-top: 32px; background: var(--bg-light);">
+        <div class="dp12-split">
+          <div>
+            <span class="eyebrow">Customer Portal</span>
+            <h3 style="font-size: 24px; font-weight: 800; color: var(--navy); margin-bottom: 8px;">Service History &amp; Maintenance Reminder</h3>
+            <p style="font-size: 14px; color: var(--muted); line-height: 1.6;">Enter your DoorPro service reference number to query our customer service database for past inspection dates and recommended annual tune-up intervals.</p>
+          </div>
+          <div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <input id="dp-ref-in" type="text" placeholder="Enter Reference # (e.g. DP-4092)" style="flex:1; min-width:180px; padding:12px 14px; border-radius:10px; border:1px solid var(--border); font-family:inherit;">
+              <button class="btn-gold" onclick="dpLookupRef()">Check Records</button>
+            </div>
+            <div id="dp-ref-out" style="display:none; margin-top:12px; padding:12px 14px; background:#fff; border:1px solid var(--border); border-radius:10px; font-size:13px; color:var(--navy);"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08. EMERGENCY ACTION PANEL -->
+  <section class="em-cta-band" id="emergency">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+      <div>
+        <h2 style="font-size: 28px; font-weight: 800;">Garage Door Emergency? Get Help Now.</h2>
+        <p style="font-weight: 600;">24/7 Emergency Service · Broken springs, doors stuck halfway, or off-track doors.</p>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <a href="tel:8005553667" style="background: var(--navy); color: #FFFFFF; padding: 12px 24px; border-radius: 99px; font-weight: 800;">Call (800) 555-3667</a>
+        <a href="#problem-finder" style="background: #FFFFFF; color: var(--navy); padding: 12px 22px; border-radius: 99px; font-weight: 800;">Request Service</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="dp-footer">
+    <div class="container" style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-size: 13px;">
+      <span><strong style="color: #FFFFFF;">DoorPro</strong> · Premium Garage Door Studio · (800) 555-3667</span>
+      <span>&copy; 2026 DoorPro Residential Services. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    window.addEventListener('scroll', () => { document.getElementById('dpNav').classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 40); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // 12 New Components JS for Theme 3
+    const dpMatData = {
+      steel: { title: 'Insulated Steel Garage Doors', img: 'https://images.unsplash.com/photo-1558036117-15d82a90b9b1?auto=format&fit=crop&w=900&q=80', desc: 'Engineered with multi-layer galvanized steel and polyurethane insulation for superior dent resistance and thermal efficiency.', pros: 'High durability, energy efficiency, low upkeep', cons: 'Can dent under heavy impact without reinforced gauge', maint: 'Wash twice yearly & inspect bottom seal' },
+      wood: { title: 'Custom Architectural Wood Doors', img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80', desc: 'Handcrafted cedar, redwood, and mahogany builds offering unmatched warmth and bespoke curb appeal.', pros: 'Rich natural grain, custom millwork flexibility', cons: 'Higher weight requires properly rated springs', maint: 'Refinish or seal every 2-3 years' },
+      aluminum: { title: 'Modern Aluminum & Glass', img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80', desc: 'Corrosion-resistant anodized aluminum frames paired with tempered frosted or clear glass panels.', pros: 'Rust-proof, lightweight, contemporary daylight', cons: 'Lower R-value unless thermally broken', maint: 'Wipe frames & clean glass seasonally' },
+      fiberglass: { title: 'Versatile Fiberglass Composite', img: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=80', desc: 'Molded composite skins resist salt-air corrosion and replicate realistic woodgrain textures.', pros: 'Moisture resistant, lightweight, wood-look options', cons: 'Can fade over many years in intense UV', maint: 'Mild soap rinse & annual hardware check' }
+    };
+    function dpMat(key, btn) {
+      document.querySelectorAll('.dp12-tab-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      const m = dpMatData[key] || dpMatData.steel;
+      document.getElementById('dp-mat-img').src = m.img;
+      document.getElementById('dp-mat-title').textContent = m.title;
+      document.getElementById('dp-mat-desc').textContent = m.desc;
+      document.getElementById('dp-mat-pros').textContent = m.pros;
+      document.getElementById('dp-mat-cons').textContent = m.cons;
+      document.getElementById('dp-mat-maint').textContent = m.maint;
+    }
+    function dpGal(cat, btn) {
+      document.querySelectorAll('.dp12-gal-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      document.querySelectorAll('#dp-gal-grid .dp12-gal-card').forEach(c => {
+        c.style.display = (cat === 'all' || c.dataset.cat === cat) ? 'block' : 'none';
+      });
+    }
+    function dpUpdSize() {
+      const w = parseFloat(document.getElementById('dp-sz-w')?.value) || 16;
+      const h = parseFloat(document.getElementById('dp-sz-h')?.value) || 7;
+      let type = 'Custom Non-Standard Opening';
+      if (w >= 8 && w <= 10 && h >= 7 && h <= 8) type = 'Standard Single-Car Residential Door';
+      else if (w >= 14 && w <= 18 && h >= 7 && h <= 8) type = 'Standard Double-Car Residential Door';
+      else if (w > 18 || h > 8) type = 'Oversized / Commercial-Grade Opening';
+      document.getElementById('dp-sz-out').textContent = `${w} ft × ${h} ft — ${type} (verify headroom & side room on-site).`;
+    }
+    function dpRvR() {
+      const checks = document.querySelectorAll('.dp12-rvr-chk:checked').length;
+      const out = document.getElementById('dp-rvr-out');
+      if (checks === 0) out.textContent = 'Select any symptoms above to view a repair vs. replacement assessment.';
+      else if (checks <= 2) out.textContent = 'Likely Repair Candidate: Targeted hardware, roller, or track calibration can often restore safe operation. Have a technician inspect before deciding.';
+      else out.textContent = 'Replacement Evaluation Recommended: Multiple structural or age indicators suggest comparing full replacement against cumulative repair costs.';
+    }
+    const dpNoiseData = {
+      squeak: { title: 'Squeaking / High-Pitch Chirp', causes: 'Dry hinges, worn steel rollers, or unlubricated bearing plates.', parts: 'Hinges, rollers, torsion shaft bearings.', svc: 'Full Tune-Up & Nylon Roller Upgrade' },
+      grind: { title: 'Grinding / Metal-on-Metal', causes: 'Misaligned tracks, failing opener drive gear, or dry chain/screw rail.', parts: 'Vertical/horizontal tracks, opener sprocket.', svc: 'Track Realignment & Opener Inspection' },
+      bang: { title: 'Loud Bang / Snap', causes: 'Sudden torsion or extension spring fracture, or cable slipping off drum.', parts: 'Torsion springs, lift cables, cable drums.', svc: 'Emergency Spring & Cable Service (Do Not Operate Door)' },
+      rattle: { title: 'Rattling During Travel', causes: 'Loose track brackets, worn roller stems, or loose hinge fasteners.', parts: 'Track wall brackets, panel hinges.', svc: 'Hardware Tightening & Balance Check' },
+      hum: { title: 'Humming Without Movement', causes: 'Opener motor capacitor issue, stripped internal gear, or jammed door lock/spring failure.', parts: 'Opener motor unit, logic board, counterbalance springs.', svc: 'Opener Diagnostics & Spring Balance Test' }
+    };
+    function dpNoise(key, btn) {
+      document.querySelectorAll('.dp12-noise-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      const d = dpNoiseData[key] || dpNoiseData.squeak;
+      const box = document.getElementById('dp-noise-out');
+      box.innerHTML = `<strong style="color:var(--navy);">${d.title}</strong><p style="font-size:13px;color:var(--muted);margin:6px 0;"><strong>Possible Causes:</strong> ${d.causes}<br><strong>Affected Components:</strong> ${d.parts}<br><strong>Recommended Service:</strong> ${d.svc}</p><p style="font-size:12px;color:#b45309;font-weight:600;margin:0;"><i class="fa-solid fa-circle-info"></i> Note: Sound alone cannot diagnose the exact mechanical fault — an on-site professional inspection is required.</p>`;
+    }
+    function dpLookupRef() {
+      const ref = (document.getElementById('dp-ref-in')?.value || '').trim();
+      const out = document.getElementById('dp-ref-out');
+      out.style.display = 'block';
+      if (!ref) {
+        out.innerHTML = '<span style="color:#dc2626;font-weight:700;">Please enter a valid service reference number.</span>';
+      } else {
+        out.innerHTML = `<strong>Reference <code>${ref.replace(/</g,'&lt;')}</code>:</strong> Live record lookup connects to our secure customer service database during dispatch hours. Call <strong>(555) 890-3300</strong> or request a callback to retrieve your complete inspection log and next annual tune-up date.`;
+      }
+    }
+
+    function checkDPZip() {
+      const z = document.getElementById('dpZip').value.trim();
+      document.getElementById('dpZipMsg').textContent = z.length >= 5 ? `✓ ZIP ${z} Covered! Nearest DoorPro Technician: 14 mins away.` : 'Enter a 5-digit ZIP code.';
+    }
+
+    let dpOpen = false;
+    function dpToggleDoor() {
+      dpOpen = !dpOpen;
+      document.getElementById('dpLeaf').classList.toggle('open', dpOpen);
+      document.getElementById('dpDoorBtn').textContent = dpOpen ? 'Close Door' : 'Open Door';
+    }
+    function dpNight(btn) {
+      const n = document.getElementById('dpSimStage').classList.toggle('night');
+      btn.innerHTML = n ? '<i class="fas fa-sun"></i> Day Mode' : '<i class="fas fa-moon"></i> Night Mode';
+    }
+    function dpStyle(cls, btn) {
+      document.querySelectorAll('.sim-grid .p-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('dpLeaf').className = 'sim-leaf ' + cls + (dpOpen ? ' open' : '');
+    }
+    function dpColor(c) { document.querySelectorAll('#dpLeaf .sim-panel').forEach(p => p.style.background = c); }
+
+    function dpChk() {
+      const boxes = document.querySelectorAll('#checklist input[type="checkbox"]');
+      const cnt = Array.from(boxes).filter(b => b.checked).length;
+      document.getElementById('dpChkFill').style.width = ((cnt / boxes.length) * 100) + '%';
+    }
+
+    const dpPData = {
+      noise: ['Door Making Strange Noises', 'Likely caused by loose hinges/brackets, dry rollers needing garage lubricant (not WD-40), or worn opener gears. Recommended: 25-Point Hardware & Roller Tune-Up.'],
+      open: ["Door Won't Open", 'Likely caused by dead remote battery, tripped circuit breaker, vacation lock mode, or a broken torsion spring. Recommended: Opener & Spring Inspection.'],
+      half: ['Door Stuck Halfway', 'Likely caused by track obstructions, flat-spotted rollers, or opener force/limit settings. Recommended: Track & Limit Calibration.'],
+      remote: ['Remote Not Working', 'Likely caused by dead remote battery, wall panel lock mode, or misaligned safety sensors. Recommended: Sensor & Remote Sync.'],
+      uneven: ['Door Moving Unevenly', 'Likely caused by a snapped lift cable or off-track rollers. Do not operate the door — call a technician immediately.'],
+      other: ['Other Garage Door Issue', 'Our licensed technicians diagnose weather seals, panel dents, and motor wear on-site with transparent upfront pricing.']
+    };
+    function dpProb(k, btn) {
+      document.querySelectorAll('.prob-pills .p-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('dpPTitle').textContent = dpPData[k][0];
+      document.getElementById('dpPDesc').textContent = dpPData[k][1];
+    }
+  </script>
+</body>
+</html>

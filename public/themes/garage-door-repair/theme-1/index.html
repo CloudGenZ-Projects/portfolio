@@ -206,6 +206,19 @@
         .trust-item::before { content: ''; width: 6px; height: 6px; background: var(--brand-orange); border-radius: 50%; }
 
         .hero-glass-form { position: absolute; bottom: -40px; left: -80px; width: 380px; z-index: 20; }
+        .slider-wrapper .slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .hero-thumb-strip { position: absolute; bottom: 20px; right: 20px; display: flex; gap: 10px; z-index: 15; background: rgba(23, 25, 28, 0.55); backdrop-filter: blur(8px); padding: 8px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); }
+        .hero-thumb-btn { width: 74px; height: 52px; border-radius: 6px; overflow: hidden; border: 2px solid transparent; padding: 0; cursor: pointer; background: none; transition: transform var(--transition-fast), border-color var(--transition-fast); }
+        .hero-thumb-btn:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.75); }
+        .hero-thumb-btn.active { border-color: var(--brand-orange); }
+        .hero-thumb-btn img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        @media (max-width: 768px) { .hero-thumb-strip { bottom: 12px; right: 12px; } .hero-thumb-btn { width: 56px; height: 40px; } }
+        .callback-band { background: var(--bg-secondary); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 48px 0; }
+        .callback-card { background: var(--color-white); border: 1px solid var(--border-color); border-radius: 12px; padding: 32px; box-shadow: 0 12px 32px rgba(0,0,0,0.04); display: grid; grid-template-columns: 1fr 2fr; gap: 32px; align-items: center; }
+        .callback-form-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; align-items: center; }
+        .callback-form-grid .neu-input { margin-bottom: 0; }
+        @media (max-width: 1024px) { .callback-card { grid-template-columns: 1fr; } .callback-form-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 640px) { .callback-form-grid { grid-template-columns: 1fr; } }
 
         /* ==========================================================================
            8. SERVICES SECTION
@@ -374,7 +387,7 @@
         .reveal-delay-2 { transition-delay: 200ms; }
         .reveal-delay-3 { transition-delay: 300ms; }
         .mask-reveal { clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%); transition: clip-path 1s var(--ease-out); }
-        .mask-reveal.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+        .mask-reveal.active { clip-path: none; }
 
         /* ==========================================================================
            17. RESPONSIVE DESIGN (Tablet & Mobile)
@@ -490,13 +503,13 @@
                     </div>
                 </div>
                 
-                <div class="hero-image-wrap mask-reveal hero-slider-wrap">
+                <div class="hero-image-wrap hero-slider-wrap">
                     
                     <!-- Modern Interactive Hero Slider -->
                     <div class="slider-wrapper" id="heroSlider">
-                        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80');"></div>
-                        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80');"></div>
-                        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1595844730298-b960af98fee8?auto=format&fit=crop&w=1200&q=80');"></div>
+                        <div class="slide active"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85" alt="Modern residential garage door exterior"></div>
+                        <div class="slide"><img src="https://images.unsplash.com/photo-1558036117-15d82a90b9b1?auto=format&fit=crop&w=1200&q=85" alt="Insulated double garage door installation"></div>
+                        <div class="slide"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=85" alt="Contemporary glass and steel garage door"></div>
                         
                         <!-- Slider UI -->
                         <button class="slider-nav prev" aria-label="Previous Slide">
@@ -511,25 +524,38 @@
                             <button class="slider-dot" data-index="1" aria-label="Slide 2"></button>
                             <button class="slider-dot" data-index="2" aria-label="Slide 3"></button>
                         </div>
+
+                        <div class="hero-thumb-strip" aria-label="Hero Gallery Previews">
+                            <button type="button" class="hero-thumb-btn active" onclick="document.querySelector('#heroSlider .slider-dot[data-index=&quot;0&quot;]')?.click(); document.querySelectorAll('.hero-thumb-btn').forEach((b,i)=>b.classList.toggle('active', i===0));"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=300&q=80" alt="Residential Garage Door"></button>
+                            <button type="button" class="hero-thumb-btn" onclick="document.querySelector('#heroSlider .slider-dot[data-index=&quot;1&quot;]')?.click(); document.querySelectorAll('.hero-thumb-btn').forEach((b,i)=>b.classList.toggle('active', i===1));"><img src="https://images.unsplash.com/photo-1558036117-15d82a90b9b1?auto=format&fit=crop&w=300&q=80" alt="Double Insulated Door"></button>
+                            <button type="button" class="hero-thumb-btn" onclick="document.querySelector('#heroSlider .slider-dot[data-index=&quot;2&quot;]')?.click(); document.querySelectorAll('.hero-thumb-btn').forEach((b,i)=>b.classList.toggle('active', i===2));"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=300&q=80" alt="Contemporary Glass Door"></button>
+                        </div>
                     </div>
-                    
-                    <!-- Glassmorphism Panel -->
-                    <div class="glass-panel hero-glass-form reveal-up reveal-delay-3">
-                        <h3 style="font-size: 20px; margin-bottom: 8px;">Need Garage Door Help?</h3>
-                        <p style="font-size: 14px; margin-bottom: 24px;">Tell us what's happening and request a service appointment.</p>
-                        <form action="#" method="POST">
-                            <input type="text" class="neu-input" placeholder="Your Name" required>
-                            <input type="tel" class="neu-input" placeholder="Phone Number" required>
-                            <select class="neu-input" required>
-                                <option value="" disabled selected>Service Required</option>
-                                <option value="repair">General Repair</option>
-                                <option value="spring">Spring Replacement</option>
-                                <option value="opener">Opener Issue</option>
-                                <option value="install">New Installation</option>
-                            </select>
-                            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">Request a Callback</button>
-                        </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUICK CALLBACK SECTION -->
+        <section id="quick-callback" class="callback-band">
+            <div class="container">
+                <div class="callback-card reveal-up">
+                    <div>
+                        <span class="eyebrow" style="margin-bottom: 8px;">Fast Appointment</span>
+                        <h3 style="font-size: 24px; margin-bottom: 8px;">Need Garage Door Help?</h3>
+                        <p style="font-size: 14.5px; margin-bottom: 0;">Tell us what's happening and request a service appointment.</p>
                     </div>
+                    <form action="#" method="POST" class="callback-form-grid" onsubmit="event.preventDefault(); alert('Callback request received! Our dispatch team will call you shortly.');">
+                        <input type="text" class="neu-input" placeholder="Your Name" required>
+                        <input type="tel" class="neu-input" placeholder="Phone Number" required>
+                        <select class="neu-input" required>
+                            <option value="" disabled selected>Service Required</option>
+                            <option value="repair">General Repair</option>
+                            <option value="spring">Spring Replacement</option>
+                            <option value="opener">Opener Issue</option>
+                            <option value="install">New Installation</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; height: 52px;">Request a Callback</button>
+                    </form>
                 </div>
             </div>
         </section>
@@ -600,7 +626,7 @@
                     </div>
                     <!-- Gallery Item 2 -->
                     <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1605276374104-162f15cebcd1?auto=format&fit=crop&w=800&q=80" alt="Clean suburban garage">
+                        <img src="https://images.unsplash.com/photo-1558036117-15d82a90b9b1?auto=format&fit=crop&w=800&q=80" alt="Clean suburban garage">
                         <div class="gallery-overlay">
                             <h4>Classic Paneled Replacement</h4>
                             <p>Door Replacement</p>
@@ -698,14 +724,14 @@
             <div class="container grid-12">
                 
                 <!-- Inner Slider Component -->
-                <div class="repair-slider-wrap mask-reveal">
+                <div class="repair-slider-wrap reveal-up">
                     <div class="slider-wrapper" id="repairSlider">
                         <!-- Tech inspecting hardware -->
-                        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1622473590773-f588134b6ce7?auto=format&fit=crop&w=1000&q=80');"></div>
+                        <div class="slide active"><img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1000&q=85" alt="Garage door opener and hardware service"></div>
                         <!-- Tools and mechanisms -->
-                        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1000&q=80');"></div>
+                        <div class="slide"><img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1000&q=85" alt="Technician tools and spring inspection"></div>
                         <!-- Detail of installation -->
-                        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1000&q=80');"></div>
+                        <div class="slide"><img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=1000&q=85" alt="Garage door roller and track maintenance"></div>
                         
                         <!-- Navigation UI -->
                         <button class="slider-nav prev" aria-label="Previous Slide">
@@ -996,11 +1022,15 @@
             initSlider('repairSlider');
 
             // 3. Scroll Reveal Animations (Intersection Observer)
+            document.querySelectorAll('.hero .reveal-up, .hero .mask-reveal').forEach(el => {
+                el.classList.add('active');
+            });
+
             const revealElements = document.querySelectorAll('.reveal-up, .mask-reveal');
             
             const revealOptions = {
-                threshold: 0.15,
-                rootMargin: "0px 0px -50px 0px"
+                threshold: 0.05,
+                rootMargin: "0px"
             };
 
             const revealOnScroll = new IntersectionObserver(function(entries, observer) {
