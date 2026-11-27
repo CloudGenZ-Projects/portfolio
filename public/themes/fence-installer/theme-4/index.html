@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aegis Perimeter Systems | Commercial &amp; Enterprise Security Fencing</title>
+  <meta name="description" content="B2B commercial security fencing, 358 anti-climb mesh, logistics yard perimeters, and ASTM/UL-325 compliant access barriers.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --navy: #0A192F;
+      --blue: #1D4ED8;
+      --blue-soft: #EFF6FF;
+      --slate: #F1F5F9;
+      --ink: #0F172A;
+      --muted: #475569;
+      --border: #CBD5E1;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--ink); background: #fff; line-height: 1.6; overflow-x: hidden; }
+    .mono { font-family: 'IBM Plex Mono', monospace; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 76px 0; border-bottom: 1px solid var(--border); }
+    .eyebrow { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
+    .h2 { font-size: clamp(1.9rem, 3.2vw, 2.6rem); font-weight: 800; color: var(--navy); margin-bottom: 10px; }
+    .btn-corp { display: inline-flex; align-items: center; gap: 8px; background: var(--blue); color: #fff; padding: 13px 24px; border-radius: 6px; font-weight: 700; font-size: 14px; border: none; cursor: pointer; text-decoration: none; transition: 0.25s; }
+    .btn-corp:hover { background: var(--navy); }
+    .btn-out { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--navy); border: 1.5px solid var(--navy); padding: 12px 22px; border-radius: 6px; font-weight: 700; font-size: 14px; cursor: pointer; text-decoration: none; }
+
+    .corp-nav { position: sticky; top: 0; z-index: 1000; background: #fff; border-bottom: 1px solid var(--border); padding: 16px 0; }
+    .nav-in { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 800; color: var(--navy); text-decoration: none; }
+    .nav-links { display: flex; gap: 22px; list-style: none; }
+    .nav-links a { font-size: 14px; font-weight: 600; color: var(--muted); text-decoration: none; }
+    .nav-links a:hover { color: var(--blue); }
+
+    .hero { background: linear-gradient(100deg, rgba(10,25,47,0.95) 0%, rgba(10,25,47,0.82) 55%, rgba(10,25,47,0.5) 100%), url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1500&q=85') center/cover no-repeat; color: #fff; padding: 96px 0; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 24px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 24px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 24px; }
+    .card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 24px; }
+    .tab-btn { background: var(--slate); border: 1px solid var(--border); padding: 10px 16px; border-radius: 6px; font-weight: 700; font-size: 13px; color: var(--navy); cursor: pointer; }
+    .tab-btn.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; }
+    th, td { text-align: left; padding: 14px 16px; border-bottom: 1px solid var(--border); }
+    th { background: var(--navy); color: #fff; font-weight: 700; }
+    tr:nth-child(even) { background: var(--slate); }
+
+    .case-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .case-card img { width: 100%; height: 190px; object-fit: cover; display: block; }
+    .corp-in { width: 100%; padding: 11px 14px; border: 1px solid var(--border); border-radius: 6px; font-family: inherit; font-size: 14px; margin-bottom: 12px; }
+    .rfq-p { display: none; }
+    .rfq-p.active { display: block; }
+
+    @media (max-width: 960px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } .nav-links { display: none; } table { display: block; overflow-x: auto; } }
+  </style>
+</head>
+<body>
+
+  <header class="corp-nav">
+    <div class="container nav-in">
+      <a href="#" class="brand"><i class="fa-solid fa-shield-halved" style="color:var(--blue);"></i> Aegis Perimeter Systems</a>
+      <ul class="nav-links">
+        <li><a href="#industries">Industries</a></li>
+        <li><a href="#solutions">Solutions</a></li>
+        <li><a href="#specs">Technical Specs</a></li>
+        <li><a href="#engineering">Engineering</a></li>
+        <li><a href="#portfolio">Case Studies</a></li>
+      </ul>
+      <a href="#rfq" class="btn-corp">Request Proposal</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div style="max-width:680px;">
+        <span class="eyebrow" style="color:#60A5FA;">Enterprise &amp; Infrastructure Security</span>
+        <h1 style="font-size:clamp(2.3rem,4.4vw,3.6rem);font-weight:800;line-height:1.08;margin-bottom:16px;">Commercial Perimeter Security Engineered to Specification.</h1>
+        <p style="color:#CBD5E1;font-size:16px;margin-bottom:26px;">Turnkey high-security fencing, crash-rated access barriers, and ASTM-certified perimeter systems for manufacturing, logistics, agriculture, and public infrastructure.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="#rfq" class="btn-corp">Submit Project RFQ &rarr;</a>
+          <a href="#specs" class="btn-out" style="color:#fff;border-color:rgba(255,255,255,0.4);">View Spec Matrix</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRY-SPECIFIC SOLUTION SELECTOR -->
+  <section class="section" id="industries" style="background:var(--slate);">
+    <div class="container">
+      <span class="eyebrow">Sector Alignment</span>
+      <h2 class="h2">Industry-Specific Perimeter Solutions</h2>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 22px;">
+        <button class="tab-btn active" onclick="corpInd('mfg',this)">Manufacturing</button>
+        <button class="tab-btn" onclick="corpInd('ag',this)">Agriculture</button>
+        <button class="tab-btn" onclick="corpInd('log',this)">Logistics &amp; Freight</button>
+        <button class="tab-btn" onclick="corpInd('infra',this)">Public Infrastructure</button>
+      </div>
+      <div class="card">
+        <div class="grid-2" style="margin-top:0;align-items:center;">
+          <div>
+            <h3 id="cIndT" style="font-size:24px;color:var(--navy);margin-bottom:8px;">Manufacturing &amp; Plant Facilities</h3>
+            <p id="cIndD" style="font-size:14.5px;color:var(--muted);margin-bottom:12px;">Protect high-value equipment, raw material yards, and shift employee access with 8–10 ft welded steel palisade and badge-integrated slide gates.</p>
+            <div class="mono" style="font-size:12.5px;color:var(--blue);" id="cIndS">SPEC: 8 ft Galvanized Palisade · UL-325 Gate Operators · 4,000 PSI Piers</div>
+          </div>
+          <div style="background:var(--blue-soft);padding:18px;border-radius:6px;border-left:4px solid var(--blue);">
+            <strong style="display:block;margin-bottom:6px;color:var(--navy);">Site Assessment Checklist</strong>
+            <ul style="font-size:13px;color:var(--muted);padding-left:18px;">
+              <li>Perimeter linear footage &amp; grade survey</li>
+              <li>Vehicle turning radius &amp; crash-gate clearance</li>
+              <li>811 utility locate &amp; grounding requirements</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTIONS + TECHNICAL SPECIFICATION TABLE -->
+  <section class="section" id="solutions">
+    <div class="container">
+      <span class="eyebrow">System Architecture</span>
+      <h2 class="h2">Commercial Security Fencing &amp; Barriers</h2>
+      <div class="grid-3">
+        <div class="card"><h4>High-Security 358 Mesh</h4><p style="font-size:13.5px;color:var(--muted);margin-top:6px;">Anti-climb, anti-cut 3" × 0.5" welded aperture for critical infrastructure and data centers.</p></div>
+        <div class="card"><h4>Industrial Perimeter Fencing</h4><p style="font-size:13.5px;color:var(--muted);margin-top:6px;">Heavy schedule-40 chain-link &amp; powder-coated steel palisade for large campuses.</p></div>
+        <div class="card"><h4>Access Barriers &amp; Crash Gates</h4><p style="font-size:13.5px;color:var(--muted);margin-top:6px;">Cantilever slide gates, hydraulic wedges, and K-rated perimeter bollards.</p></div>
+      </div>
+
+      <div id="specs" style="margin-top:44px;">
+        <span class="eyebrow">Engineering Data</span>
+        <h3 style="font-size:24px;color:var(--navy);">Technical Fence Specification Comparison</h3>
+        <table>
+          <thead><tr><th>System Type</th><th>Standard Height</th><th>Core Material</th><th>Coating / Finish</th><th>Mesh / Picket Spec</th></tr></thead>
+          <tbody>
+            <tr><td><strong>358 Anti-Climb Security</strong></td><td>8 ft – 12 ft</td><td>8-Gauge Galvanized Steel</td><td>Zinc + Polyester Powder</td><td>3" × 0.5" Welded Aperture</td></tr>
+            <tr><td><strong>Commercial Chain-Link</strong></td><td>6 ft – 10 ft</td><td>6-Gauge / 9-Gauge Core</td><td>Hot-Dip Galv / PVC</td><td>2" or 1.25" Diamond Mesh</td></tr>
+            <tr><td><strong>Steel Palisade</strong></td><td>8 ft – 10 ft</td><td>Structural Angle &amp; Tube</td><td>Hot-Dip Galv + Matte Coat</td><td>2"×2" Pickets · 4" Max Gap</td></tr>
+            <tr><td><strong>Agricultural / Ranch</strong></td><td>5 ft – 8 ft</td><td>High-Tensile Class 3 Wire</td><td>Class 3 Zinc</td><td>Fixed-Knot Woven Grid</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENGINEERING DIAGRAM + COMPLIANCE + SERVICE AREAS -->
+  <section class="section" id="engineering" style="background:var(--slate);">
+    <div class="container">
+      <div class="grid-2" style="margin-top:0;align-items:center;">
+        <div class="card">
+          <span class="eyebrow">Engineering Blueprint</span>
+          <h3 style="font-size:24px;color:var(--navy);margin-bottom:10px;">Commercial Installation Diagram</h3>
+          <svg viewBox="0 0 380 210" width="100%" style="background:#0A192F;border-radius:6px;">
+            <rect x="30" y="155" width="320" height="35" fill="#1E293B"/>
+            <rect x="165" y="135" width="50" height="55" fill="#334155" stroke="#60A5FA" stroke-width="2"/>
+            <rect x="182" y="35" width="16" height="125" fill="#CBD5E1"/>
+            <line x1="60" y1="60" x2="320" y2="60" stroke="#60A5FA" stroke-width="2.5"/>
+            <line x1="60" y1="100" x2="320" y2="100" stroke="#60A5FA" stroke-width="2.5"/>
+            <line x1="60" y1="140" x2="320" y2="140" stroke="#60A5FA" stroke-width="2.5"/>
+          </svg>
+          <p class="mono" style="font-size:12px;color:var(--muted);margin-top:10px;">ASTM F567 Footing · 48" Depth · Grounded Steel Line Post · Tensioned Top/Mid/Bottom Rails</p>
+        </div>
+        <div class="card">
+          <span class="eyebrow">Compliance &amp; Coverage</span>
+          <h3 style="font-size:24px;color:var(--navy);margin-bottom:10px;">Standards &amp; Regional Service Locator</h3>
+          <p style="font-size:14px;color:var(--muted);margin-bottom:12px;">All commercial builds adhere to ASTM F567, UL-325 gate entrapment standards, OSHA site safety, and 811 underground locate protocols.</p>
+          <div style="display:flex;gap:8px;margin-bottom:10px;">
+            <input id="corpZip" class="corp-in" style="margin-bottom:0;" placeholder="Enter Facility ZIP or Metro Area">
+            <button class="btn-corp" onclick="corpLoc()">Verify</button>
+          </div>
+          <div id="corpZipOut" style="font-size:13px;font-weight:600;color:var(--blue);">Regional B2B crews active across Metro Industrial Parks &amp; Freight Corridors.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDIES + MULTI-STEP RFQ -->
+  <section class="section" id="portfolio">
+    <div class="container">
+      <span class="eyebrow">Proven Execution</span>
+      <h2 class="h2">Commercial Case Studies</h2>
+      <div class="grid-3">
+        <div class="case-card"><img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=700&q=80" alt="Logistics Yard"><div style="padding:18px;"><h4>4,500 ft Logistics Terminal</h4><p style="font-size:13px;color:var(--muted);margin-top:4px;">10 ft chain-link with dual RFID cantilever gates installed on active freight schedule.</p></div></div>
+        <div class="case-card"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=700&q=80" alt="Substation Fence"><div style="padding:18px;"><h4>Utility Substation 358 Mesh</h4><p style="font-size:13px;color:var(--muted);margin-top:4px;">Anti-climb welded mesh perimeter with copper grounding grid integration.</p></div></div>
+        <div class="case-card"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=700&q=80" alt="Corporate Campus"><div style="padding:18px;"><h4>Corporate Campus Boundary</h4><p style="font-size:13px;color:var(--muted);margin-top:4px;">8 ft architectural steel palisade &amp; automated visitor gate entry.</p></div></div>
+      </div>
+
+      <div class="card" id="rfq" style="margin-top:44px;max-width:780px;margin-left:auto;margin-right:auto;">
+        <span class="eyebrow">B2B Proposal Desk</span>
+        <h3 style="font-size:26px;color:var(--navy);margin-bottom:14px;">Request for Quotation (Multi-Step)</h3>
+        <div id="cErr" style="color:#DC2626;font-size:13px;margin-bottom:10px;display:none;"></div>
+        <div class="rfq-p active" id="cS1">
+          <input id="cOrg" class="corp-in" placeholder="Organization / Facility Name *">
+          <select id="cSec" class="corp-in"><option>Manufacturing</option><option>Logistics / Warehouse</option><option>Agriculture</option><option>Infrastructure / Public</option></select>
+          <button class="btn-corp" onclick="cNext(2)">Step 2: Fence Specs &rarr;</button>
+        </div>
+        <div class="rfq-p" id="cS2">
+          <input id="cLen" type="number" class="corp-in" placeholder="Estimated Linear Feet *">
+          <input id="cSpec" class="corp-in" placeholder="Desired Spec (e.g. 8 ft 358 Mesh + 2 Slide Gates)">
+          <div style="display:flex;gap:10px;"><button class="btn-out" onclick="cNext(1)">&larr; Back</button><button class="btn-corp" onclick="cNext(3)">Step 3: Contact &rarr;</button></div>
+        </div>
+        <div class="rfq-p" id="cS3">
+          <input id="cMail" type="email" class="corp-in" placeholder="Corporate Email *">
+          <input id="cTel" type="tel" class="corp-in" placeholder="Direct Phone *">
+          <div style="display:flex;gap:10px;"><button class="btn-out" onclick="cNext(2)">&larr; Back</button><button class="btn-corp" onclick="cSub()">Submit Proposal Request</button></div>
+        </div>
+        <div id="cDone" style="display:none;padding:14px;background:#ECFDF5;border:1px solid #10B981;border-radius:6px;color:#065F46;font-weight:700;"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:var(--navy);color:#CBD5E1;padding:38px 0;font-size:13.5px;text-align:center;">
+    <div class="container">Aegis Perimeter Systems · B2B Commercial Security Fencing · (555) 720-9100 · &copy; 2026</div>
+  </footer>
+
+  <script>
+    const cMap = {
+      mfg: ['Manufacturing & Plant Facilities', 'Protect high-value equipment, raw material yards, and shift employee access with 8–10 ft welded steel palisade and badge-integrated slide gates.', 'SPEC: 8 ft Galvanized Palisade · UL-325 Gate Operators · 4,000 PSI Piers'],
+      ag: ['Agriculture & Acreage Perimeters', 'High-tensile fixed-knot fencing, heavy pipe corners, and wide tractor drive gates engineered for livestock and crop protection.', 'SPEC: Class-3 High-Tensile Wire · Driven Pipe Corners · 20-ft Double Gates'],
+      log: ['Logistics, Freight &amp; Distribution Hubs', '24/7 yard perimeter security with 10 ft chain-link, barbed outriggers, and high-cycle RFID cantilever truck gates.', 'SPEC: 10 ft 6-Ga Chain-Link · 36-ft Cantilever Gates · Safety Loops'],
+      infra: ['Public Infrastructure &amp; Utilities', 'Substation-ready 358 anti-climb welded mesh with copper grounding integration and crash-rated perimeter bollards.', 'SPEC: 10 ft 358 Anti-Climb Mesh · Grounded Posts · K-Rated Barriers']
+    };
+    function corpInd(k, btn) {
+      btn.parentElement.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('cIndT').innerHTML = cMap[k][0];
+      document.getElementById('cIndD').textContent = cMap[k][1];
+      document.getElementById('cIndS').textContent = cMap[k][2];
+    }
+    function corpLoc() {
+      const z = document.getElementById('corpZip').value.trim();
+      document.getElementById('corpZipOut').textContent = z ? `Commercial Engineering Team available for site walk in ${z} within 48 hours.` : 'Please enter a facility ZIP or metro area.';
+    }
+    function cNext(s) {
+      const e = document.getElementById('cErr'); e.style.display = 'none';
+      if (s === 2 && !document.getElementById('cOrg').value.trim()) { e.textContent = 'Please enter Organization / Facility Name.'; e.style.display = 'block'; return; }
+      if (s === 3 && !document.getElementById('cLen').value.trim()) { e.textContent = 'Please enter estimated linear feet.'; e.style.display = 'block'; return; }
+      document.querySelectorAll('.rfq-p').forEach(p => p.classList.remove('active'));
+      document.getElementById('cS' + s).classList.add('active');
+    }
+    function cSub() {
+      const e = document.getElementById('cErr');
+      if (!document.getElementById('cMail').value.includes('@') || document.getElementById('cTel').value.trim().length < 7) {
+        e.textContent = 'Please enter a valid corporate email and phone.'; e.style.display = 'block'; return;
+      }
+      e.style.display = 'none';
+      document.querySelectorAll('.rfq-p').forEach(p => p.classList.remove('active'));
+      const d = document.getElementById('cDone'); d.style.display = 'block';
+      d.textContent = `Proposal Request logged for ${document.getElementById('cOrg').value} (${document.getElementById('cLen').value} ft). Our B2B desk will contact you within 24 hours.`;
+    }
+  </script>
+</body>
+</html>

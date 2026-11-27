@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concrete Paving Career Profile | Infrastructure 360</title>
+  <meta name="description" content="Infrastructure 360: Job intelligence dashboard, interactive construction simulator, equipment explorer, application map, skills matrix, and career center.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #071B33;
+      --surface: #0D3155;
+      --orange: #FF7939;
+      --text: #EAF3FB;
+      --muted: #9FC0DE;
+      --border: rgba(234,243,251,0.14);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+    h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; }
+    .container { max-width: 1260px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 78px 0; border-bottom: 1px solid var(--border); }
+    .eyebrow { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange); margin-bottom: 8px; }
+    .h2 { font-size: clamp(1.9rem, 3.2vw, 2.7rem); margin-bottom: 10px; }
+    .sp { position: fixed; top: 0; left: 0; height: 3px; background: var(--orange); width: 0%; z-index: 2000; }
+
+    .nav { position: sticky; top: 0; z-index: 1000; background: rgba(7,27,51,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 15px 0; }
+    .nav-in { display: flex; justify-content: space-between; align-items: center; }
+    .brand { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+    .nav-links { display: flex; gap: 20px; list-style: none; }
+    .nav-links a { color: var(--muted); font-size: 13.5px; font-weight: 600; text-decoration: none; }
+    .nav-links a:hover { color: var(--orange); }
+
+    .hero { padding: 90px 0; background: linear-gradient(rgba(7,27,51,0.88), rgba(7,27,51,0.94)), repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 60px), url('https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat; }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 36px; align-items: center; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 24px; }
+    .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 24px; }
+    .grid-6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-top: 24px; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px; transition: 0.25s; }
+    .card:hover { border-color: var(--orange); }
+    .pill-btn { background: rgba(255,255,255,0.06); color: var(--muted); border: 1px solid var(--border); padding: 10px 15px; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; }
+    .pill-btn.active { background: var(--orange); color: #071B33; border-color: var(--orange); }
+    .top-btn { position: fixed; bottom: 22px; right: 22px; width: 42px; height: 42px; border-radius: 8px; background: var(--orange); color: #071B33; border: none; font-weight: 800; cursor: pointer; }
+
+    @media (max-width: 1024px) { .hero-grid, .grid-5, .grid-6 { grid-template-columns: 1fr 1fr; } .nav-links { display: none; } }
+    @media (max-width: 640px) { .hero-grid, .grid-2, .grid-3, .grid-5, .grid-6 { grid-template-columns: 1fr; } }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }
+  </style>
+</head>
+<body>
+  <div class="sp" id="iSp"></div>
+
+  <header class="nav">
+    <div class="container nav-in">
+      <a href="#" class="brand"><i class="fa-solid fa-microchip" style="color:var(--orange);"></i> Infrastructure 360</a>
+      <ul class="nav-links">
+        <li><a href="#dashboard">Dashboard</a></li>
+        <li><a href="#simulator">Simulator</a></li>
+        <li><a href="#equipment">Equipment</a></li>
+        <li><a href="#map">Applications</a></li>
+        <li><a href="#skills">Skills Matrix</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#career">Career Center</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- 01. TECHNOLOGY-DRIVEN HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">01 · Engineering the Future of Infrastructure</span>
+        <h1 style="font-size:clamp(2.5rem,4.6vw,3.9rem);line-height:1.08;margin-bottom:16px;">From Raw Ground to Engineered Roads.</h1>
+        <p style="color:var(--muted);font-size:16px;margin-bottom:24px;">Explore the technology, machinery and engineering processes used in modern concrete paving.</p>
+        <a href="#simulator" style="display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#071B33;padding:13px 24px;border-radius:8px;font-weight:700;text-decoration:none;">Launch Construction Simulator &rarr;</a>
+      </div>
+      <div class="card">
+        <span class="eyebrow">Live Engineering Telemetry</span>
+        <svg viewBox="0 0 320 110" width="100%" style="background:#071B33;border-radius:8px;margin-bottom:12px;">
+          <path d="M 20 85 Q 90 35 160 65 T 300 40" fill="none" stroke="#FF7939" stroke-width="3" stroke-dasharray="8 6"/>
+          <circle cx="160" cy="65" r="6" fill="#FF7939"/>
+        </svg>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:13px;">
+          <div><strong style="color:var(--orange);display:block;">6 Stages</strong>Workflow Sequence</div>
+          <div><strong style="color:var(--orange);display:block;">7+ Tools</strong>Placing &amp; Finishing</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02. JOB INTELLIGENCE DASHBOARD -->
+  <section class="section" id="dashboard">
+    <div class="container">
+      <span class="eyebrow">02 · Job Intelligence Dashboard</span>
+      <h2 class="h2">Concrete Paving at a Glance</h2>
+      <div class="grid-5">
+        <div class="card"><span style="font-size:11px;color:var(--orange);">INDUSTRY</span><h4>Civil Engineering</h4></div>
+        <div class="card"><span style="font-size:11px;color:var(--orange);">APPLICATION</span><h4>Infrastructure</h4></div>
+        <div class="card"><span style="font-size:11px;color:var(--orange);">CATEGORY</span><h4>Construction</h4></div>
+        <div class="card"><span style="font-size:11px;color:var(--orange);">MATERIAL</span><h4>Concrete</h4></div>
+        <div class="card"><span style="font-size:11px;color:var(--orange);">ENVIRONMENT</span><h4>Outdoor &amp; Industrial</h4></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03. INTERACTIVE CONSTRUCTION SIMULATOR -->
+  <section class="section" id="simulator" style="background:var(--surface);">
+    <div class="container">
+      <span class="eyebrow">03 · Interactive Simulator</span>
+      <h2 class="h2">Six-Stage Construction Simulator</h2>
+      <div class="grid-6">
+        <button class="pill-btn active" onclick="simSt(1,'Ground Preparation','Excavation, drainage grading, and subbase compaction.','Compactor, Laser Level','Labourer, Paver',this)">1. Prep</button>
+        <button class="pill-btn" onclick="simSt(2,'Formwork & Steel','Rigid edge forms and rebar/dowel placement.','Forms, Rebar Ties','Paver, Mason',this)">2. Forms</button>
+        <button class="pill-btn" onclick="simSt(3,'Concrete Mixing','Batching cement, aggregate, and water ratio.','Mixer Truck, Slump Cone','Batch Tech',this)">3. Mixing</button>
+        <button class="pill-btn" onclick="simSt(4,'Pouring & Vibration','Placing mix and removing trapped air pockets.','Concrete Pump, Vibrator','Pump Operator',this)">4. Pouring</button>
+        <button class="pill-btn" onclick="simSt(5,'Surface Finishing','Screeding, bull floating, and power troweling.','Power Screed, Trowel','Concrete Finisher',this)">5. Finishing</button>
+        <button class="pill-btn" onclick="simSt(6,'Curing & Joints','Control joint sawing and moisture retention.','Early-Entry Saw, Sprayer','Senior Finisher',this)">6. Curing</button>
+      </div>
+      <div class="card" style="margin-top:18px;background:var(--bg);">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <h3 id="simT" style="color:var(--orange);">Stage 1: Ground Preparation</h3>
+          <span id="simPct" style="font-size:12px;font-weight:700;color:var(--muted);">Stage 1 of 6</span>
+        </div>
+        <p id="simD" style="font-size:14px;margin-bottom:8px;">Excavation, drainage grading, and subbase compaction.</p>
+        <div style="font-size:13px;color:var(--muted);"><strong>Equipment:</strong> <span id="simE">Compactor, Laser Level</span> · <strong>Crew:</strong> <span id="simW">Labourer, Paver</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04. EQUIPMENT EXPLORER -->
+  <section class="section" id="equipment">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;">
+        <div><span class="eyebrow">04 · Equipment Explorer</span><h2 class="h2">Machinery &amp; Tools</h2></div>
+        <div style="display:flex;gap:8px;">
+          <button class="pill-btn active" onclick="eqF('all',this)">All</button>
+          <button class="pill-btn" onclick="eqF('place',this)">Placing</button>
+          <button class="pill-btn" onclick="eqF('finish',this)">Finishing</button>
+        </div>
+      </div>
+      <div class="grid-3" id="eqGrid">
+        <div class="card" data-c="place"><h4>Concrete Mixer &amp; Pump</h4><p style="font-size:13px;color:var(--muted);">Delivers uniform concrete mix to slabs and roadways.</p></div>
+        <div class="card" data-c="place"><h4>Concrete Vibrator</h4><p style="font-size:13px;color:var(--muted);">Consolidates wet mix around steel reinforcement.</p></div>
+        <div class="card" data-c="finish"><h4>Power Screed &amp; Laser Level</h4><p style="font-size:13px;color:var(--muted);">Strikes off concrete to engineered grade tolerance.</p></div>
+        <div class="card" data-c="finish"><h4>Trowel Machine</h4><p style="font-size:13px;color:var(--muted);">Compacts and smooths industrial floor surfaces.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05. INFRASTRUCTURE APPLICATION MAP + 06. SKILLS INTELLIGENCE MATRIX -->
+  <section class="section" id="map" style="background:var(--surface);">
+    <div class="container">
+      <div class="grid-2" style="margin-top:0;">
+        <div class="card" style="background:var(--bg);">
+          <span class="eyebrow">05 · Infrastructure Application Map</span>
+          <h3 style="font-size:24px;margin-bottom:12px;">Six Major Applications</h3>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+            <button class="pill-btn active" onclick="appSel('Road Infrastructure: Slip-form highways and arterial lanes.',this)">Roads</button>
+            <button class="pill-btn" onclick="appSel('Public Sidewalks: ADA-compliant pedestrian routes.',this)">Sidewalks</button>
+            <button class="pill-btn" onclick="appSel('Residential Driveways: Reinforced home vehicle approaches.',this)">Driveways</button>
+            <button class="pill-btn" onclick="appSel('Patios: Architectural outdoor concrete slabs.',this)">Patios</button>
+            <button class="pill-btn" onclick="appSel('Parking Infrastructure: Heavy commercial lots.',this)">Parking Lots</button>
+            <button class="pill-btn" onclick="appSel('Industrial Infrastructure: Super-flat warehouse floors.',this)">Industrial Floors</button>
+          </div>
+          <p id="appOut" style="font-size:14px;color:var(--text);">Road Infrastructure: Slip-form highways and arterial lanes.</p>
+        </div>
+
+        <div class="card" id="skills" style="background:var(--bg);">
+          <span class="eyebrow">06 · Skills Intelligence Matrix</span>
+          <h3 style="font-size:24px;margin-bottom:12px;">Core Skill Domains</h3>
+          <div style="display:grid;gap:8px;font-size:13.5px;color:var(--muted);">
+            <div><strong style="color:var(--orange);">Technical &amp; Measurement:</strong> Grade slopes, laser reading, joint layout</div>
+            <div><strong style="color:var(--orange);">Equipment Handling:</strong> Screeds, vibrators, pumps, power trowels</div>
+            <div><strong style="color:var(--orange);">Quality Control &amp; Safety:</strong> Slump checks, PPE, silica protection</div>
+            <div><strong style="color:var(--orange);">Communication:</strong> Synchronized crew pacing during active pours</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07. TEAM & SITE OPERATIONS + 08. CAREER INTELLIGENCE CENTER -->
+  <section class="section" id="team">
+    <div class="container">
+      <span class="eyebrow">07 · Construction Team</span>
+      <h2 class="h2">Job Roles &amp; Site Operations</h2>
+      <div class="grid-5">
+        <div class="card"><h4>Concrete Paver</h4><p style="font-size:12.5px;color:var(--muted);">Formwork &amp; placement.</p></div>
+        <div class="card"><h4>Concrete Finisher</h4><p style="font-size:12.5px;color:var(--muted);">Floating &amp; troweling.</p></div>
+        <div class="card"><h4>Cement Mason</h4><p style="font-size:12.5px;color:var(--muted);">Curbs, steps &amp; edges.</p></div>
+        <div class="card"><h4>Site Labourer</h4><p style="font-size:12.5px;color:var(--muted);">Base prep &amp; staging.</p></div>
+        <div class="card"><h4>Pump Operator</h4><p style="font-size:12.5px;color:var(--muted);">Pressurized mix delivery.</p></div>
+      </div>
+
+      <div class="card" id="career" style="margin-top:26px;">
+        <span class="eyebrow">08 · Career Intelligence Center</span>
+        <h3 style="font-size:24px;margin-bottom:8px;">Career Pathway &amp; Training</h3>
+        <p style="font-size:14px;color:var(--muted);">Enter through site labourer or apprentice roles, build flatwork finishing and laser-grading proficiency, and advance to Senior Finisher, Site Supervisor, and Construction Foreman.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer style="padding:34px 0;text-align:center;font-size:13px;color:var(--muted);">
+    <div class="container">Concrete Paving Career Blueprint · Infrastructure 360 Edition</div>
+  </footer>
+  <button class="top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&uarr;</button>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement;
+      document.getElementById('iSp').style.width = ((h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100) + '%';
+    });
+    function simSt(n, t, d, e, w, btn) {
+      btn.parentElement.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('simT').textContent = `Stage ${n}: ${t}`;
+      document.getElementById('simPct').textContent = `Stage ${n} of 6`;
+      document.getElementById('simD').textContent = d;
+      document.getElementById('simE').textContent = e;
+      document.getElementById('simW').textContent = w;
+    }
+    function eqF(c, btn) {
+      btn.parentElement.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('#eqGrid .card').forEach(el => { el.style.display = (c==='all'||el.dataset.c===c) ? 'block' : 'none'; });
+    }
+    function appSel(txt, btn) {
+      btn.parentElement.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('appOut').textContent = txt;
+    }
+  </script>
+</body>
+</html>

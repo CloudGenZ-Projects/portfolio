@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TitanSteel Perimeter | Industrial &amp; Heavy-Duty Fence Contractors</title>
+  <meta name="description" content="Industrial steel fencing, high-security chain-link, automated barriers, and large-scale perimeter construction.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #0B1016;
+      --surface: #131B24;
+      --surface-2: #1A2430;
+      --amber: #F97316;
+      --amber-hover: #EA580C;
+      --steel: #94A3B8;
+      --text: #F8FAFC;
+      --border: rgba(255,255,255,0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+    h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em; }
+    .container { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 80px 0; border-bottom: 1px solid var(--border); }
+    .eyebrow { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--amber); margin-bottom: 8px; }
+    .h2 { font-size: clamp(1.9rem, 3.4vw, 2.8rem); margin-bottom: 10px; }
+    .sub { color: var(--steel); max-width: 650px; font-size: 15px; }
+    .btn-amber { display: inline-flex; align-items: center; gap: 8px; background: var(--amber); color: #0B1016; font-weight: 700; padding: 13px 24px; border-radius: 6px; border: none; cursor: pointer; text-decoration: none; transition: 0.25s; }
+    .btn-amber:hover { background: var(--amber-hover); color: #fff; transform: translateY(-2px); }
+    .btn-outline { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3); font-weight: 600; padding: 12px 22px; border-radius: 6px; cursor: pointer; text-decoration: none; }
+    .btn-outline:hover { border-color: var(--amber); color: var(--amber); }
+
+    /* Transparent Sticky Navbar */
+    .ind-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 18px 0; transition: 0.3s; }
+    .ind-nav.scrolled { background: rgba(11,16,22,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); padding: 13px 0; }
+    .nav-in { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: #fff; text-decoration: none; }
+    .nav-menu { display: flex; align-items: center; gap: 24px; list-style: none; }
+    .nav-menu a { color: #E2E8F0; font-size: 14px; font-weight: 500; text-decoration: none; }
+    .nav-menu a:hover { color: var(--amber); }
+    .dropdown { position: relative; }
+    .dropdown-panel { display: none; position: absolute; top: 100%; left: 0; min-width: 220px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px; margin-top: 8px; }
+    .dropdown:hover .dropdown-panel { display: block; }
+    .dropdown-panel a { display: block; padding: 8px 12px; border-radius: 4px; font-size: 13px; }
+    .dropdown-panel a:hover { background: var(--surface-2); }
+
+    /* Full-Screen Parallax Industrial Hero */
+    .hero { position: relative; min-height: 92vh; display: flex; align-items: center; padding: 120px 0 80px; overflow: hidden; border-bottom: 1px solid var(--border); }
+    .hero-bg { position: absolute; inset: 0; background: linear-gradient(95deg, rgba(11,16,22,0.92) 0%, rgba(11,16,22,0.72) 55%, rgba(11,16,22,0.45) 100%), url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1600&q=85') center/cover no-repeat fixed; animation: kenBurns 18s ease-in-out infinite alternate; }
+    @keyframes kenBurns { from { transform: scale(1); } to { transform: scale(1.06); } }
+    .hero-content { position: relative; z-index: 2; max-width: 720px; }
+    .hero h1 { font-size: clamp(2.5rem, 5vw, 4.1rem); line-height: 1.06; margin-bottom: 18px; }
+    .rotator { color: var(--amber); border-right: 3px solid var(--amber); padding-right: 6px; }
+
+    /* Trust Bar */
+    .trust-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 28px 0; }
+    .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
+    .trust-num { font-family: 'Space Grotesk', sans-serif; font-size: 32px; font-weight: 700; color: var(--amber); }
+    .trust-lbl { font-size: 13px; color: var(--steel); }
+
+    /* Grids & Cards */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 28px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 28px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 28px; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px; transition: 0.25s; }
+    .card:hover { border-color: var(--amber); }
+    .tab-btn { background: var(--surface-2); color: var(--steel); border: 1px solid var(--border); padding: 10px 16px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; }
+    .tab-btn.active { background: var(--amber); color: #0B1016; border-color: var(--amber); }
+
+    /* SVG Steel Line Draw */
+    .steel-line { stroke-dasharray: 420; stroke-dashoffset: 420; animation: drawLine 2.4s ease forwards; }
+    @keyframes drawLine { to { stroke-dashoffset: 0; } }
+
+    /* Process Timeline */
+    .timeline-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 28px; }
+    .step-box { background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--amber); border-radius: 8px; padding: 18px; }
+    .step-box span { font-size: 11px; font-weight: 700; color: var(--amber); text-transform: uppercase; }
+
+    /* Gallery & Equipment */
+    .gal-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    .gal-card img { width: 100%; height: 210px; object-fit: cover; display: block; transition: transform 0.4s; }
+    .gal-card:hover img { transform: scale(1.04); }
+    .ind-input { width: 100%; padding: 12px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: #fff; font-family: inherit; font-size: 14px; margin-bottom: 12px; }
+    .ind-input:focus { outline: none; border-color: var(--amber); }
+    .rfq-step { display: none; }
+    .rfq-step.active { display: block; }
+    .err-msg { color: #F87171; font-size: 13px; margin-bottom: 10px; display: none; }
+
+    @media (max-width: 1024px) { .grid-4, .timeline-5 { grid-template-columns: repeat(2, 1fr); } .nav-menu { display: none; } }
+    @media (max-width: 640px) { .grid-2, .grid-3, .grid-4, .trust-grid, .timeline-5 { grid-template-columns: 1fr; } .hero-bg { background-attachment: scroll; } }
+  </style>
+</head>
+<body>
+
+  <header class="ind-nav" id="indNav">
+    <div class="container nav-in">
+      <a href="#" class="brand"><i class="fa-solid fa-industry" style="color:var(--amber);"></i> TitanSteel Perimeter</a>
+      <ul class="nav-menu">
+        <li class="dropdown">
+          <a href="#services">Services <i class="fa-solid fa-chevron-down" style="font-size:11px;"></i></a>
+          <div class="dropdown-panel">
+            <a href="#services">Industrial Steel Fencing</a>
+            <a href="#services">Heavy Chain-Link</a>
+            <a href="#services">Security Barriers &amp; Gates</a>
+          </div>
+        </li>
+        <li><a href="#diagram">Engineering</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#equipment">Equipment</a></li>
+        <li><a href="#specs">Specs</a></li>
+      </ul>
+      <a href="#rfq" class="btn-amber">Get a Quote</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="container hero-content">
+      <span class="eyebrow">Heavy-Duty Industrial Contractor</span>
+      <h1>Engineered for <span class="rotator" id="heroRot">High-Security Perimeters</span></h1>
+      <p class="sub" style="color:#CBD5E1;margin-bottom:26px;">Full-scale steel palisade, galvanized chain-link, crash-rated gates, and heavy post-drilling operations for industrial plants, logistics yards, and infrastructure sites.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a href="#rfq" class="btn-amber">Request Site Bid &rarr;</a>
+        <a href="#diagram" class="btn-outline">Inspect Technical Diagram</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="trust-bar">
+    <div class="container trust-grid">
+      <div><div class="trust-num" data-target="24">0</div><div class="trust-lbl">Years Industrial Experience</div></div>
+      <div><div class="trust-num" data-target="1420">0</div><div class="trust-lbl">Commercial Projects Completed</div></div>
+      <div><div class="trust-num" data-target="850">0</div><div class="trust-lbl">Linear Ft (K) Installed</div></div>
+      <div><div class="trust-num" data-target="100">0</div><div class="trust-lbl">% OSHA &amp; 811 Compliant</div></div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="container">
+      <span class="eyebrow">Core Capabilities</span>
+      <h2 class="h2">Industrial Perimeter Services</h2>
+      <div class="grid-4">
+        <div class="card"><i class="fa-solid fa-shield-halved" style="font-size:24px;color:var(--amber);margin-bottom:12px;"></i><h4>Steel Palisade &amp; Welded Wire</h4><p style="font-size:13.5px;color:var(--steel);margin-top:6px;">8–12 ft heavy-gauge structural steel panels with tamper-proof fasteners.</p></div>
+        <div class="card"><i class="fa-solid fa-link" style="font-size:24px;color:var(--amber);margin-bottom:12px;"></i><h4>Commercial Chain-Link</h4><p style="font-size:13.5px;color:var(--steel);margin-top:6px;">6-gauge galvanized &amp; vinyl-coated mesh with schedule-40 line posts.</p></div>
+        <div class="card"><i class="fa-solid fa-road-barrier" style="font-size:24px;color:var(--amber);margin-bottom:12px;"></i><h4>Security Barriers &amp; Bollards</h4><p style="font-size:13.5px;color:var(--steel);margin-top:6px;">Anti-ram perimeter bollards, barbed/razor outriggers, and crash beams.</p></div>
+        <div class="card"><i class="fa-solid fa-dungeon" style="font-size:24px;color:var(--amber);margin-bottom:12px;"></i><h4>Cantilever &amp; Slide Gates</h4><p style="font-size:13.5px;color:var(--steel);margin-top:6px;">40-ft span industrial gates with PLC/access control integration.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE FENCE CONSTRUCTION DIAGRAM + SPECS -->
+  <section class="section" id="diagram" style="background:var(--surface);">
+    <div class="container">
+      <span class="eyebrow">Technical Blueprint</span>
+      <h2 class="h2">Interactive Fence Construction Diagram</h2>
+      <p class="sub">Click any structural layer to inspect our industrial engineering tolerances.</p>
+      <div class="grid-2" style="align-items:center;">
+        <div class="card" style="background:var(--bg);text-align:center;">
+          <svg viewBox="0 0 420 260" width="100%" style="max-width:440px;">
+            <rect x="40" y="195" width="340" height="45" fill="#1E293B" rx="4"/>
+            <rect x="180" y="170" width="60" height="65" fill="#475569" stroke="#F97316" stroke-width="2" style="cursor:pointer;" onclick="indDiag('footing')"/>
+            <rect x="200" y="45" width="20" height="150" fill="#94A3B8" stroke="#fff" stroke-width="1.5" style="cursor:pointer;" onclick="indDiag('post')"/>
+            <path class="steel-line" d="M 60 75 L 360 75 M 60 120 L 360 120 M 60 165 L 360 165" stroke="#F97316" stroke-width="3" fill="none"/>
+            <line x1="210" y1="45" x2="240" y2="25" stroke="#F97316" stroke-width="3" style="cursor:pointer;" onclick="indDiag('top')"/>
+            <rect x="75" y="65" width="270" height="115" fill="rgba(249,115,22,0.08)" stroke="#94A3B8" stroke-dasharray="6 4" style="cursor:pointer;" onclick="indDiag('mesh')"/>
+          </svg>
+          <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px;">
+            <button class="tab-btn active" onclick="indDiag('footing',this)">Concrete Footing</button>
+            <button class="tab-btn" onclick="indDiag('post',this)">Schedule-40 Post</button>
+            <button class="tab-btn" onclick="indDiag('mesh',this)">6-Ga Security Mesh</button>
+            <button class="tab-btn" onclick="indDiag('top',this)">3-Strand Outrigger</button>
+          </div>
+        </div>
+        <div class="card">
+          <h3 id="indDiagTitle" style="font-size:24px;color:var(--amber);margin-bottom:8px;">4,000 PSI Frost-Depth Concrete Footing</h3>
+          <p id="indDiagDesc" style="font-size:14.5px;color:#CBD5E1;margin-bottom:14px;">Auger-drilled 42"–48" deep × 14" diameter piers poured with high-strength structural concrete to resist wind shear and soil heave.</p>
+          <div style="border-top:1px solid var(--border);padding-top:14px;font-size:13.5px;color:var(--steel);">
+            <strong>ASTM Spec:</strong> <span id="indDiagSpec">ASTM F567 / C94 Structural Mix</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5-STEP PROCESS TIMELINE -->
+  <section class="section" id="process">
+    <div class="container">
+      <span class="eyebrow">Execution Workflow</span>
+      <h2 class="h2">5-Stage Industrial Installation Process</h2>
+      <div class="timeline-5">
+        <div class="step-box"><span>01 · Site Inspection</span><h4 style="margin:6px 0;">Grade &amp; 811 Locate</h4><p style="font-size:13px;color:var(--steel);">Soil testing, underground utility marking, and perimeter staking.</p></div>
+        <div class="step-box"><span>02 · Measurement</span><h4 style="margin:6px 0;">CAD &amp; Linear Audit</h4><p style="font-size:13px;color:var(--steel);">Laser elevation mapping and gate swing/cantilever clearance.</p></div>
+        <div class="step-box"><span>03 · Excavation</span><h4 style="margin:6px 0;">Hydraulic Auger</h4><p style="font-size:13px;color:var(--steel);">Skid-steer rock &amp; earth drilling to frost-depth specs.</p></div>
+        <div class="step-box"><span>04 · Installation</span><h4 style="margin:6px 0;">Steel &amp; Welding</h4><p style="font-size:13px;color:var(--steel);">Post setting, tensioned rails, mesh, and automated gate mounting.</p></div>
+        <div class="step-box"><span>05 · Inspection</span><h4 style="margin:6px 0;">QA &amp; Sign-Off</h4><p style="font-size:13px;color:var(--steel);">Gate sensor testing, weld torque audit, and warranty handover.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MATERIAL COMPARISON & SPECS + COST CALCULATOR -->
+  <section class="section" id="specs" style="background:var(--surface);">
+    <div class="container">
+      <span class="eyebrow">Engineering &amp; Budgeting</span>
+      <h2 class="h2">Material Comparison &amp; Project Estimator</h2>
+      <div class="grid-3">
+        <div class="card"><h4>Galvanized Chain-Link</h4><p style="font-size:13px;color:var(--steel);margin:8px 0;">Cost-effective large-acreage boundary. 6–12 ft heights, 2" or 1.25" mini-mesh.</p><strong style="color:var(--amber);">Wind Rating: High · 25+ Yr Life</strong></div>
+        <div class="card"><h4>358 Anti-Climb Welded Mesh</h4><p style="font-size:13px;color:var(--steel);margin:8px 0;">Finger-proof &amp; bolt-cutter resistant steel mesh for substations and logistics hubs.</p><strong style="color:var(--amber);">Security Tier: Maximum · 30+ Yr Life</strong></div>
+        <div class="card"><h4>Steel Palisade / Ornamental</h4><p style="font-size:13px;color:var(--steel);margin:8px 0;">Heavy-wall 2"×2" pickets with anti-scale spear tops and automated cantilever gates.</p><strong style="color:var(--amber);">Impact Rating: Heavy · 35+ Yr Life</strong></div>
+      </div>
+      <div class="card" style="margin-top:26px;">
+        <div class="grid-2" style="margin-top:0;align-items:center;">
+          <div>
+            <h4>Industrial Linear-Foot Cost Estimator</h4>
+            <label style="font-size:13px;color:var(--steel);">Perimeter Length: <strong id="indFtVal" style="color:var(--amber);">500 ft</strong></label>
+            <input type="range" id="indFt" min="100" max="2500" step="50" value="500" oninput="indCalc()" style="width:100%;margin:8px 0 12px;accent-color:var(--amber);">
+            <select id="indSpecRate" class="ind-input" onchange="indCalc()">
+              <option value="42">8 ft Commercial Chain-Link ($42–$55/ft)</option>
+              <option value="78">8 ft 358 Anti-Climb Security Mesh ($78–$98/ft)</option>
+              <option value="95">8 ft Heavy Steel Palisade ($95–$120/ft)</option>
+            </select>
+          </div>
+          <div style="background:var(--bg);padding:20px;border-radius:8px;border:1px solid var(--border);text-align:center;">
+            <span style="font-size:12px;color:var(--steel);text-transform:uppercase;">Estimated Turnkey Bid Range</span>
+            <div id="indEstOut" style="font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:700;color:var(--amber);margin-top:6px;">$21,000 – $27,500</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS & CASE STUDIES + EQUIPMENT -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;">
+        <div>
+          <span class="eyebrow">Field Portfolio</span>
+          <h2 class="h2">Industrial Case Studies &amp; Gallery</h2>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="tab-btn active" onclick="indGal('all',this)">All</button>
+          <button class="tab-btn" onclick="indGal('logistics',this)">Logistics</button>
+          <button class="tab-btn" onclick="indGal('security',this)">358 Security</button>
+          <button class="tab-btn" onclick="indGal('gates',this)">Heavy Gates</button>
+        </div>
+      </div>
+      <div class="grid-3" id="indGalGrid">
+        <div class="gal-card" data-cat="logistics"><img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=700&q=80" alt="Distribution Center Perimeter"><div style="padding:18px;"><h4>Midwest Freight Hub · 3,200 ft</h4><p style="font-size:13px;color:var(--steel);margin-top:4px;">Case Study: 10 ft galvanized chain-link + dual 36-ft cantilever gates completed in 9 days.</p></div></div>
+        <div class="gal-card" data-cat="security"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=700&q=80" alt="Power Substation 358 Mesh"><div style="padding:18px;"><h4>Grid Substation · 1,800 ft</h4><p style="font-size:13px;color:var(--steel);margin-top:4px;">Case Study: Grounded 358 anti-climb mesh with 3-strand barbed outriggers.</p></div></div>
+        <div class="gal-card" data-cat="gates"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=700&q=80" alt="Automated Plant Entry"><div style="padding:18px;"><h4>Manufacturing Plant Entry</h4><p style="font-size:13px;color:var(--steel);margin-top:4px;">Case Study: Crash-rated slide gate + RFID badge reader &amp; safety loop.</p></div></div>
+      </div>
+
+      <div id="equipment" style="margin-top:52px;">
+        <span class="eyebrow">Fleet &amp; Machinery</span>
+        <h3 style="font-size:26px;margin-bottom:14px;">In-House Drilling, Welding &amp; Rigging Equipment</h3>
+        <div class="grid-3" style="margin-top:0;">
+          <div class="card"><strong>Hydraulic Skid-Steer Augers</strong><p style="font-size:13px;color:var(--steel);margin-top:6px;">High-torque rock &amp; clay drilling up to 60" depth for zero subcontractor delays.</p></div>
+          <div class="card"><strong>Mobile MIG / Stick Welding Rigs</strong><p style="font-size:13px;color:var(--steel);margin-top:6px;">On-site structural steel fabrication, gate trussing, and hinge reinforcement.</p></div>
+          <div class="card"><strong>Laser Grade &amp; Utility Locators</strong><p style="font-size:13px;color:var(--steel);margin-top:6px;">Precision elevation mapping and private line sweep prior to excavation.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MULTI-STEP RFQ FORM -->
+  <section class="section" id="rfq" style="background:var(--surface);">
+    <div class="container" style="max-width:780px;">
+      <span class="eyebrow">Request for Quotation</span>
+      <h2 class="h2">Multi-Step Industrial Project RFQ</h2>
+      <div class="card" style="margin-top:20px;">
+        <div id="rfqErr" class="err-msg"></div>
+        <div class="rfq-step active" id="rfqS1">
+          <h4 style="margin-bottom:12px;">Step 1 of 3 · Facility &amp; Fence Scope</h4>
+          <input id="rfqCo" class="ind-input" placeholder="Company / Facility Name *">
+          <select id="rfqType" class="ind-input">
+            <option value="358 Anti-Climb Security Fence">358 Anti-Climb Security Fence</option>
+            <option value="Commercial Chain-Link">Commercial Chain-Link</option>
+            <option value="Heavy Steel Palisade &amp; Gates">Heavy Steel Palisade &amp; Gates</option>
+          </select>
+          <button class="btn-amber" onclick="rfqNext(2)">Next: Site Specs &rarr;</button>
+        </div>
+        <div class="rfq-step" id="rfqS2">
+          <h4 style="margin-bottom:12px;">Step 2 of 3 · Dimensions &amp; Access</h4>
+          <input id="rfqFt" type="number" class="ind-input" placeholder="Approximate Linear Feet (e.g. 1200) *">
+          <input id="rfqGates" class="ind-input" placeholder="Number of Walk / Cantilever Gates">
+          <div style="display:flex;gap:10px;"><button class="btn-outline" onclick="rfqNext(1)">&larr; Back</button><button class="btn-amber" onclick="rfqNext(3)">Next: Contact &rarr;</button></div>
+        </div>
+        <div class="rfq-step" id="rfqS3">
+          <h4 style="margin-bottom:12px;">Step 3 of 3 · Project Manager Contact</h4>
+          <input id="rfqEmail" type="email" class="ind-input" placeholder="Work Email *">
+          <input id="rfqPhone" type="tel" class="ind-input" placeholder="Direct Phone *">
+          <div style="display:flex;gap:10px;"><button class="btn-outline" onclick="rfqNext(2)">&larr; Back</button><button class="btn-amber" onclick="rfqSubmit()">Submit Industrial RFQ</button></div>
+        </div>
+        <div id="rfqDone" style="display:none;padding:16px;background:rgba(16,185,129,0.12);border:1px solid #10B981;border-radius:8px;color:#6EE7B7;font-weight:600;"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="padding:44px 0;background:var(--bg);color:var(--steel);font-size:13.5px;">
+    <div class="container" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;">
+      <div><strong style="color:#fff;">TitanSteel Perimeter</strong> · Industrial Fence Contractors · (555) 410-8800</div>
+      <div>Serving Midwest &amp; National Logistics Corridors · <a href="#rfq" style="color:var(--amber);">Request Bid</a></div>
+    </div>
+  </footer>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      document.getElementById('indNav').classList.toggle('scrolled', window.scrollY > 40);
+    });
+    const phrases = ['High-Security Perimeters', 'Logistics & Plant Yards', 'Heavy Automated Gates'];
+    let pi = 0;
+    setInterval(() => { pi = (pi + 1) % phrases.length; document.getElementById('heroRot').textContent = phrases[pi]; }, 2800);
+
+    document.querySelectorAll('.trust-num').forEach(el => {
+      const target = +el.dataset.target;
+      let cur = 0;
+      const step = Math.ceil(target / 40);
+      const t = setInterval(() => {
+        cur = Math.min(cur + step, target);
+        el.textContent = cur.toLocaleString() + (target === 100 ? '%' : '+');
+        if (cur >= target) clearInterval(t);
+      }, 30);
+    });
+
+    const diagData = {
+      footing: ['4,000 PSI Frost-Depth Concrete Footing', 'Auger-drilled 42"–48" deep × 14" diameter piers poured with high-strength structural concrete to resist wind shear and soil heave.', 'ASTM F567 / C94 Structural Mix'],
+      post: ['Schedule-40 Hot-Dip Galvanized Post', '2-7/8" to 4" OD structural steel pipe posts with internal zinc coating for maximum rigidity on tall spans.', 'ASTM F1083 Schedule-40'],
+      mesh: ['6-Gauge Security Chain-Link / 358 Mesh', 'High-tensile woven or welded wire fabric anchored with tension bars and heavy-duty steel bands every 12 inches.', 'ASTM A392 Class 2 Coating'],
+      top: ['3-Strand Barbed / Razor Security Outrigger', '45-degree pressed steel arm carrying 3 strands of 12.5-gauge 4-point barbed wire for anti-climb deterrence.', 'ASTM A121 Security Topping']
+    };
+    function indDiag(k, btn) {
+      if (btn) { btn.parentElement.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
+      const d = diagData[k];
+      document.getElementById('indDiagTitle').textContent = d[0];
+      document.getElementById('indDiagDesc').textContent = d[1];
+      document.getElementById('indDiagSpec').textContent = d[2];
+    }
+    function indCalc() {
+      const ft = +document.getElementById('indFt').value;
+      const r = +document.getElementById('indSpecRate').value;
+      document.getElementById('indFtVal').textContent = ft.toLocaleString() + ' ft';
+      document.getElementById('indEstOut').textContent = `$${(ft*r).toLocaleString()} – $${Math.round(ft*r*1.28).toLocaleString()}`;
+    }
+    function indGal(cat, btn) {
+      btn.parentElement.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('#indGalGrid .gal-card').forEach(c => { c.style.display = (cat==='all'||c.dataset.cat===cat) ? 'block' : 'none'; });
+    }
+    function rfqNext(step) {
+      const err = document.getElementById('rfqErr');
+      err.style.display = 'none';
+      if (step === 2 && !document.getElementById('rfqCo').value.trim()) { err.textContent = 'Please enter your Company / Facility Name.'; err.style.display = 'block'; return; }
+      if (step === 3 && !document.getElementById('rfqFt').value.trim()) { err.textContent = 'Please enter approximate linear feet.'; err.style.display = 'block'; return; }
+      document.querySelectorAll('.rfq-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('rfqS' + step).classList.add('active');
+    }
+    function rfqSubmit() {
+      const err = document.getElementById('rfqErr');
+      const em = document.getElementById('rfqEmail').value.trim();
+      const ph = document.getElementById('rfqPhone').value.trim();
+      if (!em.includes('@') || ph.length < 7) { err.textContent = 'Please provide a valid work email and phone number.'; err.style.display = 'block'; return; }
+      err.style.display = 'none';
+      document.querySelectorAll('.rfq-step').forEach(s => s.classList.remove('active'));
+      const done = document.getElementById('rfqDone');
+      done.style.display = 'block';
+      done.textContent = `RFQ Received for ${document.getElementById('rfqCo').value} (${document.getElementById('rfqFt').value} ft ${document.getElementById('rfqType').value}). Our industrial estimator will respond within 1 business day.`;
+    }
+  </script>
+</body>
+</html>

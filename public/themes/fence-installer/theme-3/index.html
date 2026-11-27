@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GreenYard Residential Fencing | Privacy, Safety &amp; Garden Borders</title>
+  <meta name="description" content="Residential wood, vinyl, aluminum, steel, and chain-link fence installation with before-and-after transformations and instant cost estimates.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #FFFFFF;
+      --soft: #F6F8F5;
+      --green: #15803D;
+      --green-dark: #14532D;
+      --cedar: #B45309;
+      --ink: #1E293B;
+      --muted: #64748B;
+      --border: #E2E8F0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--ink); background: var(--bg); line-height: 1.6; overflow-x: hidden; }
+    h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .container { max-width: 1260px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 76px 0; }
+    .eyebrow { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); margin-bottom: 8px; }
+    .h2 { font-size: clamp(1.9rem, 3.2vw, 2.6rem); font-weight: 800; color: #0F172A; margin-bottom: 10px; }
+    .btn-green { display: inline-flex; align-items: center; gap: 8px; background: var(--green); color: #fff; padding: 13px 24px; border-radius: 10px; font-weight: 700; font-size: 14px; border: none; cursor: pointer; text-decoration: none; transition: 0.25s; }
+    .btn-green:hover { background: var(--green-dark); transform: translateY(-2px); }
+
+    /* White Sticky Navbar */
+    .res-nav { position: sticky; top: 0; z-index: 1000; background: rgba(255,255,255,0.96); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); padding: 15px 0; }
+    .nav-in { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 800; color: var(--green-dark); text-decoration: none; }
+    .nav-links { display: flex; gap: 22px; list-style: none; }
+    .nav-links a { font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: none; }
+    .nav-links a:hover { color: var(--green); }
+
+    /* Hero */
+    .hero { background: var(--soft); padding: 64px 0; border-bottom: 1px solid var(--border); }
+    .hero-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 38px; align-items: center; }
+    .hero-img { width: 100%; height: 430px; object-fit: cover; border-radius: 18px; box-shadow: 0 18px 36px rgba(21,128,61,0.12); }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 24px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 24px; }
+    .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 24px; }
+    .card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 22px; box-shadow: 0 8px 22px rgba(15,23,42,0.04); transition: 0.25s; }
+    .card:hover { transform: translateY(-3px); border-color: var(--green); }
+    .tab-btn { background: var(--soft); border: 1px solid var(--border); padding: 10px 16px; border-radius: 10px; font-weight: 600; font-size: 13px; cursor: pointer; color: var(--ink); }
+    .tab-btn.active { background: var(--green); color: #fff; border-color: var(--green); }
+
+    /* Before / After Slider */
+    .ba-wrap { position: relative; width: 100%; height: 380px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); }
+    .ba-wrap img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .ba-after { clip-path: inset(0 0 0 50%); }
+    .ba-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 3px; background: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.4); pointer-events: none; }
+    .ba-badge { position: absolute; top: 14px; padding: 5px 12px; border-radius: 99px; background: rgba(15,23,42,0.75); color: #fff; font-size: 12px; font-weight: 700; }
+
+    .gal-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+    .gal-card img { width: 100%; height: 195px; object-fit: cover; display: block; }
+    .res-input { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px; font-family: inherit; font-size: 14px; margin-bottom: 12px; }
+
+    /* Floating WhatsApp Widget */
+    .wa-float { position: fixed; bottom: 24px; right: 24px; z-index: 999; background: #25D366; color: #fff; width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; font-size: 28px; box-shadow: 0 10px 24px rgba(37,211,102,0.35); text-decoration: none; transition: 0.25s; }
+    .wa-float:hover { transform: scale(1.08); }
+
+    @media (max-width: 960px) { .hero-grid, .grid-2, .grid-3, .grid-5 { grid-template-columns: 1fr; } .nav-links { display: none; } }
+  </style>
+</head>
+<body>
+
+  <header class="res-nav">
+    <div class="container nav-in">
+      <a href="#" class="brand"><i class="fa-solid fa-leaf" style="color:var(--green);"></i> GreenYard Fencing</a>
+      <ul class="nav-links">
+        <li><a href="#types">Fence Types</a></li>
+        <li><a href="#before-after">Before &amp; After</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#estimator">Cost Estimator</a></li>
+        <li><a href="#areas">Service Areas</a></li>
+      </ul>
+      <a href="#booking" class="btn-green">Book Inspection</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">Residential Fence Specialists</span>
+        <h1 style="font-size:clamp(2.3rem,4.3vw,3.5rem);line-height:1.1;margin-bottom:16px;">Privacy, Safety &amp; Curb Appeal for Your Backyard.</h1>
+        <p style="color:var(--muted);font-size:15.5px;margin-bottom:24px;">Custom wooden, vinyl, aluminum, steel, and chain-link fencing built around your garden aesthetics, pets, and family boundaries.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="#estimator" class="btn-green">Calculate Fence Cost &rarr;</a>
+          <a href="#before-after" class="tab-btn" style="padding:13px 20px;">See Yard Transformations</a>
+        </div>
+      </div>
+      <img class="hero-img" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1100&q=85" alt="Beautiful residential home with privacy fence">
+    </div>
+  </section>
+
+  <!-- FENCE TYPES & INTERACTIVE MATERIAL COMPARISON -->
+  <section class="section" id="types">
+    <div class="container">
+      <span class="eyebrow">5 Residential Materials</span>
+      <h2 class="h2">Choose Your Ideal Fence Style</h2>
+      <div class="grid-5">
+        <div class="card" style="cursor:pointer;" onclick="resMat('wood')"><strong>Wooden (Cedar)</strong><p style="font-size:12.5px;color:var(--muted);margin-top:4px;">Warm natural privacy &amp; picket charm.</p></div>
+        <div class="card" style="cursor:pointer;" onclick="resMat('vinyl')"><strong>Vinyl Privacy</strong><p style="font-size:12.5px;color:var(--muted);margin-top:4px;">Zero-paint, splinter-free clean panels.</p></div>
+        <div class="card" style="cursor:pointer;" onclick="resMat('aluminum')"><strong>Aluminum</strong><p style="font-size:12.5px;color:var(--muted);margin-top:4px;">Rust-proof, open view &amp; pool-code safe.</p></div>
+        <div class="card" style="cursor:pointer;" onclick="resMat('steel')"><strong>Ornamental Steel</strong><p style="font-size:12.5px;color:var(--muted);margin-top:4px;">High-strength estate security &amp; gates.</p></div>
+        <div class="card" style="cursor:pointer;" onclick="resMat('chain')"><strong>Chain-Link</strong><p style="font-size:12.5px;color:var(--muted);margin-top:4px;">Budget-friendly coated pet &amp; yard mesh.</p></div>
+      </div>
+      <div class="card" style="margin-top:20px;background:var(--soft);" id="resMatDetail">
+        <strong style="color:var(--green-dark);font-size:17px;">Wooden (Western Red Cedar) —</strong> Best for natural garden aesthetics and custom heights (4 ft–8 ft). Naturally rot-resistant; recommended UV stain every 2–3 years.
+      </div>
+    </div>
+  </section>
+
+  <!-- BEFORE & AFTER COMPARISON SLIDER -->
+  <section class="section" id="before-after" style="background:var(--soft);">
+    <div class="container">
+      <div class="grid-2" style="margin-top:0;align-items:center;">
+        <div>
+          <span class="eyebrow">Interactive Transformation</span>
+          <h2 class="h2">Before &amp; After Yard Makeover</h2>
+          <p style="color:var(--muted);margin-bottom:18px;">Drag the slider below to compare an open, aging lot against a newly installed 6-ft residential privacy boundary.</p>
+          <input type="range" min="5" max="95" value="50" oninput="resBA(this.value)" style="width:100%;accent-color:var(--green);">
+        </div>
+        <div class="ba-wrap">
+          <img src="https://images.unsplash.com/photo-1558036117-15d82a90b9b1?auto=format&fit=crop&w=1000&q=80" alt="Before fence installation" style="filter:grayscale(70%) brightness(0.85);">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80" alt="After new fence installation" class="ba-after" id="baAfter">
+          <div class="ba-line" id="baLine"></div>
+          <span class="ba-badge" style="left:14px;">BEFORE</span>
+          <span class="ba-badge" style="right:14px;background:var(--green);">AFTER</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESIGN GALLERY + RESIDENTIAL COST ESTIMATOR -->
+  <section class="section" id="gallery">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;">
+        <div><span class="eyebrow">Homeowner Favorites</span><h2 class="h2">Residential Design Gallery</h2></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="tab-btn active" onclick="resGal('all',this)">All</button>
+          <button class="tab-btn" onclick="resGal('wood',this)">Wood</button>
+          <button class="tab-btn" onclick="resGal('vinyl',this)">Vinyl</button>
+          <button class="tab-btn" onclick="resGal('metal',this)">Aluminum &amp; Steel</button>
+        </div>
+      </div>
+      <div class="grid-3" id="resGalGrid">
+        <div class="gal-card" data-cat="wood"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=80" alt="Cedar Privacy"><div style="padding:16px;"><strong>Good-Neighbor Cedar</strong><p style="font-size:13px;color:var(--muted);">6 ft board-on-board backyard enclosure.</p></div></div>
+        <div class="gal-card" data-cat="vinyl"><img src="https://images.unsplash.com/photo-1558036117-15d82a90b9b1?auto=format&fit=crop&w=700&q=80" alt="White Vinyl"><div style="padding:16px;"><strong>Solid White Vinyl</strong><p style="font-size:13px;color:var(--muted);">Low-maintenance family yard fence.</p></div></div>
+        <div class="gal-card" data-cat="metal"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=700&q=80" alt="Pool Aluminum"><div style="padding:16px;"><strong>Pool-Safe Aluminum</strong><p style="font-size:13px;color:var(--muted);">Self-closing latches &amp; sleek sightlines.</p></div></div>
+      </div>
+
+      <div class="card" id="estimator" style="margin-top:42px;background:var(--soft);">
+        <div class="grid-2" style="margin-top:0;align-items:center;">
+          <div>
+            <span class="eyebrow">Instant Budget</span>
+            <h3 style="font-size:26px;margin-bottom:10px;">Residential Fence Cost Estimator</h3>
+            <label style="font-size:13px;font-weight:600;">Length: <strong id="resFtVal" style="color:var(--green);">150 ft</strong></label>
+            <input type="range" id="resFt" min="40" max="400" step="10" value="150" oninput="resCalc()" style="width:100%;margin:8px 0 14px;accent-color:var(--green);">
+            <div class="grid-3" style="margin-top:0;gap:10px;">
+              <select id="resH" class="res-input" onchange="resCalc()"><option value="1">4 ft Height</option><option value="1.15" selected>6 ft Height</option><option value="1.35">8 ft Height</option></select>
+              <select id="resM" class="res-input" onchange="resCalc()"><option value="34">Cedar ($34/ft)</option><option value="40">Vinyl ($40/ft)</option><option value="46">Aluminum ($46/ft)</option></select>
+              <select id="resG" class="res-input" onchange="resCalc()"><option value="400">1 Walk Gate (+$400)</option><option value="950">Double Gate (+$950)</option></select>
+            </div>
+          </div>
+          <div class="card" style="text-align:center;">
+            <span style="font-size:12px;color:var(--muted);text-transform:uppercase;">Animated Estimate Range</span>
+            <div id="resTot" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:32px;font-weight:800;color:var(--green);margin:8px 0;">$6,265 – $7,518</div>
+            <a href="#booking" class="btn-green">Lock In On-Site Measurement</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5-STEP JOURNEY + REVIEWS + SERVICE AREAS -->
+  <section class="section" style="background:var(--soft);">
+    <div class="container">
+      <span class="eyebrow">Simple 5-Step Journey</span>
+      <h2 class="h2">How Residential Installation Works</h2>
+      <div class="grid-5">
+        <div class="card"><strong>1. Yard Visit</strong><p style="font-size:12.5px;color:var(--muted);margin-top:4px;">Exact laser measurement &amp; sample review.</p></div>
+        <div class="card"><strong>2. 811 Locate</strong><p style="font-size:12.5px;color:var(--muted);margin-top:4px;">Underground utility &amp; HOA clearance.</p></div>
+        <div class="card"><strong>3. Concrete Posts</strong><p style="font-size:12.5px;color:var(--muted);margin-top:4px;">Frost-depth footings for zero lean.</p></div>
+        <div class="card"><strong>4. Panel &amp; Gate</strong><p style="font-size:12.5px;color:var(--muted);margin-top:4px;">Precision framing &amp; latch alignment.</p></div>
+        <div class="card"><strong>5. Walkthrough</strong><p style="font-size:12.5px;color:var(--muted);margin-top:4px;">Clean-yard sweep &amp; warranty sign-off.</p></div>
+      </div>
+
+      <div class="grid-2" style="margin-top:40px;" id="areas">
+        <div class="card">
+          <span class="eyebrow">Homeowner Stories</span>
+          <h3 style="font-size:22px;margin-bottom:10px;">Customer Reviews</h3>
+          <div id="resRevBox" style="background:var(--soft);padding:16px;border-radius:12px;margin-bottom:12px;">
+            <p style="font-size:14px;font-style:italic;">“GreenYard replaced 180 ft of storm-damaged cedar in two days. Our dogs finally have a safe, level yard.”</p>
+            <strong style="display:block;margin-top:8px;font-size:13px;color:var(--green-dark);">— Sarah &amp; Mark T., Oakridge</strong>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button class="tab-btn" onclick="resRev(-1)">&larr; Prev</button>
+            <button class="tab-btn" onclick="resRev(1)">Next &rarr;</button>
+          </div>
+        </div>
+        <div class="card">
+          <span class="eyebrow">Local Coverage</span>
+          <h3 style="font-size:22px;margin-bottom:10px;">Service Area Locator</h3>
+          <div style="display:flex;gap:8px;margin-bottom:12px;">
+            <input id="resZip" class="res-input" style="margin-bottom:0;" placeholder="Enter Neighborhood or ZIP">
+            <button class="btn-green" onclick="resZipCheck()">Check</button>
+          </div>
+          <div id="resZipOut" style="font-size:13px;color:var(--muted);">Serving Northside, Oakridge, Maplewood, Westlake &amp; surrounding suburbs.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING FORM -->
+  <section class="section" id="booking">
+    <div class="container" style="max-width:680px;">
+      <div class="card">
+        <span class="eyebrow">Free On-Site Inspection</span>
+        <h2 class="h2" style="font-size:28px;">Book Your Yard Measurement</h2>
+        <form onsubmit="resSubmit(event)">
+          <input id="resName" class="res-input" placeholder="Your Full Name *">
+          <input id="resPhone" type="tel" class="res-input" placeholder="Phone Number *">
+          <input id="resAddr" class="res-input" placeholder="Street Address / Neighborhood *">
+          <div id="resErr" style="color:#DC2626;font-size:13px;margin-bottom:10px;display:none;"></div>
+          <div id="resOk" style="color:var(--green);font-size:13.5px;font-weight:700;margin-bottom:10px;display:none;"></div>
+          <button type="submit" class="btn-green" style="width:100%;justify-content:center;">Book Free Inspection</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <a href="https://wa.me/15556129000" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+
+  <footer style="background:#0F172A;color:#CBD5E1;padding:36px 0;text-align:center;font-size:13.5px;">
+    <div class="container">GreenYard Residential Fencing · (555) 612-9000 · Licensed &amp; Insured · &copy; 2026</div>
+  </footer>
+
+  <script>
+    const matInfo = {
+      wood: 'Wooden (Western Red Cedar) — Best for natural garden aesthetics and custom heights (4 ft–8 ft). Naturally rot-resistant; recommended UV stain every 2–3 years.',
+      vinyl: 'Vinyl Privacy — Zero-splinter, zero-painting virgin PVC panels with aluminum-reinforced bottom rails for active family yards.',
+      aluminum: 'Aluminum Fencing — Rust-proof powder-coated pickets ideal for pool enclosures and sloped backyards.',
+      steel: 'Ornamental Steel — Heavy-gauge welded pickets built for perimeter security and custom driveway gates.',
+      chain: 'Coated Chain-Link — Durable, economical black or green vinyl-coated mesh great for wooded lots and large dog runs.'
+    };
+    function resMat(k) { document.getElementById('resMatDetail').textContent = matInfo[k]; }
+    function resBA(val) {
+      document.getElementById('baAfter').style.clipPath = `inset(0 0 0 ${val}%)`;
+      document.getElementById('baLine').style.left = val + '%';
+    }
+    function resGal(cat, btn) {
+      btn.parentElement.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('#resGalGrid .gal-card').forEach(c => { c.style.display = (cat==='all'||c.dataset.cat===cat) ? 'block' : 'none'; });
+    }
+    function resCalc() {
+      const ft = +document.getElementById('resFt').value;
+      const h = +document.getElementById('resH').value;
+      const m = +document.getElementById('resM').value;
+      const g = +document.getElementById('resG').value;
+      document.getElementById('resFtVal').textContent = ft + ' ft';
+      const lo = Math.round(ft * m * h + g);
+      const hi = Math.round(lo * 1.2);
+      document.getElementById('resTot').textContent = `$${lo.toLocaleString()} – $${hi.toLocaleString()}`;
+    }
+    const revs = [
+      ['“GreenYard replaced 180 ft of storm-damaged cedar in two days. Our dogs finally have a safe, level yard.”', '— Sarah & Mark T., Oakridge'],
+      ['“Cleanest crew we have ever hired. Zero leftover concrete and our aluminum pool gate passed inspection first try.”', '— David K., Maplewood']
+    ];
+    let ri = 0;
+    function resRev(d) {
+      ri = (ri + d + revs.length) % revs.length;
+      document.getElementById('resRevBox').innerHTML = `<p style="font-size:14px;font-style:italic;">${revs[ri][0]}</p><strong style="display:block;margin-top:8px;font-size:13px;color:var(--green-dark);">${revs[ri][1]}</strong>`;
+    }
+    function resZipCheck() {
+      const z = document.getElementById('resZip').value.trim();
+      document.getElementById('resZipOut').textContent = z ? `Great news! Our residential crews have next-day inspection slots in ${z}.` : 'Please enter a neighborhood or ZIP code.';
+    }
+    function resSubmit(e) {
+      e.preventDefault();
+      const err = document.getElementById('resErr'), ok = document.getElementById('resOk');
+      err.style.display = 'none'; ok.style.display = 'none';
+      const n = document.getElementById('resName').value.trim(), p = document.getElementById('resPhone').value.trim();
+      if (!n || p.length < 7) { err.textContent = 'Please enter your name and a valid phone number.'; err.style.display = 'block'; return; }
+      ok.textContent = `Inspection booked for ${n}! We will text your confirmation shortly.`; ok.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
